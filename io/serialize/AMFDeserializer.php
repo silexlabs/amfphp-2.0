@@ -60,8 +60,6 @@
 			$this->storedObjects = array();
 			$this->storedDefinitions = array();
 			$this->decodeFlags = ($this->isBigEndian() * 2) | 4;
-
-			$this->deserialize();
 		}
 
 		/**
@@ -69,7 +67,7 @@
 		 *
 		 * @param object $amfdata The object to put the deserialized data in
 		 */
-		protected function deserialize () {
+		public function deserialize() {
 			$time = microtime(true);
 			$this->readHeader(); // read the binary header
 			$this->readBody(); // read the binary body

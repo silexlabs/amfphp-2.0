@@ -5,6 +5,8 @@
 	$GLOBALS['amfphp']["customMappingsPath"] = "";
 	$deserializer = new AMFDeserializer($input);
 
+	$deserializer->deserialize();
+
 	foreach($deserializer->bodies as $body)
 		print_r($body->getValue());
 ?>
