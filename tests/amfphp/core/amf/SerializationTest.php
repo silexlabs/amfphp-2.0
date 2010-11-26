@@ -6,7 +6,7 @@
  * @author admin
  */
 
-require_once dirname(__FILE__) . '/../../../amfphp/ClassLoader.php';
+require_once dirname(__FILE__) . '/../../../../amfphp/ClassLoader.php';
 require_once dirname(__FILE__) . '/AMFTestData.php';
 require_once dirname(__FILE__) . '/AMFSerializerWrapper.php';
 
