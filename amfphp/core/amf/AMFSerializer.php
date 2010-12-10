@@ -4,6 +4,7 @@
  * the actionscript equivalent via AMF.  The main method of the serializer
  * is the serialize method which takes and AMFObject as it's argument
  * and builds the resulting AMF body.
+ * TODO spit into 2 classes, one for AMF0 , one for AMF3 or maybe more.
  * 
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  * @copyright (c) 2003 AMFphp.org
@@ -12,7 +13,7 @@
  * @version $Id: AMFSerializer.php,v 1.39 2005/07/22 10:58:11 pmineault Exp $
  */
 
-class AMFSerializer{
+class AMFSerializer implements ISerializer{
 
     /**
      *
@@ -44,29 +45,21 @@ class AMFSerializer{
      */
     private $storedObjects;
 
-    /**
-     *
-     * if this is set to true then AMF3 will be used.
-     * TODO spit into 2 classes, one for AMF0 , one for AMF3
-     * @var <Boolean>
-     */
-    private $useAmf3;
 
     /**
      *
      * @param <AMFMessage> $message
-     * @param <Boolean> $useAmf3
+     * @param <int> $amfVersion
      */
-    public function __construct($message, $useAmf3){
+    public function __construct($message){
         $this->message = $message;
-        $this->useAmf3 = $useAmf3;
         $this->AMF0StoredObjects = array();
         $this->storedObjects = array();
     }
     
     /**
      * serializes the message passed in the constructor
-     * TODO clean up the mess with the temp buffers.
+     * TODO clean up the mess with the temp buffers. A.S.
      */
     public function serialize(){
         $this->writeInt(0); //  write the version (always 0)
@@ -463,7 +456,7 @@ class AMFSerializer{
      * @param mixed $d The data
      */
     protected function writeData($d) {
-            if ($this->useAmf3)
+            if ($this->message->amfVersion == 3)
             {
                     $this->writeByte(0x11);
                     $this->writeAMF3Data($d);

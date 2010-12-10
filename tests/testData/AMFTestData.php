@@ -75,6 +75,9 @@ class AMFTestData {
     public $s2Headers2BodiesMessage;
     public $d2Headers2BodiesMessage;
     public $dd2Headers2BodiesMessage;
+
+    public $mirrorServiceRequestMessage;
+    public $mirrorServiceResponseMessage;
     
     public function  __construct() {
         $this->buildByte();
@@ -104,6 +107,7 @@ class AMFTestData {
         $this->buildNullBodyMessage();
         $this->buildStringBodyMessage();
         $this->build2HeadersAndTwoBodiesMessage();
+        $this->buildSimpleMirrorServiceRequestAndResponse();
         //$this->build;
 
     }
@@ -721,6 +725,83 @@ class AMFTestData {
 
     }
 
+    /**
+     * messages with a proper response, used to test gateway. dependant on service used. Here all will be based on mirror test, where the response data is
+     * the same as the request data.
+     */
+
+    /**
+     *
+     */
+    public function buildSimpleMirrorServiceRequestAndResponse(){
+        //the function call parameters, and the returned data are the same with the mirror service.
+        ////here a strict array containing a string
+        //type : 0x0A
+        $body = pack('C', 0x0A);
+        //number of sub objects on a long
+        $body .= pack('N', 1);
+
+        //the contained string
+        //data type is string, so use string(2)
+        $body .= pack('C', 2);
+        //data length
+        $body .= pack('n', strLen("testString"));
+        //data
+        $body .= "testString";
+        $bodyLength = strLen($body);
+
+        $requestTargetURI = "MirrorService/mirrorFunction";
+
+        //version (int)
+        $requestMessage = pack('n', 0);
+        //number of headers (int)
+        $requestMessage .= pack('n', 0);
+        //number of bodies
+        $requestMessage .= pack('n', 1);
+        //target uri length
+        $requestMessage .= pack('n', strlen($requestTargetURI));
+        //target uri .
+        $requestMessage .= $requestTargetURI;
+        //response uri length
+        $requestMessage .= pack('n', 2);
+        //response uri. 
+        $requestMessage .= "/1";
+
+
+        //body length, long
+        $requestMessage .= pack('N', $bodyLength);
+        //add the body itself
+        $requestMessage .= $body;
+        
+        $this->mirrorServiceRequestMessage = $requestMessage;
+
+
+
+        $responseTargetURI = "/1/onResult";
+
+        //version (int)
+        $responseMessage = pack('n', 0);
+        //number of headers (int)
+        $responseMessage .= pack('n', 0);
+        //number of bodies
+        $responseMessage .= pack('n', 1);
+        //target uri length
+        $responseMessage .= pack('n', strlen($responseTargetURI));
+        //target uri .
+        $responseMessage .= $requestTargetURI;
+        //response uri length
+        $responseMessage .= pack('n', 4);
+        //response uri.
+        $responseMessage .= "null";
+        //body length, long
+        $responseMessage .= pack('N', $bodyLength);
+        //add the body itself
+        $responseMessage .= $body;
+
+
+        $this->mirrorServiceResponseMessage = $responseMessage;
+
+    }
 
 
 }

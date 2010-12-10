@@ -12,15 +12,26 @@ define( 'AMFPHP_ROOTPATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
 
 //core/common
 require AMFPHP_ROOTPATH . "core/common/ClassFindInfo.php";
+require AMFPHP_ROOTPATH . "core/common/IDeserializer.php";
+require AMFPHP_ROOTPATH . "core/common/IExceptionHandler.php";
 require AMFPHP_ROOTPATH . "core/common/IServiceRouter.php";
-require AMFPHP_ROOTPATH . "core/common/DefaultServiceRouter.php";
+require AMFPHP_ROOTPATH . "core/common/ISerializer.php";
+require AMFPHP_ROOTPATH . "core/common/ServiceRouter.php";
 
 //core/amf
 require AMFPHP_ROOTPATH . "core/amf/AMFBody.php";
+//require AMFPHP_ROOTPATH . "core/amf/AMFDeserializer.php";
+require AMFPHP_ROOTPATH . "core/amf/AMFExceptionHandler.php";
 require AMFPHP_ROOTPATH . "core/amf/AMFHeader.php";
 require AMFPHP_ROOTPATH . "core/amf/AMFMessage.php";
 require AMFPHP_ROOTPATH . "core/amf/AMFSerializer.php";
 require AMFPHP_ROOTPATH . "core/amf/AMFUtil.php";
+require AMFPHP_ROOTPATH . "core/amf/DummyDeserializer.php";
+
+//core
+require AMFPHP_ROOTPATH . "core/AmfphpConfig.php";
+require AMFPHP_ROOTPATH . "core/Gateway.php";
+require AMFPHP_ROOTPATH . "core/ServiceCallContext.php";
 
 
 

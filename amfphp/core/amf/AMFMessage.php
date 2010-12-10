@@ -28,6 +28,12 @@ class AMFMessage {
     private $bodies;
 
     /**
+     * either 0 or 3. This is stored here when deserializing, because the serializer needs the info
+     * @var <int>
+     */
+    public $amfVersion;
+    
+    /**
      * The constructor function for a new AMF object.
      *
      * All the constructor does is initialize the headers and bodys containers

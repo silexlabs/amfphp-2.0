@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * responsable for loading and maintaining AMFPHP configuration
+ *
+ * @author Ariel Sommeria-klein
+ */
+class AmfphpConfig {
+
+    /**
+     * paths to folders containing services(relative or absolute)
+     * @var <array> of paths
+     */
+    public $serviceFolderPaths;
+
+    /**
+     * a dictionary of service classes represented in a ClassFindInfo.
+     * The key is the name of the service, the value is the class find info.
+     * for example: AmfphpDiscoveryService -> new ClassfindInfo( ... /plugins/serviceBrowser/AmfphpDiscoveryService.php, AmfphpDiscoveryService)
+     * The forward slash is important, don't use '\'!     
+     * @var <array> of ClassFindInfo
+     */
+    public $serviceNames2ClassFindInfo;
+
+    public function  __construct() {
+        $this->serviceFolders = array();
+        $this->serviceNames2ClassFindInfo = array();
+        $this->loadFromFile(null);
+    }
+    public function loadFromFile($path){
+        //TODO
+        array_push($this->serviceFolders, dirname(__FILE__) . "/services");
+    }
+}
+?>
