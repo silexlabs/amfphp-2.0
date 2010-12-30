@@ -95,13 +95,14 @@ class AMFSerializer implements ISerializer{
                 $this->currentBody = & $body;
                 $this->writeUTF($body->responseURI); // write the responseURI header
                 $this->writeUTF($body->targetURI); //  write null, haven't found another use for this
+                //save the current buffer, and flush it to write the body
                 $tempBuf = $this->outBuffer;
                 $this->outBuffer = "";
                 $this->writeData($body->data);
-                $tempBuf2 = $this->outBuffer;
+                $messageBody = $this->outBuffer;
                 $this->outBuffer = $tempBuf;
-                $this->writeLong(strlen($tempBuf2));
-                $this->outBuffer .= $tempBuf2;
+                $this->writeLong(strlen($messageBody));
+                $this->outBuffer .= $messageBody;
         }
 
         return $this->outBuffer;

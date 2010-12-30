@@ -52,7 +52,6 @@ class ServiceRouter implements IServiceRouter{
             //no class find info. try to look in the folders
             foreach($this->serviceFolderPaths as $folderPath){
                 $servicePath = $folderPath . "/" . $serviceName . ".php";
-                 throw new Exception($servicePath);
                 if(file_exists($servicePath)){
                     require_once $servicePath;
                     $serviceObject = new $serviceName();

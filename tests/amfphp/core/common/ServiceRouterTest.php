@@ -20,13 +20,19 @@ class ServiceRouterTest extends PHPUnit_Framework_TestCase {
      */
     protected function setUp() {
         $testServiceConfig = new TestServicesConfig();
-        $this->object = new ServiceRouter($testServiceConfig->serviceFolderPaths, $testServiceConfig->serviceNames2ClassFilePath);
+        $this->object = new ServiceRouter($testServiceConfig->serviceFolderPaths, $testServiceConfig->serviceNames2ClassFindInfo);
     }
 
     public function testExecuteMirrorServiceCall(){
-        $testParamsArray = array("a", "b", "c");
-        $mirrored = $this->object->executeServiceCall("MirrorService", "mirrorFunction", $testParamsArray);
-        $this->assertEquals($mirrored, $testParamsArray);
+        //return one param
+        $testParamsArray = array("a");
+        $mirrored = $this->object->executeServiceCall("MirrorService", "returnOneParam", $testParamsArray);
+        $this->assertEquals($mirrored, "a");
+
+        // return sum
+        $testParamsArray = array(1, 2);
+        $mirrored = $this->object->executeServiceCall("MirrorService", "returnSum", $testParamsArray);
+        $this->assertEquals($mirrored, 3);
     }
 
     public function testFindDummyServiceInFolder(){

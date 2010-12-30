@@ -8,8 +8,12 @@
  */
 class MirrorService {
 
-    public function mirrorFunction(){
-        return func_get_args();
+    public function returnOneParam($param){
+        return $param;
+    }
+
+    public function returnSum($a, $b){
+        return $a + $b;
     }
 }
 ?>

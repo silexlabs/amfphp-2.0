@@ -734,23 +734,11 @@ class AMFTestData {
      *
      */
     public function buildSimpleMirrorServiceRequestAndResponse(){
-        //the function call parameters, and the returned data are the same with the mirror service.
-        ////here a strict array containing a string
-        //type : 0x0A
-        $body = pack('C', 0x0A);
-        //number of sub objects on a long
-        $body .= pack('N', 1);
 
-        //the contained string
-        //data type is string, so use string(2)
-        $body .= pack('C', 2);
-        //data length
-        $body .= pack('n', strLen("testString"));
-        //data
-        $body .= "testString";
-        $bodyLength = strLen($body);
+        //request
 
         $requestTargetURI = "MirrorService/mirrorFunction";
+        $requestResponseURI = "/1";
 
         //version (int)
         $requestMessage = pack('n', 0);
@@ -763,21 +751,41 @@ class AMFTestData {
         //target uri .
         $requestMessage .= $requestTargetURI;
         //response uri length
-        $requestMessage .= pack('n', 2);
+        $requestMessage .= pack('n', strlen($requestTargetURI));
         //response uri. 
-        $requestMessage .= "/1";
+        $requestMessage .= $requestTargetURI;
 
+        //the function call parameters, and the returned data are the same with the mirror service.
+        ////here a strict array containing a string
+        //type : 0x0A
+        $requestBody = pack('C', 0x0A);
+        //number of sub objects on a long
+        $requestBody .= pack('N', 1);
+
+        //the contained string
+        //data type is string, so use string(2)
+        $requestBody .= pack('C', 2);
+        //data length
+        $requestBody .= pack('n', strLen("testString"));
+        //data
+        $requestBody .= "testString";
+        $requestBodyLength = strLen($requestBody);
 
         //body length, long
-        $requestMessage .= pack('N', $bodyLength);
+        $requestMessage .= pack('N', $requestBodyLength);
         //add the body itself
-        $requestMessage .= $body;
+        $requestMessage .= $requestBody;
         
         $this->mirrorServiceRequestMessage = $requestMessage;
 
 
 
+
+
+        //response
+
         $responseTargetURI = "/1/onResult";
+        $responseResponseURI = "null";
 
         //version (int)
         $responseMessage = pack('n', 0);
@@ -788,15 +796,25 @@ class AMFTestData {
         //target uri length
         $responseMessage .= pack('n', strlen($responseTargetURI));
         //target uri .
-        $responseMessage .= $requestTargetURI;
+        $responseMessage .= $responseTargetURI;
         //response uri length
-        $responseMessage .= pack('n', 4);
+        $responseMessage .= pack('n', strlen($responseResponseURI));
         //response uri.
-        $responseMessage .= "null";
+        $responseMessage .= $responseResponseURI;
+
+        //response body. here the string sent in the request
+        //data type is string, so use string(2)
+        $responseBody = pack('C', 2);
+        //data length
+        $responseBody .= pack('n', strLen("testString"));
+        //data
+        $responseBody .= "testString";
+        $responseBodyLength = strLen($responseBody);
+
         //body length, long
-        $responseMessage .= pack('N', $bodyLength);
+        $responseMessage .= pack('N', $responseBodyLength);
         //add the body itself
-        $responseMessage .= $body;
+        $responseMessage .= $responseBody;
 
 
         $this->mirrorServiceResponseMessage = $responseMessage;

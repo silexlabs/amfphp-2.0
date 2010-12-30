@@ -20,9 +20,9 @@ class DummyDeserializer implements IDeserializer{
         $body = new AMFBody();
         $body->targetURI = "MirrorService/mirrorFunction";
         $body->serviceName = "MirrorService";
-        $body->functionName = "mirrorFunction";
+        $body->functionName = "returnOneParam";
         $body->responseURI = "/1";
-        $body->data = array("test string");
+        $body->data = array("testString");
         $message = new AMFMessage();
         $message->amfVersion = 0;
         $message->addBody($body);

@@ -55,7 +55,7 @@ class Gateway {
             $responseBody->data = $ret;
             $responseBody->responseURI = $requestBody->responseURI . "/onResult";
             //not specified
-            $responseBody->targetURI = "";
+            $responseBody->targetURI = "null";
             $responseMessage->addBody($responseBody);
             $serializer = new AMFSerializer($responseMessage);
             $rawOutputData = $serializer->serialize();
