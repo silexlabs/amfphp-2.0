@@ -49,7 +49,7 @@ class Gateway {
     }
 
     /**
-     * handles an exception by generating a serialized AMF response with information about the Exception. Tries to use the requestBody for the end
+     * handles an exception by generating a serialized AMF response with information about the Exception. Tries to use the requestBody for the response/target uri
      * @param Exception $e
      * @param AMFBody $requestBody
      * @return <String>
