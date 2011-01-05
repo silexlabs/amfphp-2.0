@@ -45,6 +45,21 @@ class AMFSerializer implements ISerializer{
      */
     private $storedObjects;
 
+    /**
+     * amf3 references to strings
+     * @var <array>
+     */
+    private  $storedStrings;
+    /**
+     * Count the number of unique sent strings.
+     * The number is used as reference in case an already
+     * sent string should be sent again.
+     *
+     * @var <int>
+     */
+
+     private $encounteredStrings;
+
 
     /**
      *
@@ -55,6 +70,8 @@ class AMFSerializer implements ISerializer{
         $this->message = $message;
         $this->AMF0StoredObjects = array();
         $this->storedObjects = array();
+        $this->storedStrings = array();
+        $this->encounteredStrings = 0;
     }
     
     /**
@@ -507,7 +524,7 @@ class AMFSerializer implements ISerializer{
                             return;
                     }
                     //Fix for PHP5 overriden ArrayAccess and ArrayObjects with an explcit type 
-                    //TODO note sure if this is still relevant. A.S.
+                    //TODO not sure if this is still relevant. A.S.
                     elseif( (is_a($d, 'ArrayAccess') || is_a($d, 'ArrayObject')) && !isset($d->_explicitType))
                     {
                             $this->writeArray($d);
@@ -533,6 +550,8 @@ class AMFSerializer implements ISerializer{
 	 * @todo Is the reference still needed? PHP4 needed it for objects, but PHP5 always
 	 * passes objects by reference. And PHP5 uses a copy-on-write approach, so that all
 	 * values are passed as "reference", in case no changes take place.
+         *
+         * @todo no type markers ("\6", for example) in this method!
 	 */
 
 	protected function writeAmf3Data(& $d)
@@ -577,19 +596,9 @@ class AMFSerializer implements ISerializer{
 		elseif (is_object($d))
 		{
 			$className = strtolower(get_class($d));
-			if(array_key_exists($className, $this->resourceObjects))
-			{
-				$type = "__RECORDSET__";
-				$subtype = $this->resourceObjects[strtolower(get_class($d))];
-			}
-			else if(AMFPHP_PHP5 && $className == 'domdocument')
+                        if($className == 'domdocument')
 			{
 				$this->writeAmf3Xml($d->saveXml());
-				return;
-			}
-			else if(!AMFPHP_PHP5 && $className == 'domdocument')
-			{
-				$this->writeAmf3Xml($d->dump_mem());
 				return;
 			}
 			elseif($className == "simplexmlelement")
@@ -614,30 +623,9 @@ class AMFSerializer implements ISerializer{
 				return;
 			}
 		}
-		else
-		{
-			$type = gettype($d);
-		}
-
-		switch ($type) {
-			case "__RECORDSET__" :
-				$classname = $subtype . "Adapter"; // full class name
-				$includeFile = include_once(AMFPHP_BASE . "shared/adapters/" . $classname . ".php"); // try to load the recordset library from the sql folder
-				if (!$includeFile) {
-					trigger_error("The recordset filter class " . $classname . " was not found");
-				}
-				$GLOBALS['amfphp']['stringOffset'] = count($this->storedStrings);
-				$recordSet = new $classname($d); // returns formatted recordset
-
-				$this->writeRecordSet($recordSet); // writes the recordset formatted for Flash
-				break;
-			default:
-				// non of the above so lets assume its a Custom Class thats defined in the client
-				//$this->writeTypedObject($unsanitizedType, $d);
-				trigger_error("Unsupported Datatype: " . $type);
-				break;
-		}
+                throw new Exception("couldn't write object " . print_r($d, false));
 	}
+
 
 	/**
 	 * Write an ArrayCollection
@@ -651,6 +639,17 @@ class AMFSerializer implements ISerializer{
 		$this->storedObjects[] = "";
 	}
 
+
+	/**
+	 * Write undefined (AMF3).
+	 *
+	 * @return nothing
+	 */
+
+	protected function writeAmf3Undefined()
+	{
+		$this->outBuffer .= "\0";
+	}
 
 	/**
 	 * Write NULL (AMF3).
@@ -701,16 +700,15 @@ class AMFSerializer implements ISerializer{
 	 * @note Sending strings larger than 268435455 (2^28-1 byte) will (silently) fail!
 	 *
 	 * @note The string marker is NOT sent here and has to be sent before, if needed.
+         *
 	 *
 	 * @param string $d the string to send
-	 *
-	 * @param bool $raw
 	 *
 	 * @return The reference index inside the lookup table is returned. In case of an empty
 	 * string which is sent in a special way, NULL is returned.
 	 */
 
-	protected function writeAmf3String($d, $raw = false)
+	protected function writeAmf3String($d)
 	{
 
 		/**
@@ -752,12 +750,13 @@ class AMFSerializer implements ISerializer{
 				// transliterated string is sent. This is no issue as further
 				// occurrences of the to be transliterated string are sent
 				// as references.
-
+/*
+//no longer valid here, there is no charset handler anymore. @todo clean this when charset plugin done
 				if(!$raw)
 				{
 					$d = $this->charsetHandler->transliterate($d);
 				}
-
+*/
 				$this->writeAmf3Int(strlen($d) << 1 | 1); // U29S-value
 				$this->outBuffer .= $d;
 				return $this->encounteredStrings++; // return the "previous" value
@@ -778,9 +777,9 @@ class AMFSerializer implements ISerializer{
 		//Because if the array contains only primitive values,
 		//Then === will say that the two arrays are strictly equal
 		//if they contain the same values, even if they are really distinct
-		//if(($key = patched_array_search($d, $this->storedObjects, TRUE)) === FALSE )
+		//if(($key = array_search($d, $this->storedObjects, TRUE)) === FALSE )
 		//{
-			if(count($this->storedObjects) < MAX_STORED_OBJECTS)
+			if(count($this->storedObjects) < self::MAX_STORED_OBJECTS)
 			{
 				$this->storedObjects[] = & $d;
 			}
@@ -863,7 +862,7 @@ class AMFSerializer implements ISerializer{
 		$this->outBuffer .= "\1";
 	}
 
-
+        //TODO this is commented, so probably wrong. Fix it! A.S.
 	/*
 	protected  void WriteAMF3DateTime(DateTime value)
 	{
@@ -906,7 +905,8 @@ class AMFSerializer implements ISerializer{
 	 *
 	 * @note The limit imposed by AMF3 is 29 bit. So in case the given integer is longer than 29 bit,
 	 * only the lowest 29 bits will be serialised. No error will be logged!
-	 *
+	 * TODO refactor into writeAmf3Int
+         * 
 	 * @param int $d the integer to serialise
 	 *
 	 * @return string
@@ -950,10 +950,9 @@ class AMFSerializer implements ISerializer{
 		}
 	}
 
-
 	protected function writeAmf3Number($d)
 	{
-		if($d >= -268435456 && $d <= 268435455)//check valid range for 29bits
+		if(is_int($d) && $d >= -268435456 && $d <= 268435455)//check valid range for 29bits
 		{
 			$this->outBuffer .= "\4";
 			$this->writeAmf3Int($d);
@@ -966,6 +965,10 @@ class AMFSerializer implements ISerializer{
 		}
 	}
 
+        //in amf3 there are 2 xml types, XMLDocument and XML. the amfphp deserializer parses them both to a String.
+        //However, the serializer expects a real xml document
+        //TODO fix these inconsistencies A.S.
+
 	protected function writeAmf3Xml($d)
 	{
 		$d = preg_replace('/\>(\n|\r|\r\n| |\t)*\</','><',trim($d));
@@ -976,16 +979,17 @@ class AMFSerializer implements ISerializer{
 	protected function writeAmf3ByteArray($d)
 	{
 		$this->writeByte(0x0C);
-		$this->writeAmf3String($d, true);
+		//this seems wrong... A.S.
+                //$this->writeAmf3String($d, true);
 		$this->writeAmf3ByteArrayBody($d);
 	}
 
 
 	protected function writeAmf3ByteArrayBody($d)
 	{
-		if( ($key = patched_array_search($d, $this->storedObjects, TRUE)) === FALSE && $key === FALSE )
+		if( ($key = array_search($d, $this->storedObjects, TRUE)) === FALSE && $key === FALSE )
 		{
-			if(count($this->storedObjects) < MAX_STORED_OBJECTS)
+			if(count($this->storedObjects) < self::MAX_STORED_OBJECTS)
 			{
 				$this->storedObjects[] = & $d;
 			}
@@ -999,31 +1003,25 @@ class AMFSerializer implements ISerializer{
 		}
 	}
 
-
+        /**
+         * @TODO better support for traits. Right now the object is considered dynamic, and that's all
+         * @param <mixed> $d
+         */
 	protected function writeAmf3Object($d)
 	{
 		//Write the object tag
 		$this->outBuffer .= "\12";
-		if( ($key = patched_array_search($d, $this->storedObjects, TRUE)) === FALSE && $key === FALSE)
+		if( ($key = array_search($d, $this->storedObjects, TRUE)) === FALSE && $key === FALSE)
 		{
-			if(count($this->storedObjects) < MAX_STORED_OBJECTS)
+			if(count($this->storedObjects) < self::MAX_STORED_OBJECTS)
 			{
 				$this->storedObjects[] = & $d;
 			}
 
 			$this->storedDefinitions++;
 
-			//Type the object as an array
-			if(AMFPHP_PHP5)
-			{
-				$obj = $d;
-			}
-			else
-			{
-				$obj = (array) $d;
-			}
 			$realObj = array();
-			foreach($obj as $key => $val)
+			foreach($d as $key => $val)
 			{
 				if($key[0] != "\0" && $key != '_explicitType') //Don't show private members
 				{
@@ -1034,11 +1032,13 @@ class AMFSerializer implements ISerializer{
 			//Type this as a dynamic object
 			$this->outBuffer .= "\13";
 
-			$classname = $this->getClassName($d);
+                        //@note there used to be a getClassName function 
+                        //This is simpler, but there might be some cases where the getClassName function is still needed . TODO
+			$className = get_class($d);
 
-			$this->writeAmf3String($classname);
-
-			foreach($realObj as $key => $val)
+			$this->writeAmf3String($className);
+                        
+                        foreach($realObj as $key => $val)
 			{
 				$this->writeAmf3String($key);
 				$this->writeAmf3Data($val);
@@ -1052,6 +1052,8 @@ class AMFSerializer implements ISerializer{
 			$this->writeAmf3Int($handle);
 		}
 	}
+
+
 
 }
 ?>

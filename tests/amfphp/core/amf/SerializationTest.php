@@ -3,7 +3,7 @@
  * Unit tests for AMFSerializer
  * note: phpunit dataProvider mechanism doesn't work well, so lots of boiler plate code here. Oh well... A.S.
  *
- * @author admin
+ * @author Ariel Sommeria-klein
  */
 
 require_once dirname(__FILE__) . '/../../../../amfphp/ClassLoader.php';
@@ -20,7 +20,7 @@ class SerializationTest extends PHPUnit_Framework_TestCase{
          template
 
         //write
-        $serializer = new AMFSerializerWrapper(null, false);
+        $serializer = new AMFSerializerWrapper($emptyMessage, false);
         $serializer->write($testData->d);
         $serialized = $serializer->getOutput();
         $expectedSerialized = $testData->s;
