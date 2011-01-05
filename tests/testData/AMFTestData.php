@@ -731,9 +731,9 @@ class AMFTestData {
      */
 
     /**
-     *
+     * simple request to MirroService/MirrorFunction. TODO
      */
-    public function buildSimpleMirrorServiceRequestAndResponse(){
+    public function buildDoubleMirrorServiceRequestAndResponse(){
 
         //request
 
@@ -766,6 +766,127 @@ class AMFTestData {
         //data type is string, so use string(2)
         $requestBody .= pack('C', 2);
         //data length
+        $requestBody .= pack('n', strLen("testString2"));
+        //data
+        $requestBody .= "testString2";
+        $requestBodyLength = strLen($requestBody);
+
+        //body length, long
+        $requestMessage .= pack('N', $requestBodyLength);
+        //add the body itself
+        $requestMessage .= $requestBody;
+        
+        $this->mirrorServiceRequestMessage = $requestMessage;
+
+
+
+
+
+        //response TODO
+
+        $responseTargetURI = "/1/onResult";
+        $responseResponseURI = "null";
+
+        //version (int)
+        $responseMessage = pack('n', 0);
+        //number of headers (int)
+        $responseMessage .= pack('n', 0);
+        //number of bodies
+        $responseMessage .= pack('n', 1);
+        //target uri length
+        $responseMessage .= pack('n', strlen($responseTargetURI));
+        //target uri .
+        $responseMessage .= $responseTargetURI;
+        //response uri length
+        $responseMessage .= pack('n', strlen($responseResponseURI));
+        //response uri.
+        $responseMessage .= $responseResponseURI;
+
+        //response body. here the string sent in the request
+        //data type is string, so use string(2)
+        $responseBody = pack('C', 2);
+        //data length
+        $responseBody .= pack('n', strLen("testString"));
+        //data
+        $responseBody .= "testString";
+        $responseBodyLength = strLen($responseBody);
+
+        //body length, long
+        $responseMessage .= pack('N', $responseBodyLength);
+        //add the body itself
+        $responseMessage .= $responseBody;
+
+
+        $this->mirrorServiceResponseMessage = $responseMessage;
+
+    }
+
+
+    /**
+     * double request to MirroService/MirrorFunction.
+     */
+    public function buildSimpleMirrorServiceRequestAndResponse(){
+
+        //request
+
+        $requestTargetURI = "MirrorService/mirrorFunction";
+        $requestResponseURI = "/1";
+
+        //version (int)
+        $requestMessage = pack('n', 0);
+        //number of headers (int)
+        $requestMessage .= pack('n', 0);
+        //number of bodies
+        $requestMessage .= pack('n', 2);
+
+        //first body
+        //target uri length
+        $requestMessage .= pack('n', strlen($requestTargetURI));
+        //target uri .
+        $requestMessage .= $requestTargetURI;
+        //response uri length
+        $requestMessage .= pack('n', strlen($requestTargetURI));
+        //response uri.
+        $requestMessage .= $requestTargetURI;
+
+        //the function call parameters, and the returned data are the same with the mirror service.
+        ////here a strict array containing a string
+        //type : 0x0A
+        $requestBody = pack('C', 0x0A);
+        //number of sub objects on a long
+        $requestBody .= pack('N', 1);
+
+        //the contained string
+        //data type is string, so use string(2)
+        $requestBody .= pack('C', 2);
+        //data length
+        $requestBody .= pack('n', strLen("testString"));
+        //data
+        $requestBody .= "testString";
+        $requestBodyLength = strLen($requestBody);
+
+        //number of bodies
+        $requestMessage .= pack('n', 1);
+        //target uri length
+        $requestMessage .= pack('n', strlen($requestTargetURI));
+        //target uri .
+        $requestMessage .= $requestTargetURI;
+        //response uri length
+        $requestMessage .= pack('n', strlen($requestTargetURI));
+        //response uri.
+        $requestMessage .= $requestTargetURI;
+
+        //the function call parameters, and the returned data are the same with the mirror service.
+        ////here a strict array containing a string
+        //type : 0x0A
+        $requestBody = pack('C', 0x0A);
+        //number of sub objects on a long
+        $requestBody .= pack('N', 1);
+
+        //the contained string
+        //data type is string, so use string(2)
+        $requestBody .= pack('C', 2);
+        //data length
         $requestBody .= pack('n', strLen("testString"));
         //data
         $requestBody .= "testString";
@@ -775,7 +896,7 @@ class AMFTestData {
         $requestMessage .= pack('N', $requestBodyLength);
         //add the body itself
         $requestMessage .= $requestBody;
-        
+
         $this->mirrorServiceRequestMessage = $requestMessage;
 
 
@@ -820,6 +941,7 @@ class AMFTestData {
         $this->mirrorServiceResponseMessage = $responseMessage;
 
     }
+
 
 
 }

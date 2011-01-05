@@ -30,6 +30,48 @@ class Gateway {
     }
 
     /**
+     * process a request and generate a response.
+     * throws an Exception if anything fails, so caller must encapsulate in try/catch
+     * 
+     * @param <type> $requestBody
+     * @return AMFBody the response body for the request
+     */
+    private function handleRequest($requestBody){
+        $serviceRouter = new ServiceRouter($this->config->serviceFolderPaths, $this->config->serviceNames2ClassFindInfo);
+        $ret = $serviceRouter->executeServiceCall($requestBody->serviceName, $requestBody->functionName, $requestBody->data);
+        $responseMessage = new AMFMessage();
+        $responseBody = new AMFBody();
+        $responseBody->data = $ret;
+        $responseBody->responseURI = $requestBody->responseURI . "/onResult";
+        //not specified
+        $responseBody->targetURI = "null";
+        return $responseBody;
+    }
+
+    /**
+     * handles an exception by generating a serialized AMF response with information about the Exception. Tries to use the requestBody for the end
+     * @param Exception $e
+     * @param AMFBody $requestBody
+     * @return <String>
+     */
+    private function generateResponseForException(Exception $e, AMFBody $requestBody = null){
+        $errorMessage = new AMFMessage();
+        $errorResponseBody = new AMFBody();
+        if($requestBody != null && isset ($requestBody->responseURI)){
+            $errorResponseBody->responseURI = $requestBody->responseURI . "/onStatus";
+        }else{
+            $errorResponseBody->targetURI = "/1/onStatus";
+        }
+        //not specified
+        $errorResponseBody->targetURI = "null";
+        $errorResponseBody->data = $e->__toString();
+        $errorMessage->addBody($errorResponseBody);
+        $serializer = new AMFSerializer($errorMessage);
+        return $serializer->serialize();
+        
+    }
+    
+    /**
      * The service method runs the gateway application.  It turns the gateway 'on'.  You
      * have to call the service method as the last line of the gateway script after all of the
      * gateway configuration properties have been set.
@@ -37,38 +79,26 @@ class Gateway {
      * @return <String>
      */
     public function service(){
-        $rawOutputData = null;
+        $requestBody = null;
         try{
             $deserializer = new DummyDeserializer($this->context->rawInputData);
             $requestMessage = $deserializer->deserialize();
-            $serviceRouter = new ServiceRouter($this->config->serviceFolderPaths, $this->config->serviceNames2ClassFindInfo);
             //TODO handle headers
-            //TODO handle multiple bodies.  A.S.
-            $requestBody = $requestMessage->getBodyAt();
-            $ret = $serviceRouter->executeServiceCall($requestBody->serviceName, $requestBody->functionName, $requestBody->data);
-
-            //TODO create a new class to encapsulate response generation
-            //call something like:
-            //$r = new ResponseHandler($requestMessage, $ret); $r->getResponse();
+            $numBodies = $requestMessage->numBodies();
+            $rawOutputData = "";
             $responseMessage = new AMFMessage();
-            $responseBody = new AMFBody();
-            $responseBody->data = $ret;
-            $responseBody->responseURI = $requestBody->responseURI . "/onResult";
-            //not specified
-            $responseBody->targetURI = "null";
-            $responseMessage->addBody($responseBody);
+            for($i = 0; $i < $numBodies; $i++){
+                $requestBody = $requestMessage->getBodyAt();
+                $responseBody = $this->handleRequest($requestBody);
+                $responseMessage->addBody($responseBody);
+            }
             $serializer = new AMFSerializer($responseMessage);
             $rawOutputData = $serializer->serialize();
+            return $rawOutputData;
 
-        }catch(Exception $exception){
-            $exceptionHandler = new AMFExceptionHandler();
-            $errorMessage = $exceptionHandler->handle($exception);
-            $serializer = new AMFSerializer($errorMessage);
-            return $exception->__toString();
-            $rawOutputData = $exception;
-            $rawOutputData = $serializer->serialize();
+        }catch(Exception $e){
+            return $this->generateResponseForException($e, $requestBody);
         }
-        return $rawOutputData;
 
     }
 

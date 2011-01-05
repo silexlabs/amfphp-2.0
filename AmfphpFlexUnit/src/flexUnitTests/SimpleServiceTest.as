@@ -34,17 +34,24 @@ package flexUnitTests
 		}
 		
 		public function testReturnOneParam():void{
-			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnOneParam, 200));
+			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnOneParam, 500));
 			_nc.simpleCall("MirrorService/returnOneParam", "testString");	
+		}
+		private function verifyReturnOneParam(event:DataEvent):void{
+			assertEquals("testString", event.data);
+		}
+		
+		public function testErrorFindingService():void{
+			_nc.addEventListener(EnhancedNetConnection.EVENT_ONSTATUS, addAsync(catchErrorFindingService, 200));
+			_nc.simpleCall("NoShirtNoShoesNoService/returnOneParam", "testString");	
+		}
+		private function catchErrorFindingService(event:DataEvent):void{
+			assertTrue(event.data.indexOf("Exception") != -1);
 		}
 		
 
 		
 		
-		//async test callbacks
-		private function verifyReturnOneParam(event:DataEvent):void{
-			assertEquals("testString", event.data);
-		}
 		
 		
 	}

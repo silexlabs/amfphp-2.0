@@ -18,7 +18,7 @@ class DummyDeserializer implements IDeserializer{
     public function deserialize(){
 
         $body = new AMFBody();
-        $body->targetURI = "MirrorService/mirrorFunction";
+        $body->targetURI = "MirrorService/returnOneParam";
         $body->serviceName = "MirrorService";
         $body->functionName = "returnOneParam";
         $body->responseURI = "/1";

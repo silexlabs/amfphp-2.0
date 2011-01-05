@@ -63,6 +63,9 @@ class ServiceRouter implements IServiceRouter{
         if(!$serviceObject){
             throw new Exception("$serviceName service not found ");
         }
+        if(!method_exists($serviceObject, $functionName)){
+            throw new Exception("method  $functionName not found on $serviceName object ");
+        }
         
         return call_user_func_array(array($serviceObject, $functionName), $parameters);
 
