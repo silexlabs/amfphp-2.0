@@ -8,6 +8,7 @@
 require dirname(__FILE__) . '/ClassLoader.php';
 $rawInputData = AMFUtil::getRawPostData();
 $gateway = new Gateway($rawInputData);
+$gateway->config->serviceFolderPaths = array(dirname(__FILE__) . "/services");
 echo $gateway->service();
 
 

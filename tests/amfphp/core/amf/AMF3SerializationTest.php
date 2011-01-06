@@ -28,6 +28,14 @@ class AMF3SerializationTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));
 
          */
+        //array
+ /*       $nestedAssoc = unserialize(file_get_contents("../../../testData/nestedAssocArray.txt"));
+        $serializer = new AMFSerializerWrapper($emptyMessage, false);
+        $serializer->writeAMF3Array($nestedAssoc);
+        $serialized = $serializer->getOutput();
+        $expectedSerialized = 0;
+        $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));
+*/
 
         //undefined
         $serializer = new AMFSerializerWrapper($emptyMessage, false);

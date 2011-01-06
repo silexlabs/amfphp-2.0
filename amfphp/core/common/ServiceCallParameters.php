@@ -37,7 +37,7 @@ class ServiceCallParameters {
      */
     public static function createFromAMFBody(AMFBody $amfBody){
         $targetURI = str_replace(".", "/", $amfBody->targetURI);
-        $split = split("/", $targetURI);
+        $split = explode("/", $targetURI);
         $ret = new ServiceCallParameters();
         $ret->methodName = array_pop($split);
         $ret->serviceName = join($split, "/");

@@ -27,7 +27,11 @@ class SerializationTest extends PHPUnit_Framework_TestCase{
         $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));
 
          */
+
         $emptyMessage = new AMFMessage();
+        $serialized = $serializer->getOutput();
+        $expectedSerialized = $testData->sByte;
+        $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));
 
         //writeByte
         $serializer = new AMFSerializerWrapper($emptyMessage, false);
@@ -214,8 +218,6 @@ class SerializationTest extends PHPUnit_Framework_TestCase{
         $expectedSerialized = $testData->s2Headers2BodiesMessage;
         $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));
 
-
-        
 
     }
     

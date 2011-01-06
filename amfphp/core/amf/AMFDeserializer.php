@@ -63,7 +63,7 @@
 		 * deserialize invokes this class to transform the raw data into valid object
 		 *
 		 * @param object $amfdata The object to put the deserialized data in
-		 */
+		 */ 
 		public function deserialize() {
 			$time = microtime(true);
 			$this->readHeader(); // read the binary header
@@ -77,7 +77,7 @@
                         //TODO clean this up, bodies and headers shouldn't be stored on the deserializer directly A.S.
                         $requestMessage = new AMFMessage();
                         for($i = 0; $i < count($this->headers); $i++){
-                            $requestMessage->addBody($this->headers[$i]);
+                            $requestMessage->addHeader($this->headers[$i]);
                         }
                         for($i = 0; $i < count($this->bodies); $i++){
                             $requestMessage->addBody($this->bodies[$i]);

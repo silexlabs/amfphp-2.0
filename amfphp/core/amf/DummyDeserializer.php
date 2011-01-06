@@ -16,10 +16,11 @@ class DummyDeserializer implements IDeserializer{
      * @return AMFMessage
      */
     public function deserialize(){
+        $nestedAssoc = unserialize(file_get_contents("nestedAssocArray.txt"));
 
-        $body = new AMFBody("MirrorService/returnOneParam", "/1", array("testString"));
+        $body = new AMFBody("MirrorService/returnOneParam", "/1", array($nestedAssoc));
         $message = new AMFMessage();
-        $message->amfVersion = 0;
+        $message->amfVersion = 3;
         $message->addBody($body);
      
         return $message;
