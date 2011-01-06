@@ -45,6 +45,13 @@ package flexUnitTests
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONSTATUS, addAsync(catchErrorFindingService, 200));
 			_nc.simpleCall("NoShirtNoShoesNoService/returnOneParam", "testString");	
 		}
+		
+		
+		public function testErrorFindingService2():void{
+			_nc.addEventListener(EnhancedNetConnection.EVENT_ONSTATUS, addAsync(catchErrorFindingService, 200));
+			_nc.simpleCall("nothingReally", "testString");	
+		}
+		
 		private function catchErrorFindingService(event:DataEvent):void{
 			assertTrue(event.data.indexOf("Exception") != -1);
 		}

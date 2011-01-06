@@ -7,16 +7,26 @@
  */
 class AMFBody {
     /**
+     * inthe case of a request:
      * parsed to a service name and a function name. supported separators for the targetURI are "." and "/"
      * The service name can either be just the name of the class (MirrorService) or include a path(package/MirrorService)
      * example of full targetURI package/MirrorService/mirrorFunction
+     *
+     * in the case of a response:
+     * the request responseUri + OK/KO
+     * for example: /1/onResult or /1/onStatus
      *
      * @var <String>
      */
     public $targetURI = "";
 
     /**
+     * in the case of a request:
+     * operation name, for example /1
      *
+     * in the case of a response:
+     * undefined
+     * 
      * @var <String>
      */
     public $responseURI = "";
@@ -27,20 +37,13 @@ class AMFBody {
      */
     public $data;
 
-    /**
-     * the name of the service. parsed from targetURI
-     * The service name can either be just the name of the class (MirrorService) or include a path(package/MirrorService)
-     * separator for path can only be "/"
-     *
-     * @var <String>
-     */
-    public $serviceName;
 
-    /**
-     * the nbame of the function to execute on the service object
-     * @var <String>
-     */
-    public $functionName;
+    public function  __construct($targetURI = "", $responseURI = "", $data = "") {
+        $this->targetURI = $targetURI;
+        $this->responseURI = $responseURI;
+        $this->data = $data;
+    }
+    
     
 }
 ?>

@@ -16,11 +16,12 @@ require AMFPHP_ROOTPATH . "core/common/IDeserializer.php";
 require AMFPHP_ROOTPATH . "core/common/IExceptionHandler.php";
 require AMFPHP_ROOTPATH . "core/common/IServiceRouter.php";
 require AMFPHP_ROOTPATH . "core/common/ISerializer.php";
+require AMFPHP_ROOTPATH . "core/common/ServiceCallParameters.php";
 require AMFPHP_ROOTPATH . "core/common/ServiceRouter.php";
 
 //core/amf
 require AMFPHP_ROOTPATH . "core/amf/AMFBody.php";
-//require AMFPHP_ROOTPATH . "core/amf/AMFDeserializer.php";
+require AMFPHP_ROOTPATH . "core/amf/AMFDeserializer.php";
 require AMFPHP_ROOTPATH . "core/amf/AMFExceptionHandler.php";
 require AMFPHP_ROOTPATH . "core/amf/AMFHeader.php";
 require AMFPHP_ROOTPATH . "core/amf/AMFMessage.php";

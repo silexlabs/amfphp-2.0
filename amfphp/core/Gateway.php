@@ -36,9 +36,10 @@ class Gateway {
      * @param <type> $requestBody
      * @return AMFBody the response body for the request
      */
-    private function handleRequest($requestBody){
+    private function handleRequest(AMFBody $requestBody){
         $serviceRouter = new ServiceRouter($this->config->serviceFolderPaths, $this->config->serviceNames2ClassFindInfo);
-        $ret = $serviceRouter->executeServiceCall($requestBody->serviceName, $requestBody->functionName, $requestBody->data);
+        $serviceCallParameters = ServiceCallParameters::createFromAMFBody($requestBody);
+        $ret = $serviceRouter->executeServiceCall($serviceCallParameters->serviceName, $serviceCallParameters->methodName, $serviceCallParameters->methodParameters);
         $responseMessage = new AMFMessage();
         $responseBody = new AMFBody();
         $responseBody->data = $ret;
@@ -81,7 +82,8 @@ class Gateway {
     public function service(){
         $requestBody = null;
         try{
-            $deserializer = new DummyDeserializer($this->context->rawInputData);
+            //$deserializer = new DummyDeserializer($this->context->rawInputData);
+            $deserializer = new AMFDeserializer($this->context->rawInputData);
             $requestMessage = $deserializer->deserialize();
             //TODO handle headers
             $numBodies = $requestMessage->numBodies();
@@ -101,6 +103,7 @@ class Gateway {
         }
 
     }
+
 
 }
 ?>

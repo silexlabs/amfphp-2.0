@@ -17,15 +17,11 @@ class DummyDeserializer implements IDeserializer{
      */
     public function deserialize(){
 
-        $body = new AMFBody();
-        $body->targetURI = "MirrorService/returnOneParam";
-        $body->serviceName = "MirrorService";
-        $body->functionName = "returnOneParam";
-        $body->responseURI = "/1";
-        $body->data = array("testString");
+        $body = new AMFBody("MirrorService/returnOneParam", "/1", array("testString"));
         $message = new AMFMessage();
         $message->amfVersion = 0;
         $message->addBody($body);
+     
         return $message;
         
     }
