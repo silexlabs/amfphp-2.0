@@ -60,13 +60,13 @@ package flexUnitTests
 		}
 		
 		//test can't be run, the netconnection doesn't accept the call
-		
+		/*
 		public function testSendingExternalizableObject():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONSTATUS, addAsync(catchErrorFindingService, 200));
 			var ext:ExternalizableDummy = new ExternalizableDummy();
 			_nc.simpleCall("MirrorService/returnOneParam", ext);	
 		}			
-		
+		*/
 		
 
 		
