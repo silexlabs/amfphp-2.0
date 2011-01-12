@@ -11,21 +11,21 @@ class AMFPacket {
      *
      * @var <array>
      */
-    public $headers;
+    private $headers;
 
     /**
      * The header table is a quick lookup table for
      * a header by it's key
      * @var <array>
      */
-    public $headerTable;
+    private $headerTable;
 
     /**
      * The place to keep the Message elements
      *
      * @var <array>
      */
-    private $Messages;
+    private $messages;
 
     /**
      * either 0 or 3. This is stored here when deserializing, because the serializer needs the info
@@ -40,7 +40,7 @@ class AMFPacket {
      */
     public function __construct() {
         $this->headers = array();
-        $this->Messages = array();
+        $this->messages = array();
         $this->headerTable = array();
         $this->amfVersion = 0;
     }
@@ -105,7 +105,7 @@ class AMFPacket {
      * @param int $ps The pagesize of a recordset
      */
     public function addMessage($Message) {
-            $this->Messages[] = $Message;
+            $this->messages[] = $Message;
     }
 
     /**
@@ -116,7 +116,7 @@ class AMFPacket {
      * @param AMFMessage $Message The Message element to add
      */
     public function addMessageAt($pos, $Message) {
-            array_splice($this->Messages, $pos, 0, array($Message)); // splice the new Message into the array
+            array_splice($this->messages, $pos, 0, array($Message)); // splice the new Message into the array
     }
 
     /**
@@ -127,7 +127,7 @@ class AMFPacket {
      * @param AMFMessage $Message The Message element to add
      */
     public function removeMessageAt($pos) {
-            array_splice($this->Messages, $pos, 1); // splice the new Message into the array
+            array_splice($this->messages, $pos, 1); // splice the new Message into the array
     }
 
     /**
@@ -137,7 +137,7 @@ class AMFPacket {
      * @return int The number of Message elements
      */
     public function numMessages() {
-            return count($this->Messages);
+            return count($this->messages);
     }
 
     /**
@@ -150,7 +150,7 @@ class AMFPacket {
      * @return array The Message element
      */
     public function getMessageAt($id = 0) {
-            return $this->Messages[$id];
+            return $this->messages[$id];
     }
 }
 ?>
