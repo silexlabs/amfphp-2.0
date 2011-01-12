@@ -150,44 +150,44 @@ class DeserializationTest extends PHPUnit_Framework_TestCase{
 
     }
 
-    public function testSerializingMessages(){
+    public function testSerializingPackets(){
         $testData = new AMFTestData();
         /*
         template
 
-        //message with
+        //Packet with
 
          */
 
-        //message with null header
-        $deserializer = new AMFDeserializer($testData->sNullHeaderMessage);
+        //Packet with null header
+        $deserializer = new AMFDeserializer($testData->sNullHeaderPacket);
         $deserialized = $deserializer->deserialize();
-        $expectedDeserialized = $testData->dNullHeaderMessage;
+        $expectedDeserialized = $testData->dNullHeaderPacket;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
 
-        //message with string header
-        $deserializer = new AMFDeserializerWrapper($testData->sStringHeaderMessage);
+        //Packet with string header
+        $deserializer = new AMFDeserializerWrapper($testData->sStringHeaderPacket);
         $deserialized = $deserializer->deserialize();
-        $expectedDeserialized = $testData->dStringHeaderMessage;
+        $expectedDeserialized = $testData->dStringHeaderPacket;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
-        //message with null body
-        $deserializer = new AMFDeserializerWrapper($testData->sNullBodyMessage);
+        //Packet with null Message
+        $deserializer = new AMFDeserializerWrapper($testData->sNullMessagePacket);
         $deserialized = $deserializer->deserialize();
-        $expectedDeserialized = $testData->dNullBodyMessage;
+        $expectedDeserialized = $testData->dNullMessagePacket;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
-        //message with string body
-        $deserializer = new AMFDeserializerWrapper($testData->sStringBodyMessage);
+        //Packet with string Message
+        $deserializer = new AMFDeserializerWrapper($testData->sStringMessagePacket);
         $deserialized = $deserializer->deserialize();
-        $expectedDeserialized = $testData->dStringBodyMessage;
+        $expectedDeserialized = $testData->dStringMessagePacket;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
-        //message with 2 headers and 2 bodies
-        $deserializer = new AMFDeserializerWrapper($testData->s2Headers2BodiesMessage);
+        //Packet with 2 headers and 2 Messages
+        $deserializer = new AMFDeserializerWrapper($testData->s2Headers2MessagesPacket);
         $deserialized = $deserializer->deserialize();
-        $expectedDeserialized = $testData->d2Headers2BodiesMessage;
+        $expectedDeserialized = $testData->d2Headers2MessagesPacket;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
     }

@@ -33,73 +33,72 @@ class Gateway {
      * process a request and generate a response.
      * throws an Exception if anything fails, so caller must encapsulate in try/catch
      * 
-     * @param <type> $requestBody
-     * @return AMFBody the response body for the request
+     * @param <type> $requestMessage
+     * @return AMFMessage the response Message for the request
      */
-    private function handleRequest(AMFBody $requestBody){
+    private function handleRequest(AMFMessage $requestMessage){
         $serviceRouter = new ServiceRouter($this->config->serviceFolderPaths, $this->config->serviceNames2ClassFindInfo);
-        $serviceCallParameters = ServiceCallParameters::createFromAMFBody($requestBody);
+        $serviceCallParameters = ServiceCallParameters::createFromAMFMessage($requestMessage);
         $ret = $serviceRouter->executeServiceCall($serviceCallParameters->serviceName, $serviceCallParameters->methodName, $serviceCallParameters->methodParameters);
+        $responsePacket = new AMFPacket();
         $responseMessage = new AMFMessage();
-        $responseBody = new AMFBody();
-        $responseBody->data = $ret;
-        $responseBody->targetURI = $requestBody->responseURI . "/onResult";
+        $responseMessage->data = $ret;
+        $responseMessage->targetURI = $requestMessage->responseURI . "/onResult";
         //not specified
-        $responseBody->responseURI = "null";
-        return $responseBody;
+        $responseMessage->responseURI = "null";
+        return $responseMessage;
     }
 
     /**
-     * handles an exception by generating a serialized AMF response with information about the Exception. Tries to use the requestBody for the response/target uri
+     * handles an exception by generating a serialized AMF response with information about the Exception. Tries to use the requestMessage for the response/target uri
      * @param Exception $e
-     * @param AMFBody $requestBody
+     * @param AMFMessage $requestMessage
      * @return <String>
      */
-    private function generateResponseForException(Exception $e, AMFBody $requestBody = null){
-        $errorMessage = new AMFMessage();
-        $errorResponseBody = new AMFBody();
-        if($requestBody != null && isset ($requestBody->responseURI)){
-            $errorResponseBody->targetURI = $requestBody->responseURI . "/onStatus";
+    private function generateResponseForException(Exception $e, AMFMessage $requestMessage = null){
+        $errorPacket = new AMFPacket();
+        $errorResponseMessage = new AMFMessage();
+        if($requestMessage != null && isset ($requestMessage->responseURI)){
+            $errorResponseMessage->targetURI = $requestMessage->responseURI . "/onStatus";
         }else{
-            $errorResponseBody->targetURI = "/1/onStatus";
+            $errorResponseMessage->targetURI = "/1/onStatus";
         }
         //not specified
-        $errorResponseBody->responseURI = "null";
-        $errorResponseBody->data = $e->__toString();
-        $errorMessage->addBody($errorResponseBody);
-        $serializer = new AMFSerializer($errorMessage);
+        $errorResponseMessage->responseURI = "null";
+        $errorResponseMessage->data = $e->__toString();
+        $errorPacket->addMessage($errorResponseMessage);
+        $serializer = new AMFSerializer($errorPacket);
         return $serializer->serialize();
         
     }
     
     /**
-     * The service method runs the gateway application.  It turns the gateway 'on'.  You
-     * have to call the service method as the last line of the gateway script after all of the
-     * gateway configuration properties have been set.
+     * The service method runs the gateway application.  It deserializes the raw data passed into the constructor as an AMFPacket, handles the headers,
+     * handles the messages as requests to services, and returns the responses from the services
+     * It does not however handle output headers, gzip compression, etc. that is the job of the calling script
+     * @TODO handle headers. This is a job for plugins, unless comes a header that is so fundamental that it needs to be handled by the core
      *
-     * @return <String>
+     * @return <String> the serialized amf packet containg the service responses
      */
     public function service(){
-        $requestBody = null;
+        $requestMessage = null;
         try{
-            //$deserializer = new DummyDeserializer($this->context->rawInputData);
             $deserializer = new AMFDeserializer($this->context->rawInputData);
-            $requestMessage = $deserializer->deserialize();
-            //TODO handle headers
-            $numBodies = $requestMessage->numBodies();
+            $requestPacket = $deserializer->deserialize();
+            $numMessages = $requestPacket->numMessages();
             $rawOutputData = "";
-            $responseMessage = new AMFMessage();
-            for($i = 0; $i < $numBodies; $i++){
-                $requestBody = $requestMessage->getBodyAt();
-                $responseBody = $this->handleRequest($requestBody);
-                $responseMessage->addBody($responseBody);
+            $responsePacket = new AMFPacket();
+            for($i = 0; $i < $numMessages; $i++){
+                $requestMessage = $requestPacket->getMessageAt();
+                $responseMessage = $this->handleRequest($requestMessage);
+                $responsePacket->addMessage($responseMessage);
             }
-            $serializer = new AMFSerializer($responseMessage);
+            $serializer = new AMFSerializer($responsePacket);
             $rawOutputData = $serializer->serialize();
             return $rawOutputData;
 
         }catch(Exception $e){
-            return $this->generateResponseForException($e, $requestBody);
+            return $this->generateResponseForException($e, $requestMessage);
         }
 
     }

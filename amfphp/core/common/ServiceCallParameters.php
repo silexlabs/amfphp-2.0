@@ -30,18 +30,18 @@ class ServiceCallParameters {
     public $methodParameters;
 
     /**
-     * creates a ServiceCallParamaeters object from an AMFBody
+     * creates a ServiceCallParamaeters object from an AMFMessage
      * supported separators in the targetURI are "/" and "."
-     * @param AMFBody $amfBody
+     * @param AMFMessage $amfMessage
      * @return ServiceCallParameters
      */
-    public static function createFromAMFBody(AMFBody $amfBody){
-        $targetURI = str_replace(".", "/", $amfBody->targetURI);
+    public static function createFromAMFMessage(AMFMessage $amfMessage){
+        $targetURI = str_replace(".", "/", $amfMessage->targetURI);
         $split = explode("/", $targetURI);
         $ret = new ServiceCallParameters();
         $ret->methodName = array_pop($split);
         $ret->serviceName = join($split, "/");
-        $ret->methodParameters = $amfBody->data;
+        $ret->methodParameters = $amfMessage->data;
         return $ret;
     }
 }

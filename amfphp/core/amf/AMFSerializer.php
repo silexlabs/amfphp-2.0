@@ -3,7 +3,7 @@
  * AMFSerializer manages the job of translating PHP objects into
  * the actionscript equivalent via AMF.  The main method of the serializer
  * is the serialize method which takes and AMFObject as it's argument
- * and builds the resulting AMF body.
+ * and builds the resulting AMF Message.
  * TODO spit into 2 classes, one for AMF0 , one for AMF3 or maybe more.
  * 
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
@@ -23,9 +23,9 @@ class AMFSerializer implements ISerializer{
     
     /**
      *
-     * @var <AMFMessage>
+     * @var <AMFPacket>
      */
-    private $message;
+    private $Packet;
 
     /**
      * the maximum amount of objects stored for reference
@@ -63,11 +63,11 @@ class AMFSerializer implements ISerializer{
 
     /**
      *
-     * @param <AMFMessage> $message
+     * @param <AMFPacket> $Packet
      * @param <int> $amfVersion
      */
-    public function __construct($message){
-        $this->message = $message;
+    public function __construct($Packet){
+        $this->Packet = $Packet;
         $this->AMF0StoredObjects = array();
         $this->storedObjects = array();
         $this->storedStrings = array();
@@ -75,16 +75,16 @@ class AMFSerializer implements ISerializer{
     }
     
     /**
-     * serializes the message passed in the constructor
+     * serializes the Packet passed in the constructor
      * TODO clean up the mess with the temp buffers. A.S.
      */
     public function serialize(){
         $this->writeInt(0); //  write the version (always 0)
-        $count = $this->message->numHeaders();
+        $count = $this->Packet->numHeaders();
         $this->writeInt($count); // write header count
         for ($i = 0; $i < $count; $i++) {
                 //write headers
-                $header = $this->message->getHeaderAt($i);
+                $header = $this->Packet->getHeaderAt($i);
                 $this->writeUTF($header->name);
                 if($header->required){
                     $this->writeByte(1);
@@ -99,27 +99,27 @@ class AMFSerializer implements ISerializer{
                 $this->writeLong(strlen($serializedHeader));
                 $this->outBuffer .= $serializedHeader;
         }
-        $count = $this->message->numBodies();
-        $this->writeInt($count); // write the body  count
+        $count = $this->Packet->numMessages();
+        $this->writeInt($count); // write the Message  count
         for ($i = 0; $i < $count; $i++) {
-                //write body
+                //write Message
                 $this->AMF0StoredObjects = array();
                 $this->storedStrings = array();
                 $this->storedObjects = array();
                 $this->encounteredStrings = 0;
                 $this->storedDefinitions = 0;
-                $body = $this->message->getBodyAt($i);
-                $this->currentBody = & $body;
-                $this->writeUTF($body->targetURI);
-                $this->writeUTF($body->responseURI); 
-                //save the current buffer, and flush it to write the body
+                $Message = $this->Packet->getMessageAt($i);
+                $this->currentMessage = & $Message;
+                $this->writeUTF($Message->targetURI);
+                $this->writeUTF($Message->responseURI); 
+                //save the current buffer, and flush it to write the Message
                 $tempBuf = $this->outBuffer;
                 $this->outBuffer = "";
-                $this->writeData($body->data);
-                $serializedBody = $this->outBuffer;
+                $this->writeData($Message->data);
+                $serializedMessage = $this->outBuffer;
                 $this->outBuffer = $tempBuf;
-                $this->writeLong(strlen($serializedBody));
-                $this->outBuffer .= $serializedBody;
+                $this->writeLong(strlen($serializedMessage));
+                $this->outBuffer .= $serializedMessage;
         }
 
         return $this->outBuffer;
@@ -479,7 +479,7 @@ class AMFSerializer implements ISerializer{
      * @param mixed $d The data
      */
     protected function writeData($d) {
-            if ($this->message->amfVersion == 3)
+            if ($this->Packet->amfVersion == 3)
             {
                     $this->writeByte(0x11);
                     $this->writeAMF3Data($d);
@@ -991,11 +991,11 @@ class AMFSerializer implements ISerializer{
 		$this->writeByte(0x0C);
 		//this seems wrong... A.S.
                 //$this->writeAmf3String($d, true);
-		$this->writeAmf3ByteArrayBody($d);
+		$this->writeAmf3ByteArrayMessage($d);
 	}
 
 
-	protected function writeAmf3ByteArrayBody($d)
+	protected function writeAmf3ByteArrayMessage($d)
 	{
 		if( ($key = array_search($d, $this->storedObjects, TRUE)) === FALSE && $key === FALSE )
 		{

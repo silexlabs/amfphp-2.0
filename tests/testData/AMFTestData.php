@@ -2,7 +2,7 @@
     /**
  * test data for the AMFPHP unit tests
  * data types have the s prefix for "serialized" and "d" prefix for "deserialized"
- * for messages there is a flaw in the AMFphp design which means that serializng and deserializing is not symmetrical.
+ * for Packets there is a flaw in the AMFphp design which means that serializng and deserializing is not symmetrical.
  * so use s for serialized, d for deserialized for the serialization tests and dd for the deserialation tests, the idea being that dd will disappear for v2
  *
  * @author Ariel Sommeria-klein
@@ -57,22 +57,22 @@ class AMFTestData {
     public $dTypedObject;
     public $dTypedObjectAsArray;
 
-    //AMF message objects
-    public $sEmptyMessage;
-    public $dEmptyMessage;
-    public $sNullHeaderMessage;
-    public $dNullHeaderMessage;
-    public $sStringHeaderMessage;
-    public $dStringHeaderMessage;
-    public $sNullBodyMessage;
-    public $dNullBodyMessage;
-    public $sStringBodyMessage;
-    public $dStringBodyMessage;
-    public $s2Headers2BodiesMessage;
-    public $d2Headers2BodiesMessage;
+    //AMF Packet objects
+    public $sEmptyPacket;
+    public $dEmptyPacket;
+    public $sNullHeaderPacket;
+    public $dNullHeaderPacket;
+    public $sStringHeaderPacket;
+    public $dStringHeaderPacket;
+    public $sNullMessagePacket;
+    public $dNullMessagePacket;
+    public $sStringMessagePacket;
+    public $dStringMessagePacket;
+    public $s2Headers2MessagesPacket;
+    public $d2Headers2MessagesPacket;
 
-    public $mirrorServiceRequestMessage;
-    public $mirrorServiceResponseMessage;
+    public $mirrorServiceRequestPacket;
+    public $mirrorServiceResponsePacket;
     
     public function  __construct() {
         $this->buildByte();
@@ -96,12 +96,12 @@ class AMFTestData {
         $this->buildUnsupported();
         $this->buildXml();
         $this->buildTypedObject();
-        $this->buildEmptyMessage();
-        $this->buildNullHeaderMessage();
-        $this->buildStringHeaderMessage();
-        $this->buildNullBodyMessage();
-        $this->buildStringBodyMessage();
-        $this->build2HeadersAndTwoBodiesMessage();
+        $this->buildEmptyPacket();
+        $this->buildNullHeaderPacket();
+        $this->buildStringHeaderPacket();
+        $this->buildNullMessagePacket();
+        $this->buildStringMessagePacket();
+        $this->build2HeadersAndTwoMessagesPacket();
         $this->buildSimpleMirrorServiceRequestAndResponse();
         //$this->build;
 
@@ -442,72 +442,72 @@ class AMFTestData {
 
 
    /**
-    * AMF messages
+    * AMF Packets
     */
 
     /**
-     * test serializing an empty AMFMessage.
+     * test serializing an empty AMFPacket.
      * expected output: 0x000000
      * 1st int : version
      * 2nd int : number of headers
-     * 3rd int : number of bodies
+     * 3rd int : number of Messages
      */
-    public function buildEmptyMessage(){
-        $this->dEmptyMessage = new AMFMessage();
-        $this->sEmptyMessage = pack('nnn', 0, 0, 0);
+    public function buildEmptyPacket(){
+        $this->dEmptyPacket = new AMFPacket();
+        $this->sEmptyPacket = pack('nnn', 0, 0, 0);
     }
 
     /**
      * one header containing a null, and with required set to true
      */
-    public function buildNullHeaderMessage(){
+    public function buildNullHeaderPacket(){
         $nullHeader = new AMFHeader("null header", TRUE, NULL);
 
-        $this->dNullHeaderMessage = new AMFMessage();
-        $this->dNullHeaderMessage->addHeader($nullHeader);
+        $this->dNullHeaderPacket = new AMFPacket();
+        $this->dNullHeaderPacket->addHeader($nullHeader);
 
         //version (int)
-        $this->sNullHeaderMessage = pack('n', 0);
+        $this->sNullHeaderPacket = pack('n', 0);
         //number of headers (int)
-        $this->sNullHeaderMessage .= pack('n', 1);
+        $this->sNullHeaderPacket .= pack('n', 1);
         //header name length (int)
-        $this->sNullHeaderMessage .= pack('n', strlen($nullHeader->name));
+        $this->sNullHeaderPacket .= pack('n', strlen($nullHeader->name));
         //header name
-        $this->sNullHeaderMessage .= $nullHeader->name;
+        $this->sNullHeaderPacket .= $nullHeader->name;
         //required (here true, cf constructor of $nullHeader)
-        $this->sNullHeaderMessage .= pack('C', 1);
+        $this->sNullHeaderPacket .= pack('C', 1);
 
         //null type indicator (byte)
         $headerValueData = pack('C', 5);
 
         //header value length (long)
-        $this->sNullHeaderMessage .= pack('N', strlen($headerValueData));
+        $this->sNullHeaderPacket .= pack('N', strlen($headerValueData));
         //header value
-        $this->sNullHeaderMessage .= $headerValueData;
+        $this->sNullHeaderPacket .= $headerValueData;
 
-        //number of bodies
-        $this->sNullHeaderMessage .= pack('n', 0);
+        //number of Messages
+        $this->sNullHeaderPacket .= pack('n', 0);
 
     }
 
     /**
      *  with one header containing a string
      */
-    public function buildStringHeaderMessage(){
+    public function buildStringHeaderPacket(){
         $stringHeader = new AMFHeader("string header", FALSE, "zzzzzz");
 
-        $this->dStringHeaderMessage = new AMFMessage();
-        $this->dStringHeaderMessage->addHeader($stringHeader);
+        $this->dStringHeaderPacket = new AMFPacket();
+        $this->dStringHeaderPacket->addHeader($stringHeader);
         //version (int)
-        $this->sStringHeaderMessage = pack('n', 0);
+        $this->sStringHeaderPacket = pack('n', 0);
         //number of headers (int)
-        $this->sStringHeaderMessage .= pack('n', 1);
+        $this->sStringHeaderPacket .= pack('n', 1);
         //header name length (int)
-        $this->sStringHeaderMessage .= pack('n', strlen($stringHeader->name));
+        $this->sStringHeaderPacket .= pack('n', strlen($stringHeader->name));
         //header name
-        $this->sStringHeaderMessage .= $stringHeader->name;
+        $this->sStringHeaderPacket .= $stringHeader->name;
         //required(false)
-        $this->sStringHeaderMessage .= pack('C', 0);
+        $this->sStringHeaderPacket .= pack('C', 0);
 
         //string type indicator (byte)
         $headerValueData = pack('C', 2);
@@ -517,121 +517,121 @@ class AMFTestData {
         $headerValueData .= $stringHeader->value;
 
         //header value length (long)
-        $this->sStringHeaderMessage .= pack('N', strlen($headerValueData));
+        $this->sStringHeaderPacket .= pack('N', strlen($headerValueData));
         //header value
-        $this->sStringHeaderMessage .= $headerValueData;
+        $this->sStringHeaderPacket .= $headerValueData;
 
-        //number of bodies
-        $this->sStringHeaderMessage .= pack('n', 0);
+        //number of Messages
+        $this->sStringHeaderPacket .= pack('n', 0);
 
     }
 
 
     /**
-     * no headers and a body containing a null
+     * no headers and a Message containing a null
      */
-    public function buildNullBodyMessage(){
-        $nullBody = new AMFBody();
-        $nullBody->targetURI = "/onStatus";
-        $nullBody->responseURI = "null";
-        $this->dNullBodyMessage = new AMFMessage();
-        $this->dNullBodyMessage->addBody($nullBody);
+    public function buildNullMessagePacket(){
+        $nullMessage = new AMFMessage();
+        $nullMessage->targetURI = "/onStatus";
+        $nullMessage->responseURI = "null";
+        $this->dNullMessagePacket = new AMFPacket();
+        $this->dNullMessagePacket->addMessage($nullMessage);
 
         //version (int)
-        $this->sNullBodyMessage = pack('n', 0);
+        $this->sNullMessagePacket = pack('n', 0);
         //number of headers (int)
-        $this->sNullBodyMessage .= pack('n', 0);
-        //number of bodies
-        $this->sNullBodyMessage .= pack('n', 1);
+        $this->sNullMessagePacket .= pack('n', 0);
+        //number of Messages
+        $this->sNullMessagePacket .= pack('n', 1);
         //target uri length
-        $this->sNullBodyMessage .= pack('n', 9);
+        $this->sNullMessagePacket .= pack('n', 9);
         //target uri.
-        $this->sNullBodyMessage .= "/onStatus";
+        $this->sNullMessagePacket .= "/onStatus";
         //response uri length
-        $this->sNullBodyMessage .= pack('n', 4);
+        $this->sNullMessagePacket .= pack('n', 4);
         //response uri.
-        $this->sNullBodyMessage .= "null";
+        $this->sNullMessagePacket .= "null";
 
         //result is NULL by default. this is one byte for type that is worth 5, and no data
-        $bodyResultsData = pack('C', 5);
+        $MessageResultsData = pack('C', 5);
         //result length, long
-        $this->sNullBodyMessage .= pack('N', strlen($bodyResultsData));
+        $this->sNullMessagePacket .= pack('N', strlen($MessageResultsData));
         //add the result itself
-        $this->sNullBodyMessage .= $bodyResultsData;
+        $this->sNullMessagePacket .= $MessageResultsData;
 
     }
 
     /**
-     *  no headers and a body containing a string
+     *  no headers and a Message containing a string
      */
-    public function buildStringBodyMessage(){
-        $stringBody = new AMFBody();
+    public function buildStringMessagePacket(){
+        $stringMessage = new AMFMessage();
         $testString = "test string";
-        $stringBody->targetURI = "/onStatus";
-        $stringBody->responseURI = "null";
-        $stringBody->data = $testString;
-        $this->dStringBodyMessage = new AMFMessage();
-        $this->dStringBodyMessage->addBody($stringBody);
+        $stringMessage->targetURI = "/onStatus";
+        $stringMessage->responseURI = "null";
+        $stringMessage->data = $testString;
+        $this->dStringMessagePacket = new AMFPacket();
+        $this->dStringMessagePacket->addMessage($stringMessage);
 
         //version (int)
-        $this->sStringBodyMessage = pack('n', 0);
+        $this->sStringMessagePacket = pack('n', 0);
         //number of headers (int)
-        $this->sStringBodyMessage .= pack('n', 0);
-        //number of bodies
-        $this->sStringBodyMessage .= pack('n', 1);
+        $this->sStringMessagePacket .= pack('n', 0);
+        //number of Messages
+        $this->sStringMessagePacket .= pack('n', 1);
         //target uri length
-        $this->sStringBodyMessage .= pack('n', 9);
+        $this->sStringMessagePacket .= pack('n', 9);
         //target uri.
-        $this->sStringBodyMessage .= "/onStatus";
+        $this->sStringMessagePacket .= "/onStatus";
         //response uri length
-        $this->sStringBodyMessage .= pack('n', 4);
+        $this->sStringMessagePacket .= pack('n', 4);
         //response uri. default is "null"
-        $this->sStringBodyMessage .= "null";
+        $this->sStringMessagePacket .= "null";
 
         //result is string. byte with '2' as data type, then length, then char data
-        $bodyResultsData = pack('C', 2) . pack('n', strLen($testString)) . $testString;
+        $MessageResultsData = pack('C', 2) . pack('n', strLen($testString)) . $testString;
         //result length, long
-        $this->sStringBodyMessage .= pack('N', strlen($bodyResultsData));
+        $this->sStringMessagePacket .= pack('N', strlen($MessageResultsData));
         //add the result itself
-        $this->sStringBodyMessage .= $bodyResultsData;
+        $this->sStringMessagePacket .= $MessageResultsData;
 
     }
 
 
     /**
-     * an AMFMessage with two headers one with a string and one with a null , and two bodies, one with a string and one with a null
+     * an AMFPacket with two headers one with a string and one with a null , and two Messages, one with a string and one with a null
      */
-    public function build2HeadersAndTwoBodiesMessage(){
+    public function build2HeadersAndTwoMessagesPacket(){
         $nullHeader = new AMFHeader("null header", TRUE, NULL);
         $stringHeader = new AMFHeader("string header", FALSE, "zzzzzz");
-        $nullBody = new AMFBody();
-        $nullBody->targetURI = "/onStatus";
-        $nullBody->responseURI = "null";
-        $stringBody = new AMFBody();
+        $nullMessage = new AMFMessage();
+        $nullMessage->targetURI = "/onStatus";
+        $nullMessage->responseURI = "null";
+        $stringMessage = new AMFMessage();
         $testString = "test string";
-        $stringBody->targetURI = "/onStatus";
-        $stringBody->responseURI = "null";
-        $stringBody->data = $testString;
+        $stringMessage->targetURI = "/onStatus";
+        $stringMessage->responseURI = "null";
+        $stringMessage->data = $testString;
 
-        $this->d2Headers2BodiesMessage = new AMFMessage();
-        $this->d2Headers2BodiesMessage->addHeader($stringHeader);
-        $this->d2Headers2BodiesMessage->addHeader($nullHeader);
-        $this->d2Headers2BodiesMessage->addBody($stringBody);
-        $this->d2Headers2BodiesMessage->addBody($nullBody);
+        $this->d2Headers2MessagesPacket = new AMFPacket();
+        $this->d2Headers2MessagesPacket->addHeader($stringHeader);
+        $this->d2Headers2MessagesPacket->addHeader($nullHeader);
+        $this->d2Headers2MessagesPacket->addMessage($stringMessage);
+        $this->d2Headers2MessagesPacket->addMessage($nullMessage);
         //version (int)
-        $this->s2Headers2BodiesMessage = pack('n', 0);
+        $this->s2Headers2MessagesPacket = pack('n', 0);
         //number of headers (int)
-        $this->s2Headers2BodiesMessage .= pack('n', 2);
+        $this->s2Headers2MessagesPacket .= pack('n', 2);
 
         /**
          * first header (string)
          */
         //header name length (int)
-        $this->s2Headers2BodiesMessage .= pack('n', strlen($stringHeader->name));
+        $this->s2Headers2MessagesPacket .= pack('n', strlen($stringHeader->name));
         //header name
-        $this->s2Headers2BodiesMessage .= $stringHeader->name;
+        $this->s2Headers2MessagesPacket .= $stringHeader->name;
         //required(false) (byte)
-        $this->s2Headers2BodiesMessage .= pack('C', 0);
+        $this->s2Headers2MessagesPacket .= pack('C', 0);
 
         //string type indicator (byte)
         $headerValueData = pack('C', 2);
@@ -641,75 +641,75 @@ class AMFTestData {
         $headerValueData .= $stringHeader->value;
 
         //header value length (long)
-        $this->s2Headers2BodiesMessage .= pack('N', strlen($headerValueData));
+        $this->s2Headers2MessagesPacket .= pack('N', strlen($headerValueData));
         //header value
-        $this->s2Headers2BodiesMessage .= $headerValueData;
+        $this->s2Headers2MessagesPacket .= $headerValueData;
 
         /**
          * second header (null)
          */
         //header name length (int)
-        $this->s2Headers2BodiesMessage .= pack('n', strlen($nullHeader->name));
+        $this->s2Headers2MessagesPacket .= pack('n', strlen($nullHeader->name));
         //header name
-        $this->s2Headers2BodiesMessage .= $nullHeader->name;
+        $this->s2Headers2MessagesPacket .= $nullHeader->name;
         //required (here true, cf constructor of $nullHeader)
-        $this->s2Headers2BodiesMessage .= pack('C', 1);
+        $this->s2Headers2MessagesPacket .= pack('C', 1);
 
         //string type indicator (byte)
         $headerValueData = pack('C', 5);
         //header value length (long)
-        $this->s2Headers2BodiesMessage .= pack('N', strlen($headerValueData));
+        $this->s2Headers2MessagesPacket .= pack('N', strlen($headerValueData));
         //header value
-        $this->s2Headers2BodiesMessage .= $headerValueData;
+        $this->s2Headers2MessagesPacket .= $headerValueData;
 
         /**
-         * bodies
+         * Messages
          */
-        //number of bodies
-        $this->s2Headers2BodiesMessage .= pack('n', 2);
+        //number of Messages
+        $this->s2Headers2MessagesPacket .= pack('n', 2);
 
         /**
-         * first body (string)
+         * first Message (string)
          */
         //target uri length
-        $this->s2Headers2BodiesMessage .= pack('n', 9);
+        $this->s2Headers2MessagesPacket .= pack('n', 9);
         //target uri. This is responseIndex (default is "") + "/onStatus"
-        $this->s2Headers2BodiesMessage .= "/onStatus";
+        $this->s2Headers2MessagesPacket .= "/onStatus";
         //response uri length
-        $this->s2Headers2BodiesMessage .= pack('n', 4);
+        $this->s2Headers2MessagesPacket .= pack('n', 4);
         //response uri. default is "null"
-        $this->s2Headers2BodiesMessage .= "null";
+        $this->s2Headers2MessagesPacket .= "null";
 
         //result is string. byte with '2' as data type, then length, then char data
-        $bodyResultsData = pack('C', 2) . pack('n', strLen($testString)) . $testString;
+        $MessageResultsData = pack('C', 2) . pack('n', strLen($testString)) . $testString;
         //result length, long
-        $this->s2Headers2BodiesMessage .= pack('N', strlen($bodyResultsData));
+        $this->s2Headers2MessagesPacket .= pack('N', strlen($MessageResultsData));
         //add the result itself
-        $this->s2Headers2BodiesMessage .= $bodyResultsData;
+        $this->s2Headers2MessagesPacket .= $MessageResultsData;
 
         /**
-         * second body (null)
+         * second Message (null)
          */
         //target uri length
-        $this->s2Headers2BodiesMessage .= pack('n', 9);
+        $this->s2Headers2MessagesPacket .= pack('n', 9);
         //target uri. This is responseIndex (default is "") + "/onStatus"
-        $this->s2Headers2BodiesMessage .= "/onStatus";
+        $this->s2Headers2MessagesPacket .= "/onStatus";
         //response uri length
-        $this->s2Headers2BodiesMessage .= pack('n', 4);
+        $this->s2Headers2MessagesPacket .= pack('n', 4);
         //response uri. default is "null"
-        $this->s2Headers2BodiesMessage .= "null";
+        $this->s2Headers2MessagesPacket .= "null";
 
         //result is null
-        $bodyResultsData = pack('C', 5);
+        $MessageResultsData = pack('C', 5);
         //result length, long
-        $this->s2Headers2BodiesMessage .= pack('N', strlen($bodyResultsData));
+        $this->s2Headers2MessagesPacket .= pack('N', strlen($MessageResultsData));
         //add the result itself
-        $this->s2Headers2BodiesMessage .= $bodyResultsData;
+        $this->s2Headers2MessagesPacket .= $MessageResultsData;
 
     }
 
     /**
-     * messages with a proper response, used to test gateway. dependant on service used. Here all will be based on mirror test, where the response data is
+     * Packets with a proper response, used to test gateway. dependant on service used. Here all will be based on mirror test, where the response data is
      * the same as the request data.
      */
 
@@ -725,42 +725,42 @@ class AMFTestData {
         $requestResponseURI = "/1";
 
         //version (int)
-        $requestMessage = pack('n', 0);
+        $requestPacket = pack('n', 0);
         //number of headers (int)
-        $requestMessage .= pack('n', 0);
-        //number of bodies
-        $requestMessage .= pack('n', 1);
+        $requestPacket .= pack('n', 0);
+        //number of Messages
+        $requestPacket .= pack('n', 1);
         //target uri length
-        $requestMessage .= pack('n', strlen($requestTargetURI));
+        $requestPacket .= pack('n', strlen($requestTargetURI));
         //target uri .
-        $requestMessage .= $requestTargetURI;
+        $requestPacket .= $requestTargetURI;
         //response uri length
-        $requestMessage .= pack('n', strlen($requestResponseURI));
+        $requestPacket .= pack('n', strlen($requestResponseURI));
         //response uri.
-        $requestMessage .= $requestResponseURI;
+        $requestPacket .= $requestResponseURI;
 
         //the function call parameters, and the returned data are the same with the mirror service.
         ////here a strict array containing a string
         //type : 0x0A
-        $requestBody = pack('C', 0x0A);
+        $requestMessage = pack('C', 0x0A);
         //number of sub objects on a long
-        $requestBody .= pack('N', 1);
+        $requestMessage .= pack('N', 1);
 
         //the contained string
         //data type is string, so use string(2)
-        $requestBody .= pack('C', 2);
+        $requestMessage .= pack('C', 2);
         //data length
-        $requestBody .= pack('n', strLen("testString"));
+        $requestMessage .= pack('n', strLen("testString"));
         //data
-        $requestBody .= "testString";
-        $requestBodyLength = strLen($requestBody);
+        $requestMessage .= "testString";
+        $requestMessageLength = strLen($requestMessage);
 
-        //body length, long
-        $requestMessage .= pack('N', $requestBodyLength);
-        //add the body itself
-        $requestMessage .= $requestBody;
+        //Message length, long
+        $requestPacket .= pack('N', $requestMessageLength);
+        //add the Message itself
+        $requestPacket .= $requestMessage;
 
-        $this->mirrorServiceRequestMessage = $requestMessage;
+        $this->mirrorServiceRequestPacket = $requestPacket;
 
 
 
@@ -772,36 +772,36 @@ class AMFTestData {
         $responseResponseURI = "null";
 
         //version (int)
-        $responseMessage = pack('n', 0);
+        $responsePacket = pack('n', 0);
         //number of headers (int)
-        $responseMessage .= pack('n', 0);
-        //number of bodies
-        $responseMessage .= pack('n', 1);
+        $responsePacket .= pack('n', 0);
+        //number of Messages
+        $responsePacket .= pack('n', 1);
         //target uri length
-        $responseMessage .= pack('n', strlen($responseTargetURI));
+        $responsePacket .= pack('n', strlen($responseTargetURI));
         //target uri .
-        $responseMessage .= $responseTargetURI;
+        $responsePacket .= $responseTargetURI;
         //response uri length
-        $responseMessage .= pack('n', strlen($responseResponseURI));
+        $responsePacket .= pack('n', strlen($responseResponseURI));
         //response uri.
-        $responseMessage .= $responseResponseURI;
+        $responsePacket .= $responseResponseURI;
 
-        //response body. here the string sent in the request
+        //response Message. here the string sent in the request
         //data type is string, so use string(2)
-        $responseBody = pack('C', 2);
+        $responseMessage = pack('C', 2);
         //data length
-        $responseBody .= pack('n', strLen("testString"));
+        $responseMessage .= pack('n', strLen("testString"));
         //data
-        $responseBody .= "testString";
-        $responseBodyLength = strLen($responseBody);
+        $responseMessage .= "testString";
+        $responseMessageLength = strLen($responseMessage);
 
-        //body length, long
-        $responseMessage .= pack('N', $responseBodyLength);
-        //add the body itself
-        $responseMessage .= $responseBody;
+        //Message length, long
+        $responsePacket .= pack('N', $responseMessageLength);
+        //add the Message itself
+        $responsePacket .= $responseMessage;
 
 
-        $this->mirrorServiceResponseMessage = $responseMessage;
+        $this->mirrorServiceResponsePacket = $responsePacket;
 
     }
 

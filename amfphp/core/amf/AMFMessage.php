@@ -1,156 +1,49 @@
 <?php
+
 /**
- * content holder for an AMF Message.
- * TODO there is a confusion here between the AMF Message and the AMF Packets. This is probably because AMFPHP was written before the publication of the official specs. Clean up!
+ * AMFMessage is a data type that encapsulates all of the various properties a Message object can have.
  *
  * @author Ariel Sommeria-klein
  */
 class AMFMessage {
     /**
-     * The place to keep the headers data
+     * inthe case of a request:
+     * parsed to a service name and a function name. supported separators for the targetURI are "." and "/"
+     * The service name can either be just the name of the class (MirrorService) or include a path(package/MirrorService)
+     * example of full targetURI package/MirrorService/mirrorFunction
      *
-     * @var <array>
-     */
-    public $headers;
-
-    /**
-     * The header table is a quick lookup table for
-     * a header by it's key
-     * @var <array>
-     */
-    public $headerTable;
-
-    /**
-     * The place to keep the body elements
+     * in the case of a response:
+     * the request responseUri + OK/KO
+     * for example: /1/onResult or /1/onStatus
      *
-     * @var <array>
+     * @var <String>
      */
-    private $bodies;
+    public $targetURI = "";
 
     /**
-     * either 0 or 3. This is stored here when deserializing, because the serializer needs the info
-     * @var <int>
+     * in the case of a request:
+     * operation name, for example /1
+     *
+     * in the case of a response:
+     * undefined
+     * 
+     * @var <String>
      */
-    public $amfVersion;
+    public $responseURI = "";
+
+    /**
+     *
+     * @var <mixed>
+     */
+    public $data;
+
+
+    public function  __construct($targetURI = "", $responseURI = "", $data = null) {
+        $this->targetURI = $targetURI;
+        $this->responseURI = $responseURI;
+        $this->data = $data;
+    }
     
-    /**
-     * The constructor function for a new AMF object.
-     *
-     * All the constructor does is initialize the headers and bodys containers
-     */
-    public function __construct() {
-        $this->headers = array();
-        $this->bodies = array();
-        $this->headerTable = array();
-        $this->amfVersion = 0;
-    }
-
-    /**
-     * addHeader places a new header into the pool of headers.
-     *
-     * Each header has 3 properties, they header key, the required flag
-     * and the data associated with the header.
-     *
-     * @param object $header The AMFHeader object to add to the list
-     */
-    public function addHeader(&$header) {
-            //$len = array_push($this->headers, $header);
-            $this->headers[] = $header;
-            $name = $header->name;
-            $this->headerTable[$name] = $header;
-    }
-
-    /**
-     * getHeader returns a header record for a given key
-     *
-     * @param string $key The header key
-     * @return mixed The header record
-     */
-    public function getHeader ($key) {
-            if (isset($this->headerTable[$key])) {
-                    return $this->headerTable[$key];
-            }
-            return false;
-    }
-
-    /**
-     * Gets the number of headers for this AMF packet
-     *
-     * @return int The header count
-     */
-    public function numHeaders() {
-            return count($this->headers);
-    }
-
-    /**
-     * Get the header at the specified position.
-     *
-     * If you pass an id this method will return the header
-     * located at that id, otherwise it will return the first header
-     *
-     * @param int $id Optional id field
-     * @return array The header object
-     */
-    public function getHeaderAt($id = 0) {
-            return $this->headers[$id];
-    }
-
-    /**
-     * addBody has the job of adding a new body element to the bodys array.
-     *
-     * @param string $t The target URI
-     * @param string $r The response URI
-     * @param mixed $v The value of the object
-     * @param string $ty The type of the results
-     * @param int $ps The pagesize of a recordset
-     */
-    public function addBody($body) {
-            $this->bodies[] = $body;
-    }
-
-    /**
-     * addBodyAt provides an interface to push a body element to a desired
-     * position in the array.
-     *
-     * @param int $pos The position to add the body element
-     * @param AMFBody $body The body element to add
-     */
-    public function addBodyAt($pos, $body) {
-            array_splice($this->bodies, $pos, 0, array($body)); // splice the new body into the array
-    }
-
-    /**
-     * removeBodyAt provides an interface to remove a body element to a desired
-     * position in the array.
-     *
-     * @param int $pos The position to add the body element
-     * @param AMFBody $body The body element to add
-     */
-    public function removeBodyAt($pos) {
-            array_splice($this->bodies, $pos, 1); // splice the new body into the array
-    }
-
-    /**
-     * numBody returns the total number of body elements.  There is one body
-     * element for each method call.
-     *
-     * @return int The number of body elements
-     */
-    public function numBodies() {
-            return count($this->bodies);
-    }
-
-    /**
-     * getBodyAt returns the current body element the specified position.
-     *
-     * If a integer is passed this method will return the element at the given position.
-     * Otherwise the first element will be returned.
-     *
-     * @param int $id The id of the body element desired
-     * @return array The body element
-     */
-    public function getBodyAt($id = 0) {
-            return $this->bodies[$id];
-    }
+    
 }
 ?>

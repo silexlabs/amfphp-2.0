@@ -470,10 +470,10 @@ BrowserHistory = (function() {
             iframe.src = 'javascript:false;'; 
 
             try {
-                document.body.appendChild(iframe);
+                document.Message.appendChild(iframe);
             } catch(e) {
                 setTimeout(function() {
-                    document.body.appendChild(iframe);
+                    document.Message.appendChild(iframe);
                 }, 0);
             }
         }
@@ -482,12 +482,12 @@ BrowserHistory = (function() {
         {
             var rememberDiv = document.createElement("div");
             rememberDiv.id = 'safari_rememberDiv';
-            document.body.appendChild(rememberDiv);
+            document.Message.appendChild(rememberDiv);
             rememberDiv.innerHTML = '<input type="text" id="safari_remember_field" style="width: 500px;">';
 
             var formDiv = document.createElement("div");
             formDiv.id = 'safari_formDiv';
-            document.body.appendChild(formDiv);
+            document.Message.appendChild(formDiv);
 
             var reloader_content = document.createElement('div');
             reloader_content.id = 'safarireloader';
@@ -498,7 +498,7 @@ BrowserHistory = (function() {
                 }
             }
             reloader_content.innerHTML = '<iframe id="safarireloader-iframe" src="about:blank" frameborder="no" scrolling="no"></iframe>';
-            document.body.appendChild(reloader_content);
+            document.Message.appendChild(reloader_content);
             reloader_content.style.position = 'absolute';
             reloader_content.style.left = reloader_content.style.top = '-9999px';
             iframe = reloader_content.getElementsByTagName('iframe')[0];
@@ -513,11 +513,11 @@ BrowserHistory = (function() {
         {
             var anchorDiv = document.createElement("div");
             anchorDiv.id = 'firefox_anchorDiv';
-            document.body.appendChild(anchorDiv);
+            document.Message.appendChild(anchorDiv);
         }
 
         if (browser.ie8)        
-            document.body.onhashchange = hashChangeHandler;
+            document.Message.onhashchange = hashChangeHandler;
         //setTimeout(checkForUrlChange, 50);
     }
 

@@ -9,9 +9,9 @@ require_once dirname(__FILE__) . '/../../../../amfphp/ClassLoader.php';
 class ServiceCallParametersTest extends PHPUnit_Framework_TestCase {
 
 
-    public function testCreateFromAMFBody() {
-        $amfBody = new AMFBody("serviceFolder.service/serviceMethod", "/1", array("bla"));
-        $serviceCallParameters = ServiceCallParameters::createFromAMFBody($amfBody);
+    public function testCreateFromAMFMessage() {
+        $amfMessage = new AMFMessage("serviceFolder.service/serviceMethod", "/1", array("bla"));
+        $serviceCallParameters = ServiceCallParameters::createFromAMFMessage($amfMessage);
         $this->assertEquals("serviceFolder/service" , $serviceCallParameters->serviceName);
         $this->assertEquals("serviceMethod" , $serviceCallParameters->methodName);
         $this->assertEquals(array("bla") , $serviceCallParameters->methodParameters);

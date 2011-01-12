@@ -1,6 +1,6 @@
 <?php
 /**
- * analyzes an exception and returns an AMFMessage
+ * analyzes an exception and returns an AMFPacket
  * TODO. the code here is really rough. It needs some enhancement, and some checking 
  *
  * @author Ariel Sommeria-klein
@@ -12,11 +12,11 @@ class AMFExceptionHandler {
      * @return <mixed>
      */
     public function handle($exception){
-        $amfMessage = new AMFMessage();
-        $errorMessageBody = new AMFBody();
-        $errorMessageBody->data = $exception->__toString();
-        $amfMessage->addBody($errorMessageBody);
-        return $amfMessage;
+        $amfPacket = new AMFPacket();
+        $errorPacketMessage = new AMFMessage();
+        $errorPacketMessage->data = $exception->__toString();
+        $amfPacket->addMessage($errorPacketMessage);
+        return $amfPacket;
     }
 }
 ?>

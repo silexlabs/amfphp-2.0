@@ -80,7 +80,7 @@ var swfobject = function() {
 	*/ 
 	onDomLoad = function() {
 		if (!ua.w3) { return; }
-		if ((typeof doc.readyState != UNDEF && doc.readyState == "complete") || (typeof doc.readyState == UNDEF && (doc.getElementsByTagName("body")[0] || doc.body))) { // function is fired after onload, e.g. when script is inserted dynamically 
+		if ((typeof doc.readyState != UNDEF && doc.readyState == "complete") || (typeof doc.readyState == UNDEF && (doc.getElementsByTagName("Message")[0] || doc.Message))) { // function is fired after onload, e.g. when script is inserted dynamically 
 			callDomLoadFunctions();
 		}
 		if (!isDomLoaded) {
@@ -125,7 +125,7 @@ var swfobject = function() {
 	function callDomLoadFunctions() {
 		if (isDomLoaded) { return; }
 		try { // test if we can really add/remove elements to/from the DOM; we don't want to fire it too early
-			var t = doc.getElementsByTagName("body")[0].appendChild(createElement("span"));
+			var t = doc.getElementsByTagName("Message")[0].appendChild(createElement("span"));
 			t.parentNode.removeChild(t);
 		}
 		catch (e) { return; }
@@ -191,7 +191,7 @@ var swfobject = function() {
 		- Disadvantage of this method is that it depends on the availability of the DOM, while the plugins collection is immediately available
 	*/
 	function testPlayerVersion() {
-		var b = doc.getElementsByTagName("body")[0];
+		var b = doc.getElementsByTagName("Message")[0];
 		var o = createElement(OBJECT);
 		o.setAttribute("type", FLASH_MIME_TYPE);
 		var t = b.appendChild(o);

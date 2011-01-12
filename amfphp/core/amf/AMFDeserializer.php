@@ -5,12 +5,12 @@
 		protected $rawData;
 
 		/**
-		 * The number of bodies in the packet left to process
+		 * The number of Messages in the packet left to process
 		 *
 		 * @access private
 		 * @var int
 		 */
-		protected $bodiesLeftToProcess;
+		protected $MessagesLeftToProcess;
 
 		/**
 		 * The current seek cursor of the stream
@@ -37,10 +37,10 @@
 		protected $headers = array();
 
                 /**
-                 * the message contained in the serialized data
-                 * @var <AMFMessage>
+                 * the Packet contained in the serialized data
+                 * @var <AMFPacket>
                  */
-                protected $deserializedMessage;
+                protected $deserializedPacket;
 
 		/**
 		 * metaInfo
@@ -54,12 +54,12 @@
 
 
 		/**
-		 * The content of the packet bodies
+		 * The content of the packet Messages
 		 *
 		 * @access private
 		 * @var array
 		 */
-		public $bodies = array();
+		public $Messages = array();
 
 		public function __construct($raw)
 		{
@@ -78,20 +78,20 @@
 		 * @param object $amfdata The object to put the deserialized data in
 		 */ 
 		public function deserialize() {
-                        $this->deserializedMessage = new AMFMessage();
+                        $this->deserializedPacket = new AMFPacket();
 			$this->readHeaders(); // read the binary headers
-			$this->readBodies(); // read the binary bodies
+			$this->readMessages(); // read the binary Messages
                         if($this->decodeFlags & 1 == 1){
-                            $this->deserializedMessage->amfVersion = 3;
+                            $this->deserializedPacket->amfVersion = 3;
                         }else{
-                            $this->deserializedMessage->amfVersion = 0;
+                            $this->deserializedPacket->amfVersion = 0;
                         }
-                        return $this->deserializedMessage;
+                        return $this->deserializedPacket;
 		}
 
 		/**
-		 * readHeaders converts that header section of the amf message into php obects.
-		 * Header information typically contains meta data about the message.
+		 * readHeaders converts that header section of the amf Packet into php obects.
+		 * Header information typically contains meta data about the Packet.
 		 */
 		protected function readHeaders() {
 
@@ -102,7 +102,7 @@
 			//
 			if(!($topByte == 0 || $topByte == 3))
 			{
-				throw new Exception("Malformed AMF message, connection may have dropped");
+				throw new Exception("Malformed AMF Packet, connection may have dropped");
 				exit();
 			}
 			$this->headersLeftToProcess = $this->readInt(); //  find the total number of header elements
@@ -117,16 +117,16 @@
 				$content = $this->readData($type); // turn the element into real data
 
                                 $header = new AMFHeader($name, $required, $content);
-				$this->deserializedMessage->addHeader($header);
+				$this->deserializedPacket->addHeader($header);
 			}
 
 		}
 
-		protected function readBodies()
+		protected function readMessages()
 		{
-			$this->bodiesLeftToProcess = $this->readInt(); // find the total number  of body elements
-			while ($this->bodiesLeftToProcess--)
-			{ // loop over all of the body elements
+			$this->MessagesLeftToProcess = $this->readInt(); // find the total number  of Message elements
+			while ($this->MessagesLeftToProcess--)
+			{ // loop over all of the Message elements
 
 				$this->amf0storedObjects = array();
 				$this->storedStrings = array();
@@ -136,14 +136,14 @@
 				$target = $this->readUTF();
 				$response = $this->readUTF(); //    the response that the client understands
 
-				//$length = $this->readLong(); // grab the length of    the body element
+				//$length = $this->readLong(); // grab the length of    the Message element
 				$this->currentByte += 4;
 
 				$type = $this->readByte(); // grab the type of the element
 				$data = $this->readData($type); // turn the element into real data
 
-                                $body = new AMFBody($target, $response, $data);
-				$this->deserializedMessage->addBody($body);
+                                $Message = new AMFMessage($target, $response, $data);
+				$this->deserializedPacket->addMessage($Message);
 
 			}
 		}
@@ -198,7 +198,7 @@
 		 * implementation for deciphering it.
 		 *
 		 * @param mixed $type The $type integer
-		 * @return mixed The php version of the data in the message block
+		 * @return mixed The php version of the data in the Packet block
 		 */
 		public function readData($type)
 		{
@@ -265,7 +265,7 @@
 		}
 
 		/**
-		 * readObject reads the name/value properties of the amf message and converts them into
+		 * readObject reads the name/value properties of the amf Packet and converts them into
 		 * their equivilent php representation
 		 *
 		 * @return array The php array with the object data
@@ -307,11 +307,11 @@
 		{
 			//$length   = $this->readLong(); // get the length  property set by flash
 			$this->currentByte += 4;
-			return $this->readMixedObject(); // return the body of mixed array
+			return $this->readMixedObject(); // return the Message of mixed array
 		}
 
 		/**
-		 * readMixedObject reads the name/value properties of the amf message and converts
+		 * readMixedObject reads the name/value properties of the amf Packet and converts
 		 * numeric looking keys to numeric keys
 		 *
 		 * @return array The php array with the object data
@@ -354,7 +354,7 @@
 		}
 
 		/**
-		 * readDate reads a date from the amf message and returns the time in ms.
+		 * readDate reads a date from the amf Packet and returns the time in ms.
 		 * This method is still under development.
 		 *
 		 * @return long The date in ms.

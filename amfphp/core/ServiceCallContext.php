@@ -21,13 +21,13 @@ class ServiceCallContext {
     public $serviceRouter;
 
     /**
-     * transforms a service call result into a serialized messaged ready to go to the output stream
+     * transforms a service call result into a serialized Packetd ready to go to the output stream
      * @var <ISerializer>
      */
     public $serializer;
 
     /**
-     * handles an exception and generates the corresponding message
+     * handles an exception and generates the corresponding Packet
      * @var <IExceptionHandler>
      */
     public $exceptionHandler;

@@ -13,12 +13,12 @@ class GatewayTest extends PHPUnit_Framework_TestCase {
 
     public function testService() {
         $amfTestData = new AMFTestData();
-        $gateway = new Gateway($amfTestData->mirrorServiceRequestMessage);
+        $gateway = new Gateway($amfTestData->mirrorServiceRequestPacket);
         $testServiceConfig = new TestServicesConfig();
         $gateway->config->serviceFolderPaths = $testServiceConfig->serviceFolderPaths;
         $gateway->config->serviceNames2ClassFindInfo = $testServiceConfig->serviceNames2ClassFindInfo;
         $ret = $gateway->service();
-        $this->assertEquals(bin2hex($amfTestData->mirrorServiceResponseMessage), bin2hex($ret));
+        $this->assertEquals(bin2hex($amfTestData->mirrorServiceResponsePacket), bin2hex($ret));
     }
 
 
