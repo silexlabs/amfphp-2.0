@@ -443,7 +443,7 @@ class AMFSerializer implements ISerializer{
      * in it to the output stream.
      * To accomplish this we just blanket grab all of the object vars with get_object_vars, minus the _explicitType, whiuch is used as class name
      *
-     * @param object $d The object to serialize the properties. The deserializer looks for AMFUtil::FIELD_EXPLICIT_TYPE on this object and writes it as the class name. 
+     * @param object $d The object to serialize the properties. The deserializer looks for AMFConstants::FIELD_EXPLICIT_TYPE on this object and writes it as the class name. 
      */
     protected function writeTypedObject($d, $className) {
             if($this->writeReferenceIfExists($d))
@@ -453,11 +453,11 @@ class AMFSerializer implements ISerializer{
 
             $this->writeByte(16); // write  the custom class code
 
-            $className = $d[AMFUtil::FIELD_EXPLICIT_TYPE];
+            $className = $d[AMFConstants::FIELD_EXPLICIT_TYPE];
             if(!$className){
                 throw new Exception("_explicitType not found on a object that is to be sent as typed. " . print_r($d, true));
             }
-            unset ($d[AMFUtil::FIELD_EXPLICIT_TYPE]);
+            unset ($d[AMFConstants::FIELD_EXPLICIT_TYPE]);
             $this->writeUTF($className); // write the class name
             $objVars = $d;
             foreach($objVars as $key => $data) { // loop over each element
@@ -546,9 +546,12 @@ class AMFSerializer implements ISerializer{
                             unset ($d->_explicitType);
                             $this->writeTypedObject($d, $type);
                             return;
+                    }else{
+                            $this->writeArray($d);
+                            return;
                     }
             }
-            throw new Exception("couldn't write data " . $d);
+            throw new Exception("couldn't write data ");
     }
 
 
@@ -1042,7 +1045,7 @@ class AMFSerializer implements ISerializer{
 			//Type this as a dynamic object
 			$this->outBuffer .= "\13";
 
-			$className = $d[AMFUtil::FIELD_EXPLICIT_TYPE];
+			$className = $d[AMFConstants::FIELD_EXPLICIT_TYPE];
 
 			$this->writeAmf3String($className);
                         

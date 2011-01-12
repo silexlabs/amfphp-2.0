@@ -4,7 +4,7 @@
  * @author Ariel Sommeria-klein
  */
 
-require_once dirname(__FILE__) . '/../../amfphp/ClassLoader.php';
+require_once dirname(__FILE__) . '/../../amfphp/AMFPHPClassLoader.php';
 require_once dirname(__FILE__) . "/TestServicesConfig.php";
 $rawInputData = AMFUtil::getRawPostData();
 $gateway = new Gateway($rawInputData);

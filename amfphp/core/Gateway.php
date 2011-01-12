@@ -43,7 +43,7 @@ class Gateway {
         $responsePacket = new AMFPacket();
         $responseMessage = new AMFMessage();
         $responseMessage->data = $ret;
-        $responseMessage->targetURI = $requestMessage->responseURI . "/onResult";
+        $responseMessage->targetURI = $requestMessage->responseURI . AMFConstants::AMFPHP_CLIENT_SUCCESS_METHOD;
         //not specified
         $responseMessage->responseURI = "null";
         return $responseMessage;
@@ -59,9 +59,9 @@ class Gateway {
         $errorPacket = new AMFPacket();
         $errorResponseMessage = new AMFMessage();
         if($requestMessage != null && isset ($requestMessage->responseURI)){
-            $errorResponseMessage->targetURI = $requestMessage->responseURI . "/onStatus";
+            $errorResponseMessage->targetURI = $requestMessage->responseURI . AMFConstants::CLIENT_FAILURE_METHOD;
         }else{
-            $errorResponseMessage->targetURI = "/1/onStatus";
+            $errorResponseMessage->targetURI = AMFConstants::DEFAULT_REQUEST_RESPONSE_URI . AMFConstants::CLIENT_FAILURE_METHOD;
         }
         //not specified
         $errorResponseMessage->responseURI = "null";

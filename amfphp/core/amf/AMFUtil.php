@@ -7,12 +7,6 @@
  */
 class AMFUtil {
     /**
-     * this is the field where the class name of an object must be set so that it can be sent as a strongly typed object
-     * should probably be moved to a AMFConsts class once there are more constants, but for now it will do here
-     */
-    const FIELD_EXPLICIT_TYPE = "_explicitType";
-
-    /**
      * looks if the system is Big Endain or not
      * @return <Boolean>
      */

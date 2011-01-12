@@ -418,7 +418,7 @@ class AMFTestData {
      * note: the writeXml method gets rids of CRs and LFs
      */
     public function buildTypedObject(){
-        $this->dTypedObject = array("data" => "dummyData", AMFUtil::FIELD_EXPLICIT_TYPE => "DummyClass");
+        $this->dTypedObject = array("data" => "dummyData", AMFConstants::FIELD_EXPLICIT_TYPE => "DummyClass");
         //type : 0x10
         $this->sTypedObject = pack('C', 0x10);
         //class name length on a int

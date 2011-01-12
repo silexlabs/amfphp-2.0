@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__) . '/../../../../amfphp/ClassLoader.php';
+require_once dirname(__FILE__) . '/../../../../amfphp/AMFPHPClassLoader.php';
 
 /**
  * Test class for ServiceCallParameters.

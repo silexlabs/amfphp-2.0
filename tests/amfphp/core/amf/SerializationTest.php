@@ -6,7 +6,7 @@
  * @author Ariel Sommeria-klein
  */
 
-require_once dirname(__FILE__) . '/../../../../amfphp/ClassLoader.php';
+require_once dirname(__FILE__) . '/../../../../amfphp/AMFPHPClassLoader.php';
 require_once dirname(__FILE__) . '/../../../testData/AMFTestData.php';
 require_once dirname(__FILE__) . '/AMFSerializerWrapper.php';
 
@@ -164,7 +164,7 @@ class SerializationTest extends PHPUnit_Framework_TestCase{
 
         //writeTypedObject
         $serializer = new AMFSerializerWrapper($emptyPacket);
-        $serializer->writeTypedObject($testData->dTypedObject, $testData->dTypedObject[AMFUtil::FIELD_EXPLICIT_TYPE]);
+        $serializer->writeTypedObject($testData->dTypedObject, $testData->dTypedObject[AMFConstants::FIELD_EXPLICIT_TYPE]);
         $serialized = $serializer->getOutput();
         $expectedSerialized = $testData->sTypedObject;
         $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));

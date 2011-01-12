@@ -20,14 +20,15 @@ require AMFPHP_ROOTPATH . "core/common/ServiceCallParameters.php";
 require AMFPHP_ROOTPATH . "core/common/ServiceRouter.php";
 
 //core/amf
-require AMFPHP_ROOTPATH . "core/amf/AMFMessage.php";
+require AMFPHP_ROOTPATH . "core/amf/AMFConstants.php";
 require AMFPHP_ROOTPATH . "core/amf/AMFDeserializer.php";
 require AMFPHP_ROOTPATH . "core/amf/AMFExceptionHandler.php";
 require AMFPHP_ROOTPATH . "core/amf/AMFHeader.php";
+require AMFPHP_ROOTPATH . "core/amf/AMFMessage.php";
 require AMFPHP_ROOTPATH . "core/amf/AMFPacket.php";
 require AMFPHP_ROOTPATH . "core/amf/AMFSerializer.php";
 require AMFPHP_ROOTPATH . "core/amf/AMFUtil.php";
-require AMFPHP_ROOTPATH . "core/amf/WrapperClasses.php";
+require AMFPHP_ROOTPATH . "core/amf/AMFWrapperClasses.php";
 
 //core
 require AMFPHP_ROOTPATH . "core/AmfphpConfig.php";

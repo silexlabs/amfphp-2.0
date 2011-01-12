@@ -399,7 +399,7 @@
 		/**
 		 * readCustomClass reads the amf content associated with a class instance which was registered
 		 * with Object.registerClass.  In order to preserve the class name an additional property is assigned
-		 * to the object AMFUtil::FIELD_EXPLICIT_TYPE.  This property will be overwritten if it existed within the class already.
+		 * to the object AMFConstants::FIELD_EXPLICIT_TYPE.  This property will be overwritten if it existed within the class already.
 		 *
 		 * @return object The php representation of the object
 		 */
