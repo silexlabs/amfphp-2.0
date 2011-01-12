@@ -38,7 +38,7 @@ class AMFBody {
     public $data;
 
 
-    public function  __construct($targetURI = "", $responseURI = "", $data = "") {
+    public function  __construct($targetURI = "", $responseURI = "", $data = null) {
         $this->targetURI = $targetURI;
         $this->responseURI = $responseURI;
         $this->data = $data;

@@ -43,9 +43,9 @@ class Gateway {
         $responseMessage = new AMFMessage();
         $responseBody = new AMFBody();
         $responseBody->data = $ret;
-        $responseBody->responseURI = $requestBody->responseURI . "/onResult";
+        $responseBody->targetURI = $requestBody->responseURI . "/onResult";
         //not specified
-        $responseBody->targetURI = "null";
+        $responseBody->responseURI = "null";
         return $responseBody;
     }
 
@@ -59,12 +59,12 @@ class Gateway {
         $errorMessage = new AMFMessage();
         $errorResponseBody = new AMFBody();
         if($requestBody != null && isset ($requestBody->responseURI)){
-            $errorResponseBody->responseURI = $requestBody->responseURI . "/onStatus";
+            $errorResponseBody->targetURI = $requestBody->responseURI . "/onStatus";
         }else{
             $errorResponseBody->targetURI = "/1/onStatus";
         }
         //not specified
-        $errorResponseBody->targetURI = "null";
+        $errorResponseBody->responseURI = "null";
         $errorResponseBody->data = $e->__toString();
         $errorMessage->addBody($errorResponseBody);
         $serializer = new AMFSerializer($errorMessage);

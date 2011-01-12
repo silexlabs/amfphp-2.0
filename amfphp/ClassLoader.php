@@ -27,7 +27,6 @@ require AMFPHP_ROOTPATH . "core/amf/AMFHeader.php";
 require AMFPHP_ROOTPATH . "core/amf/AMFMessage.php";
 require AMFPHP_ROOTPATH . "core/amf/AMFSerializer.php";
 require AMFPHP_ROOTPATH . "core/amf/AMFUtil.php";
-require AMFPHP_ROOTPATH . "core/amf/DummyDeserializer.php";
 require AMFPHP_ROOTPATH . "core/amf/WrapperClasses.php";
 
 //core

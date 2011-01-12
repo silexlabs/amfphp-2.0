@@ -2,15 +2,15 @@
 
 	class AMFDeserializer
 	{
-		protected $raw_data;
+		protected $rawData;
 
 		/**
-		 * The number of bodies in the packet.
+		 * The number of bodies in the packet left to process
 		 *
 		 * @access private
 		 * @var int
 		 */
-		protected $body_count;
+		protected $bodiesLeftToProcess;
 
 		/**
 		 * The current seek cursor of the stream
@@ -18,15 +18,15 @@
 		 * @access private
 		 * @var int
 		 */
-		protected $current_byte;
+		protected $currentByte;
 
 		/**
-		 * The number of headers in the packet.
+		 * The number of headers in the packet left to process
 		 *
 		 * @access private
 		 * @var int
 		 */
-		protected $header_count;
+		protected $headersLeftToProcess;
 
 		/**
 		 * The content of the packet headers
@@ -35,6 +35,12 @@
 		 * @var array
 		 */
 		protected $headers = array();
+
+                /**
+                 * the message contained in the serialized data
+                 * @var <AMFMessage>
+                 */
+                protected $deserializedMessage;
 
 		/**
 		 * metaInfo
@@ -46,17 +52,24 @@
 		protected $storedDefinitions;
 		protected $amf0storedObjects;
 
+
+		/**
+		 * The content of the packet bodies
+		 *
+		 * @access private
+		 * @var array
+		 */
 		public $bodies = array();
 
 		public function __construct($raw)
 		{
-			$this->raw_data = $raw;
-			$this->current_byte = 0;
-			$this->content_length = strlen($this->raw_data); // grab the total length of this stream
+			$this->rawData = $raw;
+			$this->currentByte = 0;
+			$this->content_length = strlen($this->rawData); // grab the total length of this stream
 			$this->storedStrings = array();
 			$this->storedObjects = array();
 			$this->storedDefinitions = array();
-			$this->decodeFlags = ($this->isBigEndian() * 2) | 4;
+			$this->decodeFlags = (AMFUtil::isSystemBigEndian() * 2) | 4;
 		}
 
 		/**
@@ -65,82 +78,54 @@
 		 * @param object $amfdata The object to put the deserialized data in
 		 */ 
 		public function deserialize() {
-			$time = microtime(true);
-			$this->readHeader(); // read the binary header
-			$this->readBody(); // read the binary body
-			if($this->decodeFlags & 1 == 1)
-			{
-				//AMF3 mode
-				$GLOBALS['amfphp']['encoding'] = "amf3";
-			}
-			global $amfphp;
-                        //TODO clean this up, bodies and headers shouldn't be stored on the deserializer directly A.S.
-                        $requestMessage = new AMFMessage();
-                        for($i = 0; $i < count($this->headers); $i++){
-                            $requestMessage->addHeader($this->headers[$i]);
-                        }
-                        for($i = 0; $i < count($this->bodies); $i++){
-                            $requestMessage->addBody($this->bodies[$i]);
-                        }
+                        $this->deserializedMessage = new AMFMessage();
+			$this->readHeaders(); // read the binary headers
+			$this->readBodies(); // read the binary bodies
                         if($this->decodeFlags & 1 == 1){
-                            $requestMessage->amfVersion = 3;
+                            $this->deserializedMessage->amfVersion = 3;
                         }else{
-                            $requestMessage->amfVersion = 0;
+                            $this->deserializedMessage->amfVersion = 0;
                         }
-			$amfphp['decodeTime'] = microtime(true) - $time;
-                        return $requestMessage;
+                        return $this->deserializedMessage;
 		}
 
 		/**
-		 * readHeader converts that header section of the amf message into php obects.
+		 * readHeaders converts that header section of the amf message into php obects.
 		 * Header information typically contains meta data about the message.
 		 */
-		protected function readHeader() {
+		protected function readHeaders() {
 
 			$topByte = $this->readByte(); // ignore the first two bytes --  version or something
 			$secondByte = $this->readByte(); //0 for Flash,
-											 //1 for FlashComm
-			//Disable debug events for FlashComm
-			$GLOBALS['amfphp']['isFlashComm'] = $secondByte == 1;
-
+                       
 			//If firstByte != 0, then the AMF data is corrupted, for example the transmission
 			//
 			if(!($topByte == 0 || $topByte == 3))
 			{
-				trigger_error("Malformed AMF message, connection may have dropped");
+				throw new Exception("Malformed AMF message, connection may have dropped");
 				exit();
 			}
-			$this->header_count = $this->readInt(); //  find the total number of header elements
+			$this->headersLeftToProcess = $this->readInt(); //  find the total number of header elements
 
-			while ($this->header_count--) { // loop over all of the header elements
+			while ($this->headersLeftToProcess--) { // loop over all of the header elements
 				$name = $this->readUTF();
 				$required = $this->readByte() == 1; // find the must understand flag
 				//$length   = $this->readLong(); // grab the length of  the header element
-				$this->current_byte += 4; // grab the length of the header element
+				$this->currentByte += 4; // grab the length of the header element
 
 				$type = $this->readByte();  // grab the type of the element
 				$content = $this->readData($type); // turn the element into real data
 
-				$this->headers[] = new AMFHeader($name, $required, $content); // save the name/value into the headers array
+                                $header = new AMFHeader($name, $required, $content);
+				$this->deserializedMessage->addHeader($header);
 			}
 
 		}
 
-		/**
-		 * Determine the endianness of the system
-		 *
-		 * @return bool - Big (true) or Little (false)
-		 */
-		private function isBigEndian()
+		protected function readBodies()
 		{
-			$tmp = pack("d", 1);
-			return $tmp == "\0\0\0\0\0\0\360\77";
-		}
-
-		protected function readBody()
-		{
-			$this->body_count = $this->readInt(); // find the total number  of body elements
-			while ($this->body_count--)
+			$this->bodiesLeftToProcess = $this->readInt(); // find the total number  of body elements
+			while ($this->bodiesLeftToProcess--)
 			{ // loop over all of the body elements
 
 				$this->amf0storedObjects = array();
@@ -152,12 +137,13 @@
 				$response = $this->readUTF(); //    the response that the client understands
 
 				//$length = $this->readLong(); // grab the length of    the body element
-				$this->current_byte += 4;
+				$this->currentByte += 4;
 
 				$type = $this->readByte(); // grab the type of the element
 				$data = $this->readData($type); // turn the element into real data
 
-				$this->bodies[] = new AMFBody($target, $response, $data); // add the body element to the body object
+                                $body = new AMFBody($target, $response, $data);
+				$this->deserializedMessage->addBody($body);
 
 			}
 		}
@@ -170,8 +156,8 @@
 		 */
 		protected function readInt()
 		{
-			return ((ord($this->raw_data[$this->current_byte++]) << 8) |
-				ord($this->raw_data[$this->current_byte++])); // read the next 2 bytes, shift and add
+			return ((ord($this->rawData[$this->currentByte++]) << 8) |
+				ord($this->rawData[$this->currentByte++])); // read the next 2 bytes, shift and add
 		}
 
 		/**
@@ -190,10 +176,9 @@
 			}
 			else
 			{
-				$val = substr($this->raw_data, $this->current_byte, $length); // grab the string
-				$this->current_byte += $length; // move the seek head to the end of the string
+				$val = substr($this->rawData, $this->currentByte, $length); // grab the string
+				$this->currentByte += $length; // move the seek head to the end of the string
 
-				// TODO: Include charset transliteration
 				return $val; // return the string
 			}
 		}
@@ -205,7 +190,7 @@
 		 */
 		protected function readByte()
 		{
-			return ord($this->raw_data[$this->current_byte++]); // return the next byte
+			return ord($this->rawData[$this->currentByte++]); // return the next byte
 		}
 
 		/**
@@ -220,53 +205,41 @@
 			switch ($type)
 			{
 				case 0: // number
-					$data = $this->readDouble();
-					break;
+					return $this->readDouble();
 				case 1: // boolean
-					$data = $this->readByte() == 1;
-					break;
+					return $this->readByte() == 1;
 				case 2: // string
-					$data = $this->readUTF();
-					break;
+					return $this->readUTF();
 				case 3: // object Object
-					$data = $this->readObject();
-					break;
+					return $this->readObject();
 				case 5: // null
-					$data = null;
-					break;
+					return null;
 				case 6: // undefined
-					$data = null;
-					break;
+					return new Undefined();
 				case 7: // Circular references are returned here
-					$data = $this->readReference();
-					break;
+					return $this->readReference();
 				case 8: // mixed array with numeric and string keys
-					$data = $this->readMixedArray();
-					break;
+					return $this->readMixedArray();
+				case 9: //object end. not worth , TODO maybe some integrity checking
+					return null;
 				case 10: // array
-					$data = $this->readArray();
-					break;
+					return $this->readArray();
 				case 11: // date
-					$data = $this->readDate();
-					break;
+					return $this->readDate();
 				case 12: // string, strlen(string) > 2^16
-					$data = $this->readLongUTF();
-					break;
+					return $this->readLongUTF();
 				case 13: // mainly internal AS objects
-					$data = null;
-					break;
+					return null;
 				case 15: // XML
-					$data = $this->readLongUTF();
-					break;
+					return $this->readLongUTF();
 				case 16: // Custom Class
-					$data = $this->readCustomClass();
-					break;
+					return $this->readCustomClass();
 				case 17: //AMF3-specific
 					$GLOBALS['amfphp']['encoding'] = "amf3";
-					$data = $this->readAmf3Data();
+					return $this->readAmf3Data();
 					break;
 				default: // unknown case
-					trigger_error("Found unhandled type with code: $type");
+					throw new Exception("Found unhandled type with code: $type");
 					exit();
 					break;
 			}
@@ -281,9 +254,9 @@
 		 */
 		protected function readDouble()
 		{
-			$bytes = substr($this->raw_data, $this->current_byte, 8);
-			$this->current_byte += 8;
-			if ($this->isBigEndian())
+			$bytes = substr($this->rawData, $this->currentByte, 8);
+			$this->currentByte += 8;
+			if (AMFUtil::isSystemBigEndian())
 			{
 				$bytes = strrev($bytes);
 			}
@@ -333,7 +306,7 @@
 		protected function readMixedArray()
 		{
 			//$length   = $this->readLong(); // get the length  property set by flash
-			$this->current_byte += 4;
+			$this->currentByte += 4;
 			return $this->readMixedObject(); // return the body of mixed array
 		}
 
@@ -417,49 +390,32 @@
 		protected function readLongUTF()
 		{
 			$length = $this->readLong(); // get the length of the string (1st 4 bytes)
-			$val = substr($this->raw_data, $this->current_byte, $length); // grab the string
-			$this->current_byte += $length; // move the seek head to the end of the string
+			$val = substr($this->rawData, $this->currentByte, $length); // grab the string
+			$this->currentByte += $length; // move the seek head to the end of the string
 
-			// TODO: Include charset transliteration
 			return $val; // return the string
 		}
 
 		/**
 		 * readCustomClass reads the amf content associated with a class instance which was registered
 		 * with Object.registerClass.  In order to preserve the class name an additional property is assigned
-		 * to the object "_explicitType".  This property will be overwritten if it existed within the class already.
+		 * to the object AMFUtil::FIELD_EXPLICIT_TYPE.  This property will be overwritten if it existed within the class already.
 		 *
 		 * @return object The php representation of the object
 		 */
 		protected function readCustomClass()
 		{
 			$typeIdentifier = str_replace('..', '', $this->readUTF());
-			$obj = $this->mapClass($typeIdentifier);
-			$isObject = true;
-			if ($obj == NULL)
-			{
-				$obj = array();
-				$isObject = false;
-			}
+			$obj = array();
 			$this->amf0storedObjects[] = & $obj;
 			$key = $this->readUTF(); // grab the key
 			for ($type = $this->readByte(); $type != 9; $type = $this->readByte())
 			{
 				$val = $this->readData($type); // grab the value
-				if ($isObject)
-				{
-					$obj->$key = $val; // save the name/value pair in the array
-				}
-				else
-				{
-					$obj[$key] = $val; // save the name/value pair in the array
-				}
+				$obj[$key] = $val; // save the name/value pair in the array
 				$key = $this->readUTF(); // get the next name
 			}
-			if (!$isObject)
-			{
-				$obj['_explicitType'] = $typeIdentifier;
-			}
+			$obj['_explicitType'] = $typeIdentifier;
 			return $obj; // return the array
 		}
 
@@ -469,7 +425,7 @@
 			switch ($type)
 			{
 				case 0x00 :
-					return null; //undefined
+					return new Undefined();
 				case 0x01 :
 					return null; //null
 				case 0x02 :
@@ -495,7 +451,7 @@
 				case 0x0C :
 					return $this->readAmf3ByteArray();
 				default:
-					trigger_error("undefined Amf3 type encountered: " . $type, E_USER_ERROR);
+					throw new Exception("undefined Amf3 type encountered: " . $type, E_USER_ERROR);
 			}
 		}
 
@@ -558,7 +514,7 @@
 				$dateref = $dateref >> 1;
 				if ($dateref >= count($this->storedObjects))
 				{
-					trigger_error('Undefined date reference: ' . $dateref, E_USER_ERROR);
+					throw new Exception('Undefined date reference: ' . $dateref, E_USER_ERROR);
 					return false;
 				}
 				return $this->storedObjects[$dateref];
@@ -588,7 +544,7 @@
 				$strref = $strref >> 1;
 				if ($strref >= count($this->storedStrings))
 				{
-					trigger_error('Undefined string reference: ' . $strref, E_USER_ERROR);
+					throw new Exception('Undefined string reference: ' . $strref, E_USER_ERROR);
 					return false;
 				}
 				return $this->storedStrings[$strref];
@@ -671,6 +627,10 @@
 			}
 		}
 
+                /**
+                 * this probably needs some refactoring. Leave as is for now... A.S.
+                 * @return <Object>
+                 */
 		protected function readAmf3Object()
 		{
 			$handle = $this->readAmf3Int();
@@ -721,7 +681,7 @@
 
 
 			$type = $classDefinition['type'];
-			$obj = $this->mapClass($type);
+			$obj = null;
 
 			$isObject = true;
 			if ($obj == NULL)
@@ -745,7 +705,7 @@
 				}
 				else
 				{
-					trigger_error("Unable to read externalizable data type " . $type, E_USER_ERROR);
+					throw new Exception("Unable to read externalizable data type " . $type, E_USER_ERROR);
 				}
 			}
 			else
@@ -805,59 +765,12 @@
 		 */
 		protected function readLong()
 		{
-			return ((ord($this->raw_data[$this->current_byte++]) << 24) |
-				(ord($this->raw_data[$this->current_byte++]) << 16) |
-				(ord($this->raw_data[$this->current_byte++]) << 8) |
-				ord($this->raw_data[$this->current_byte++])); // read the next 4 bytes, shift and add
+			return ((ord($this->rawData[$this->currentByte++]) << 24) |
+				(ord($this->rawData[$this->currentByte++]) << 16) |
+				(ord($this->rawData[$this->currentByte++]) << 8) |
+				ord($this->rawData[$this->currentByte++])); // read the next 4 bytes, shift and add
 		}
 
-		protected function mapClass($typeIdentifier)
-		{
-			//Check out if class exists
-			if ($typeIdentifier == "")
-			{
-				return NULL;
-			}
-			$clazz = NULL;
-			$mappedClass = str_replace('.', '/', $typeIdentifier);
-
-			if ($typeIdentifier == "flex.messaging.messages.CommandMessage")
-			{
-				return new CommandMessage();
-			}
-			if ($typeIdentifier == "flex.messaging.messages.RemotingMessage")
-			{
-				return new RemotingMessage();
-			}
-
-			if (isset($GLOBALS['amfphp']['incomingClassMappings'][$typeIdentifier]))
-			{
-				$mappedClass = str_replace('.', '/', $GLOBALS['amfphp']['incomingClassMappings'][$typeIdentifier]);
-			}
-
-			$include = FALSE;
-			if (file_exists($GLOBALS['amfphp']['customMappingsPath'] . $mappedClass . '.php'))
-			{
-				$include = $GLOBALS['amfphp']['customMappingsPath'] . $mappedClass . '.php';
-			}
-			elseif (file_exists($GLOBALS['amfphp']['customMappingsPath'] . $mappedClass . '.class.php'))
-			{
-				$include = $GLOBALS['amfphp']['customMappingsPath'] . $mappedClass . '.class.php';
-			}
-
-			if ($include !== FALSE)
-			{
-				include_once($include);
-				$lastPlace = strrpos('/' . $mappedClass, '/');
-				$classname = substr($mappedClass, $lastPlace);
-				if (class_exists($classname))
-				{
-					$clazz = new $classname;
-				}
-			}
-
-			return $clazz; // return the object
-		}
 
 		/**
 		 * Taken from SabreAMF
@@ -867,10 +780,10 @@
 			$data = "";
 			for ($i = 0; $i < $len; $i++)
 			{
-				$data .= $this->raw_data
-				{$i + $this->current_byte};
+				$data .= $this->rawData
+				{$i + $this->currentByte};
 			}
-			$this->current_byte += $len;
+			$this->currentByte += $len;
 			return $data;
 		}
 	}

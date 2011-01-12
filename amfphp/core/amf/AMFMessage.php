@@ -11,14 +11,14 @@ class AMFMessage {
      *
      * @var <array>
      */
-    private $headers;
+    public $headers;
 
     /**
      * The header table is a quick lookup table for
      * a header by it's key
      * @var <array>
      */
-    private $headerTable;
+    public $headerTable;
 
     /**
      * The place to keep the body elements
@@ -42,6 +42,7 @@ class AMFMessage {
         $this->headers = array();
         $this->bodies = array();
         $this->headerTable = array();
+        $this->amfVersion = 0;
     }
 
     /**

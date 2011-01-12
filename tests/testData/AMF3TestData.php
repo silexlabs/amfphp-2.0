@@ -7,6 +7,7 @@
  */
 class AMF3TestData {
     public $sUndefined;
+    public $dUndefined;
     public $sNull;
     public $sFalse;
     public $sTrue;
@@ -56,6 +57,7 @@ class AMF3TestData {
      * simple...
      */
     public function buildBasics(){
+        $this->dUndefined = new Undefined();
         $this->sUndefined = pack('C', 0);
         $this->sNull = pack('C', 1);
         $this->sFalse = pack('C', 2);
@@ -204,8 +206,7 @@ class AMF3TestData {
     }
 
     public function buildObject(){
-        $this->dObject = new DummyClass2();
-        $this->dObject->data = "test";
+        $this->dObject = array("data" => "test", AMFUtil::FIELD_EXPLICIT_TYPE => "DummyClass2");
         //object marker
         $this->sObject = pack("C", 0x0A);
         //dynamic marker. This is hard coded.
@@ -244,10 +245,4 @@ class AMF3TestData {
 }
 
 
-/**
- * used for testing with typed objects
- */
-class DummyClass2{
-    public $data;
-}
 ?>

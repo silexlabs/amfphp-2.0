@@ -26,9 +26,9 @@ package flexUnitTests
 			
 			_nc = new EnhancedNetConnection();
 			//_nc.objectEncoding = ObjectEncoding.AMF0;
-			//_nc.connect("http://localhost:8888/workspaceNetbeans/amfphp-2.0/tests/testData/testGateway.php");
+			_nc.connect("http://localhost:8888/workspaceNetbeans/amfphp-2.0/tests/testData/testGateway.php");
 			//silex integration
-			_nc.connect("http://localhost:8888/workspace/silex_server-v1.6.0beta7/cgi/gateway.php");			
+			//_nc.connect("http://localhost:8888/workspace/silex_server-v1.6.0beta7/cgi/gateway.php");			
 			
 		}
 		
@@ -36,19 +36,6 @@ package flexUnitTests
 		override public function tearDown():void
 		{
 		}
-		
-		/*
-		public function testNestedArray():void{
-			_nc.simpleCall("TestService/testArray", null);	
-			_nc.simpleCall("amfphp/DiscoveryService/getServices", null);	
-			
-		}
-		*/
-		
-		public function testDataExchange():void{
-			_nc.simpleCall("data_exchange/returnOneParam", "testString");	
-		}
-		
 		public function testReturnOneParam():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnOneParam, 500));
 			_nc.simpleCall("MirrorService/returnOneParam", "testString");	
@@ -73,13 +60,13 @@ package flexUnitTests
 		}
 		
 		//test can't be run, the netconnection doesn't accept the call
-		/*
+		
 		public function testSendingExternalizableObject():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONSTATUS, addAsync(catchErrorFindingService, 200));
 			var ext:ExternalizableDummy = new ExternalizableDummy();
 			_nc.simpleCall("MirrorService/returnOneParam", ext);	
 		}			
-		*/
+		
 		
 
 		

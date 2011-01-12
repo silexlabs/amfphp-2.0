@@ -26,10 +26,6 @@ class AMFSerializerWrapper extends AMFSerializer
         parent::writeDouble($s);
     }
 
-    function writeBinary($s) {
-        parent::writeBinary($a);
-    }
-
     public function writeLongUtf($s) {
         parent::writeLongUtf($s);
     }

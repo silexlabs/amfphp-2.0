@@ -62,19 +62,14 @@ class AMFTestData {
     public $dEmptyMessage;
     public $sNullHeaderMessage;
     public $dNullHeaderMessage;
-    public $ddNullHeaderMessage;
     public $sStringHeaderMessage;
     public $dStringHeaderMessage;
-    public $ddStringHeaderMessage;
     public $sNullBodyMessage;
     public $dNullBodyMessage;
-    public $ddNullBodyMessage;
     public $sStringBodyMessage;
     public $dStringBodyMessage;
-    public $ddStringBodyMessage;
     public $s2Headers2BodiesMessage;
     public $d2Headers2BodiesMessage;
-    public $dd2Headers2BodiesMessage;
 
     public $mirrorServiceRequestMessage;
     public $mirrorServiceResponseMessage;
@@ -260,11 +255,8 @@ class AMFTestData {
         $this->sNull = pack('C', 5);
     }
 
-    /**
-     * TODO: no writeUndefined method. Write or understand why A.S. define a PHP for "undefined"
-     */
     public function buildUndefined(){
-        $this->dUndefined = "undefined";
+        $this->dUndefined = new Undefined();
         //type: 6
         $this->sUndefined = pack('C', 6);
 
@@ -327,10 +319,7 @@ class AMFTestData {
         $this->sEcmaArray .= pack("Cn", 0, 9);
 
     }
-
-    /**
-     * TODO: no writeObjectEnd method. Write it, and get the number of bytes right (0X09, not 0X009) A.S.
-     */
+    
     public function buildObjectEnd(){
         $this->dObjectEnd = NULL;
         //type: 9
@@ -429,9 +418,7 @@ class AMFTestData {
      * note: the writeXml method gets rids of CRs and LFs
      */
     public function buildTypedObject(){
-        $this->dTypedObjectAsArray = array("data" => "dummyData", "_explicitType" => "DummyClass");
-        $this->dTypedObject = new DummyClass();
-        $this->dTypedObject->data = "dummyData";
+        $this->dTypedObject = array("data" => "dummyData", AMFUtil::FIELD_EXPLICIT_TYPE => "DummyClass");
         //type : 0x10
         $this->sTypedObject = pack('C', 0x10);
         //class name length on a int
@@ -478,8 +465,6 @@ class AMFTestData {
 
         $this->dNullHeaderMessage = new AMFMessage();
         $this->dNullHeaderMessage->addHeader($nullHeader);
-        $this->ddNullHeaderMessage = new AMFMessage();
-        $this->ddNullHeaderMessage->addHeader($nullHeader);
 
         //version (int)
         $this->sNullHeaderMessage = pack('n', 0);
@@ -513,8 +498,6 @@ class AMFTestData {
 
         $this->dStringHeaderMessage = new AMFMessage();
         $this->dStringHeaderMessage->addHeader($stringHeader);
-        $this->ddStringHeaderMessage = new AMFMessage();
-        $this->ddStringHeaderMessage->addHeader($stringHeader);
         //version (int)
         $this->sStringHeaderMessage = pack('n', 0);
         //number of headers (int)
@@ -549,8 +532,8 @@ class AMFTestData {
      */
     public function buildNullBodyMessage(){
         $nullBody = new AMFBody();
-        $nullBody->targetURI = "null";
-        $nullBody->responseURI = "/onStatus";
+        $nullBody->targetURI = "/onStatus";
+        $nullBody->responseURI = "null";
         $this->dNullBodyMessage = new AMFMessage();
         $this->dNullBodyMessage->addBody($nullBody);
 
@@ -560,13 +543,13 @@ class AMFTestData {
         $this->sNullBodyMessage .= pack('n', 0);
         //number of bodies
         $this->sNullBodyMessage .= pack('n', 1);
-        //response uri length
+        //target uri length
         $this->sNullBodyMessage .= pack('n', 9);
-        //response uri. This is responseIndex (default is "") + "/onStatus"
+        //target uri.
         $this->sNullBodyMessage .= "/onStatus";
-        //response target length
+        //response uri length
         $this->sNullBodyMessage .= pack('n', 4);
-        //response target. default is "null"
+        //response uri.
         $this->sNullBodyMessage .= "null";
 
         //result is NULL by default. this is one byte for type that is worth 5, and no data
@@ -584,8 +567,8 @@ class AMFTestData {
     public function buildStringBodyMessage(){
         $stringBody = new AMFBody();
         $testString = "test string";
-        $stringBody->targetURI = "null";
-        $stringBody->responseURI = "/onStatus";
+        $stringBody->targetURI = "/onStatus";
+        $stringBody->responseURI = "null";
         $stringBody->data = $testString;
         $this->dStringBodyMessage = new AMFMessage();
         $this->dStringBodyMessage->addBody($stringBody);
@@ -596,13 +579,13 @@ class AMFTestData {
         $this->sStringBodyMessage .= pack('n', 0);
         //number of bodies
         $this->sStringBodyMessage .= pack('n', 1);
-        //response uri length
+        //target uri length
         $this->sStringBodyMessage .= pack('n', 9);
-        //response uri. This is responseIndex (default is "") + "/onStatus"
+        //target uri.
         $this->sStringBodyMessage .= "/onStatus";
-        //response target length
+        //response uri length
         $this->sStringBodyMessage .= pack('n', 4);
-        //response target. default is "null"
+        //response uri. default is "null"
         $this->sStringBodyMessage .= "null";
 
         //result is string. byte with '2' as data type, then length, then char data
@@ -622,12 +605,12 @@ class AMFTestData {
         $nullHeader = new AMFHeader("null header", TRUE, NULL);
         $stringHeader = new AMFHeader("string header", FALSE, "zzzzzz");
         $nullBody = new AMFBody();
-        $nullBody->targetURI = "null";
-        $nullBody->responseURI = "/onStatus";
+        $nullBody->targetURI = "/onStatus";
+        $nullBody->responseURI = "null";
         $stringBody = new AMFBody();
         $testString = "test string";
-        $stringBody->targetURI = "null";
-        $stringBody->responseURI = "/onStatus";
+        $stringBody->targetURI = "/onStatus";
+        $stringBody->responseURI = "null";
         $stringBody->data = $testString;
 
         $this->d2Headers2BodiesMessage = new AMFMessage();
@@ -688,13 +671,13 @@ class AMFTestData {
         /**
          * first body (string)
          */
-        //response uri length
+        //target uri length
         $this->s2Headers2BodiesMessage .= pack('n', 9);
-        //response uri. This is responseIndex (default is "") + "/onStatus"
+        //target uri. This is responseIndex (default is "") + "/onStatus"
         $this->s2Headers2BodiesMessage .= "/onStatus";
-        //response target length
+        //response uri length
         $this->s2Headers2BodiesMessage .= pack('n', 4);
-        //response target. default is "null"
+        //response uri. default is "null"
         $this->s2Headers2BodiesMessage .= "null";
 
         //result is string. byte with '2' as data type, then length, then char data
@@ -707,13 +690,13 @@ class AMFTestData {
         /**
          * second body (null)
          */
-        //response uri length
+        //target uri length
         $this->s2Headers2BodiesMessage .= pack('n', 9);
-        //response uri. This is responseIndex (default is "") + "/onStatus"
+        //target uri. This is responseIndex (default is "") + "/onStatus"
         $this->s2Headers2BodiesMessage .= "/onStatus";
-        //response target length
+        //response uri length
         $this->s2Headers2BodiesMessage .= pack('n', 4);
-        //response target. default is "null"
+        //response uri. default is "null"
         $this->s2Headers2BodiesMessage .= "null";
 
         //result is null

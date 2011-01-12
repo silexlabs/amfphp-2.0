@@ -9,4 +9,8 @@ class ByteArray
 	}
 }
 
+class Undefined{
+    
+}
+
 ?>
