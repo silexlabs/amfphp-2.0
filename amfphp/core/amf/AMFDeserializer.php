@@ -100,7 +100,7 @@
 				$content = $this->readData($type); // turn the element into real data
 
                                 $header = new AMFHeader($name, $required, $content);
-				$this->deserializedPacket->addHeader($header);
+				array_push($this->deserializedPacket->headers, $header);
 			}
 
 		}
@@ -125,8 +125,8 @@
 				$type = $this->readByte(); // grab the type of the element
 				$data = $this->readData($type); // turn the element into real data
 
-                                $Message = new AMFMessage($target, $response, $data);
-				$this->deserializedPacket->addMessage($Message);
+                                $message = new AMFMessage($target, $response, $data);
+                                array_push($this->deserializedPacket->messages, $message);
 
 			}
 		}

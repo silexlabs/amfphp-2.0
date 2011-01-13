@@ -21,6 +21,14 @@ class GatewayTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals(bin2hex($amfTestData->mirrorServiceResponsePacket), bin2hex($ret));
     }
 
+    public function testEmptyMessage(){
+        $gateway = new Gateway(null);
+        $ret = $gateway->service();
+
+        $this->assertFalse(strpos($ret, "onStatus") === false);
+
+    }
+
 
 }
 

@@ -26,5 +26,22 @@ class AMFConstants {
      * this is the field where the class name of an object must be set so that it can be sent as a strongly typed object
      */
     const FIELD_EXPLICIT_TYPE = "_explicitType";
+
+    /**
+     * this is the name of the credentials header. can be used for AS3, but is mostly AS2 only
+     */
+    const CREDENTIALS_HEADER_NAME = "Credentials";
+
+    /**
+     * the user id field in the credentials header
+     */
+    const CREDENTIALS_FIELD_USERID = "userid";
+
+    /**
+     * the password field in the credentials header
+     */
+    const CREDENTIALS_FIELD_PASSWORD = "password";
+
+
 }
 ?>

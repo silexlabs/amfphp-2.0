@@ -464,7 +464,7 @@ class AMFTestData {
         $nullHeader = new AMFHeader("null header", TRUE, NULL);
 
         $this->dNullHeaderPacket = new AMFPacket();
-        $this->dNullHeaderPacket->addHeader($nullHeader);
+	array_push($this->dNullHeaderPacket->headers, $nullHeader);
 
         //version (int)
         $this->sNullHeaderPacket = pack('n', 0);
@@ -497,7 +497,7 @@ class AMFTestData {
         $stringHeader = new AMFHeader("string header", FALSE, "zzzzzz");
 
         $this->dStringHeaderPacket = new AMFPacket();
-        $this->dStringHeaderPacket->addHeader($stringHeader);
+	array_push($this->dStringHeaderPacket->headers, $stringHeader);
         //version (int)
         $this->sStringHeaderPacket = pack('n', 0);
         //number of headers (int)
@@ -535,7 +535,7 @@ class AMFTestData {
         $nullMessage->targetURI = "/onStatus";
         $nullMessage->responseURI = "null";
         $this->dNullMessagePacket = new AMFPacket();
-        $this->dNullMessagePacket->addMessage($nullMessage);
+        array_push($this->dNullMessagePacket->messages, $nullMessage);
 
         //version (int)
         $this->sNullMessagePacket = pack('n', 0);
@@ -553,11 +553,11 @@ class AMFTestData {
         $this->sNullMessagePacket .= "null";
 
         //result is NULL by default. this is one byte for type that is worth 5, and no data
-        $MessageResultsData = pack('C', 5);
+        $messageResultsData = pack('C', 5);
         //result length, long
-        $this->sNullMessagePacket .= pack('N', strlen($MessageResultsData));
+        $this->sNullMessagePacket .= pack('N', strlen($messageResultsData));
         //add the result itself
-        $this->sNullMessagePacket .= $MessageResultsData;
+        $this->sNullMessagePacket .= $messageResultsData;
 
     }
 
@@ -571,7 +571,7 @@ class AMFTestData {
         $stringMessage->responseURI = "null";
         $stringMessage->data = $testString;
         $this->dStringMessagePacket = new AMFPacket();
-        $this->dStringMessagePacket->addMessage($stringMessage);
+        array_push($this->dStringMessagePacket->messages, $stringMessage);
 
         //version (int)
         $this->sStringMessagePacket = pack('n', 0);
@@ -589,11 +589,11 @@ class AMFTestData {
         $this->sStringMessagePacket .= "null";
 
         //result is string. byte with '2' as data type, then length, then char data
-        $MessageResultsData = pack('C', 2) . pack('n', strLen($testString)) . $testString;
+        $messageResultsData = pack('C', 2) . pack('n', strLen($testString)) . $testString;
         //result length, long
-        $this->sStringMessagePacket .= pack('N', strlen($MessageResultsData));
+        $this->sStringMessagePacket .= pack('N', strlen($messageResultsData));
         //add the result itself
-        $this->sStringMessagePacket .= $MessageResultsData;
+        $this->sStringMessagePacket .= $messageResultsData;
 
     }
 
@@ -614,10 +614,10 @@ class AMFTestData {
         $stringMessage->data = $testString;
 
         $this->d2Headers2MessagesPacket = new AMFPacket();
-        $this->d2Headers2MessagesPacket->addHeader($stringHeader);
-        $this->d2Headers2MessagesPacket->addHeader($nullHeader);
-        $this->d2Headers2MessagesPacket->addMessage($stringMessage);
-        $this->d2Headers2MessagesPacket->addMessage($nullMessage);
+	array_push($this->d2Headers2MessagesPacket->headers, $stringHeader);
+	array_push($this->d2Headers2MessagesPacket->headers, $nullHeader);
+        array_push($this->d2Headers2MessagesPacket->messages, $stringMessage);
+        array_push($this->d2Headers2MessagesPacket->messages, $nullMessage);
         //version (int)
         $this->s2Headers2MessagesPacket = pack('n', 0);
         //number of headers (int)
@@ -681,11 +681,11 @@ class AMFTestData {
         $this->s2Headers2MessagesPacket .= "null";
 
         //result is string. byte with '2' as data type, then length, then char data
-        $MessageResultsData = pack('C', 2) . pack('n', strLen($testString)) . $testString;
+        $messageResultsData = pack('C', 2) . pack('n', strLen($testString)) . $testString;
         //result length, long
-        $this->s2Headers2MessagesPacket .= pack('N', strlen($MessageResultsData));
+        $this->s2Headers2MessagesPacket .= pack('N', strlen($messageResultsData));
         //add the result itself
-        $this->s2Headers2MessagesPacket .= $MessageResultsData;
+        $this->s2Headers2MessagesPacket .= $messageResultsData;
 
         /**
          * second Message (null)
@@ -700,11 +700,11 @@ class AMFTestData {
         $this->s2Headers2MessagesPacket .= "null";
 
         //result is null
-        $MessageResultsData = pack('C', 5);
+        $messageResultsData = pack('C', 5);
         //result length, long
-        $this->s2Headers2MessagesPacket .= pack('N', strlen($MessageResultsData));
+        $this->s2Headers2MessagesPacket .= pack('N', strlen($messageResultsData));
         //add the result itself
-        $this->s2Headers2MessagesPacket .= $MessageResultsData;
+        $this->s2Headers2MessagesPacket .= $messageResultsData;
 
     }
 

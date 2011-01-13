@@ -8,7 +8,11 @@
  * @author Ariel Sommeria-klein
  */
 class ServiceRouter implements IServiceRouter{
-
+    /**
+     * hook called when the service object is created. Useful for authentication
+     * @param <String> the raw http data
+     */
+    const HOOK_SERVICE_OBJECT_CREATED = "HOOK_SERVICE_OBJECT_CREATED";
      /**
      * paths to folders containing services(relative or absolute)
      * @var <array> of paths
@@ -32,17 +36,17 @@ class ServiceRouter implements IServiceRouter{
     }
 
     /**
-     * loads and instanciates a service class matching $serviceName, then calls the function defined by $functionName using $parameters as parameters
+     * loads and instanciates a service class matching $serviceName, then calls the function defined by $methodName using $parameters as parameters
      * throws an exception if service not found.
      * if the service exists but not the function, an exception is thrown by call_user_func_array. It is pretty explicit, so no furher code was added
      *
      * @param <string> $serviceName
-     * @param <string> $functionName
+     * @param <string> $methodName
      * @param <array> $parameters
      * @return <mixed> the result of the function call
      *
      */
-    public function executeServiceCall($serviceName, $functionName, $parameters){
+    public function executeServiceCall($serviceName, $methodName, $parameters){
         $serviceObject = null;
         if(isset ($this->serviceNames2ClassFindInfo[$serviceName])){
             $classFindInfo = $this->serviceNames2ClassFindInfo[$serviceName];
@@ -63,11 +67,11 @@ class ServiceRouter implements IServiceRouter{
         if(!$serviceObject){
             throw new Exception("$serviceName service not found ");
         }
-        if(!method_exists($serviceObject, $functionName)){
-            throw new Exception("method  $functionName not found on $serviceName object ");
+        if(!method_exists($serviceObject, $methodName)){
+            throw new Exception("method  $methodName not found on $serviceName object ");
         }
         
-        return call_user_func_array(array($serviceObject, $functionName), $parameters);
+        return call_user_func_array(array($serviceObject, $methodName), $parameters);
 
     }
 }
