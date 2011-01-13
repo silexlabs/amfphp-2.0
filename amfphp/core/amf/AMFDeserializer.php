@@ -10,7 +10,7 @@
 		 * @access private
 		 * @var int
 		 */
-		protected $MessagesLeftToProcess;
+		protected $messagesLeftToProcess;
 
 		/**
 		 * The current seek cursor of the stream
@@ -28,14 +28,6 @@
 		 */
 		protected $headersLeftToProcess;
 
-		/**
-		 * The content of the packet headers
-		 *
-		 * @access private
-		 * @var array
-		 */
-		protected $headers = array();
-
                 /**
                  * the Packet contained in the serialized data
                  * @var <AMFPacket>
@@ -51,15 +43,6 @@
 		protected $storedObjects;
 		protected $storedDefinitions;
 		protected $amf0storedObjects;
-
-
-		/**
-		 * The content of the packet Messages
-		 *
-		 * @access private
-		 * @var array
-		 */
-		public $Messages = array();
 
 		public function __construct($raw)
 		{
@@ -124,8 +107,8 @@
 
 		protected function readMessages()
 		{
-			$this->MessagesLeftToProcess = $this->readInt(); // find the total number  of Message elements
-			while ($this->MessagesLeftToProcess--)
+			$this->messagesLeftToProcess = $this->readInt(); // find the total number  of Message elements
+			while ($this->messagesLeftToProcess--)
 			{ // loop over all of the Message elements
 
 				$this->amf0storedObjects = array();
