@@ -63,7 +63,6 @@ class Gateway {
         $this->context = new ServiceCallContext();
         $this->context->rawInputData = $rawInputData;
         $this->config = new AmfphpConfig();
-        PluginManager::getInstance()->loadPlugins(AMFPHP_ROOTPATH . "/plugins/");
     }
 
     /**
@@ -119,6 +118,7 @@ class Gateway {
      * @return <String> the serialized amf packet containg the service responses
      */
     public function service(){
+        PluginManager::getInstance()->loadPlugins($this->config->pluginsFolder);
         $requestMessage = null;
         $hookManager = HookManager::getInstance();
         try{
@@ -139,7 +139,7 @@ class Gateway {
             for($i = 0; $i < $numHeaders; $i++){
                 $requestHeader = $requestPacket->headers[$i];
                 //handle a header. This is a job for plugins, unless comes a header that is so fundamental that it needs to be handled by the core
-                $hookManager->callHooks(self::HOOK_REQUEST_HEADER, $requestHeader);
+                $hookManager->callHooks(self::HOOK_REQUEST_HEADER, array($requestHeader));
             }
 
             $numMessages = count($requestPacket->messages);

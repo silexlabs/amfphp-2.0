@@ -14,13 +14,13 @@
         <title></title>         
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<!-- Include CSS to eliminate any default margins/padding and set the height of the html element and 
-		     the Message element to 100%, because Firefox, or any Gecko based browser, interprets percentage as 
+		     the body element to 100%, because Firefox, or any Gecko based browser, interprets percentage as 
 			 the percentage of the height of its parent container, which has to be set explicitly.  Initially, 
 			 don't display flashContent div so it won't show if JavaScript disabled.
 		-->
         <style type="text/css" media="screen"> 
-			html, Message	{ height:100%; }
-			Message { margin:0; padding:0; overflow:auto; text-align:center; 
+			html, body	{ height:100%; }
+			body { margin:0; padding:0; overflow:auto; text-align:center; 
 			       background-color: #ffffff; }   
 			#flashContent { display:none; }
         </style>
@@ -44,11 +44,11 @@
             params.allowscriptaccess = "sameDomain";
             params.allowfullscreen = "true";
             var attributes = {};
-            attributes.id = "AmfphpTest";
-            attributes.name = "AmfphpTest";
+            attributes.id = "Test";
+            attributes.name = "Test";
             attributes.align = "middle";
             swfobject.embedSWF(
-                "AmfphpTest.swf", "flashContent", 
+                "Test.swf", "flashContent", 
                 "100%", "100%", 
                 swfVersionStr, xiSwfUrlStr, 
                 flashvars, params, attributes);
@@ -56,7 +56,7 @@
 			swfobject.createCSS("#flashContent", "display:block;text-align:left;");
         </script>
     </head>
-    <Message>
+    <body>
         <!-- SWFObject's dynamic embed method replaces this alternative HTML content with Flash content when enough 
 			 JavaScript and Flash plug-in support is available. The div is initially hidden so that it doesn't show
 			 when JavaScript is disabled.
@@ -74,14 +74,14 @@
         </div>
 	   	
        	<noscript>
-            <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="100%" height="100%" id="AmfphpTest">
-                <param name="movie" value="AmfphpTest.swf" />
+            <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="100%" height="100%" id="Test">
+                <param name="movie" value="Test.swf" />
                 <param name="quality" value="high" />
                 <param name="bgcolor" value="#ffffff" />
                 <param name="allowScriptAccess" value="sameDomain" />
                 <param name="allowFullScreen" value="true" />
                 <!--[if !IE]>-->
-                <object type="application/x-shockwave-flash" data="AmfphpTest.swf" width="100%" height="100%">
+                <object type="application/x-shockwave-flash" data="Test.swf" width="100%" height="100%">
                     <param name="quality" value="high" />
                     <param name="bgcolor" value="#ffffff" />
                     <param name="allowScriptAccess" value="sameDomain" />
@@ -101,5 +101,5 @@
                 <!--<![endif]-->
             </object>
 	    </noscript>		
-   </Message>
+   </body>
 </html>

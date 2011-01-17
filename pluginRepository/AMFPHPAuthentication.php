@@ -3,13 +3,18 @@
  * Authentication for AMFPHP.
  * On a service object, the plugin looks for a method called getMethodRoles. If the method exists, the plugin will look for a role in the session that matches the role.
  * If the roles don't match, an Exception is thrown.
- * The getMethodRoles takes a parameter $methodName, and must return an array of strings containing acceptable roles for the method.
+ * The getMethodRoles takes a parameter $methodName, and must return an array of strings containing acceptable roles for the method. If the return value is null,
+ * it is considered that that particular method is not protected.
  * 
  * For example:
  * <code>
  * public function getMethodRoles($methodName){
- *     return array("user", 'admin");
- * }
+       if($methodName == "adminMethod"){
+           return array("admin");
+       }else{
+           return null;
+       }
+    }
  *
  * </code>
  * 
@@ -19,22 +24,7 @@
  * The login method returns a role in a "string". It takes 2 parameters, the user id and the password.
  * The logout method should call AMFPHPAuthentication::clearSessionInfo();
  * 
- * for example:
- * class AuthenticationService {
-
-    public function login($userid, $password){
-        if(($userId == "user") && ($password == "userPassword")){
-            AMFPHPAuthentication::addRole("user");
-        }
-        if(($userId == "admin") && ($password == "adminPassword")){
-            AMFPHPAuthentication::addRole("admin");
-        }
-    }
-
-    public function logout(){
-        AMFPHPAuthentication::clearSessionInfo();
-    }
-  }
+ * See the AuthenticationService class in the test data for an example of an implementation.
  *
  * @author Ariel Sommeria-klein
  */
@@ -81,29 +71,10 @@ class AMFPHPAuthentication {
     
     public function  __construct() {
         $hookManager = HookManager::getInstance();
-        $hookManager->addHook(ServiceRouter::HOOK_SERVICE_OBJECT_CREATED, "serviceObjectCreatedHandler");
-        $hookManager->addHook(Gateway::HOOK_REQUEST_HEADER, "requestHeaderHandler");
+        $hookManager->addHook(ServiceRouter::HOOK_SERVICE_OBJECT_CREATED, array($this, "serviceObjectCreatedHandler"));
+        $hookManager->addHook(Gateway::HOOK_REQUEST_HEADER, array($this, "requestHeaderHandler"));
         $this->headerUserId = null;
         $this->headerPassword = null;
-    }
-
-    /**
-     * looks for a "Credentials" request header. If there is one, uses it to try to authentify the user.
-     * @param <type> $serviceRouter the service router is used to call the authentication service
-     * @param AMFHeader $header
-     */
-    public function requestHeaderHandler(AMFHeader $header){
-        if($header->name == AMFConstants::CREDENTIALS_HEADER_NAME){
-            $userId = $header->value[AMFConstants::CREDENTIALS_FIELD_USERID];
-            $password = $header->value[AMFConstants::CREDENTIALS_FIELD_PASSWORD];
-            if(session_id () == ""){
-                session_start();
-            }
-            $_SESSION[self::SESSION_FIELD_USERID] = $userId;
-            $_SESSION[self::SESSION_FIELD_PASSWORD] = $password;
-
-
-        }
     }
 
     /**
@@ -112,7 +83,7 @@ class AMFPHPAuthentication {
      * @param <type> $acceptedRoles
      * @return <type>
      */
-    private function doesRoleMatch($userRoles, $acceptedRoles){
+    private function doRolesMatch($userRoles, $acceptedRoles){
             foreach($userRoles as $userRole){
                 foreach($acceptedRoles as $acceptedRole){
                     if($userRole == $acceptedRole){
@@ -130,44 +101,50 @@ class AMFPHPAuthentication {
      * Tries to authenticate if a credentials header was sent in the packet.
      * Throws an exception if the roles don't match 
      * 
-     * @param <type> $serviceObject
-     * @param <type> $serviceName
-     * @param <type> $methodName
-     * @return <type>
+     * @param <Object> $serviceObject
+     * @param <String> $methodName
+     * @return <array>
      */
-    public function serviceObjectCreatedHandler($serviceObject, $serviceName, $methodName){
-        if(isset ($serviceObject[self::GET_METHOD_ROLES])){
+    public function serviceObjectCreatedHandler($serviceObject, $methodName){
+        if(!method_exists($serviceObject, self::METHOD_GET_METHOD_ROLES)){
+            return;
+        }
 
-            //the service object has a "getMethodRoles" method. role checking is necessary
-            $acceptedRoles = $serviceObject[self::GET_METHOD_ROLES]($methodName);
+        //the service object has a "getMethodRoles" method. role checking is necessary if the returned value is not null
+        $acceptedRoles = call_user_func(array($serviceObject, self::METHOD_GET_METHOD_ROLES), $methodName);
+        if(!$acceptedRoles){
+            return;
+        }
 
-            //try to authenticate using header info if available
-            if($this->headerUserId && $this->headerPassword){
-                $serviceObject[self::METHOD_LOGIN]($this->headerUserId, $this->headerPassword);
-            }
+        //try to authenticate using header info if available
+        if($this->headerUserId && $this->headerPassword){
+            call_user_func(array($serviceObject, self::METHOD_LOGIN), $this->headerUserId, $this->headerPassword);
+        }
 
-            if(session_id () == ""){
-                session_start();
-            }
-            
-            $userRoles = $_SESSION[self::SESSION_FIELD_ROLES];
-            if(!$userRoles){
-                throw new Exception("User not authenticated");
-            }
-            if(!$this->doesRoleMatch($userRoles, $acceptedRoles)){
-                throw new Exception("role doesn't match");
-            }
+        if(session_id () == ""){
+            session_start();
 
         }
 
-        return array($serviceObject, $serviceName, $methodName);
+        if(!isset ($_SESSION[self::SESSION_FIELD_ROLES])){
+            throw new Exception("User not authenticated");
+        }
+        
+        $userRoles = $_SESSION[self::SESSION_FIELD_ROLES];
+        if(!$this->doRolesMatch($userRoles, $acceptedRoles)){
+            throw new Exception("roles don't match");
+        }
     }
 
     /**
      * clears the session info set by the plugin. Use to logout
      */
     public static function clearSessionInfo(){
-        if(session_id () != ""){
+        if(session_id () == ""){
+            session_start();
+
+        }
+        if(isset ($_SESSION[self::SESSION_FIELD_ROLES])){
             unset ($_SESSION[self::SESSION_FIELD_ROLES]);
         }
     }
@@ -176,15 +153,42 @@ class AMFPHPAuthentication {
      *
      * @param String $role
      */
-    public static function addRole($role){
+    public static function addRole($roleToAdd){
         if(session_id () == ""){
             session_start();
         }
         if(!isset($_SESSION[self::SESSION_FIELD_ROLES])){
             $_SESSION[self::SESSION_FIELD_ROLES] = array();
         }
-        
-        array_push($_SESSION[self::SESSION_FIELD_ROLES], $role);
+
+        //check role isn't already available
+        foreach($_SESSION[self::SESSION_FIELD_ROLES] as $userRole){
+            if($userRole == $roleToAdd){
+                return;
+            }
+        }
+        //role isn't already available. Add it.
+        array_push($_SESSION[self::SESSION_FIELD_ROLES], $roleToAdd);
+    }
+
+
+
+    /**
+     * looks for a "Credentials" request header. If there is one, uses it to try to authentify the user.
+     * @param <type> $serviceRouter the service router is used to call the authentication service
+     * @param AMFHeader $header
+     */
+    public function requestHeaderHandler(AMFHeader $header){
+        if($header->name == AMFConstants::CREDENTIALS_HEADER_NAME){
+            $userId = $header->value[AMFConstants::CREDENTIALS_FIELD_USERID];
+            $password = $header->value[AMFConstants::CREDENTIALS_FIELD_PASSWORD];
+            if(session_id () == ""){
+                session_start();
+            }
+            $this->headerUserId = $userId;
+            $this->headerPassword = $password;
+
+        }
     }
 }
 ?>

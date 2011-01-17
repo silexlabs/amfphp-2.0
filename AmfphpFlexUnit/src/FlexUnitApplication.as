@@ -4,7 +4,7 @@ package
 	
 	import flash.display.Sprite;
 	
-	import flexUnitTests.SimpleServiceTest;
+	import flexUnitTests.NetConnectionTests;
 	
 	import flexunit.flexui.FlexUnitTestRunnerUIAS;
 	
@@ -25,7 +25,7 @@ package
 		public function currentRunTestSuite():Array
 		{
 			var testsToRun:Array = new Array();
-			testsToRun.push(flexUnitTests.SimpleServiceTest);
+			testsToRun.push(flexUnitTests.NetConnectionTests);
 			return testsToRun;
 		}
 	}

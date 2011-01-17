@@ -36,7 +36,6 @@ class AMFPHPLogger {
      */
     public function amfPacketRequestSerializedHandler($rawData){
         $this->logMessage("serialized request packet : \n$rawData");
-        return array($rawData);
     }
 
     /**
@@ -46,7 +45,6 @@ class AMFPHPLogger {
      */
     public function amfPacketRequestDeserializedHandler(AMFPacket $requestPacket){
         $this->logMessage("deserialized request packet : \n" . print_r($requestPacket, true));
-        return array($requestPacket);
     }
 
     /**
@@ -56,7 +54,6 @@ class AMFPHPLogger {
      */
     public function amfPacketResponseDeserializedHandler(AMFPacket $responsePacket){
         $this->logMessage("deserialized response packet : \n" . print_r($responsePacket, true));
-        return array($responsePacket);
     }
 
     /**
@@ -66,7 +63,6 @@ class AMFPHPLogger {
      */
     public function amfPacketResponseSerializedHandler($rawData){
         $this->logMessage("serialized response packet : \n$rawData");
-        return array($rawData);
     }
 
     /**
@@ -76,7 +72,6 @@ class AMFPHPLogger {
      */
     public function exceptionCaughtHandler(Exception $e, AMFPacket $requestPacket){
         $this->logMessage("exception caught. exception :  \n " . $e->__toString() . "\nrequest : \n" . print_r($requestPacket, true));
-        return array($e, $requestPacket);
     }
 
 }

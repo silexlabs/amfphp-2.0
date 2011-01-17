@@ -16,7 +16,7 @@ package flexUnitTests
 	import org.amfphp.test.EnhancedNetConnection;
 	import org.amfphp.test.ExternalizableDummy;
 	
-	public class SimpleServiceTest extends TestCase
+	public class NetConnectionTests extends TestCase
 	{
 		private var _nc:EnhancedNetConnection;
 		
@@ -26,9 +26,7 @@ package flexUnitTests
 			
 			_nc = new EnhancedNetConnection();
 			//_nc.objectEncoding = ObjectEncoding.AMF0;
-			_nc.connect("http://localhost:8888/workspaceNetbeans/amfphp-2.0/tests/testData/testGateway.php");
-			//silex integration
-			//_nc.connect("http://localhost:8888/workspace/silex_server-v1.6.0beta7/cgi/gateway.php");			
+			_nc.connect(TestConfig.NC_GATEWAY_URL);
 			
 		}
 		
@@ -57,6 +55,11 @@ package flexUnitTests
 		
 		private function catchErrorFindingService(event:DataEvent):void{
 			assertTrue(event.data.indexOf("Exception") != -1);
+		}
+		
+		public function verifyAccessGranted(event:DataEvent):void{
+			assertEquals("ok", event.data);
+			
 		}
 		
 		//test can't be run, the netconnection doesn't accept the call

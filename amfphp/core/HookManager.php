@@ -52,12 +52,19 @@ class HookManager{
          * @param <array> $paramsArray the array of the parameters to call the function with
          * @return <array> $paramsArray, as modified by the hook callees.
          */
-        public function callHooks($hookName, $paramsArray){
+        public function callHooks($hookName, array $paramsArray){
                 if (isset($this->hooksArray[$hookName])){
                         // loop on registered hooks
                         foreach($this->hooksArray[$hookName] as $callBack){
-                            if($paramsArray){
-                                $paramsArray = call_user_func_array($callBack, $paramsArray);
+                            $ret = call_user_func_array($callBack, $paramsArray);
+                            if($ret){
+                                if(!is_array($ret)){
+                                    throw new Exception("hooked method must return array");
+                                }
+                                if(count($ret) != count($paramsArray)){
+                                    throw new Exception("hooked function returned array size doesn't match");
+                                }
+                                $paramsArray = $ret;
                             }
                         }
                 }

@@ -11,19 +11,49 @@
  */
 class AuthenticationService {
 
-    public function login($userid, $password){
+    /**
+     * test login function
+     * 
+     * @param <type> $userid
+     * @param <type> $password
+     */
+    public function login($userId, $password){
         if(($userId == "user") && ($password == "userPassword")){
-            return "user";
+            AMFPHPAuthentication::addRole("user");
         }
         if(($userId == "admin") && ($password == "adminPassword")){
-            return "admin";
+            AMFPHPAuthentication::addRole("admin");
         }
-
-        return null;
     }
 
+    /**
+     * test logout function
+     */
     public function logout(){
         AMFPHPAuthentication::clearSessionInfo();
     }
+
+    /**
+     * function the authentication plugin uses to get accepted roles for each function
+     * Here login and logout are not protected, however
+     * @param <String> $methodName
+     * @return <array>
+     */
+    public function getMethodRoles($methodName){
+       if($methodName == "adminMethod"){
+           return array("admin");
+       }else{
+           return null;
+       }
+    }
+
+    /**
+     * method that is protected by authentication. Only "admin" role is authorized. (see getMethodRoles)
+     * @return <String> "ok"
+     */
+    public function adminMethod(){
+        return "ok";
+    }
+
 }
 ?>

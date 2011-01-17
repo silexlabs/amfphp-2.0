@@ -22,9 +22,17 @@ class AmfphpConfig {
      */
     public $serviceNames2ClassFindInfo;
 
+    /**
+     * path to the folder containing the plugins. defaults to AMFPHP_ROOTPATH . "/plugins/"
+     * @var <String>
+     */
+    public $pluginsFolder;
+
     public function  __construct() {
         $this->serviceFolders = array();
         $this->serviceNames2ClassFindInfo = array();
+        $this->pluginsFolder = AMFPHP_ROOTPATH . "/plugins/";
+        
         $this->loadFromFile(null);
     }
     public function loadFromFile($path){

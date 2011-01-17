@@ -49,11 +49,21 @@ package org.amfphp.test
 		}
 		
 		private function onResult(res:Object):void{
-			dispatchEvent(new DataEvent(EVENT_ONRESULT, false, false, res.toString())); 
+			if(res){
+				dispatchEvent(new DataEvent(EVENT_ONRESULT, false, false, res.toString())); 
+			}else{
+				dispatchEvent(new DataEvent(EVENT_ONRESULT, false, false, null)); 
+				
+			}
 		}
 		
 		private function onStatus(statusObj:Object):void{
-			dispatchEvent(new DataEvent(EVENT_ONSTATUS, false, false, statusObj.toString())); 
+			if(statusObj is String){
+				dispatchEvent(new DataEvent(EVENT_ONSTATUS, false, false, statusObj as String)); 
+			}else{
+				dispatchEvent(new DataEvent(EVENT_ONSTATUS, false, false, statusObj.toString())); 
+				
+			}
 		}
 		
 		/**
