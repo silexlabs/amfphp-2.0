@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testrun name="" >
-<testsuite  name="Default Test Suite" project="AmfphpFlexUnit">
-<testsuite name="flexUnitTests:NetConnectionTests" type="testcaseclass"/>
-<testsuite name="flexUnitTests:RemoteObjectTests" type="testcaseclass"/>
-</testsuite>
-</testrun>
