@@ -5,7 +5,7 @@
  *
  * @author Ariel Sommeria-klein
  */
-class AMFUtil {
+class core_amf_Util {
     /**
      * looks if the system is Big Endain or not
      * @return <Boolean>

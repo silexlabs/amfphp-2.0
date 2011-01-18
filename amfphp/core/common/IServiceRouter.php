@@ -5,7 +5,7 @@
  * 
  * @author Ariel Sommeria-klein
  */
-interface IServiceRouter {
+interface core_common_IServiceRouter {
 
     /**
      * loads and instanciates a service class matching $serviceName, then calls the function defined by $functionName using $parameters as parameters

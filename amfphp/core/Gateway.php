@@ -7,17 +7,17 @@
  *
  * @author Ariel Sommeria-klein
  */
-class Gateway {
+class core_Gateway {
 
     /**
      * config. 
-     * @var <AmfphpConfig>
+     * @var <core_Config>
      */
     public $config;
 
     /**
      * context.
-     * @var <ServiceCallContext>
+     * @var <core_ServiceCallContext>
      */
     private $context;
 
@@ -35,7 +35,7 @@ class Gateway {
 
     /**
      * hook called when the packet response is ready.
-     * @param AMFPacket $responsePacket the deserialized packet
+     * @param core_amf_Packet $responsePacket the deserialized packet
      */
     const HOOK_PACKET_RESPONSE_DESERIALIZED = "HOOK_PACKET_RESPONSE_DESERIALIZED";
 
@@ -48,38 +48,38 @@ class Gateway {
     /**
      * hook called when there is an exception
      * @param <Exception> $e the exception object
-     * @param <AMFMessage> $requestMessage the request message that caused the exception
+     * @param <core_amf_Message> $requestMessage the request message that caused the exception
      */
     const HOOK_EXCEPTION_CAUGHT = "HOOK_EXCEPTION_CAUGHT";
 
     /**
      * hook called for each request header
-     * @param AMFHeader $header the request header
+     * @param core_amf_Header $header the request header
      */
     const HOOK_REQUEST_HEADER = "HOOK_REQUEST_HEADER";
 
 
     public function  __construct($rawInputData) {
-        $this->context = new ServiceCallContext();
+        $this->context = new core_ServiceCallContext();
         $this->context->rawInputData = $rawInputData;
-        $this->config = new AmfphpConfig();
+        $this->config = new core_Config();
     }
 
     /**
      * process a request and generate a response.
      * throws an Exception if anything fails, so caller must encapsulate in try/catch
      * 
-     * @param AMFMessage $requestMessage
-     * @return AMFMessage the response Message for the request
+     * @param core_amf_Message $requestMessage
+     * @return core_amf_Message the response Message for the request
      */
-    private function handleRequestMessage(AMFMessage $requestMessage){
-        $serviceRouter = new ServiceRouter($this->config->serviceFolderPaths, $this->config->serviceNames2ClassFindInfo);
-        $serviceCallParameters = ServiceCallParameters::createFromAMFMessage($requestMessage);
+    private function handleRequestMessage(core_amf_Message $requestMessage){
+        $serviceRouter = new core_common_ServiceRouter($this->config->serviceFolderPaths, $this->config->serviceNames2ClassFindInfo);
+        $serviceCallParameters = core_common_ServiceCallParameters::createFromAMFMessage($requestMessage);
         $ret = $serviceRouter->executeServiceCall($serviceCallParameters->serviceName, $serviceCallParameters->methodName, $serviceCallParameters->methodParameters);
-        $responsePacket = new AMFPacket();
-        $responseMessage = new AMFMessage();
+        $responsePacket = new core_amf_Packet();
+        $responseMessage = new core_amf_Message();
         $responseMessage->data = $ret;
-        $responseMessage->targetURI = $requestMessage->responseURI . AMFConstants::AMFPHP_CLIENT_SUCCESS_METHOD;
+        $responseMessage->targetURI = $requestMessage->responseURI . core_amf_Constants::AMFPHP_CLIENT_SUCCESS_METHOD;
         //not specified
         $responseMessage->responseURI = "null";
         return $responseMessage;
@@ -88,39 +88,39 @@ class Gateway {
     /**
      * handles an exception by generating a serialized AMF response with information about the Exception. Tries to use the requestMessage for the response/target uri
      * @param Exception $e
-     * @param AMFMessage $requestMessage the request message that caused it, if it exists
+     * @param core_amf_Message $requestMessage the request message that caused it, if it exists
      * @return String
      */
-    private function generateResponseForException(Exception $e, AMFMessage $requestMessage = null){
-        $errorPacket = new AMFPacket();
-        $hookManager = HookManager::getInstance();
-        $errorResponseMessage = new AMFMessage();
+    private function generateResponseForException(Exception $e, core_amf_Message $requestMessage = null){
+        $errorPacket = new core_amf_Packet();
+        $hookManager = core_HookManager::getInstance();
+        $errorResponseMessage = new core_amf_Message();
         if($requestMessage != null && isset ($requestMessage->responseURI)){
-            $errorResponseMessage->targetURI = $requestMessage->responseURI . AMFConstants::CLIENT_FAILURE_METHOD;
+            $errorResponseMessage->targetURI = $requestMessage->responseURI . core_amf_Constants::CLIENT_FAILURE_METHOD;
         }else{
-            $errorResponseMessage->targetURI = AMFConstants::DEFAULT_REQUEST_RESPONSE_URI . AMFConstants::CLIENT_FAILURE_METHOD;
+            $errorResponseMessage->targetURI = core_amf_Constants::DEFAULT_REQUEST_RESPONSE_URI . core_amf_Constants::CLIENT_FAILURE_METHOD;
         }
         //not specified
         $errorResponseMessage->responseURI = "null";
         $errorResponseMessage->data = $e->__toString();
         array_push($errorPacket->messages, $errorResponseMessage);
-        $serializer = new AMFSerializer($errorPacket);
+        $serializer = new core_amf_Serializer($errorPacket);
         return $serializer->serialize();
         
     }
 
     
     /**
-     * The service method runs the gateway application.  It deserializes the raw data passed into the constructor as an AMFPacket, handles the headers,
+     * The service method runs the gateway application.  It deserializes the raw data passed into the constructor as an core_amf_Packet, handles the headers,
      * handles the messages as requests to services, and returns the responses from the services
      * It does not however handle output headers, gzip compression, etc. that is the job of the calling script
      *
      * @return <String> the serialized amf packet containg the service responses
      */
     public function service(){
-        PluginManager::getInstance()->loadPlugins($this->config->pluginsFolder);
+        core_PluginManager::getInstance()->loadPlugins($this->config->pluginsFolder);
         $requestMessage = null;
-        $hookManager = HookManager::getInstance();
+        $hookManager = core_HookManager::getInstance();
         try{
             if(!$this->context->rawInputData){
                 throw new Exception("no raw data passed to gateway");
@@ -128,7 +128,7 @@ class Gateway {
             //call hook for reading serialized incoming packet
             $hookManager->callHooks(self::HOOK_PACKET_REQUEST_SERIALIZED, array($this->context->rawInputData));
 
-            $deserializer = new AMFDeserializer($this->context->rawInputData);
+            $deserializer = new core_amf_Deserializer($this->context->rawInputData);
             $requestPacket = $deserializer->deserialize();
 
             //call hook for reading/modifying request packet
@@ -144,7 +144,7 @@ class Gateway {
 
             $numMessages = count($requestPacket->messages);
             $rawOutputData = "";
-            $responsePacket = new AMFPacket();
+            $responsePacket = new core_amf_Packet();
             for($i = 0; $i < $numMessages; $i++){
                 $requestMessage = $requestPacket->messages[$i];
                 $responseMessage = $this->handleRequestMessage($requestMessage);
@@ -155,7 +155,7 @@ class Gateway {
             $fromHooks = $hookManager->callHooks(self::HOOK_PACKET_RESPONSE_DESERIALIZED, array($responsePacket));
             $responsePacket = $fromHooks[0];
 
-            $serializer = new AMFSerializer($responsePacket);
+            $serializer = new core_amf_Serializer($responsePacket);
             $rawOutputData = $serializer->serialize();
 
             //call hook for reading serialized response packet

@@ -3,7 +3,7 @@
  * interface for serializers. 
  * @author Ariel Sommeria-klein
  */
-interface ISerializer {
+interface core_common_ISerializer {
     
     /**
      * the Packet and any meta data (such as using amf0 or amf3 for example) are passed in the constructor.

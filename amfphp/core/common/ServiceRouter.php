@@ -3,11 +3,11 @@
 /**
  *  The Service Router class is responsible for executing the remote service method and returning it's value.
  * based on the old "Executive" of php 1.9. It looks for a service either explicitely defined in a
- * ClassFindInfo object, or in a service folder.
+ * core_common_ClassFindInfo object, or in a service folder.
  *
  * @author Ariel Sommeria-klein
  */
-class ServiceRouter implements IServiceRouter{
+class core_common_ServiceRouter implements core_common_IServiceRouter{
     /**
      * hook called when the service object is created. Useful for authentication
      * @param <String> the raw http data
@@ -21,14 +21,14 @@ class ServiceRouter implements IServiceRouter{
 
     /**
      *
-     * @var <array> of ClassFindInfo
+     * @var <array> of core_common_ClassFindInfo
      */
     private $serviceNames2ClassFindInfo;
 
     /**
      *
      * @param <array> $serviceFolderPaths folders containing service classes
-     * @param <array> $serviceNames2ClassFindInfo a dictionary of service classes represented in a ClassFindInfo.
+     * @param <array> $serviceNames2ClassFindInfo a dictionary of service classes represented in a core_common_ClassFindInfo.
      */
     public function  __construct($serviceFolderPaths, $serviceNames2ClassFindInfo) {
         $this->serviceFolderPaths = $serviceFolderPaths;
@@ -69,7 +69,7 @@ class ServiceRouter implements IServiceRouter{
         }
 
 
-        HookManager::getInstance()->callHooks(self::HOOK_SERVICE_OBJECT_CREATED, array($serviceObject, $methodName));
+        core_HookManager::getInstance()->callHooks(self::HOOK_SERVICE_OBJECT_CREATED, array($serviceObject, $methodName));
         
         if(!method_exists($serviceObject, $methodName)){
             throw new Exception("method  $methodName not found on $serviceName object ");

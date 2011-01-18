@@ -1,6 +1,6 @@
 <?php
 
-	class AMFDeserializer
+	class core_amf_Deserializer
 	{
 		protected $rawData;
 
@@ -30,7 +30,7 @@
 
                 /**
                  * the Packet contained in the serialized data
-                 * @var <AMFPacket>
+                 * @var <core_amf_Packet>
                  */
                 protected $deserializedPacket;
 
@@ -52,7 +52,7 @@
 			$this->storedStrings = array();
 			$this->storedObjects = array();
 			$this->storedDefinitions = array();
-			$this->decodeFlags = (AMFUtil::isSystemBigEndian() * 2) | 4;
+			$this->decodeFlags = (core_amf_Util::isSystemBigEndian() * 2) | 4;
 		}
 
 		/**
@@ -61,7 +61,7 @@
 		 * @param object $amfdata The object to put the deserialized data in
 		 */ 
 		public function deserialize() {
-                        $this->deserializedPacket = new AMFPacket();
+                        $this->deserializedPacket = new core_amf_Packet();
 			$this->readHeaders(); // read the binary headers
 			$this->readMessages(); // read the binary Messages
                         if($this->decodeFlags & 1 == 1){
@@ -99,7 +99,7 @@
 				$type = $this->readByte();  // grab the type of the element
 				$content = $this->readData($type); // turn the element into real data
 
-                                $header = new AMFHeader($name, $required, $content);
+                                $header = new core_amf_Header($name, $required, $content);
 				array_push($this->deserializedPacket->headers, $header);
 			}
 
@@ -125,7 +125,7 @@
 				$type = $this->readByte(); // grab the type of the element
 				$data = $this->readData($type); // turn the element into real data
 
-                                $message = new AMFMessage($target, $response, $data);
+                                $message = new core_amf_Message($target, $response, $data);
                                 array_push($this->deserializedPacket->messages, $message);
 
 			}
@@ -239,7 +239,7 @@
 		{
 			$bytes = substr($this->rawData, $this->currentByte, 8);
 			$this->currentByte += 8;
-			if (AMFUtil::isSystemBigEndian())
+			if (core_amf_Util::isSystemBigEndian())
 			{
 				$bytes = strrev($bytes);
 			}
@@ -382,7 +382,7 @@
 		/**
 		 * readCustomClass reads the amf content associated with a class instance which was registered
 		 * with Object.registerClass.  In order to preserve the class name an additional property is assigned
-		 * to the object AMFConstants::FIELD_EXPLICIT_TYPE.  This property will be overwritten if it existed within the class already.
+		 * to the object core_amf_Constants::FIELD_EXPLICIT_TYPE.  This property will be overwritten if it existed within the class already.
 		 *
 		 * @return object The php representation of the object
 		 */

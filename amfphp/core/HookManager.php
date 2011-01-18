@@ -15,7 +15,7 @@ To read the license please visit http://www.gnu.org/copyleft/gpl.html
  * Hooks are provided by AMFPHP to allow your contexts to 'hook into' the rest of AMFPHP, i.e. to call functions in your context at specific times<br />
  * This is a singleton, so use getInstance
  */
-class HookManager{
+class core_HookManager{
         /**
          * registered hooks
          */
@@ -36,11 +36,11 @@ class HookManager{
 
         /**
          *
-         * @return <HookManager>
+         * @return <core_HookManager>
          */
         public static function getInstance() {
                 if (self::$instance == NULL) {
-                        self::$instance = new HookManager();
+                        self::$instance = new core_HookManager();
                 }
                 return self::$instance;
         }
