@@ -1,6 +1,6 @@
 <?php
 /**
- * Unit tests for AMFSerializer
+ * Unit tests for core_amf_Serializer
  * note: phpunit dataProvider mechanism doesn't work well, so lots of boiler plate code here. Oh well... A.S.
  *
  * @author Ariel Sommeria-klein
@@ -160,7 +160,7 @@ class DeserializationTest extends PHPUnit_Framework_TestCase{
          */
 
         //Packet with null header
-        $deserializer = new AMFDeserializer($testData->sNullHeaderPacket);
+        $deserializer = new core_amf_Deserializer($testData->sNullHeaderPacket);
         $deserialized = $deserializer->deserialize();
         $expectedDeserialized = $testData->dNullHeaderPacket;
         $this->assertEquals($expectedDeserialized, $deserialized);

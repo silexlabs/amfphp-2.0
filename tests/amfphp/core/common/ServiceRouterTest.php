@@ -20,7 +20,7 @@ class ServiceRouterTest extends PHPUnit_Framework_TestCase {
      */
     protected function setUp() {
         $testServiceConfig = new TestServicesConfig();
-        $this->object = new ServiceRouter($testServiceConfig->serviceFolderPaths, $testServiceConfig->serviceNames2ClassFindInfo);
+        $this->object = new core_common_ServiceRouter($testServiceConfig->serviceFolderPaths, $testServiceConfig->serviceNames2ClassFindInfo);
     }
 
     public function testExecuteMirrorServiceCall(){

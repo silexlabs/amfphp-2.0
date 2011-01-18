@@ -1,6 +1,6 @@
 <?php
 /**
- * Unit tests for AMFSerializer
+ * Unit tests for core_amf_Serializer
  * note: phpunit dataProvider mechanism doesn't work well, so lots of boiler plate code here. Oh well... A.S.
  *
  * @author Ariel Sommeria-klein
@@ -15,7 +15,7 @@ class SerializationTest extends PHPUnit_Framework_TestCase{
 
     public function testBasicMethods(){
         $testData = new AMFTestData();
-        $emptyPacket = new AMFPacket();
+        $emptyPacket = new core_amf_Packet();
 
         /*
          template
@@ -164,7 +164,7 @@ class SerializationTest extends PHPUnit_Framework_TestCase{
 
         //writeTypedObject
         $serializer = new AMFSerializerWrapper($emptyPacket);
-        $serializer->writeTypedObject($testData->dTypedObject, $testData->dTypedObject[AMFConstants::FIELD_EXPLICIT_TYPE]);
+        $serializer->writeTypedObject($testData->dTypedObject, $testData->dTypedObject[core_amf_Constants::FIELD_EXPLICIT_TYPE]);
         $serialized = $serializer->getOutput();
         $expectedSerialized = $testData->sTypedObject;
         $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));

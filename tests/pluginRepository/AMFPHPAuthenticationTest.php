@@ -93,8 +93,8 @@ class AMFPHPAuthenticationTest extends PHPUnit_Framework_TestCase
     
     public function testRequestHeaderHandler()
     {
-        $credentialsAssoc = array(AMFConstants::CREDENTIALS_FIELD_USERID => "admin", AMFConstants::CREDENTIALS_FIELD_PASSWORD => "adminPassword");
-        $credentialsHeader = new AMFHeader(AMFConstants::CREDENTIALS_HEADER_NAME, true, $credentialsAssoc);
+        $credentialsAssoc = array(core_amf_Constants::CREDENTIALS_FIELD_USERID => "admin", core_amf_Constants::CREDENTIALS_FIELD_PASSWORD => "adminPassword");
+        $credentialsHeader = new core_amf_Header(core_amf_Constants::CREDENTIALS_HEADER_NAME, true, $credentialsAssoc);
         $this->object->requestHeaderHandler($credentialsHeader);
         $this->object->serviceObjectCreatedHandler($this->serviceObj, "adminMethod");
     }
@@ -103,14 +103,14 @@ class AMFPHPAuthenticationTest extends PHPUnit_Framework_TestCase
      * @expectedException Exception
      */
     public function testWithHooksBlockAccess(){
-        HookManager::getInstance()->callHooks(ServiceRouter::HOOK_SERVICE_OBJECT_CREATED, array($this->serviceObj, "adminMethod"));
+        core_HookManager::getInstance()->callHooks(core_common_ServiceRouter::HOOK_SERVICE_OBJECT_CREATED, array($this->serviceObj, "adminMethod"));
     }
 
     public function testWithHooksGrantAccess(){
-        $credentialsAssoc = array(AMFConstants::CREDENTIALS_FIELD_USERID => "admin", AMFConstants::CREDENTIALS_FIELD_PASSWORD => "adminPassword");
-        $credentialsHeader = new AMFHeader(AMFConstants::CREDENTIALS_HEADER_NAME, true, $credentialsAssoc);
-        HookManager::getInstance()->callHooks(Gateway::HOOK_REQUEST_HEADER, array($credentialsHeader));
-        HookManager::getInstance()->callHooks(ServiceRouter::HOOK_SERVICE_OBJECT_CREATED, array($this->serviceObj, "adminMethod"));
+        $credentialsAssoc = array(core_amf_Constants::CREDENTIALS_FIELD_USERID => "admin", core_amf_Constants::CREDENTIALS_FIELD_PASSWORD => "adminPassword");
+        $credentialsHeader = new core_amf_Header(core_amf_Constants::CREDENTIALS_HEADER_NAME, true, $credentialsAssoc);
+        core_HookManager::getInstance()->callHooks(core_Gateway::HOOK_REQUEST_HEADER, array($credentialsHeader));
+        core_HookManager::getInstance()->callHooks(core_common_ServiceRouter::HOOK_SERVICE_OBJECT_CREATED, array($this->serviceObj, "adminMethod"));
     }
 
 

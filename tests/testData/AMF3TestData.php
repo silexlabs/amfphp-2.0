@@ -96,7 +96,7 @@ class AMF3TestData {
     public function buildDouble(){
         $this->dDouble = 0.42;
         $packedData = pack("d", 0.42);
-        if(AMFUtil::isSystemBigEndian()){
+        if(core_amf_Util::isSystemBigEndian()){
             $packedData = strrev($packedData);
         }
         $this->sDouble = pack('C', 5) . $packedData;
@@ -206,7 +206,7 @@ class AMF3TestData {
     }
 
     public function buildObject(){
-        $this->dObject = array("data" => "test", AMFConstants::FIELD_EXPLICIT_TYPE => "DummyClass2");
+        $this->dObject = array("data" => "test", core_amf_Constants::FIELD_EXPLICIT_TYPE => "DummyClass2");
         //object marker
         $this->sObject = pack("C", 0x0A);
         //dynamic marker. This is hard coded.

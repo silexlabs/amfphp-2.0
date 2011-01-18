@@ -1,6 +1,6 @@
 <?php
 /**
- * Unit tests for AMFSerializer, but using amf3
+ * Unit tests for core_amf_Serializer, but using amf3
  * note: phpunit dataProvider mechanism doesn't work well, so lots of boiler plate code here. Oh well... A.S.
  *
  * @author Ariel Sommeria-klein

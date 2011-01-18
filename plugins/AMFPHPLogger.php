@@ -12,12 +12,12 @@ class AMFPHPLogger {
     const LOG_FILE_PATH = "amfphplog.log";
 
     public function  __construct() {
-        $hookManager = HookManager::getInstance();
+        $hookManager = core_HookManager::getInstance();
 
-        $hookManager->addHook(Gateway::HOOK_PACKET_REQUEST_SERIALIZED, array($this, "amfPacketRequestSerializedHandler"));
-        $hookManager->addHook(Gateway::HOOK_PACKET_REQUEST_DESERIALIZED, array($this, "amfPacketRequestDeserializedHandler"));
-        $hookManager->addHook(Gateway::HOOK_PACKET_RESPONSE_DESERIALIZED, array($this, "amfPacketResponseDeserializedHandler"));
-        $hookManager->addHook(Gateway::HOOK_PACKET_RESPONSE_SERIALIZED, array($this, "amfPacketResponseSerializedHandler"));
+        $hookManager->addHook(core_Gateway::HOOK_PACKET_REQUEST_SERIALIZED, array($this, "amfPacketRequestSerializedHandler"));
+        $hookManager->addHook(core_Gateway::HOOK_PACKET_REQUEST_DESERIALIZED, array($this, "amfPacketRequestDeserializedHandler"));
+        $hookManager->addHook(core_Gateway::HOOK_PACKET_RESPONSE_DESERIALIZED, array($this, "amfPacketResponseDeserializedHandler"));
+        $hookManager->addHook(core_Gateway::HOOK_PACKET_RESPONSE_SERIALIZED, array($this, "amfPacketResponseSerializedHandler"));
     }
 
     private function logMessage($message){
@@ -40,19 +40,19 @@ class AMFPHPLogger {
 
     /**
      * logs the deserialized incoming packet.
-     * @param AMFPacket $requestPacket
-     * @return AMFPacket
+     * @param core_amf_Packet $requestPacket
+     * @return core_amf_Packet
      */
-    public function amfPacketRequestDeserializedHandler(AMFPacket $requestPacket){
+    public function amfPacketRequestDeserializedHandler(core_amf_Packet $requestPacket){
         $this->logMessage("deserialized request packet : \n" . print_r($requestPacket, true));
     }
 
     /**
      * logs the deserialized incoming packet.
-     * @param AMFPacket $requestPacket
+     * @param core_amf_Packet $requestPacket
      * @return <array>
      */
-    public function amfPacketResponseDeserializedHandler(AMFPacket $responsePacket){
+    public function amfPacketResponseDeserializedHandler(core_amf_Packet $responsePacket){
         $this->logMessage("deserialized response packet : \n" . print_r($responsePacket, true));
     }
 
@@ -67,10 +67,10 @@ class AMFPHPLogger {
 
     /**
      * logs the exception and the packet that caused it
-     * @param AMFPacket $requestPacket
+     * @param core_amf_Packet $requestPacket
      * @return <array>
      */
-    public function exceptionCaughtHandler(Exception $e, AMFPacket $requestPacket){
+    public function exceptionCaughtHandler(Exception $e, core_amf_Packet $requestPacket){
         $this->logMessage("exception caught. exception :  \n " . $e->__toString() . "\nrequest : \n" . print_r($requestPacket, true));
     }
 

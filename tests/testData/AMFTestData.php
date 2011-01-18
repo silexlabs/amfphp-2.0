@@ -140,7 +140,7 @@ class AMFTestData {
     public function buildDouble(){
         $this->dDouble = 42;
         $this->sDouble = pack("d", 42);
-        if(AMFUtil::isSystemBigEndian()){
+        if(core_amf_Util::isSystemBigEndian()){
             $this->sDouble = strrev($this->sDouble);
         }
     }
@@ -181,7 +181,7 @@ class AMFTestData {
         $this->sNumber = pack('C', 0);
         //number
         $numberData = pack("d", 42);
-        if(AMFUtil::isSystemBigEndian()){
+        if(core_amf_Util::isSystemBigEndian()){
             $numberData = strrev($numberData);
         }
 
@@ -370,7 +370,7 @@ class AMFTestData {
         $this->sDate = pack('C', 0x0B);
         //date is a double, see writeDouble for little/big endian
         $dateData = pack("d", 1234);
-        if(AMFUtil::isSystemBigEndian()){
+        if(core_amf_Util::isSystemBigEndian()){
             $dateData = strrev($dateData);
         }
         $this->sDate .= $dateData;
@@ -418,7 +418,7 @@ class AMFTestData {
      * note: the writeXml method gets rids of CRs and LFs
      */
     public function buildTypedObject(){
-        $this->dTypedObject = array("data" => "dummyData", AMFConstants::FIELD_EXPLICIT_TYPE => "DummyClass");
+        $this->dTypedObject = array("data" => "dummyData", core_amf_Constants::FIELD_EXPLICIT_TYPE => "DummyClass");
         //type : 0x10
         $this->sTypedObject = pack('C', 0x10);
         //class name length on a int
@@ -446,14 +446,14 @@ class AMFTestData {
     */
 
     /**
-     * test serializing an empty AMFPacket.
+     * test serializing an empty core_amf_Packet.
      * expected output: 0x000000
      * 1st int : version
      * 2nd int : number of headers
      * 3rd int : number of Messages
      */
     public function buildEmptyPacket(){
-        $this->dEmptyPacket = new AMFPacket();
+        $this->dEmptyPacket = new core_amf_Packet();
         $this->sEmptyPacket = pack('nnn', 0, 0, 0);
     }
 
@@ -461,9 +461,9 @@ class AMFTestData {
      * one header containing a null, and with required set to true
      */
     public function buildNullHeaderPacket(){
-        $nullHeader = new AMFHeader("null header", TRUE, NULL);
+        $nullHeader = new core_amf_Header("null header", TRUE, NULL);
 
-        $this->dNullHeaderPacket = new AMFPacket();
+        $this->dNullHeaderPacket = new core_amf_Packet();
 	array_push($this->dNullHeaderPacket->headers, $nullHeader);
 
         //version (int)
@@ -494,9 +494,9 @@ class AMFTestData {
      *  with one header containing a string
      */
     public function buildStringHeaderPacket(){
-        $stringHeader = new AMFHeader("string header", FALSE, "zzzzzz");
+        $stringHeader = new core_amf_Header("string header", FALSE, "zzzzzz");
 
-        $this->dStringHeaderPacket = new AMFPacket();
+        $this->dStringHeaderPacket = new core_amf_Packet();
 	array_push($this->dStringHeaderPacket->headers, $stringHeader);
         //version (int)
         $this->sStringHeaderPacket = pack('n', 0);
@@ -531,10 +531,10 @@ class AMFTestData {
      * no headers and a Message containing a null
      */
     public function buildNullMessagePacket(){
-        $nullMessage = new AMFMessage();
+        $nullMessage = new core_amf_Message();
         $nullMessage->targetURI = "/onStatus";
         $nullMessage->responseURI = "null";
-        $this->dNullMessagePacket = new AMFPacket();
+        $this->dNullMessagePacket = new core_amf_Packet();
         array_push($this->dNullMessagePacket->messages, $nullMessage);
 
         //version (int)
@@ -565,12 +565,12 @@ class AMFTestData {
      *  no headers and a Message containing a string
      */
     public function buildStringMessagePacket(){
-        $stringMessage = new AMFMessage();
+        $stringMessage = new core_amf_Message();
         $testString = "test string";
         $stringMessage->targetURI = "/onStatus";
         $stringMessage->responseURI = "null";
         $stringMessage->data = $testString;
-        $this->dStringMessagePacket = new AMFPacket();
+        $this->dStringMessagePacket = new core_amf_Packet();
         array_push($this->dStringMessagePacket->messages, $stringMessage);
 
         //version (int)
@@ -599,21 +599,21 @@ class AMFTestData {
 
 
     /**
-     * an AMFPacket with two headers one with a string and one with a null , and two Messages, one with a string and one with a null
+     * an core_amf_Packet with two headers one with a string and one with a null , and two Messages, one with a string and one with a null
      */
     public function build2HeadersAndTwoMessagesPacket(){
-        $nullHeader = new AMFHeader("null header", TRUE, NULL);
-        $stringHeader = new AMFHeader("string header", FALSE, "zzzzzz");
-        $nullMessage = new AMFMessage();
+        $nullHeader = new core_amf_Header("null header", TRUE, NULL);
+        $stringHeader = new core_amf_Header("string header", FALSE, "zzzzzz");
+        $nullMessage = new core_amf_Message();
         $nullMessage->targetURI = "/onStatus";
         $nullMessage->responseURI = "null";
-        $stringMessage = new AMFMessage();
+        $stringMessage = new core_amf_Message();
         $testString = "test string";
         $stringMessage->targetURI = "/onStatus";
         $stringMessage->responseURI = "null";
         $stringMessage->data = $testString;
 
-        $this->d2Headers2MessagesPacket = new AMFPacket();
+        $this->d2Headers2MessagesPacket = new core_amf_Packet();
 	array_push($this->d2Headers2MessagesPacket->headers, $stringHeader);
 	array_push($this->d2Headers2MessagesPacket->headers, $nullHeader);
         array_push($this->d2Headers2MessagesPacket->messages, $stringMessage);
