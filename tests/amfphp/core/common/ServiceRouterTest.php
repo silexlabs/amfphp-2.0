@@ -41,7 +41,7 @@ class ServiceRouterTest extends PHPUnit_Framework_TestCase {
     }
 
      /**
-     * @expectedException Exception
+     * @expectedException AmfphpException
      */
     public function testNoServiceException()
     {
@@ -49,7 +49,7 @@ class ServiceRouterTest extends PHPUnit_Framework_TestCase {
     }
 
      /**
-     * @expectedException Exception
+     * @expectedException AmfphpException
      */
     public function testNoFunctionException()
     {

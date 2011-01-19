@@ -32,6 +32,7 @@ require AMFPHP_ROOTPATH . "core/amf/AMFWrapperClasses.php";
 
 //core
 require AMFPHP_ROOTPATH . "core/AmfphpConfig.php";
+require AMFPHP_ROOTPATH . "core/AmfphpException.php";
 require AMFPHP_ROOTPATH . "core/Gateway.php";
 require AMFPHP_ROOTPATH . "core/HookManager.php";
 require AMFPHP_ROOTPATH . "core/PluginManager.php";

@@ -70,8 +70,8 @@ class AMFSerializerWrapper extends AMFSerializer
         parent::writeReference($d);
     }
 
-    public function writeTypedObject($d, $className) {
-        parent::writeTypedObject($d, $className);
+    public function writeTypedObject($d) {
+        parent::writeTypedObject($d);
     }
 
     public function writeAMF3Data(&$d)

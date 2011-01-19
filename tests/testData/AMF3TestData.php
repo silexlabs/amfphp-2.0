@@ -206,7 +206,10 @@ class AMF3TestData {
     }
 
     public function buildObject(){
-        $this->dObject = array("data" => "test", AMFConstants::FIELD_EXPLICIT_TYPE => "DummyClass2");
+        $this->dObject = new stdClass();
+        $this->dObject->data= "test";
+        $explicitTypeField = AMFConstants::FIELD_EXPLICIT_TYPE;
+        $this->dObject->$explicitTypeField ="DummyClass2";
         //object marker
         $this->sObject = pack("C", 0x0A);
         //dynamic marker. This is hard coded.

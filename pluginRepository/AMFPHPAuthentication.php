@@ -127,12 +127,12 @@ class AMFPHPAuthentication {
         }
 
         if(!isset ($_SESSION[self::SESSION_FIELD_ROLES])){
-            throw new Exception("User not authenticated");
+            throw new AmfphpException("User not authenticated");
         }
         
         $userRoles = $_SESSION[self::SESSION_FIELD_ROLES];
         if(!$this->doRolesMatch($userRoles, $acceptedRoles)){
-            throw new Exception("roles don't match");
+            throw new AmfphpException("roles don't match");
         }
     }
 

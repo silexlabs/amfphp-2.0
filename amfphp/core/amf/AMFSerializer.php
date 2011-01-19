@@ -440,11 +440,11 @@ class AMFSerializer implements ISerializer{
     /**
      * writeTypedObject takes an instance of a class and writes the variables defined
      * in it to the output stream.
-     * To accomplish this we just blanket grab all of the object vars with get_object_vars, minus the _explicitType, whiuch is used as class name
+     * To accomplish this we just blanket grab all of the object vars with get_object_vars, minus the AMFConstants::FIELD_EXPLICIT_TYPE field, whiuch is used as class name
      *
      * @param object $d The object to serialize the properties. The deserializer looks for AMFConstants::FIELD_EXPLICIT_TYPE on this object and writes it as the class name. 
      */
-    protected function writeTypedObject($d, $className) {
+    protected function writeTypedObject($d) {
             if($this->writeReferenceIfExists($d))
             {
                     return;
@@ -452,11 +452,12 @@ class AMFSerializer implements ISerializer{
 
             $this->writeByte(16); // write  the custom class code
 
-            $className = $d[AMFConstants::FIELD_EXPLICIT_TYPE];
+            $explicitTypeField = AMFConstants::FIELD_EXPLICIT_TYPE;
+            $className = $d->$explicitTypeField;
             if(!$className){
-                throw new Exception("_explicitType not found on a object that is to be sent as typed. " . print_r($d, true));
+                throw new AmfphpException(AMFConstants::FIELD_EXPLICIT_TYPE . " not found on a object that is to be sent as typed. " . print_r($d, true));
             }
-            unset ($d[AMFConstants::FIELD_EXPLICIT_TYPE]);
+            unset ($d->$explicitTypeField);
             $this->writeUTF($className); // write the class name
             $objVars = $d;
             foreach($objVars as $key => $data) { // loop over each element
@@ -510,7 +511,8 @@ class AMFSerializer implements ISerializer{
                     return;
             }
             elseif (is_object($d))
-            {
+            {       $explicitTypeField = AMFConstants::FIELD_EXPLICIT_TYPE;
+                    $hasExplicitType = isset($d->$explicitTypeField);
                     $className = strtolower(get_class($d));
                     if($className == 'domdocument')
                     {
@@ -527,30 +529,28 @@ class AMFSerializer implements ISerializer{
                             $this->writeUndefined();
                             return;
                     }
-                    else if($className == 'stdclass' && !isset($d->_explicitType))
+                    else if($className == 'stdclass' && !$hasExplicitType)
                     {
                             $this->writeAnonymousObject($d);
                             return;
                     }
                     //Fix for PHP5 overriden ArrayAccess and ArrayObjects with an explcit type 
                     //TODO not sure if this is still relevant. A.S.
-                    elseif( (is_a($d, 'ArrayAccess') || is_a($d, 'ArrayObject')) && !isset($d->_explicitType))
+                    elseif( (is_a($d, 'ArrayAccess') || is_a($d, 'ArrayObject')) && !$hasExplicitType)
                     {
                             $this->writeArray($d);
                             return;
                     }
-                    else if(isset($d->_explicitType))
+                    else if($hasExplicitType)
                     {
-                            $type = $d->_explicitType;
-                            unset ($d->_explicitType);
-                            $this->writeTypedObject($d, $type);
+                            $this->writeTypedObject($d);
                             return;
                     }else{
                             $this->writeArray($d);
                             return;
                     }
             }
-            throw new Exception("couldn't write data ");
+            throw new AmfphpException("couldn't write data ");
     }
 
 
@@ -567,7 +567,8 @@ class AMFSerializer implements ISerializer{
 	 */
 
 	protected function writeAmf3Data(& $d)
-	{
+	{       $explicitTypeField = AMFConstants::FIELD_EXPLICIT_TYPE;
+                $hasExplicitType = isset($d->$explicitTypeField);
 		if (is_int($d))
 		{ //int
 			$this->writeAmf3Number($d);
@@ -595,7 +596,7 @@ class AMFSerializer implements ISerializer{
 			$this->writeAmf3Null();
 			return;
 		}
-		elseif (is_array($d) && !isset($d->_explicitType))
+		elseif (is_array($d) && !$hasExplicitType)
 		{ // array
 			$this->writeAmf3Array($d);
 			return;
@@ -624,7 +625,7 @@ class AMFSerializer implements ISerializer{
 				return;
 			}
 			// Fix for PHP5 overriden ArrayAccess and ArrayObjects with an explcit type
-			elseif( (is_a($d, 'ArrayAccess') || is_a($d, 'ArrayObject')) && !isset($d->_explicitType))
+			elseif( (is_a($d, 'ArrayAccess') || is_a($d, 'ArrayObject')) && !$hasExplicitType)
 			{
 				$this->writeAmf3Array($d, true);
 				return;
@@ -635,7 +636,7 @@ class AMFSerializer implements ISerializer{
 				return;
 			}
 		}
-                throw new Exception("couldn't write object " . print_r($d, false));
+                throw new AmfphpException("couldn't write object " . print_r($d, false));
 	}
 
 
@@ -1032,19 +1033,20 @@ class AMFSerializer implements ISerializer{
 
 			$this->storedDefinitions++;
 
-			$realObj = array();
+			$realObj = new stdClass();
+                        $explicitTypeField = AMFConstants::FIELD_EXPLICIT_TYPE;
 			foreach($d as $key => $val)
 			{
-				if($key[0] != "\0" && $key != '_explicitType') //Don't show private members
+				if($key[0] != "\0" && $key != $explicitTypeField) //Don't show private members
 				{
-					$realObj[$key] = $val;
+					$realObj->$key = $val;
 				}
 			}
 
 			//Type this as a dynamic object
 			$this->outBuffer .= "\13";
 
-			$className = $d[AMFConstants::FIELD_EXPLICIT_TYPE];
+			$className = $d->$explicitTypeField;
 
 			$this->writeAmf3String($className);
                         

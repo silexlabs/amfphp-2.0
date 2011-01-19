@@ -164,7 +164,7 @@ class SerializationTest extends PHPUnit_Framework_TestCase{
 
         //writeTypedObject
         $serializer = new AMFSerializerWrapper($emptyPacket);
-        $serializer->writeTypedObject($testData->dTypedObject, $testData->dTypedObject[AMFConstants::FIELD_EXPLICIT_TYPE]);
+        $serializer->writeTypedObject($testData->dTypedObject);
         $serialized = $serializer->getOutput();
         $expectedSerialized = $testData->sTypedObject;
         $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));

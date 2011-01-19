@@ -65,14 +65,14 @@ class ServiceRouter implements IServiceRouter{
         }
 
         if(!$serviceObject){
-            throw new Exception("$serviceName service not found ");
+            throw new AmfphpException("$serviceName service not found ");
         }
 
 
         HookManager::getInstance()->callHooks(self::HOOK_SERVICE_OBJECT_CREATED, array($serviceObject, $methodName));
         
         if(!method_exists($serviceObject, $methodName)){
-            throw new Exception("method  $methodName not found on $serviceName object ");
+            throw new AmfphpException("method  $methodName not found on $serviceName object ");
         }
         
         return call_user_func_array(array($serviceObject, $methodName), $parameters);

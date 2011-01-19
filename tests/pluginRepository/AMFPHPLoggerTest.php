@@ -15,7 +15,7 @@ class AMFPHPLoggerTest extends PHPUnit_Framework_TestCase {
         try{
             unlink(AMFPHPLogger::LOG_FILE_PATH);
         }catch(Exception $e){}
-        $logger->amfPacketRequestSerializedHandler("bla");
+        $logger->packetRequestSerializedHandler("bla");
         $logFileContent = file_get_contents(AMFPHPLogger::LOG_FILE_PATH);
         //clean up
         unlink(AMFPHPLogger::LOG_FILE_PATH);

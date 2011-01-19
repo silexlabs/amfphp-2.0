@@ -7,12 +7,12 @@
 			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" xmlns:flexui="flexunit.flexui.*" creationComplete="onCreationComplete()">
 	<fx:Script>
 		<![CDATA[
-			import flexUnitTests.AuthenticationTests;
+			import flexUnitTests.RemoteObjectTests;
 			
 			public function currentRunTestSuite():Array
 			{
 				var testsToRun:Array = new Array();
-				testsToRun.push(flexUnitTests.AuthenticationTests);
+				testsToRun.push(flexUnitTests.RemoteObjectTests);
 				return testsToRun;
 			}
 			

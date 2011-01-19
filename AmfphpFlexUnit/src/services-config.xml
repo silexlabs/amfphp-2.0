@@ -2,9 +2,17 @@
 <services-config>
 	<services>
 		<service id="amfphp-flashremoting-service" class="flex.messaging.services.RemotingService" messageTypes="flex.messaging.messages.RemotingMessage">
-			<destination id="amfphp">
+			<destination id="amfphp1.9">
 				<channels>
 					<channel ref="amfphp1.9"/>
+				</channels>
+				<properties>
+					<source>*</source>
+				</properties>
+			</destination>
+			<destination id="amfphp2">
+				<channels>
+					<channel ref="amfphp2"/>
 				</channels>
 				<properties>
 					<source>*</source>

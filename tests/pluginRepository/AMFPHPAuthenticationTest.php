@@ -66,7 +66,7 @@ class AMFPHPAuthenticationTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Exception
+     * @expectedException AmfphpException
      */
     public function testLogout(){
         $this->serviceObj->login("admin", "adminPassword");
@@ -75,7 +75,7 @@ class AMFPHPAuthenticationTest extends PHPUnit_Framework_TestCase
         $this->object->serviceObjectCreatedHandler($this->serviceObj, "adminMethod");
     }
     /**
-     * @expectedException Exception
+     * @expectedException AmfphpException
      */
     public function testAccessWithoutAuthentication()
     {
@@ -83,7 +83,7 @@ class AMFPHPAuthenticationTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Exception
+     * @expectedException AmfphpException
      */
     public function testBadRole(){
         $this->serviceObj->login("user", "userPassword");
@@ -100,7 +100,7 @@ class AMFPHPAuthenticationTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Exception
+     * @expectedException AmfphpException
      */
     public function testWithHooksBlockAccess(){
         HookManager::getInstance()->callHooks(ServiceRouter::HOOK_SERVICE_OBJECT_CREATED, array($this->serviceObj, "adminMethod"));

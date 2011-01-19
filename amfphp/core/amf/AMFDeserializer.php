@@ -85,8 +85,7 @@
 			//
 			if(!($topByte == 0 || $topByte == 3))
 			{
-				throw new Exception("Malformed AMF Packet, connection may have dropped");
-				exit();
+				throw new AmfphpException("Malformed AMF Packet, connection may have dropped");
 			}
 			$this->headersLeftToProcess = $this->readInt(); //  find the total number of header elements
 
@@ -218,11 +217,10 @@
 				case 16: // Custom Class
 					return $this->readCustomClass();
 				case 17: //AMF3-specific
-					$GLOBALS['amfphp']['encoding'] = "amf3";
 					return $this->readAmf3Data();
 					break;
 				default: // unknown case
-					throw new Exception("Found unhandled type with code: $type");
+					throw new AmfphpException("Found unhandled type with code: $type");
 					exit();
 					break;
 			}
@@ -389,16 +387,17 @@
 		protected function readCustomClass()
 		{
 			$typeIdentifier = str_replace('..', '', $this->readUTF());
-			$obj = array();
+			$obj = new stdClass();
 			$this->amf0storedObjects[] = & $obj;
 			$key = $this->readUTF(); // grab the key
 			for ($type = $this->readByte(); $type != 9; $type = $this->readByte())
 			{
 				$val = $this->readData($type); // grab the value
-				$obj[$key] = $val; // save the name/value pair in the array
+				$obj->$key = $val; // save the name/value pair in the array
 				$key = $this->readUTF(); // get the next name
 			}
-			$obj['_explicitType'] = $typeIdentifier;
+                        $explicitTypeField = AMFConstants::FIELD_EXPLICIT_TYPE;
+			$obj->$explicitTypeField = $typeIdentifier;
 			return $obj; // return the array
 		}
 
@@ -434,7 +433,7 @@
 				case 0x0C :
 					return $this->readAmf3ByteArray();
 				default:
-					throw new Exception("undefined Amf3 type encountered: " . $type, E_USER_ERROR);
+					throw new AmfphpException("undefined Amf3 type encountered: " . $type);
 			}
 		}
 
@@ -497,7 +496,7 @@
 				$dateref = $dateref >> 1;
 				if ($dateref >= count($this->storedObjects))
 				{
-					throw new Exception('Undefined date reference: ' . $dateref, E_USER_ERROR);
+					throw new AmfphpException('Undefined date reference: ' . $dateref);
 					return false;
 				}
 				return $this->storedObjects[$dateref];
@@ -527,7 +526,7 @@
 				$strref = $strref >> 1;
 				if ($strref >= count($this->storedStrings))
 				{
-					throw new Exception('Undefined string reference: ' . $strref, E_USER_ERROR);
+					throw new AmfphpException('Undefined string reference: ' . $strref, E_USER_ERROR);
 					return false;
 				}
 				return $this->storedStrings[$strref];
@@ -664,14 +663,7 @@
 
 
 			$type = $classDefinition['type'];
-			$obj = null;
-
-			$isObject = true;
-			if ($obj == NULL)
-			{
-				$obj = array();
-				$isObject = false;
-			}
+			$obj = new stdClass();
 
 			//Add to references as circular references may search for this object
 			$this->storedObjects[] = & $obj;
@@ -688,7 +680,7 @@
 				}
 				else
 				{
-					throw new Exception("Unable to read externalizable data type " . $type, E_USER_ERROR);
+					throw new AmfphpException("Unable to read externalizable data type " . $type);
 				}
 			}
 			else
@@ -699,14 +691,7 @@
 				{
 					$val = $this->readAmf3Data();
 					$key = $members[$i];
-					if ($isObject)
-					{
-						$obj->$key = $val;
-					}
-					else
-					{
-						$obj[$key] = $val;
-					}
+                                         $obj->$key = $val;
 				}
 
 				if ($classDefinition['dynamic'] /* && obj is ASObject*/)
@@ -715,27 +700,16 @@
 					while ($key != "")
 					{
 						$value = $this->readAmf3Data();
-						if ($isObject)
-						{
-							$obj->$key = $value;
-						}
-						else
-						{
-							$obj[$key] = $value;
-						}
+                                                $obj->$key = $value;
 						$key = $this->readAmf3String();
 					}
 				}
 
-				if ($type != '' && !$isObject)
+				if ($type != '')
 				{
-					$obj['_explicitType'] = $type;
+                                        $explicitTypeField = AMFConstants::FIELD_EXPLICIT_TYPE;
+					$obj->$explicitTypeField = $type;
 				}
-			}
-
-			if ($isObject && method_exists($obj, 'init'))
-			{
-				$obj->init();
 			}
 
 			return $obj;

@@ -59,10 +59,10 @@ class HookManager{
                             $ret = call_user_func_array($callBack, $paramsArray);
                             if($ret){
                                 if(!is_array($ret)){
-                                    throw new Exception("hooked method must return array");
+                                    throw new AmfphpException("hooked method for $hookName must return array");
                                 }
                                 if(count($ret) != count($paramsArray)){
-                                    throw new Exception("hooked function returned array size doesn't match");
+                                    throw new AmfphpException("hooked function for $hookName returned array size doesn't match. returned : " . count($ret) . ", expected : " . count($paramsArray));
                                 }
                                 $paramsArray = $ret;
                             }

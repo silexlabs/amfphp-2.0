@@ -47,8 +47,10 @@ class Gateway {
 
     /**
      * hook called when there is an exception
-     * @param <Exception> $e the exception object
-     * @param <AMFMessage> $requestMessage the request message that caused the exception
+     * @param Exception $e the exception object
+     * @param AMFMessage $requestMessage the request message that caused the exception
+     * @param AMFMessage $responseMessage. null at first call in gateway. If the plugin takes over the handling of the request message,
+     * it must set this to a proper AMFMessage
      */
     const HOOK_EXCEPTION_CAUGHT = "HOOK_EXCEPTION_CAUGHT";
 
@@ -57,6 +59,17 @@ class Gateway {
      * @param AMFHeader $header the request header
      */
     const HOOK_REQUEST_HEADER = "HOOK_REQUEST_HEADER";
+
+    /**
+     * hook called to give plugins a chance to handle the request message instead of passing it to the service router
+     * @param AMFMessage $requestMessage the request message
+     * @param ServiceRouter the service router, if needed
+     * @param AMFMessage $responseMessage. null at first call in gateway. If the plugin takes over the handling of the request message,
+     * it must set this to a proper AMFMessage
+     * to indicate
+     */
+    const HOOK_SPECIAL_REQUEST_HANDLING = "HOOK_SPECIAL_REQUEST_HANDLING";
+
 
 
     public function  __construct($rawInputData) {
@@ -73,10 +86,16 @@ class Gateway {
      * @return AMFMessage the response Message for the request
      */
     private function handleRequestMessage(AMFMessage $requestMessage){
+        $hookManager = HookManager::getInstance();
         $serviceRouter = new ServiceRouter($this->config->serviceFolderPaths, $this->config->serviceNames2ClassFindInfo);
+        $ret = $hookManager->callHooks(self::HOOK_SPECIAL_REQUEST_HANDLING, array($requestMessage, $serviceRouter, null));
+        if($ret && ($ret[2] != null)){
+            return $ret[2];
+        }
+        
+        //plugins didn't do any special handling. Assumes this is a simple AMF RPC call
         $serviceCallParameters = ServiceCallParameters::createFromAMFMessage($requestMessage);
         $ret = $serviceRouter->executeServiceCall($serviceCallParameters->serviceName, $serviceCallParameters->methodName, $serviceCallParameters->methodParameters);
-        $responsePacket = new AMFPacket();
         $responseMessage = new AMFMessage();
         $responseMessage->data = $ret;
         $responseMessage->targetURI = $requestMessage->responseURI . AMFConstants::AMFPHP_CLIENT_SUCCESS_METHOD;
@@ -89,20 +108,31 @@ class Gateway {
      * handles an exception by generating a serialized AMF response with information about the Exception. Tries to use the requestMessage for the response/target uri
      * @param Exception $e
      * @param AMFMessage $requestMessage the request message that caused it, if it exists
-     * @return String
+     * @return String the serialized error message
      */
     private function generateResponseForException(Exception $e, AMFMessage $requestMessage = null){
         $errorPacket = new AMFPacket();
         $hookManager = HookManager::getInstance();
-        $errorResponseMessage = new AMFMessage();
-        if($requestMessage != null && isset ($requestMessage->responseURI)){
-            $errorResponseMessage->targetURI = $requestMessage->responseURI . AMFConstants::CLIENT_FAILURE_METHOD;
+        $errorResponseMessage = null;
+        $ret = $hookManager->callHooks(self::HOOK_EXCEPTION_CAUGHT, array($e, $requestMessage, null));
+        if($ret && ($ret[2] != null)){
+            $errorResponseMessage = $ret[2];
         }else{
-            $errorResponseMessage->targetURI = AMFConstants::DEFAULT_REQUEST_RESPONSE_URI . AMFConstants::CLIENT_FAILURE_METHOD;
+            //no special handling by plugins. generate a basic error AMFMessage
+            $errorResponseMessage = new AMFMessage();
+            if($requestMessage != null && isset ($requestMessage->responseURI)){
+                $errorResponseMessage->targetURI = $requestMessage->responseURI . AMFConstants::CLIENT_FAILURE_METHOD;
+            }else{
+                $errorResponseMessage->targetURI = AMFConstants::DEFAULT_REQUEST_RESPONSE_URI . AMFConstants::CLIENT_FAILURE_METHOD;
+            }
+            //not specified
+            $errorResponseMessage->responseURI = "null";
+            $errorResponseMessage->data = new stdClass();
+            $errorResponseMessage->data->faultCode = $e->getCode();
+            $errorResponseMessage->data->faultString = $e->getMessage();
+            $errorResponseMessage->data->faultDetail = $e->getTraceAsString();
         }
-        //not specified
-        $errorResponseMessage->responseURI = "null";
-        $errorResponseMessage->data = $e->__toString();
+
         array_push($errorPacket->messages, $errorResponseMessage);
         $serializer = new AMFSerializer($errorPacket);
         return $serializer->serialize();
@@ -119,11 +149,11 @@ class Gateway {
      */
     public function service(){
         PluginManager::getInstance()->loadPlugins($this->config->pluginsFolder);
-        $requestMessage = null;
         $hookManager = HookManager::getInstance();
+        $requestMessage = null;
         try{
             if(!$this->context->rawInputData){
-                throw new Exception("no raw data passed to gateway");
+                throw new AmfphpException("no raw data passed to gateway");
             }
             //call hook for reading serialized incoming packet
             $hookManager->callHooks(self::HOOK_PACKET_REQUEST_SERIALIZED, array($this->context->rawInputData));
@@ -158,20 +188,14 @@ class Gateway {
             $serializer = new AMFSerializer($responsePacket);
             $rawOutputData = $serializer->serialize();
 
-            //call hook for reading serialized response packet
-            $hookManager->callHooks(self::HOOK_PACKET_RESPONSE_SERIALIZED, array($rawOutputData));
-
-            return $rawOutputData;
 
         }catch(Exception $e){
-            $serializedErrorMessage = $this->generateResponseForException($e, $requestMessage);
-
-            //call hooks for reading the exception and the request packet that caused it
-            $hookManager->callHooks(self::HOOK_EXCEPTION_CAUGHT, array($e, $requestMessage));
-            //call hook for reading serialized response packet
-            $hookManager->callHooks(self::HOOK_PACKET_RESPONSE_SERIALIZED, array($serializedErrorMessage));
-            return $serializedErrorMessage;
+            $rawOutputData = $this->generateResponseForException($e, $requestMessage);
         }
+        //call hook for reading serialized response packet
+        $hookManager->callHooks(self::HOOK_PACKET_RESPONSE_SERIALIZED, array($rawOutputData));
+
+        return $rawOutputData;
 
     }
 
