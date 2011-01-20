@@ -30,6 +30,18 @@ class AMFPHPLogger {
 
     }
 
+/*
+ get this for test logging
+    private function logMessage($message){
+        $fh = fopen("bla.txt", 'a');
+        if(!$fh){
+            throw new AmfphpException("couldn't open log file for writing");
+        }
+        fwrite($fh, $message . "\n");
+        fclose($fh);
+
+    }
+*/
     /**
      * logs the serialized incoming packet
      * @param <type> $rawData

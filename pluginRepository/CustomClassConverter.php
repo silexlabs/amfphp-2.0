@@ -1,9 +1,10 @@
 <?php
 /**
  * Converts data from incoming packets with explicit types to custom classes.
+ * If the vclass is not found, the object is unmodified.
  * Sets the explicit type marker in the data of the outgoing packets.
- * This works also for nested objects.
  * If the explicit type marker is already set in an outgoing object, the value is left as is.
+ * This works for nested objects.
  * This is to support services and plugins setting the explicit type themselves.
  *
  * @author Ariel Sommeria-Klein
@@ -25,25 +26,22 @@ class CustomClassConverter {
         $hookManager->addHook(Gateway::HOOK_PACKET_RESPONSE_DESERIALIZED, array($this, "packetResponseDeserializedHandler"));
     }
 
+
     /**
      * if the object or any of its sub-objects contain an explicit type marker, this method attempts to convert it to its typed counterpart
      * if the typed class is already available, then simply creates a new instance of it. If not,
      * attempts to load the file from the available service folders.
      * If then the class is still not available, the object is not converted
-     * This is a recursive function.
-     * note: can't find a proper syntax to handle both objects and arrays, so some of the code is duplicated. If anyone has an idea give me a shout! A.S.
+     * note: This is not a recursive function. Rather the recusrion is handled by AMFUtil::applyFunctionToContainedObjects.
+     * must be public so that AMFUtil::applyFunctionToContainedObjects can call it
      * @param $obj it's either an object or an array
-     * @param int $recursionDepth This is a counter for how deep the recursion is in the object that is being converted. If it is more than MAX_RECURSION_DEPTH, an exception is thrown.
-     * This is to avoid looped references.
      * @return Object
      */
-    private function convertToTyped($obj, $recursionDepth){
-        if($recursionDepth >= self::MAX_RECURSION_DEPTH){
-            throw new AmfphpException("can't convert object, it probably contains a looped reference");
+    public function convertToTyped($obj){
+        if(!is_object($obj)){
+            return $obj;
         }
-
         $explicitTypeField = AMFConstants::FIELD_EXPLICIT_TYPE;
-        $typedObj = null;
         if(isset($obj->$explicitTypeField)){
             $customClassName = $obj->$explicitTypeField;
             if(!class_exists($customClassName)){
@@ -58,33 +56,18 @@ class CustomClassConverter {
             if(class_exists($customClassName)){
                 //class is available. Use it!
                 $typedObj =  new $customClassName();
-                //get rid of explicit type marker
-                unset ($obj->$explicitTypeField);
-            }else{
-                //don't do anything, because the class wasn't found. 
-            }
-        }
-
-        foreach($obj as $key => $data) { // loop over each element
-
-            if(is_object($data) || is_array($data)){
-                $convertedData = $this->convertToTyped($data, $recursionDepth + 1);
-                if(is_array($obj)){
-                    $obj[$key] = $convertedData;
-                }else{
-                    $obj->$key = $convertedData;
+                foreach($obj as $key => $data) { // loop over each element to copy it into typed object
+                    if($key != $explicitTypeField){
+                        $typedObj->$key = $data;
+                    }
                 }
+                return $typedObj;
 
             }
-            if($typedObj){
-                $typedObj->$key = $obj->$key;
-            }
         }
-        if($typedObj){
-            return $typedObj;
-        }else{
-            return $obj;
-        }
+
+        return $obj;
+
      }
 
     /**
@@ -93,14 +76,7 @@ class CustomClassConverter {
      * @return packet
      */
     public function packetRequestDeserializedHandler(AMFPacket $requestPacket){
-        $numHeaders = count($requestPacket->headers);
-        for($i = 0; $i < $numHeaders; $i++){
-            $requestPacket->headers[$i]->value  = $this->convertToTyped($requestPacket->headers[$i]->value, 0);
-        }
-        $numMessages = count($requestPacket->messages);
-        for($i = 0; $i < $numMessages; $i++){
-            $requestPacket->messages[$i]->data  = $this->convertToTyped($requestPacket->messages[$i]->data, 0);
-        }
+        $requestPacket = AMFUtil::applyFunctionToContainedObjects($requestPacket, array($this, "convertToTyped"), 0, self::MAX_RECURSION_DEPTH);
         return array($requestPacket);
 
     }
@@ -108,27 +84,20 @@ class CustomClassConverter {
     /**
      * sets the the explicit type marker on the object and its sub-objects. This is only done if it not already set, as in some cases
      * the service class might want to do this manually.
+     * note: This is not a recursive function. Rather the recusrion is handled by AMFUtil::applyFunctionToContainedObjects.
+     * must be public so that AMFUtil::applyFunctionToContainedObjects can call it
      * 
      * @param stdClass $obj
-     * @param int $recursionDepth This is a counter for how deep the recursion is in the object that is being converted. If it is more than MAX_RECURSION_DEPTH, an exception is thrown.
-     * This is to avoid looped references.
      * @return stdClass
      */
-    private function markExplicitType($obj, $recursionDepth){
-        if($recursionDepth >= self::MAX_RECURSION_DEPTH){
-            throw new AmfphpException("can't markExplicitType on object, it probably contains a looped reference");
+    public function markExplicitType($obj){
+        if(!is_object($obj)){
+            return $obj;
         }
-
         $explicitTypeField = AMFConstants::FIELD_EXPLICIT_TYPE;
         $className = get_class ($obj);
         if($className != "stdClass" && !isset($obj->$explicitTypeField)){
             $obj->$explicitTypeField = $className;
-        }
-
-        foreach($obj as $key => $data) { // loop over each element
-            if(is_object($obj->$key)){
-                $obj->$key = $this->markExplicitType($obj->$key, $recursionDepth + 1);
-            }
         }
         return $obj;
     }
@@ -139,14 +108,7 @@ class CustomClassConverter {
      * @return <array>
      */
     public function packetResponseDeserializedHandler(AMFPacket $responsePacket){
-        $numHeaders = count($responsePacket->headers);
-        for($i = 0; $i < $numHeaders; $i++){
-            $responsePacket->headers[$i]->value  = $this->markExplicitType($responsePacket->headers[$i]->value, 0);
-        }
-        $numMessages = count($responsePacket->messages);
-        for($i = 0; $i < $numMessages; $i++){
-            $responsePacket->messages[$i]->data  = $this->markExplicitType($responsePacket->messages[$i]->data, 0);
-        }
+        $responsePacket = AMFUtil::applyFunctionToContainedObjects($responsePacket, array($this, "markExplicitType"), 0, self::MAX_RECURSION_DEPTH);
         return array($responsePacket);
 
     }
