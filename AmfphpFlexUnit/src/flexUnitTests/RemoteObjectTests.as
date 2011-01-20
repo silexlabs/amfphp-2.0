@@ -5,6 +5,8 @@ package flexUnitTests
 	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
 	import mx.rpc.remoting.RemoteObject;
+	
+	import org.amfphp.test.TestCustomClass1;
 
 	public class RemoteObjectTests extends TestCase
 	{		
@@ -44,6 +46,17 @@ package flexUnitTests
 		public function badRequestFaultHandler(event:FaultEvent):void{
 			assertTrue(true);
 		}
+		
+		public function testSendingAndReceivingATypedObject():void{
+			_myConnection.returnOneParam(new TestCustomClass1());
+			_myConnection.addEventListener(ResultEvent.RESULT, addAsync(sendingAndReceivingATypedObjectResultHandler, 200));
+			
+		}
+
+		public function sendingAndReceivingATypedObjectResultHandler(event:ResultEvent):void{
+			assertTrue(event.result is TestCustomClass1);
+		}
+		
 		
 	}
 }
