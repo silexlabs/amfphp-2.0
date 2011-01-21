@@ -28,14 +28,14 @@ class CustomClassConverter {
 
 
     /**
-     * if the object or any of its sub-objects contain an explicit type marker, this method attempts to convert it to its typed counterpart
+     * if the object contains an explicit type marker, this method attempts to convert it to its typed counterpart
      * if the typed class is already available, then simply creates a new instance of it. If not,
      * attempts to load the file from the available service folders.
      * If then the class is still not available, the object is not converted
      * note: This is not a recursive function. Rather the recusrion is handled by AMFUtil::applyFunctionToContainedObjects.
      * must be public so that AMFUtil::applyFunctionToContainedObjects can call it
-     * @param $obj it's either an object or an array
-     * @return Object
+     * @param mixed $obj
+     * @return mixed
      */
     public function convertToTyped($obj){
         if(!is_object($obj)){
@@ -87,8 +87,8 @@ class CustomClassConverter {
      * note: This is not a recursive function. Rather the recusrion is handled by AMFUtil::applyFunctionToContainedObjects.
      * must be public so that AMFUtil::applyFunctionToContainedObjects can call it
      * 
-     * @param stdClass $obj
-     * @return stdClass
+     * @param mixed $obj
+     * @return mixed
      */
     public function markExplicitType($obj){
         if(!is_object($obj)){

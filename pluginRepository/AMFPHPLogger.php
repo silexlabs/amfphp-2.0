@@ -20,7 +20,7 @@ class AMFPHPLogger {
         $hookManager->addHook(Gateway::HOOK_PACKET_RESPONSE_SERIALIZED, array($this, "packetResponseSerializedHandler"));
     }
 
-    private function logMessage($message){
+    public static function logMessage($message){
         $fh = fopen(self::LOG_FILE_PATH, 'a');
         if(!$fh){
             throw new AmfphpException("couldn't open log file for writing");
@@ -47,7 +47,7 @@ class AMFPHPLogger {
      * @param <type> $rawData
      */
     public function packetRequestSerializedHandler($rawData){
-        $this->logMessage("serialized request packet : \n$rawData");
+        self::logMessage("serialized request packet : \n$rawData");
     }
 
     /**
@@ -56,7 +56,7 @@ class AMFPHPLogger {
      * @return packet
      */
     public function packetRequestDeserializedHandler(AMFPacket $requestPacket){
-        $this->logMessage("deserialized request packet : \n" . print_r($requestPacket, true));
+        self::logMessage("deserialized request packet : \n" . print_r($requestPacket, true));
     }
 
     /**
@@ -65,7 +65,7 @@ class AMFPHPLogger {
      * @return <array>
      */
     public function packetResponseDeserializedHandler(AMFPacket $responsePacket){
-        $this->logMessage("deserialized response packet : \n" . print_r($responsePacket, true));
+        self::logMessage("deserialized response packet : \n" . print_r($responsePacket, true));
     }
 
     /**
@@ -74,7 +74,7 @@ class AMFPHPLogger {
      * @return <array>
      */
     public function packetResponseSerializedHandler($rawData){
-        $this->logMessage("serialized response packet : \n$rawData");
+        self::logMessage("serialized response packet : \n$rawData");
     }
 
     /**
@@ -83,7 +83,7 @@ class AMFPHPLogger {
      * @return <array>
      */
     public function exceptionCaughtHandler(Exception $e, packet $requestPacket){
-        $this->logMessage("exception caught. exception :  \n " . $e->__toString() . "\nrequest : \n" . print_r($requestPacket, true));
+        self::logMessage("exception caught. exception :  \n " . $e->__toString() . "\nrequest : \n" . print_r($requestPacket, true));
     }
 
 }
