@@ -28,7 +28,7 @@ class FlexMessagingTest extends PHPUnit_Framework_TestCase {
     protected function setUp() {
         $this->object = new FlexMessaging;
         $testServiceConfig = new TestServicesConfig();
-        $this->serviceRouter = new Amfphp_Core_Common_ServiceRouter($testServiceConfig->serviceFolderPaths, $testServiceConfig->serviceNames2Amfphp_Core_Common_ClassFindInfo);
+        $this->serviceRouter = new Amfphp_Core_Common_ServiceRouter($testServiceConfig->serviceFolderPaths, $testServiceConfig->serviceNames2ClassFindInfo);
     }
 
     /**

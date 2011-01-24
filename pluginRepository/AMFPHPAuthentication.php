@@ -70,9 +70,9 @@ class AMFPHPAuthentication {
     private $headerPassword;
     
     public function  __construct() {
-        $hookManager = Amfphp_HookManager::getInstance();
+        $hookManager = Amfphp_Core_HookManager::getInstance();
         $hookManager->addHook(Amfphp_Core_Common_ServiceRouter::HOOK_SERVICE_OBJECT_CREATED, array($this, "serviceObjectCreatedHandler"));
-        $hookManager->addHook(Amfphp_Gateway::HOOK_REQUEST_HEADER, array($this, "requestHeaderHandler"));
+        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_REQUEST_HEADER, array($this, "requestHeaderHandler"));
         $this->headerUserId = null;
         $this->headerPassword = null;
     }
@@ -127,12 +127,12 @@ class AMFPHPAuthentication {
         }
 
         if(!isset ($_SESSION[self::SESSION_FIELD_ROLES])){
-            throw new Amfphp_Exception("User not authenticated");
+            throw new Amfphp_Core_Exception("User not authenticated");
         }
         
         $userRoles = $_SESSION[self::SESSION_FIELD_ROLES];
         if(!$this->doRolesMatch($userRoles, $acceptedRoles)){
-            throw new Amfphp_Exception("roles don't match");
+            throw new Amfphp_Core_Exception("roles don't match");
         }
     }
 

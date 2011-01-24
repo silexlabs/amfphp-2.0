@@ -11,7 +11,7 @@ if(!$rawInputData){
 	echo "AMFPHP gateway";
 	exit();
 }
-$gateway = new Amfphp_Gateway($rawInputData);
+$gateway = new Amfphp_Core_Gateway($rawInputData);
 $gateway->config->serviceFolderPaths = array(dirname(__FILE__) . "/services");
 header(Amfphp_Core_Amf_Constants::CONTENT_TYPE);
 echo $gateway->service();

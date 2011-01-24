@@ -66,7 +66,7 @@ class AMFPHPAuthenticationTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Amfphp_Exception
+     * @expectedException Amfphp_Core_Exception
      */
     public function testLogout(){
         $this->serviceObj->login("admin", "adminPassword");
@@ -75,7 +75,7 @@ class AMFPHPAuthenticationTest extends PHPUnit_Framework_TestCase
         $this->object->serviceObjectCreatedHandler($this->serviceObj, "adminMethod");
     }
     /**
-     * @expectedException Amfphp_Exception
+     * @expectedException Amfphp_Core_Exception
      */
     public function testAccessWithoutAuthentication()
     {
@@ -83,7 +83,7 @@ class AMFPHPAuthenticationTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Amfphp_Exception
+     * @expectedException Amfphp_Core_Exception
      */
     public function testBadRole(){
         $this->serviceObj->login("user", "userPassword");
@@ -100,17 +100,17 @@ class AMFPHPAuthenticationTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Amfphp_Exception
+     * @expectedException Amfphp_Core_Exception
      */
     public function testWithHooksBlockAccess(){
-        Amfphp_HookManager::getInstance()->callHooks(Amfphp_Core_Common_ServiceRouter::HOOK_SERVICE_OBJECT_CREATED, array($this->serviceObj, "adminMethod"));
+        Amfphp_Core_HookManager::getInstance()->callHooks(Amfphp_Core_Common_ServiceRouter::HOOK_SERVICE_OBJECT_CREATED, array($this->serviceObj, "adminMethod"));
     }
 
     public function testWithHooksGrantAccess(){
         $credentialsAssoc = array(Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_USERID => "admin", Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_PASSWORD => "adminPassword");
         $credentialsHeader = new Amfphp_Core_Amf_Header(Amfphp_Core_Amf_Constants::CREDENTIALS_HEADER_NAME, true, $credentialsAssoc);
-        Amfphp_HookManager::getInstance()->callHooks(Amfphp_Gateway::HOOK_REQUEST_HEADER, array($credentialsHeader));
-        Amfphp_HookManager::getInstance()->callHooks(Amfphp_Core_Common_ServiceRouter::HOOK_SERVICE_OBJECT_CREATED, array($this->serviceObj, "adminMethod"));
+        Amfphp_Core_HookManager::getInstance()->callHooks(Amfphp_Core_Gateway::HOOK_REQUEST_HEADER, array($credentialsHeader));
+        Amfphp_Core_HookManager::getInstance()->callHooks(Amfphp_Core_Common_ServiceRouter::HOOK_SERVICE_OBJECT_CREATED, array($this->serviceObj, "adminMethod"));
     }
 
 

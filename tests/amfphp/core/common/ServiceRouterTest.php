@@ -20,7 +20,7 @@ class Amfphp_Core_Common_ServiceRouterTest extends PHPUnit_Framework_TestCase {
      */
     protected function setUp() {
         $testServiceConfig = new TestServicesConfig();
-        $this->object = new Amfphp_Core_Common_ServiceRouter($testServiceConfig->serviceFolderPaths, $testServiceConfig->serviceNames2Amfphp_Core_Common_ClassFindInfo);
+        $this->object = new Amfphp_Core_Common_ServiceRouter($testServiceConfig->serviceFolderPaths, $testServiceConfig->serviceNames2ClassFindInfo);
     }
 
     public function testExecuteMirrorServiceCall(){
@@ -41,7 +41,7 @@ class Amfphp_Core_Common_ServiceRouterTest extends PHPUnit_Framework_TestCase {
     }
 
      /**
-     * @expectedException Amfphp_Exception
+     * @expectedException Amfphp_Core_Exception
      */
     public function testNoServiceException()
     {
@@ -49,7 +49,7 @@ class Amfphp_Core_Common_ServiceRouterTest extends PHPUnit_Framework_TestCase {
     }
 
      /**
-     * @expectedException Amfphp_Exception
+     * @expectedException Amfphp_Core_Exception
      */
     public function testNoFunctionException()
     {

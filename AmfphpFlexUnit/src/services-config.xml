@@ -25,7 +25,7 @@
 			<endpoint uri="http://localhost:8888/workspace/amfphp%201.9/gateway.php" class="flex.messaging.endpoints.AMFEndpoint"/>
 		</channel-definition>
 		<channel-definition id="amfphp2" class="mx.messaging.channels.AMFChannel">
-			<endpoint uri="http://localhost:8888/workspaceNetbeans/amfphp-2.0/tests/testData/testAmfphp_Gateway.php" class="flex.messaging.endpoints.AMFEndpoint"/>
+			<endpoint uri="http://localhost:8888/workspaceNetbeans/amfphp-2.0/tests/testData/testAmfphp_Core_Gateway.php" class="flex.messaging.endpoints.AMFEndpoint"/>
 		</channel-definition>		
 	</channels>
 </services-config>

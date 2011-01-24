@@ -8,7 +8,7 @@ class Amfphp_Core_Amf_Constants {
     /**
      * The success method name
      */
-    const AMFPHP_CLIENT_SUCCESS_METHOD = "/onResult";
+    const CLIENT_SUCCESS_METHOD = "/onResult";
     /**
      * The status method name
      */

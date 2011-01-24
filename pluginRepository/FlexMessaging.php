@@ -28,8 +28,8 @@ class FlexMessaging{
      */
     private $lastFlexMessageId;
     public function  __construct() {
-        Amfphp_HookManager::getInstance()->addHook(Amfphp_Gateway::HOOK_SPECIAL_REQUEST_HANDLING, array($this, "specialRequestMessageHandler"));
-        Amfphp_HookManager::getInstance()->addHook(Amfphp_Gateway::HOOK_EXCEPTION_CAUGHT, array($this, "exceptionCaughtHandler"));
+        Amfphp_Core_HookManager::getInstance()->addHook(Amfphp_Core_Gateway::HOOK_SPECIAL_REQUEST_HANDLING, array($this, "specialRequestMessageHandler"));
+        Amfphp_Core_HookManager::getInstance()->addHook(Amfphp_Core_Gateway::HOOK_EXCEPTION_CAUGHT, array($this, "exceptionCaughtHandler"));
         $this->clientUsesFlexMessaging = false;
     }
 
@@ -44,7 +44,7 @@ class FlexMessaging{
     public function specialRequestMessageHandler(Amfphp_Core_Amf_Message $requestMessage, Amfphp_Core_Common_ServiceRouter $serviceRouter, Amfphp_Core_Amf_Message $responseMessage = null){
 
         //for test purposes
-        //throw new Amfphp_Exception(print_r($requestMessage->data[0], true));
+        //throw new Amfphp_Core_Exception(print_r($requestMessage->data[0], true));
         if($responseMessage != null){
             //message has already been handled by another plugin, so don't look any further
             return;
@@ -59,7 +59,7 @@ class FlexMessaging{
         $messageIdField = self::FIELD_MESSAGE_ID;
 
         if(!isset ($requestMessage->data[0]) || !isset ($requestMessage->data[0]->$explicitTypeField)){
-        throw new Amfphp_Exception(print_r($requestMessage->data[0], true));
+        throw new Amfphp_Core_Exception(print_r($requestMessage->data[0], true));
             //and all flex messages have data containing one object with an explicit type
             return;
         }
@@ -70,7 +70,7 @@ class FlexMessaging{
             $command = $requestMessage->data[0];
             //command message. An empty AcknowledgeMessage is expected.
             $acknowledge = new AcknowledgeMessage($command->$messageIdField);
-            $responseMessage = new Amfphp_Core_Amf_Message($requestMessage->responseURI . Amfphp_Core_Amf_Constants::AMFPHP_CLIENT_SUCCESS_METHOD, null, $acknowledge);
+            $responseMessage = new Amfphp_Core_Amf_Message($requestMessage->responseURI . Amfphp_Core_Amf_Constants::CLIENT_SUCCESS_METHOD, null, $acknowledge);
 
         }
 
@@ -82,7 +82,7 @@ class FlexMessaging{
             $serviceCallResult = $serviceRouter->executeServiceCall($remoting->source, $remoting->operation, $remoting->body);
             $acknowledge = new AcknowledgeMessage($remoting->$messageIdField);
             $acknowledge->body = $serviceCallResult;
-            $responseMessage = new Amfphp_Core_Amf_Message($requestMessage->responseURI . Amfphp_Core_Amf_Constants::AMFPHP_CLIENT_SUCCESS_METHOD, null, $acknowledge);
+            $responseMessage = new Amfphp_Core_Amf_Message($requestMessage->responseURI . Amfphp_Core_Amf_Constants::CLIENT_SUCCESS_METHOD, null, $acknowledge);
 
         }
         if($responseMessage != null){
