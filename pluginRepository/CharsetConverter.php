@@ -77,8 +77,8 @@ class CharsetConverter {
         
         //TODO once config system, don't add hooks if not necessary
         $hookManager = HookManager::getInstance();
-        $hookManager->addHook(Gateway::HOOK_PACKET_REQUEST_DESERIALIZED, array($this, "packetRequestDeserializedHandler"));
-        $hookManager->addHook(Gateway::HOOK_PACKET_RESPONSE_DESERIALIZED, array($this, "packetResponseDeserializedHandler"));
+        $hookManager->addHook(Gateway::HOOK_REQUEST_DESERIALIZED, array($this, "packetRequestDeserializedHandler"));
+        $hookManager->addHook(Gateway::HOOK_RESPONSE_DESERIALIZED, array($this, "packetResponseDeserializedHandler"));
     }
 
     /**

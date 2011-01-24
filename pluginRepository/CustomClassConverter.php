@@ -22,8 +22,8 @@ class CustomClassConverter {
     public function  __construct() {
         $this->customClassFolderPaths = array(AMFPHP_ROOTPATH . "/services/vo/");
         $hookManager = HookManager::getInstance();
-        $hookManager->addHook(Gateway::HOOK_PACKET_REQUEST_DESERIALIZED, array($this, "packetRequestDeserializedHandler"));
-        $hookManager->addHook(Gateway::HOOK_PACKET_RESPONSE_DESERIALIZED, array($this, "packetResponseDeserializedHandler"));
+        $hookManager->addHook(Gateway::HOOK_REQUEST_DESERIALIZED, array($this, "packetRequestDeserializedHandler"));
+        $hookManager->addHook(Gateway::HOOK_RESPONSE_DESERIALIZED, array($this, "packetResponseDeserializedHandler"));
     }
 
 

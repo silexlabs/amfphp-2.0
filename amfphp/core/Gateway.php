@@ -7,7 +7,7 @@
  *
  * @author Ariel Sommeria-klein
  */
-class Gateway {
+class tGateway {
 
     /**
      * config. 
@@ -25,25 +25,25 @@ class Gateway {
      * hook called when the packet request comes in.
      * @param String $rawData the raw http data
      */
-    const HOOK_PACKET_REQUEST_SERIALIZED = "HOOK_PACKET_REQUEST_SERIALIZED";
+    const HOOK_REQUEST_SERIALIZED = "HOOK_REQUEST_SERIALIZED";
 
     /**
      * hook called after the packet request is deserialized
      * @param AMFPacket requestPacket the deserialized packet
      */
-    const HOOK_PACKET_REQUEST_DESERIALIZED = "HOOK_PACKET_REQUEST_DESERIALIZED";
+    const HOOK_REQUEST_DESERIALIZED = "HOOK_REQUEST_DESERIALIZED";
 
     /**
      * hook called when the packet response is ready.
      * @param AMFPacket $responsePacket the deserialized packet
      */
-    const HOOK_PACKET_RESPONSE_DESERIALIZED = "HOOK_PACKET_RESPONSE_DESERIALIZED";
+    const HOOK_RESPONSE_DESERIALIZED = "HOOK_RESPONSE_DESERIALIZED";
 
     /**
      * hook called when the packet response is ready and serialized
      * @param String $rawData the raw http data
      */
-    const HOOK_PACKET_RESPONSE_SERIALIZED = "HOOK_PACKET_RESPONSE_SERIALIZED";
+    const HOOK_RESPONSE_SERIALIZED = "HOOK_RESPONSE_SERIALIZED";
 
     /**
      * hook called when there is an exception
@@ -156,13 +156,13 @@ class Gateway {
                 throw new AmfphpException("no raw data passed to gateway");
             }
             //call hook for reading serialized incoming packet
-            $hookManager->callHooks(self::HOOK_PACKET_REQUEST_SERIALIZED, array($this->context->rawInputData));
+            $hookManager->callHooks(self::HOOK_REQUEST_SERIALIZED, array($this->context->rawInputData));
 
             $deserializer = new AMFDeserializer($this->context->rawInputData);
             $requestPacket = $deserializer->deserialize();
 
             //call hook for reading/modifying request packet
-            $fromHooks = $hookManager->callHooks(self::HOOK_PACKET_REQUEST_DESERIALIZED, array($requestPacket));
+            $fromHooks = $hookManager->callHooks(self::HOOK_REQUEST_DESERIALIZED, array($requestPacket));
             $requestPacket = $fromHooks[0];
 
             $numHeaders = count($requestPacket->headers);
@@ -182,7 +182,7 @@ class Gateway {
             }
 
             //call hook for reading/modifying response packet
-            $fromHooks = $hookManager->callHooks(self::HOOK_PACKET_RESPONSE_DESERIALIZED, array($responsePacket));
+            $fromHooks = $hookManager->callHooks(self::HOOK_RESPONSE_DESERIALIZED, array($responsePacket));
             $responsePacket = $fromHooks[0];
 
             $serializer = new AMFSerializer($responsePacket);
@@ -193,7 +193,7 @@ class Gateway {
             $rawOutputData = $this->generateResponseForException($e, $requestMessage);
         }
         //call hook for reading serialized response packet
-        $hookManager->callHooks(self::HOOK_PACKET_RESPONSE_SERIALIZED, array($rawOutputData));
+        $hookManager->callHooks(self::HOOK_RESPONSE_SERIALIZED, array($rawOutputData));
 
         return $rawOutputData;
 

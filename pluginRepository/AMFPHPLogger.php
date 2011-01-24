@@ -14,10 +14,10 @@ class AMFPHPLogger {
     public function  __construct() {
         $hookManager = HookManager::getInstance();
 
-        $hookManager->addHook(Gateway::HOOK_PACKET_REQUEST_SERIALIZED, array($this, "packetRequestSerializedHandler"));
-        $hookManager->addHook(Gateway::HOOK_PACKET_REQUEST_DESERIALIZED, array($this, "packetRequestDeserializedHandler"));
-        $hookManager->addHook(Gateway::HOOK_PACKET_RESPONSE_DESERIALIZED, array($this, "packetResponseDeserializedHandler"));
-        $hookManager->addHook(Gateway::HOOK_PACKET_RESPONSE_SERIALIZED, array($this, "packetResponseSerializedHandler"));
+        $hookManager->addHook(Gateway::HOOK_REQUEST_SERIALIZED, array($this, "packetRequestSerializedHandler"));
+        $hookManager->addHook(Gateway::HOOK_REQUEST_DESERIALIZED, array($this, "packetRequestDeserializedHandler"));
+        $hookManager->addHook(Gateway::HOOK_RESPONSE_DESERIALIZED, array($this, "packetResponseDeserializedHandler"));
+        $hookManager->addHook(Gateway::HOOK_RESPONSE_SERIALIZED, array($this, "packetResponseSerializedHandler"));
     }
 
     public static function logMessage($message){
