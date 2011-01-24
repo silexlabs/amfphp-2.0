@@ -76,9 +76,9 @@ class CharsetConverter {
         $this->method = self::METHOD_NONE;
         
         //TODO once config system, don't add hooks if not necessary
-        $hookManager = HookManager::getInstance();
-        $hookManager->addHook(Gateway::HOOK_REQUEST_DESERIALIZED, array($this, "packetRequestDeserializedHandler"));
-        $hookManager->addHook(Gateway::HOOK_RESPONSE_DESERIALIZED, array($this, "packetResponseDeserializedHandler"));
+        $hookManager = Amfphp_HookManager::getInstance();
+        $hookManager->addHook(Amfphp_Gateway::HOOK_REQUEST_DESERIALIZED, array($this, "packetRequestDeserializedHandler"));
+        $hookManager->addHook(Amfphp_Gateway::HOOK_RESPONSE_DESERIALIZED, array($this, "packetResponseDeserializedHandler"));
     }
 
     /**

@@ -6,7 +6,7 @@
  * @author Ariel Sommeria-klein
  */
 
-require_once dirname(__FILE__) . '/../../../../amfphp/AMFPHPClassLoader.php';
+require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
 require_once dirname(__FILE__) . '/../../../testData/AMFTestData.php';
 require_once dirname(__FILE__) . '/AMFSerializerWrapper.php';
 

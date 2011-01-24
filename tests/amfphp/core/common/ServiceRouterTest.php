@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__) . '/../../../../amfphp/AMFPHPClassLoader.php';
+require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
 require_once dirname(__FILE__) . "/../../../testData/TestServicesConfig.php";
 
 /**
@@ -41,7 +41,7 @@ class Amfphp_Core_Common_ServiceRouterTest extends PHPUnit_Framework_TestCase {
     }
 
      /**
-     * @expectedException AmfphpException
+     * @expectedException Amfphp_Exception
      */
     public function testNoServiceException()
     {
@@ -49,7 +49,7 @@ class Amfphp_Core_Common_ServiceRouterTest extends PHPUnit_Framework_TestCase {
     }
 
      /**
-     * @expectedException AmfphpException
+     * @expectedException Amfphp_Exception
      */
     public function testNoFunctionException()
     {

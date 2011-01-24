@@ -4,10 +4,10 @@
  * @author Ariel Sommeria-klein
  */
 
-require_once dirname(__FILE__) . '/../../amfphp/AMFPHPClassLoader.php';
+require_once dirname(__FILE__) . '/../../Amfphp/ClassLoader.php';
 require_once dirname(__FILE__) . "/TestServicesConfig.php";
 $rawInputData = Amfphp_Core_Amf_Util::getRawPostData();
-$gateway = new Gateway($rawInputData);
+$gateway = new Amfphp_Gateway($rawInputData);
 $testServiceConfig = new TestServicesConfig();
 $gateway->config->serviceFolderPaths = $testServiceConfig->serviceFolderPaths;
 $gateway->config->serviceNames2Amfphp_Core_Common_ClassFindInfo = $testServiceConfig->serviceNames2Amfphp_Core_Common_ClassFindInfo;

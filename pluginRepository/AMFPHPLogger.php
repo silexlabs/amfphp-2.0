@@ -12,18 +12,18 @@ class AMFPHPLogger {
     const LOG_FILE_PATH = "amfphplog.log";
 
     public function  __construct() {
-        $hookManager = HookManager::getInstance();
+        $hookManager = Amfphp_HookManager::getInstance();
 
-        $hookManager->addHook(Gateway::HOOK_REQUEST_SERIALIZED, array($this, "packetRequestSerializedHandler"));
-        $hookManager->addHook(Gateway::HOOK_REQUEST_DESERIALIZED, array($this, "packetRequestDeserializedHandler"));
-        $hookManager->addHook(Gateway::HOOK_RESPONSE_DESERIALIZED, array($this, "packetResponseDeserializedHandler"));
-        $hookManager->addHook(Gateway::HOOK_RESPONSE_SERIALIZED, array($this, "packetResponseSerializedHandler"));
+        $hookManager->addHook(Amfphp_Gateway::HOOK_REQUEST_SERIALIZED, array($this, "packetRequestSerializedHandler"));
+        $hookManager->addHook(Amfphp_Gateway::HOOK_REQUEST_DESERIALIZED, array($this, "packetRequestDeserializedHandler"));
+        $hookManager->addHook(Amfphp_Gateway::HOOK_RESPONSE_DESERIALIZED, array($this, "packetResponseDeserializedHandler"));
+        $hookManager->addHook(Amfphp_Gateway::HOOK_RESPONSE_SERIALIZED, array($this, "packetResponseSerializedHandler"));
     }
 
     public static function logMessage($message){
         $fh = fopen(self::LOG_FILE_PATH, 'a');
         if(!$fh){
-            throw new AmfphpException("couldn't open log file for writing");
+            throw new Amfphp_Exception("couldn't open log file for writing");
         }
         fwrite($fh, $message . "\n");
         fclose($fh);
@@ -35,7 +35,7 @@ class AMFPHPLogger {
     private function logMessage($message){
         $fh = fopen("bla.txt", 'a');
         if(!$fh){
-            throw new AmfphpException("couldn't open log file for writing");
+            throw new Amfphp_Exception("couldn't open log file for writing");
         }
         fwrite($fh, $message . "\n");
         fclose($fh);

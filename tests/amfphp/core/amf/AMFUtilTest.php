@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__) . '/../../../../amfphp/core/amf/Util.php';
+require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
 
 /**
  * Test class for Amfphp_Core_Amf_Util.

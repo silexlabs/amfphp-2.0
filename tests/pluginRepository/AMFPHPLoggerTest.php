@@ -1,7 +1,7 @@
 <?php
 
 require_once dirname(__FILE__) . '/../../pluginRepository/AMFPHPLogger.php';
-require_once dirname(__FILE__) . '/../../amfphp/AMFPHPClassLoader.php';
+require_once dirname(__FILE__) . '/../../Amfphp/ClassLoader.php';
 
 /**
  * Test class for AMFPHPLogger.

@@ -1,7 +1,7 @@
 <?php
 
 require_once dirname(__FILE__) . '/../../pluginRepository/CustomClassConverter.php';
-require_once dirname(__FILE__) . '/../../amfphp/AMFPHPClassLoader.php';
+require_once dirname(__FILE__) . '/../../Amfphp/ClassLoader.php';
 require_once dirname(__FILE__) . "/../testData/customClasses/TestCustomClass1.php";
 require_once dirname(__FILE__) . "/../testData/customClasses/TestCustomClass2.php";
 
