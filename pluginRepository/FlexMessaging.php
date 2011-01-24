@@ -35,13 +35,13 @@ class FlexMessaging{
 
     /**
      *
-     * @param AMFMessage $requestMessage the request message
-     * @param ServiceRouter the service router, if needed
-     * @param AMFMessage $responseMessage. null at first call in gateway. If the plugin takes over the handling of the request message,
-     * it must set this to a proper AMFMessage
+     * @param Amfphp_Core_Amf_Message $requestMessage the request message
+     * @param Amfphp_Core_Common_ServiceRouter the service router, if needed
+     * @param Amfphp_Core_Amf_Message $responseMessage. null at first call in gateway. If the plugin takes over the handling of the request message,
+     * it must set this to a proper Amfphp_Core_Amf_Message
      * @return <array>
      */
-    public function specialRequestMessageHandler(AMFMessage $requestMessage, ServiceRouter $serviceRouter, AMFMessage $responseMessage = null){
+    public function specialRequestMessageHandler(Amfphp_Core_Amf_Message $requestMessage, Amfphp_Core_Common_ServiceRouter $serviceRouter, Amfphp_Core_Amf_Message $responseMessage = null){
 
         //for test purposes
         //throw new AmfphpException(print_r($requestMessage->data[0], true));
@@ -55,7 +55,7 @@ class FlexMessaging{
             return;
         }
 
-        $explicitTypeField = AMFConstants::FIELD_EXPLICIT_TYPE;
+        $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
         $messageIdField = self::FIELD_MESSAGE_ID;
 
         if(!isset ($requestMessage->data[0]) || !isset ($requestMessage->data[0]->$explicitTypeField)){
@@ -70,7 +70,7 @@ class FlexMessaging{
             $command = $requestMessage->data[0];
             //command message. An empty AcknowledgeMessage is expected.
             $acknowledge = new AcknowledgeMessage($command->$messageIdField);
-            $responseMessage = new AMFMessage($requestMessage->responseURI . AMFConstants::AMFPHP_CLIENT_SUCCESS_METHOD, null, $acknowledge);
+            $responseMessage = new Amfphp_Core_Amf_Message($requestMessage->responseURI . Amfphp_Core_Amf_Constants::AMFPHP_CLIENT_SUCCESS_METHOD, null, $acknowledge);
 
         }
 
@@ -82,7 +82,7 @@ class FlexMessaging{
             $serviceCallResult = $serviceRouter->executeServiceCall($remoting->source, $remoting->operation, $remoting->body);
             $acknowledge = new AcknowledgeMessage($remoting->$messageIdField);
             $acknowledge->body = $serviceCallResult;
-            $responseMessage = new AMFMessage($requestMessage->responseURI . AMFConstants::AMFPHP_CLIENT_SUCCESS_METHOD, null, $acknowledge);
+            $responseMessage = new Amfphp_Core_Amf_Message($requestMessage->responseURI . Amfphp_Core_Amf_Constants::AMFPHP_CLIENT_SUCCESS_METHOD, null, $acknowledge);
 
         }
         if($responseMessage != null){
@@ -95,10 +95,10 @@ class FlexMessaging{
      * flex expects error messages formatted in a special way, using the ErrorMessage object.
      * 
      * @param Exception $e
-     * @param AMFMessage $requestMessage
-     * @param AMFMessage $responseMessage
+     * @param Amfphp_Core_Amf_Message $requestMessage
+     * @param Amfphp_Core_Amf_Message $responseMessage
      */
-    public function exceptionCaughtHandler(Exception $e, AMFMessage $requestMessage = null, AMFMessage $responseMessage = null){
+    public function exceptionCaughtHandler(Exception $e, Amfphp_Core_Amf_Message $requestMessage = null, Amfphp_Core_Amf_Message $responseMessage = null){
         if(!$this->clientUsesFlexMessaging){
             return;
         }
@@ -107,7 +107,7 @@ class FlexMessaging{
         $error->faultCode = $e->getCode();
         $error->faultString = $e->getMessage();
         $error->faultDetail = $e->getTraceAsString();
-        $responseMessage = new AMFMessage($requestMessage->responseURI . AMFConstants::CLIENT_FAILURE_METHOD, null, $error);
+        $responseMessage = new Amfphp_Core_Amf_Message($requestMessage->responseURI . Amfphp_Core_Amf_Constants::CLIENT_FAILURE_METHOD, null, $error);
         return array($e, $requestMessage, $responseMessage);
     }
 }
@@ -121,7 +121,7 @@ class ErrorMessage
 	public $faultString;
 
         public function  __construct($correlationId) {
-            $explicitTypeField = AMFConstants::FIELD_EXPLICIT_TYPE;
+            $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
             $this->$explicitTypeField = FlexMessaging::TYPE_FLEX_ERROR_MESSAGE;
 	    $this->correlationId = $correlationId;
         }
@@ -141,7 +141,7 @@ class AcknowledgeMessage
 
 	public function  __construct($correlationId)
 	{
-            $explicitTypeField = AMFConstants::FIELD_EXPLICIT_TYPE;
+            $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
             $this->$explicitTypeField = FlexMessaging::TYPE_FLEX_ACKNOWLEDGE_MESSAGE;
 	    $this->correlationId = $correlationId;
 	    $this->messageId = $this->generateRandomId();

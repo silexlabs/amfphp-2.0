@@ -55,7 +55,7 @@ class AMFPHPLogger {
      * @param packet $requestPacket
      * @return packet
      */
-    public function packetRequestDeserializedHandler(AMFPacket $requestPacket){
+    public function packetRequestDeserializedHandler(Amfphp_Core_Amf_Packet $requestPacket){
         self::logMessage("deserialized request packet : \n" . print_r($requestPacket, true));
     }
 
@@ -64,7 +64,7 @@ class AMFPHPLogger {
      * @param packet $requestPacket
      * @return <array>
      */
-    public function packetResponseDeserializedHandler(AMFPacket $responsePacket){
+    public function packetResponseDeserializedHandler(Amfphp_Core_Amf_Packet $responsePacket){
         self::logMessage("deserialized response packet : \n" . print_r($responsePacket, true));
     }
 

@@ -4,7 +4,7 @@
  *
  * @author Ariel Sommeria-klein
  */
-class AMFConstants {
+class Amfphp_Core_Amf_Constants {
     /**
      * The success method name
      */

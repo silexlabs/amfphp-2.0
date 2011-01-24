@@ -16,19 +16,21 @@ require AMFPHP_ROOTPATH . "core/common/IDeserializer.php";
 require AMFPHP_ROOTPATH . "core/common/IExceptionHandler.php";
 require AMFPHP_ROOTPATH . "core/common/IServiceRouter.php";
 require AMFPHP_ROOTPATH . "core/common/ISerializer.php";
-require AMFPHP_ROOTPATH . "core/common/ServiceCallParameters.php";
 require AMFPHP_ROOTPATH . "core/common/ServiceRouter.php";
+require AMFPHP_ROOTPATH . "core/common/ServiceCallParameters.php";
 
 //core/amf
-require AMFPHP_ROOTPATH . "core/amf/AMFConstants.php";
-require AMFPHP_ROOTPATH . "core/amf/AMFDeserializer.php";
-require AMFPHP_ROOTPATH . "core/amf/AMFExceptionHandler.php";
-require AMFPHP_ROOTPATH . "core/amf/AMFHeader.php";
-require AMFPHP_ROOTPATH . "core/amf/AMFMessage.php";
-require AMFPHP_ROOTPATH . "core/amf/AMFPacket.php";
-require AMFPHP_ROOTPATH . "core/amf/AMFSerializer.php";
-require AMFPHP_ROOTPATH . "core/amf/AMFUtil.php";
-require AMFPHP_ROOTPATH . "core/amf/AMFWrapperClasses.php";
+require AMFPHP_ROOTPATH . "core/amf/Constants.php";
+require AMFPHP_ROOTPATH . "core/amf/Deserializer.php";
+require AMFPHP_ROOTPATH . "core/amf/Header.php";
+require AMFPHP_ROOTPATH . "core/amf/Message.php";
+require AMFPHP_ROOTPATH . "core/amf/Packet.php";
+require AMFPHP_ROOTPATH . "core/amf/Serializer.php";
+require AMFPHP_ROOTPATH . "core/amf/Util.php";
+
+//core/amf/types
+require AMFPHP_ROOTPATH . "core/amf/types/ByteArray.php";
+require AMFPHP_ROOTPATH . "core/amf/types/Undefined.php";
 
 //core
 require AMFPHP_ROOTPATH . "core/AmfphpConfig.php";

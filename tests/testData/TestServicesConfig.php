@@ -7,13 +7,13 @@
  */
 class TestServicesConfig {
     public $serviceFolderPaths;
-    public $serviceNames2ClassFindInfo;
+    public $serviceNames2Amfphp_Core_Common_ClassFindInfo;
 
     public function  __construct() {
         $this->serviceFolderPaths  = array(dirname(__FILE__) . "/services");
         $mirrorServicePath = dirname(__FILE__) . '/MirrorService.php';
-        $mirrorServiceClassFindInfo = new ClassFindInfo($mirrorServicePath, "MirrorService");
-        $this->serviceNames2ClassFindInfo = array("MirrorService" => $mirrorServiceClassFindInfo);
+        $mirrorServiceAmfphp_Core_Common_ClassFindInfo = new Amfphp_Core_Common_ClassFindInfo($mirrorServicePath, "MirrorService");
+        $this->serviceNames2Amfphp_Core_Common_ClassFindInfo = array("MirrorService" => $mirrorServiceAmfphp_Core_Common_ClassFindInfo);
     }
 
 }

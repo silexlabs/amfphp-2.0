@@ -6,7 +6,7 @@
  *
  * @author Ariel Sommeria-klein
  */
-class ClassFindInfo {
+class Amfphp_Core_Common_ClassFindInfo {
     /**
      * the absolute path to the file containing the class definition
      * @var <String>

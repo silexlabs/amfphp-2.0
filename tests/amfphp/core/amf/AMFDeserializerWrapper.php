@@ -5,7 +5,7 @@
  * can be tested separately.
  */
 
-class AMFDeserializerWrapper extends AMFDeserializer
+class AMFDeserializerWrapper extends Amfphp_Core_Amf_Deserializer
 {
     public function readByte(){
         return parent::readByte();

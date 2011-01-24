@@ -1,11 +1,11 @@
 <?php
 
 /**
- * AMFMessage is a data type that encapsulates all of the various properties a Message object can have.
+ * Amfphp_Core_Amf_Message is a data type that encapsulates all of the various properties a Message object can have.
  *
  * @author Ariel Sommeria-klein
  */
-class AMFMessage {
+class Amfphp_Core_Amf_Message {
     /**
      * inthe case of a request:
      * parsed to a service name and a function name. supported separators for the targetURI are "." and "/"

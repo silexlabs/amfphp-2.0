@@ -5,7 +5,7 @@
  *
  * @author Ariel Sommeria-klein
  */
-class AMFPacket {
+class Amfphp_Core_Amf_Packet {
     /**
      * The place to keep the headers data
      *

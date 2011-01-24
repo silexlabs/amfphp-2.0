@@ -122,8 +122,8 @@ class CharsetConverter {
 
     /**
      * converts the strings
-     * note: This is not a recursive function. Rather the recursion is handled by AMFUtil::applyFunctionToContainedObjects.
-     * must be public so that AMFUtil::applyFunctionToContainedObjects can call it
+     * note: This is not a recursive function. Rather the recursion is handled by Amfphp_Core_Amf_Util::applyFunctionToContainedObjects.
+     * must be public so that Amfphp_Core_Amf_Util::applyFunctionToContainedObjects can call it
      * @param mixed $obj
      * @return mixed
      */
@@ -141,15 +141,15 @@ class CharsetConverter {
      * @param packet $requestPacket
      * @return packet
      */
-    public function packetRequestDeserializedHandler(AMFPacket $requestPacket){
-        $requestPacket = AMFUtil::applyFunctionToContainedObjects($requestPacket, array($this, "convertStringFromClientToPhpCharsets"), 0, self::MAX_RECURSION_DEPTH);
+    public function packetRequestDeserializedHandler(Amfphp_Core_Amf_Packet $requestPacket){
+        $requestPacket = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($requestPacket, array($this, "convertStringFromClientToPhpCharsets"), 0, self::MAX_RECURSION_DEPTH);
         return array($requestPacket);
 
     }
 
     /**
-     * note: This is not a recursive function. Rather the recusrion is handled by AMFUtil::applyFunctionToContainedObjects.
-     * must be public so that AMFUtil::applyFunctionToContainedObjects can call it
+     * note: This is not a recursive function. Rather the recusrion is handled by Amfphp_Core_Amf_Util::applyFunctionToContainedObjects.
+     * must be public so that Amfphp_Core_Amf_Util::applyFunctionToContainedObjects can call it
      *
      * @param mixed $obj
      * @return mixed
@@ -166,8 +166,8 @@ class CharsetConverter {
      * @param packet $responsePacket
      * @return <array>
      */
-    public function packetResponseDeserializedHandler(AMFPacket $responsePacket){
-        $responsePacket = AMFUtil::applyFunctionToContainedObjects($responsePacket, array($this, "convertStringFromPhpToClientCharsets"), 0, self::MAX_RECURSION_DEPTH);
+    public function packetResponseDeserializedHandler(Amfphp_Core_Amf_Packet $responsePacket){
+        $responsePacket = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($responsePacket, array($this, "convertStringFromPhpToClientCharsets"), 0, self::MAX_RECURSION_DEPTH);
         return array($responsePacket);
 
     }

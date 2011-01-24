@@ -6,13 +6,13 @@
 
 require_once dirname(__FILE__) . '/../../amfphp/AMFPHPClassLoader.php';
 require_once dirname(__FILE__) . "/TestServicesConfig.php";
-$rawInputData = AMFUtil::getRawPostData();
+$rawInputData = Amfphp_Core_Amf_Util::getRawPostData();
 $gateway = new Gateway($rawInputData);
 $testServiceConfig = new TestServicesConfig();
 $gateway->config->serviceFolderPaths = $testServiceConfig->serviceFolderPaths;
-$gateway->config->serviceNames2ClassFindInfo = $testServiceConfig->serviceNames2ClassFindInfo;
+$gateway->config->serviceNames2Amfphp_Core_Common_ClassFindInfo = $testServiceConfig->serviceNames2Amfphp_Core_Common_ClassFindInfo;
 $gateway->config->pluginsFolder = dirname(__FILE__) . "/../../pluginRepository/";
-header(AMFConstants::CONTENT_TYPE);
+header(Amfphp_Core_Amf_Constants::CONTENT_TYPE);
 echo $gateway->service();
 
 ?>

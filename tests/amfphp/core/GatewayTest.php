@@ -16,7 +16,7 @@ class GatewayTest extends PHPUnit_Framework_TestCase {
         $gateway = new Gateway($amfTestData->mirrorServiceRequestPacket);
         $testServiceConfig = new TestServicesConfig();
         $gateway->config->serviceFolderPaths = $testServiceConfig->serviceFolderPaths;
-        $gateway->config->serviceNames2ClassFindInfo = $testServiceConfig->serviceNames2ClassFindInfo;
+        $gateway->config->serviceNames2Amfphp_Core_Common_ClassFindInfo = $testServiceConfig->serviceNames2Amfphp_Core_Common_ClassFindInfo;
         $ret = $gateway->service();
         $this->assertEquals(bin2hex($amfTestData->mirrorServiceResponsePacket), bin2hex($ret));
     }

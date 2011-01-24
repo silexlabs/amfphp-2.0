@@ -5,7 +5,7 @@
  * can be tested separately.
  */
 
-class AMFSerializerWrapper extends AMFSerializer
+class AMFSerializerWrapper extends Amfphp_Core_Amf_Serializer
 {
     public function writeByte($b){
         parent::writeByte($b);

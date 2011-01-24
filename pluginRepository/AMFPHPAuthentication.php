@@ -71,7 +71,7 @@ class AMFPHPAuthentication {
     
     public function  __construct() {
         $hookManager = HookManager::getInstance();
-        $hookManager->addHook(ServiceRouter::HOOK_SERVICE_OBJECT_CREATED, array($this, "serviceObjectCreatedHandler"));
+        $hookManager->addHook(Amfphp_Core_Common_ServiceRouter::HOOK_SERVICE_OBJECT_CREATED, array($this, "serviceObjectCreatedHandler"));
         $hookManager->addHook(Gateway::HOOK_REQUEST_HEADER, array($this, "requestHeaderHandler"));
         $this->headerUserId = null;
         $this->headerPassword = null;
@@ -175,13 +175,12 @@ class AMFPHPAuthentication {
 
     /**
      * looks for a "Credentials" request header. If there is one, uses it to try to authentify the user.
-     * @param <type> $serviceRouter the service router is used to call the authentication service
-     * @param AMFHeader $header
+     * @param Amfphp_Core_Amf_Header $header
      */
-    public function requestHeaderHandler(AMFHeader $header){
-        if($header->name == AMFConstants::CREDENTIALS_HEADER_NAME){
-            $userId = $header->value[AMFConstants::CREDENTIALS_FIELD_USERID];
-            $password = $header->value[AMFConstants::CREDENTIALS_FIELD_PASSWORD];
+    public function requestHeaderHandler(Amfphp_Core_Amf_Header $header){
+        if($header->name == Amfphp_Core_Amf_Constants::CREDENTIALS_HEADER_NAME){
+            $userId = $header->value[Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_USERID];
+            $password = $header->value[Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_PASSWORD];
             if(session_id () == ""){
                 session_start();
             }

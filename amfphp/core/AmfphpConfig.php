@@ -14,13 +14,13 @@ class AmfphpConfig {
     public $serviceFolderPaths;
 
     /**
-     * a dictionary of service classes represented in a ClassFindInfo.
+     * a dictionary of service classes represented in a Amfphp_Core_Common_ClassFindInfo.
      * The key is the name of the service, the value is the class find info.
-     * for example: AmfphpDiscoveryService -> new ClassfindInfo( ... /plugins/serviceBrowser/AmfphpDiscoveryService.php, AmfphpDiscoveryService)
+     * for example: AmfphpDiscoveryService -> new Amfphp_Core_Common_ClassFindInfo( ... /plugins/serviceBrowser/AmfphpDiscoveryService.php, AmfphpDiscoveryService)
      * The forward slash is important, don't use '\'!     
-     * @var <array> of ClassFindInfo
+     * @var <array> of Amfphp_Core_Common_ClassFindInfo
      */
-    public $serviceNames2ClassFindInfo;
+    public $serviceNames2Amfphp_Core_Common_ClassFindInfo;
 
     /**
      * path to the folder containing the plugins. defaults to AMFPHP_ROOTPATH . "/plugins/"
@@ -30,7 +30,7 @@ class AmfphpConfig {
 
     public function  __construct() {
         $this->serviceFolders = array();
-        $this->serviceNames2ClassFindInfo = array();
+        $this->serviceNames2Amfphp_Core_Common_ClassFindInfo = array();
         $this->pluginsFolder = AMFPHP_ROOTPATH . "/plugins/";
         
         $this->loadFromFile(null);

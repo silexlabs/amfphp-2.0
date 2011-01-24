@@ -1,6 +1,6 @@
 <?php
 /**
- * AMFSerializer manages the job of translating PHP objects into
+ * Amfphp_Core_Amf_Serializer manages the job of translating PHP objects into
  * the actionscript equivalent via AMF.  The main method of the serializer
  * is the serialize method which takes and AMFObject as it's argument
  * and builds the resulting AMF Message.
@@ -10,10 +10,10 @@
  * @copyright (c) 2003 AMFphp.org
  * @package flashservices
  * @subpackage io
- * @version $Id: AMFSerializer.php,v 1.39 2005/07/22 10:58:11 pmineault Exp $
+ * @version $Id: Amfphp_Core_Amf_Serializer.php,v 1.39 2005/07/22 10:58:11 pmineault Exp $
  */
 
-class AMFSerializer implements ISerializer{
+class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
 
     /**
      *
@@ -23,7 +23,7 @@ class AMFSerializer implements ISerializer{
     
     /**
      *
-     * @var <AMFPacket>
+     * @var <Amfphp_Core_Amf_Packet>
      */
     private $Packet;
 
@@ -63,7 +63,7 @@ class AMFSerializer implements ISerializer{
 
     /**
      *
-     * @param <AMFPacket> $packet
+     * @param <Amfphp_Core_Amf_Packet> $packet
      */
     public function __construct($packet){
         $this->packet = $packet;
@@ -168,7 +168,7 @@ class AMFSerializer implements ISerializer{
      */
     protected function writeDouble($d) {
             $b = pack("d", $d); // pack the bytes
-            if (AMFUtil::isSystemBigEndian()) { // if we are a big-endian processor
+            if (Amfphp_Core_Amf_Util::isSystemBigEndian()) { // if we are a big-endian processor
                     $r = strrev($b);
             } else { // add the bytes to the output
                     $r = $b;
@@ -440,9 +440,9 @@ class AMFSerializer implements ISerializer{
     /**
      * writeTypedObject takes an instance of a class and writes the variables defined
      * in it to the output stream.
-     * To accomplish this we just blanket grab all of the object vars with get_object_vars, minus the AMFConstants::FIELD_EXPLICIT_TYPE field, whiuch is used as class name
+     * To accomplish this we just blanket grab all of the object vars with get_object_vars, minus the Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE field, whiuch is used as class name
      *
-     * @param object $d The object to serialize the properties. The deserializer looks for AMFConstants::FIELD_EXPLICIT_TYPE on this object and writes it as the class name. 
+     * @param object $d The object to serialize the properties. The deserializer looks for Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE on this object and writes it as the class name. 
      */
     protected function writeTypedObject($d) {
             if($this->writeReferenceIfExists($d))
@@ -452,10 +452,10 @@ class AMFSerializer implements ISerializer{
 
             $this->writeByte(16); // write  the custom class code
 
-            $explicitTypeField = AMFConstants::FIELD_EXPLICIT_TYPE;
+            $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
             $className = $d->$explicitTypeField;
             if(!$className){
-                throw new AmfphpException(AMFConstants::FIELD_EXPLICIT_TYPE . " not found on a object that is to be sent as typed. " . print_r($d, true));
+                throw new AmfphpException(Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE . " not found on a object that is to be sent as typed. " . print_r($d, true));
             }
             unset ($d->$explicitTypeField);
             $this->writeUTF($className); // write the class name
@@ -511,7 +511,7 @@ class AMFSerializer implements ISerializer{
                     return;
             }
             elseif (is_object($d))
-            {       $explicitTypeField = AMFConstants::FIELD_EXPLICIT_TYPE;
+            {       $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
                     $hasExplicitType = isset($d->$explicitTypeField);
                     $className = strtolower(get_class($d));
                     if($className == 'domdocument')
@@ -567,7 +567,7 @@ class AMFSerializer implements ISerializer{
 	 */
 
 	protected function writeAmf3Data(& $d)
-	{       $explicitTypeField = AMFConstants::FIELD_EXPLICIT_TYPE;
+	{       $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
                 $hasExplicitType = isset($d->$explicitTypeField);
 		if (is_int($d))
 		{ //int
@@ -1034,7 +1034,7 @@ class AMFSerializer implements ISerializer{
 			$this->storedDefinitions++;
 
 			$realObj = new stdClass();
-                        $explicitTypeField = AMFConstants::FIELD_EXPLICIT_TYPE;
+                        $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
 			foreach($d as $key => $val)
 			{
 				if($key[0] != "\0" && $key != $explicitTypeField) //Don't show private members

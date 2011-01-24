@@ -5,7 +5,7 @@
  *
  * @author Ariel Sommeria-klein
  */
-class ServiceCallParameters {
+class Amfphp_Core_Common_ServiceCallParameters {
 
 
     /**
@@ -30,18 +30,18 @@ class ServiceCallParameters {
     public $methodParameters;
 
     /**
-     * creates a ServiceCallParamaeters object from an AMFMessage
+     * creates a ServiceCallParamaeters object from an Amfphp_Core_Amf_Message
      * supported separators in the targetURI are "/" and "."
-     * @param AMFMessage $amfMessage
-     * @return ServiceCallParameters
+     * @param Amfphp_Core_Amf_Message $Amfphp_Core_Amf_Message
+     * @return Amfphp_Core_Common_ServiceCallParameters
      */
-    public static function createFromAMFMessage(AMFMessage $amfMessage){
-        $targetURI = str_replace(".", "/", $amfMessage->targetURI);
+    public static function createFromAmfphp_Core_Amf_Message(Amfphp_Core_Amf_Message $Amfphp_Core_Amf_Message){
+        $targetURI = str_replace(".", "/", $Amfphp_Core_Amf_Message->targetURI);
         $split = explode("/", $targetURI);
-        $ret = new ServiceCallParameters();
+        $ret = new Amfphp_Core_Common_ServiceCallParameters();
         $ret->methodName = array_pop($split);
         $ret->serviceName = join($split, "/");
-        $ret->methodParameters = $amfMessage->data;
+        $ret->methodParameters = $Amfphp_Core_Amf_Message->data;
         return $ret;
     }
 }

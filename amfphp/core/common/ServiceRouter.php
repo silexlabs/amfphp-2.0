@@ -3,11 +3,11 @@
 /**
  *  The Service Router class is responsible for executing the remote service method and returning it's value.
  * based on the old "Executive" of php 1.9. It looks for a service either explicitely defined in a
- * ClassFindInfo object, or in a service folder.
+ * Amfphp_Core_Common_ClassFindInfo object, or in a service folder.
  *
  * @author Ariel Sommeria-klein
  */
-class ServiceRouter implements IServiceRouter{
+class Amfphp_Core_Common_ServiceRouter implements Amfphp_Core_Common_IServiceRouter{
     /**
      * hook called when the service object is created. Useful for authentication
      * @param <String> the raw http data
@@ -21,18 +21,18 @@ class ServiceRouter implements IServiceRouter{
 
     /**
      *
-     * @var <array> of ClassFindInfo
+     * @var <array> of Amfphp_Core_Common_ClassFindInfo
      */
-    private $serviceNames2ClassFindInfo;
+    private $serviceNames2Amfphp_Core_Common_ClassFindInfo;
 
     /**
      *
      * @param <array> $serviceFolderPaths folders containing service classes
-     * @param <array> $serviceNames2ClassFindInfo a dictionary of service classes represented in a ClassFindInfo.
+     * @param <array> $serviceNames2Amfphp_Core_Common_ClassFindInfo a dictionary of service classes represented in a Amfphp_Core_Common_ClassFindInfo.
      */
-    public function  __construct($serviceFolderPaths, $serviceNames2ClassFindInfo) {
+    public function  __construct($serviceFolderPaths, $serviceNames2Amfphp_Core_Common_ClassFindInfo) {
         $this->serviceFolderPaths = $serviceFolderPaths;
-        $this->serviceNames2ClassFindInfo = $serviceNames2ClassFindInfo;
+        $this->serviceNames2Amfphp_Core_Common_ClassFindInfo = $serviceNames2Amfphp_Core_Common_ClassFindInfo;
     }
 
     /**
@@ -48,10 +48,10 @@ class ServiceRouter implements IServiceRouter{
      */
     public function executeServiceCall($serviceName, $methodName, $parameters){
         $serviceObject = null;
-        if(isset ($this->serviceNames2ClassFindInfo[$serviceName])){
-            $classFindInfo = $this->serviceNames2ClassFindInfo[$serviceName];
-            require_once $classFindInfo->absolutePath;
-            $serviceObject = new $classFindInfo->className();
+        if(isset ($this->serviceNames2Amfphp_Core_Common_ClassFindInfo[$serviceName])){
+            $Amfphp_Core_Common_ClassFindInfo = $this->serviceNames2Amfphp_Core_Common_ClassFindInfo[$serviceName];
+            require_once $Amfphp_Core_Common_ClassFindInfo->absolutePath;
+            $serviceObject = new $Amfphp_Core_Common_ClassFindInfo->className();
         }else{
             //no class find info. try to look in the folders
             foreach($this->serviceFolderPaths as $folderPath){

@@ -5,15 +5,15 @@
  * @author Ariel Sommeria-klein
  */
 
-require dirname(__FILE__) . '/../amfphp/AMFPHPClassLoader.php';
-$rawInputData = AMFUtil::getRawPostData();
+require_once dirname(__FILE__) . '/../amfphp/AMFPHPClassLoader.php';
+$rawInputData = Amfphp_Core_Amf_Util::getRawPostData();
 if(!$rawInputData){
 	echo "AMFPHP gateway";
 	exit();
 }
 $gateway = new Gateway($rawInputData);
 $gateway->config->serviceFolderPaths = array(dirname(__FILE__) . "/services");
-header(AMFConstants::CONTENT_TYPE);
+header(Amfphp_Core_Amf_Constants::CONTENT_TYPE);
 echo $gateway->service();
 
 

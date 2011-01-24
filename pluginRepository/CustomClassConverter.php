@@ -32,8 +32,8 @@ class CustomClassConverter {
      * if the typed class is already available, then simply creates a new instance of it. If not,
      * attempts to load the file from the available service folders.
      * If then the class is still not available, the object is not converted
-     * note: This is not a recursive function. Rather the recusrion is handled by AMFUtil::applyFunctionToContainedObjects.
-     * must be public so that AMFUtil::applyFunctionToContainedObjects can call it
+     * note: This is not a recursive function. Rather the recusrion is handled by Amfphp_Core_Amf_Util::applyFunctionToContainedObjects.
+     * must be public so that Amfphp_Core_Amf_Util::applyFunctionToContainedObjects can call it
      * @param mixed $obj
      * @return mixed
      */
@@ -41,7 +41,7 @@ class CustomClassConverter {
         if(!is_object($obj)){
             return $obj;
         }
-        $explicitTypeField = AMFConstants::FIELD_EXPLICIT_TYPE;
+        $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
         if(isset($obj->$explicitTypeField)){
             $customClassName = $obj->$explicitTypeField;
             if(!class_exists($customClassName)){
@@ -75,8 +75,8 @@ class CustomClassConverter {
      * @param packet $requestPacket
      * @return packet
      */
-    public function packetRequestDeserializedHandler(AMFPacket $requestPacket){
-        $requestPacket = AMFUtil::applyFunctionToContainedObjects($requestPacket, array($this, "convertToTyped"), 0, self::MAX_RECURSION_DEPTH);
+    public function packetRequestDeserializedHandler(Amfphp_Core_Amf_Packet $requestPacket){
+        $requestPacket = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($requestPacket, array($this, "convertToTyped"), 0, self::MAX_RECURSION_DEPTH);
         return array($requestPacket);
 
     }
@@ -84,8 +84,8 @@ class CustomClassConverter {
     /**
      * sets the the explicit type marker on the object and its sub-objects. This is only done if it not already set, as in some cases
      * the service class might want to do this manually.
-     * note: This is not a recursive function. Rather the recusrion is handled by AMFUtil::applyFunctionToContainedObjects.
-     * must be public so that AMFUtil::applyFunctionToContainedObjects can call it
+     * note: This is not a recursive function. Rather the recusrion is handled by Amfphp_Core_Amf_Util::applyFunctionToContainedObjects.
+     * must be public so that Amfphp_Core_Amf_Util::applyFunctionToContainedObjects can call it
      * 
      * @param mixed $obj
      * @return mixed
@@ -94,7 +94,7 @@ class CustomClassConverter {
         if(!is_object($obj)){
             return $obj;
         }
-        $explicitTypeField = AMFConstants::FIELD_EXPLICIT_TYPE;
+        $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
         $className = get_class ($obj);
         if($className != "stdClass" && !isset($obj->$explicitTypeField)){
             $obj->$explicitTypeField = $className;
@@ -107,8 +107,8 @@ class CustomClassConverter {
      * @param packet $responsePacket
      * @return <array>
      */
-    public function packetResponseDeserializedHandler(AMFPacket $responsePacket){
-        $responsePacket = AMFUtil::applyFunctionToContainedObjects($responsePacket, array($this, "markExplicitType"), 0, self::MAX_RECURSION_DEPTH);
+    public function packetResponseDeserializedHandler(Amfphp_Core_Amf_Packet $responsePacket){
+        $responsePacket = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($responsePacket, array($this, "markExplicitType"), 0, self::MAX_RECURSION_DEPTH);
         return array($responsePacket);
 
     }

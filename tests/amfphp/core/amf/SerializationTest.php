@@ -1,6 +1,6 @@
 <?php
 /**
- * Unit tests for AMFSerializer
+ * Unit tests for Amfphp_Core_Amf_Serializer
  * note: phpunit dataProvider mechanism doesn't work well, so lots of boiler plate code here. Oh well... A.S.
  *
  * @author Ariel Sommeria-klein
@@ -15,7 +15,7 @@ class SerializationTest extends PHPUnit_Framework_TestCase{
 
     public function testBasicMethods(){
         $testData = new AMFTestData();
-        $emptyPacket = new AMFPacket();
+        $emptyPacket = new Amfphp_Core_Amf_Packet();
 
         /*
          template

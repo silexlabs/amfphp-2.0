@@ -35,7 +35,7 @@ class CustomClassConverterTest extends PHPUnit_Framework_TestCase {
 
     public function testPacketRequestDeserializedHandler() {
         
-        $explicitTypeField = AMFConstants::FIELD_EXPLICIT_TYPE;
+        $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
         //3 level object: TestCustomClass1, untyped, TestCustomClass2 with some data around
         $testObj1 = new stdClass();
         $testObj1->$explicitTypeField = "TestCustomClass1";
@@ -48,8 +48,8 @@ class CustomClassConverterTest extends PHPUnit_Framework_TestCase {
         $subObj1->sub = $subObj2;
         $testObj1->sub = $subObj1;
 
-        $testMessage = new AMFMessage(null, null, array($testObj1));
-        $testPacket = new AMFPacket();
+        $testMessage = new Amfphp_Core_Amf_Message(null, null, array($testObj1));
+        $testPacket = new Amfphp_Core_Amf_Packet();
         $testPacket->messages[] = $testMessage;
         $ret = $this->object->packetRequestDeserializedHandler($testPacket);
         $modifiedPacket = $ret[0];
@@ -64,8 +64,8 @@ class CustomClassConverterTest extends PHPUnit_Framework_TestCase {
         //test using a class that isn't loaded yet
         $testObj2 = new stdClass();
         $testObj2->$explicitTypeField = "TestCustomClass3";
-        $testMessage = new AMFMessage(null, null, array($testObj2));
-        $testPacket = new AMFPacket();
+        $testMessage = new Amfphp_Core_Amf_Message(null, null, array($testObj2));
+        $testPacket = new Amfphp_Core_Amf_Packet();
         $testPacket->messages[] = $testMessage;
         $ret = $this->object->packetRequestDeserializedHandler($testPacket);
         $modifiedPacket = $ret[0];
@@ -75,8 +75,8 @@ class CustomClassConverterTest extends PHPUnit_Framework_TestCase {
         //test using a class that isn't available. The data should be left untouched for now
         $testObj3 = new stdClass();
         $testObj3->$explicitTypeField = "flex.messaging.Bla";
-        $testMessage = new AMFMessage(null, null, array($testObj3));
-        $testPacket = new AMFPacket();
+        $testMessage = new Amfphp_Core_Amf_Message(null, null, array($testObj3));
+        $testPacket = new Amfphp_Core_Amf_Packet();
         $testPacket->messages[] = $testMessage;
         $ret = $this->object->packetRequestDeserializedHandler($testPacket);
         $modifiedPacket = $ret[0];
@@ -87,7 +87,7 @@ class CustomClassConverterTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testPacketResponseDeserializedHandler() {
-        $explicitTypeField = AMFConstants::FIELD_EXPLICIT_TYPE;
+        $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
         //3 level object: TestCustomClass1, untyped, TestCustomClass2 with some data around
         $testObj1 = new TestCustomClass1();
         $testObj1->data = "bla1";
@@ -98,8 +98,8 @@ class CustomClassConverterTest extends PHPUnit_Framework_TestCase {
         $subObj1->sub = $subObj2;
         $testObj1->sub = $subObj1;
 
-        $testMessage = new AMFMessage(null,null, $testObj1);
-        $testPacket = new AMFPacket();
+        $testMessage = new Amfphp_Core_Amf_Message(null,null, $testObj1);
+        $testPacket = new Amfphp_Core_Amf_Packet();
         $testPacket->messages[] = $testMessage;
         $ret = $this->object->packetResponseDeserializedHandler($testPacket);
         $modifiedPacket = $ret[0];
@@ -114,8 +114,8 @@ class CustomClassConverterTest extends PHPUnit_Framework_TestCase {
         //test don't overwrite explicit type when already set
         $testObj2 = new TestCustomClass1();
         $testObj2->$explicitTypeField = "alreadySet";
-        $testMessage = new AMFMessage(null, null, $testObj2);
-        $testPacket = new AMFPacket();
+        $testMessage = new Amfphp_Core_Amf_Message(null, null, $testObj2);
+        $testPacket = new Amfphp_Core_Amf_Packet();
         $testPacket->messages[] = $testMessage;
         $ret = $this->object->packetResponseDeserializedHandler($testPacket);
         $modifiedPacket = $ret[0];

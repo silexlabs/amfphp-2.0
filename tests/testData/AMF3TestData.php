@@ -96,7 +96,7 @@ class AMF3TestData {
     public function buildDouble(){
         $this->dDouble = 0.42;
         $packedData = pack("d", 0.42);
-        if(AMFUtil::isSystemBigEndian()){
+        if(Amfphp_Core_Amf_Util::isSystemBigEndian()){
             $packedData = strrev($packedData);
         }
         $this->sDouble = pack('C', 5) . $packedData;
@@ -208,7 +208,7 @@ class AMF3TestData {
     public function buildObject(){
         $this->dObject = new stdClass();
         $this->dObject->data= "test";
-        $explicitTypeField = AMFConstants::FIELD_EXPLICIT_TYPE;
+        $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
         $this->dObject->$explicitTypeField ="DummyClass2";
         //object marker
         $this->sObject = pack("C", 0x0A);

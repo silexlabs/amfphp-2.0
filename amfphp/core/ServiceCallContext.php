@@ -10,25 +10,25 @@ class ServiceCallContext {
 
     /**
      * the deserializer. transforms a request to arguments for a service call
-     * @var <IDeserializer>
+     * @var <Amfphp_Core_Common_IDeserializer>
      */
     public $deserializer;
 
     /**
      * routes a service call to a service
-     * @var <IServiceRouter>
+     * @var <Amfphp_Core_Common_IServiceRouter>
      */
     public $serviceRouter;
 
     /**
      * transforms a service call result into a serialized Packetd ready to go to the output stream
-     * @var <ISerializer>
+     * @var <Amfphp_Core_Common_IServiceRouter>
      */
     public $serializer;
 
     /**
      * handles an exception and generates the corresponding Packet
-     * @var <IExceptionHandler>
+     * @var <Amfphp_Core_Common_IExceptionHandler>
      */
     public $exceptionHandler;
 

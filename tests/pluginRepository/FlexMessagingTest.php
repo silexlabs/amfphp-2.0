@@ -17,7 +17,7 @@ class FlexMessagingTest extends PHPUnit_Framework_TestCase {
 
     /**
      *
-     * @var ServiceRouter
+     * @var Amfphp_Core_Common_ServiceRouter
      */
     protected $serviceRouter;
 
@@ -28,7 +28,7 @@ class FlexMessagingTest extends PHPUnit_Framework_TestCase {
     protected function setUp() {
         $this->object = new FlexMessaging;
         $testServiceConfig = new TestServicesConfig();
-        $this->serviceRouter = new ServiceRouter($testServiceConfig->serviceFolderPaths, $testServiceConfig->serviceNames2ClassFindInfo);
+        $this->serviceRouter = new Amfphp_Core_Common_ServiceRouter($testServiceConfig->serviceFolderPaths, $testServiceConfig->serviceNames2Amfphp_Core_Common_ClassFindInfo);
     }
 
     /**
@@ -40,9 +40,9 @@ class FlexMessagingTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testCommandMessage() {
-        $requestMessage = new AMFMessage(null, "/1", null);
+        $requestMessage = new Amfphp_Core_Amf_Message(null, "/1", null);
         $requestMessage->data = array();
-        $expectedResponseMessage = new AMFMessage("/1/onResult", null, null);
+        $expectedResponseMessage = new Amfphp_Core_Amf_Message("/1/onResult", null, null);
         
         $command = new stdClass();
         $command->_explicitType = FlexMessaging::TYPE_FLEX_COMMAND_MESSAGE;
@@ -59,9 +59,9 @@ class FlexMessagingTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testRemotingMessage(){
-        $requestMessage = new AMFMessage(null, "/1", null);
+        $requestMessage = new Amfphp_Core_Amf_Message(null, "/1", null);
         $requestMessage->data = array();
-        $expectedResponseMessage = new AMFMessage("/1/onResult", null, null);
+        $expectedResponseMessage = new Amfphp_Core_Amf_Message("/1/onResult", null, null);
 
         $remoting = new stdClass();
         $remoting->_explicitType = FlexMessaging::TYPE_FLEX_REMOTING_MESSAGE;
