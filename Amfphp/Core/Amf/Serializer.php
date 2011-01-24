@@ -92,7 +92,7 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
                 }
                 $tempBuf = $this->outBuffer;
                 $this->outBuffer = "";
-                $this->writeData($header->value);
+                $this->writeData($header->data);
                 $serializedHeader = $this->outBuffer;
                 $this->outBuffer = $tempBuf;
                 $this->writeLong(strlen($serializedHeader));

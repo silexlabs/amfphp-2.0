@@ -514,9 +514,9 @@ class AMFTestData {
         //string type indicator (byte)
         $headerValueData = pack('C', 2);
         //header value length (int)
-        $headerValueData .= pack('n', strlen($stringHeader->value));
+        $headerValueData .= pack('n', strlen($stringHeader->data));
         //header value (works because the value is a string)
-        $headerValueData .= $stringHeader->value;
+        $headerValueData .= $stringHeader->data;
 
         //header value length (long)
         $this->sStringHeaderPacket .= pack('N', strlen($headerValueData));
@@ -638,9 +638,9 @@ class AMFTestData {
         //string type indicator (byte)
         $headerValueData = pack('C', 2);
         //header value length (int)
-        $headerValueData .= pack('n', strlen($stringHeader->value));
+        $headerValueData .= pack('n', strlen($stringHeader->data));
         //header value (works because the value is a string)
-        $headerValueData .= $stringHeader->value;
+        $headerValueData .= $stringHeader->data;
 
         //header value length (long)
         $this->s2Headers2MessagesPacket .= pack('N', strlen($headerValueData));

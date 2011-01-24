@@ -31,11 +31,11 @@ class Amfphp_Core_Amf_Header
 	public $required;
 
 	/**
-	 * Value is the actual object value of the header key
+	 * data is the actual object data of the header key
 	 *
 	 * @var mixed
 	 */
-	public $value;
+	public $data;
 
 	/**
 	 * Amfphp_Core_Amf_Header is the Constructor function for the Amfphp_Core_Amf_Header data type.
@@ -44,7 +44,7 @@ class Amfphp_Core_Amf_Header
 	{
 		$this->name = $name;
 		$this->required = $required;
-		$this->value = $value;
+		$this->data = $value;
 	}
 }
 

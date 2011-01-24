@@ -1,8 +1,8 @@
 <?php
 
-require_once dirname(__FILE__).'/../../pluginRepository/AMFPHPAuthentication.php';
-require_once dirname(__FILE__) . '/../../Amfphp/ClassLoader.php';
-require_once dirname(__FILE__) . "/../testData/services/AuthenticationService.php";
+require_once dirname(__FILE__).'/../../../Amfphp/plugins/AMFPHPAuthentication.php';
+require_once dirname(__FILE__) . '/../../../Amfphp/ClassLoader.php';
+require_once dirname(__FILE__) . "/../../testData/services/AuthenticationService.php";
 
 /**
  * Test class for AMFPHPAuthentication.
@@ -93,7 +93,11 @@ class AMFPHPAuthenticationTest extends PHPUnit_Framework_TestCase
     
     public function testRequestHeaderHandler()
     {
-        $credentialsAssoc = array(Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_USERID => "admin", Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_PASSWORD => "adminPassword");
+        $credentialsAssoc = new stdClass();
+        $userIdField = Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_USERID;
+        $passwordField = Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_PASSWORD;
+        $credentialsAssoc->$userIdField =  "admin";
+        $credentialsAssoc->$passwordField = "adminPassword";
         $credentialsHeader = new Amfphp_Core_Amf_Header(Amfphp_Core_Amf_Constants::CREDENTIALS_HEADER_NAME, true, $credentialsAssoc);
         $this->object->requestHeaderHandler($credentialsHeader);
         $this->object->serviceObjectCreatedHandler($this->serviceObj, "adminMethod");
@@ -107,7 +111,11 @@ class AMFPHPAuthenticationTest extends PHPUnit_Framework_TestCase
     }
 
     public function testWithHooksGrantAccess(){
-        $credentialsAssoc = array(Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_USERID => "admin", Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_PASSWORD => "adminPassword");
+        $credentialsAssoc = new stdClass();
+        $userIdField = Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_USERID;
+        $passwordField = Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_PASSWORD;
+        $credentialsAssoc->$userIdField =  "admin";
+        $credentialsAssoc->$passwordField = "adminPassword";
         $credentialsHeader = new Amfphp_Core_Amf_Header(Amfphp_Core_Amf_Constants::CREDENTIALS_HEADER_NAME, true, $credentialsAssoc);
         Amfphp_Core_HookManager::getInstance()->callHooks(Amfphp_Core_Gateway::HOOK_REQUEST_HEADER, array($credentialsHeader));
         Amfphp_Core_HookManager::getInstance()->callHooks(Amfphp_Core_Common_ServiceRouter::HOOK_SERVICE_OBJECT_CREATED, array($this->serviceObj, "adminMethod"));

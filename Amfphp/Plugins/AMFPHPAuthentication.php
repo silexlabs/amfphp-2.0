@@ -179,8 +179,10 @@ class AMFPHPAuthentication {
      */
     public function requestHeaderHandler(Amfphp_Core_Amf_Header $header){
         if($header->name == Amfphp_Core_Amf_Constants::CREDENTIALS_HEADER_NAME){
-            $userId = $header->value[Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_USERID];
-            $password = $header->value[Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_PASSWORD];
+            $userIdField = Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_USERID;
+            $passwordField = Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_PASSWORD;
+            $userId = $header->data->$userIdField;
+            $password = $header->data->$passwordField;
             if(session_id () == ""){
                 session_start();
             }

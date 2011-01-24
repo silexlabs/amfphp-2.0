@@ -15,6 +15,7 @@ package flexUnitTests
 	
 	import org.amfphp.test.EnhancedNetConnection;
 	import org.amfphp.test.ExternalizableDummy;
+	import org.amfphp.test.ObjEvent;
 	
 	public class NetConnectionTests extends TestCase
 	{
@@ -38,8 +39,8 @@ package flexUnitTests
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnOneParam, 500));
 			_nc.simpleCall("MirrorService/returnOneParam", "testString");	
 		}
-		private function verifyReturnOneParam(event:DataEvent):void{
-			assertEquals("testString", event.data);
+		private function verifyReturnOneParam(event:ObjEvent):void{
+			assertEquals("testString", event.obj);
 		}
 		
 		public function testErrorFindingService():void{
@@ -53,14 +54,10 @@ package flexUnitTests
 			_nc.simpleCall("nothingReally", "testString");	
 		}
 		
-		private function catchErrorFindingService(event:DataEvent):void{
-			assertTrue(event.data.indexOf("Exception") != -1);
+		private function catchErrorFindingService(event:ObjEvent):void{
+			assertTrue(event.obj.faultString.indexOf("service not found") != -1);
 		}
 		
-		public function verifyAccessGranted(event:DataEvent):void{
-			assertEquals("ok", event.data);
-			
-		}
 		
 		//test can't be run, the netconnection doesn't accept the call
 		/*

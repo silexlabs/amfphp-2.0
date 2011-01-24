@@ -8,7 +8,7 @@
  *
  * @author Ariel Sommeria-Klein
  */
-class FlexMessaging{
+class AMFPHPFlexMessaging{
     const TYPE_FLEX_COMMAND_MESSAGE = 'flex.messaging.messages.CommandMessage';
     const TYPE_FLEX_REMOTING_MESSAGE = 'flex.messaging.messages.RemotingMessage';
     const TYPE_FLEX_ACKNOWLEDGE_MESSAGE = 'flex.messaging.messages.AcknowledgeMessage';
@@ -59,7 +59,6 @@ class FlexMessaging{
         $messageIdField = self::FIELD_MESSAGE_ID;
 
         if(!isset ($requestMessage->data[0]) || !isset ($requestMessage->data[0]->$explicitTypeField)){
-        throw new Amfphp_Core_Exception(print_r($requestMessage->data[0], true));
             //and all flex messages have data containing one object with an explicit type
             return;
         }
@@ -122,7 +121,7 @@ class ErrorMessage
 
         public function  __construct($correlationId) {
             $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
-            $this->$explicitTypeField = FlexMessaging::TYPE_FLEX_ERROR_MESSAGE;
+            $this->$explicitTypeField = AMFPHPFlexMessaging::TYPE_FLEX_ERROR_MESSAGE;
 	    $this->correlationId = $correlationId;
         }
 }
@@ -142,7 +141,7 @@ class AcknowledgeMessage
 	public function  __construct($correlationId)
 	{
             $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
-            $this->$explicitTypeField = FlexMessaging::TYPE_FLEX_ACKNOWLEDGE_MESSAGE;
+            $this->$explicitTypeField = AMFPHPFlexMessaging::TYPE_FLEX_ACKNOWLEDGE_MESSAGE;
 	    $this->correlationId = $correlationId;
 	    $this->messageId = $this->generateRandomId();
 	    $this->clientId = $this->generateRandomId();

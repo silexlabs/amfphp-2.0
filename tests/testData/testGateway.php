@@ -11,7 +11,6 @@ $gateway = new Amfphp_Core_Gateway($rawInputData);
 $testServiceConfig = new TestServicesConfig();
 $gateway->config->serviceFolderPaths = $testServiceConfig->serviceFolderPaths;
 $gateway->config->serviceNames2ClassFindInfo = $testServiceConfig->serviceNames2ClassFindInfo;
-$gateway->config->pluginsFolder = dirname(__FILE__) . "/../../pluginRepository/";
 header(Amfphp_Core_Amf_Constants::CONTENT_TYPE);
 echo $gateway->service();
 

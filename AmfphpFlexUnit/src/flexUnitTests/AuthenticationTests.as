@@ -15,6 +15,7 @@ package flexUnitTests
 	
 	import org.amfphp.test.EnhancedNetConnection;
 	import org.amfphp.test.ExternalizableDummy;
+	import org.amfphp.test.ObjEvent;
 	
 	public class AuthenticationTests extends TestCase
 	{
@@ -47,13 +48,12 @@ package flexUnitTests
 		}
 		
 		
-		private function afterLogoutTryToAccessAdminMethod(event:DataEvent):void{
+		private function afterLogoutTryToAccessAdminMethod(event:ObjEvent):void{
 			_nc.simpleCall("AuthenticationService/adminMethod");	
 		} 
 		
-		public function verifyAccessDenied(event:DataEvent):void{
-			assertTrue(event.data.indexOf("Exception") != -1);
-			assertTrue(event.data.indexOf("User not authenticated") != -1);
+		public function verifyAccessDenied(event:ObjEvent):void{
+			assertTrue(event.obj.faultString.indexOf("User not authenticated") != -1);
 			
 		}
 		
@@ -63,8 +63,8 @@ package flexUnitTests
 			_nc.simpleCall("AuthenticationService/adminMethod");	
 		}
 		
-		public function verifyAccessGranted(event:DataEvent):void{
-			assertEquals("ok", event.data);
+		public function verifyAccessGranted(event:ObjEvent):void{
+			assertEquals("ok", event.obj);
 			
 		}
 		

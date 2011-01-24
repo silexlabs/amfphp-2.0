@@ -5,7 +5,7 @@
  *
  * @author Ariel Sommeria-Klein
  */
-class CharsetConverter {
+class AMFPHPCharsetConverter {
     const MAX_RECURSION_DEPTH = 10;
 
     /**

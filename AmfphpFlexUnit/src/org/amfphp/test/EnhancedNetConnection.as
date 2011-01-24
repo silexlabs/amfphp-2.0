@@ -20,6 +20,7 @@ package org.amfphp.test
 		static public const EVENT_ONRESULT:String = "onResult";
 		static public const EVENT_ONSTATUS:String = "onStatus";
 		
+		
 		public function EnhancedNetConnection()
 		{
 			super();
@@ -49,21 +50,11 @@ package org.amfphp.test
 		}
 		
 		private function onResult(res:Object):void{
-			if(res){
-				dispatchEvent(new DataEvent(EVENT_ONRESULT, false, false, res.toString())); 
-			}else{
-				dispatchEvent(new DataEvent(EVENT_ONRESULT, false, false, null)); 
-				
-			}
+			dispatchEvent(new ObjEvent(EVENT_ONRESULT, res)); 
 		}
 		
 		private function onStatus(statusObj:Object):void{
-			if(statusObj is String){
-				dispatchEvent(new DataEvent(EVENT_ONSTATUS, false, false, statusObj as String)); 
-			}else{
-				dispatchEvent(new DataEvent(EVENT_ONSTATUS, false, false, statusObj.toString())); 
-				
-			}
+			dispatchEvent(new ObjEvent(EVENT_ONSTATUS, statusObj)); 
 		}
 		
 		/**
