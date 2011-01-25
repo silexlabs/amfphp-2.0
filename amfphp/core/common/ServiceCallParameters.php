@@ -1,6 +1,6 @@
 <?php
 /**
- * an AMF request comes with a targetURI that must be parsed to a service name and a function name. This class parses the request targetURI, and holds the necessary
+ * an Amf request comes with a targetURI that must be parsed to a service name and a function name. This class parses the request targetURI, and holds the necessary
  * data for the service call
  *
  * @author Ariel Sommeria-klein

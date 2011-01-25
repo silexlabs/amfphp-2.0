@@ -1,6 +1,6 @@
 <?php
 /**
- * constants relative to the AMF format
+ * constants relative to the Amf format
  *
  * @author Ariel Sommeria-klein
  */

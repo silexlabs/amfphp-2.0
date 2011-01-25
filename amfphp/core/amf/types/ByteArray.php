@@ -1,6 +1,6 @@
 <?php
 /**
- * AMF byte arrays will be converted to and from this class
+ * Amf byte arrays will be converted to and from this class
  *
  * @author Ariel Sommeria-klein
  */

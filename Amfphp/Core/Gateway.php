@@ -105,7 +105,7 @@ class Amfphp_Core_Gateway {
     }
 
     /**
-     * handles an exception by generating a serialized AMF response with information about the Exception. Tries to use the requestMessage for the response/target uri
+     * handles an exception by generating a serialized Amf response with information about the Exception. Tries to use the requestMessage for the response/target uri
      * @param Exception $e
      * @param Amfphp_Core_Amf_Message $requestMessage the request message that caused it, if it exists
      * @return String the serialized error message

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * utils for AMF handling
+ * utils for Amf handling
  *
  * @author Ariel Sommeria-klein
  */

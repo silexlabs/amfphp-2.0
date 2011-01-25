@@ -1,7 +1,7 @@
 <?php
 /**
- * content holder for an AMF Packet.
- * TODO there is a confusion here between the AMF Packet and the AMF Packets. This is probably because Amfphp was written before the publication of the official specs. Clean up!
+ * content holder for an Amf Packet.
+ * TODO there is a confusion here between the Amf Packet and the Amf Packets. This is probably because Amfphp was written before the publication of the official specs. Clean up!
  *
  * @author Ariel Sommeria-klein
  */
@@ -28,7 +28,7 @@ class Amfphp_Core_Amf_Packet {
 
 
     /**
-     * The constructor function for a new AMF object.
+     * The constructor function for a new Amf object.
      *
      * All the constructor does is initialize the headers and Messages containers
      */

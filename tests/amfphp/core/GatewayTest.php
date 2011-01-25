@@ -1,7 +1,7 @@
 <?php
 
 require_once dirname(__FILE__) . '/../../../Amfphp/ClassLoader.php';
-require_once dirname(__FILE__) . "/../../TestData/AMFTestData.php";
+require_once dirname(__FILE__) . "/../../TestData/AmfTestData.php";
 require_once dirname(__FILE__) . "/../../TestData/TestServicesConfig.php";
 
 /**
@@ -12,7 +12,7 @@ class Amfphp_Core_GatewayTest extends PHPUnit_Framework_TestCase {
 
 
     public function testService() {
-        $amfTestData = new AMFTestData();
+        $amfTestData = new AmfTestData();
         $gateway = new Amfphp_Core_Gateway($amfTestData->mirrorServiceRequestPacket);
         $testServiceConfig = new TestServicesConfig();
         $gateway->config->serviceFolderPaths = $testServiceConfig->serviceFolderPaths;

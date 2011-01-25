@@ -2,12 +2,12 @@
     /**
  * test data for the Amfphp unit tests
  * data types have the s prefix for "serialized" and "d" prefix for "deserialized"
- * for Packets there is a flaw in the AMFphp design which means that serializng and deserializing is not symmetrical.
+ * for Packets there is a flaw in the Amfphp design which means that serializng and deserializing is not symmetrical.
  * so use s for serialized, d for deserialized for the serialization tests and dd for the deserialation tests, the idea being that dd will disappear for v2
  *
  * @author Ariel Sommeria-klein
  */
-class AMFTestData {
+class AmfTestData {
     //fundamental (stream) types
     public $sByte;
     public $dByte;
@@ -24,7 +24,7 @@ class AMFTestData {
     public $sBinary;
     public $dBinary;
 
-    //AMF data types
+    //Amf data types
     public $sNumber;
     public $dNumber;
     public $sBoolean;
@@ -57,7 +57,7 @@ class AMFTestData {
     public $dTypedObject;
     public $dTypedObjectAsArray;
 
-    //AMF Packet objects
+    //Amf Packet objects
     public $sEmptyPacket;
     public $dEmptyPacket;
     public $sNullHeaderPacket;
@@ -444,7 +444,7 @@ class AMFTestData {
 
 
    /**
-    * AMF Packets
+    * Amf Packets
     */
 
     /**

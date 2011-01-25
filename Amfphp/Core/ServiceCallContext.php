@@ -33,13 +33,13 @@ class Amfphp_Core_ServiceCallContext {
     public $exceptionHandler;
 
     /**
-     * the input data. In the case of AMF, the raw post data.
+     * the input data. In the case of Amf, the raw post data.
      * @var <mixed>
      */
     public $rawInputData;
 
     /**
-     * the output data. In the case of AMF, the amf packet in binary form
+     * the output data. In the case of Amf, the amf packet in binary form
      * @var <mixed>
      */
     public $rawOutputData;

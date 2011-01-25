@@ -81,11 +81,11 @@
 			$topByte = $this->readByte(); // ignore the first two bytes --  version or something
 			$secondByte = $this->readByte(); //0 for Flash,
 
-			//If firstByte != 0, then the AMF data is corrupted, for example the transmission
+			//If firstByte != 0, then the Amf data is corrupted, for example the transmission
 			//
 			if(!($topByte == 0 || $topByte == 3))
 			{
-				throw new Amfphp_Core_Exception("Malformed AMF Packet, connection may have dropped");
+				throw new Amfphp_Core_Exception("Malformed Amf Packet, connection may have dropped");
 			}
 			$this->headersLeftToProcess = $this->readInt(); //  find the total number of header elements
 
@@ -216,7 +216,7 @@
 					return $this->readLongUTF();
 				case 16: // Custom Class
 					return $this->readCustomClass();
-				case 17: //AMF3-specific
+				case 17: //Amf3-specific
 					return $this->readAmf3Data();
 					break;
 				default: // unknown case
@@ -473,7 +473,7 @@
 						$tmp = $this->readByte();
 						$int |= $tmp;
 
-						// Integers in AMF3 are 29 bit. The MSB (of those 29 bit) is the sign bit.
+						// Integers in Amf3 are 29 bit. The MSB (of those 29 bit) is the sign bit.
 						// In order to properly convert that integer to a PHP integer - the system
 						// might be 32 bit, 64 bit, 128 bit or whatever - all higher bits need to
 						// be set.
@@ -730,7 +730,7 @@
 
 
 		/**
-		 * Taken from SabreAMF
+		 * Taken from SabreAmf
 		 */
 		protected function readBuffer($len)
 		{

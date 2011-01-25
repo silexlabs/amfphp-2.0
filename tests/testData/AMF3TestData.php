@@ -1,11 +1,11 @@
 <?php
 
 /**
- * See AMFTestData for details, this is the extension for AMF3
+ * See AmfTestData for details, this is the extension for Amf3
  *
  * @author Ariel Sommeria-klein, based on work by ci-dev
  */
-class AMF3TestData {
+class Amf3TestData {
     public $sUndefined;
     public $dUndefined;
     public $sNull;
@@ -145,7 +145,7 @@ class AMF3TestData {
     }
 
     public function buildDate(){
-        //AMF3 date serialization not supported at the moment. 
+        //Amf3 date serialization not supported at the moment. 
        //$this->dDate =
         
     }

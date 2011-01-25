@@ -5,7 +5,7 @@
  * can be tested separately.
  */
 
-class AMFDeserializerWrapper extends Amfphp_Core_Amf_Deserializer
+class AmfDeserializerWrapper extends Amfphp_Core_Amf_Deserializer
 {
     public function readByte(){
         return parent::readByte();
@@ -50,25 +50,25 @@ class AMFDeserializerWrapper extends Amfphp_Core_Amf_Deserializer
         return parent::readReference();
     }
 
-    public function readAMF3Data(){
-        return parent::readAMF3Data();
+    public function readAmf3Data(){
+        return parent::readAmf3Data();
     }
 
-    public function readAMF3String()    {
-        return parent::readAMF3String();
+    public function readAmf3String()    {
+        return parent::readAmf3String();
     }
 
-    public function readAMF3Array( )
+    public function readAmf3Array( )
     {
-        return parent::readAMF3Array();
+        return parent::readAmf3Array();
     }
 
-    public function readAMF3Object()
+    public function readAmf3Object()
     {
-        return parent::readAMF3Object();
+        return parent::readAmf3Object();
     }
 
-    public function readAMF3ByteArray()
+    public function readAmf3ByteArray()
     {
         return parent::readAmf3ByteArray();
     }

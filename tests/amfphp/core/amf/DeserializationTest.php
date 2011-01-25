@@ -7,102 +7,102 @@
  */
 
 require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
-require_once dirname(__FILE__) . '/../../../TestData/AMFTestData.php';
-require_once dirname(__FILE__) . '/AMFDeserializerWrapper.php';
+require_once dirname(__FILE__) . '/../../../TestData/AmfTestData.php';
+require_once dirname(__FILE__) . '/AmfDeserializerWrapper.php';
 
 class DeserializationTest extends PHPUnit_Framework_TestCase{
 
 
     public function testBasicMethods(){
-        $testData = new AMFTestData();
+        $testData = new AmfTestData();
 
         //readByte
-        $deserializer = new AMFDeserializerWrapper($testData->sByte);
+        $deserializer = new AmfDeserializerWrapper($testData->sByte);
         $deserialized = $deserializer->readByte();
         $expectedDeserialized = $testData->dByte;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
         //readInt
-        $deserializer = new AMFDeserializerWrapper($testData->sInt);
+        $deserializer = new AmfDeserializerWrapper($testData->sInt);
         $deserialized = $deserializer->readInt();
         $expectedDeserialized = $testData->dInt;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
         //readLong
-        $deserializer = new AMFDeserializerWrapper($testData->sLong);
+        $deserializer = new AmfDeserializerWrapper($testData->sLong);
         $deserialized = $deserializer->readLong();
         $expectedDeserialized = $testData->dLong;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
         //readDouble
-        $deserializer = new AMFDeserializerWrapper($testData->sDouble);
+        $deserializer = new AmfDeserializerWrapper($testData->sDouble);
         $deserialized = $deserializer->readDouble();
         $expectedDeserialized = $testData->dDouble;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
         //readUtf
-        $deserializer = new AMFDeserializerWrapper($testData->sUtf);
+        $deserializer = new AmfDeserializerWrapper($testData->sUtf);
         $deserialized = $deserializer->readUtf();
         $expectedDeserialized = $testData->dUtf;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
         //readLongUtf
-        $deserializer = new AMFDeserializerWrapper($testData->sLongUtf);
+        $deserializer = new AmfDeserializerWrapper($testData->sLongUtf);
         $deserialized = $deserializer->readLongUtf();
         $expectedDeserialized = $testData->dLongUtf;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
         //read Number
-        $deserializer = new AMFDeserializerWrapper($testData->sNumber);
+        $deserializer = new AmfDeserializerWrapper($testData->sNumber);
         $type = $deserializer->readByte();
         $deserialized = $deserializer->readData($type);
         $expectedDeserialized = $testData->dNumber;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
         //read Boolean  
-        $deserializer = new AMFDeserializerWrapper($testData->sBoolean);
+        $deserializer = new AmfDeserializerWrapper($testData->sBoolean);
         $type = $deserializer->readByte();
         $deserialized = $deserializer->readData($type);
         $expectedDeserialized = $testData->dBoolean;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
         //readString (short string)
-        $deserializer = new AMFDeserializerWrapper($testData->sString);
+        $deserializer = new AmfDeserializerWrapper($testData->sString);
         $type = $deserializer->readByte();
         $deserialized = $deserializer->readData($type);
         $expectedDeserialized = $testData->dString;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
         //readArray (Object)
-        $deserializer = new AMFDeserializerWrapper($testData->sObject);
+        $deserializer = new AmfDeserializerWrapper($testData->sObject);
         $type = $deserializer->readByte();
         $deserialized = $deserializer->readObject();
         $expectedDeserialized = $testData->dObject;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
         //readNull
-        $deserializer = new AMFDeserializerWrapper($testData->sNull);
+        $deserializer = new AmfDeserializerWrapper($testData->sNull);
         $type = $deserializer->readByte();
         $deserialized = $deserializer->readData($type);
         $expectedDeserialized = $testData->dNull;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
         //readUndefined
-        $deserializer = new AMFDeserializerWrapper($testData->sUndefined);
+        $deserializer = new AmfDeserializerWrapper($testData->sUndefined);
         $type = $deserializer->readByte();
         $deserialized = $deserializer->readData($type);
         $expectedDeserialized = $testData->dUndefined;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
         //readReference
-        $deserializer = new AMFDeserializerWrapper($testData->sReference);
+        $deserializer = new AmfDeserializerWrapper($testData->sReference);
         $deserialized = $deserializer->readReference();
         $expectedDeserialized = $testData->dReference;
         //TODO better tests for references
         //$this->assertEquals($expectedDeserialized, $deserialized);
 
         //readArray (EcmaArray)
-        $deserializer = new AMFDeserializerWrapper($testData->sEcmaArray);
+        $deserializer = new AmfDeserializerWrapper($testData->sEcmaArray);
         $type = $deserializer->readByte();
         $deserialized = $deserializer->readData($type);
         $expectedDeserialized = $testData->dEcmaArray;
@@ -112,35 +112,35 @@ class DeserializationTest extends PHPUnit_Framework_TestCase{
         //nothing!
         //
         //readArray (strict array)
-        $deserializer = new AMFDeserializerWrapper($testData->sStrictArray);
+        $deserializer = new AmfDeserializerWrapper($testData->sStrictArray);
         $type = $deserializer->readByte();
         $deserialized = $deserializer->readData($type);
         $expectedDeserialized = $testData->dStrictArray;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
         //readDate
-        $deserializer = new AMFDeserializerWrapper($testData->sDate);
+        $deserializer = new AmfDeserializerWrapper($testData->sDate);
         $type = $deserializer->readByte();
         $deserialized = $deserializer->readData($type);
         $expectedDeserialized = $testData->dDate;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
         //readString (long string)
-        $deserializer = new AMFDeserializerWrapper($testData->sLongString);
+        $deserializer = new AmfDeserializerWrapper($testData->sLongString);
         $type = $deserializer->readByte();
         $deserialized = $deserializer->readData($type);
         $expectedDeserialized = $testData->dLongString;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
         //readXml
-        $deserializer = new AMFDeserializerWrapper($testData->sXml);
+        $deserializer = new AmfDeserializerWrapper($testData->sXml);
         $type = $deserializer->readByte();
         $deserialized = $deserializer->readData($type);
         $expectedDeserialized = $testData->dXml;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
         //readTypedObject
-        $deserializer = new AMFDeserializerWrapper($testData->sTypedObject);
+        $deserializer = new AmfDeserializerWrapper($testData->sTypedObject);
         $type = $deserializer->readByte();
         $deserialized = $deserializer->readData($type);
         $expectedDeserialized = $testData->dTypedObject;
@@ -151,7 +151,7 @@ class DeserializationTest extends PHPUnit_Framework_TestCase{
     }
 
     public function testSerializingPackets(){
-        $testData = new AMFTestData();
+        $testData = new AmfTestData();
         /*
         template
 
@@ -167,25 +167,25 @@ class DeserializationTest extends PHPUnit_Framework_TestCase{
 
 
         //Packet with string header
-        $deserializer = new AMFDeserializerWrapper($testData->sStringHeaderPacket);
+        $deserializer = new AmfDeserializerWrapper($testData->sStringHeaderPacket);
         $deserialized = $deserializer->deserialize();
         $expectedDeserialized = $testData->dStringHeaderPacket;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
         //Packet with null Message
-        $deserializer = new AMFDeserializerWrapper($testData->sNullMessagePacket);
+        $deserializer = new AmfDeserializerWrapper($testData->sNullMessagePacket);
         $deserialized = $deserializer->deserialize();
         $expectedDeserialized = $testData->dNullMessagePacket;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
         //Packet with string Message
-        $deserializer = new AMFDeserializerWrapper($testData->sStringMessagePacket);
+        $deserializer = new AmfDeserializerWrapper($testData->sStringMessagePacket);
         $deserialized = $deserializer->deserialize();
         $expectedDeserialized = $testData->dStringMessagePacket;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
         //Packet with 2 headers and 2 Messages
-        $deserializer = new AMFDeserializerWrapper($testData->s2Headers2MessagesPacket);
+        $deserializer = new AmfDeserializerWrapper($testData->s2Headers2MessagesPacket);
         $deserialized = $deserializer->deserialize();
         $expectedDeserialized = $testData->d2Headers2MessagesPacket;
         $this->assertEquals($expectedDeserialized, $deserialized);

@@ -1,16 +1,16 @@
 <?php
 /**
- * AMFSerializer manages the job of translating PHP objects into
- * the actionscript equivalent via AMF.  The main method of the serializer
- * is the serialize method which takes and AMFObject as it's argument
- * and builds the resulting AMF Message.
- * TODO spit into 2 classes, one for AMF0 , one for AMF3 or maybe more.
+ * AmfSerializer manages the job of translating PHP objects into
+ * the actionscript equivalent via Amf.  The main method of the serializer
+ * is the serialize method which takes and AmfObject as it's argument
+ * and builds the resulting Amf Message.
+ * TODO spit into 2 classes, one for Amf0 , one for Amf3 or maybe more.
  *
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
- * @copyright (c) 2003 AMFphp.org
+ * @copyright (c) 2003 Amfphp.org
  * @package flashservices
  * @subpackage io
- * @version $Id: AMFSerializer.php,v 1.39 2005/07/22 10:58:11 pmineault Exp $
+ * @version $Id: AmfSerializer.php,v 1.39 2005/07/22 10:58:11 pmineault Exp $
  */
 
 class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
@@ -33,14 +33,14 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
     const MAX_STORED_OBJECTS = 1024;
     /**
      *
-     * used for AMF0 references
+     * used for Amf0 references
      * @var <array>
      */
-    private $AMF0StoredObjects;
+    private $Amf0StoredObjects;
 
     /**
      *
-     * used for AMF3 references
+     * used for Amf3 references
      * @var <array>
      */
     private $storedObjects;
@@ -67,7 +67,7 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
      */
     public function __construct($packet){
         $this->packet = $packet;
-        $this->AMF0StoredObjects = array();
+        $this->Amf0StoredObjects = array();
         $this->storedObjects = array();
         $this->storedStrings = array();
         $this->encounteredStrings = 0;
@@ -102,7 +102,7 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
         $this->writeInt($count); // write the Message  count
         for ($i = 0; $i < $count; $i++) {
                 //write Message
-                $this->AMF0StoredObjects = array();
+                $this->Amf0StoredObjects = array();
                 $this->storedStrings = array();
                 $this->storedObjects = array();
                 $this->encounteredStrings = 0;
@@ -258,7 +258,7 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
             /**
              * write timezone
              * ?? this is wierd -- put what you like and it pumps it back into flash at the current GMT ??
-             * have a look at the AMF it creates...
+             * have a look at the Amf it creates...
              */
             $this->writeInt(0);
     }
@@ -355,23 +355,23 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
 
     protected function writeReferenceIfExists($d)
     {
-            if(count($this->AMF0StoredObjects) >= self::MAX_STORED_OBJECTS)
+            if(count($this->Amf0StoredObjects) >= self::MAX_STORED_OBJECTS)
             {
                     return false;
             }
             if(is_array($d))
             {
-                    $this->AMF0StoredObjects[] = "";
+                    $this->Amf0StoredObjects[] = "";
                     return false;
             }
-            if(($key = array_search($d, $this->AMF0StoredObjects, true)) !== FALSE)
+            if(($key = array_search($d, $this->Amf0StoredObjects, true)) !== FALSE)
             {
                     $this->writeReference($key);
                     return true;
             }
             else
             {
-                    $this->AMF0StoredObjects[] = & $d;
+                    $this->Amf0StoredObjects[] = & $d;
                     return false;
             }
     }
@@ -474,7 +474,7 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
     /**
      * writeData checks to see if the type was declared and then either
      * auto negotiates the type or relies on the user defined type to
-     * serialize the data into AMF
+     * serialize the data into Amf
      *
      * @param mixed $d The data
      */
@@ -482,7 +482,7 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
             if ($this->packet->amfVersion == 3)
             {
                     $this->writeByte(0x11);
-                    $this->writeAMF3Data($d);
+                    $this->writeAmf3Data($d);
                     return;
             }
             elseif (is_int($d) || is_float($d))
@@ -555,7 +555,7 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
 
 
 	/********************************************************************************
-	 *                             AMF3 related code
+	 *                             Amf3 related code
 	 *******************************************************************************/
 
 	/**
@@ -654,7 +654,7 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
 
 
 	/**
-	 * Write undefined (AMF3).
+	 * Write undefined (Amf3).
 	 *
 	 * @return nothing
 	 */
@@ -665,7 +665,7 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
 	}
 
 	/**
-	 * Write NULL (AMF3).
+	 * Write NULL (Amf3).
 	 *
 	 * @return nothing
 	 */
@@ -677,7 +677,7 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
 
 
 	/**
-	 * Write a boolean (AMF3).
+	 * Write a boolean (Amf3).
 	 *
 	 * @param bool $d the boolean to serialise
 	 *
@@ -691,7 +691,7 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
 
 
 	/**
-	 * Write an (un-)signed integer (AMF3).
+	 * Write an (un-)signed integer (Amf3).
 	 *
 	 * @see getAmf3Int()
 	 *
@@ -707,7 +707,7 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
 
 
 	/**
-	 * Write a string (AMF3). Strings are stored in a cache and in case the same string
+	 * Write a string (Amf3). Strings are stored in a cache and in case the same string
 	 * is written again, a reference to the string is sent instead of the string itself.
 	 *
 	 * @note Sending strings larger than 268435455 (2^28-1 byte) will (silently) fail!
@@ -746,7 +746,7 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
 				// The string is not yet available in the reference lookup table.
 				// If the string is shorter than 64 byte, add it to the lookup cache;
 				// if it is longer, do not store it locally. This way, it cannot be
-				// referenced once it is encountered again. However, the AMF client
+				// referenced once it is encountered again. However, the Amf client
 				// builds the reference lookup table as well, so in all cases this
 				// string must increment the reference lookup table index.
 
@@ -877,13 +877,13 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
 
         //TODO this is commented, so probably wrong. Fix it! A.S.
 	/*
-	protected  void WriteAMF3DateTime(DateTime value)
+	protected  void WriteAmf3DateTime(DateTime value)
 	{
 		if( !_objectReferences.Contains(value) )
 		{
 			_objectReferences.Add(value, _objectReferences.Count);
 			int handle = 1;
-			WriteAMF3IntegerData(handle);
+			WriteAmf3IntegerData(handle);
 
 			// Write date (milliseconds from 1970).
 			DateTime timeStart = new DateTime(1970, 1, 1, 0, 0, 0);
@@ -903,20 +903,20 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
 		{
 			int handle = (int)_objectReferences[value];
 			handle = handle << 1;
-			WriteAMF3IntegerData(handle);
+			WriteAmf3IntegerData(handle);
 		}
 	}
 	*/
 
 
 	/**
-	 * Return the serialisation of the given integer (AMF3).
+	 * Return the serialisation of the given integer (Amf3).
 	 *
 	 * @note There does not seem to be a way to distinguish between signed and unsigned integers.
 	 * This method just sends the lowest 29 bit as-is, and the receiver is responsible to interpret
 	 * the result as signed or unsigned based on some context.
 	 *
-	 * @note The limit imposed by AMF3 is 29 bit. So in case the given integer is longer than 29 bit,
+	 * @note The limit imposed by Amf3 is 29 bit. So in case the given integer is longer than 29 bit,
 	 * only the lowest 29 bits will be serialised. No error will be logged!
 	 * TODO refactor into writeAmf3Int
          *

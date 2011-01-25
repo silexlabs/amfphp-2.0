@@ -5,7 +5,7 @@
  * can be tested separately.
  */
 
-class AMFSerializerWrapper extends Amfphp_Core_Amf_Serializer
+class AmfSerializerWrapper extends Amfphp_Core_Amf_Serializer
 {
     public function writeByte($b){
         parent::writeByte($b);
@@ -74,57 +74,57 @@ class AMFSerializerWrapper extends Amfphp_Core_Amf_Serializer
         parent::writeTypedObject($d);
     }
 
-    public function writeAMF3Data(&$d)
+    public function writeAmf3Data(&$d)
     {
-        return parent::writeAMF3Data($d);
+        return parent::writeAmf3Data($d);
     }
 
-    public function writeAMF3Null()
+    public function writeAmf3Null()
     {
-        return parent::writeAMF3Null();
+        return parent::writeAmf3Null();
     }
 
-    public function writeAMF3Undefined()
+    public function writeAmf3Undefined()
     {
-        return parent::writeAMF3Undefined();
-    }
-
-
-    public function writeAMF3Bool($d)
-    {
-        return parent::writeAMF3Bool($d);
+        return parent::writeAmf3Undefined();
     }
 
 
-    public function writeAMF3Number($d)
+    public function writeAmf3Bool($d)
     {
-        return parent::writeAMF3Number($d);
+        return parent::writeAmf3Bool($d);
     }
 
 
-    public function writeAMF3String($d, $raw = FALSE)
+    public function writeAmf3Number($d)
     {
-        return parent::writeAMF3String($d, $raw);
+        return parent::writeAmf3Number($d);
     }
 
 
-    public function writeAMF3Xml($d)
+    public function writeAmf3String($d, $raw = FALSE)
     {
-        return parent::writeAMF3Xml($d);
+        return parent::writeAmf3String($d, $raw);
     }
 
 
-    public function writeAMF3Array(/* array */ $d, $arrayCollectionable = FALSE)
+    public function writeAmf3Xml($d)
     {
-        return parent::writeAMF3Array($d, $arrayCollectionable);
+        return parent::writeAmf3Xml($d);
     }
 
-    public function writeAMF3Object(/* object */ $d)
+
+    public function writeAmf3Array(/* array */ $d, $arrayCollectionable = FALSE)
     {
-        return parent::writeAMF3Object($d);
+        return parent::writeAmf3Array($d, $arrayCollectionable);
     }
 
-    public function writeAMF3ByteArray(/* ByteArray */ $d)
+    public function writeAmf3Object(/* object */ $d)
+    {
+        return parent::writeAmf3Object($d);
+    }
+
+    public function writeAmf3ByteArray(/* ByteArray */ $d)
     {
         return parent::writeAmf3ByteArray($d);
     }
