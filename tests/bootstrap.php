@@ -1,6 +1,6 @@
 <?php
 /**
- * bootstrap for AMFPHP phpunit tests.
+ * bootstrap for Amfphp phpunit tests.
  * @author Ariel Sommeria-klein
  */
 

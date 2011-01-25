@@ -1,10 +1,11 @@
 <?php
 /**
- * Loads plugins for AMFPHP. Plugins consist of one class, declared in a file of the same name, in the plugins folder. A plugin interacts with AMFPHP by using the
- * Amfphp_Core_HookManager to register its functions to be called at specific times with specific parameters during execution.
- * singleton, so use getInstance
- * @todo the plugins folder is hard coded. consider a mechanism to make this more flexible
- * @todo some more explanation here for plugin developers.
+ * Loads plugins for Amfphp. Plugins consist of a folder in the plugins folder. The folder and the class
+ * should all have the same name. The file containing the class should be named with the class name with the ".php" suffix added.
+ * It is the loaded class' responsability to load any  other resources that the plugin needs from the same folder.
+ *  A plugin interacts with Amfphp by using the Amfphp_Core_HookManager to register its functions
+ * to be called at specific times with specific parameters during execution.
+ * It's a singleton, so use getInstance
  *
  * @author Ariel Sommeria-Klein
  */
@@ -49,21 +50,25 @@ class Amfphp_Core_PluginManager {
      */
     public function loadPlugins($rootFolder, array $pluginsConfig = null, array $disabledPlugins = null){
         $pluginsFolderRootPath = $rootFolder;
+        if(!is_dir($rootFolder)){
+            throw new Amfphp_Core_Exception("invalid path for loading plugins at " . $rootFolder);
+        }
         $folderContent = scandir($pluginsFolderRootPath);
         $pluginDescriptors = array();
 
-        foreach($folderContent as $fileName){
-            $phpSuffixPos = strpos($fileName, ".php");
-            if($phpSuffixPos == false){
+        foreach($folderContent as $pluginName){
+            if(!is_dir($rootFolder . "/" . $pluginName)){
                 continue;
             }
-            $className = substr($fileName, 0, $phpSuffixPos);
+            if(($pluginName == ".") || ($pluginName == "..")){
+                continue;
+            }
 
             //check first if plugin is disabled
             $shouldInstanciatePlugin = true;
             if($disabledPlugins){
                 foreach($disabledPlugins as $disabledPlugin){
-                    if($disabledPlugin == $className){
+                    if($disabledPlugin == $pluginName){
                         $shouldInstanciatePlugin = false;
                     }
                 }
@@ -72,14 +77,14 @@ class Amfphp_Core_PluginManager {
                 continue;
             }
             
-            if(!class_exists($className)){
-                require_once $pluginsFolderRootPath . $fileName;
+            if(!class_exists($pluginName)){
+                require_once $pluginsFolderRootPath . "/" . $pluginName . "/" . $pluginName . ".php";
             }
             $pluginConfig = null;
-            if(isset($pluginsConfig[$className])){
-                $pluginConfig = $pluginsConfig[$className];
+            if(isset($pluginsConfig[$pluginName])){
+                $pluginConfig = $pluginsConfig[$pluginName];
             }
-            $pluginInstance = new $className($pluginConfig);
+            $pluginInstance = new $pluginName($pluginConfig);
             array_push($this->pluginInstances, $pluginInstance);
         }
         

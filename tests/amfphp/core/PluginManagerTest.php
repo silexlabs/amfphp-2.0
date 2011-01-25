@@ -1,7 +1,7 @@
 <?php
 
 require_once dirname(__FILE__) . '/../../../Amfphp/ClassLoader.php';
-require_once dirname(__FILE__) . "/../../TestData/TestPlugins/DisabledPlugin.php";
+require_once dirname(__FILE__) . "/../../TestData/TestPlugins/DisabledPlugin/DisabledPlugin.php";
 
 /**
  * Test class for Amfphp_Core_PluginManager.
@@ -30,22 +30,31 @@ class Amfphp_Core_PluginManagerTest extends PHPUnit_Framework_TestCase {
      */
     public function testSimple(){
         
-        $this->pluginManager->loadPlugins(dirname(__FILE__) . "/../../testData/testPlugins/");
+        $this->pluginManager->loadPlugins(dirname(__FILE__) . "/../../TestData/testPlugins/");
         $this->assertEquals(1, DummyPlugin::$instanciationCounter);
     }
 
     public function testDisabled(){
         $disabledPluginLoadCount = DisabledPlugin::$instanciationCounter;
-        $this->pluginManager->loadPlugins(dirname(__FILE__) . "/../../testData/testPlugins/", null, array("DisabledPlugin"));
+        $this->pluginManager->loadPlugins(dirname(__FILE__) . "/../../TestData/testPlugins/", null, array("DisabledPlugin"));
         $this->assertEquals($disabledPluginLoadCount, DisabledPlugin::$instanciationCounter);
 
     }
 
     public function testConfig(){
         $pluginsConfig = array("DummyPlugin" => array("dummyConfVar" => "custom"));
-        $this->pluginManager->loadPlugins(dirname(__FILE__) . "/../../testData/testPlugins/", $pluginsConfig);
+        $this->pluginManager->loadPlugins(dirname(__FILE__) . "/../../TestData/testPlugins/", $pluginsConfig);
         $this->assertEquals("custom", DummyPlugin::$dummyConfVar);
 
+
+    }
+
+
+    /**
+     * @expectedException Amfphp_Core_Exception
+     */
+    public function testBadFolder(){
+        $this->pluginManager->loadPlugins("bla");
 
     }
 

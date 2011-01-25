@@ -1,7 +1,7 @@
 <?php
 
 /**
- * responsable for loading and maintaining AMFPHP configuration
+ * responsable for loading and maintaining Amfphp configuration
  *
  * @author Ariel Sommeria-klein
  */
@@ -23,7 +23,7 @@ class Amfphp_Core_Config {
     public $serviceNames2ClassFindInfo;
 
     /**
-     * path to the folder containing the plugins. defaults to AMFPHP_ROOTPATH . "/plugins/"
+     * path to the folder containing the plugins. defaults to Amfphp_ROOTPATH . "/plugins/"
      * @var String
      */
     public $pluginsFolder;
@@ -47,11 +47,11 @@ class Amfphp_Core_Config {
     public function  __construct() {
         $this->serviceFolders = array();
         $this->serviceNames2ClassFindInfo = array();
-        $this->pluginsFolder = AMFPHP_ROOTPATH . "/plugins/";
+        $this->pluginsFolder = Amfphp_ROOTPATH . "/plugins/";
         $this->pluginsConfig = array();
         $this->disabledPlugins = array();
         //disable logging by default
-        $this->disabledPlugins[] = "AMFPHPLogger";
+        $this->disabledPlugins[] = "AmfphpLogger";
         
     }
 }

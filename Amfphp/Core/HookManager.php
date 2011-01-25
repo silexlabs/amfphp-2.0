@@ -12,7 +12,7 @@ To read the license please visit http://www.gnu.org/copyleft/gpl.html
 
 /**
  * This class is a kind of event dispatcher <br />
- * Hooks are provided by AMFPHP to allow your contexts to 'hook into' the rest of AMFPHP, i.e. to call functions in your context at specific times<br />
+ * Hooks are provided by Amfphp to allow your contexts to 'hook into' the rest of Amfphp, i.e. to call functions in your context at specific times<br />
  * This is a singleton, so use getInstance
  */
 class Amfphp_Core_HookManager{
@@ -36,7 +36,7 @@ class Amfphp_Core_HookManager{
 
         /**
          *
-         * @return <Amfphp_Core_HookManager>
+         * @return Amfphp_Core_HookManager
          */
         public static function getInstance() {
                 if (self::$instance == NULL) {
@@ -48,9 +48,9 @@ class Amfphp_Core_HookManager{
         /**
          * call the functions registered for the given hook. 
          *
-         * @param <String> $hookName the name of the hook which was used in addHook( a string)
-         * @param <array> $paramsArray the array of the parameters to call the function with
-         * @return <array> $paramsArray, as modified by the hook callees.
+         * @param String $hookName the name of the hook which was used in addHook( a string)
+         * @param array $paramsArray the array of the parameters to call the function with
+         * @return array $paramsArray, as modified by the hook callees.
          */
         public function callHooks($hookName, array $paramsArray){
                 if (isset($this->hooksArray[$hookName])){

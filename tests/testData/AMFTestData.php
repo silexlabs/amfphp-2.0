@@ -1,6 +1,6 @@
 <?php
     /**
- * test data for the AMFPHP unit tests
+ * test data for the Amfphp unit tests
  * data types have the s prefix for "serialized" and "d" prefix for "deserialized"
  * for Packets there is a flaw in the AMFphp design which means that serializng and deserializing is not symmetrical.
  * so use s for serialized, d for deserialized for the serialization tests and dd for the deserialation tests, the idea being that dd will disappear for v2

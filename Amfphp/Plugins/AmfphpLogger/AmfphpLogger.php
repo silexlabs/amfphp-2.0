@@ -6,7 +6,7 @@
  *
  * @author Ariel Sommeria-klein
  */
-class AMFPHPLogger {
+class AmfphpLogger {
 
 
     const LOG_FILE_PATH = "amfphplog.log";

@@ -5,7 +5,7 @@
  */
 
 /**
- * a simple authentication service, used for testing the AMFPHPAuthentication plugin
+ * a simple authentication service, used for testing the AmfphpAuthentication plugin
  *
  * @author Ariel Sommeria-klein
  */
@@ -19,10 +19,10 @@ class AuthenticationService {
      */
     public function login($userId, $password){
         if(($userId == "user") && ($password == "userPassword")){
-            AMFPHPAuthentication::addRole("user");
+            AmfphpAuthentication::addRole("user");
         }
         if(($userId == "admin") && ($password == "adminPassword")){
-            AMFPHPAuthentication::addRole("admin");
+            AmfphpAuthentication::addRole("admin");
         }
     }
 
@@ -30,7 +30,7 @@ class AuthenticationService {
      * test logout function
      */
     public function logout(){
-        AMFPHPAuthentication::clearSessionInfo();
+        AmfphpAuthentication::clearSessionInfo();
     }
 
     /**

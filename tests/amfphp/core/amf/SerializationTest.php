@@ -7,7 +7,7 @@
  */
 
 require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
-require_once dirname(__FILE__) . '/../../../testData/AMFTestData.php';
+require_once dirname(__FILE__) . '/../../../TestData/AMFTestData.php';
 require_once dirname(__FILE__) . '/AMFSerializerWrapper.php';
 
 class SerializationTest extends PHPUnit_Framework_TestCase{

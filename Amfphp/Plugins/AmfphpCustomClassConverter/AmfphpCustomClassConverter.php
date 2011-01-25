@@ -9,7 +9,7 @@
  *
  * @author Ariel Sommeria-Klein
  */
-class AMFPHPCustomClassConverter {
+class AmfphpCustomClassConverter {
 
      /**
      * paths to folders containing custom classes(relative or absolute)
@@ -20,8 +20,13 @@ class AMFPHPCustomClassConverter {
     const MAX_RECURSION_DEPTH = 10;
 
     public function  __construct(array $config = null) {
-        $this->customClassFolderPaths = array(AMFPHP_ROOTPATH . "/services/vo/");
-        $this->customClassFolderPaths = array(AMFPHP_ROOTPATH . "../tests/testData/customClasses/");
+        //default
+        $this->customClassFolderPaths = array(Amfphp_ROOTPATH . "/services/vo/");
+        if($config){
+            if(isset($config["customClassFolderPaths"])){
+                $this->customClassFolderPaths = $config["customClassFolderPaths"];
+            }
+        }
         $hookManager = Amfphp_Core_HookManager::getInstance();
         $hookManager->addHook(Amfphp_Core_Gateway::HOOK_REQUEST_DESERIALIZED, array($this, "packetRequestDeserializedHandler"));
         $hookManager->addHook(Amfphp_Core_Gateway::HOOK_RESPONSE_DESERIALIZED, array($this, "packetResponseDeserializedHandler"));

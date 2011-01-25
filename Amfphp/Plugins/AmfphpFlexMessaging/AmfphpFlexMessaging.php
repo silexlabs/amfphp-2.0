@@ -1,5 +1,6 @@
 <?php
-
+require_once dirname(__FILE__) . "/AcknowledgeMessage.php";
+require_once dirname(__FILE__) . "/ErrorMessage.php";
 /**
  * Support for flex messaging.
  * Flex doesn't use the basic packet system. When using a remote objct, first a CommandMessage is sent, expecting an AcknowledgeMessage in return.
@@ -8,7 +9,7 @@
  *
  * @author Ariel Sommeria-Klein
  */
-class AMFPHPFlexMessaging{
+class AmfphpFlexMessaging{
     const TYPE_FLEX_COMMAND_MESSAGE = 'flex.messaging.messages.CommandMessage';
     const TYPE_FLEX_REMOTING_MESSAGE = 'flex.messaging.messages.RemotingMessage';
     const TYPE_FLEX_ACKNOWLEDGE_MESSAGE = 'flex.messaging.messages.AcknowledgeMessage';
@@ -68,7 +69,7 @@ class AMFPHPFlexMessaging{
             $this->clientUsesFlexMessaging = true;
             $command = $requestMessage->data[0];
             //command message. An empty AcknowledgeMessage is expected.
-            $acknowledge = new AcknowledgeMessage($command->$messageIdField);
+            $acknowledge = new AmfphpFlexMessaging_AcknowledgeMessage($command->$messageIdField);
             $responseMessage = new Amfphp_Core_Amf_Message($requestMessage->responseURI . Amfphp_Core_Amf_Constants::CLIENT_SUCCESS_METHOD, null, $acknowledge);
 
         }
@@ -79,7 +80,7 @@ class AMFPHPFlexMessaging{
             $remoting = $requestMessage->data[0];
             //remoting message. An AcknowledgeMessage with the result of the service call is expected.
             $serviceCallResult = $serviceRouter->executeServiceCall($remoting->source, $remoting->operation, $remoting->body);
-            $acknowledge = new AcknowledgeMessage($remoting->$messageIdField);
+            $acknowledge = new AmfphpFlexMessaging_AcknowledgeMessage($remoting->$messageIdField);
             $acknowledge->body = $serviceCallResult;
             $responseMessage = new Amfphp_Core_Amf_Message($requestMessage->responseURI . Amfphp_Core_Amf_Constants::CLIENT_SUCCESS_METHOD, null, $acknowledge);
 
@@ -102,71 +103,13 @@ class AMFPHPFlexMessaging{
             return;
         }
         
-        $error = new ErrorMessage($this->lastFlexMessageId);
+        $error = new AmfphpFlexMessaging_ErrorMessage($this->lastFlexMessageId);
         $error->faultCode = $e->getCode();
         $error->faultString = $e->getMessage();
         $error->faultDetail = $e->getTraceAsString();
         $responseMessage = new Amfphp_Core_Amf_Message($requestMessage->responseURI . Amfphp_Core_Amf_Constants::CLIENT_FAILURE_METHOD, null, $error);
         return array($e, $requestMessage, $responseMessage);
     }
-}
-
-class ErrorMessage
-{
-	public $_explicitType;
-	public $correlationId;
-	public $faultCode;
-	public $faultDetail;
-	public $faultString;
-
-        public function  __construct($correlationId) {
-            $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
-            $this->$explicitTypeField = AMFPHPFlexMessaging::TYPE_FLEX_ERROR_MESSAGE;
-	    $this->correlationId = $correlationId;
-        }
-}
-
-class AcknowledgeMessage
-{
-	public $_explicitType;
-	public $correlationId;
-        public $messageId;
-        public $clientId;
-        public $destination;
-        public $body;
-        public $timeToLive;
-        public $timeStamp;
-        public $headers;
-
-	public function  __construct($correlationId)
-	{
-            $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
-            $this->$explicitTypeField = AMFPHPFlexMessaging::TYPE_FLEX_ACKNOWLEDGE_MESSAGE;
-	    $this->correlationId = $correlationId;
-	    $this->messageId = $this->generateRandomId();
-	    $this->clientId = $this->generateRandomId();
-	    $this->destination = null;
-	    $this->body = null;
-	    $this->timeToLive = 0;
-	    $this->timestamp = (int) (time() . '00');
-	    $this->headers = new stdClass();
-	}
-
-	public function generateRandomId()
-	{
-	   // version 4 UUID
-	   return sprintf(
-	       '%08X-%04X-%04X-%02X%02X-%012X',
-	       mt_rand(),
-	       mt_rand(0, 65535),
-	       bindec(substr_replace(
-	           sprintf('%016b', mt_rand(0, 65535)), '0100', 11, 4)
-	       ),
-	       bindec(substr_replace(sprintf('%08b', mt_rand(0, 255)), '01', 5, 2)),
-	       mt_rand(0, 255),
-	       mt_rand()
-	   );
-	}
 }
 
 ?>

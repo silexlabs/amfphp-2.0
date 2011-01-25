@@ -8,7 +8,7 @@
 require_once dirname(__FILE__) . '/../Amfphp/ClassLoader.php';
 $rawInputData = Amfphp_Core_Amf_Util::getRawPostData();
 if(!$rawInputData){
-	echo "AMFPHP gateway";
+	echo "Amfphp gateway";
 	exit();
 }
 $gateway = new Amfphp_Core_Gateway($rawInputData);

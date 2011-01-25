@@ -1,6 +1,6 @@
 <?php
 /* 
- * Authentication for AMFPHP.
+ * Authentication for Amfphp.
  * On a service object, the plugin looks for a method called getMethodRoles. If the method exists, the plugin will look for a role in the session that matches the role.
  * If the roles don't match, an Exception is thrown.
  * The getMethodRoles takes a parameter $methodName, and must return an array of strings containing acceptable roles for the method. If the return value is null,
@@ -22,14 +22,14 @@
  * explicitly, or by setting a header with the name "Credentials", containing {userid: userid, password: password}, as defined by the AS2
  * NetConnection.setCredentials method. It is considered good practise to have a "logout" method, though this is optional
  * The login method returns a role in a "string". It takes 2 parameters, the user id and the password.
- * The logout method should call AMFPHPAuthentication::clearSessionInfo();
+ * The logout method should call AmfphpAuthentication::clearSessionInfo();
  * 
  * See the AuthenticationService class in the test data for an example of an implementation.
  *
  * @author Ariel Sommeria-klein
  */
 
-class AMFPHPAuthentication {
+class AmfphpAuthentication {
     /**
      * the field in the session where the roles array is stored
      */
@@ -44,18 +44,6 @@ class AMFPHPAuthentication {
      * the name of the login method
      */
     const METHOD_LOGIN = "login";
-    
-    //the following session fields are unused at the moment
-    
-    /**
-     * the field in the session where the user id is stored
-     */
-    //const SESSION_FIELD_USERID = "amfphp_userid";
-
-    /**
-     * the field in the session where the password is stored
-     */
-    //const SESSION_FIELD_PASSWORD = "amfphp_password";
 
     /**
      * the user id passed in the credentials header

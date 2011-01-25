@@ -1,7 +1,7 @@
 <?php
 /**
  * content holder for an AMF Packet.
- * TODO there is a confusion here between the AMF Packet and the AMF Packets. This is probably because AMFPHP was written before the publication of the official specs. Clean up!
+ * TODO there is a confusion here between the AMF Packet and the AMF Packets. This is probably because Amfphp was written before the publication of the official specs. Clean up!
  *
  * @author Ariel Sommeria-klein
  */

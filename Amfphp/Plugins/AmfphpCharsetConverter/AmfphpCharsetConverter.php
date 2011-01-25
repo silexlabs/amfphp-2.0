@@ -5,7 +5,7 @@
  *
  * @author Ariel Sommeria-Klein
  */
-class AMFPHPCharsetConverter {
+class AmfphpCharsetConverter {
     const MAX_RECURSION_DEPTH = 10;
 
     /**
@@ -74,8 +74,25 @@ class AMFPHPCharsetConverter {
         $this->clientCharset = "utf-8";
         $this->phpCharset = "utf-8";
         $this->method = self::METHOD_NONE;
-        
-        //TODO once config system, don't add hooks if not necessary
+        if($config){
+            if(isset ($config["clientCharset"])){
+                $this->clientCharset = $config["clientCharset"];
+            }
+            if(isset ($config["phpCharset"])){
+                $this->phpCharset = $config["phpCharset"];
+            }
+            if(isset ($config["method"])){
+                $this->method = $config["method"];
+            }
+        }
+
+        //only add hooks if conversion is necessary
+        if($this->method == self::METHOD_NONE){
+            return;
+        }
+        if($this->clientCharset == $this->phpCharset){
+            return;
+        }
         $hookManager = Amfphp_Core_HookManager::getInstance();
         $hookManager->addHook(Amfphp_Core_Gateway::HOOK_REQUEST_DESERIALIZED, array($this, "packetRequestDeserializedHandler"));
         $hookManager->addHook(Amfphp_Core_Gateway::HOOK_RESPONSE_DESERIALIZED, array($this, "packetResponseDeserializedHandler"));

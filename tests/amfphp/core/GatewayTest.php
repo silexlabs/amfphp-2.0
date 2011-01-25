@@ -1,8 +1,8 @@
 <?php
 
 require_once dirname(__FILE__) . '/../../../Amfphp/ClassLoader.php';
-require_once dirname(__FILE__) . "/../../testData/AMFTestData.php";
-require_once dirname(__FILE__) . "/../../testData/TestServicesConfig.php";
+require_once dirname(__FILE__) . "/../../TestData/AMFTestData.php";
+require_once dirname(__FILE__) . "/../../TestData/TestServicesConfig.php";
 
 /**
  * Test class for Amfphp_Core_Gateway.

@@ -1,6 +1,6 @@
 <?php
 /**
- * just a type to distinguish between AMFPHP exceptions and everything else
+ * just a type to distinguish between Amfphp exceptions and everything else
  *
  * @author Ariel Sommeria-klein
  */
