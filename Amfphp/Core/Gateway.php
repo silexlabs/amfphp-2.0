@@ -11,13 +11,13 @@ class Amfphp_Core_Gateway {
 
     /**
      * config. 
-     * @var <Amfphp_Core_Config>
+     * @var Amfphp_Core_Config
      */
     public $config;
 
     /**
      * context.
-     * @var <Amfphp_Core_ServiceCallContext>
+     * @var Amfphp_Core_ServiceCallContext
      */
     private $context;
 
@@ -148,10 +148,10 @@ class Amfphp_Core_Gateway {
      * @return <String> the serialized amf packet containg the service responses
      */
     public function service(){
-        Amfphp_Core_PluginManager::getInstance()->loadPlugins($this->config->pluginsFolder);
         $hookManager = Amfphp_Core_HookManager::getInstance();
         $requestMessage = null;
         try{
+            Amfphp_Core_PluginManager::getInstance()->loadPlugins($this->config->pluginsFolder, $this->config->pluginsConfig, $this->config->disabledPlugins);
             if(!$this->context->rawInputData){
                 throw new Amfphp_Core_Exception("no raw data passed to gateway");
             }

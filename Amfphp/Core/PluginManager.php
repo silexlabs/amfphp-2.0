@@ -13,14 +13,14 @@ class Amfphp_Core_PluginManager {
 
     /**
      * private instance of singleton
-     * @var <Amfphp_Core_PluginManager>
+     * @var Amfphp_Core_PluginManager
      *
      */
     private static $instance = NULL;
 
     /**
      *
-     * @var <array>
+     * @var array
      */
     private $pluginInstances;
     /**
@@ -32,7 +32,7 @@ class Amfphp_Core_PluginManager {
 
     /**
      * gives access to the singleton
-     * @return <Amfphp_Core_PluginManager>
+     * @return Amfphp_Core_PluginManager
      */
     public static function getInstance() {
             if (self::$instance == NULL) {
@@ -43,20 +43,44 @@ class Amfphp_Core_PluginManager {
 
     /**
      * load the plugins
+     * @param String $rootFolder where to load the plugins from. Absolute path.
+     * @param array $pluginConfig . optional. an array containing the plugin configuration, using the plugin name as key.
+     * @param array $disabledPlugins . optional.  an array of names of plugins to disable
      */
-    public function loadPlugins($rootFolder){
+    public function loadPlugins($rootFolder, array $pluginsConfig = null, array $disabledPlugins = null){
         $pluginsFolderRootPath = $rootFolder;
         $folderContent = scandir($pluginsFolderRootPath);
         $pluginDescriptors = array();
 
         foreach($folderContent as $fileName){
             $phpSuffixPos = strpos($fileName, ".php");
-            if($phpSuffixPos != false){
-                require_once $pluginsFolderRootPath . $fileName;
-                $className = substr($fileName, 0, $phpSuffixPos);
-                $pluginInstance = new $className();
-                array_push($this->pluginInstances, $pluginInstance);
+            if($phpSuffixPos == false){
+                continue;
             }
+            $className = substr($fileName, 0, $phpSuffixPos);
+
+            //check first if plugin is disabled
+            $shouldInstanciatePlugin = true;
+            if($disabledPlugins){
+                foreach($disabledPlugins as $disabledPlugin){
+                    if($disabledPlugin == $className){
+                        $shouldInstanciatePlugin = false;
+                    }
+                }
+            }
+            if(!$shouldInstanciatePlugin){
+                continue;
+            }
+            
+            if(!class_exists($className)){
+                require_once $pluginsFolderRootPath . $fileName;
+            }
+            $pluginConfig = null;
+            if(isset($pluginsConfig[$className])){
+                $pluginConfig = $pluginsConfig[$className];
+            }
+            $pluginInstance = new $className($pluginConfig);
+            array_push($this->pluginInstances, $pluginInstance);
         }
         
     }

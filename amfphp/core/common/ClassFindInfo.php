@@ -9,13 +9,13 @@
 class Amfphp_Core_Common_ClassFindInfo {
     /**
      * the absolute path to the file containing the class definition
-     * @var <String>
+     * @var String
      */
     public $absolutePath;
 
     /**
      * the name of the class.
-     * @var <String>
+     * @var String
      */
     public $className;
 

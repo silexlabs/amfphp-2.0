@@ -16,7 +16,7 @@ class Amfphp_Core_Amf_Message {
      * the request responseUri + OK/KO
      * for example: /1/onResult or /1/onStatus
      *
-     * @var <String>
+     * @var String
      */
     public $targetURI = "";
 
@@ -27,7 +27,7 @@ class Amfphp_Core_Amf_Message {
      * in the case of a response:
      * undefined
      * 
-     * @var <String>
+     * @var String
      */
     public $responseURI = "";
 

@@ -11,7 +11,7 @@ class AMFPHPLogger {
 
     const LOG_FILE_PATH = "amfphplog.log";
 
-    public function  __construct() {
+    public function  __construct(array $config = null) {
         $hookManager = Amfphp_Core_HookManager::getInstance();
 
         $hookManager->addHook(Amfphp_Core_Gateway::HOOK_REQUEST_SERIALIZED, array($this, "packetRequestSerializedHandler"));

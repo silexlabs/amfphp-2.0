@@ -59,17 +59,17 @@ class AMFPHPAuthentication {
 
     /**
      * the user id passed in the credentials header
-     * @var <String>
+     * @var String
      */
     private $headerUserId;
 
     /**
      * the password passed in the credentials header
-     * @var <String>
+     * @var String
      */
     private $headerPassword;
     
-    public function  __construct() {
+    public function  __construct(array $config = null) {
         $hookManager = Amfphp_Core_HookManager::getInstance();
         $hookManager->addHook(Amfphp_Core_Common_ServiceRouter::HOOK_SERVICE_OBJECT_CREATED, array($this, "serviceObjectCreatedHandler"));
         $hookManager->addHook(Amfphp_Core_Gateway::HOOK_REQUEST_HEADER, array($this, "requestHeaderHandler"));

@@ -17,7 +17,7 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
 
     /**
      *
-     * @var <String> the output stream
+     * @var String the output stream
      */
     private $outBuffer;
 

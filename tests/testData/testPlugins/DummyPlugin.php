@@ -7,8 +7,15 @@
 class DummyPlugin {
     public static $instanciationCounter = 0;
 
-    public function  __construct() {
+    public static $dummyConfVar = "default";
+    
+    public function  __construct(array $pluginConfig = null) {
         self::$instanciationCounter++;
+        if($pluginConfig){
+            if(isset($pluginConfig["dummyConfVar"])){
+                self::$dummyConfVar = $pluginConfig["dummyConfVar"];
+            }
+        }
     }
 }
 ?>

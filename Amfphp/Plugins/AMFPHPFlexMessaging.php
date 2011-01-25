@@ -27,7 +27,7 @@ class AMFPHPFlexMessaging{
      * @var String
      */
     private $lastFlexMessageId;
-    public function  __construct() {
+    public function  __construct(array $config = null) {
         Amfphp_Core_HookManager::getInstance()->addHook(Amfphp_Core_Gateway::HOOK_SPECIAL_REQUEST_HANDLING, array($this, "specialRequestMessageHandler"));
         Amfphp_Core_HookManager::getInstance()->addHook(Amfphp_Core_Gateway::HOOK_EXCEPTION_CAUGHT, array($this, "exceptionCaughtHandler"));
         $this->clientUsesFlexMessaging = false;

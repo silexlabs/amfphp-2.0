@@ -69,7 +69,7 @@ class AMFPHPCharsetConverter {
     public $clientCharset;
 
 
-    public function  __construct() {
+    public function  __construct(array $config = null) {
         //defaults
         $this->clientCharset = "utf-8";
         $this->phpCharset = "utf-8";

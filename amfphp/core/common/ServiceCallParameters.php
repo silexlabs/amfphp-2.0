@@ -13,13 +13,13 @@ class Amfphp_Core_Common_ServiceCallParameters {
      * The service name can either be just the name of the class (MirrorService) or include a path(package/MirrorService)
      * separator for path can only be "/"
      *
-     * @var <String>
+     * @var String
      */
     public $serviceName;
 
     /**
      * the name of the method to execute on the service object
-     * @var <String>
+     * @var String
      */
     public $methodName;
 

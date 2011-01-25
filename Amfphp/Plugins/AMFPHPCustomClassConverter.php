@@ -19,7 +19,7 @@ class AMFPHPCustomClassConverter {
 
     const MAX_RECURSION_DEPTH = 10;
 
-    public function  __construct() {
+    public function  __construct(array $config = null) {
         $this->customClassFolderPaths = array(AMFPHP_ROOTPATH . "/services/vo/");
         $this->customClassFolderPaths = array(AMFPHP_ROOTPATH . "../tests/testData/customClasses/");
         $hookManager = Amfphp_Core_HookManager::getInstance();

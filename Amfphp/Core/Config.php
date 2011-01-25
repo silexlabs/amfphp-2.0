@@ -24,20 +24,35 @@ class Amfphp_Core_Config {
 
     /**
      * path to the folder containing the plugins. defaults to AMFPHP_ROOTPATH . "/plugins/"
-     * @var <String>
+     * @var String
      */
     public $pluginsFolder;
+
+    /**
+     * array containing untyped plugin configuration data. Add as needed. The advised format is the name of the plugin as key, and then
+     * paramName/paramValue pairs as an array.
+     * example: array("plugin" => array( "paramName" =>"paramValue"))
+     * The array( "paramName" =>"paramValue") will be passed as is to the plugin at construction time.
+     * 
+     * @var array
+     */
+    public $pluginsConfig;
+
+    /**
+     * array of plugins that are available but should be disabled
+     * @var array
+     */
+    public $disabledPlugins;
 
     public function  __construct() {
         $this->serviceFolders = array();
         $this->serviceNames2ClassFindInfo = array();
         $this->pluginsFolder = AMFPHP_ROOTPATH . "/plugins/";
+        $this->pluginsConfig = array();
+        $this->disabledPlugins = array();
+        //disable logging by default
+        $this->disabledPlugins[] = "AMFPHPLogger";
         
-        $this->loadFromFile(null);
-    }
-    public function loadFromFile($path){
-        //TODO
-        array_push($this->serviceFolders, dirname(__FILE__) . "/services");
     }
 }
 ?>
