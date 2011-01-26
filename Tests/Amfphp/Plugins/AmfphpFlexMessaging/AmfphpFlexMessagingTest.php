@@ -39,17 +39,27 @@ class AmfphpFlexMessagingTest extends PHPUnit_Framework_TestCase {
 
     }
 
+    public function testGetAmfRequestMessageHandlerHook(){
+        $requestMessage = new Amfphp_Core_Amf_Message(null, "/1", null);
+        $requestMessage->data = array();
+        $command = new stdClass();
+        $command->_explicitType = AmfphpFlexMessaging::FLEX_TYPE_COMMAND_MESSAGE;
+        $command->messageId = "690D76D5-13C0-DFBD-7F2F-9E3786B59EB5";
+        $requestMessage->data[] = $command;
+        $ret = $this->object->getAmfRequestMessageHandlerHook($requestMessage, null);
+        $this->assertEquals($this->object, $ret[1]);
+    }
+    
     public function testCommandMessage() {
         $requestMessage = new Amfphp_Core_Amf_Message(null, "/1", null);
         $requestMessage->data = array();
         $expectedResponseMessage = new Amfphp_Core_Amf_Message("/1/onResult", null, null);
         
         $command = new stdClass();
-        $command->_explicitType = AmfphpFlexMessaging::TYPE_FLEX_COMMAND_MESSAGE;
+        $command->_explicitType = AmfphpFlexMessaging::FLEX_TYPE_COMMAND_MESSAGE;
         $command->messageId = "690D76D5-13C0-DFBD-7F2F-9E3786B59EB5";
         $requestMessage->data[] = $command;
-        $ret = $this->object->specialRequestMessageHandler($requestMessage, $this->serviceRouter, null);
-        $responseMessage = $ret[2];
+        $responseMessage = $this->object->handleRequestMessage($requestMessage, $this->serviceRouter);
         $expectedAcknowledge = new AmfphpFlexMessaging_AcknowledgeMessage("690D76D5-13C0-DFBD-7F2F-9E3786B59EB5");
         //copy random ids, so as not to fail test
         $expectedAcknowledge->clientId = $responseMessage->data->clientId;
@@ -64,15 +74,13 @@ class AmfphpFlexMessagingTest extends PHPUnit_Framework_TestCase {
         $expectedResponseMessage = new Amfphp_Core_Amf_Message("/1/onResult", null, null);
 
         $remoting = new stdClass();
-        $remoting->_explicitType = AmfphpFlexMessaging::TYPE_FLEX_REMOTING_MESSAGE;
+        $remoting->_explicitType = AmfphpFlexMessaging::FLEX_TYPE_REMOTING_MESSAGE;
         $remoting->messageId = "690D76D5-13C0-DFBD-7F2F-9E3786B59EB5";
         $remoting->source = "MirrorService";
         $remoting->operation = "returnOneParam";
         $remoting->body = array("boo");
         $requestMessage->data[] = $remoting;
-        $ret = $this->object->specialRequestMessageHandler($requestMessage, $this->serviceRouter, null);
-
-        $responseMessage = $ret[2];
+        $responseMessage = $this->object->handleRequestMessage($requestMessage, $this->serviceRouter);
         $expectedAcknowledge = new AmfphpFlexMessaging_AcknowledgeMessage("690D76D5-13C0-DFBD-7F2F-9E3786B59EB5");
         //copy random ids, so as not to fail test
         $expectedAcknowledge->clientId = $responseMessage->data->clientId;
@@ -82,11 +90,10 @@ class AmfphpFlexMessagingTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals(print_r($expectedResponseMessage, true), print_r($responseMessage, true));
 
         //test error handling. Must reuse the same AmfphpFlexMessaging obj so that it already has data
-        $ret = $this->object->exceptionCaughtHandler(new Exception("Bad!"), $requestMessage, null);
-        $responseMessage = $ret[2];
+        $responsePacket = $this->object->generateErrorResponse(new Exception("Bad!"), $requestMessage, null);
         $expectedError = new AmfphpFlexMessaging_ErrorMessage("690D76D5-13C0-DFBD-7F2F-9E3786B59EB5");
         $expectedResponseMessage->data = $expectedError;
-        $this->assertEquals("AmfphpFlexMessaging_ErrorMessage", get_class($responseMessage->data));
+        $this->assertEquals("AmfphpFlexMessaging_ErrorMessage", get_class($responsePacket->messages[0]->data));
 
 
     }

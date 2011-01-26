@@ -40,11 +40,11 @@ class Amfphp_Core_Amf_Header
 	/**
 	 * Amfphp_Core_Amf_Header is the Constructor function for the Amfphp_Core_Amf_Header data type.
 	 */
-	public function __construct($name = "", $required = false, $value = null)
+	public function __construct($name = "", $required = false, $data = null)
 	{
 		$this->name = $name;
 		$this->required = $required;
-		$this->data = $value;
+		$this->data = $data;
 	}
 }
 

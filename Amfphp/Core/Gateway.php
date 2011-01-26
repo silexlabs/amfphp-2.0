@@ -10,135 +10,98 @@
 class Amfphp_Core_Gateway {
 
     /**
-     * config. 
-     * @var Amfphp_Core_Config
-     */
-    public $config;
-
-    /**
-     * context.
-     * @var Amfphp_Core_ServiceCallContext
-     */
-    private $context;
-
-    /**
-     * hook called when the packet request comes in.
+     * hook called when the serialized request comes in.  Anything the callee returns is ignored.
      * @param String $rawData the raw http data
      */
     const HOOK_REQUEST_SERIALIZED = "HOOK_REQUEST_SERIALIZED";
 
     /**
-     * hook called after the packet request is deserialized
-     * @param Amfphp_Core_Amf_Packet requestPacket the deserialized packet
+     * hook called to allow a plugin to override the default amf deserializer.
+     * @param String $contentType
+     * @param Amfphp_Core_Common_IDeserializer $deserializer the deserializer. null at call in gateway.
+     * Plugin sets to a Amfphp_Core_Common_IDeserializer if it recognizes the content type
+     */
+    const HOOK_GET_DESERIALIZER = "HOOK_GET_DESERIALIZER";
+    
+    /**
+     * hook called after the request is deserialized. The callee can modify the data and return it.
+     * @param mixed $deserializedRequest 
      */
     const HOOK_REQUEST_DESERIALIZED = "HOOK_REQUEST_DESERIALIZED";
 
     /**
-     * hook called when the packet response is ready.
+     * hook called to allow a plugin to override the default amf deserialized request handler. 
+     * @param mixed $deserializedRequest.
+     * @param Amfphp_Core_Common_IDeserializedRequestHandler $deserializedRequestHandler null at call in gateway.
+     * Plugin sets to a Amfphp_Core_Common_IDeserializedRequestHandler if it recognizes the request
+     */
+    const HOOK_GET_DESERIALIZED_REQUEST_HANDLER = "HOOK_GET_DESERIALIZED_REQUEST_HANDLER";
+
+    /**
+     * hook called when the response is ready but not yet serialized.  The callee can modify the data and return it.
      * @param Amfphp_Core_Amf_Packet $responsePacket the deserialized packet
      */
     const HOOK_RESPONSE_DESERIALIZED = "HOOK_RESPONSE_DESERIALIZED";
 
     /**
-     * hook called when the packet response is ready and serialized
+     * hook called to allow a plugin to override the default amf exception handler.
+     * @param String $contentType
+     * @param Amfphp_Core_Common_IExceptionHandler $exceptionHandler. null at first call in gateway. If the plugin takes over the handling of the request message,
+     * it must set this to a proper Amfphp_Core_Common_IExceptionHandler
+     */
+    const HOOK_GET_EXCEPTION_HANDLER = "HOOK_GET_EXCEPTION_HANDLER";
+
+    /**
+     * hook called to allow a plugin to override the default amf serializer.
+     * @param String $contentType
+     * @param Amfphp_Core_Common_ISerializer $serializer the serializer. null at call in gateway.
+     * Plugin sets to a Amfphp_Core_Common_ISerializer if it recognizes the content type
+     */
+    const HOOK_GET_SERIALIZER = "HOOK_GET_SERIALIZER";
+
+    /**
+     * hook called when the packet response is ready and serialized. Anything the callee returns is ignored.
      * @param String $rawData the raw http data
      */
     const HOOK_RESPONSE_SERIALIZED = "HOOK_RESPONSE_SERIALIZED";
 
-    /**
-     * hook called when there is an exception
-     * @param Exception $e the exception object
-     * @param Amfphp_Core_Amf_Message $requestMessage the request message that caused the exception
-     * @param Amfphp_Core_Amf_Message $responseMessage. null at first call in gateway. If the plugin takes over the handling of the request message,
-     * it must set this to a proper Amfphp_Core_Amf_Message
-     */
-    const HOOK_EXCEPTION_CAUGHT = "HOOK_EXCEPTION_CAUGHT";
 
     /**
-     * hook called for each request header
-     * @param Amfphp_Core_Amf_Header $header the request header
+     * config.
+     * @var Amfphp_Core_Config
      */
-    const HOOK_REQUEST_HEADER = "HOOK_REQUEST_HEADER";
+    private $config;
 
     /**
-     * hook called to give plugins a chance to handle the request message instead of passing it to the service router
-     * @param Amfphp_Core_Amf_Message $requestMessage the request message
-     * @param ServiceRouter the service router, if needed
-     * @param Amfphp_Core_Amf_Message $responseMessage. null at first call in gateway. If the plugin takes over the handling of the request message,
-     * it must set this to a proper Amfphp_Core_Amf_Message
-     * to indicate
+     * the serialized request 
+     * @var String 
      */
-    const HOOK_SPECIAL_REQUEST_HANDLING = "HOOK_SPECIAL_REQUEST_HANDLING";
-
-
-
-    public function  __construct($rawInputData) {
-        $this->context = new Amfphp_Core_ServiceCallContext();
-        $this->context->rawInputData = $rawInputData;
-        $this->config = new Amfphp_Core_Config();
-    }
+    private $rawInputData;
 
     /**
-     * process a request and generate a response.
-     * throws an Exception if anything fails, so caller must encapsulate in try/catch
-     * 
-     * @param Amfphp_Core_Amf_Message $requestMessage
-     * @return Amfphp_Core_Amf_Message the response Message for the request
+     * the content type. For example for amf, application/x-amf
+     * @var String
      */
-    private function handleRequestMessage(Amfphp_Core_Amf_Message $requestMessage){
-        $hookManager = Amfphp_Core_HookManager::getInstance();
-        $serviceRouter = new Amfphp_Core_Common_ServiceRouter($this->config->serviceFolderPaths, $this->config->serviceNames2ClassFindInfo);
-        $ret = $hookManager->callHooks(self::HOOK_SPECIAL_REQUEST_HANDLING, array($requestMessage, $serviceRouter, null));
-        if($ret && ($ret[2] != null)){
-            return $ret[2];
-        }
-        
-        //plugins didn't do any special handling. Assumes this is a simple Amfphp_Core_Amf_ RPC call
-        $serviceCallParameters = Amfphp_Core_Common_ServiceCallParameters::createFromAmfphp_Core_Amf_Message($requestMessage);
-        $ret = $serviceRouter->executeServiceCall($serviceCallParameters->serviceName, $serviceCallParameters->methodName, $serviceCallParameters->methodParameters);
-        $responseMessage = new Amfphp_Core_Amf_Message();
-        $responseMessage->data = $ret;
-        $responseMessage->targetURI = $requestMessage->responseURI . Amfphp_Core_Amf_Constants::CLIENT_SUCCESS_METHOD;
-        //not specified
-        $responseMessage->responseURI = "null";
-        return $responseMessage;
-    }
-
+    private $contentType;
     /**
-     * handles an exception by generating a serialized Amf response with information about the Exception. Tries to use the requestMessage for the response/target uri
-     * @param Exception $e
-     * @param Amfphp_Core_Amf_Message $requestMessage the request message that caused it, if it exists
-     * @return String the serialized error message
+     *
      */
-    private function generateResponseForException(Exception $e, Amfphp_Core_Amf_Message $requestMessage = null){
-        $errorPacket = new Amfphp_Core_Amf_Packet();
-        $hookManager = Amfphp_Core_HookManager::getInstance();
-        $errorResponseMessage = null;
-        $ret = $hookManager->callHooks(self::HOOK_EXCEPTION_CAUGHT, array($e, $requestMessage, null));
-        if($ret && ($ret[2] != null)){
-            $errorResponseMessage = $ret[2];
+    /**
+     * constructor
+     * @param String $rawInputData
+     * @param String $contentType
+     * @param Amfphp_Core_Config $config optional. The default config object will be used if null
+     */
+    public function  __construct($rawInputData, $contentType, Amfphp_Core_Config $config = null) {
+        $this->rawInputData = $rawInputData;
+        $this->contentType = $contentType;
+        if($config){
+            $this->config = $config;
         }else{
-            //no special handling by plugins. generate a basic error Amfphp_Core_Amf_Message
-            $errorResponseMessage = new Amfphp_Core_Amf_Message();
-            if($requestMessage != null && isset ($requestMessage->responseURI)){
-                $errorResponseMessage->targetURI = $requestMessage->responseURI . Amfphp_Core_Amf_Constants::CLIENT_FAILURE_METHOD;
-            }else{
-                $errorResponseMessage->targetURI = Amfphp_Core_Amf_Constants::DEFAULT_REQUEST_RESPONSE_URI . Amfphp_Core_Amf_Constants::CLIENT_FAILURE_METHOD;
-            }
-            //not specified
-            $errorResponseMessage->responseURI = "null";
-            $errorResponseMessage->data = new stdClass();
-            $errorResponseMessage->data->faultCode = $e->getCode();
-            $errorResponseMessage->data->faultString = $e->getMessage();
-            $errorResponseMessage->data->faultDetail = $e->getTraceAsString();
+            $this->config = new Amfphp_Core_Config();
         }
 
-        array_push($errorPacket->messages, $errorResponseMessage);
-        $serializer = new Amfphp_Core_Amf_Serializer($errorPacket);
-        return $serializer->serialize();
-        
     }
-
     
     /**
      * The service method runs the gateway application.  It deserializes the raw data passed into the constructor as an Amfphp_Core_Amf_Packet, handles the headers,
@@ -149,49 +112,78 @@ class Amfphp_Core_Gateway {
      */
     public function service(){
         $hookManager = Amfphp_Core_HookManager::getInstance();
-        $requestMessage = null;
+        $defaultHandler = new Amfphp_Core_Amf_Handler();
+        $deserializedResponse = null;
         try{
             Amfphp_Core_PluginManager::getInstance()->loadPlugins($this->config->pluginsFolder, $this->config->pluginsConfig, $this->config->disabledPlugins);
-            if(!$this->context->rawInputData){
-                throw new Amfphp_Core_Exception("no raw data passed to gateway");
-            }
             //call hook for reading serialized incoming packet
-            $hookManager->callHooks(self::HOOK_REQUEST_SERIALIZED, array($this->context->rawInputData));
+            $hookManager->callHooks(self::HOOK_REQUEST_SERIALIZED, array($this->rawInputData));
 
-            $deserializer = new Amfphp_Core_Amf_Deserializer($this->context->rawInputData);
-            $requestPacket = $deserializer->deserialize();
+            //call hook for overriding the default deserializer
+            $fromHooks = $hookManager->callHooks(self::HOOK_GET_DESERIALIZER, array($this->contentType, null));
+            $deserializer = null;
+            if($fromHooks && isset ($fromHooks[1])){
+                $deserializer = $fromHooks[1];
+            }else{
+                $deserializer = $defaultHandler;
+            }
+            
+            //deserialize
+            $deserializedRequest = $deserializer->deserialize($this->rawInputData);
 
-            //call hook for reading/modifying request packet
-            $fromHooks = $hookManager->callHooks(self::HOOK_REQUEST_DESERIALIZED, array($requestPacket));
-            $requestPacket = $fromHooks[0];
-
-            $numHeaders = count($requestPacket->headers);
-            for($i = 0; $i < $numHeaders; $i++){
-                $requestHeader = $requestPacket->headers[$i];
-                //handle a header. This is a job for plugins, unless comes a header that is so fundamental that it needs to be handled by the core
-                $hookManager->callHooks(self::HOOK_REQUEST_HEADER, array($requestHeader));
+            //call hook for reading/modifying deserialized request
+            $fromHooks = $hookManager->callHooks(self::HOOK_REQUEST_DESERIALIZED, array($deserializedRequest));
+            if($fromHooks && isset ($fromHooks[0])){
+                $deserializedRequest = $fromHooks[0];
             }
 
-            $numMessages = count($requestPacket->messages);
-            $rawOutputData = "";
-            $responsePacket = new Amfphp_Core_Amf_Packet();
-            for($i = 0; $i < $numMessages; $i++){
-                $requestMessage = $requestPacket->messages[$i];
-                $responseMessage = $this->handleRequestMessage($requestMessage);
-                array_push($responsePacket->messages, $responseMessage);
+            //create service router
+            $serviceRouter = new Amfphp_Core_Common_ServiceRouter($this->config->serviceFolderPaths, $this->config->serviceNames2ClassFindInfo);
+
+            //call hook for overriding the default deserialized request handler
+            $fromHooks = $hookManager->callHooks(self::HOOK_GET_DESERIALIZED_REQUEST_HANDLER, array($deserializedRequest, null));
+            $deserializedRequestHandler = null;
+            if($fromHooks && isset ($fromHooks[1])){
+                $deserializedRequestHandler = $fromHooks[1];
+            }else{
+                $deserializedRequestHandler = $defaultHandler;
             }
 
-            //call hook for reading/modifying response packet
-            $fromHooks = $hookManager->callHooks(self::HOOK_RESPONSE_DESERIALIZED, array($responsePacket));
-            $responsePacket = $fromHooks[0];
+            //handle request
+            $deserializedResponse = $deserializedRequestHandler->handleDeserializedRequest($deserializedRequest, $serviceRouter);
 
-            $serializer = new Amfphp_Core_Amf_Serializer($responsePacket);
-            $rawOutputData = $serializer->serialize();
+            //call hook for reading/modifying deserialized response
+            $fromHooks = $hookManager->callHooks(self::HOOK_RESPONSE_DESERIALIZED, array($deserializedResponse));
+            if($fromHooks && isset ($fromHooks[0])){
+                $deserializedResponse = $fromHooks[0];
+            }
 
+        }catch(Exception $exception){
+            //call hook for overriding the default exception handler
+            $fromHooks = $hookManager->callHooks(self::HOOK_GET_EXCEPTION_HANDLER, array($this->contentType, null));
+            $exceptionHandler = null;
+            if($fromHooks && isset ($fromHooks[1])){
+                $exceptionHandler = $fromHooks[1];
+            }else{
+                $exceptionHandler = $defaultHandler;
+            }
 
-        }catch(Exception $e){
-            $rawOutputData = $this->generateResponseForException($e, $requestMessage);
+            //handle exception
+            $deserializedResponse = $exceptionHandler->handleException($exception);
+
         }
+
+        //call hook for overriding the default serializer
+        $fromHooks = $hookManager->callHooks(self::HOOK_GET_SERIALIZER, array($this->contentType, null));
+        $serializer = null;
+        if($fromHooks && isset ($fromHooks[1])){
+            $serializer = $fromHooks[1];
+        }else{
+            $serializer = $defaultHandler;
+        }
+
+        $rawOutputData = $serializer->serialize($deserializedResponse);
+        
         //call hook for reading serialized response packet
         $hookManager->callHooks(self::HOOK_RESPONSE_SERIALIZED, array($rawOutputData));
 

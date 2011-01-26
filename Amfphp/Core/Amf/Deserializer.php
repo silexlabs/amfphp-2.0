@@ -1,4 +1,14 @@
 <?php
+/**
+ * Amfphp_Core_Amf_Deserializer takes the raw amf input stream and converts it PHP objects
+ * representing the data.
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @copyright (c) 2003 amfphp.org
+ * @package flashservices
+ * @subpackage io
+ * @version $Id$
+ */
 
 	class Amfphp_Core_Amf_Deserializer
 	{
@@ -99,7 +109,7 @@
 				$content = $this->readData($type); // turn the element into real data
 
                                 $header = new Amfphp_Core_Amf_Header($name, $required, $content);
-				array_push($this->deserializedPacket->headers, $header);
+				$this->deserializedPacket->headers[] = $header;
 			}
 
 		}
@@ -125,7 +135,7 @@
 				$data = $this->readData($type); // turn the element into real data
 
                                 $message = new Amfphp_Core_Amf_Message($target, $response, $data);
-                                array_push($this->deserializedPacket->messages, $message);
+                                $this->deserializedPacket->messages[] = $message;
 
 			}
 		}

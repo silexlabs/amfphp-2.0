@@ -49,7 +49,7 @@ class AmfphpAuthentication {
      * the user id passed in the credentials header
      * @var String
      */
-    private $headerUserId;
+    public $headerUserId;
 
     /**
      * the password passed in the credentials header
@@ -59,12 +59,18 @@ class AmfphpAuthentication {
     
     public function  __construct(array $config = null) {
         $hookManager = Amfphp_Core_HookManager::getInstance();
-        $hookManager->addHook(Amfphp_Core_Common_ServiceRouter::HOOK_SERVICE_OBJECT_CREATED, array($this, "serviceObjectCreatedHandler"));
-        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_REQUEST_HEADER, array($this, "requestHeaderHandler"));
+        $hookManager->addHook(Amfphp_Core_Common_ServiceRouter::HOOK_SERVICE_OBJECT_CREATED, array($this, "serviceObjectCreatedHook"));
+        $hookManager->addHook(Amfphp_Core_Amf_Handler::HOOK_GET_AMF_REQUEST_HEADER_HANDLER, array($this, "getAmfRequestHeaderHandlerHook"));
         $this->headerUserId = null;
         $this->headerPassword = null;
     }
 
+    public function getAmfRequestHeaderHandlerHook(Amfphp_Core_Amf_Header $header){
+        if($header->name == Amfphp_Core_Amf_Constants::CREDENTIALS_HEADER_NAME){
+            return array($header, $this);
+        }
+
+    }
     /**
      * looks for a match between the user roles and the accepted roles
      * @param <type> $userRoles
@@ -93,7 +99,7 @@ class AmfphpAuthentication {
      * @param <String> $methodName
      * @return <array>
      */
-    public function serviceObjectCreatedHandler($serviceObject, $methodName){
+    public function serviceObjectCreatedHook($serviceObject, $methodName){
         if(!method_exists($serviceObject, self::METHOD_GET_METHOD_ROLES)){
             return;
         }
@@ -156,7 +162,7 @@ class AmfphpAuthentication {
             }
         }
         //role isn't already available. Add it.
-        array_push($_SESSION[self::SESSION_FIELD_ROLES], $roleToAdd);
+        $_SESSION[self::SESSION_FIELD_ROLES][] = $roleToAdd;
     }
 
 
@@ -164,20 +170,22 @@ class AmfphpAuthentication {
     /**
      * looks for a "Credentials" request header. If there is one, uses it to try to authentify the user.
      * @param Amfphp_Core_Amf_Header $header
+     * @return void
      */
-    public function requestHeaderHandler(Amfphp_Core_Amf_Header $header){
-        if($header->name == Amfphp_Core_Amf_Constants::CREDENTIALS_HEADER_NAME){
-            $userIdField = Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_USERID;
-            $passwordField = Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_PASSWORD;
-            $userId = $header->data->$userIdField;
-            $password = $header->data->$passwordField;
-            if(session_id () == ""){
-                session_start();
-            }
-            $this->headerUserId = $userId;
-            $this->headerPassword = $password;
-
+    public function handleRequestHeader(Amfphp_Core_Amf_Header $header){
+        if($header->name != Amfphp_Core_Amf_Constants::CREDENTIALS_HEADER_NAME){
+            throw new Amfphp_Core_Exception("not an authentication amf header. type: " . $header->name);
         }
+        $userIdField = Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_USERID;
+        $passwordField = Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_PASSWORD;
+        $userId = $header->data->$userIdField;
+        $password = $header->data->$passwordField;
+        if(session_id () == ""){
+            session_start();
+        }
+        $this->headerUserId = $userId;
+        $this->headerPassword = $password;
+
     }
 }
 ?>

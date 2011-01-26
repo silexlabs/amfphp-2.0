@@ -19,9 +19,9 @@ class Amfphp_Core_Amf_Constants {
      */
     const DEFAULT_REQUEST_RESPONSE_URI = "/1";
     /**
-     * The Content Type String, for use in the headers
+     * The AMf content type, for use in the headers
      */
-    const CONTENT_TYPE = "Content-type: application/x-amf";
+    const CONTENT_TYPE = "application/x-amf";
     /**
      * this is the field where the class name of an object must be set so that it can be sent as a strongly typed object
      * try to use this where possible, but it can't be everywhere because we would need to use ReflectionClass::hasProperty, and that is only with PHP 5.1

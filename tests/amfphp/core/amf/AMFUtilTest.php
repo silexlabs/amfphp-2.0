@@ -39,10 +39,6 @@ class Amfphp_Core_Amf_UtilTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue(($isBigEndian == false) || ($isBigEndian == true));
     }
 
-    public function testGetRawPostData() {
-        $this->assertTrue(Amfphp_Core_Amf_Util::getRawPostData() == null);
-    }
-
     public function testApplyFunc($obj = null){
         $this->counter++;
         return $obj;

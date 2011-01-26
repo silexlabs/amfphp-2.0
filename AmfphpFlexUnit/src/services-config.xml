@@ -21,11 +21,11 @@
 		</service>
 	</services>
 	<channels>
-		<channel-definition id="amfphp1.9" class="mx.messaging.channels.AmfChannel">
-			<endpoint uri="http://localhost:8888/workspace/amfphp%201.9/gateway.php" class="flex.messaging.endpoints.AmfEndpoint"/>
+		<channel-definition id="amfphp1.9" class="mx.messaging.channels.AMFChannel">
+			<endpoint uri="http://localhost:8888/workspace/amfphp%201.9/gateway.php" class="flex.messaging.endpoints.AMFEndpoint"/>
 		</channel-definition>
-		<channel-definition id="amfphp2" class="mx.messaging.channels.AmfChannel">
-			<endpoint uri="http://localhost:8888/workspaceNetbeans/amfphp-2.0/tests/TestData/testGateway.php" class="flex.messaging.endpoints.AmfEndpoint"/>
+		<channel-definition id="amfphp2" class="mx.messaging.channels.AMFChannel">
+			<endpoint uri="http://localhost:8888/workspaceNetbeans/amfphp-2.0/tests/TestData/testGateway.php" class="flex.messaging.endpoints.AMFEndpoint"/>
 		</channel-definition>		
 	</channels>
 </services-config>

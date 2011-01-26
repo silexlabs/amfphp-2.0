@@ -1,7 +1,7 @@
 <?php
 /**
- * an Amf request comes with a targetURI that must be parsed to a service name and a function name. This class parses the request targetURI, and holds the necessary
- * data for the service call
+ *
+ * place holder class for the variables necessary to make a service call
  *
  * @author Ariel Sommeria-klein
  */
@@ -9,7 +9,7 @@ class Amfphp_Core_Common_ServiceCallParameters {
 
 
     /**
-     * the name of the service. parsed from targetURI
+     * the name of the service. 
      * The service name can either be just the name of the class (MirrorService) or include a path(package/MirrorService)
      * separator for path can only be "/"
      *
@@ -29,20 +29,5 @@ class Amfphp_Core_Common_ServiceCallParameters {
      */
     public $methodParameters;
 
-    /**
-     * creates a ServiceCallParamaeters object from an Amfphp_Core_Amf_Message
-     * supported separators in the targetURI are "/" and "."
-     * @param Amfphp_Core_Amf_Message $Amfphp_Core_Amf_Message
-     * @return Amfphp_Core_Common_ServiceCallParameters
-     */
-    public static function createFromAmfphp_Core_Amf_Message(Amfphp_Core_Amf_Message $Amfphp_Core_Amf_Message){
-        $targetURI = str_replace(".", "/", $Amfphp_Core_Amf_Message->targetURI);
-        $split = explode("/", $targetURI);
-        $ret = new Amfphp_Core_Common_ServiceCallParameters();
-        $ret->methodName = array_pop($split);
-        $ret->serviceName = join($split, "/");
-        $ret->methodParameters = $Amfphp_Core_Amf_Message->data;
-        return $ret;
-    }
 }
 ?>

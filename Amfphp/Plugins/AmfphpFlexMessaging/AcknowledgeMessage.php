@@ -20,7 +20,7 @@ class AmfphpFlexMessaging_AcknowledgeMessage
 	public function  __construct($correlationId)
 	{
             $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
-            $this->$explicitTypeField = AmfphpFlexMessaging::TYPE_FLEX_ACKNOWLEDGE_MESSAGE;
+            $this->$explicitTypeField = AmfphpFlexMessaging::FLEX_TYPE_ACKNOWLEDGE_MESSAGE;
 	    $this->correlationId = $correlationId;
 	    $this->messageId = $this->generateRandomId();
 	    $this->clientId = $this->generateRandomId();

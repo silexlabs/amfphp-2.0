@@ -13,7 +13,7 @@
  * @version $Id: AmfSerializer.php,v 1.39 2005/07/22 10:58:11 pmineault Exp $
  */
 
-class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
+class Amfphp_Core_Amf_Serializer{
 
     /**
      *
@@ -23,9 +23,9 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
 
     /**
      *
-     * @var <Amfphp_Core_Amf_Packet>
+     * @var Amfphp_Core_Amf_Packet
      */
-    private $Packet;
+    private $packet;
 
     /**
      * the maximum amount of objects stored for reference
@@ -34,20 +34,20 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
     /**
      *
      * used for Amf0 references
-     * @var <array>
+     * @var array
      */
     private $Amf0StoredObjects;
 
     /**
      *
      * used for Amf3 references
-     * @var <array>
+     * @var array
      */
     private $storedObjects;
 
     /**
      * amf3 references to strings
-     * @var <array>
+     * @var array
      */
     private  $storedStrings;
     /**
@@ -55,7 +55,7 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
      * The number is used as reference in case an already
      * sent string should be sent again.
      *
-     * @var <int>
+     * @var int
      */
 
      private $encounteredStrings;
@@ -65,7 +65,7 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
      *
      * @param <Amfphp_Core_Amf_Packet> $packet
      */
-    public function __construct($packet){
+    public function __construct(Amfphp_Core_Amf_Packet $packet){
         $this->packet = $packet;
         $this->Amf0StoredObjects = array();
         $this->storedObjects = array();
@@ -109,8 +109,8 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
                 $this->storedDefinitions = 0;
                 $message = $this->packet->messages[$i];
                 $this->currentMessage = & $message;
-                $this->writeUTF($message->targetURI);
-                $this->writeUTF($message->responseURI);
+                $this->writeUTF($message->targetUri);
+                $this->writeUTF($message->responseUri);
                 //save the current buffer, and flush it to write the Message
                 $tempBuf = $this->outBuffer;
                 $this->outBuffer = "";

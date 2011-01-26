@@ -45,14 +45,21 @@ class Amfphp_Core_Config {
     public $disabledPlugins;
 
     public function  __construct() {
-        $this->serviceFolders = array();
+        $this->serviceFolders = array(dirname(__FILE__) . "../Services");
         $this->serviceNames2ClassFindInfo = array();
-        $this->pluginsFolder = Amfphp_ROOTPATH . "/plugins/";
+        $this->pluginsFolder = Amfphp_ROOTPATH . "/Plugins/";
         $this->pluginsConfig = array();
         $this->disabledPlugins = array();
         //disable logging by default
         $this->disabledPlugins[] = "AmfphpLogger";
         
+        //disable if not needed
+        /*
+        $this->disabledPlugins[] = "AmfphpAuthentication";
+        $this->disabledPlugins[] = "AmfphpCharsetConverter";
+        $this->disabledPlugins[] = "AmfphpCustomClassConverter";
+        $this->disabledPlugins[] = "AmfphpFlexMessaging";
+        */
     }
 }
 ?>

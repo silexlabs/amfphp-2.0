@@ -19,7 +19,7 @@ package flexUnitTests
 			_myConnection.destination = "amfphp1.9";
 			_myConnection.source = "amfphp.DiscoveryService";			
 
-			_myConnection.destination = "amfphp2";
+			_myConnection.destination = "amfphp2"; 
 			_myConnection.source = "MirrorService";			
 		}
 		
@@ -31,7 +31,7 @@ package flexUnitTests
 		public function testSimpleRequest():void{
 			//_myConnection.getServices();
 			_myConnection.returnOneParam("boo");
-			_myConnection.addEventListener(ResultEvent.RESULT, addAsync(simpleRequestResultHandler, 200));
+			_myConnection.addEventListener(ResultEvent.RESULT, addAsync(simpleRequestResultHandler, 500));
 		}
 		
 		public function simpleRequestResultHandler(event:ResultEvent):void{
@@ -40,7 +40,7 @@ package flexUnitTests
 		
 		public function testBadRequest():void{
 			_myConnection.getInexistantMethod();
-			_myConnection.addEventListener(FaultEvent.FAULT, addAsync(badRequestFaultHandler, 200));
+			_myConnection.addEventListener(FaultEvent.FAULT, addAsync(badRequestFaultHandler, 500));
 		}
 		
 		public function badRequestFaultHandler(event:FaultEvent):void{
@@ -49,7 +49,7 @@ package flexUnitTests
 		
 		public function testSendingAndReceivingATypedObject():void{
 			_myConnection.returnOneParam(new TestCustomClass1());
-			_myConnection.addEventListener(ResultEvent.RESULT, addAsync(sendingAndReceivingATypedObjectResultHandler, 200));
+			_myConnection.addEventListener(ResultEvent.RESULT, addAsync(sendingAndReceivingATypedObjectResultHandler, 500));
 			
 		}
 

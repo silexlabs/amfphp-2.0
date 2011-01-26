@@ -21,15 +21,15 @@ class AmfphpCustomClassConverter {
 
     public function  __construct(array $config = null) {
         //default
-        $this->customClassFolderPaths = array(Amfphp_ROOTPATH . "/services/vo/");
+        $this->customClassFolderPaths = array(Amfphp_ROOTPATH . "/Services/Vo/");
         if($config){
             if(isset($config["customClassFolderPaths"])){
                 $this->customClassFolderPaths = $config["customClassFolderPaths"];
             }
         }
         $hookManager = Amfphp_Core_HookManager::getInstance();
-        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_REQUEST_DESERIALIZED, array($this, "packetRequestDeserializedHandler"));
-        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_RESPONSE_DESERIALIZED, array($this, "packetResponseDeserializedHandler"));
+        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_REQUEST_DESERIALIZED, array($this, "packetRequestDeserializedHook"));
+        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_RESPONSE_DESERIALIZED, array($this, "packetResponseDeserializedHook"));
     }
 
 
@@ -81,7 +81,7 @@ class AmfphpCustomClassConverter {
      * @param packet $requestPacket
      * @return packet
      */
-    public function packetRequestDeserializedHandler(Amfphp_Core_Amf_Packet $requestPacket){
+    public function packetRequestDeserializedHook(Amfphp_Core_Amf_Packet $requestPacket){
         $requestPacket = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($requestPacket, array($this, "convertToTyped"), 0, self::MAX_RECURSION_DEPTH);
         return array($requestPacket);
 
@@ -113,7 +113,7 @@ class AmfphpCustomClassConverter {
      * @param packet $responsePacket
      * @return <array>
      */
-    public function packetResponseDeserializedHandler(Amfphp_Core_Amf_Packet $responsePacket){
+    public function packetResponseDeserializedHook(Amfphp_Core_Amf_Packet $responsePacket){
         $responsePacket = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($responsePacket, array($this, "markExplicitType"), 0, self::MAX_RECURSION_DEPTH);
         return array($responsePacket);
 

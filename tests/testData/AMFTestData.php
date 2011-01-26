@@ -466,7 +466,7 @@ class AmfTestData {
         $nullHeader = new Amfphp_Core_Amf_Header("null header", TRUE, NULL);
 
         $this->dNullHeaderPacket = new Amfphp_Core_Amf_Packet();
-	array_push($this->dNullHeaderPacket->headers, $nullHeader);
+	$this->dNullHeaderPacket->headers[] = $nullHeader;
 
         //version (int)
         $this->sNullHeaderPacket = pack('n', 0);
@@ -499,7 +499,7 @@ class AmfTestData {
         $stringHeader = new Amfphp_Core_Amf_Header("string header", FALSE, "zzzzzz");
 
         $this->dStringHeaderPacket = new Amfphp_Core_Amf_Packet();
-	array_push($this->dStringHeaderPacket->headers, $stringHeader);
+	$this->dStringHeaderPacket->headers[] = $stringHeader;
         //version (int)
         $this->sStringHeaderPacket = pack('n', 0);
         //number of headers (int)
@@ -534,10 +534,10 @@ class AmfTestData {
      */
     public function buildNullMessagePacket(){
         $nullMessage = new Amfphp_Core_Amf_Message();
-        $nullMessage->targetURI = "/onStatus";
-        $nullMessage->responseURI = "null";
+        $nullMessage->targetUri = "/onStatus";
+        $nullMessage->responseUri = "null";
         $this->dNullMessagePacket = new Amfphp_Core_Amf_Packet();
-        array_push($this->dNullMessagePacket->messages, $nullMessage);
+	$this->dNullMessagePacket->messages[] = $nullMessage;
 
         //version (int)
         $this->sNullMessagePacket = pack('n', 0);
@@ -569,11 +569,11 @@ class AmfTestData {
     public function buildStringMessagePacket(){
         $stringMessage = new Amfphp_Core_Amf_Message();
         $testString = "test string";
-        $stringMessage->targetURI = "/onStatus";
-        $stringMessage->responseURI = "null";
+        $stringMessage->targetUri = "/onStatus";
+        $stringMessage->responseUri = "null";
         $stringMessage->data = $testString;
         $this->dStringMessagePacket = new Amfphp_Core_Amf_Packet();
-        array_push($this->dStringMessagePacket->messages, $stringMessage);
+        $this->dStringMessagePacket->messages[] = $stringMessage;
 
         //version (int)
         $this->sStringMessagePacket = pack('n', 0);
@@ -607,19 +607,19 @@ class AmfTestData {
         $nullHeader = new Amfphp_Core_Amf_Header("null header", TRUE, NULL);
         $stringHeader = new Amfphp_Core_Amf_Header("string header", FALSE, "zzzzzz");
         $nullMessage = new Amfphp_Core_Amf_Message();
-        $nullMessage->targetURI = "/onStatus";
-        $nullMessage->responseURI = "null";
+        $nullMessage->targetUri = "/onStatus";
+        $nullMessage->responseUri = "null";
         $stringMessage = new Amfphp_Core_Amf_Message();
         $testString = "test string";
-        $stringMessage->targetURI = "/onStatus";
-        $stringMessage->responseURI = "null";
+        $stringMessage->targetUri = "/onStatus";
+        $stringMessage->responseUri = "null";
         $stringMessage->data = $testString;
 
         $this->d2Headers2MessagesPacket = new Amfphp_Core_Amf_Packet();
-	array_push($this->d2Headers2MessagesPacket->headers, $stringHeader);
-	array_push($this->d2Headers2MessagesPacket->headers, $nullHeader);
-        array_push($this->d2Headers2MessagesPacket->messages, $stringMessage);
-        array_push($this->d2Headers2MessagesPacket->messages, $nullMessage);
+	$this->d2Headers2MessagesPacket->headers[] = $stringHeader;
+	$this->d2Headers2MessagesPacket->headers[] = $nullHeader;
+        $this->d2Headers2MessagesPacket->messages[] = $stringMessage;
+        $this->d2Headers2MessagesPacket->messages[] = $nullMessage;
         //version (int)
         $this->s2Headers2MessagesPacket = pack('n', 0);
         //number of headers (int)
@@ -723,8 +723,8 @@ class AmfTestData {
 
         //request
 
-        $requestTargetURI = "MirrorService/returnOneParam";
-        $requestResponseURI = "/1";
+        $requestTargetUri = "MirrorService/returnOneParam";
+        $requestResponseUri = "/1";
 
         //version (int)
         $requestPacket = pack('n', 0);
@@ -733,13 +733,13 @@ class AmfTestData {
         //number of Messages
         $requestPacket .= pack('n', 1);
         //target uri length
-        $requestPacket .= pack('n', strlen($requestTargetURI));
+        $requestPacket .= pack('n', strlen($requestTargetUri));
         //target uri .
-        $requestPacket .= $requestTargetURI;
+        $requestPacket .= $requestTargetUri;
         //response uri length
-        $requestPacket .= pack('n', strlen($requestResponseURI));
+        $requestPacket .= pack('n', strlen($requestResponseUri));
         //response uri.
-        $requestPacket .= $requestResponseURI;
+        $requestPacket .= $requestResponseUri;
 
         //the function call parameters, and the returned data are the same with the mirror service.
         ////here a strict array containing a string
@@ -770,8 +770,8 @@ class AmfTestData {
 
         //response
 
-        $responseTargetURI = "/1/onResult";
-        $responseResponseURI = "null";
+        $responseTargetUri = "/1/onResult";
+        $responseResponseUri = "null";
 
         //version (int)
         $responsePacket = pack('n', 0);
@@ -780,13 +780,13 @@ class AmfTestData {
         //number of Messages
         $responsePacket .= pack('n', 1);
         //target uri length
-        $responsePacket .= pack('n', strlen($responseTargetURI));
+        $responsePacket .= pack('n', strlen($responseTargetUri));
         //target uri .
-        $responsePacket .= $responseTargetURI;
+        $responsePacket .= $responseTargetUri;
         //response uri length
-        $responsePacket .= pack('n', strlen($responseResponseURI));
+        $responsePacket .= pack('n', strlen($responseResponseUri));
         //response uri.
-        $responsePacket .= $responseResponseURI;
+        $responsePacket .= $responseResponseUri;
 
         //response Message. here the string sent in the request
         //data type is string, so use string(2)

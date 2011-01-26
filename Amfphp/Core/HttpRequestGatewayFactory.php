@@ -1,0 +1,41 @@
+<?php
+/**
+ * A gateway factory's job is to create a gateway. There can be many gateway factories, but as such the only one for now is this one,
+ * which creates a gateway assuming that the data to be processed is in an http request and thus available through the usual php globals
+ *
+ * @author Ariel Sommeria-Klein
+ */
+class Amfphp_Core_HttpRequestGatewayFactory {
+
+
+
+    /**
+     * there seems to be some confusion in the php doc as to where best to get the raw post data from.
+     * try $GLOBALS['HTTP_RAW_POST_DATA'] and php://input
+     *
+     * @return <String> it's a binary stream, but there seems to be no better type than String for this.
+     */
+    static private function getRawPostData(){
+        if (isset($GLOBALS['HTTP_RAW_POST_DATA'])) {
+            return $GLOBALS['HTTP_RAW_POST_DATA'];
+        }else{
+            return file_get_contents('php://input');
+        }
+
+    }
+
+    /**
+     * create the gateway
+     * @param Amfphp_Core_Config $config optional. If null, the gateway will use the default
+     * @return Amfphp_Core_Gateway
+     */
+    static public function createGateway(Amfphp_Core_Config $config = null){
+        $contentType = null;
+        if(isset ($_SERVER["Content-Type"])){
+            $contentType = $_SERVER["Content-Type"];
+        }
+        $rawInputData = self::getRawPostData();
+        return new Amfphp_Core_Gateway($rawInputData, $contentType, $config);
+    }
+}
+?>

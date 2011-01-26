@@ -18,7 +18,7 @@ class AmfphpFlexMessaging_ErrorMessage
 
         public function  __construct($correlationId) {
             $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
-            $this->$explicitTypeField = AmfphpFlexMessaging::TYPE_FLEX_ERROR_MESSAGE;
+            $this->$explicitTypeField = AmfphpFlexMessaging::FLEX_TYPE_ERROR_MESSAGE;
 	    $this->correlationId = $correlationId;
         }
 }

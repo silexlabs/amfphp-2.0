@@ -6,12 +6,12 @@
 
 require_once dirname(__FILE__) . '/../../Amfphp/ClassLoader.php';
 require_once dirname(__FILE__) . "/TestServicesConfig.php";
-$rawInputData = Amfphp_Core_Amf_Util::getRawPostData();
-$gateway = new Amfphp_Core_Gateway($rawInputData);
+$config = new Amfphp_Core_Config();
 $testServiceConfig = new TestServicesConfig();
-$gateway->config->serviceFolderPaths = $testServiceConfig->serviceFolderPaths;
-$gateway->config->serviceNames2ClassFindInfo = $testServiceConfig->serviceNames2ClassFindInfo;
-header(Amfphp_Core_Amf_Constants::CONTENT_TYPE);
+$config->serviceFolderPaths = $testServiceConfig->serviceFolderPaths;
+$config->serviceNames2ClassFindInfo = $testServiceConfig->serviceNames2ClassFindInfo;
+$gateway = Amfphp_Core_HttpRequestGatewayFactory::createGateway($config);
+header("Content-type: " . Amfphp_Core_Amf_Constants::CONTENT_TYPE);
 echo $gateway->service();
 
 ?>

@@ -7,28 +7,28 @@
 *
 * @author Ariel Sommeria-klein
 */
-class Amfphp_Core_Common_ServiceRouter implements Amfphp_Core_Common_IServiceRouter{
+class Amfphp_Core_Common_ServiceRouter{
     /**
 * hook called when the service object is created. Useful for authentication
-* @param <String> the raw http data
+* @param String the raw http data
 */
     const HOOK_SERVICE_OBJECT_CREATED = "HOOK_SERVICE_OBJECT_CREATED";
      /**
 * paths to folders containing services(relative or absolute)
-* @var <array> of paths
+* @var array of paths
 */
     private $serviceFolderPaths;
 
     /**
 *
-* @var <array> of ClassFindInfo
+* @var array of ClassFindInfo
 */
     private $serviceNames2ClassFindInfo;
 
     /**
 *
-* @param <array> $serviceFolderPaths folders containing service classes
-* @param <array> $serviceNames2ClassFindInfo a dictionary of service classes represented in a ClassFindInfo.
+* @param array $serviceFolderPaths folders containing service classes
+* @param array $serviceNames2ClassFindInfo a dictionary of service classes represented in a ClassFindInfo.
 */
     public function __construct($serviceFolderPaths, $serviceNames2ClassFindInfo) {
         $this->serviceFolderPaths = $serviceFolderPaths;
@@ -40,10 +40,10 @@ class Amfphp_Core_Common_ServiceRouter implements Amfphp_Core_Common_IServiceRou
 * throws an exception if service not found.
 * if the service exists but not the function, an exception is thrown by call_user_func_array. It is pretty explicit, so no furher code was added
 *
-* @param <string> $serviceName
-* @param <string> $methodName
-* @param <array> $parameters
-* @return <mixed> the result of the function call
+* @param string $serviceName
+* @param string $methodName
+* @param array $parameters
+* @return mixed the result of the function call
 *
 */
     public function executeServiceCall($serviceName, $methodName, $parameters){

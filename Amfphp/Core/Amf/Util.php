@@ -15,26 +15,6 @@ class Amfphp_Core_Amf_Util {
         return ($tmp == "\0\0\0\0\0\0\360\77");
     }
 
-
-
-    /**
-     * there seems to be some confusion in the php doc as to where best to get the raw post data from.
-     * try $GLOBALS['HTTP_RAW_POST_DATA'] and php://input
-     *
-     * @return <String> it's a binary stream, but there seems to be no better type than String for this.
-     */
-    static public function getRawPostData(){
-        if (isset($GLOBALS['HTTP_RAW_POST_DATA'])) {
-            return $GLOBALS['HTTP_RAW_POST_DATA'];
-        }else{
-            return file_get_contents('php://input');
-        }
-
-    }
-
-    static public function d($obj){
-        return $obj;
-    }
     /**
      * applies a function to all objects contained by $obj and $obj itself.
      * iterates on $obj and its sub objects, which can iether be arrays or objects

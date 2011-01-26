@@ -14,7 +14,7 @@ define( 'Amfphp_ROOTPATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
 require_once Amfphp_ROOTPATH . "Core/Common/ClassFindInfo.php";
 require_once Amfphp_ROOTPATH . "Core/Common/IDeserializer.php";
 require_once Amfphp_ROOTPATH . "Core/Common/IExceptionHandler.php";
-require_once Amfphp_ROOTPATH . "Core/Common/IServiceRouter.php";
+require_once Amfphp_ROOTPATH . "Core/Common/IDeserializedRequestHandler.php";
 require_once Amfphp_ROOTPATH . "Core/Common/ISerializer.php";
 require_once Amfphp_ROOTPATH . "Core/Common/ServiceRouter.php";
 require_once Amfphp_ROOTPATH . "Core/Common/ServiceCallParameters.php";
@@ -22,6 +22,7 @@ require_once Amfphp_ROOTPATH . "Core/Common/ServiceCallParameters.php";
 //core/amf
 require_once Amfphp_ROOTPATH . "Core/Amf/Constants.php";
 require_once Amfphp_ROOTPATH . "Core/Amf/Deserializer.php";
+require_once Amfphp_ROOTPATH . "Core/Amf/Handler.php";
 require_once Amfphp_ROOTPATH . "Core/Amf/Header.php";
 require_once Amfphp_ROOTPATH . "Core/Amf/Message.php";
 require_once Amfphp_ROOTPATH . "Core/Amf/Packet.php";
@@ -37,6 +38,7 @@ require_once Amfphp_ROOTPATH . "Core/Config.php";
 require_once Amfphp_ROOTPATH . "Core/Exception.php";
 require_once Amfphp_ROOTPATH . "Core/Gateway.php";
 require_once Amfphp_ROOTPATH . "Core/HookManager.php";
+require_once Amfphp_ROOTPATH . "Core/HttpRequestGatewayFactory.php";
 require_once Amfphp_ROOTPATH . "Core/PluginManager.php";
 require_once Amfphp_ROOTPATH . "Core/ServiceCallContext.php";
 

@@ -85,7 +85,7 @@ class Amfphp_Core_PluginManager {
                 $pluginConfig = $pluginsConfig[$pluginName];
             }
             $pluginInstance = new $pluginName($pluginConfig);
-            array_push($this->pluginInstances, $pluginInstance);
+            $this->pluginInstances[] = $pluginInstance;
         }
         
     }

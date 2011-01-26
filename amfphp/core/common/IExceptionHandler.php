@@ -8,10 +8,10 @@
  */
 interface Amfphp_Core_Common_IExceptionHandler {
     /**
-     * a stronger typing for the return type would be better in the future. In the meantime mixed is ok. For Amf, return an Amfphp_Core_Amf_Packet
-     * @param <Exception> $exception the exception object to analyze
-     * @return <mixed>
+     * generates an object describing the exception.
+     * @param Exception $exception the exception object to analyze
+     * @return mixed an object describing the error, that will be serialized and sent back to the client
      */
-    public function handle($exception);
+    public function handleException(Exception $exception);
 }
 ?>
