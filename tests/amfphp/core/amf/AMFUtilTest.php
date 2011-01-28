@@ -45,11 +45,16 @@ class Amfphp_Core_Amf_UtilTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testApplyFunctionToContainedObjects() {
+        //non object
+        $this->counter = 0;
+        Amfphp_Core_Amf_Util::applyFunctionToContainedObjects("bla", array($this, "testApplyFunc"));
+        $this->assertEquals(1, $this->counter);
+
         //simple
         $testObj1 = array();
         $testObj1[] = new stdClass();
         $this->counter = 0;
-        Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($testObj1, array($this, "testApplyFunc"), 0, 10);
+        Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($testObj1, array($this, "testApplyFunc"));
         $this->assertEquals(2, $this->counter);
 
         //a bit more complicated
@@ -58,7 +63,7 @@ class Amfphp_Core_Amf_UtilTest extends PHPUnit_Framework_TestCase {
         $testObj2->data = $subObj;
         $testObj2->bla = 'bla';
         $this->counter = 0;
-        Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($testObj2, array($this, "testApplyFunc"), 0, 10);
+        Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($testObj2, array($this, "testApplyFunc"));
         $this->assertEquals(10, $this->counter);
 
     }

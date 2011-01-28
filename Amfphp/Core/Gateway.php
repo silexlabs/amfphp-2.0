@@ -17,37 +17,43 @@ class Amfphp_Core_Gateway {
 
     /**
      * hook called to allow a plugin to override the default amf deserializer.
+     * Plugin should return a Amfphp_Core_Common_IDeserializer if it recognizes the content type
      * @param String $contentType
      * @param Amfphp_Core_Common_IDeserializer $deserializer the deserializer. null at call in gateway.
-     * Plugin sets to a Amfphp_Core_Common_IDeserializer if it recognizes the content type
+     * @return Amfphp_Core_Common_IDeserializer
      */
     const HOOK_GET_DESERIALIZER = "HOOK_GET_DESERIALIZER";
     
     /**
      * hook called after the request is deserialized. The callee can modify the data and return it.
-     * @param mixed $deserializedRequest 
+     * @param mixed $deserializedRequest
+     * @return mixed the modified data
      */
     const HOOK_REQUEST_DESERIALIZED = "HOOK_REQUEST_DESERIALIZED";
 
     /**
      * hook called to allow a plugin to override the default amf deserialized request handler. 
-     * @param mixed $deserializedRequest.
+     * Plugin should return a Amfphp_Core_Common_IDeserializedRequestHandler if it recognizes the request
+     * @param String $contentType
      * @param Amfphp_Core_Common_IDeserializedRequestHandler $deserializedRequestHandler null at call in gateway.
-     * Plugin sets to a Amfphp_Core_Common_IDeserializedRequestHandler if it recognizes the request
+     * @return Amfphp_Core_Common_IDeserializedRequestHandler
      */
     const HOOK_GET_DESERIALIZED_REQUEST_HANDLER = "HOOK_GET_DESERIALIZED_REQUEST_HANDLER";
 
     /**
      * hook called when the response is ready but not yet serialized.  The callee can modify the data and return it.
      * @param Amfphp_Core_Amf_Packet $responsePacket the deserialized packet
+     * @return mixed the modified data
      */
     const HOOK_RESPONSE_DESERIALIZED = "HOOK_RESPONSE_DESERIALIZED";
 
     /**
      * hook called to allow a plugin to override the default amf exception handler.
-     * @param String $contentType
-     * @param Amfphp_Core_Common_IExceptionHandler $exceptionHandler. null at first call in gateway. If the plugin takes over the handling of the request message,
+     * If the plugin takes over the handling of the request message,
      * it must set this to a proper Amfphp_Core_Common_IExceptionHandler
+     * @param String $contentType
+     * @param Amfphp_Core_Common_IExceptionHandler $exceptionHandler. null at call in gateway.
+     * @return Amfphp_Core_Common_IExceptionHandler
      */
     const HOOK_GET_EXCEPTION_HANDLER = "HOOK_GET_EXCEPTION_HANDLER";
 
@@ -79,6 +85,11 @@ class Amfphp_Core_Gateway {
     private $rawInputData;
 
     /**
+     * any eventual GET parameters
+     */
+    private $getData;
+
+    /**
      * the content type. For example for amf, application/x-amf
      * @var String
      */
@@ -89,11 +100,13 @@ class Amfphp_Core_Gateway {
     /**
      * constructor
      * @param String $rawInputData
+     * @param array $getData typically the $_GET array. 
      * @param String $contentType
      * @param Amfphp_Core_Config $config optional. The default config object will be used if null
      */
-    public function  __construct($rawInputData, $contentType, Amfphp_Core_Config $config = null) {
+    public function  __construct($rawInputData, array $getData, $contentType, Amfphp_Core_Config $config = null) {
         $this->rawInputData = $rawInputData;
+        $this->getData = $getData;
         $this->contentType = $contentType;
         if($config){
             $this->config = $config;
@@ -129,7 +142,7 @@ class Amfphp_Core_Gateway {
             }
             
             //deserialize
-            $deserializedRequest = $deserializer->deserialize($this->rawInputData);
+            $deserializedRequest = $deserializer->deserialize($this->rawInputData, $this->getData);
 
             //call hook for reading/modifying deserialized request
             $fromHooks = $hookManager->callHooks(self::HOOK_REQUEST_DESERIALIZED, array($deserializedRequest));
@@ -141,7 +154,7 @@ class Amfphp_Core_Gateway {
             $serviceRouter = new Amfphp_Core_Common_ServiceRouter($this->config->serviceFolderPaths, $this->config->serviceNames2ClassFindInfo);
 
             //call hook for overriding the default deserialized request handler
-            $fromHooks = $hookManager->callHooks(self::HOOK_GET_DESERIALIZED_REQUEST_HANDLER, array($deserializedRequest, null));
+            $fromHooks = $hookManager->callHooks(self::HOOK_GET_DESERIALIZED_REQUEST_HANDLER, array($this->contentType, null));
             $deserializedRequestHandler = null;
             if($fromHooks && isset ($fromHooks[1])){
                 $deserializedRequestHandler = $fromHooks[1];

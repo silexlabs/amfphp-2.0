@@ -16,77 +16,133 @@ To read the license please visit http://www.gnu.org/copyleft/gpl.html
  * This is a singleton, so use getInstance
  */
 class Amfphp_Core_HookManager{
-        /**
-         * registered hooks
-         */
-        private $hooksArray = NULL;
+    /**
+     * The aim of the hook is for the caller to get an object/value from a plugin.
+     * The hook manager will look at each callee's return value, and will return the first non null value
+     */
+    const BEHAVIOR_GETTER = 0;
 
-        /**
-        *private instance of singleton
-        */
-        private static $instance = NULL;
-        /**
-         * constructor
-         */
-        private function __construct(){
-                $this->hooksArray = Array();
-                //$this->logger->debug($action . " $siteName/$fileName to $siteName/$newFileName");
-                //$this->logger->err("modifying $siteFolderPath/$fileName not allowed");
+    /**
+     * the aim of the hook is to allow the plugins to manipulate(filter) the data.
+     * The first parameter is the value that can be filtered and returned by successive plugins. Any other parameters are
+     * to be considered as context and cannot be returned.
+     */
+    const BEHAVIOR_FILTER = 1;
+
+    /**
+     * the aim of the hook is just to allow plugins to inspect the parameters. Any return value will be ignored.
+     */
+    const BEHAVIOR_GIVER = 2;
+
+    /**
+     * registered hooks
+     */
+    private $hooksArray = NULL;
+
+    /**
+    *private instance of singleton
+    */
+    private static $instance = NULL;
+    /**
+     * constructor
+     */
+    private function __construct(){
+        $this->hooksArray = Array();
+    }
+
+    /**
+     *
+     * @return Amfphp_Core_HookManager
+     */
+    public static function getInstance() {
+        if (self::$instance == NULL) {
+            self::$instance = new Amfphp_Core_HookManager();
         }
+        return self::$instance;
+    }
 
-        /**
-         *
-         * @return Amfphp_Core_HookManager
-         */
-        public static function getInstance() {
-                if (self::$instance == NULL) {
-                        self::$instance = new Amfphp_Core_HookManager();
-                }
-                return self::$instance;
-        }
-
-        /**
-         * call the functions registered for the given hook. 
-         *
-         * @param String $hookName the name of the hook which was used in addHook( a string)
-         * @param array $paramsArray the array of the parameters to call the function with
-         * @return array $paramsArray, as modified by the hook callees.
-         */
-        public function callHooks($hookName, array $paramsArray){
-                if (isset($this->hooksArray[$hookName])){
-                        // loop on registered hooks
-                        foreach($this->hooksArray[$hookName] as $callBack){
-                            $ret = call_user_func_array($callBack, $paramsArray);
-                            if($ret){
-                                if(!is_array($ret)){
-                                    throw new Amfphp_Core_Exception("hooked method for $hookName must return array");
-                                }
-                                if(count($ret) != count($paramsArray)){
-                                    throw new Amfphp_Core_Exception("hooked function for $hookName returned array size doesn't match. returned : " . count($ret) . ", expected : " . count($paramsArray));
-                                }
-                                $paramsArray = $ret;
+     /**
+     * call the functions registered for the given hook.
+     *
+     * @param String $hookName the name of the hook which was used in addHook( a string)
+     * @param array $paramsArray the array of the parameters to call the function with
+     * @return array $paramsArray, as modified by the hook callees.
+     */
+    public function callHooks($hookName, array $paramsArray){
+            if (isset($this->hooksArray[$hookName])){
+                    // loop on registered hooks
+                    foreach($this->hooksArray[$hookName] as $callBack){
+                        $ret = call_user_func_array($callBack, $paramsArray);
+                        if($ret){
+                            if(!is_array($ret)){
+                                throw new Amfphp_Core_Exception("hooked method for $hookName must return array");
                             }
+                            if(count($ret) != count($paramsArray)){
+                                throw new Amfphp_Core_Exception("hooked function for $hookName returned array size doesn't match. returned : " . count($ret) . ", expected : " . count($paramsArray));
+                            }
+                            $paramsArray = $ret;
                         }
+                    }
+            }
+            return $paramsArray;
+    }
+
+
+    /**
+     * call the functions registered for the given hook. Parameters are passed as an array, and the first member of this array
+     * is returned. This first parameter can be modified and returned by the callees, in the case a hook where the aim is to "filter" the data.
+     * The other parameters must be considered as context, and should not be modified by the callees, and will not be returned to the caller.
+     * 
+     * @param String $hookName the name of the hook which was used in addHook( a string)
+     * @param array $paramsArray the array of the parameters to call the function with
+     * @param int $behavior. See above for consts BEHAVIOR_xxx. 
+     * @return array $paramsArray, as modified by the hook callees.
+     */
+    public function NewcallHooks($hookName, array $paramsArray){
+        $fromCallee = null;
+        if (isset($this->hooksArray[$hookName])){
+            // loop on registered hooks
+            foreach($this->hooksArray[$hookName] as $callBack){
+                $fromCallee = call_user_func_array($callBack, $paramsArray);
+                if($fromCallee){
+                    switch ($behavior){
+                        case self::BEHAVIOR_GETTER:
+                            return $fromCallee;
+                        break;
+                        case self::BEHAVIOR_FILTER:
+                            $paramsArray[0] = $fromCallee;
+                        break;
+                        default:
+                            //nothing!
+                        break;
+                    }
                 }
-                return $paramsArray;
+            }
         }
 
-
-
-        /**
-         * register a function for the given hook<br />
-         * call this method in your contexts to be notified when the hook occures<br />
-         *
-         * Inputs :
-         * $hookName : the name of the hook
-         * $callBack : Either the name of the global function, array($object, $methodName) or array($className, $staticMethodName).  See http://php.net/manual/en/function.call-user-func.php
-         * and http://www.php.net/manual/en/language.pseudo-types.php#language.types.callback for documentation.
-         */
-       public function addHook($hookName, $callBack){
-                // init the hook placeholder
-                if (!isset($this->hooksArray[$hookName])) $this->hooksArray[$hookName] = Array();
-                // add the hook callback
-                $this->hooksArray[$hookName][] = $callBack;
+        if($behavior == self::BEHAVIOR_FILTER){
+            return $fromCallee;
+        }else{
+            return null;
         }
+    }
+
+
+
+    /**
+     * register a function for the given hook<br />
+     * call this method in your contexts to be notified when the hook occures<br />
+     *
+     * Inputs :
+     * $hookName : the name of the hook
+     * $callBack : Either the name of the global function, array($object, $methodName) or array($className, $staticMethodName).  See http://php.net/manual/en/function.call-user-func.php
+     * and http://www.php.net/manual/en/language.pseudo-types.php#language.types.callback for documentation.
+     */
+    public function addHook($hookName, $callBack){
+        // init the hook placeholder
+        if (!isset($this->hooksArray[$hookName])) $this->hooksArray[$hookName] = Array();
+        // add the hook callback
+        $this->hooksArray[$hookName][] = $callBack;
+    }
 }
 ?>

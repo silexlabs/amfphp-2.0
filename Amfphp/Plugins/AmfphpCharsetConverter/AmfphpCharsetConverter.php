@@ -6,8 +6,6 @@
  * @author Ariel Sommeria-Klein
  */
 class AmfphpCharsetConverter {
-    const MAX_RECURSION_DEPTH = 10;
-
     /**
      * don't do anything
      */
@@ -68,7 +66,10 @@ class AmfphpCharsetConverter {
      */
     public $clientCharset;
 
-
+    /**
+     * constructor.
+     * @param array $config optional key/value pairs in an associative array. Used to override default configuration values.
+     */
     public function  __construct(array $config = null) {
         //defaults
         $this->clientCharset = "utf-8";
@@ -155,11 +156,11 @@ class AmfphpCharsetConverter {
 
     /**
      * converts untyped objects to their typed counterparts. Loads the class if necessary
-     * @param packet $requestPacket
+     * @param mixed $requestPacket
      * @return packet
      */
-    public function packetRequestDeserializedHook(Amfphp_Core_Amf_Packet $requestPacket){
-        $requestPacket = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($requestPacket, array($this, "convertStringFromClientToPhpCharsets"), 0, self::MAX_RECURSION_DEPTH);
+    public function packetRequestDeserializedHook($requestPacket){
+        $requestPacket = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($requestPacket, array($this, "convertStringFromClientToPhpCharsets"));
         return array($requestPacket);
 
     }
@@ -184,7 +185,7 @@ class AmfphpCharsetConverter {
      * @return <array>
      */
     public function packetResponseDeserializedHook(Amfphp_Core_Amf_Packet $responsePacket){
-        $responsePacket = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($responsePacket, array($this, "convertStringFromPhpToClientCharsets"), 0, self::MAX_RECURSION_DEPTH);
+        $responsePacket = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($responsePacket, array($this, "convertStringFromPhpToClientCharsets"));
         return array($responsePacket);
 
     }

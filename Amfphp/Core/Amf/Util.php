@@ -20,16 +20,19 @@ class Amfphp_Core_Amf_Util {
      * iterates on $obj and its sub objects, which can iether be arrays or objects
      * @param mixed $obj the object/array that will be iterated on
      * @param array $callBack the function to apply to obj and subobjs. must take 1 parameter, and return the modified object
-     * @param int $recursionDepth current recursion depth. The first call should be made with this set 0
-     * @param int $maxRecursionDepth
+     * @param int $recursionDepth current recursion depth. The first call should be made with this set 0. default is 0
+     * @param int $maxRecursionDepth. default is 30
      * @return mixed array or object, depending on type of $obj
      */
-    static public function applyFunctionToContainedObjects($obj, $callBack, $recursionDepth, $maxRecursionDepth){
+    static public function applyFunctionToContainedObjects($obj, $callBack, $recursionDepth = 0, $maxRecursionDepth = 30){
         if($recursionDepth == $maxRecursionDepth){
-            throw new Amfphp_Core_Exception("couldn't recurse deeper on object");
+            throw new Amfphp_Core_Exception("couldn't recurse deeper on object. Probably a looped reference");
         }
         //apply callBack to obj itself
         $obj = call_user_func($callBack, $obj);
+        if(!is_array($obj) && !is_object($obj)){
+            return $obj;
+        }
         foreach($obj as $key => $data) { // loop over each element
             $modifiedData = null;
             if(is_object($data) || is_array($data)){

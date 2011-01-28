@@ -48,8 +48,8 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
     /**
      * @see Amfphp_Core_Common_IDeserializer
      */
-    public function deserialize($rawData){
-        $deserializer = new Amfphp_Core_Amf_Deserializer($rawData);
+    public function deserialize($rawPostData, array $getData){
+        $deserializer = new Amfphp_Core_Amf_Deserializer($rawPostData);
         return $deserializer->deserialize();
     }
 
@@ -154,9 +154,11 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
 
     /**
      * @see Amfphp_Core_Common_ISerializer
+     * @todo not sure if this is right place for header. figure it out.
      */
     public function serialize($data){
         $serializer = new Amfphp_Core_Amf_Serializer($data);
+        //header("Content-type: " . Amfphp_Core_Amf_Constants::CONTENT_TYPE);
         return $serializer->serialize();
 
     }

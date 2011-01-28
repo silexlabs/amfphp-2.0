@@ -19,7 +19,7 @@ class Amfphp_Core_Common_ServiceRouter{
 */
     private $serviceFolderPaths;
 
-    /**
+/**
 *
 * @var array of ClassFindInfo
 */

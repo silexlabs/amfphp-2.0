@@ -17,8 +17,10 @@ class AmfphpCustomClassConverter {
      */
     public $customClassFolderPaths;
 
-    const MAX_RECURSION_DEPTH = 10;
-
+    /**
+     * constructor.
+     * @param array $config optional key/value pairs in an associative array. Used to override default configuration values.
+     */
     public function  __construct(array $config = null) {
         //default
         $this->customClassFolderPaths = array(Amfphp_ROOTPATH . "/Services/Vo/");
@@ -78,11 +80,11 @@ class AmfphpCustomClassConverter {
 
     /**
      * converts untyped objects to their typed counterparts. Loads the class if necessary
-     * @param packet $requestPacket
+     * @param mixed $requestPacket
      * @return packet
      */
-    public function packetRequestDeserializedHook(Amfphp_Core_Amf_Packet $requestPacket){
-        $requestPacket = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($requestPacket, array($this, "convertToTyped"), 0, self::MAX_RECURSION_DEPTH);
+    public function packetRequestDeserializedHook($requestPacket){
+        $requestPacket = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($requestPacket, array($this, "convertToTyped"));
         return array($requestPacket);
 
     }
@@ -110,11 +112,11 @@ class AmfphpCustomClassConverter {
 
     /**
      * looks at the outgoing packet and sets the explicit type field so that the serializer sends it properly
-     * @param packet $responsePacket
+     * @param mixed $responsePacket
      * @return <array>
      */
-    public function packetResponseDeserializedHook(Amfphp_Core_Amf_Packet $responsePacket){
-        $responsePacket = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($responsePacket, array($this, "markExplicitType"), 0, self::MAX_RECURSION_DEPTH);
+    public function packetResponseDeserializedHook($responsePacket){
+        $responsePacket = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($responsePacket, array($this, "markExplicitType"));
         return array($responsePacket);
 
     }

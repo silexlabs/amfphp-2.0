@@ -31,11 +31,14 @@ class Amfphp_Core_HttpRequestGatewayFactory {
      */
     static public function createGateway(Amfphp_Core_Config $config = null){
         $contentType = null;
-        if(isset ($_SERVER["Content-Type"])){
-            $contentType = $_SERVER["Content-Type"];
+        //for debugging
+        //throw new Exception("bla" . print_r($_SERVER, true));
+        if(isset ($_SERVER["CONTENT_TYPE"])){
+
+            $contentType = $_SERVER["CONTENT_TYPE"];
         }
         $rawInputData = self::getRawPostData();
-        return new Amfphp_Core_Gateway($rawInputData, $contentType, $config);
+        return new Amfphp_Core_Gateway($rawInputData, $_GET, $contentType, $config);
     }
 }
 ?>

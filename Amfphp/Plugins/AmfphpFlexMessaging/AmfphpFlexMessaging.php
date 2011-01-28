@@ -34,7 +34,11 @@ class AmfphpFlexMessaging{
      * @var String
      */
     private $lastFlexMessageResponseUri;
-    
+
+    /**
+     * constructor.
+     * @param array $config optional key/value pairs in an associative array. Used to override default configuration values.
+     */
     public function  __construct(array $config = null) {
         Amfphp_Core_HookManager::getInstance()->addHook(Amfphp_Core_Amf_Handler::HOOK_GET_AMF_REQUEST_MESSAGE_HANDLER, array($this, "getAmfRequestMessageHandlerHook"));
         Amfphp_Core_HookManager::getInstance()->addHook(Amfphp_Core_Amf_Handler::HOOK_GET_AMF_EXCEPTION_HANDLER, array($this, "getAmfExceptionHandlerHook"));

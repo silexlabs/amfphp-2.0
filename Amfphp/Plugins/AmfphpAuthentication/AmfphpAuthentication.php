@@ -56,7 +56,11 @@ class AmfphpAuthentication {
      * @var String
      */
     private $headerPassword;
-    
+
+    /**
+     * constructor.
+     * @param array $config optional key/value pairs in an associative array. Used to override default configuration values.
+     */
     public function  __construct(array $config = null) {
         $hookManager = Amfphp_Core_HookManager::getInstance();
         $hookManager->addHook(Amfphp_Core_Common_ServiceRouter::HOOK_SERVICE_OBJECT_CREATED, array($this, "serviceObjectCreatedHook"));
