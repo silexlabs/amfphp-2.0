@@ -38,20 +38,20 @@ class AmfphpCharsetConverterTest extends PHPUnit_Framework_TestCase {
 
     }
     
-    public function testPacketRequestDeserializedHook() {
+    public function testRequestDeserializedHook() {
         $testPacket = new Amfphp_Core_Amf_Packet();
-        $testPacket->messages[] = new Amfphp_Core_Amf_Message(null, null, array($this->textInClientCharset));
-        $ret = $this->object->packetRequestDeserializedHook($testPacket);
-        $modifiedPacket = $ret[0];
-        $this->assertEquals($this->textInPhpCharset, $modifiedPacket->messages[0]->data[0]);
+        $testPacket->messages[] = new Amfphp_Core_Amf_Message(null, null, $this->textInClientCharset);
+        $ret = $this->object->requestDeserializedHook($testPacket);
+        $modifiedPacket = $ret;
+        $this->assertEquals($this->textInPhpCharset, $modifiedPacket->messages[0]->data);
     }
 
-    public function testPacketResponseDeserializedHook() {
+    public function testResponseDeserializedHook() {
         $testPacket = new Amfphp_Core_Amf_Packet();
-        $testPacket->messages[] = new Amfphp_Core_Amf_Message(null, null, array($this->textInPhpCharset));
-        $ret = $this->object->packetResponseDeserializedHook($testPacket);
-        $modifiedPacket = $ret[0];
-        $this->assertEquals($this->textInClientCharset, $modifiedPacket->messages[0]->data[0]);
+        $testPacket->messages[] = new Amfphp_Core_Amf_Message(null, null, $this->textInPhpCharset);
+        $ret = $this->object->responseDeserializedHook($testPacket);
+        $modifiedPacket = $ret;
+        $this->assertEquals($this->textInClientCharset, $modifiedPacket->messages[0]->data);
     }
 
 }

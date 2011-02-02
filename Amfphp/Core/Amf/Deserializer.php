@@ -259,20 +259,20 @@
 		 * readObject reads the name/value properties of the amf Packet and converts them into
 		 * their equivilent php representation
 		 *
-		 * @return array The php array with the object data
+		 * @return Object The php object filled with the data
 		 */
 		protected function readObject()
 		{
-			$ret = array(); // init the array
+			$ret = new stdClass();
 			$this->amf0storedObjects[] = & $ret;
-			$key = $this->readUTF(); // grab the key
+			$key = $this->readUTF(); 
 			for ($type = $this->readByte(); $type != 9; $type = $this->readByte())
 			{
 				$val = $this->readData($type); // grab the value
-				$ret[$key] = $val; // save the name/value pair in the array
+				$ret->$key = $val; // save the name/value pair in the object
 				$key = $this->readUTF(); // get the next name
 			}
-			return $ret; // return the array
+			return $ret; 
 		}
 
 		/**

@@ -1,6 +1,6 @@
 <?php
 /* 
- * a gateway php script like the normal gateway except that it uses the test services and the plgunis in "pluginRepository"
+ * a gateway php script like the normal gateway except that it uses test services 
  * @author Ariel Sommeria-klein
  */
 
@@ -11,6 +11,11 @@ $testServiceConfig = new TestServicesConfig();
 $config->serviceFolderPaths = $testServiceConfig->serviceFolderPaths;
 $config->serviceNames2ClassFindInfo = $testServiceConfig->serviceNames2ClassFindInfo;
 $gateway = Amfphp_Core_HttpRequestGatewayFactory::createGateway($config);
-echo $gateway->service();
+$serializedResponse = $gateway->service();
+$responseHeaders = $gateway->getResponseHeaders();
+foreach($responseHeaders as $header){
+    header($header);
+}
+echo $serializedResponse;
 
 ?>

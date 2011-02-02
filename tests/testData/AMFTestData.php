@@ -210,7 +210,9 @@ class AmfTestData {
 
 
     public function buildObject(){
-        $this->dObject = Array("firstKey" => "firstValue", "secondKey" =>"secondValue");
+        $this->dObject = new stdClass();
+        $this->dObject->firstKey = "firstValue";
+        $this->dObject->secondKey = "secondValue";
         //type : 3
         $this->sObject = pack('C', 3);
 

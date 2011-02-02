@@ -30,10 +30,32 @@ class AmfphpCustomClassConverter {
             }
         }
         $hookManager = Amfphp_Core_HookManager::getInstance();
-        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_REQUEST_DESERIALIZED, array($this, "packetRequestDeserializedHook"));
-        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_RESPONSE_DESERIALIZED, array($this, "packetResponseDeserializedHook"));
+        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_REQUEST_DESERIALIZED, $this, "requestDeserializedHook");
+        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_RESPONSE_DESERIALIZED, $this, "responseDeserializedHook");
     }
 
+
+    /**
+     * converts untyped objects to their typed counterparts. Loads the class if necessary
+     * @param mixed $deserializedRequest
+     * @return mixed
+     */
+    public function requestDeserializedHook($deserializedRequest){
+        $deserializedRequest = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($deserializedRequest, array($this, "convertToTyped"));
+        return $deserializedRequest;
+
+    }
+    
+    /**
+     * looks at the outgoing packet and sets the explicit type field so that the serializer sends it properly
+     * @param mixed $deserializedResponse
+     * @return mixed
+     */
+    public function responseDeserializedHook($deserializedResponse){
+        $deserializedResponse = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($deserializedResponse, array($this, "markExplicitType"));
+        return $deserializedResponse;
+
+    }
 
     /**
      * if the object contains an explicit type marker, this method attempts to convert it to its typed counterpart
@@ -78,16 +100,6 @@ class AmfphpCustomClassConverter {
 
      }
 
-    /**
-     * converts untyped objects to their typed counterparts. Loads the class if necessary
-     * @param mixed $requestPacket
-     * @return packet
-     */
-    public function packetRequestDeserializedHook($requestPacket){
-        $requestPacket = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($requestPacket, array($this, "convertToTyped"));
-        return array($requestPacket);
-
-    }
 
     /**
      * sets the the explicit type marker on the object and its sub-objects. This is only done if it not already set, as in some cases
@@ -110,16 +122,6 @@ class AmfphpCustomClassConverter {
         return $obj;
     }
 
-    /**
-     * looks at the outgoing packet and sets the explicit type field so that the serializer sends it properly
-     * @param mixed $responsePacket
-     * @return <array>
-     */
-    public function packetResponseDeserializedHook($responsePacket){
-        $responsePacket = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($responsePacket, array($this, "markExplicitType"));
-        return array($responsePacket);
-
-    }
 
 }
 ?>

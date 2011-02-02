@@ -69,7 +69,7 @@ class Amfphp_Core_Common_ServiceRouter{
         }
 
 
-        Amfphp_Core_HookManager::getInstance()->callHooks(self::HOOK_SERVICE_OBJECT_CREATED, array($serviceObject, $methodName));
+        Amfphp_Core_HookManager::getInstance()->callHooks(self::HOOK_SERVICE_OBJECT_CREATED, $serviceObject, $methodName);
 
         if(!method_exists($serviceObject, $methodName)){
             throw new Amfphp_Core_Exception("method $methodName not found on $serviceName object ");

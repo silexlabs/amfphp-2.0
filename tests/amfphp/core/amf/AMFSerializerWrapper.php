@@ -62,8 +62,8 @@ class AmfSerializerWrapper extends Amfphp_Core_Amf_Serializer
         parent::writeObjectEnd();
     }
 
-    public function writeArray($d) {
-        parent::writeArray($d);
+    public function writeArrayOrObject($d) {
+        parent::writeArrayOrObject($d);
     }
 
     public function writeReference($d) {

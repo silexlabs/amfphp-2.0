@@ -15,12 +15,12 @@ class AmfphpLoggerTest extends PHPUnit_Framework_TestCase {
         try{
             unlink(AmfphpLogger::LOG_FILE_PATH);
         }catch(Exception $e){}
-        $logger->packetRequestSerializedHandler("bla");
+        $logger->requestSerializedHandler("bla");
         $logFileContent = file_get_contents(AmfphpLogger::LOG_FILE_PATH);
         //clean up
         unlink(AmfphpLogger::LOG_FILE_PATH);
         
-        $this->assertEquals("serialized request packet : \nbla\n", $logFileContent);
+        $this->assertEquals("serialized request : \nbla\n", $logFileContent);
     }
 
 }

@@ -18,10 +18,10 @@ class AmfphpLogger {
     public function  __construct(array $config = null) {
         $hookManager = Amfphp_Core_HookManager::getInstance();
 
-        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_REQUEST_SERIALIZED, array($this, "packetRequestSerializedHandler"));
-        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_REQUEST_DESERIALIZED, array($this, "packetRequestDeserializedHandler"));
-        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_RESPONSE_DESERIALIZED, array($this, "packetResponseDeserializedHandler"));
-        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_RESPONSE_SERIALIZED, array($this, "packetResponseSerializedHandler"));
+        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_REQUEST_SERIALIZED, $this, "requestSerializedHandler");
+        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_REQUEST_DESERIALIZED, $this, "requestDeserializedHandler");
+        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_RESPONSE_DESERIALIZED, $this, "responseDeserializedHandler");
+        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_RESPONSE_SERIALIZED, $this, "responseSerializedHandler");
     }
 
     public static function logMessage($message){
@@ -48,43 +48,39 @@ class AmfphpLogger {
 */
     /**
      * logs the serialized incoming packet
-     * @param <type> $rawData
+     * @param String $rawData
      */
-    public function packetRequestSerializedHandler($rawData){
-        self::logMessage("serialized request packet : \n$rawData");
+    public function requestSerializedHandler($rawData){
+        self::logMessage("serialized request : \n$rawData");
     }
 
     /**
-     * logs the deserialized incoming packet.
-     * @param packet $requestPacket
-     * @return packet
+     * logs the deserialized request
+     * @param mixed $deserializedRequest
      */
-    public function packetRequestDeserializedHandler(Amfphp_Core_Amf_Packet $requestPacket){
-        self::logMessage("deserialized request packet : \n" . print_r($requestPacket, true));
+    public function requestDeserializedHandler($deserializedRequest){
+        self::logMessage("deserialized request : \n" . print_r($deserializedRequest, true));
     }
 
     /**
-     * logs the deserialized incoming packet.
-     * @param packet $requestPacket
-     * @return <array>
+     * logs the deserialized response
+     * @param packet $deserializedResponse
      */
-    public function packetResponseDeserializedHandler(Amfphp_Core_Amf_Packet $responsePacket){
-        self::logMessage("deserialized response packet : \n" . print_r($responsePacket, true));
+    public function responseDeserializedHandler($deserializedResponse){
+        self::logMessage("deserialized response : \n" . print_r($deserializedResponse, true));
     }
 
     /**
      * logs the deserialized incoming packet
      * @param <type> $rawData
-     * @return <array>
      */
-    public function packetResponseSerializedHandler($rawData){
-        self::logMessage("serialized response packet : \n$rawData");
+    public function responseSerializedHandler($rawData){
+        self::logMessage("serialized response : \n$rawData");
     }
 
     /**
      * logs the exception and the packet that caused it
      * @param packet $requestPacket
-     * @return <array>
      */
     public function exceptionCaughtHandler(Exception $e, packet $requestPacket){
         self::logMessage("exception caught. exception :  \n " . $e->__toString() . "\nrequest : \n" . print_r($requestPacket, true));

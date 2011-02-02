@@ -6,14 +6,23 @@
  *
  * @author Ariel Sommeria-klein
  */
+
+$myFile = "testFile.txt";
+$fh = fopen($myFile, 'w') or die("can't open file");
+$stringData = "Bobby Bopper\n";
+fwrite($fh, $stringData);
+$stringData = "Tracy Tanner\n";
+fwrite($fh, $stringData);
+fclose($fh);
+
+
+require_once("./includes/DummyInclude.php");
+
 class MirrorService {
 
     public function returnOneParam($param){
         return $param;
     }
 
-    public function returnSum($a, $b){
-        return $a + $b;
-    }
 }
 ?>

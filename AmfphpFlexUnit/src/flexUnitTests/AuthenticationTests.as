@@ -58,7 +58,7 @@ package flexUnitTests
 		}
 		
 		public function testAccessingProtectedMethodStep2WithCredentialsHeader():void{
-			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyAccessGranted, 500));
+			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyAccessGranted, 1000));
 			_nc.addHeader("Credentials", true, {userid:"admin", password:"adminPassword"});
 			_nc.simpleCall("AuthenticationService/adminMethod");	
 		}

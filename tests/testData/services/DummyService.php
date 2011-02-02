@@ -4,6 +4,7 @@
  *
  * @author Ariel Sommeria-klein
  */
+
 class DummyService {
     function returnNull(){
         return null;

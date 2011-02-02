@@ -17,24 +17,6 @@ To read the license please visit http://www.gnu.org/copyleft/gpl.html
  */
 class Amfphp_Core_HookManager{
     /**
-     * The aim of the hook is for the caller to get an object/value from a plugin.
-     * The hook manager will look at each callee's return value, and will return the first non null value
-     */
-    const BEHAVIOR_GETTER = 0;
-
-    /**
-     * the aim of the hook is to allow the plugins to manipulate(filter) the data.
-     * The first parameter is the value that can be filtered and returned by successive plugins. Any other parameters are
-     * to be considered as context and cannot be returned.
-     */
-    const BEHAVIOR_FILTER = 1;
-
-    /**
-     * the aim of the hook is just to allow plugins to inspect the parameters. Any return value will be ignored.
-     */
-    const BEHAVIOR_GIVER = 2;
-
-    /**
      * registered hooks
      */
     private $hooksArray = NULL;
@@ -68,7 +50,7 @@ class Amfphp_Core_HookManager{
      * @param array $paramsArray the array of the parameters to call the function with
      * @return array $paramsArray, as modified by the hook callees.
      */
-    public function callHooks($hookName, array $paramsArray){
+    public function oldcallHooks($hookName, array $paramsArray){
             if (isset($this->hooksArray[$hookName])){
                     // loop on registered hooks
                     foreach($this->hooksArray[$hookName] as $callBack){
@@ -89,60 +71,52 @@ class Amfphp_Core_HookManager{
 
 
     /**
-     * call the functions registered for the given hook. Parameters are passed as an array, and the first member of this array
-     * is returned. This first parameter can be modified and returned by the callees, in the case a hook where the aim is to "filter" the data.
+     * call the functions registered for the given hook. There can be as many parameters as necessary, but only the first
+     * one can be changed and and returned by the callees.
      * The other parameters must be considered as context, and should not be modified by the callees, and will not be returned to the caller.
      * 
      * @param String $hookName the name of the hook which was used in addHook( a string)
-     * @param array $paramsArray the array of the parameters to call the function with
-     * @param int $behavior. See above for consts BEHAVIOR_xxx. 
-     * @return array $paramsArray, as modified by the hook callees.
+     * @param parameters for the function call. As many as necessary can be passed, but only the first will be filtered
+     * @return mixed the first call parameter, as filtered by the callees.
      */
-    public function NewcallHooks($hookName, array $paramsArray){
-        $fromCallee = null;
+    public function callHooks(){
+        
+        //get arguments with which to call the function. All except first, which is the hook name
+        $hookArgs = func_get_args();
+        $hookName = array_shift($hookArgs);
+        //throw new Exception("hookArgs " . print_r($hookArgs, true));
+        $filtered = $hookArgs[0];
         if (isset($this->hooksArray[$hookName])){
             // loop on registered hooks
             foreach($this->hooksArray[$hookName] as $callBack){
-                $fromCallee = call_user_func_array($callBack, $paramsArray);
+                $fromCallee = call_user_func_array($callBack, $hookArgs);
                 if($fromCallee){
-                    switch ($behavior){
-                        case self::BEHAVIOR_GETTER:
-                            return $fromCallee;
-                        break;
-                        case self::BEHAVIOR_FILTER:
-                            $paramsArray[0] = $fromCallee;
-                        break;
-                        default:
-                            //nothing!
-                        break;
-                    }
+                    $filtered = $hookArgs[0] = $fromCallee;
                 }
             }
         }
 
-        if($behavior == self::BEHAVIOR_FILTER){
-            return $fromCallee;
-        }else{
-            return null;
-        }
+        return $filtered;
     }
 
 
 
     /**
-     * register a function for the given hook<br />
-     * call this method in your contexts to be notified when the hook occures<br />
+     * register an object method for the given hook
+     * call this method in your contexts to be notified when the hook occures
+     * @see http://php.net/manual/en/function.call-user-func.php
+     * @see http://www.php.net/manual/en/language.pseudo-types.php#language.types.callback
      *
-     * Inputs :
-     * $hookName : the name of the hook
-     * $callBack : Either the name of the global function, array($object, $methodName) or array($className, $staticMethodName).  See http://php.net/manual/en/function.call-user-func.php
-     * and http://www.php.net/manual/en/language.pseudo-types.php#language.types.callback for documentation.
+     * 
+     * @param String $hookName  the name of the hook
+     * @param Object $object the object on which to call the method
+     * @param String $methodName the name of the method to call on the object
      */
-    public function addHook($hookName, $callBack){
+    public function addHook($hookName, $object, $methodName){
         // init the hook placeholder
         if (!isset($this->hooksArray[$hookName])) $this->hooksArray[$hookName] = Array();
         // add the hook callback
-        $this->hooksArray[$hookName][] = $callBack;
+        $this->hooksArray[$hookName][] = array($object, $methodName);
     }
 }
 ?>

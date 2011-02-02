@@ -40,19 +40,19 @@ class AmfphpFlexMessaging{
      * @param array $config optional key/value pairs in an associative array. Used to override default configuration values.
      */
     public function  __construct(array $config = null) {
-        Amfphp_Core_HookManager::getInstance()->addHook(Amfphp_Core_Amf_Handler::HOOK_GET_AMF_REQUEST_MESSAGE_HANDLER, array($this, "getAmfRequestMessageHandlerHook"));
-        Amfphp_Core_HookManager::getInstance()->addHook(Amfphp_Core_Amf_Handler::HOOK_GET_AMF_EXCEPTION_HANDLER, array($this, "getAmfExceptionHandlerHook"));
+        Amfphp_Core_HookManager::getInstance()->addHook(Amfphp_Core_Amf_Handler::HOOK_GET_AMF_REQUEST_MESSAGE_HANDLER, $this, "getAmfRequestMessageHandlerHook");
+        Amfphp_Core_HookManager::getInstance()->addHook(Amfphp_Core_Amf_Handler::HOOK_GET_AMF_EXCEPTION_HANDLER, $this, "getAmfExceptionHandlerHook");
         $this->clientUsesFlexMessaging = false;
     }
 
     /**
      *
-     * @param Amfphp_Core_Amf_Message $requestMessage the request message
      * @param Object $handler. null at call. If the plugin takes over the handling of the request message,
      * it must set this to a proper handler for the message, probably itself.
+     * @param Amfphp_Core_Amf_Message $requestMessage the request message
      * @return array
      */
-    public function getAmfRequestMessageHandlerHook(Amfphp_Core_Amf_Message $requestMessage, $handler){
+    public function getAmfRequestMessageHandlerHook($handler, Amfphp_Core_Amf_Message $requestMessage){
 
         //for test purposes
         //throw new Amfphp_Core_Exception(print_r($requestMessage->data[0], true));
@@ -72,7 +72,7 @@ class AmfphpFlexMessaging{
         if($messageType == self::FLEX_TYPE_COMMAND_MESSAGE || $messageType == self::FLEX_TYPE_REMOTING_MESSAGE){
             //recognized message type! This plugin will handle it
             $this->clientUsesFlexMessaging = true;
-            return array($requestMessage, $this);
+            return $this;
         }
     }
 
@@ -84,7 +84,7 @@ class AmfphpFlexMessaging{
      */
     public function getAmfExceptionHandlerHook($handler){
         if($this->clientUsesFlexMessaging){
-            return array($this);
+            return $this;
         }
     }
 

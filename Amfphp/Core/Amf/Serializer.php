@@ -298,13 +298,13 @@ class Amfphp_Core_Amf_Serializer{
     }
 
     /**
-     * writeArray first deterines if the PHP array contains all numeric indexes
+     * writeArrayOrObject first deterines if the PHP array contains all numeric indexes
      * or a mix of keys.  Then it either writes the array code (0x0A) or the
      * object code (0x03) and then the associated data.
      *
      * @param array $d The php array
      */
-    protected function writeArray($d)
+    protected function writeArrayOrObject($d)
     {
             if($this->writeReferenceIfExists($d))
             {
@@ -400,7 +400,7 @@ class Amfphp_Core_Amf_Serializer{
 
     /**
      * writeObjectFromArray handles writing a php array with string or mixed keys.  It does
-     * not write the object code as that is handled by the writeArray and this method
+     * not write the object code as that is handled by the writeArrayOrObject and this method
      * is shared with the CustomClass writer which doesn't use the object code.
      *
      * @param array $d The php array with string keys
@@ -415,7 +415,7 @@ class Amfphp_Core_Amf_Serializer{
 
     /**
      * writeObject handles writing a php array with string or mixed keys.  It does
-     * not write the object code as that is handled by the writeArray and this method
+     * not write the object code as that is handled by the writeArrayOrObject and this method
      * is shared with the CustomClass writer which doesn't use the object code.
      *
      * @param array $d The php array with string keys
@@ -507,7 +507,7 @@ class Amfphp_Core_Amf_Serializer{
             }
             elseif (is_array($d))
             { // array
-                    $this->writeArray($d);
+                    $this->writeArrayOrObject($d);
                     return;
             }
             elseif (is_object($d))
@@ -538,7 +538,7 @@ class Amfphp_Core_Amf_Serializer{
                     //TODO not sure if this is still relevant. A.S.
                     elseif( (is_a($d, 'ArrayAccess') || is_a($d, 'ArrayObject')) && !$hasExplicitType)
                     {
-                            $this->writeArray($d);
+                            $this->writeArrayOrObject($d);
                             return;
                     }
                     else if($hasExplicitType)
@@ -546,7 +546,7 @@ class Amfphp_Core_Amf_Serializer{
                             $this->writeTypedObject($d);
                             return;
                     }else{
-                            $this->writeArray($d);
+                            $this->writeArrayOrObject($d);
                             return;
                     }
             }

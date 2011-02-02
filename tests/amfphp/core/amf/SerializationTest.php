@@ -92,9 +92,9 @@ class SerializationTest extends PHPUnit_Framework_TestCase{
         $expectedSerialized = $testData->sString;
         $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));
 
-        //writeArray (Object)
+        //writeArrayOrObject (Object)
         $serializer = new AmfSerializerWrapper($emptyPacket);
-        $serializer->writeArray($testData->dObject);
+        $serializer->writeArrayOrObject($testData->dObject);
         $serialized = $serializer->getOutput();
         $expectedSerialized = $testData->sObject;
         $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));
@@ -120,9 +120,9 @@ class SerializationTest extends PHPUnit_Framework_TestCase{
         $expectedSerialized = $testData->sReference;
         $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));
 
-        //writeArray (EcmaArray)
+        //writeArrayOrObject (EcmaArray)
         $serializer = new AmfSerializerWrapper($emptyPacket);
-        $serializer->writeArray($testData->dEcmaArray);
+        $serializer->writeArrayOrObject($testData->dEcmaArray);
         $serialized = $serializer->getOutput();
         $expectedSerialized = $testData->sEcmaArray;
         $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));
@@ -134,9 +134,9 @@ class SerializationTest extends PHPUnit_Framework_TestCase{
         $expectedSerialized = $testData->sObjectEnd;
         $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));
 
-        //writeArray (strict array)
+        //writeArrayOrObject (strict array)
         $serializer = new AmfSerializerWrapper($emptyPacket);
-        $serializer->writeArray($testData->dStrictArray);
+        $serializer->writeArrayOrObject($testData->dStrictArray);
         $serialized = $serializer->getOutput();
         $expectedSerialized = $testData->sStrictArray;
         $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));

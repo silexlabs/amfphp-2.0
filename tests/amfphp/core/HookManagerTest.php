@@ -11,16 +11,11 @@ class Amfphp_Core_HookManagerTest extends PHPUnit_Framework_TestCase {
     public function testHook() {
         $hookManager = Amfphp_Core_HookManager::getInstance();
         //add the same hook twice to test filtering
-        $hookManager->addHook("TESTHOOK", array($this, "double"));
-        $hookManager->addHook("TESTHOOK", array($this, "double"));
-        return;
+        $hookManager->addHook("TESTHOOK", $this, "double");
+        $hookManager->addHook("TESTHOOK", $this, "double");
 
-        $ret = $hookManager->callHooks("TESTHOOK", array(1), Amfphp_Core_HookManager::BEHAVIOR_GETTER);
-        $this->assertEquals(2, $ret);
-        $ret = $hookManager->callHooks("TESTHOOK", array(1), Amfphp_Core_HookManager::BEHAVIOR_FILTER);
+        $ret = $hookManager->callHooks("TESTHOOK", 1);
         $this->assertEquals(4, $ret);
-        $ret = $hookManager->callHooks("TESTHOOK", array(1), Amfphp_Core_HookManager::BEHAVIOR_GIVER);
-        $this->assertEquals(null, $ret);
 
 
     }

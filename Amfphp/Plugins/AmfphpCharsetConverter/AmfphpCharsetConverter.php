@@ -95,15 +95,39 @@ class AmfphpCharsetConverter {
             return;
         }
         $hookManager = Amfphp_Core_HookManager::getInstance();
-        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_REQUEST_DESERIALIZED, array($this, "packetRequestDeserializedHook"));
-        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_RESPONSE_DESERIALIZED, array($this, "packetResponseDeserializedHook"));
+        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_REQUEST_DESERIALIZED, $this, "requestDeserializedHook");
+        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_RESPONSE_DESERIALIZED, $this, "responseDeserializedHook");
     }
+
+
+    /**
+     * converts untyped objects to their typed counterparts. Loads the class if necessary
+     * @param mixed $deserializedRequest
+     * @return mixed
+     */
+    public function requestDeserializedHook($deserializedRequest){
+        $deserializedRequest = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($deserializedRequest, array($this, "convertStringFromClientToPhpCharsets"));
+        return $deserializedRequest;
+
+    }
+    
+    /**
+     * looks at the response and sets the explicit type field so that the serializer sends it properly
+     * @param mixed $deserializedResponse
+     * @return mixed
+     */
+    public function responseDeserializedHook($deserializedResponse){
+        $deserializedResponse = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($deserializedResponse, array($this, "convertStringFromPhpToClientCharsets"));
+        return $deserializedResponse;
+
+    }
+
 
     /**
      * convert the string. finds the proper encoding depending on direction
-     * @param <type> $string data to convert
-     * @param <type> $direction one of the DIRECTION_XXX consts described above
-     * @return <type>
+     * @param String $string data to convert
+     * @param int $direction one of the DIRECTION_XXX consts described above
+     * @return String
      */
     private function transliterate($string, $direction)
     {
@@ -155,17 +179,6 @@ class AmfphpCharsetConverter {
      }
 
     /**
-     * converts untyped objects to their typed counterparts. Loads the class if necessary
-     * @param mixed $requestPacket
-     * @return packet
-     */
-    public function packetRequestDeserializedHook($requestPacket){
-        $requestPacket = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($requestPacket, array($this, "convertStringFromClientToPhpCharsets"));
-        return array($requestPacket);
-
-    }
-
-    /**
      * note: This is not a recursive function. Rather the recusrion is handled by Amfphp_Core_Amf_Util::applyFunctionToContainedObjects.
      * must be public so that Amfphp_Core_Amf_Util::applyFunctionToContainedObjects can call it
      *
@@ -179,16 +192,6 @@ class AmfphpCharsetConverter {
         return $this->transliterate($obj, self::DIRECTION_PHP_TO_CLIENT);
     }
 
-    /**
-     * looks at the outgoing packet and sets the explicit type field so that the serializer sends it properly
-     * @param packet $responsePacket
-     * @return <array>
-     */
-    public function packetResponseDeserializedHook(Amfphp_Core_Amf_Packet $responsePacket){
-        $responsePacket = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($responsePacket, array($this, "convertStringFromPhpToClientCharsets"));
-        return array($responsePacket);
-
-    }
 
 }
 ?>

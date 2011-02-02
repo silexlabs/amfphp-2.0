@@ -45,7 +45,11 @@ class Amfphp_Core_Config {
     public $disabledPlugins;
 
     public function  __construct() {
-        $this->serviceFolders = array(dirname(__FILE__) . "../Services");
+        $this->serviceFolderPaths = array();
+        //new folder coherent with the naming scheme
+        $this->serviceFolderPaths [] = dirname(__FILE__) . "/Services";
+        //legacy folder
+        $this->serviceFolderPaths [] = dirname(__FILE__) . "/services";
         $this->serviceNames2ClassFindInfo = array();
         $this->pluginsFolder = Amfphp_ROOTPATH . "/Plugins/";
         $this->pluginsConfig = array();

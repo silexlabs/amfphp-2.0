@@ -63,42 +63,30 @@ class AmfphpAuthentication {
      */
     public function  __construct(array $config = null) {
         $hookManager = Amfphp_Core_HookManager::getInstance();
-        $hookManager->addHook(Amfphp_Core_Common_ServiceRouter::HOOK_SERVICE_OBJECT_CREATED, array($this, "serviceObjectCreatedHook"));
-        $hookManager->addHook(Amfphp_Core_Amf_Handler::HOOK_GET_AMF_REQUEST_HEADER_HANDLER, array($this, "getAmfRequestHeaderHandlerHook"));
+        $hookManager->addHook(Amfphp_Core_Common_ServiceRouter::HOOK_SERVICE_OBJECT_CREATED, $this, "serviceObjectCreatedHook");
+        $hookManager->addHook(Amfphp_Core_Amf_Handler::HOOK_GET_AMF_REQUEST_HEADER_HANDLER, $this, "getAmfRequestHeaderHandlerHook");
         $this->headerUserId = null;
         $this->headerPassword = null;
     }
 
-    public function getAmfRequestHeaderHandlerHook(Amfphp_Core_Amf_Header $header){
+    /**
+     * @param Object $handler
+     * @param Amfphp_Core_Amf_Header $header the request header
+     * @return AmfphpAuthentication 
+     */
+    public function getAmfRequestHeaderHandlerHook($handler, Amfphp_Core_Amf_Header $header){
         if($header->name == Amfphp_Core_Amf_Constants::CREDENTIALS_HEADER_NAME){
-            return array($header, $this);
+            return $this;
         }
 
     }
-    /**
-     * looks for a match between the user roles and the accepted roles
-     * @param <type> $userRoles
-     * @param <type> $acceptedRoles
-     * @return <type>
-     */
-    private function doRolesMatch($userRoles, $acceptedRoles){
-            foreach($userRoles as $userRole){
-                foreach($acceptedRoles as $acceptedRole){
-                    if($userRole == $acceptedRole){
-                        //a match is found
-                        return true;
 
-                    }
-                }
-            }
-            return false;
-    }
-    
+
     /**
      * called when the service object is created, just before the method call.
      * Tries to authenticate if a credentials header was sent in the packet.
-     * Throws an exception if the roles don't match 
-     * 
+     * Throws an exception if the roles don't match
+     *
      * @param <Object> $serviceObject
      * @param <String> $methodName
      * @return <array>
@@ -127,12 +115,32 @@ class AmfphpAuthentication {
         if(!isset ($_SESSION[self::SESSION_FIELD_ROLES])){
             throw new Amfphp_Core_Exception("User not authenticated");
         }
-        
+
         $userRoles = $_SESSION[self::SESSION_FIELD_ROLES];
         if(!$this->doRolesMatch($userRoles, $acceptedRoles)){
             throw new Amfphp_Core_Exception("roles don't match");
         }
     }
+    
+    /**
+     * looks for a match between the user roles and the accepted roles
+     * @param <type> $userRoles
+     * @param <type> $acceptedRoles
+     * @return <type>
+     */
+    private function doRolesMatch($userRoles, $acceptedRoles){
+            foreach($userRoles as $userRole){
+                foreach($acceptedRoles as $acceptedRole){
+                    if($userRole == $acceptedRole){
+                        //a match is found
+                        return true;
+
+                    }
+                }
+            }
+            return false;
+    }
+
 
     /**
      * clears the session info set by the plugin. Use to logout
@@ -173,7 +181,7 @@ class AmfphpAuthentication {
 
     /**
      * looks for a "Credentials" request header. If there is one, uses it to try to authentify the user.
-     * @param Amfphp_Core_Amf_Header $header
+     * @param Amfphp_Core_Amf_Header $header the request header
      * @return void
      */
     public function handleRequestHeader(Amfphp_Core_Amf_Header $header){
