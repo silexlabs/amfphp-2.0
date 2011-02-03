@@ -6,6 +6,7 @@ package flexUnitTests
 	import mx.rpc.events.ResultEvent;
 	import mx.rpc.remoting.RemoteObject;
 	
+	import org.amfphp.test.ExternalizableDummy;
 	import org.amfphp.test.TestCustomClass1;
 
 	public class RemoteObjectTests extends TestCase
@@ -31,7 +32,7 @@ package flexUnitTests
 		public function testSimpleRequest():void{
 			//_myConnection.getServices();
 			_myConnection.returnOneParam("boo");
-			_myConnection.addEventListener(ResultEvent.RESULT, addAsync(simpleRequestResultHandler, 500));
+			_myConnection.addEventListener(ResultEvent.RESULT, addAsync(simpleRequestResultHandler, 1000));
 		}
 		
 		public function simpleRequestResultHandler(event:ResultEvent):void{
@@ -40,7 +41,7 @@ package flexUnitTests
 		
 		public function testBadRequest():void{
 			_myConnection.getInexistantMethod();
-			_myConnection.addEventListener(FaultEvent.FAULT, addAsync(badRequestFaultHandler, 500));
+			_myConnection.addEventListener(FaultEvent.FAULT, addAsync(badRequestFaultHandler, 1000));
 		}
 		
 		public function badRequestFaultHandler(event:FaultEvent):void{
@@ -49,13 +50,27 @@ package flexUnitTests
 		
 		public function testSendingAndReceivingATypedObject():void{
 			_myConnection.returnOneParam(new TestCustomClass1());
-			_myConnection.addEventListener(ResultEvent.RESULT, addAsync(sendingAndReceivingATypedObjectResultHandler, 500));
+			_myConnection.addEventListener(ResultEvent.RESULT, addAsync(sendingAndReceivingATypedObjectResultHandler, 1000));
 			
 		}
 
 		public function sendingAndReceivingATypedObjectResultHandler(event:ResultEvent):void{
 			assertTrue(event.result is TestCustomClass1);
 		}
+		
+		
+		public function testSendingAndReceivingAnIExternalizable():void{
+			_myConnection.returnOneParam(new ExternalizableDummy());
+			_myConnection.addEventListener(ResultEvent.RESULT, addAsync(sendingAndReceivingAnIExternalizableResultHandler, 1000));
+			_myConnection.addEventListener(FaultEvent.FAULT, addAsync(badRequestFaultHandler, 1000));
+			
+		}
+		
+		
+		public function sendingAndReceivingAnIExternalizableResultHandler(event:ResultEvent):void{
+			assertTrue(event.result is ExternalizableDummy);
+		}
+		
 		
 		
 	}

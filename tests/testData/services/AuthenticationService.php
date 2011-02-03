@@ -14,8 +14,8 @@ class AuthenticationService {
     /**
      * test login function
      * 
-     * @param <type> $userid
-     * @param <type> $password
+     * @param String $userid
+     * @param String $password
      */
     public function login($userId, $password){
         if(($userId == "user") && ($password == "userPassword")){

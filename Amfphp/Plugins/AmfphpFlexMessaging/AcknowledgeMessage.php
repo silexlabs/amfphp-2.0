@@ -14,7 +14,7 @@ class AmfphpFlexMessaging_AcknowledgeMessage
         public $destination;
         public $body;
         public $timeToLive;
-        public $timeStamp;
+        public $timestamp;
         public $headers;
 
 	public function  __construct($correlationId)

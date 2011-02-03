@@ -133,7 +133,6 @@
 
 				$type = $this->readByte(); // grab the type of the element
 				$data = $this->readData($type); // turn the element into real data
-
                                 $message = new Amfphp_Core_Amf_Message($target, $response, $data);
                                 $this->deserializedPacket->messages[] = $message;
 
@@ -621,7 +620,7 @@
 
                 /**
                  * this probably needs some refactoring. Leave as is for now... A.S.
-                 * @return <Object>
+                 * @return Object
                  */
 		protected function readAmf3Object()
 		{
@@ -678,49 +677,31 @@
 			//Add to references as circular references may search for this object
 			$this->storedObjects[] = & $obj;
 
-			if ($classDefinition['externalizable'])
-			{
-				if ($type == 'flex.messaging.io.ArrayCollection')
-				{
-					$obj = $this->readAmf3Data();
-				}
-				else if ($type == 'flex.messaging.io.ObjectProxy')
-				{
-					$obj = $this->readAmf3Data();
-				}
-				else
-				{
-					throw new Amfphp_Core_Exception("Unable to read externalizable data type " . $type);
-				}
-			}
-			else
-			{
-				$members = $classDefinition['members'];
-				$memberCount = count($members);
-				for ($i = 0; $i < $memberCount; $i++)
-				{
-					$val = $this->readAmf3Data();
-					$key = $members[$i];
-                                         $obj->$key = $val;
-				}
+                        $members = $classDefinition['members'];
+                        $memberCount = count($members);
+                        for ($i = 0; $i < $memberCount; $i++)
+                        {
+                                $val = $this->readAmf3Data();
+                                $key = $members[$i];
+                                 $obj->$key = $val;
+                        }
 
-				if ($classDefinition['dynamic'] /* && obj is ASObject*/)
-				{
-					$key = $this->readAmf3String();
-					while ($key != "")
-					{
-						$value = $this->readAmf3Data();
-                                                $obj->$key = $value;
-						$key = $this->readAmf3String();
-					}
-				}
+                        if ($classDefinition['dynamic'] /* && obj is ASObject*/)
+                        {
+                                $key = $this->readAmf3String();
+                                while ($key != "")
+                                {
+                                        $value = $this->readAmf3Data();
+                                        $obj->$key = $value;
+                                        $key = $this->readAmf3String();
+                                }
+                        }
 
-				if ($type != '')
-				{
-                                        $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
-					$obj->$explicitTypeField = $type;
-				}
-			}
+                        if ($type != '')
+                        {
+                                $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
+                                $obj->$explicitTypeField = $type;
+                        }
 
 			return $obj;
 		}

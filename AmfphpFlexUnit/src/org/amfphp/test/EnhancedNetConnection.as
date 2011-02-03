@@ -60,8 +60,8 @@ package org.amfphp.test
 		/**
 		 * like call, but with out responder
 		 * */
-		public function simpleCall(command:String, ... args):void{
-			call(command, new Responder(onResult, onStatus), args);
+		public function simpleCall(command:String, param1:Object = null):void{
+			call(command, new Responder(onResult, onStatus), param1);
 		}
 	}
 }

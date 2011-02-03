@@ -36,21 +36,22 @@ package flexUnitTests
 		{
 		}
 		public function testReturnOneParam():void{
-			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnOneParam, 500));
+			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnTestString, 1000));
 			_nc.simpleCall("MirrorService/returnOneParam", "testString");	
 		}
-		private function verifyReturnOneParam(event:ObjEvent):void{
+		private function verifyReturnTestString(event:ObjEvent):void{
+			assertTrue(event.obj is String);
 			assertEquals("testString", event.obj);
 		}
 		
 		public function testErrorFindingService():void{
-			_nc.addEventListener(EnhancedNetConnection.EVENT_ONSTATUS, addAsync(catchErrorFindingService, 200));
+			_nc.addEventListener(EnhancedNetConnection.EVENT_ONSTATUS, addAsync(catchErrorFindingService, 1000));
 			_nc.simpleCall("NoShirtNoShoesNoService/returnOneParam", "testString");	
 		}
 		
 		
 		public function testErrorFindingService2():void{
-			_nc.addEventListener(EnhancedNetConnection.EVENT_ONSTATUS, addAsync(catchErrorFindingService, 200));
+			_nc.addEventListener(EnhancedNetConnection.EVENT_ONSTATUS, addAsync(catchErrorFindingService, 1000));
 			_nc.simpleCall("nothingReally", "testString");	
 		}
 		
@@ -60,13 +61,16 @@ package flexUnitTests
 		
 		
 		//test can't be run, the netconnection doesn't accept the call
-		/*
 		public function testSendingExternalizableObject():void{
-			_nc.addEventListener(EnhancedNetConnection.EVENT_ONSTATUS, addAsync(catchErrorFindingService, 200));
+			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnExternalizableDummy, 1000));
 			var ext:ExternalizableDummy = new ExternalizableDummy();
 			_nc.simpleCall("MirrorService/returnOneParam", ext);	
 		}			
-		*/
+		
+		private function verifyReturnExternalizableDummy(event:ObjEvent):void{
+			assertTrue(event.obj is ExternalizableDummy);
+		}
+		
 		
 
 		
