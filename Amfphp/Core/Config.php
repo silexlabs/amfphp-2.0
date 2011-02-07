@@ -16,14 +16,14 @@ class Amfphp_Core_Config {
     /**
      * a dictionary of service classes represented in a ClassFindInfo.
      * The key is the name of the service, the value is the class find info.
-     * for example: AmfphpDiscoveryService -> new ClassfindInfo( ... /plugins/serviceBrowser/AmfphpDiscoveryService.php, AmfphpDiscoveryService)
+     * for example: AmfphpDiscoveryService -> new ClassfindInfo( ... /Plugins/serviceBrowser/AmfphpDiscoveryService.php, AmfphpDiscoveryService)
      * The forward slash is important, don't use '\'!     
      * @var <array> of ClassFindInfo
      */
     public $serviceNames2ClassFindInfo;
 
     /**
-     * path to the folder containing the plugins. defaults to Amfphp_ROOTPATH . "/plugins/"
+     * path to the folder containing the plugins. defaults to Amfphp_ROOTPATH . "/Plugins/"
      * @var String
      */
     public $pluginsFolder;

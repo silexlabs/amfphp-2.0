@@ -30,8 +30,8 @@ require_once Amfphp_ROOTPATH . "Core/Amf/Serializer.php";
 require_once Amfphp_ROOTPATH . "Core/Amf/Util.php";
 
 //core/Amf/types
-require_once Amfphp_ROOTPATH . "Core/Amf/types/ByteArray.php";
-require_once Amfphp_ROOTPATH . "Core/Amf/types/Undefined.php";
+require_once Amfphp_ROOTPATH . "Core/Amf/Types/ByteArray.php";
+require_once Amfphp_ROOTPATH . "Core/Amf/Types/Undefined.php";
 
 //core
 require_once Amfphp_ROOTPATH . "Core/Config.php";

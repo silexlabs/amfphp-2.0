@@ -561,7 +561,7 @@
 			if ($inline)
 			{
 				$xml = $this->readBuffer($handle);
-				$this->storedStrings[] = $xml;
+				$this->storedObjects[] = $xml; 
 			}
 			else
 			{

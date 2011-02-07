@@ -25,25 +25,25 @@ class Amfphp_Core_PluginManagerTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * the testPlugins folder must be scanned and in it found the class DummyPlugin, which contains an instanication counter.
+     * the TestPlugins folder must be scanned and in it found the class DummyPlugin, which contains an instanication counter.
      * It is included and instanciated by the plugin manager, and the test looks at the instanciation counter to check that an instance was created
      */
     public function testSimple(){
         
-        $this->pluginManager->loadPlugins(dirname(__FILE__) . "/../../TestData/testPlugins/");
+        $this->pluginManager->loadPlugins(dirname(__FILE__) . "/../../TestData/TestPlugins/");
         $this->assertEquals(1, DummyPlugin::$instanciationCounter);
     }
 
     public function testDisabled(){
         $disabledPluginLoadCount = DisabledPlugin::$instanciationCounter;
-        $this->pluginManager->loadPlugins(dirname(__FILE__) . "/../../TestData/testPlugins/", null, array("DisabledPlugin"));
+        $this->pluginManager->loadPlugins(dirname(__FILE__) . "/../../TestData/TestPlugins/", null, array("DisabledPlugin"));
         $this->assertEquals($disabledPluginLoadCount, DisabledPlugin::$instanciationCounter);
 
     }
 
     public function testConfig(){
         $pluginsConfig = array("DummyPlugin" => array("dummyConfVar" => "custom"));
-        $this->pluginManager->loadPlugins(dirname(__FILE__) . "/../../TestData/testPlugins/", $pluginsConfig);
+        $this->pluginManager->loadPlugins(dirname(__FILE__) . "/../../TestData/TestPlugins/", $pluginsConfig);
         $this->assertEquals("custom", DummyPlugin::$dummyConfVar);
 
 

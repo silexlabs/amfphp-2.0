@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__) . '/../../../../Amfphp/plugins/AmfphpCharsetConverter/AmfphpCharsetConverter.php';
+require_once dirname(__FILE__) . '/../../../../Amfphp/Plugins/AmfphpCharsetConverter/AmfphpCharsetConverter.php';
 require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
 
 /**

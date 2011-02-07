@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__) . '/../../../../Amfphp/plugins/AmfphpFlexMessaging/AmfphpFlexMessaging.php';
+require_once dirname(__FILE__) . '/../../../../Amfphp/Plugins/AmfphpFlexMessaging/AmfphpFlexMessaging.php';
 require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
 require_once dirname(__FILE__) . "/../../../TestData/TestServicesConfig.php";
 

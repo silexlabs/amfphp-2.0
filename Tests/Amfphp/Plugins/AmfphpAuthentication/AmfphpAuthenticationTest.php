@@ -1,8 +1,8 @@
 <?php
 
-require_once dirname(__FILE__).'/../../../../Amfphp/plugins/AmfphpAuthentication/AmfphpAuthentication.php';
+require_once dirname(__FILE__).'/../../../../Amfphp/Plugins/AmfphpAuthentication/AmfphpAuthentication.php';
 require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
-require_once dirname(__FILE__) . "/../../../TestData/services/AuthenticationService.php";
+require_once dirname(__FILE__) . "/../../../TestData/Services/AuthenticationService.php";
 
 /**
  * Test class for AmfphpAuthentication.

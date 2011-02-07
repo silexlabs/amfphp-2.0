@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__) . '/../../../../Amfphp/plugins/AmfphpCustomClassConverter/AmfphpCustomClassConverter.php';
+require_once dirname(__FILE__) . '/../../../../Amfphp/Plugins/AmfphpCustomClassConverter/AmfphpCustomClassConverter.php';
 require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
 require_once dirname(__FILE__) . "/../../../TestData/CustomClasses/TestCustomClass1.php";
 require_once dirname(__FILE__) . "/../../../TestData/CustomClasses/TestCustomClass2.php";

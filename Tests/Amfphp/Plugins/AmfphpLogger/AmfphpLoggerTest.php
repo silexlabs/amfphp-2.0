@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__) . '/../../../../Amfphp/plugins/AmfphpLogger/AmfphpLogger.php';
+require_once dirname(__FILE__) . '/../../../../Amfphp/Plugins/AmfphpLogger/AmfphpLogger.php';
 require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
 
 /**
