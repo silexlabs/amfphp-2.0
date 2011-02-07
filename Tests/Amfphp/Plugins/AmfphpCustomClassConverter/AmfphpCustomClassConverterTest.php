@@ -33,7 +33,7 @@ class AmfphpCustomClassConverterTest extends PHPUnit_Framework_TestCase {
 
     }
 
-    public function testrequestDeserializedHook() {
+    public function testrequestDeserializedFilter() {
         
         $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
         //3 level object: TestCustomClass1, untyped, TestCustomClass2 with some data around
@@ -51,7 +51,7 @@ class AmfphpCustomClassConverterTest extends PHPUnit_Framework_TestCase {
         $testMessage = new Amfphp_Core_Amf_Message(null, null, array($testObj1));
         $testPacket = new Amfphp_Core_Amf_Packet();
         $testPacket->messages[] = $testMessage;
-        $ret = $this->object->requestDeserializedHook($testPacket);
+        $ret = $this->object->requestDeserializedFilter($testPacket);
         $modifiedPacket = $ret;
         $modifiedObj = $modifiedPacket->messages[0]->data[0];
         $this->assertEquals("TestCustomClass1", get_class($modifiedObj));
@@ -67,7 +67,7 @@ class AmfphpCustomClassConverterTest extends PHPUnit_Framework_TestCase {
         $testMessage = new Amfphp_Core_Amf_Message(null, null, array($testObj2));
         $testPacket = new Amfphp_Core_Amf_Packet();
         $testPacket->messages[] = $testMessage;
-        $ret = $this->object->requestDeserializedHook($testPacket);
+        $ret = $this->object->requestDeserializedFilter($testPacket);
         $modifiedPacket = $ret;
         $modifiedObj = $modifiedPacket->messages[0]->data[0];
         $this->assertEquals("TestCustomClass3", get_class($modifiedObj));
@@ -78,7 +78,7 @@ class AmfphpCustomClassConverterTest extends PHPUnit_Framework_TestCase {
         $testMessage = new Amfphp_Core_Amf_Message(null, null, array($testObj3));
         $testPacket = new Amfphp_Core_Amf_Packet();
         $testPacket->messages[] = $testMessage;
-        $ret = $this->object->requestDeserializedHook($testPacket);
+        $ret = $this->object->requestDeserializedFilter($testPacket);
         $modifiedPacket = $ret;
         $modifiedObj = $modifiedPacket->messages[0]->data[0];
         $this->assertEquals("flex.messaging.Bla", $modifiedObj->$explicitTypeField);
@@ -86,7 +86,7 @@ class AmfphpCustomClassConverterTest extends PHPUnit_Framework_TestCase {
 
     }
 
-    public function testresponseDeserializedHook() {
+    public function testresponseDeserializedFilter() {
         $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
         //3 level object: TestCustomClass1, untyped, TestCustomClass2 with some data around
         $testObj1 = new TestCustomClass1();
@@ -101,7 +101,7 @@ class AmfphpCustomClassConverterTest extends PHPUnit_Framework_TestCase {
         $testMessage = new Amfphp_Core_Amf_Message(null,null, $testObj1);
         $testPacket = new Amfphp_Core_Amf_Packet();
         $testPacket->messages[] = $testMessage;
-        $ret = $this->object->responseDeserializedHook($testPacket);
+        $ret = $this->object->responseDeserializedFilter($testPacket);
         $modifiedPacket = $ret;
         $modifiedObj = $modifiedPacket->messages[0]->data;
         $this->assertEquals("TestCustomClass1", $modifiedObj->$explicitTypeField);
@@ -117,7 +117,7 @@ class AmfphpCustomClassConverterTest extends PHPUnit_Framework_TestCase {
         $testMessage = new Amfphp_Core_Amf_Message(null, null, $testObj2);
         $testPacket = new Amfphp_Core_Amf_Packet();
         $testPacket->messages[] = $testMessage;
-        $ret = $this->object->responseDeserializedHook($testPacket);
+        $ret = $this->object->responseDeserializedFilter($testPacket);
         $modifiedPacket = $ret;
         $modifiedObj = $modifiedPacket->messages[0]->data;
         $this->assertEquals("alreadySet", $modifiedObj->$explicitTypeField);

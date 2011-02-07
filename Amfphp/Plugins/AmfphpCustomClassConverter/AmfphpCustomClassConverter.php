@@ -29,9 +29,9 @@ class AmfphpCustomClassConverter {
                 $this->customClassFolderPaths = $config["customClassFolderPaths"];
             }
         }
-        $hookManager = Amfphp_Core_HookManager::getInstance();
-        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_REQUEST_DESERIALIZED, $this, "requestDeserializedHook");
-        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_RESPONSE_DESERIALIZED, $this, "responseDeserializedHook");
+        $hookManager = Amfphp_Core_FilterManager::getInstance();
+        $hookManager->addFilter(Amfphp_Core_Gateway::FILTER_REQUEST_DESERIALIZED, $this, "requestDeserializedFilter");
+        $hookManager->addFilter(Amfphp_Core_Gateway::FILTER_RESPONSE_DESERIALIZED, $this, "responseDeserializedFilter");
     }
 
 
@@ -40,7 +40,7 @@ class AmfphpCustomClassConverter {
      * @param mixed $deserializedRequest
      * @return mixed
      */
-    public function requestDeserializedHook($deserializedRequest){
+    public function requestDeserializedFilter($deserializedRequest){
         $deserializedRequest = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($deserializedRequest, array($this, "convertToTyped"));
         return $deserializedRequest;
 
@@ -51,7 +51,7 @@ class AmfphpCustomClassConverter {
      * @param mixed $deserializedResponse
      * @return mixed
      */
-    public function responseDeserializedHook($deserializedResponse){
+    public function responseDeserializedFilter($deserializedResponse){
         $deserializedResponse = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($deserializedResponse, array($this, "markExplicitType"));
         return $deserializedResponse;
 

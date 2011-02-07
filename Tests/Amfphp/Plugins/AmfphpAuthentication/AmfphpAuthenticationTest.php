@@ -57,11 +57,11 @@ class AmfphpAuthenticationTest extends PHPUnit_Framework_TestCase
 
     public function testLoginAndAccess(){
         $this->serviceObj->login("admin", "adminPassword");
-        $this->object->serviceObjectCreatedHook($this->serviceObj, "adminMethod");
+        $this->object->serviceObjectCreatedFilter($this->serviceObj, "adminMethod");
     }
 
     public function testNormalAccessToUnprotectedMethods(){
-        $this->object->serviceObjectCreatedHook($this->serviceObj, "logout");
+        $this->object->serviceObjectCreatedFilter($this->serviceObj, "logout");
 
     }
 
@@ -70,16 +70,16 @@ class AmfphpAuthenticationTest extends PHPUnit_Framework_TestCase
      */
     public function testLogout(){
         $this->serviceObj->login("admin", "adminPassword");
-        $this->object->serviceObjectCreatedHook($this->serviceObj, "adminMethod");
+        $this->object->serviceObjectCreatedFilter($this->serviceObj, "adminMethod");
         $this->serviceObj->logout();
-        $this->object->serviceObjectCreatedHook($this->serviceObj, "adminMethod");
+        $this->object->serviceObjectCreatedFilter($this->serviceObj, "adminMethod");
     }
     /**
      * @expectedException Amfphp_Core_Exception
      */
     public function testAccessWithoutAuthentication()
     {
-        $this->object->serviceObjectCreatedHook($this->serviceObj, "adminMethod");
+        $this->object->serviceObjectCreatedFilter($this->serviceObj, "adminMethod");
     }
 
     /**
@@ -87,11 +87,11 @@ class AmfphpAuthenticationTest extends PHPUnit_Framework_TestCase
      */
     public function testBadRole(){
         $this->serviceObj->login("user", "userPassword");
-        $this->object->serviceObjectCreatedHook($this->serviceObj, "adminMethod");
+        $this->object->serviceObjectCreatedFilter($this->serviceObj, "adminMethod");
 
     }
     
-    public function testGetAmfRequestHeaderHandlerHook()
+    public function testGetAmfRequestHeaderHandlerFilter()
     {
         $credentialsAssoc = new stdClass();
         $userIdField = Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_USERID;
@@ -99,32 +99,32 @@ class AmfphpAuthenticationTest extends PHPUnit_Framework_TestCase
         $credentialsAssoc->$userIdField =  "admin";
         $credentialsAssoc->$passwordField = "adminPassword";
         $credentialsHeader = new Amfphp_Core_Amf_Header(Amfphp_Core_Amf_Constants::CREDENTIALS_HEADER_NAME, true, $credentialsAssoc);
-        $ret = $this->object->getAmfRequestHeaderHandlerHook(null, $credentialsHeader);
+        $ret = $this->object->getAmfRequestHeaderHandlerFilter(null, $credentialsHeader);
         $this->assertEquals($this->object, $ret);
         
         $otherHeader = new Amfphp_Core_Amf_Header("bla");
-        $ret = $this->object->getAmfRequestHeaderHandlerHook(null, $otherHeader);
+        $ret = $this->object->getAmfRequestHeaderHandlerFilter(null, $otherHeader);
         $this->assertEquals(null, $ret);
     }
 
     /**
      * @expectedException Amfphp_Core_Exception
      */
-    public function testWithHooksBlockAccess(){
-        Amfphp_Core_HookManager::getInstance()->callHooks(Amfphp_Core_Common_ServiceRouter::HOOK_SERVICE_OBJECT_CREATED, $this->serviceObj, "adminMethod");
+    public function testWithFiltersBlockAccess(){
+        Amfphp_Core_FilterManager::getInstance()->callFilters(Amfphp_Core_Common_ServiceRouter::FILTER_SERVICE_OBJECT_CREATED, $this->serviceObj, "adminMethod");
     }
 
-    public function testWithHooksGrantAccess(){
+    public function testWithFiltersGrantAccess(){
         $credentialsAssoc = new stdClass();
         $userIdField = Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_USERID;
         $passwordField = Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_PASSWORD;
         $credentialsAssoc->$userIdField =  "admin";
         $credentialsAssoc->$passwordField = "adminPassword";
         $credentialsHeader = new Amfphp_Core_Amf_Header(Amfphp_Core_Amf_Constants::CREDENTIALS_HEADER_NAME, true, $credentialsAssoc);
-        $hookManager = Amfphp_Core_HookManager::getInstance();
-        $ret = $hookManager->callHooks(Amfphp_Core_Amf_Handler::HOOK_GET_AMF_REQUEST_HEADER_HANDLER, null, $credentialsHeader);
+        $hookManager = Amfphp_Core_FilterManager::getInstance();
+        $ret = $hookManager->callFilters(Amfphp_Core_Amf_Handler::FILTER_GET_AMF_REQUEST_HEADER_HANDLER, null, $credentialsHeader);
         $ret->handleRequestHeader($credentialsHeader);
-        $ret->serviceObjectCreatedHook($this->serviceObj, "adminMethod");
+        $ret->serviceObjectCreatedFilter($this->serviceObj, "adminMethod");
     }
 
 

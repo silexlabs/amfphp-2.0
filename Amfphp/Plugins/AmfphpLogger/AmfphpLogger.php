@@ -16,12 +16,12 @@ class AmfphpLogger {
      * @param array $config optional key/value pairs in an associative array. Used to override default configuration values.
      */
     public function  __construct(array $config = null) {
-        $hookManager = Amfphp_Core_HookManager::getInstance();
+        $hookManager = Amfphp_Core_FilterManager::getInstance();
 
-        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_REQUEST_SERIALIZED, $this, "requestSerializedHandler");
-        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_REQUEST_DESERIALIZED, $this, "requestDeserializedHandler");
-        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_RESPONSE_DESERIALIZED, $this, "responseDeserializedHandler");
-        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_RESPONSE_SERIALIZED, $this, "responseSerializedHandler");
+        $hookManager->addFilter(Amfphp_Core_Gateway::FILTER_REQUEST_SERIALIZED, $this, "requestSerializedHandler");
+        $hookManager->addFilter(Amfphp_Core_Gateway::FILTER_REQUEST_DESERIALIZED, $this, "requestDeserializedHandler");
+        $hookManager->addFilter(Amfphp_Core_Gateway::FILTER_RESPONSE_DESERIALIZED, $this, "responseDeserializedHandler");
+        $hookManager->addFilter(Amfphp_Core_Gateway::FILTER_RESPONSE_SERIALIZED, $this, "responseSerializedHandler");
     }
 
     public static function logMessage($message){

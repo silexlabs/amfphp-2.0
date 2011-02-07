@@ -12,10 +12,10 @@ To read the license please visit http://www.gnu.org/copyleft/gpl.html
 
 /**
  * This class is a kind of event dispatcher <br />
- * Hooks are provided by Amfphp to allow your contexts to 'hook into' the rest of Amfphp, i.e. to call functions in your context at specific times<br />
+ * Filters are provided by Amfphp to allow your contexts to 'hook into' the rest of Amfphp, i.e. to call functions in your context at specific times<br />
  * This is a singleton, so use getInstance
  */
-class Amfphp_Core_HookManager{
+class Amfphp_Core_FilterManager{
     /**
      * registered hooks
      */
@@ -34,11 +34,11 @@ class Amfphp_Core_HookManager{
 
     /**
      *
-     * @return Amfphp_Core_HookManager
+     * @return Amfphp_Core_FilterManager
      */
     public static function getInstance() {
         if (self::$instance == NULL) {
-            self::$instance = new Amfphp_Core_HookManager();
+            self::$instance = new Amfphp_Core_FilterManager();
         }
         return self::$instance;
     }
@@ -46,11 +46,11 @@ class Amfphp_Core_HookManager{
      /**
      * call the functions registered for the given hook.
      *
-     * @param String $hookName the name of the hook which was used in addHook( a string)
+     * @param String $hookName the name of the hook which was used in addFilter( a string)
      * @param array $paramsArray the array of the parameters to call the function with
      * @return array $paramsArray, as modified by the hook callees.
      */
-    public function oldcallHooks($hookName, array $paramsArray){
+    public function oldcallFilters($hookName, array $paramsArray){
             if (isset($this->hooksArray[$hookName])){
                     // loop on registered hooks
                     foreach($this->hooksArray[$hookName] as $callBack){
@@ -75,11 +75,11 @@ class Amfphp_Core_HookManager{
      * one can be changed and and returned by the callees.
      * The other parameters must be considered as context, and should not be modified by the callees, and will not be returned to the caller.
      * 
-     * @param String $hookName the name of the hook which was used in addHook( a string)
+     * @param String $hookName the name of the hook which was used in addFilter( a string)
      * @param parameters for the function call. As many as necessary can be passed, but only the first will be filtered
      * @return mixed the first call parameter, as filtered by the callees.
      */
-    public function callHooks(){
+    public function callFilters(){
         
         //get arguments with which to call the function. All except first, which is the hook name
         $hookArgs = func_get_args();
@@ -112,7 +112,7 @@ class Amfphp_Core_HookManager{
      * @param Object $object the object on which to call the method
      * @param String $methodName the name of the method to call on the object
      */
-    public function addHook($hookName, $object, $methodName){
+    public function addFilter($hookName, $object, $methodName){
         // init the hook placeholder
         if (!isset($this->hooksArray[$hookName])) $this->hooksArray[$hookName] = Array();
         // add the hook callback

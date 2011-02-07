@@ -37,7 +37,7 @@ require_once Amfphp_ROOTPATH . "Core/Amf/Types/Undefined.php";
 require_once Amfphp_ROOTPATH . "Core/Config.php";
 require_once Amfphp_ROOTPATH . "Core/Exception.php";
 require_once Amfphp_ROOTPATH . "Core/Gateway.php";
-require_once Amfphp_ROOTPATH . "Core/HookManager.php";
+require_once Amfphp_ROOTPATH . "Core/FilterManager.php";
 require_once Amfphp_ROOTPATH . "Core/HttpRequestGatewayFactory.php";
 require_once Amfphp_ROOTPATH . "Core/PluginManager.php";
 require_once Amfphp_ROOTPATH . "Core/ServiceCallContext.php";

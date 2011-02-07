@@ -13,7 +13,7 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      * @param Amfphp_Core_Amf_Header $header the request header
      * @todo consider an interface for $handler. Maybe overkill here
      */
-    const HOOK_GET_AMF_REQUEST_HEADER_HANDLER = "HOOK_GET_AMF_REQUEST_HEADER_HANDLER";
+    const FILTER_GET_AMF_REQUEST_HEADER_HANDLER = "FILTER_GET_AMF_REQUEST_HEADER_HANDLER";
 
     /**
      * hook called for each amf request message, to give a plugin the chance to handle it.
@@ -22,7 +22,7 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      * @param Amfphp_Core_Amf_Message $requestMessage the request message
      * @todo consider an interface for $handler. Maybe overkill here
      */
-    const HOOK_GET_AMF_REQUEST_MESSAGE_HANDLER = "HOOK_GET_AMF_REQUEST_MESSAGE_HANDLER";
+    const FILTER_GET_AMF_REQUEST_MESSAGE_HANDLER = "FILTER_GET_AMF_REQUEST_MESSAGE_HANDLER";
 
     /**
      * hook called for exception handling an Amf packet/message, to give a plugin the chance to handle it.
@@ -30,7 +30,7 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      * @param Object $handler. null at call. Return if the plugin can handle
      * @todo consider an interface for $handler. Maybe overkill here
      */
-    const HOOK_GET_AMF_EXCEPTION_HANDLER = "HOOK_GET_AMF_EXCEPTION_HANDLER";
+    const FILTER_GET_AMF_EXCEPTION_HANDLER = "FILTER_GET_AMF_EXCEPTION_HANDLER";
 
     /**
      * Amf specifies that an error message must be aimed at an end point. This stores the last message's response Uri to be able to give this end point
@@ -41,11 +41,11 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
 
     public function  __construct() {
         $this->lastRequestMessageResponseUri = "/1";
-        $hookManager = Amfphp_Core_HookManager::getInstance();
-        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_GET_DESERIALIZER, $this, "getHandlerHook");
-        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_GET_DESERIALIZED_REQUEST_HANDLER, $this, "getHandlerHook");
-        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_GET_EXCEPTION_HANDLER, $this, "getHandlerHook");
-        $hookManager->addHook(Amfphp_Core_Gateway::HOOK_GET_SERIALIZER, $this, "getHandlerHook");
+        $hookManager = Amfphp_Core_FilterManager::getInstance();
+        $hookManager->addFilter(Amfphp_Core_Gateway::FILTER_GET_DESERIALIZER, $this, "getHandlerFilter");
+        $hookManager->addFilter(Amfphp_Core_Gateway::FILTER_GET_DESERIALIZED_REQUEST_HANDLER, $this, "getHandlerFilter");
+        $hookManager->addFilter(Amfphp_Core_Gateway::FILTER_GET_EXCEPTION_HANDLER, $this, "getHandlerFilter");
+        $hookManager->addFilter(Amfphp_Core_Gateway::FILTER_GET_SERIALIZER, $this, "getHandlerFilter");
     }
 
 
@@ -55,7 +55,7 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      * @param String $contentType
      * @return this or null
      */
-    public function getHandlerHook($handler, $contentType){
+    public function getHandlerFilter($handler, $contentType){
         if($contentType == Amfphp_Core_Amf_Constants::CONTENT_TYPE){
             return $this;
         }
@@ -93,10 +93,10 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      * @return Amfphp_Core_Amf_Message the response Message for the request
      */
     private function handleRequestMessage(Amfphp_Core_Amf_Message $requestMessage, Amfphp_Core_Common_ServiceRouter $serviceRouter){
-        $hookManager = Amfphp_Core_HookManager::getInstance();
-        $fromHooks = $hookManager->callHooks(self::HOOK_GET_AMF_REQUEST_MESSAGE_HANDLER, null, $requestMessage);
-        if($fromHooks){
-            $handler = $fromHooks;
+        $hookManager = Amfphp_Core_FilterManager::getInstance();
+        $fromFilters = $hookManager->callFilters(self::FILTER_GET_AMF_REQUEST_MESSAGE_HANDLER, null, $requestMessage);
+        if($fromFilters){
+            $handler = $fromFilters;
             return $handler->handleRequestMessage($requestMessage, $serviceRouter);
         }
         
@@ -120,9 +120,9 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
         for($i = 0; $i < $numHeaders; $i++){
             $requestHeader = $deserializedRequest->headers[$i];
             //handle a header. This is a job for plugins, unless comes a header that is so fundamental that it needs to be handled by the core
-            $fromHooks = Amfphp_Core_HookManager::getInstance()->callHooks(self::HOOK_GET_AMF_REQUEST_HEADER_HANDLER, null, $requestHeader);
-            if($fromHooks){
-                $handler = $fromHooks;
+            $fromFilters = Amfphp_Core_FilterManager::getInstance()->callFilters(self::FILTER_GET_AMF_REQUEST_HEADER_HANDLER, null, $requestHeader);
+            if($fromFilters){
+                $handler = $fromFilters;
                 $handler->handleRequestHeader($requestHeader);
             }
         }
@@ -145,10 +145,10 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      */
     public function handleException(Exception $exception){
         $errorPacket = new Amfphp_Core_Amf_Packet();
-        $hookManager = Amfphp_Core_HookManager::getInstance();
-        $fromHooks = $hookManager->callHooks(self::HOOK_GET_AMF_EXCEPTION_HANDLER, null);
-        if($fromHooks){
-            $handler = $fromHooks;
+        $hookManager = Amfphp_Core_FilterManager::getInstance();
+        $fromFilters = $hookManager->callFilters(self::FILTER_GET_AMF_EXCEPTION_HANDLER, null);
+        if($fromFilters){
+            $handler = $fromFilters;
             return $handler->generateErrorResponse($exception);
         }
 

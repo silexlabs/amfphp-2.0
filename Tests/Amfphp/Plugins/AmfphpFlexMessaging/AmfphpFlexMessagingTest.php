@@ -39,14 +39,14 @@ class AmfphpFlexMessagingTest extends PHPUnit_Framework_TestCase {
 
     }
 
-    public function testGetAmfRequestMessageHandlerHook(){
+    public function testGetAmfRequestMessageHandlerFilter(){
         $requestMessage = new Amfphp_Core_Amf_Message(null, "/1", null);
         $requestMessage->data = array();
         $command = new stdClass();
         $command->_explicitType = AmfphpFlexMessaging::FLEX_TYPE_COMMAND_MESSAGE;
         $command->messageId = "690D76D5-13C0-DFBD-7F2F-9E3786B59EB5";
         $requestMessage->data[] = $command;
-        $ret = $this->object->getAmfRequestMessageHandlerHook(null, $requestMessage);
+        $ret = $this->object->getAmfRequestMessageHandlerFilter(null, $requestMessage);
         $this->assertEquals($this->object, $ret);
     }
     

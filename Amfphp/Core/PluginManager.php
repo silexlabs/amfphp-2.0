@@ -3,7 +3,7 @@
  * Loads plugins for Amfphp. Plugins consist of a folder in the plugins folder. The folder and the class
  * should all have the same name. The file containing the class should be named with the class name with the ".php" suffix added.
  * It is the loaded class' responsability to load any  other resources that the plugin needs from the same folder.
- *  A plugin interacts with Amfphp by using the Amfphp_Core_HookManager to register its functions
+ *  A plugin interacts with Amfphp by using the Amfphp_Core_FilterManager to register its functions
  * to be called at specific times with specific parameters during execution.
  * It's a singleton, so use getInstance
  *

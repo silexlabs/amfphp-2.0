@@ -13,7 +13,7 @@ class Amfphp_Core_Gateway {
      * hook called when the serialized request comes in.  Anything the callee returns is ignored.
      * @param String $rawData the raw http data
      */
-    const HOOK_REQUEST_SERIALIZED = "HOOK_REQUEST_SERIALIZED";
+    const FILTER_REQUEST_SERIALIZED = "FILTER_REQUEST_SERIALIZED";
 
     /**
      * hook called to allow a plugin to override the default amf deserializer.
@@ -21,13 +21,13 @@ class Amfphp_Core_Gateway {
      * @param Amfphp_Core_Common_IDeserializer $deserializer the deserializer. null at call in gateway.
      * @param String $contentType
      */
-    const HOOK_GET_DESERIALIZER = "HOOK_GET_DESERIALIZER";
+    const FILTER_GET_DESERIALIZER = "FILTER_GET_DESERIALIZER";
     
     /**
      * hook called after the request is deserialized. The callee can modify the data and return it.
      * @param mixed $deserializedRequest
      */
-    const HOOK_REQUEST_DESERIALIZED = "HOOK_REQUEST_DESERIALIZED";
+    const FILTER_REQUEST_DESERIALIZED = "FILTER_REQUEST_DESERIALIZED";
 
     /**
      * hook called to allow a plugin to override the default amf deserialized request handler. 
@@ -35,13 +35,13 @@ class Amfphp_Core_Gateway {
      * @param Amfphp_Core_Common_IDeserializedRequestHandler $deserializedRequestHandler null at call in gateway.
      * @param String $contentType
      */
-    const HOOK_GET_DESERIALIZED_REQUEST_HANDLER = "HOOK_GET_DESERIALIZED_REQUEST_HANDLER";
+    const FILTER_GET_DESERIALIZED_REQUEST_HANDLER = "FILTER_GET_DESERIALIZED_REQUEST_HANDLER";
 
     /**
      * hook called when the response is ready but not yet serialized.  The callee can modify the data and return it.
      * @param $deserializedResponse
      */
-    const HOOK_RESPONSE_DESERIALIZED = "HOOK_RESPONSE_DESERIALIZED";
+    const FILTER_RESPONSE_DESERIALIZED = "FILTER_RESPONSE_DESERIALIZED";
 
     /**
      * hook called to allow a plugin to override the default amf exception handler.
@@ -50,7 +50,7 @@ class Amfphp_Core_Gateway {
      * @param Amfphp_Core_Common_IExceptionHandler $exceptionHandler. null at call in gateway.
      * @param String $contentType
      */
-    const HOOK_GET_EXCEPTION_HANDLER = "HOOK_GET_EXCEPTION_HANDLER";
+    const FILTER_GET_EXCEPTION_HANDLER = "FILTER_GET_EXCEPTION_HANDLER";
 
     /**
      * hook called to allow a plugin to override the default amf serializer.
@@ -58,13 +58,13 @@ class Amfphp_Core_Gateway {
      * @param String $contentType
      * Plugin sets to a Amfphp_Core_Common_ISerializer if it recognizes the content type
      */
-    const HOOK_GET_SERIALIZER = "HOOK_GET_SERIALIZER";
+    const FILTER_GET_SERIALIZER = "FILTER_GET_SERIALIZER";
 
     /**
      * hook called when the packet response is ready and serialized. Anything the callee returns is ignored.
      * @param String $rawData the raw http data
      */
-    const HOOK_RESPONSE_SERIALIZED = "HOOK_RESPONSE_SERIALIZED";
+    const FILTER_RESPONSE_SERIALIZED = "FILTER_RESPONSE_SERIALIZED";
 
 
     /**
@@ -119,38 +119,38 @@ class Amfphp_Core_Gateway {
      * @return <String> the serialized amf packet containg the service responses
      */
     public function service(){
-        $hookManager = Amfphp_Core_HookManager::getInstance();
+        $hookManager = Amfphp_Core_FilterManager::getInstance();
         $defaultHandler = new Amfphp_Core_Amf_Handler();
         $deserializedResponse = null;
         try{
             Amfphp_Core_PluginManager::getInstance()->loadPlugins($this->config->pluginsFolder, $this->config->pluginsConfig, $this->config->disabledPlugins);
             //call hook for filtering serialized incoming packet
-            $this->rawInputData = $hookManager->callHooks(self::HOOK_REQUEST_SERIALIZED, $this->rawInputData);
+            $this->rawInputData = $hookManager->callFilters(self::FILTER_REQUEST_SERIALIZED, $this->rawInputData);
 
             //call hook to get the deserializer
-            $deserializer = $hookManager->callHooks(self::HOOK_GET_DESERIALIZER, null, $this->contentType);
+            $deserializer = $hookManager->callFilters(self::FILTER_GET_DESERIALIZER, null, $this->contentType);
             
             //deserialize
             $deserializedRequest = $deserializer->deserialize($this->rawInputData, $this->getData);
 
             //call hook for filtering deserialized request
-            $deserializedRequest = $hookManager->callHooks(self::HOOK_REQUEST_DESERIALIZED, $deserializedRequest);
+            $deserializedRequest = $hookManager->callFilters(self::FILTER_REQUEST_DESERIALIZED, $deserializedRequest);
 
             //create service router
             $serviceRouter = new Amfphp_Core_Common_ServiceRouter($this->config->serviceFolderPaths, $this->config->serviceNames2ClassFindInfo);
 
             //call hook to get the deserialized request handler
-            $deserializedRequestHandler = $hookManager->callHooks(self::HOOK_GET_DESERIALIZED_REQUEST_HANDLER, null, $this->contentType);
+            $deserializedRequestHandler = $hookManager->callFilters(self::FILTER_GET_DESERIALIZED_REQUEST_HANDLER, null, $this->contentType);
 
             //handle request
             $deserializedResponse = $deserializedRequestHandler->handleDeserializedRequest($deserializedRequest, $serviceRouter);
 
             //call hook for filtering the deserialized response
-            $deserializedResponse = $hookManager->callHooks(self::HOOK_RESPONSE_DESERIALIZED, $deserializedResponse);
+            $deserializedResponse = $hookManager->callFilters(self::FILTER_RESPONSE_DESERIALIZED, $deserializedResponse);
 
         }catch(Exception $exception){
             //call hook to get the exception handler
-            $exceptionHandler = $hookManager->callHooks(self::HOOK_GET_EXCEPTION_HANDLER, null, $this->contentType);
+            $exceptionHandler = $hookManager->callFilters(self::FILTER_GET_EXCEPTION_HANDLER, null, $this->contentType);
 
             //handle exception
             $deserializedResponse = $exceptionHandler->handleException($exception);
@@ -158,13 +158,13 @@ class Amfphp_Core_Gateway {
         }
 
         //call hook to get the serializer
-        $serializer = $hookManager->callHooks(self::HOOK_GET_SERIALIZER, null, $this->contentType);
+        $serializer = $hookManager->callFilters(self::FILTER_GET_SERIALIZER, null, $this->contentType);
 
         //serialize
         $rawOutputData = $serializer->serialize($deserializedResponse);
         
         //call hook for filtering the serialized response packet
-        $rawOutputData = $hookManager->callHooks(self::HOOK_RESPONSE_SERIALIZED, $rawOutputData);
+        $rawOutputData = $hookManager->callFilters(self::FILTER_RESPONSE_SERIALIZED, $rawOutputData);
 
         return $rawOutputData;
 

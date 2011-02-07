@@ -38,18 +38,18 @@ class AmfphpCharsetConverterTest extends PHPUnit_Framework_TestCase {
 
     }
     
-    public function testRequestDeserializedHook() {
+    public function testRequestDeserializedFilter() {
         $testPacket = new Amfphp_Core_Amf_Packet();
         $testPacket->messages[] = new Amfphp_Core_Amf_Message(null, null, $this->textInClientCharset);
-        $ret = $this->object->requestDeserializedHook($testPacket);
+        $ret = $this->object->requestDeserializedFilter($testPacket);
         $modifiedPacket = $ret;
         $this->assertEquals($this->textInPhpCharset, $modifiedPacket->messages[0]->data);
     }
 
-    public function testResponseDeserializedHook() {
+    public function testResponseDeserializedFilter() {
         $testPacket = new Amfphp_Core_Amf_Packet();
         $testPacket->messages[] = new Amfphp_Core_Amf_Message(null, null, $this->textInPhpCharset);
-        $ret = $this->object->responseDeserializedHook($testPacket);
+        $ret = $this->object->responseDeserializedFilter($testPacket);
         $modifiedPacket = $ret;
         $this->assertEquals($this->textInClientCharset, $modifiedPacket->messages[0]->data);
     }

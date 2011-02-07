@@ -62,9 +62,9 @@ class AmfphpAuthentication {
      * @param array $config optional key/value pairs in an associative array. Used to override default configuration values.
      */
     public function  __construct(array $config = null) {
-        $hookManager = Amfphp_Core_HookManager::getInstance();
-        $hookManager->addHook(Amfphp_Core_Common_ServiceRouter::HOOK_SERVICE_OBJECT_CREATED, $this, "serviceObjectCreatedHook");
-        $hookManager->addHook(Amfphp_Core_Amf_Handler::HOOK_GET_AMF_REQUEST_HEADER_HANDLER, $this, "getAmfRequestHeaderHandlerHook");
+        $hookManager = Amfphp_Core_FilterManager::getInstance();
+        $hookManager->addFilter(Amfphp_Core_Common_ServiceRouter::FILTER_SERVICE_OBJECT_CREATED, $this, "serviceObjectCreatedFilter");
+        $hookManager->addFilter(Amfphp_Core_Amf_Handler::FILTER_GET_AMF_REQUEST_HEADER_HANDLER, $this, "getAmfRequestHeaderHandlerFilter");
         $this->headerUserId = null;
         $this->headerPassword = null;
     }
@@ -74,7 +74,7 @@ class AmfphpAuthentication {
      * @param Amfphp_Core_Amf_Header $header the request header
      * @return AmfphpAuthentication 
      */
-    public function getAmfRequestHeaderHandlerHook($handler, Amfphp_Core_Amf_Header $header){
+    public function getAmfRequestHeaderHandlerFilter($handler, Amfphp_Core_Amf_Header $header){
         if($header->name == Amfphp_Core_Amf_Constants::CREDENTIALS_HEADER_NAME){
             return $this;
         }
@@ -91,7 +91,7 @@ class AmfphpAuthentication {
      * @param <String> $methodName
      * @return <array>
      */
-    public function serviceObjectCreatedHook($serviceObject, $methodName){
+    public function serviceObjectCreatedFilter($serviceObject, $methodName){
         if(!method_exists($serviceObject, self::METHOD_GET_METHOD_ROLES)){
             return;
         }
