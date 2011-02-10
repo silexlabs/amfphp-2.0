@@ -1,4 +1,13 @@
 <?php
+/**
+ *  This file part is part of amfPHP
+ *
+ * LICENSE
+ *
+ * This source file is subject to the license that is bundled
+ * with this package in the file license.txt.
+ */
+
 
 /**
  * The information necessary for a service router to be able to load a class' file and instanciate it

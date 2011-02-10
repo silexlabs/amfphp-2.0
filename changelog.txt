@@ -1,0 +1,10 @@
+Version history
+--------- 2.0 ---------
+Just about everything is rewritten and rethought except the AMF serializer/deserialer.
+Introduction of the plugin/filter system
+--------- 1.9 --------- 
+update code to make AMFPHP compatible with PHP 5.3
+get rid of phpinfo.php
+remove mxml source code from distrib
+
+No notes before 1.9

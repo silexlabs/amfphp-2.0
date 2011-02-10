@@ -1,5 +1,14 @@
 <?php
 /**
+ *  This file part is part of amfPHP
+ *
+ * LICENSE
+ *
+ * This source file is subject to the license that is bundled
+ * with this package in the file license.txt.
+ */
+
+/**
  *
  * place holder class for the variables necessary to make a service call
  *

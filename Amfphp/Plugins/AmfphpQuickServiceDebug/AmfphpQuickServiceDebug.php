@@ -1,5 +1,14 @@
 <?php
 /**
+ *  This file part is part of amfPHP
+ *
+ * LICENSE
+ *
+ * This source file is subject to the license that is bundled
+ * with this package in the file license.txt.
+ */
+
+/**
  * simple (and limited) plugin to debug services.
  * call the gateway with the following GET parameters:
  * serviceName: the service name

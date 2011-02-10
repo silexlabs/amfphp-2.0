@@ -58,7 +58,9 @@ package flexUnitTests
 			assertTrue(event.result is TestCustomClass1);
 		}
 		
-		
+		/**
+		 * note this currently fails because the deserializer doesn't parse the message properly
+		 * */
 		public function testSendingAndReceivingAnIExternalizable():void{
 			_myConnection.returnOneParam(new ExternalizableDummy());
 			_myConnection.addEventListener(ResultEvent.RESULT, addAsync(sendingAndReceivingAnIExternalizableResultHandler, 1000));

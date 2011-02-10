@@ -1,5 +1,14 @@
 <?php
 /**
+ *  This file part is part of amfPHP
+ *
+ * LICENSE
+ *
+ * This source file is subject to the license that is bundled
+ * with this package in the file license.txt.
+ */
+
+/**
  * a dummy plugin to test if loading in the plugin manager works properly. It does mothing except increment a static counter to count instanciation
  *
  * @author Ariel Sommeria-klein

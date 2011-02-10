@@ -1,5 +1,14 @@
 <?php
 /**
+ *  This file part is part of amfPHP
+ *
+ * LICENSE
+ *
+ * This source file is subject to the license that is bundled
+ * with this package in the file license.txt.
+ */
+
+/**
  * Unit tests for Amfphp_Core_Amf_Serializer
  * note: phpunit dataProvider mechanism doesn't work well, so lots of boiler plate code here. Oh well... A.S.
  *

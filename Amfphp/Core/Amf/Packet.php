@@ -1,7 +1,15 @@
 <?php
 /**
+ *  This file part is part of amfPHP
+ *
+ * LICENSE
+ *
+ * This source file is subject to the license that is bundled
+ * with this package in the file license.txt.
+ */
+
+/**
  * content holder for an Amf Packet.
- * TODO there is a confusion here between the Amf Packet and the Amf Packets. This is probably because Amfphp was written before the publication of the official specs. Clean up!
  *
  * @author Ariel Sommeria-klein
  */

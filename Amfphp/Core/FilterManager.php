@@ -1,4 +1,13 @@
 <?php
+/**
+ *  This file part is part of amfPHP
+ *
+ * LICENSE
+ *
+ * This source file is subject to the license that is bundled
+ * with this package in the file license.txt.
+ */
+
 /*This file is part of Silex - see http://projects.silexlabs.org/?/silex
 
 Silex is © 2010-2011 Silex Labs and is released under the GPL License:

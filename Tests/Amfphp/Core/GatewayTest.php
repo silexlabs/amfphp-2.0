@@ -1,4 +1,13 @@
 <?php
+/**
+ *  This file part is part of amfPHP
+ *
+ * LICENSE
+ *
+ * This source file is subject to the license that is bundled
+ * with this package in the file license.txt.
+ */
+
 
 require_once dirname(__FILE__) . '/../../../Amfphp/ClassLoader.php';
 require_once dirname(__FILE__) . "/../../TestData/AmfTestData.php";

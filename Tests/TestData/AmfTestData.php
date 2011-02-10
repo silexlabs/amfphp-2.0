@@ -1,4 +1,13 @@
 <?php
+/**
+ *  This file part is part of amfPHP
+ *
+ * LICENSE
+ *
+ * This source file is subject to the license that is bundled
+ * with this package in the file license.txt.
+ */
+
     /**
  * test data for the Amfphp unit tests
  * data types have the s prefix for "serialized" and "d" prefix for "deserialized"

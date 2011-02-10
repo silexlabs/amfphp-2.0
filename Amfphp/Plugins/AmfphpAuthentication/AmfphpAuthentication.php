@@ -1,4 +1,13 @@
 <?php
+/**
+ *  This file part is part of amfPHP
+ *
+ * LICENSE
+ *
+ * This source file is subject to the license that is bundled
+ * with this package in the file license.txt.
+ */
+
 /* 
  * Authentication for Amfphp.
  * On a service object, the plugin looks for a method called getMethodRoles. If the method exists, the plugin will look for a role in the session that matches the role.
@@ -9,12 +18,12 @@
  * For example:
  * <code>
  * public function getMethodRoles($methodName){
-       if($methodName == "adminMethod"){
-           return array("admin");
-       }else{
-           return null;
-       }
-    }
+ *    if($methodName == "adminMethod"){
+ *        return array("admin");
+ *    }else{
+ *        return null;
+ *    }
+ * }
  *
  * </code>
  * 
@@ -28,7 +37,6 @@
  *
  * @author Ariel Sommeria-klein
  */
-
 class AmfphpAuthentication {
     /**
      * the field in the session where the roles array is stored

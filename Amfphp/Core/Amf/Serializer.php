@@ -1,5 +1,14 @@
 <?php
 /**
+ *  This file part is part of amfPHP
+ *
+ * LICENSE
+ *
+ * This source file is subject to the license that is bundled
+ * with this package in the file license.txt.
+ */
+
+/**
  * AmfSerializer manages the job of translating PHP objects into
  * the actionscript equivalent via Amf.  The main method of the serializer
  * is the serialize method which takes and AmfObject as it's argument

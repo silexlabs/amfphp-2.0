@@ -8,7 +8,11 @@ Please click on the "Refresh" icon in "FlexUnit Results" view to regenerate this
 			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600">
 	<fx:Script>
 		<![CDATA[
+			import flexUnitTests.LargeObjectsTests;
 			import flexUnitTests.RemoteObjectTests;
+			
+			private var flexUnitTests_LargeObjectsTests_obj:flexUnitTests.LargeObjectsTests;
+			
 			
 			private var flexUnitTests_RemoteObjectTests_obj:flexUnitTests.RemoteObjectTests;
 			

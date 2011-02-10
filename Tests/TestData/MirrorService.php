@@ -1,4 +1,13 @@
 <?php
+/**
+ *  This file part is part of amfPHP
+ *
+ * LICENSE
+ *
+ * This source file is subject to the license that is bundled
+ * with this package in the file license.txt.
+ */
+
 
 /**
  * MirrorService is a test service that has only one function, mirror, which returns the arguments received. This should be made into a plugin

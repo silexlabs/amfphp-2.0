@@ -1,5 +1,14 @@
 <?php
 /**
+ *  This file part is part of amfPHP
+ *
+ * LICENSE
+ *
+ * This source file is subject to the license that is bundled
+ * with this package in the file license.txt.
+ */
+
+/**
  * Loads plugins for Amfphp. Plugins consist of a folder in the plugins folder. The folder and the class
  * should all have the same name. The file containing the class should be named with the class name with the ".php" suffix added.
  * It is the loaded class' responsability to load any  other resources that the plugin needs from the same folder.

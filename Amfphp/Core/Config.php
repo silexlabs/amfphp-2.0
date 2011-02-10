@@ -1,4 +1,13 @@
 <?php
+/**
+ *  This file part is part of amfPHP
+ *
+ * LICENSE
+ *
+ * This source file is subject to the license that is bundled
+ * with this package in the file license.txt.
+ */
+
 
 /**
  * responsable for loading and maintaining Amfphp configuration
@@ -58,12 +67,13 @@ class Amfphp_Core_Config {
         $this->disabledPlugins[] = "AmfphpLogger";
         
         //disable if not needed
-        /*
+        
         $this->disabledPlugins[] = "AmfphpAuthentication";
         $this->disabledPlugins[] = "AmfphpCharsetConverter";
         $this->disabledPlugins[] = "AmfphpCustomClassConverter";
-        $this->disabledPlugins[] = "AmfphpFlexMessaging";
-        */
+        //$this->disabledPlugins[] = "AmfphpFlexMessaging";
+        $this->disabledPlugins[] = "AmfphpquickServiceDebug";
+        
     }
 }
 ?>

@@ -1,5 +1,14 @@
 <?php
 /**
+ *  This file part is part of amfPHP
+ *
+ * LICENSE
+ *
+ * This source file is subject to the license that is bundled
+ * with this package in the file license.txt.
+ */
+
+/**
  * Converts data from incoming packets with explicit types to custom classes.
  * If the vclass is not found, the object is unmodified.
  * Sets the explicit type marker in the data of the outgoing packets.

@@ -1,5 +1,14 @@
 <?php
 /**
+ *  This file part is part of amfPHP
+ *
+ * LICENSE
+ *
+ * This source file is subject to the license that is bundled
+ * with this package in the file license.txt.
+ */
+
+/**
  * Amfphp_Core_Amf_Deserializer takes the raw amf input stream and converts it PHP objects
  * representing the data.
  *

@@ -1,4 +1,13 @@
 <?php
+/**
+ *  This file part is part of amfPHP
+ *
+ * LICENSE
+ *
+ * This source file is subject to the license that is bundled
+ * with this package in the file license.txt.
+ */
+
 
 /**
  * An exception handler is passed an exception and must translate that into something that is serializable. In the case of Amf, it must return an Amfphp_Core_Amf_Packet object

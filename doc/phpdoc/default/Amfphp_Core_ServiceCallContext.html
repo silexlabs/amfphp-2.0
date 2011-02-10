@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class Amfphp_Core_ServiceCallContext</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class Amfphp_Core_ServiceCallContext</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+													</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Contains the data being manipulated in its various formats and flavours, as well as pointers to the various classes  that will be called during the process. Is meant to be remoting protocol agnostic, i.e. work just as well for amf as for json or xml.</p>
+<p class="description"><p>This is initialized  by the gateway, and can be tweaked by the plugins as needed.</p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Ariel Sommeria-klein</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_Core---ServiceCallContext.php.html">/Core/ServiceCallContext.php</a> (line <span class="field">9</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																																																<div class="var-title">
+					<span class="var-type"><IDeserializer></span>
+					<a href="#$deserializer" title="details" class="var-name">$deserializer</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type"><IExceptionHandler></span>
+					<a href="#$exceptionHandler" title="details" class="var-name">$exceptionHandler</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type"><mixed></span>
+					<a href="#$rawInputData" title="details" class="var-name">$rawInputData</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type"><mixed></span>
+					<a href="#$rawOutputData" title="details" class="var-name">$rawOutputData</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type"><ISerializer></span>
+					<a href="#$serializer" title="details" class="var-name">$serializer</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type"><IServiceRouter></span>
+					<a href="#$serviceRouter" title="details" class="var-name">$serviceRouter</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<span class="disabled">Vars</span>
+						
+			
+								</div>
+		<div class="info-box-body">
+			<a name="var$deserializer" id="$deserializer"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type"><IDeserializer></span>
+			<span class="var-name">$deserializer</span>
+						(line <span class="line-number">15</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">the deserializer. transforms a request to arguments for a service call</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$exceptionHandler" id="$exceptionHandler"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type"><IExceptionHandler></span>
+			<span class="var-name">$exceptionHandler</span>
+						(line <span class="line-number">33</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">handles an exception and generates the corresponding Packet</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$rawInputData" id="$rawInputData"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type"><mixed></span>
+			<span class="var-name">$rawInputData</span>
+						(line <span class="line-number">39</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">the input data. In the case of Amf, the raw post data.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$rawOutputData" id="$rawOutputData"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type"><mixed></span>
+			<span class="var-name">$rawOutputData</span>
+						(line <span class="line-number">45</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">the output data. In the case of Amf, the amf packet in binary form</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$serializer" id="$serializer"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type"><ISerializer></span>
+			<span class="var-name">$serializer</span>
+						(line <span class="line-number">27</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">transforms a service call result into a serialized Packetd ready to go to the output stream</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$serviceRouter" id="$serviceRouter"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type"><IServiceRouter></span>
+			<span class="var-name">$serviceRouter</span>
+						(line <span class="line-number">21</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">routes a service call to a service</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Wed, 09 Feb 2011 18:15:17 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>
