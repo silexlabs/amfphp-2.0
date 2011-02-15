@@ -16,11 +16,9 @@ package flexUnitTests
 		[Before]
 		override public function setUp():void
 		{
-			_myConnection = new RemoteObject;
-			_myConnection.destination = "amfphp1.9";
-			_myConnection.source = "amfphp.DiscoveryService";			
+			_myConnection = new RemoteObject;	
 
-			_myConnection.destination = "amfphp2"; 
+			_myConnection.destination = "amfphp2remote"; 
 			_myConnection.source = "MirrorService";			
 		}
 		

@@ -64,7 +64,7 @@ class Amfphp_Core_Common_ServiceRouter{
         }else{
             //no class find info. try to look in the folders
             foreach($this->serviceFolderPaths as $folderPath){
-                $servicePath = $folderPath . "/" . $serviceName . ".php";
+                $servicePath = $folderPath . $serviceName . ".php";
                 if(file_exists($servicePath)){
                     require_once $servicePath;
                     $serviceObject = new $serviceName();

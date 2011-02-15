@@ -56,9 +56,9 @@ class Amfphp_Core_Config {
     public function  __construct() {
         $this->serviceFolderPaths = array();
         //new folder coherent with the naming scheme
-        $this->serviceFolderPaths [] = dirname(__FILE__) . "/Services";
+        $this->serviceFolderPaths [] = dirname(__FILE__) . "/../Services/";
         //legacy folder
-        $this->serviceFolderPaths [] = dirname(__FILE__) . "/services";
+        $this->serviceFolderPaths [] = dirname(__FILE__) . "/../services/";
         $this->serviceNames2ClassFindInfo = array();
         $this->pluginsFolder = Amfphp_ROOTPATH . "/Plugins/";
         $this->pluginsConfig = array();
@@ -68,11 +68,11 @@ class Amfphp_Core_Config {
         
         //disable if not needed
         
-        $this->disabledPlugins[] = "AmfphpAuthentication";
-        $this->disabledPlugins[] = "AmfphpCharsetConverter";
-        $this->disabledPlugins[] = "AmfphpCustomClassConverter";
+        //$this->disabledPlugins[] = "AmfphpAuthentication";
+        //$this->disabledPlugins[] = "AmfphpCharsetConverter";
+        //$this->disabledPlugins[] = "AmfphpCustomClassConverter";
         //$this->disabledPlugins[] = "AmfphpFlexMessaging";
-        $this->disabledPlugins[] = "AmfphpquickServiceDebug";
+        //$this->disabledPlugins[] = "AmfphpquickServiceDebug";
         
     }
 }

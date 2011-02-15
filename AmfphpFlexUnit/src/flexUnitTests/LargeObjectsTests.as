@@ -19,8 +19,8 @@ package flexUnitTests
 			_myConnection = new RemoteObject;
 			_myConnection.destination = "amfphp1.9";
 			_myConnection.destination = "amfphp2"; 
-			_myConnection.destination = "remoteamfphp1.9"; 
-			_myConnection.destination = "remoteamfphp2"; 
+			//_myConnection.destination = "remoteamfphp1.9"; 
+			//_myConnection.destination = "remoteamfphp2"; 
 			_myConnection.source = "MirrorService";			
 		}
 		
@@ -31,7 +31,7 @@ package flexUnitTests
 		
 		public function testManyUniqueStrings():void{
 			_manyUniqueStrings = new Array();
-			for(var i:int = 0; i < 10000; i++){
+			for(var i:int = 0; i < 1000; i++){
 				var uid:String = UIDUtil.createUID();
 				_manyUniqueStrings.push(uid);
 			}
