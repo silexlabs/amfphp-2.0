@@ -20,8 +20,8 @@ class MirrorService {
         return $param;
     }
 
-    public function returnSum($a, $b){
-        return $a + $b;
+    public function returnSum($number1, $number2){
+        return $number1 + $number2;
     }
 }
 ?>

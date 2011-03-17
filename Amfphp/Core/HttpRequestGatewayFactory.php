@@ -47,7 +47,7 @@ class Amfphp_Core_HttpRequestGatewayFactory {
             $contentType = $_SERVER["CONTENT_TYPE"];
         }
         $rawInputData = self::getRawPostData();
-        return new Amfphp_Core_Gateway($rawInputData, $_GET, $contentType, $config);
+        return new Amfphp_Core_Gateway($_GET, $_POST, $rawInputData, $contentType, $config);
     }
 }
 ?>

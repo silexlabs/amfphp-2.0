@@ -83,15 +83,22 @@ class Amfphp_Core_Gateway {
     private $config;
 
     /**
+     * typically the $_GET array.
+     * @var array
+     */
+    private $getData;
+
+    /**
+     * typically the $_POST array.
+     * @var array
+     */
+    private $postData;
+
+    /**
      * the serialized request 
      * @var String 
      */
     private $rawInputData;
-
-    /**
-     * any eventual GET parameters
-     */
-    private $getData;
 
     /**
      * the content type. For example for amf, application/x-amf
@@ -103,14 +110,16 @@ class Amfphp_Core_Gateway {
      */
     /**
      * constructor
+     * @param array $getData typically the $_GET array.
+     * @param array $postData typically the $_POST array.
      * @param String $rawInputData
-     * @param array $getData typically the $_GET array. 
      * @param String $contentType
      * @param Amfphp_Core_Config $config optional. The default config object will be used if null
      */
-    public function  __construct($rawInputData, array $getData, $contentType, Amfphp_Core_Config $config = null) {
-        $this->rawInputData = $rawInputData;
+    public function  __construct(array $getData, array $postData, $rawInputData, $contentType, Amfphp_Core_Config $config = null) {
         $this->getData = $getData;
+        $this->postData = $postData;
+        $this->rawInputData = $rawInputData;
         $this->contentType = $contentType;
         if($config){
             $this->config = $config;
@@ -137,10 +146,10 @@ class Amfphp_Core_Gateway {
             $this->rawInputData = $hookManager->callFilters(self::FILTER_REQUEST_SERIALIZED, $this->rawInputData);
 
             //call hook to get the deserializer
-            $deserializer = $hookManager->callFilters(self::FILTER_GET_DESERIALIZER, null, $this->contentType);
+            $deserializer = $hookManager->callFilters(self::FILTER_GET_DESERIALIZER, $defaultHandler, $this->contentType);
             
             //deserialize
-            $deserializedRequest = $deserializer->deserialize($this->rawInputData, $this->getData);
+            $deserializedRequest = $deserializer->deserialize($this->getData, $this->postData, $this->rawInputData);
 
             //call hook for filtering deserialized request
             $deserializedRequest = $hookManager->callFilters(self::FILTER_REQUEST_DESERIALIZED, $deserializedRequest);
@@ -149,7 +158,7 @@ class Amfphp_Core_Gateway {
             $serviceRouter = new Amfphp_Core_Common_ServiceRouter($this->config->serviceFolderPaths, $this->config->serviceNames2ClassFindInfo);
 
             //call hook to get the deserialized request handler
-            $deserializedRequestHandler = $hookManager->callFilters(self::FILTER_GET_DESERIALIZED_REQUEST_HANDLER, null, $this->contentType);
+            $deserializedRequestHandler = $hookManager->callFilters(self::FILTER_GET_DESERIALIZED_REQUEST_HANDLER, $defaultHandler, $this->contentType);
 
             //handle request
             $deserializedResponse = $deserializedRequestHandler->handleDeserializedRequest($deserializedRequest, $serviceRouter);
@@ -159,7 +168,7 @@ class Amfphp_Core_Gateway {
 
         }catch(Exception $exception){
             //call hook to get the exception handler
-            $exceptionHandler = $hookManager->callFilters(self::FILTER_GET_EXCEPTION_HANDLER, null, $this->contentType);
+            $exceptionHandler = $hookManager->callFilters(self::FILTER_GET_EXCEPTION_HANDLER, $defaultHandler, $this->contentType);
 
             //handle exception
             $deserializedResponse = $exceptionHandler->handleException($exception);
@@ -167,7 +176,7 @@ class Amfphp_Core_Gateway {
         }
 
         //call hook to get the serializer
-        $serializer = $hookManager->callFilters(self::FILTER_GET_SERIALIZER, null, $this->contentType);
+        $serializer = $hookManager->callFilters(self::FILTER_GET_SERIALIZER, $defaultHandler, $this->contentType);
 
         //serialize
         $rawOutputData = $serializer->serialize($deserializedResponse);

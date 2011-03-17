@@ -26,36 +26,31 @@ class Amfphp_Core_Common_ServiceRouter{
 * paths to folders containing services(relative or absolute)
 * @var array of paths
 */
-    private $serviceFolderPaths;
+    public $serviceFolderPaths;
 
 /**
 *
 * @var array of ClassFindInfo
 */
-    private $serviceNames2ClassFindInfo;
+    public $serviceNames2ClassFindInfo;
 
     /**
-*
-* @param array $serviceFolderPaths folders containing service classes
-* @param array $serviceNames2ClassFindInfo a dictionary of service classes represented in a ClassFindInfo.
-*/
+    *
+    * @param array $serviceFolderPaths folders containing service classes
+    * @param array $serviceNames2ClassFindInfo a dictionary of service classes represented in a ClassFindInfo.
+    */
     public function __construct($serviceFolderPaths, $serviceNames2ClassFindInfo) {
         $this->serviceFolderPaths = $serviceFolderPaths;
         $this->serviceNames2ClassFindInfo = $serviceNames2ClassFindInfo;
     }
 
     /**
-* loads and instanciates a service class matching $serviceName, then calls the function defined by $methodName using $parameters as parameters
-* throws an exception if service not found.
-* if the service exists but not the function, an exception is thrown by call_user_func_array. It is pretty explicit, so no furher code was added
-*
-* @param string $serviceName
-* @param string $methodName
-* @param array $parameters
-* @return mixed the result of the function call
-*
-*/
-    public function executeServiceCall($serviceName, $methodName, $parameters){
+     * get a service object by its name. Looks for a match in serviceNames2ClassFindInfo, then in the defined service folders.
+     * If none found, an exception is thrown
+     * @param String $serviceName
+     * @return serviceName
+     */
+    public function getServiceObject($serviceName){
         $serviceObject = null;
         if(isset ($this->serviceNames2ClassFindInfo[$serviceName])){
             $classFindInfo = $this->serviceNames2ClassFindInfo[$serviceName];
@@ -76,8 +71,22 @@ class Amfphp_Core_Common_ServiceRouter{
         if(!$serviceObject){
             throw new Amfphp_Core_Exception("$serviceName service not found ");
         }
+        return $serviceObject;
+    }
 
-
+    /**
+    * loads and instanciates a service class matching $serviceName, then calls the function defined by $methodName using $parameters as parameters
+    * throws an exception if service not found.
+    * if the service exists but not the function, an exception is thrown by call_user_func_array. It is pretty explicit, so no furher code was added
+    *
+    * @param string $serviceName
+    * @param string $methodName
+    * @param array $parameters
+    * @return mixed the result of the function call
+    *
+    */
+    public function executeServiceCall($serviceName, $methodName, array $parameters){
+        $serviceObject = $this->getServiceObject($serviceName);
         Amfphp_Core_FilterManager::getInstance()->callFilters(self::FILTER_SERVICE_OBJECT_CREATED, $serviceObject, $methodName);
 
         if(!method_exists($serviceObject, $methodName)){

@@ -50,30 +50,12 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
 
     public function  __construct() {
         $this->lastRequestMessageResponseUri = "/1";
-        $hookManager = Amfphp_Core_FilterManager::getInstance();
-        $hookManager->addFilter(Amfphp_Core_Gateway::FILTER_GET_DESERIALIZER, $this, "getHandlerFilter");
-        $hookManager->addFilter(Amfphp_Core_Gateway::FILTER_GET_DESERIALIZED_REQUEST_HANDLER, $this, "getHandlerFilter");
-        $hookManager->addFilter(Amfphp_Core_Gateway::FILTER_GET_EXCEPTION_HANDLER, $this, "getHandlerFilter");
-        $hookManager->addFilter(Amfphp_Core_Gateway::FILTER_GET_SERIALIZER, $this, "getHandlerFilter");
-    }
-
-
-    /**
-     * if no content type, then returns this.
-     * @param mixed null at call in gateway.
-     * @param String $contentType
-     * @return this or null
-     */
-    public function getHandlerFilter($handler, $contentType){
-        if($contentType == Amfphp_Core_Amf_Constants::CONTENT_TYPE){
-            return $this;
-        }
     }
     
     /**
      * @see Amfphp_Core_Common_IDeserializer
      */
-    public function deserialize($rawPostData, array $getData){
+    public function deserialize(array $getData, array $postData, $rawPostData){
         $deserializer = new Amfphp_Core_Amf_Deserializer($rawPostData);
         return $deserializer->deserialize();
     }

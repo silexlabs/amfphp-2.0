@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" applicationComplete="application1_applicationCompleteHandler(event)">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<mx:VBox>
+		<mx:Text text="amfPHP Flex Pizza Example"/>
+		<s:Button label="Get a Pizza" click="button1_clickHandler(event)"/>
+	</mx:VBox>
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			import mx.rpc.events.ResultEvent;
+			import mx.rpc.remoting.RemoteObject;
+			private var _myConnection:RemoteObject;		
+			
+			protected function application1_applicationCompleteHandler(event:FlexEvent):void
+			{
+				_myConnection = new RemoteObject;	
+				_myConnection.destination = "amfphpExamplesGateway"; 
+				_myConnection.source = "PizzaService";						
+				_myConnection.addEventListener(ResultEvent.RESULT, handleResult);
+			}
+			
+			private function handleResult(event:ResultEvent):void{
+				Alert.show("pizza : " + event.result);
+			}
+			
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				if(loaderInfo.url.indexOf("file://") == 0){
+					Alert.show("Please access this example through a server, and not through the file system, as the gateway is set as a relative url. Alternatively you can change the url in the service-config.xml file and clean the project(Project->Clean");
+				}else{
+					_myConnection.getPizza();
+				}
+			}
+
+		]]>
+	</fx:Script>
+</s:Application>
