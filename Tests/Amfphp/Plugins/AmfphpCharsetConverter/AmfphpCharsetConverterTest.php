@@ -52,7 +52,7 @@ class AmfphpCharsetConverterTest extends PHPUnit_Framework_TestCase {
     public function testRequestDeserializedFilter() {
         $testPacket = new Amfphp_Core_Amf_Packet();
         $testPacket->messages[] = new Amfphp_Core_Amf_Message(null, null, $this->textInClientCharset);
-        $ret = $this->object->requestDeserializedFilter($testPacket);
+        $ret = $this->object->filterDeserializedRequest($testPacket);
         $modifiedPacket = $ret;
         $this->assertEquals($this->textInPhpCharset, $modifiedPacket->messages[0]->data);
     }
@@ -60,7 +60,7 @@ class AmfphpCharsetConverterTest extends PHPUnit_Framework_TestCase {
     public function testResponseDeserializedFilter() {
         $testPacket = new Amfphp_Core_Amf_Packet();
         $testPacket->messages[] = new Amfphp_Core_Amf_Message(null, null, $this->textInPhpCharset);
-        $ret = $this->object->responseDeserializedFilter($testPacket);
+        $ret = $this->object->filterDeserializedResponse($testPacket);
         $modifiedPacket = $ret;
         $this->assertEquals($this->textInClientCharset, $modifiedPacket->messages[0]->data);
     }

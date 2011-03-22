@@ -50,8 +50,8 @@ class AmfphpFlexMessaging{
      * @param array $config optional key/value pairs in an associative array. Used to override default configuration values.
      */
     public function  __construct(array $config = null) {
-        Amfphp_Core_FilterManager::getInstance()->addFilter(Amfphp_Core_Amf_Handler::FILTER_GET_AMF_REQUEST_MESSAGE_HANDLER, $this, "getAmfRequestMessageHandlerFilter");
-        Amfphp_Core_FilterManager::getInstance()->addFilter(Amfphp_Core_Amf_Handler::FILTER_GET_AMF_EXCEPTION_HANDLER, $this, "getAmfExceptionHandlerFilter");
+        Amfphp_Core_FilterManager::getInstance()->addFilter(Amfphp_Core_Amf_Handler::FILTER_AMF_REQUEST_MESSAGE_HANDLER, $this, "filterAmfRequestMessageHandler");
+        Amfphp_Core_FilterManager::getInstance()->addFilter(Amfphp_Core_Amf_Handler::FILTER_AMF_EXCEPTION_HANDLER, $this, "filterAmfExceptionHandler");
         $this->clientUsesFlexMessaging = false;
     }
 
@@ -62,7 +62,7 @@ class AmfphpFlexMessaging{
      * @param Amfphp_Core_Amf_Message $requestMessage the request message
      * @return array
      */
-    public function getAmfRequestMessageHandlerFilter($handler, Amfphp_Core_Amf_Message $requestMessage){
+    public function filterAmfRequestMessageHandler($handler, Amfphp_Core_Amf_Message $requestMessage){
 
         //for test purposes
         //throw new Amfphp_Core_Exception(print_r($requestMessage->data[0], true));
@@ -92,7 +92,7 @@ class AmfphpFlexMessaging{
      * it must set this to a proper handler for the message, probably itself.
      * @return array
      */
-    public function getAmfExceptionHandlerFilter($handler){
+    public function filterAmfExceptionHandler($handler){
         if($this->clientUsesFlexMessaging){
             return $this;
         }

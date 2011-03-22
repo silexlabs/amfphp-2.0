@@ -28,11 +28,11 @@ class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common
      * @param array $config optional key/value pairs in an associative array. Used to override default configuration values.
      */
     public function  __construct(array $config = null) {
-        $hookManager = Amfphp_Core_FilterManager::getInstance();
-        $hookManager->addFilter(Amfphp_Core_Gateway::FILTER_GET_DESERIALIZER, $this, "getHandlerFilter");
-        $hookManager->addFilter(Amfphp_Core_Gateway::FILTER_GET_DESERIALIZED_REQUEST_HANDLER, $this, "getHandlerFilter");
-        $hookManager->addFilter(Amfphp_Core_Gateway::FILTER_GET_EXCEPTION_HANDLER, $this, "getHandlerFilter");
-        $hookManager->addFilter(Amfphp_Core_Gateway::FILTER_GET_SERIALIZER, $this, "getHandlerFilter");
+        $filterManager = Amfphp_Core_FilterManager::getInstance();
+        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZER, $this, "filterHandler");
+        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_REQUEST_HANDLER, $this, "filterHandler");
+        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_EXCEPTION_HANDLER, $this, "filterHandler");
+        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_SERIALIZER, $this, "filterHandler");
     }
 
     /**
@@ -41,7 +41,7 @@ class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common
      * @param String $contentType
      * @return this or null
      */
-    public function getHandlerFilter($handler, $contentType){
+    public function filterHandler($handler, $contentType){
         if(strpos($contentType, self::JSON_CONTENT_TYPE) !== false)
             return $this;
 		return $handler;

@@ -26,12 +26,12 @@ class AmfphpLogger {
      * @param array $config optional key/value pairs in an associative array. Used to override default configuration values.
      */
     public function  __construct(array $config = null) {
-        $hookManager = Amfphp_Core_FilterManager::getInstance();
+        $filterManager = Amfphp_Core_FilterManager::getInstance();
 
-        $hookManager->addFilter(Amfphp_Core_Gateway::FILTER_REQUEST_SERIALIZED, $this, "requestSerializedHandler");
-        $hookManager->addFilter(Amfphp_Core_Gateway::FILTER_REQUEST_DESERIALIZED, $this, "requestDeserializedHandler");
-        $hookManager->addFilter(Amfphp_Core_Gateway::FILTER_RESPONSE_DESERIALIZED, $this, "responseDeserializedHandler");
-        $hookManager->addFilter(Amfphp_Core_Gateway::FILTER_RESPONSE_SERIALIZED, $this, "responseSerializedHandler");
+        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_SERIALIZED_REQUEST, $this, "filterSerializedRequest");
+        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_REQUEST, $this, "filterDeserializedRequest");
+        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_RESPONSE, $this, "filterDeserializedResponse");
+        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_SERIALIZED_RESPONSE, $this, "filterSerializedResponse");
     }
 
     public static function logMessage($message){
@@ -44,23 +44,11 @@ class AmfphpLogger {
 
     }
 
-/*
- get this for test logging
-    private function logMessage($message){
-        $fh = fopen("bla.txt", 'a');
-        if(!$fh){
-            throw new Amfphp_Core_Exception("couldn't open log file for writing");
-        }
-        fwrite($fh, $message . "\n");
-        fclose($fh);
-
-    }
-*/
     /**
      * logs the serialized incoming packet
      * @param String $rawData
      */
-    public function requestSerializedHandler($rawData){
+    public function filterSerializedRequest($rawData){
         self::logMessage("serialized request : \n$rawData");
     }
 
@@ -68,7 +56,7 @@ class AmfphpLogger {
      * logs the deserialized request
      * @param mixed $deserializedRequest
      */
-    public function requestDeserializedHandler($deserializedRequest){
+    public function filterDeserializedRequest($deserializedRequest){
         self::logMessage("deserialized request : \n" . print_r($deserializedRequest, true));
     }
 
@@ -76,7 +64,7 @@ class AmfphpLogger {
      * logs the deserialized response
      * @param packet $deserializedResponse
      */
-    public function responseDeserializedHandler($deserializedResponse){
+    public function filterDeserializedResponse($deserializedResponse){
         self::logMessage("deserialized response : \n" . print_r($deserializedResponse, true));
     }
 
@@ -84,7 +72,7 @@ class AmfphpLogger {
      * logs the deserialized incoming packet
      * @param <type> $rawData
      */
-    public function responseSerializedHandler($rawData){
+    public function filterSerializedResponse($rawData){
         self::logMessage("serialized response : \n$rawData");
     }
 

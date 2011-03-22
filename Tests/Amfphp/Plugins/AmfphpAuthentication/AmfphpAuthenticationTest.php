@@ -67,11 +67,11 @@ class AmfphpAuthenticationTest extends PHPUnit_Framework_TestCase
 
     public function testLoginAndAccess(){
         $this->serviceObj->login("admin", "adminPassword");
-        $this->object->serviceObjectCreatedFilter($this->serviceObj, "adminMethod");
+        $this->object->filterServiceObject($this->serviceObj, "adminMethod");
     }
 
     public function testNormalAccessToUnprotectedMethods(){
-        $this->object->serviceObjectCreatedFilter($this->serviceObj, "logout");
+        $this->object->filterServiceObject($this->serviceObj, "logout");
 
     }
 
@@ -80,16 +80,16 @@ class AmfphpAuthenticationTest extends PHPUnit_Framework_TestCase
      */
     public function testLogout(){
         $this->serviceObj->login("admin", "adminPassword");
-        $this->object->serviceObjectCreatedFilter($this->serviceObj, "adminMethod");
+        $this->object->filterServiceObject($this->serviceObj, "adminMethod");
         $this->serviceObj->logout();
-        $this->object->serviceObjectCreatedFilter($this->serviceObj, "adminMethod");
+        $this->object->filterServiceObject($this->serviceObj, "adminMethod");
     }
     /**
      * @expectedException Amfphp_Core_Exception
      */
     public function testAccessWithoutAuthentication()
     {
-        $this->object->serviceObjectCreatedFilter($this->serviceObj, "adminMethod");
+        $this->object->filterServiceObject($this->serviceObj, "adminMethod");
     }
 
     /**
@@ -97,7 +97,7 @@ class AmfphpAuthenticationTest extends PHPUnit_Framework_TestCase
      */
     public function testBadRole(){
         $this->serviceObj->login("user", "userPassword");
-        $this->object->serviceObjectCreatedFilter($this->serviceObj, "adminMethod");
+        $this->object->filterServiceObject($this->serviceObj, "adminMethod");
 
     }
     
@@ -109,11 +109,11 @@ class AmfphpAuthenticationTest extends PHPUnit_Framework_TestCase
         $credentialsAssoc->$userIdField =  "admin";
         $credentialsAssoc->$passwordField = "adminPassword";
         $credentialsHeader = new Amfphp_Core_Amf_Header(Amfphp_Core_Amf_Constants::CREDENTIALS_HEADER_NAME, true, $credentialsAssoc);
-        $ret = $this->object->getAmfRequestHeaderHandlerFilter(null, $credentialsHeader);
+        $ret = $this->object->filterAmfRequestHeaderHandler(null, $credentialsHeader);
         $this->assertEquals($this->object, $ret);
         
         $otherHeader = new Amfphp_Core_Amf_Header("bla");
-        $ret = $this->object->getAmfRequestHeaderHandlerFilter(null, $otherHeader);
+        $ret = $this->object->filterAmfRequestHeaderHandler(null, $otherHeader);
         $this->assertEquals(null, $ret);
     }
 
@@ -121,7 +121,7 @@ class AmfphpAuthenticationTest extends PHPUnit_Framework_TestCase
      * @expectedException Amfphp_Core_Exception
      */
     public function testWithFiltersBlockAccess(){
-        Amfphp_Core_FilterManager::getInstance()->callFilters(Amfphp_Core_Common_ServiceRouter::FILTER_SERVICE_OBJECT_CREATED, $this->serviceObj, "adminMethod");
+        Amfphp_Core_FilterManager::getInstance()->callFilters(Amfphp_Core_Common_ServiceRouter::FILTER_SERVICE_OBJECT, $this->serviceObj, "adminMethod");
     }
 
     public function testWithFiltersGrantAccess(){
@@ -131,10 +131,10 @@ class AmfphpAuthenticationTest extends PHPUnit_Framework_TestCase
         $credentialsAssoc->$userIdField =  "admin";
         $credentialsAssoc->$passwordField = "adminPassword";
         $credentialsHeader = new Amfphp_Core_Amf_Header(Amfphp_Core_Amf_Constants::CREDENTIALS_HEADER_NAME, true, $credentialsAssoc);
-        $hookManager = Amfphp_Core_FilterManager::getInstance();
-        $ret = $hookManager->callFilters(Amfphp_Core_Amf_Handler::FILTER_GET_AMF_REQUEST_HEADER_HANDLER, null, $credentialsHeader);
+        $filterManager = Amfphp_Core_FilterManager::getInstance();
+        $ret = $filterManager->callFilters(Amfphp_Core_Amf_Handler::FILTER_AMF_REQUEST_HEADER_HANDLER, null, $credentialsHeader);
         $ret->handleRequestHeader($credentialsHeader);
-        $ret->serviceObjectCreatedFilter($this->serviceObj, "adminMethod");
+        $ret->filterServiceObject($this->serviceObj, "adminMethod");
     }
 
 

@@ -56,7 +56,7 @@ class AmfphpFlexMessagingTest extends PHPUnit_Framework_TestCase {
         $command->_explicitType = AmfphpFlexMessaging::FLEX_TYPE_COMMAND_MESSAGE;
         $command->messageId = "690D76D5-13C0-DFBD-7F2F-9E3786B59EB5";
         $requestMessage->data[] = $command;
-        $ret = $this->object->getAmfRequestMessageHandlerFilter(null, $requestMessage);
+        $ret = $this->object->filterAmfRequestMessageHandler(null, $requestMessage);
         $this->assertEquals($this->object, $ret);
     }
     

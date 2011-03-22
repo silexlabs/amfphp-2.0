@@ -19,10 +19,10 @@
 */
 class Amfphp_Core_Common_ServiceRouter{
     /**
-* hook called when the service object is created. Useful for authentication
+* filter called when the service object is created. Useful for authentication
 * @param String the raw http data
 */
-    const FILTER_SERVICE_OBJECT_CREATED = "FILTER_SERVICE_OBJECT_CREATED";
+    const FILTER_SERVICE_OBJECT = "FILTER_SERVICE_OBJECT";
      /**
 * paths to folders containing services(relative or absolute)
 * @var array of paths
@@ -88,7 +88,7 @@ class Amfphp_Core_Common_ServiceRouter{
     */
     public function executeServiceCall($serviceName, $methodName, array $parameters){
         $serviceObject = $this->getServiceObject($serviceName);
-        Amfphp_Core_FilterManager::getInstance()->callFilters(self::FILTER_SERVICE_OBJECT_CREATED, $serviceObject, $methodName);
+        Amfphp_Core_FilterManager::getInstance()->callFilters(self::FILTER_SERVICE_OBJECT, $serviceObject, $methodName);
 
         if(!method_exists($serviceObject, $methodName)){
             throw new Amfphp_Core_Exception("method $methodName not found on $serviceName object ");

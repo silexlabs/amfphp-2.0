@@ -97,16 +97,16 @@ class AmfphpCharsetConverter {
             }
         }
 
-        //only add hooks if conversion is necessary
+        //only add filters if conversion is necessary
         if($this->method == self::METHOD_NONE){
             return;
         }
         if($this->clientCharset == $this->phpCharset){
             return;
         }
-        $hookManager = Amfphp_Core_FilterManager::getInstance();
-        $hookManager->addFilter(Amfphp_Core_Gateway::FILTER_REQUEST_DESERIALIZED, $this, "requestDeserializedFilter");
-        $hookManager->addFilter(Amfphp_Core_Gateway::FILTER_RESPONSE_DESERIALIZED, $this, "responseDeserializedFilter");
+        $filterManager = Amfphp_Core_FilterManager::getInstance();
+        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_REQUEST, $this, "filterDeserializedRequest");
+        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_RESPONSE, $this, "filterDeserializedResponse");
     }
 
 
@@ -115,7 +115,7 @@ class AmfphpCharsetConverter {
      * @param mixed $deserializedRequest
      * @return mixed
      */
-    public function requestDeserializedFilter($deserializedRequest){
+    public function filterDeserializedRequest($deserializedRequest){
         $deserializedRequest = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($deserializedRequest, array($this, "convertStringFromClientToPhpCharsets"));
         return $deserializedRequest;
 
@@ -126,7 +126,7 @@ class AmfphpCharsetConverter {
      * @param mixed $deserializedResponse
      * @return mixed
      */
-    public function responseDeserializedFilter($deserializedResponse){
+    public function filterDeserializedResponse($deserializedResponse){
         $deserializedResponse = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($deserializedResponse, array($this, "convertStringFromPhpToClientCharsets"));
         return $deserializedResponse;
 

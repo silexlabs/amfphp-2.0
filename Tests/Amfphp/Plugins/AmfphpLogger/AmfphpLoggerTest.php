@@ -25,7 +25,7 @@ class AmfphpLoggerTest extends PHPUnit_Framework_TestCase {
         try{
             unlink(AmfphpLogger::LOG_FILE_PATH);
         }catch(Exception $e){}
-        $logger->requestSerializedHandler("bla");
+        $logger->filterSerializedRequest("bla");
         $logFileContent = file_get_contents(AmfphpLogger::LOG_FILE_PATH);
         //clean up
         unlink(AmfphpLogger::LOG_FILE_PATH);

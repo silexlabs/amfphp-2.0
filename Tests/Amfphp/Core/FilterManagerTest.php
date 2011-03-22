@@ -18,19 +18,19 @@ require_once dirname(__FILE__) . '/../../../Amfphp/ClassLoader.php';
  */
 class Amfphp_Core_FilterManagerTest extends PHPUnit_Framework_TestCase {
     public function testFilter() {
-        $hookManager = Amfphp_Core_FilterManager::getInstance();
-        //add the same hook twice to test filtering
-        $hookManager->addFilter("TESTFILTER", $this, "double");
-        $hookManager->addFilter("TESTFILTER", $this, "double");
+        $filterManager = Amfphp_Core_FilterManager::getInstance();
+        //add the same filter twice to test filtering
+        $filterManager->addFilter("TESTFILTER", $this, "double");
+        $filterManager->addFilter("TESTFILTER", $this, "double");
 
-        $ret = $hookManager->callFilters("TESTFILTER", 1);
+        $ret = $filterManager->callFilters("TESTFILTER", 1);
         $this->assertEquals(4, $ret);
 
 
     }
 
     /**
-     * note: this function must be public to be called. This is called by hook
+     * note: this function must be public to be called. This is called by filter
      * @param <type> $valueToDouble
      * @return <type>
      */
