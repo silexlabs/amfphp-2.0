@@ -1,5 +1,5 @@
 <?php
-/**
+/*
  *  This file part is part of amfPHP
  *
  * LICENSE
@@ -11,6 +11,7 @@
 /**
  * an exception thrown by AmfphpQuickServiceDebug. The message must be a ready to print html fragment
  *
+ * @package AmfphpQuickServiceDebug
  * @author Ariel Sommeria-Klein
  */
 class AmfphpQuickServiceDebugException extends Amfphp_Core_Exception {
