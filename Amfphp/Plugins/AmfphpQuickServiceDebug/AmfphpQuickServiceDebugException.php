@@ -15,6 +15,5 @@
  * @author Ariel Sommeria-Klein
  */
 class AmfphpQuickServiceDebugException extends Amfphp_Core_Exception {
-    //put your code here
 }
 ?>
