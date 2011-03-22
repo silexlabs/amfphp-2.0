@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -10,6 +10,7 @@
 
 /**
  * interface for deserializers. 
+ * @package Amfphp_Core_Common
  * @author Ariel Sommeria-klein
  */
 interface Amfphp_Core_Common_IDeserializer {

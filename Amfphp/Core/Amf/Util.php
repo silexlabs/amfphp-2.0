@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -12,6 +12,7 @@
 /**
  * utils for Amf handling
  *
+ * @package Amfphp_Core_Amf
  * @author Ariel Sommeria-klein
  */
 class Amfphp_Core_Amf_Util {

@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -23,6 +23,7 @@ require dirname(__FILE__) . "/AmfphpQuickServiceDebugException.php";
  * in the GET and POST data, some useful information and links should be displayed. If there is an exception elsewhere in the code,
  * either in the service object itself or in the rest of amfphp, information about the exception will be shown.
  *
+ * @package AmfphpQuickServiceDebug
  * @author Ariel Sommeria-Klein
  */
 class AmfphpQuickServiceDebug implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_IDeserializedRequestHandler, Amfphp_Core_Common_IExceptionHandler, Amfphp_Core_Common_ISerializer {

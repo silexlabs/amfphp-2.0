@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -15,11 +15,7 @@
  * and builds the resulting Amf Message.
  * TODO spit into 2 classes, one for Amf0 , one for Amf3 or maybe more.
  *
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
- * @copyright (c) 2003 Amfphp.org
- * @package flashservices
- * @subpackage io
- * @version $Id: AmfSerializer.php,v 1.39 2005/07/22 10:58:11 pmineault Exp $
+ * @package Amfphp_Core_Amf
  */
 
 class Amfphp_Core_Amf_Serializer{

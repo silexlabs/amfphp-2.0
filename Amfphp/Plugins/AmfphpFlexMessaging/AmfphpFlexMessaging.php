@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -16,6 +16,7 @@ require_once dirname(__FILE__) . "/ErrorMessage.php";
  * Then a RemotingMessage is sent, expecting an AcknowledgeMessage in return.
  * In case of an error, an ErrorMessage is expected
  *
+ * @package AmfphpFlexMessaging
  * @author Ariel Sommeria-Klein
  */
 class AmfphpFlexMessaging{

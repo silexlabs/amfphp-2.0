@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -11,14 +11,15 @@
 /**
  * Amf byte arrays will be converted to and from this class
  *
+ * @package Amfphp_Core_Amf_Types
  * @author Ariel Sommeria-klein
  */
 
-class ByteArray
+class Amfphp_Core_Amf_Types_ByteArray
 {
 	var $data;
 
-	function ByteArray($data)
+	function Amfphp_Core_Amf_Types_ByteArray($data)
 	{
 		$this->data = $data;
 	}

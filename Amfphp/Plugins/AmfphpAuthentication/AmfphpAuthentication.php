@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -35,6 +35,7 @@
  * 
  * See the AuthenticationService class in the test data for an example of an implementation.
  *
+ * @package AmfphpAuthentication
  * @author Ariel Sommeria-klein
  */
 class AmfphpAuthentication {

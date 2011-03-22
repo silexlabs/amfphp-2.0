@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -14,6 +14,7 @@
 * based on the old "Executive" of php 1.9. It looks for a service either explicitely defined in a
 * ClassFindInfo object, or in a service folder.
 *
+* @package Amfphp_Core_Common
 * @author Ariel Sommeria-klein
 */
 class Amfphp_Core_Common_ServiceRouter{

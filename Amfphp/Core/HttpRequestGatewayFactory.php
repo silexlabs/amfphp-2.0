@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -12,6 +12,7 @@
  * A gateway factory's job is to create a gateway. There can be many gateway factories, but as such the only one for now is this one,
  * which creates a gateway assuming that the data to be processed is in an http request and thus available through the usual php globals
  *
+ * @package Amfphp_Core
  * @author Ariel Sommeria-Klein
  */
 class Amfphp_Core_HttpRequestGatewayFactory {

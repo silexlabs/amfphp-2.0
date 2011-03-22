@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -16,6 +16,7 @@
  * This works for nested objects.
  * This is to support services and plugins setting the explicit type themselves.
  *
+ * @package AmfphpCustomClassConverter
  * @author Ariel Sommeria-Klein
  */
 class AmfphpCustomClassConverter {

@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -13,6 +13,7 @@
  * logs requests and responses in their serialized and deserialized forms. Note that this a crude logging system, with no levels, targets etc. like Log4j for example.
  * It is as such to be used for development purposes, but not for production
  *
+ * @package AmfphpLogger
  * @author Ariel Sommeria-klein
  */
 class AmfphpLogger {

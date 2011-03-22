@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -11,13 +11,7 @@
 /**
  * Amfphp_Core_Amf_Header is a data type that represents a single header passed via Amf
  *
- * Amfphp_Core_Amf_Header encapsulates the different Amf keys.
- *
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
- * @copyright (c) 2003 Amfphp.org
- * @package flashservices
- * @subpackage util
- * @version $Id: Amfphp_Core_Amf_Header.php,v 1.4 2005/07/05 07:40:53 pmineault Exp $
+ * @package Amfphp_Core_Amf
  */
 
 class Amfphp_Core_Amf_Header

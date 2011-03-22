@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -12,11 +12,7 @@
  * Amfphp_Core_Amf_Deserializer takes the raw amf input stream and converts it PHP objects
  * representing the data.
  *
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
- * @copyright (c) 2003 amfphp.org
- * @package flashservices
- * @subpackage io
- * @version $Id$
+ * @package Amfphp_Core_Amf
  */
 
 	class Amfphp_Core_Amf_Deserializer
@@ -215,7 +211,7 @@
 				case 5: // null
 					return null;
 				case 6: // undefined
-					return new Undefined();
+					return new Amfphp_Core_Amf_Types_Undefined();
 				case 7: // Circular references are returned here
 					return $this->readReference();
 				case 8: // mixed array with numeric and string keys
@@ -425,7 +421,7 @@
 			switch ($type)
 			{
 				case 0x00 :
-					return new Undefined();
+					return new Amfphp_Core_Amf_Types_Undefined();
 				case 0x01 :
 					return null; //null
 				case 0x02 :
@@ -586,7 +582,7 @@
 			$handle = $handle >> 1;
 			if ($inline)
 			{
-				$ba = new ByteArray($this->readBuffer($handle));
+				$ba = new Amfphp_Core_Amf_Types_ByteArray($this->readBuffer($handle));
 				$this->storedObjects[] = $ba;
 			}
 			else

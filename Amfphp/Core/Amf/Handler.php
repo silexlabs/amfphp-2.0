@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -10,6 +10,8 @@
 
 /**
  * This is the default handler for the gateway. It's job is to handle everything that is specific to Amf for the gateway.
+ * @package Amfphp_Core_Amf
+ * @author Ariel Sommeria-Klein
  */
 class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_IDeserializedRequestHandler, Amfphp_Core_Common_IExceptionHandler, Amfphp_Core_Common_ISerializer{
 

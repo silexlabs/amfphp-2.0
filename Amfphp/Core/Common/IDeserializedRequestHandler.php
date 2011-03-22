@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -10,7 +10,8 @@
 
 
 /**
- * 
+ * interface for a class that can handle a deserialized request
+ * @package Amfphp_Core_Common
  * @author Ariel Sommeria-klein
  */
 interface Amfphp_Core_Common_IDeserializedRequestHandler {

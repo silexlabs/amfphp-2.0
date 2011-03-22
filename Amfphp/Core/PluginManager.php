@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -16,6 +16,7 @@
  * to be called at specific times with specific parameters during execution.
  * It's a singleton, so use getInstance
  *
+ * @package Amfphp_Core
  * @author Ariel Sommeria-Klein
  */
 class Amfphp_Core_PluginManager {

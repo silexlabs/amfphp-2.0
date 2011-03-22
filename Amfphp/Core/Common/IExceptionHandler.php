@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -13,6 +13,7 @@
  * An exception handler is passed an exception and must translate that into something that is serializable. In the case of Amf, it must return an Amfphp_Core_Amf_Packet object
  * containing the relevant information
  *
+ * @package Amfphp_Core_Common
  * @author Ariel Sommeria-klein
  */
 interface Amfphp_Core_Common_IExceptionHandler {

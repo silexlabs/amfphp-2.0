@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -14,6 +14,7 @@
  * The class used for the entry point of a remoting call
  * TODO consider moving everything from context directly to gateway class. A.S.
  *
+ * @package Amfphp_Core
  * @author Ariel Sommeria-klein
  */
 class Amfphp_Core_Gateway {

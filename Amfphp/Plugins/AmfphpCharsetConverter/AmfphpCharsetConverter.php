@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -12,6 +12,7 @@
  * Converts strings to the right encoding in incoming and outgoing packets
  * This works for nested objects.
  *
+ * @package AmfphpCharsetConverter
  * @author Ariel Sommeria-Klein
  */
 class AmfphpCharsetConverter {

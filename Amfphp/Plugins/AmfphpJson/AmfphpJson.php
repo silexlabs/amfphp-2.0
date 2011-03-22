@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -13,6 +13,7 @@
  * strings and returned as JSON strings using POST parameters. 
  * Requires at least PHP 5.2.
  *
+ * @package AmfphpJson
  * @author Yannick DOMINGUEZ
  */
 class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_IDeserializedRequestHandler, Amfphp_Core_Common_IExceptionHandler, Amfphp_Core_Common_ISerializer {

@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -9,8 +9,9 @@
  */
 
 /**
- * just a type to distinguish between Amfphp exceptions and everything else
+ * just a type to distinguish between Amfphp exceptions and any other exceptions
  *
+ * @package Amfphp_Core
  * @author Ariel Sommeria-klein
  */
 class Amfphp_Core_Exception extends Exception {

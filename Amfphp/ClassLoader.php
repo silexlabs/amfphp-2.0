@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -13,7 +13,9 @@
  * note: this list could be generated. In the meantime maintain it manually. 
  * It would be nice to do this alphabetically, It seems however that an interface must be loaded before a class, so do as possible
  *
+ * @package Amfphp_Core
  * @author Ariel Sommeria-klein
+ *
  */
 
 define( 'Amfphp_ROOTPATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);

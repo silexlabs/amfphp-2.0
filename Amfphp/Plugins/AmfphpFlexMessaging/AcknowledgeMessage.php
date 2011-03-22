@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -12,6 +12,7 @@
  * Used to generate a Flex Acknowledge message.
  * part of the AmfphpFlexMessaging plugin
  *
+ * @package AmfphpFlexMessaging
  * @author Ariel Sommeria-Klein
  */
 class AmfphpFlexMessaging_AcknowledgeMessage

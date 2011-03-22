@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -12,6 +12,7 @@
  *
  * place holder class for the variables necessary to make a service call
  *
+ * @package Amfphp_Core_Common
  * @author Ariel Sommeria-klein
  */
 class Amfphp_Core_Common_ServiceCallParameters {

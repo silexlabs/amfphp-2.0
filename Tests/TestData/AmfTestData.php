@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -14,6 +14,7 @@
  * for Packets there is a flaw in the Amfphp design which means that serializng and deserializing is not symmetrical.
  * so use s for serialized, d for deserialized for the serialization tests and dd for the deserialation tests, the idea being that dd will disappear for v2
  *
+ * @package Tests_TestData
  * @author Ariel Sommeria-klein
  */
 class AmfTestData {
@@ -267,7 +268,7 @@ class AmfTestData {
     }
 
     public function buildUndefined(){
-        $this->dUndefined = new Undefined();
+        $this->dUndefined = new Amfphp_Core_Amf_Types_Undefined();
         //type: 6
         $this->sUndefined = pack('C', 6);
 
