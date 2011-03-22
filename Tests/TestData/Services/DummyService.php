@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -11,6 +11,7 @@
 /**
  * a dummy service to test locating services in folders
  *
+ * @package Tests_TestData_CustomClasses
  * @author Ariel Sommeria-klein
  */
 

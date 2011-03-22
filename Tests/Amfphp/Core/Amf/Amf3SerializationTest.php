@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -12,6 +12,7 @@
  * Unit tests for Amfphp_Core_Amf_Serializer, but using amf3
  * note: phpunit dataProvider mechanism doesn't work well, so lots of boiler plate code here. Oh well... A.S.
  *
+ * @package Tests_Amfphp_Core_Amf
  * @author Ariel Sommeria-klein
  */
 

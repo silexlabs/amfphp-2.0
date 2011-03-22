@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -10,6 +10,7 @@
 
 /**
  * bootstrap for Amfphp phpunit tests.
+ * @package Tests
  * @author Ariel Sommeria-klein
  */
 

@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -11,7 +11,8 @@
 /**
  * dummy class for testing custom class conversion
  *
- * @author Ariel Sommeria-Klein
+ * @package Tests_TestData_CustomClasses
+ * @author Ariel Sommeria-klein
  */
 class TestCustomClass1 {
     //put your code here

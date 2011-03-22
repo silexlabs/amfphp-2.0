@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -12,6 +12,7 @@
 /**
  * testing requires some services. They are described here.
  *
+ * @package Tests_TestData
  * @author Ariel Sommeria-klein
  */
 class TestServicesConfig {

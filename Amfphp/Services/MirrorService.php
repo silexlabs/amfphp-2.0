@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -12,6 +12,7 @@
 /**
  * MirrorService is a test/example service. Remove it for production use
  *
+ * @package Amfphp_Services
  * @author Ariel Sommeria-klein
  */
 class MirrorService {

@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -10,6 +10,7 @@
 
 /* 
  * a gateway php script like the normal gateway except that it uses test services 
+ * @package Tests_TestData
  * @author Ariel Sommeria-klein
  */
 

@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -11,6 +11,7 @@
 /**
  * a dummy plugin to test if loading in the plugin manager works properly. It does mothing except increment a static counter to count instanciation
  *
+ * @package Tests_TestData_TestPlugins_DisabledPlugin
  * @author Ariel Sommeria-klein
  */
 class DisabledPlugin {

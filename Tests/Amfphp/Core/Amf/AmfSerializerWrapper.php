@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -12,6 +12,8 @@
 /**
  * This class exports some internal (public) methods. This way, those methods
  * can be tested separately.
+ * @package Tests_Amfphp_Core_Amf
+ * @author Ariel Sommeria-klein
  */
 
 class AmfSerializerWrapper extends Amfphp_Core_Amf_Serializer

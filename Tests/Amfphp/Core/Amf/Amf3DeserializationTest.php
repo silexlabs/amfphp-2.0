@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -8,16 +8,17 @@
  * with this package in the file license.txt.
  */
 
-/**
- * Unit tests for Amfphp_Core_Amf_Serializer, but using amf3
- * note: phpunit dataProvider mechanism doesn't work well, so lots of boiler plate code here. Oh well... A.S.
- *
- * @author Ariel Sommeria-klein
- */
 
 require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
 require_once dirname(__FILE__) . '/../../../TestData/Amf3TestData.php';
 require_once dirname(__FILE__) . '/AmfDeserializerWrapper.php';
+/**
+ * Unit tests for Amfphp_Core_Amf_Serializer, but using amf3
+ * note: phpunit dataProvider mechanism doesn't work well, so lots of boiler plate code here. Oh well... A.S.
+ * 
+ * @package Tests_Amfphp_Core_Amf
+ * @author Ariel Sommeria-klein
+ */
 
 class Amf3DeserializationTest extends PHPUnit_Framework_TestCase {
 

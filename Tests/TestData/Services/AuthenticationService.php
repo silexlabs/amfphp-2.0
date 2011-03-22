@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -16,6 +16,7 @@
 /**
  * a simple authentication service, used for testing the AmfphpAuthentication plugin
  *
+ * @package Tests_TestData_Services
  * @author Ariel Sommeria-klein
  */
 class AuthenticationService {

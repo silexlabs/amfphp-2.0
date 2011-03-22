@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -12,6 +12,7 @@
 /**
  * See AmfTestData for details, this is the extension for Amf3
  *
+ * @package Tests_TestData
  * @author Ariel Sommeria-klein, based on work by ci-dev
  */
 class Amf3TestData {
@@ -66,7 +67,7 @@ class Amf3TestData {
      * simple...
      */
     public function buildBasics(){
-        $this->dUndefined = new Undefined();
+        $this->dUndefined = new Amfphp_Core_Amf_Types_Undefined();
         $this->sUndefined = pack('C', 0);
         $this->sNull = pack('C', 1);
         $this->sFalse = pack('C', 2);
@@ -243,7 +244,7 @@ class Amf3TestData {
     }
 
     public function buildByteArray(){
-        $this->dByteArray = new ByteArray("test");
+        $this->dByteArray = new Amfphp_Core_Amf_Types_ByteArray("test");
         //Byte Array Marker
         $this->sByteArray = pack("C", 0x0C);
         //only the data field of ByteArray is encoded, the class is just a wrapper!

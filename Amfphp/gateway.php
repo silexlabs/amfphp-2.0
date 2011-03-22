@@ -1,6 +1,6 @@
 <?php
-/**
- *  This file part is part of amfPHP
+/*
+ *  This file is part of amfPHP
  *
  * LICENSE
  *
@@ -11,6 +11,7 @@
 /* 
  * main entry point (gateway) for service calls. instanciates the gateway class and uses it to handle the call.
  * 
+ * @package Amfphp_Core
  * @author Ariel Sommeria-klein
  */
 
