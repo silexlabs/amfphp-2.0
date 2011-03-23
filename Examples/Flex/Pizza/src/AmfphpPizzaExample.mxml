@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   backgroundColor="#001116"
 			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" applicationComplete="application1_applicationCompleteHandler(event)">
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
-	<mx:VBox>
-		<mx:Text text="amfPHP Flex Pizza Example"/>
-		<s:Button label="Get a Pizza" click="button1_clickHandler(event)"/>
+	<mx:VBox horizontalAlign="center" width="100%">
+		<mx:Image source="header-background-pizza.png" />
+	</mx:VBox> 
+	<mx:VBox y="320" x="0" horizontalAlign="center" width="100%">
+		<mx:Text text="amfPHP Flex Pizza Example" color="white" fontSize="30"/>
+		<s:Button label="Get a Pizza" click="button1_clickHandler(event)" />
 	</mx:VBox>
 	<fx:Script>
 		<![CDATA[
