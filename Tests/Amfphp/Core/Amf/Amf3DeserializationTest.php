@@ -1,14 +1,17 @@
 <?php
-/*
+/**
  *  This file is part of amfPHP
  *
  * LICENSE
  *
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
+ * @package Tests_Amfphp_Core_Amf
  */
 
-
+/**
+*  includes
+*  */
 require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
 require_once dirname(__FILE__) . '/../../../TestData/Amf3TestData.php';
 require_once dirname(__FILE__) . '/AmfDeserializerWrapper.php';
@@ -19,7 +22,6 @@ require_once dirname(__FILE__) . '/AmfDeserializerWrapper.php';
  * @package Tests_Amfphp_Core_Amf
  * @author Ariel Sommeria-klein
  */
-
 class Amf3DeserializationTest extends PHPUnit_Framework_TestCase {
 
     public function testBasicMethods(){

@@ -1,11 +1,12 @@
 <?php
-/*
+/**
  *  This file is part of amfPHP
  *
  * LICENSE
  *
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
+ * @package Tests_TestData
  */
 
     /**
@@ -826,6 +827,7 @@ class AmfTestData {
 
 /**
  * used for testing with typed objects
+ * @package Tests_TestData
  */
 class DummyClass{
     public $data;

@@ -1,11 +1,12 @@
 <?php
-/*
+/**
  *  This file is part of amfPHP
  *
  * LICENSE
  *
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
+ * @package Tests_TestData
  */
 
 
@@ -113,7 +114,7 @@ class Amf3TestData {
     }
 
     /**
-     * @note no type markers here, because the method doesn't do it. So only the raw data.
+     * note: no type markers here, because the method doesn't do it. So only the raw data.
      * @todo methods with a type marker included
      *
      */

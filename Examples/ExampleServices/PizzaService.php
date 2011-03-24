@@ -6,11 +6,12 @@
  *
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
- * @package Amfphp_
+ * @package Amfphp_Examples_ExampleService
  */
 
-/*
- * an example service for getting a pizza
+/**
+ * an example service for the pizza examples
+ * @package Amfphp_Examples_ExampleService
  * @author Ariel Sommeria-klein
  */
 class PizzaService {

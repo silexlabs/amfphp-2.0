@@ -1,11 +1,12 @@
 <?php
-/*
+/**
  *  This file is part of amfPHP
  *
  * LICENSE
  *
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
+ * @package Amfphp_Core
  */
 
 /**
@@ -13,7 +14,6 @@
  * note: this list could be generated. In the meantime maintain it manually. 
  * It would be nice to do this alphabetically, It seems however that an interface must be loaded before a class, so do as possible
  *
- * @package Amfphp_Core
  * @author Ariel Sommeria-klein
  *
  */

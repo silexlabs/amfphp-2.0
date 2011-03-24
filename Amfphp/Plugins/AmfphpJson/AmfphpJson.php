@@ -1,11 +1,12 @@
 <?php
-/*
+/**
  *  This file is part of amfPHP
  *
  * LICENSE
  *
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
+ * @package Amfphp_Plugins_Json
  */
 
 /**
@@ -13,7 +14,7 @@
  * strings and returned as JSON strings using POST parameters. 
  * Requires at least PHP 5.2.
  *
- * @package AmfphpJson
+ * @package Amfphp_Plugins_Json
  * @author Yannick DOMINGUEZ
  */
 class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_IDeserializedRequestHandler, Amfphp_Core_Common_IExceptionHandler, Amfphp_Core_Common_ISerializer {

@@ -1,11 +1,12 @@
 <?php
-/*
+/**
  *  This file is part of amfPHP
  *
  * LICENSE
  *
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
+ * @package Amfphp_Plugins_CustomClassConverter
  */
 
 /**
@@ -16,7 +17,7 @@
  * This works for nested objects.
  * This is to support services and plugins setting the explicit type themselves.
  *
- * @package AmfphpCustomClassConverter
+ * @package Amfphp_Plugins_CustomClassConverter
  * @author Ariel Sommeria-Klein
  */
 class AmfphpCustomClassConverter {

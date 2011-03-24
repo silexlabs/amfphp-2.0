@@ -1,18 +1,18 @@
 <?php
-/*
+/**
  *  This file is part of amfPHP
  *
  * LICENSE
  *
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
+ * @package Amfphp_Core
  */
 
 
 /**
  * where everything comes together in amfphp.
  * The class used for the entry point of a remoting call
- * TODO consider moving everything from context directly to gateway class. A.S.
  *
  * @package Amfphp_Core
  * @author Ariel Sommeria-klein

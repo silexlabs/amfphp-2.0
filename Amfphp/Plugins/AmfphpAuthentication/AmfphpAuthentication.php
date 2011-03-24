@@ -1,14 +1,15 @@
 <?php
-/*
+/**
  *  This file is part of amfPHP
  *
  * LICENSE
  *
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
+ * @package Amfphp_Plugins_Authentication
  */
 
-/* 
+/** 
  * Authentication for Amfphp.
  * On a service object, the plugin looks for a method called getMethodRoles. If the method exists, the plugin will look for a role in the session that matches the role.
  * If the roles don't match, an Exception is thrown.
@@ -35,7 +36,7 @@
  * 
  * See the AuthenticationService class in the test data for an example of an implementation.
  *
- * @package AmfphpAuthentication
+ * @package Amfphp_Plugins_Authentication
  * @author Ariel Sommeria-klein
  */
 class AmfphpAuthentication {

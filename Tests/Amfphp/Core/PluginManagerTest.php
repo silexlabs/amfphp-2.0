@@ -1,14 +1,17 @@
 <?php
-/*
+/**
  *  This file is part of amfPHP
  *
  * LICENSE
  *
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
+ * @package Tests_Amfphp_Core
  */
 
-
+/**
+*  includes
+*  */
 require_once dirname(__FILE__) . '/../../../Amfphp/ClassLoader.php';
 require_once dirname(__FILE__) . "/../../TestData/TestPlugins/DisabledPlugin/DisabledPlugin.php";
 

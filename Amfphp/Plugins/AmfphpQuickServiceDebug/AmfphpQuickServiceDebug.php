@@ -1,13 +1,17 @@
 <?php
-/*
+/**
  *  This file is part of amfPHP
  *
  * LICENSE
  *
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
+ * @package Amfphp_Plugins_QuickServiceDebug
  */
 
+/**
+*  includes
+*  */
 require dirname(__FILE__) . "/AmfphpQuickServiceDebugException.php";
 /**
  * A simple service browser with html only. Sometimes you don't need the full thing with AMF etc., so use this
@@ -23,7 +27,7 @@ require dirname(__FILE__) . "/AmfphpQuickServiceDebugException.php";
  * in the GET and POST data, some useful information and links should be displayed. If there is an exception elsewhere in the code,
  * either in the service object itself or in the rest of amfphp, information about the exception will be shown.
  *
- * @package AmfphpQuickServiceDebug
+ * @package Amfphp_Plugins_QuickServiceDebug
  * @author Ariel Sommeria-Klein
  */
 class AmfphpQuickServiceDebug implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_IDeserializedRequestHandler, Amfphp_Core_Common_IExceptionHandler, Amfphp_Core_Common_ISerializer {

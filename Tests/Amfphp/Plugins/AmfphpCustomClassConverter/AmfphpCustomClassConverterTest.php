@@ -1,14 +1,17 @@
 <?php
-/*
+/**
  *  This file is part of amfPHP
  *
  * LICENSE
  *
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
+ * @package Tests_Amfphp_Plugins_CustomClassConverter
  */
 
-
+/**
+*  includes
+*  */
 require_once dirname(__FILE__) . '/../../../../Amfphp/Plugins/AmfphpCustomClassConverter/AmfphpCustomClassConverter.php';
 require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
 require_once dirname(__FILE__) . "/../../../TestData/CustomClasses/TestCustomClass1.php";
@@ -16,7 +19,7 @@ require_once dirname(__FILE__) . "/../../../TestData/CustomClasses/TestCustomCla
 
 /**
  * Test class for CustomClassConverter.
- * @package Tests_AmfphpCustomClassConverter
+ * @package Tests_Amfphp_Plugins_CustomClassConverter
  * @author Ariel Sommeria-klein
  */
 class AmfphpCustomClassConverterTest extends PHPUnit_Framework_TestCase {

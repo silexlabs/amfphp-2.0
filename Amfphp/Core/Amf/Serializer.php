@@ -1,11 +1,12 @@
 <?php
-/*
+/**
  *  This file is part of amfPHP
  *
  * LICENSE
  *
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
+ * @package Amfphp_Core_Amf
  */
 
 /**
@@ -715,10 +716,10 @@ class Amfphp_Core_Amf_Serializer{
 	 * Write a string (Amf3). Strings are stored in a cache and in case the same string
 	 * is written again, a reference to the string is sent instead of the string itself.
 	 *
-	 * @note Sending strings larger than 268435455 (2^28-1 byte) will (silently) fail!
+	 * note: Sending strings larger than 268435455 (2^28-1 byte) will (silently) fail!
 	 *
-	 * @note The string marker is NOT sent here and has to be sent before, if needed.
-         *
+	 * note: The string marker is NOT sent here and has to be sent before, if needed.
+     *
 	 *
 	 * @param string $d the string to send
 	 *
@@ -917,13 +918,13 @@ class Amfphp_Core_Amf_Serializer{
 	/**
 	 * Return the serialisation of the given integer (Amf3).
 	 *
-	 * @note There does not seem to be a way to distinguish between signed and unsigned integers.
+	 * note: There does not seem to be a way to distinguish between signed and unsigned integers.
 	 * This method just sends the lowest 29 bit as-is, and the receiver is responsible to interpret
 	 * the result as signed or unsigned based on some context.
 	 *
-	 * @note The limit imposed by Amf3 is 29 bit. So in case the given integer is longer than 29 bit,
+	 * note: The limit imposed by Amf3 is 29 bit. So in case the given integer is longer than 29 bit,
 	 * only the lowest 29 bits will be serialised. No error will be logged!
-	 * TODO refactor into writeAmf3Int
+	 * @TODO refactor into writeAmf3Int
          *
 	 * @param int $d the integer to serialise
 	 *

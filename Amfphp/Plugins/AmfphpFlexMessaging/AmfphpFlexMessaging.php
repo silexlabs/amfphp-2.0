@@ -1,13 +1,17 @@
 <?php
-/*
+/**
  *  This file is part of amfPHP
  *
  * LICENSE
  *
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
+ * @package Amfphp_Plugins_FlexMessaging
  */
 
+/**
+*  includes
+*  */
 require_once dirname(__FILE__) . "/AcknowledgeMessage.php";
 require_once dirname(__FILE__) . "/ErrorMessage.php";
 /**
@@ -16,7 +20,7 @@ require_once dirname(__FILE__) . "/ErrorMessage.php";
  * Then a RemotingMessage is sent, expecting an AcknowledgeMessage in return.
  * In case of an error, an ErrorMessage is expected
  *
- * @package AmfphpFlexMessaging
+ * @package Amfphp_Plugins_FlexMessaging
  * @author Ariel Sommeria-Klein
  */
 class AmfphpFlexMessaging{

@@ -1,21 +1,25 @@
 <?php
-/*
+/**
  *  This file is part of amfPHP
  *
  * LICENSE
  *
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
+ * @package Amfphp
  */
+
+/**
+*  includes
+*  */
+require_once dirname(__FILE__) . '/ClassLoader.php';
 
 /* 
  * main entry point (gateway) for service calls. instanciates the gateway class and uses it to handle the call.
  * 
- * @package Amfphp_Core
+ * @package Amfphp
  * @author Ariel Sommeria-klein
  */
-
-require_once dirname(__FILE__) . '/ClassLoader.php';
 $gateway = Amfphp_Core_HttpRequestGatewayFactory::createGateway();
 
 //use this to change the current folder to the services folder. Be careful of the case.

@@ -1,0 +1,18 @@
+body
+{
+background:#001116	url(header-background-pizza.png) no-repeat top center;
+padding-top:300px;
+text-align:center; /* for IE */
+}
+
+h2 
+{
+color:#FFFFFF;
+}
+
+div#wrapper 
+{
+text-align:left; /* reset text alignment */
+width:985px; 
+margin:0 auto; /* for the rest */
+}
