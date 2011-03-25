@@ -93,15 +93,16 @@ class AmfphpQuickServiceDebug implements Amfphp_Core_Common_IDeserializer, Amfph
     private function getAvailableServiceNames(array $serviceFolderPaths, array $serviceNames2ClassFindInfo){
         $ret = array();
         foreach ($serviceFolderPaths as $serviceFolderPath) {
-            $folderContent = scandir($serviceFolderPath);
+            @$folderContent = scandir($serviceFolderPath);
 
-            foreach($folderContent as $fileName){
-                //add all .php file names, but removing the .php suffix
-                if(strpos($fileName, ".php")){
-                    $serviceName = substr($fileName, 0, strlen($fileName) - 4);
-                    $ret = $this->addToArrayIfUnique($ret, $serviceName);
-                }
-            }
+	        if($folderContent)
+				foreach($folderContent as $fileName){
+					//add all .php file names, but removing the .php suffix
+					if(strpos($fileName, ".php")){
+						$serviceName = substr($fileName, 0, strlen($fileName) - 4);
+						$ret = $this->addToArrayIfUnique($ret, $serviceName);
+					}
+				}
 
             
         }
