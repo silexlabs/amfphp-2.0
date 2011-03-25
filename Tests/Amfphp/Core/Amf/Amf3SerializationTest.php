@@ -29,7 +29,7 @@ class Amf3SerializationTest extends PHPUnit_Framework_TestCase {
         $testData = new Amf3TestData();
 
         $emptyPacket = new Amfphp_Core_Amf_Packet();
-        $emptyPacket->amfVersion = 3;
+        $emptyPacket->amfVersion = Amfphp_Core_Amf_Constants::AMF3_ENCODING;
         /*
          template
 

@@ -54,6 +54,16 @@ class Amfphp_Core_Amf_Constants {
      */
     const CREDENTIALS_FIELD_PASSWORD = "password";
 
+    /**
+     * the password field in the credentials header
+     */
+    const AMF0_ENCODING = 0;
+
+    /**
+     * the password field in the credentials header
+     */
+    const AMF3_ENCODING = 3;
+
 
 }
 ?>
