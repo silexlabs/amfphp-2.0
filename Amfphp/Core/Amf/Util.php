@@ -75,5 +75,16 @@ class Amfphp_Core_Amf_Util {
 	static public function is_undefined($obj){
 		return is_object($obj) ? get_class($obj) == "Amfphp_Core_Amf_Types_Undefined" : false;
 	}
+
+	/**
+	 * Determines whether an object is the ActionScript type "Date"
+	 *
+	 * @static
+	 * @param  $obj
+	 * @return bool
+	 */
+	static public function is_date($obj){
+		return is_object($obj) ? get_class($obj) == "Amfphp_Core_Amf_Types_Date" : false;
+	}
 }
 ?>

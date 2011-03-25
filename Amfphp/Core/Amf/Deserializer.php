@@ -520,7 +520,8 @@
 			$ms = $this->readDouble();
 
 			//$date = $ms-$timeOffset;
-			$date = $ms;
+			$date = new Amfphp_Core_Amf_Types_Date();
+			$date->time = $ms;
 
 			$this->storedObjects[] = & $date;
 			return $date;

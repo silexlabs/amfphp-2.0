@@ -260,7 +260,7 @@ class Amfphp_Core_Amf_Serializer{
      */
     protected function writeDate($d) {
             $this->writeByte(11); // write  date code
-            $this->writeDouble($d); //  write date (milliseconds from 1970)
+            $this->writeDouble($d->time); //  write date (milliseconds from 1 January 1970)
             /**
              * write timezone
              * ?? this is wierd -- put what you like and it pumps it back into flash at the current GMT ??
@@ -520,6 +520,11 @@ class Amfphp_Core_Amf_Serializer{
             { // array
                     $this->writeArrayOrObject($d);
                     return;
+            }
+            elseif (Amfphp_Core_Amf_Util::is_date($d))
+            { // date
+					$this->writeDate($d);
+					return;
             }
             elseif (is_object($d))
             {       $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
@@ -885,40 +890,6 @@ class Amfphp_Core_Amf_Serializer{
 		//Now we close the open object
 		$this->outBuffer .= "\1";
 	}
-
-        //TODO this is commented, so probably wrong. Fix it! A.S.
-	/*
-	protected  void WriteAmf3DateTime(DateTime value)
-	{
-		if( !_objectReferences.Contains(value) )
-		{
-			_objectReferences.Add(value, _objectReferences.Count);
-			int handle = 1;
-			WriteAmf3IntegerData(handle);
-
-			// Write date (milliseconds from 1970).
-			DateTime timeStart = new DateTime(1970, 1, 1, 0, 0, 0);
-
-			string timezoneCompensation = System.Configuration.ConfigurationSettings.AppSettings["timezoneCompensation"];
-			if( timezoneCompensation != null && ( timezoneCompensation.ToLower() == "auto" ) )
-			{
-				value = value.ToUniversalTime();
-			}
-
-			TimeSpan span = value.Subtract(timeStart);
-			long milliSeconds = (long)span.TotalMilliseconds;
-			long date = BitConverter.DoubleToInt64Bits((double)milliSeconds);
-			this.WriteLong(date);
-		}
-		else
-		{
-			int handle = (int)_objectReferences[value];
-			handle = handle << 1;
-			WriteAmf3IntegerData(handle);
-		}
-	}
-	*/
-
 
 	/**
 	 * Return the serialisation of the given integer (Amf3).
