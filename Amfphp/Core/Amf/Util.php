@@ -64,5 +64,16 @@ class Amfphp_Core_Amf_Util {
 
         return $obj;
     }
+
+	/**
+	 * Determines whether an object is the ActionScript type "undefined"
+	 *
+	 * @static
+	 * @param  $obj
+	 * @return bool
+	 */
+	static public function is_undefined($obj){
+		return is_object($obj) ? get_class($obj) == "Amfphp_Core_Amf_Types_Undefined" : false;
+	}
 }
 ?>

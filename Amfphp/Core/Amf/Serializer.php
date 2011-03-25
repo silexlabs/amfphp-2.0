@@ -511,6 +511,11 @@ class Amfphp_Core_Amf_Serializer{
                     $this->writeNull();
                     return;
             }
+            elseif (Amfphp_Core_Amf_Util::is_undefined($d))
+            { // undefined
+	                $this->writeUndefined();
+	                return;
+            }
             elseif (is_array($d))
             { // array
                     $this->writeArrayOrObject($d);
@@ -528,11 +533,6 @@ class Amfphp_Core_Amf_Serializer{
                     elseif($className == "simplexmlelement")
                     {
                             $this->writeXML($d->asXML());
-                            return;
-                    }
-                    elseif($className == "undefined")
-                    {
-                            $this->writeUndefined();
                             return;
                     }
                     else if($className == 'stdclass' && !$hasExplicitType)
@@ -600,6 +600,11 @@ class Amfphp_Core_Amf_Serializer{
 		elseif (is_null($d))
 		{ // null
 			$this->writeAmf3Null();
+			return;
+		}
+		elseif (Amfphp_Core_Amf_Util::is_undefined($d))
+		{ // undefined
+			$this->writeAmf3Undefined();
 			return;
 		}
 		elseif (is_array($d) && !$hasExplicitType)
