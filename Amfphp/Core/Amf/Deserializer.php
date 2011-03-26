@@ -77,13 +77,15 @@
 		 * @param object $amfdata The object to put the deserialized data in
 		 */
 		public function deserialize() {
-			if(!$this->deserializedPacket)
-				$this->deserializedPacket = new Amfphp_Core_Amf_Packet();
-
+                        $this->deserializedPacket = new Amfphp_Core_Amf_Packet();
 			$this->readHeaders(); // read the binary headers
 			$this->readMessages(); // read the binary Messages
-			
-			return $this->deserializedPacket;
+                        if($this->decodeFlags & 1 == 1){
+                            $this->deserializedPacket->amfVersion = 3;
+                        }else{
+                            $this->deserializedPacket->amfVersion = 0;
+                        }
+                        return $this->deserializedPacket;
 		}
 
 		/**
@@ -230,11 +232,6 @@
 				case 16: // Custom Class
 					return $this->readCustomClass();
 				case 17: //Amf3-specific
-					if(!$this->deserializedPacket)
-						$this->deserializedPacket = new Amfphp_Core_Amf_Packet();
-
-					$this->deserializedPacket->amfVersion = Amfphp_Core_Amf_Constants::AMF3_ENCODING;
-
 					return $this->readAmf3Data();
 					break;
 				default: // unknown case

@@ -259,7 +259,7 @@ class Amfphp_Core_Amf_Serializer{
      * @param date $d The date value
      */
     protected function writeDate($d) {
-            $this->writeByte(11); // write  date code
+            $this->writeByte(0x0B); // write  date code
             $this->writeDouble($d->time); //  write date (milliseconds from 1 January 1970)
             /**
              * write timezone
@@ -577,9 +577,9 @@ class Amfphp_Core_Amf_Serializer{
          * @todo no type markers ("\6", for example) in this method!
 	 */
 
-	protected function writeAmf3Data(& $d)
-	{       $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
-                $hasExplicitType = isset($d->$explicitTypeField);
+	protected function writeAmf3Data(& $d) {
+		$explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
+		$hasExplicitType = isset($d->$explicitTypeField);
 		if (is_int($d))
 		{ //int
 			$this->writeAmf3Number($d);
@@ -612,6 +612,11 @@ class Amfphp_Core_Amf_Serializer{
 			$this->writeAmf3Undefined();
 			return;
 		}
+		elseif (Amfphp_Core_Amf_Util::is_date($d))
+		{ // date
+			$this->writeDate($d);
+			return;
+		}
 		elseif (is_array($d) && !$hasExplicitType)
 		{ // array
 			$this->writeAmf3Array($d);
@@ -623,9 +628,11 @@ class Amfphp_Core_Amf_Serializer{
 			list($type, $subtype) = $this->sanitizeType($type);
 		}
 		elseif (is_object($d))
-		{
+        {
+	        $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
+            $hasExplicitType = isset($d->$explicitTypeField);
 			$className = strtolower(get_class($d));
-                        if($className == 'domdocument')
+            if($className == 'domdocument')
 			{
 				$this->writeAmf3Xml($d->saveXml());
 				return;
@@ -652,7 +659,7 @@ class Amfphp_Core_Amf_Serializer{
 				return;
 			}
 		}
-                throw new Amfphp_Core_Exception("couldn't write object " . print_r($d, false));
+		throw new Amfphp_Core_Exception("couldn't write object " . print_r($d, false));
 	}
 
 
@@ -722,7 +729,7 @@ class Amfphp_Core_Amf_Serializer{
 	}
 
 
-	/**
+    /**
 	 * Write a string (Amf3). Strings are stored in a cache and in case the same string
 	 * is written again, a reference to the string is sent instead of the string itself.
 	 *
