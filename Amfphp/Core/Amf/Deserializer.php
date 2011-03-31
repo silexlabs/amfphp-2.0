@@ -68,7 +68,6 @@
 			$this->storedStrings = array();
 			$this->storedObjects = array();
 			$this->storedDefinitions = array();
-			$this->decodeFlags = (Amfphp_Core_Amf_Util::isSystemBigEndian() * 2) | 4;
 		}
 
 		/**
@@ -80,11 +79,6 @@
                         $this->deserializedPacket = new Amfphp_Core_Amf_Packet();
 			$this->readHeaders(); // read the binary headers
 			$this->readMessages(); // read the binary Messages
-                        if($this->decodeFlags & 1 == 1){
-                            $this->deserializedPacket->amfVersion = 3;
-                        }else{
-                            $this->deserializedPacket->amfVersion = 0;
-                        }
                         return $this->deserializedPacket;
 		}
 
@@ -416,10 +410,16 @@
 			return $obj; // return the array
 		}
 
+                /**
+                 * read the type byte, then call the corresponding amf3 data reading function 
+                 * @return mixed
+                 */
 		public function readAmf3Data()
 		{
+                    //AMF3 data found, so mark it in the deserialized packet. This is useful to know what kind of AMF to send back
+                        $this->deserializedPacket->amfVersion = 3;
 			$type = $this->readByte();
-			switch ($type)
+    			switch ($type)
 			{
 				case 0x00 :
 					return new Amfphp_Core_Amf_Types_Undefined();

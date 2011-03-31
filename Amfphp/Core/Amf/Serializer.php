@@ -615,7 +615,12 @@ class Amfphp_Core_Amf_Serializer{
 		elseif (is_object($d))
 		{
 			$className = strtolower(get_class($d));
-                        if($className == 'domdocument')
+                        if(is_a($d, "Amfphp_Core_Amf_Types_ByteArray")){
+				$this->writeAmf3ByteArray($d->data);
+				return;
+
+                        }
+                        elseif($className == 'domdocument')
 			{
 				$this->writeAmf3Xml($d->saveXml());
 				return;
@@ -623,11 +628,6 @@ class Amfphp_Core_Amf_Serializer{
 			elseif($className == "simplexmlelement")
 			{
 				$this->writeAmf3Xml($d->asXML());
-				return;
-			}
-			elseif($className == 'bytearray')
-			{
-				$this->writeAmf3ByteArray($d->data);
 				return;
 			}
 			// Fix for PHP5 overriden ArrayAccess and ArrayObjects with an explcit type
@@ -986,7 +986,7 @@ class Amfphp_Core_Amf_Serializer{
 
         //in amf3 there are 2 xml types, XMLDocument and XML. the amfphp deserializer parses them both to a String.
         //However, the serializer expects a real xml document
-        //TODO fix these inconsistencies A.S.
+        //@todo fix these inconsistencies A.S.
 
 	protected function writeAmf3Xml($d)
 	{
@@ -998,8 +998,6 @@ class Amfphp_Core_Amf_Serializer{
 	protected function writeAmf3ByteArray($d)
 	{
 		$this->writeByte(0x0C);
-		//this seems wrong... A.S.
-                //$this->writeAmf3String($d, true);
 		$this->writeAmf3ByteArrayMessage($d);
 	}
 

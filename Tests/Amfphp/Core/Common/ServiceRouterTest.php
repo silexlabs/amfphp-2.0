@@ -15,7 +15,6 @@
 *  */
 require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
 require_once dirname(__FILE__) . '/../../../TestData/AmfTestData.php';
-require_once dirname(__FILE__) . '/AmfSerializerWrapper.php';
 require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
 require_once dirname(__FILE__) . "/../../../TestData/TestServicesConfig.php";
 

@@ -124,6 +124,7 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
         $numMessages = count($deserializedRequest->messages);
         $rawOutputData = "";
         $responsePacket = new Amfphp_Core_Amf_Packet();
+        $responsePacket->amfVersion = $deserializedRequest->amfVersion;
         for($i = 0; $i < $numMessages; $i++){
             $requestMessage = $deserializedRequest->messages[$i];
             $this->lastRequestMessageResponseUri = $requestMessage->responseUri;
