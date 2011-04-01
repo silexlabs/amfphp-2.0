@@ -51,6 +51,8 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      */
     private $lastRequestMessageResponseUri;
 
+	private $objectEncoding = Amfphp_Core_Amf_Constants::AMF0_ENCODING;
+
     public function  __construct() {
         $this->lastRequestMessageResponseUri = "/1";
     }
@@ -60,7 +62,11 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      */
     public function deserialize(array $getData, array $postData, $rawPostData){
         $deserializer = new Amfphp_Core_Amf_Deserializer($rawPostData);
-        return $deserializer->deserialize();
+        $requestPacket = $deserializer->deserialize();
+
+	    $this->objectEncoding = $requestPacket->amfVersion;
+
+	    return $requestPacket;
     }
 
     /**
@@ -167,6 +173,8 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      * @see Amfphp_Core_Common_ISerializer
      */
     public function serialize($data){
+	    $data->amfVersion = $this->objectEncoding;
+
         $serializer = new Amfphp_Core_Amf_Serializer($data);
         return $serializer->serialize();
 

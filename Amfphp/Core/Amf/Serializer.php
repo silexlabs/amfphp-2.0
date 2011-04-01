@@ -259,8 +259,8 @@ class Amfphp_Core_Amf_Serializer{
      * @param date $d The date value
      */
     protected function writeDate($d) {
-            $this->writeByte(11); // write  date code
-            $this->writeDouble($d); //  write date (milliseconds from 1970)
+            $this->writeByte(0x0B); // write  date code
+            $this->writeDouble($d->time); //  write date (milliseconds from 1 January 1970)
             /**
              * write timezone
              * ?? this is wierd -- put what you like and it pumps it back into flash at the current GMT ??
@@ -511,10 +511,20 @@ class Amfphp_Core_Amf_Serializer{
                     $this->writeNull();
                     return;
             }
+            elseif (Amfphp_Core_Amf_Util::is_undefined($d))
+            { // undefined
+	                $this->writeUndefined();
+	                return;
+            }
             elseif (is_array($d))
             { // array
                     $this->writeArrayOrObject($d);
                     return;
+            }
+            elseif (Amfphp_Core_Amf_Util::is_date($d))
+            { // date
+					$this->writeDate($d);
+					return;
             }
             elseif (is_object($d))
             {       $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
@@ -528,11 +538,6 @@ class Amfphp_Core_Amf_Serializer{
                     elseif($className == "simplexmlelement")
                     {
                             $this->writeXML($d->asXML());
-                            return;
-                    }
-                    elseif($className == "undefined")
-                    {
-                            $this->writeUndefined();
                             return;
                     }
                     else if($className == 'stdclass' && !$hasExplicitType)
@@ -572,9 +577,9 @@ class Amfphp_Core_Amf_Serializer{
          * @todo no type markers ("\6", for example) in this method!
 	 */
 
-	protected function writeAmf3Data(& $d)
-	{       $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
-                $hasExplicitType = isset($d->$explicitTypeField);
+	protected function writeAmf3Data(& $d) {
+		$explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
+		$hasExplicitType = isset($d->$explicitTypeField);
 		if (is_int($d))
 		{ //int
 			$this->writeAmf3Number($d);
@@ -602,6 +607,16 @@ class Amfphp_Core_Amf_Serializer{
 			$this->writeAmf3Null();
 			return;
 		}
+		elseif (Amfphp_Core_Amf_Util::is_undefined($d))
+		{ // undefined
+			$this->writeAmf3Undefined();
+			return;
+		}
+		elseif (Amfphp_Core_Amf_Util::is_date($d))
+		{ // date
+			$this->writeDate($d);
+			return;
+		}
 		elseif (is_array($d) && !$hasExplicitType)
 		{ // array
 			$this->writeAmf3Array($d);
@@ -613,7 +628,9 @@ class Amfphp_Core_Amf_Serializer{
 			list($type, $subtype) = $this->sanitizeType($type);
 		}
 		elseif (is_object($d))
-		{
+        {
+	        $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
+            $hasExplicitType = isset($d->$explicitTypeField);
 			$className = strtolower(get_class($d));
                         if(is_a($d, "Amfphp_Core_Amf_Types_ByteArray")){
 				$this->writeAmf3ByteArray($d->data);
@@ -642,7 +659,7 @@ class Amfphp_Core_Amf_Serializer{
 				return;
 			}
 		}
-                throw new Amfphp_Core_Exception("couldn't write object " . print_r($d, false));
+		throw new Amfphp_Core_Exception("couldn't write object " . print_r($d, false));
 	}
 
 
@@ -712,7 +729,7 @@ class Amfphp_Core_Amf_Serializer{
 	}
 
 
-	/**
+    /**
 	 * Write a string (Amf3). Strings are stored in a cache and in case the same string
 	 * is written again, a reference to the string is sent instead of the string itself.
 	 *
@@ -880,40 +897,6 @@ class Amfphp_Core_Amf_Serializer{
 		//Now we close the open object
 		$this->outBuffer .= "\1";
 	}
-
-        //TODO this is commented, so probably wrong. Fix it! A.S.
-	/*
-	protected  void WriteAmf3DateTime(DateTime value)
-	{
-		if( !_objectReferences.Contains(value) )
-		{
-			_objectReferences.Add(value, _objectReferences.Count);
-			int handle = 1;
-			WriteAmf3IntegerData(handle);
-
-			// Write date (milliseconds from 1970).
-			DateTime timeStart = new DateTime(1970, 1, 1, 0, 0, 0);
-
-			string timezoneCompensation = System.Configuration.ConfigurationSettings.AppSettings["timezoneCompensation"];
-			if( timezoneCompensation != null && ( timezoneCompensation.ToLower() == "auto" ) )
-			{
-				value = value.ToUniversalTime();
-			}
-
-			TimeSpan span = value.Subtract(timeStart);
-			long milliSeconds = (long)span.TotalMilliseconds;
-			long date = BitConverter.DoubleToInt64Bits((double)milliSeconds);
-			this.WriteLong(date);
-		}
-		else
-		{
-			int handle = (int)_objectReferences[value];
-			handle = handle << 1;
-			WriteAmf3IntegerData(handle);
-		}
-	}
-	*/
-
 
 	/**
 	 * Return the serialisation of the given integer (Amf3).
