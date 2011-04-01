@@ -193,7 +193,7 @@
 		 */
 		public function readData($type)
 		{
-			switch ($type)
+                 	switch ($type)
 			{
 				case 0: // number
 					return $this->readDouble();

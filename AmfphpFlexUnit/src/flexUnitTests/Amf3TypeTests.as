@@ -8,7 +8,10 @@ package flexUnitTests
 	import org.amfphp.test.EnhancedNetConnection;
 	import org.amfphp.test.ObjEvent;
 
-	public class Amf3TypeTests extends Amf0TypeTests
+	/**
+	 * adds on the tests that work for both amf0 and am3
+	 * */
+	public class Amf3TypeTests extends AmfCommonTypeTests
 	{		
 		
 		[Before]
@@ -37,6 +40,19 @@ package flexUnitTests
 		}
 		
 		
+		/**
+		 * send an xml object (the as3 E4X object)
+		 * */
+		public function testXml():void{
+			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnXml, 1000));
+			var testVar:XML = new XML("<root>bla</root>");
+			_nc.simpleCall("MirrorService/returnOneParam", testVar);	
+			
+		}
+		
+		private function verifyReturnXml(event:ObjEvent):void{
+			assertTrue(event.obj is XML);
+		}			
 		
 	}
 }
