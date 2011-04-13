@@ -145,13 +145,13 @@ class Amf3TestData {
     }
 
     public function buildXml(){
-        $this->dXmlDocument = "<?xml version=\"1.0\"?><testRoot><testChild1>testChild1Value</testChild1></testRoot>";
+        $this->dXmlDocument = new Amfphp_Core_Amf_Types_XmlDocument("<?xml version=\"1.0\"?><testRoot><testChild1>testChild1Value</testChild1></testRoot>");
         //2nd is u29s-value : length << 1 | 1.
-        $this->sXmlDocument = pack('C', 7) . pack("C2", 0x81, 0x25) . $this->dXmlDocument;
+        $this->sXmlDocument = pack('C', 7) . pack("C2", 0x81, 0x25) . $this->dXmlDocument->data;
 
         //xml and xml doc treated the same. So do no tests for xml(not doc!) only for deserializer
-        $this->dXml = "<?xml version=\"1.0\"?><testRoot><testChild1>testChild1Value</testChild1></testRoot>";
-        $this->sXml = pack('C', 0x0B) . pack("C2", 0x81, 0x25) . $this->dXmlDocument;
+        $this->dXml = new Amfphp_Core_Amf_Types_Xml("<?xml version=\"1.0\"?><testRoot><testChild1>testChild1Value</testChild1></testRoot>");
+        $this->sXml = pack('C', 0x0B) . pack("C2", 0x81, 0x25) . $this->dXml->data;
 
     }
 

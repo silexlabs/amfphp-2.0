@@ -234,10 +234,10 @@ class Amfphp_Core_Amf_Serializer {
      * Note: strips whitespace
      * @param string $d The XML string
      */
-    protected function writeXML($d) {
-        if (!$this->writeReferenceIfExists($d)) {
-            $this->writeByte(15);
-            $this->writeLongUTF(preg_replace('/\>(\n|\r|\r\n| |\t)*\</', '><', trim($d)));
+    protected function writeXML(Amfphp_Core_Amf_Types_Xml $d) {
+        if (!$this->writeReferenceIfExists($d->data)) {
+            $this->writeByte(0x0F);
+            $this->writeLongUTF(preg_replace('/\>(\n|\r|\r\n| |\t)*\</', '><', trim($d->data)));
         }
     }
 
@@ -480,9 +480,9 @@ class Amfphp_Core_Amf_Serializer {
         } elseif (is_object($d)) {
             $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
             $hasExplicitType = isset($d->$explicitTypeField);
-            $className = strtolower(get_class($d));
-            if ($className == 'domdocument') {
-                $this->writeXML($d->saveXml());
+            $className = get_class($d);
+            if ($className == 'Amfphp_Core_Amf_Types_Xml') {
+                $this->writeXML($d);
                 return;
             } elseif ($className == "simplexmlelement") {
                 $this->writeXML($d->asXML());
@@ -553,13 +553,13 @@ class Amfphp_Core_Amf_Serializer {
         } elseif (is_object($d)) {
             $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
             $hasExplicitType = isset($d->$explicitTypeField);
-            $className = strtolower(get_class($d));
+            $className = get_class($d);
             
-            if ($className == 'domdocument') {
-                $this->writeAmf3Xml($d->saveXml());
+            if ($className == 'Amfphp_Core_Amf_Types_Xml') {
+                $this->writeAmf3Xml($d);
                 return;
-            } elseif ($className == "simplexmlelement") {
-                $this->writeAmf3Xml($d->asXML());
+            } elseif ($className == "Amfphp_Core_Amf_Types_XmlDocument") {
+                $this->writeAmf3XmlDocument($d);
                 return;
             }
             // Fix for PHP5 overriden ArrayAccess and ArrayObjects with an explcit type
@@ -830,12 +830,14 @@ class Amfphp_Core_Amf_Serializer {
         }
     }
 
-    //in amf3 there are 2 xml types, XMLDocument and XML. the amfphp deserializer parses them both to a String.
-    //However, the serializer expects a real xml document
-    //@todo fix these inconsistencies A.S.
+    protected function writeAmf3Xml(Amfphp_Core_Amf_Types_Xml $d) {
+        $d = preg_replace('/\>(\n|\r|\r\n| |\t)*\</', '><', trim($d->data));
+        $this->writeByte(0x0B);
+        $this->writeAmf3String($d);
+    }
 
-    protected function writeAmf3Xml($d) {
-        $d = preg_replace('/\>(\n|\r|\r\n| |\t)*\</', '><', trim($d));
+    protected function writeAmf3XmlDocument(Amfphp_Core_Amf_Types_XmlDocument $d) {
+        $d = preg_replace('/\>(\n|\r|\r\n| |\t)*\</', '><', trim($d->data));
         $this->writeByte(0x07);
         $this->writeAmf3String($d);
     }

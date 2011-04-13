@@ -43,6 +43,8 @@ require_once Amfphp_ROOTPATH . "Core/Amf/Util.php";
 require_once Amfphp_ROOTPATH . "Core/Amf/Types/ByteArray.php";
 require_once Amfphp_ROOTPATH . "Core/Amf/Types/Undefined.php";
 require_once Amfphp_ROOTPATH . "Core/Amf/Types/Date.php";
+require_once Amfphp_ROOTPATH . "Core/Amf/Types/Xml.php";
+require_once Amfphp_ROOTPATH . "Core/Amf/Types/XmlDocument.php";
 
 //core
 require_once Amfphp_ROOTPATH . "Core/Config.php";

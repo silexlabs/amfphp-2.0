@@ -195,6 +195,10 @@
 		{
                  	switch ($type)
 			{
+                            //amf3 is now most common, so start with that
+				case 0x11: //Amf3-specific
+					return $this->readAmf3Data();
+					break;
 				case 0: // number
 					return $this->readDouble();
 				case 1: // boolean
@@ -203,6 +207,7 @@
 					return $this->readUTF();
 				case 3: // object Object
 					return $this->readObject();
+                                //ignore movie clip
 				case 5: // null
 					return null;
 				case 6: // undefined
@@ -213,21 +218,19 @@
 					return $this->readMixedArray();
 				case 9: //object end. not worth , TODO maybe some integrity checking
 					return null;
-				case 10: // array
+				case 0X0A: // array
 					return $this->readArray();
-				case 11: // date
+				case 0X0B: // date
 					return $this->readDate();
-				case 12: // string, strlen(string) > 2^16
+				case 0X0C: // string, strlen(string) > 2^16
 					return $this->readLongUTF();
-				case 13: // mainly internal AS objects
+				case 0X0D: // mainly internal AS objects
 					return null;
-				case 15: // XML
-					return $this->readLongUTF();
-				case 16: // Custom Class
+                                //ignore recordset
+				case 0X0F: // XML
+					return $this->readXml();
+				case 0x10: // Custom Class
 					return $this->readCustomClass();
-				case 17: //Amf3-specific
-					return $this->readAmf3Data();
-					break;
 				default: // unknown case
 					throw new Amfphp_Core_Exception("Found unhandled type with code: $type");
 					exit();
@@ -371,6 +374,15 @@
 			return $ms;
 		}
 
+                /**
+                 *
+                 * @return Amfphp_Core_Amf_Types_Xml 
+                 */
+                protected function readXml(){
+                    $str = $this->readLongUTF();
+                    return new Amfphp_Core_Amf_Types_Xml($str);
+                }
+
 		/**
 		 * readLongUTF first grabs the next 4 bytes which represent the string length.
 		 * Then it grabs the next (len) bytes of the resulting in the string
@@ -436,7 +448,7 @@
 				case 0x06 :
 					return $this->readAmf3String();
 				case 0x07 :
-					return $this->readAmf3XmlString();
+					return $this->readAmf3XmlDocument();
 				case 0x08 :
 					return $this->readAmf3Date();
 				case 0x09 :
@@ -444,7 +456,7 @@
 				case 0x0A :
 					return $this->readAmf3Object();
 				case 0x0B :
-					return $this->readAmf3XmlString();
+					return $this->readAmf3Xml();
 				case 0x0C :
 					return $this->readAmf3ByteArray();
 				default:
@@ -560,7 +572,11 @@
 
 		}
 
-		protected function readAmf3XmlString()
+                /**
+                 *
+                 * @return Amfphp_Core_Amf_Types_Xml
+                 */
+		protected function readAmf3Xml()
 		{
 			$handle = $this->readAmf3Int();
 			$inline = (($handle & 1) != 0);
@@ -574,7 +590,28 @@
 			{
 				$xml = $this->storedObjects[$handle];
 			}
-			return $xml;
+			return new Amfphp_Core_Amf_Types_Xml($xml);
+		}
+
+                /**
+                 *
+                 * @return Amfphp_Core_Amf_Types_Xml
+                 */
+		protected function readAmf3XmlDocument()
+		{
+			$handle = $this->readAmf3Int();
+			$inline = (($handle & 1) != 0);
+			$handle = $handle >> 1;
+			if ($inline)
+			{
+				$xml = $this->readBuffer($handle);
+				$this->storedObjects[] = $xml;
+			}
+			else
+			{
+				$xml = $this->storedObjects[$handle];
+			}
+			return new Amfphp_Core_Amf_Types_XmlDocument($xml);
 		}
 
 		protected function readAmf3ByteArray()

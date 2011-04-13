@@ -8,20 +8,10 @@
 	<fx:Script>
 		<![CDATA[
 			import flexUnitTests.Amf3TypeTests;
-			import flexUnitTests.AmfCommonTypeTests;
-			import flexUnitTests.AuthenticationTests;
-			import flexUnitTests.LargeObjectsTests;
-			import flexUnitTests.NetConnectionTests;
-			import flexUnitTests.RemoteObjectTests;
 			
 			public function currentRunTestSuite():Array
 			{
 				var testsToRun:Array = new Array();
-				testsToRun.push(flexUnitTests.RemoteObjectTests);
-				testsToRun.push(flexUnitTests.NetConnectionTests);
-				testsToRun.push(flexUnitTests.LargeObjectsTests);
-				testsToRun.push(flexUnitTests.AuthenticationTests);
-				testsToRun.push(flexUnitTests.AmfCommonTypeTests);
 				testsToRun.push(flexUnitTests.Amf3TypeTests);
 				return testsToRun;
 			}

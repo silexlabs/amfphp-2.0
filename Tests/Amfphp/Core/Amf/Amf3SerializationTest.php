@@ -112,7 +112,14 @@ class Amf3SerializationTest extends PHPUnit_Framework_TestCase {
 
         //xml
         $serializer = new AmfSerializerWrapper($emptyPacket);
-        $serializer->writeAmf3XML($testData->dXmlDocument);
+        $serializer->writeAmf3Xml($testData->dXml);
+        $serialized = $serializer->getOutput();
+        $expectedSerialized = $testData->sXml;
+        $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));
+
+        //xml document
+        $serializer = new AmfSerializerWrapper($emptyPacket);
+        $serializer->writeAmf3XmlDocument($testData->dXmlDocument);
         $serialized = $serializer->getOutput();
         $expectedSerialized = $testData->sXmlDocument;
         $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));
