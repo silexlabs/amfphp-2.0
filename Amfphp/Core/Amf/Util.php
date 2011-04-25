@@ -97,7 +97,28 @@ class Amfphp_Core_Amf_Util {
     static public function is_date($obj) {
         return is_object($obj) ? get_class($obj) == "Amfphp_Core_Amf_Types_Date" : false;
     }
-    
+
+    /**
+     * Determines whether an object is the ActionScript type "XML"
+     *
+     * @static
+     * @param  $obj
+     * @return bool
+     */
+    static public function is_Xml($obj) {
+        return is_object($obj) ? get_class($obj) == "Amfphp_Core_Amf_Types_Xml" : false;
+    }
+        /**
+     * Determines whether an object is the ActionScript type "XmlDoument"
+     *
+     * @static
+     * @param  $obj
+     * @return bool
+     */
+    static public function is_XmlDocument($obj) {
+        return is_object($obj) ? get_class($obj) == "Amfphp_Core_Amf_Types_XmlDocument" : false;
+    }
+
 
 }
 
