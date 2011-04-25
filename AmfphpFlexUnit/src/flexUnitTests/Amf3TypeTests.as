@@ -2,6 +2,7 @@ package flexUnitTests
 {
 	import flash.net.ObjectEncoding;
 	import flash.utils.ByteArray;
+	import flash.xml.XMLDocument;
 	
 	import flexunit.framework.TestCase;
 	
@@ -39,9 +40,9 @@ package flexUnitTests
 			assertEquals(false, retByteArray.readBoolean());
 		}
 		
-		
 		/**
-		 * send an xml object (the as3 E4X object)
+		 * send an xml object (the as3 E4X object, or the as2 XML object)
+		 * the as3 netconnection trips up on this when using AMF0...
 		 * */
 		public function testXml():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnXml, 1000));
@@ -52,7 +53,9 @@ package flexUnitTests
 		
 		private function verifyReturnXml(event:ObjEvent):void{
 			assertTrue(event.obj is XML);
-		}			
+		}		
+		
+		
 		
 	}
 }

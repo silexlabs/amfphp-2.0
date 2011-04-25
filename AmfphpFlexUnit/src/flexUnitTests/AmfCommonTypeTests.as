@@ -204,8 +204,10 @@ package flexUnitTests
 		}
 		
 		
+		
+		
 		/**
-		 * send an xml document object (comparable to as2 xml object)
+		 * send an xml document object
 		 * */
 		public function testXMLDocument():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnXMLDocument, 1000));
@@ -217,7 +219,6 @@ package flexUnitTests
 		private function verifyReturnXMLDocument(event:ObjEvent):void{
 			assertTrue(event.obj is XMLDocument);
 		}		
-	
 		
 		
 	}

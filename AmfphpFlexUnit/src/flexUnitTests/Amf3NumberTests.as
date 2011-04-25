@@ -1,6 +1,7 @@
 package flexUnitTests
 {
 	import flash.net.ObjectEncoding;
+	import flash.xml.XMLDocument;
 	
 	import flexunit.framework.TestCase;
 	
@@ -33,6 +34,18 @@ package flexUnitTests
 			assertTrue(event.obj is int);
 			assertEquals(-1, event.obj);
 		}
+		
+		public function test2Power30():void{
+			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturn2Power30, 1000));
+			var testVar:Number = 2^30;
+			_nc.simpleCall("MirrorService/returnOneParam", testVar);	
 			
+		}
+		
+		private function verifyReturn2Power30(event:ObjEvent):void{
+			assertTrue(event.obj is Number);
+			assertEquals(2^30, event.obj);
+		}	
+		
 	}
 }

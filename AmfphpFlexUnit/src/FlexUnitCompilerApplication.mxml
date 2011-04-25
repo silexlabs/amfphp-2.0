@@ -9,13 +9,11 @@ Please click on the "Refresh" icon in "FlexUnit Results" view to regenerate this
 	<fx:Script>
 		<![CDATA[
 			import flexUnitTests.Amf3TypeTests;
-			import flexUnitTests.LargeObjectsTests;
 			import flexUnitTests.RemoteObjectTests;
 			
 			private var flexUnitTests_TypeTests_obj:flexUnitTests.Amf3TypeTests;
 			
 			
-			private var flexUnitTests_LargeObjectsTests_obj:flexUnitTests.LargeObjectsTests;
 			
 			
 			private var flexUnitTests_RemoteObjectTests_obj:flexUnitTests.RemoteObjectTests;
