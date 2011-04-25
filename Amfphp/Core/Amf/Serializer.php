@@ -452,14 +452,14 @@ class Amfphp_Core_Amf_Serializer {
      * @param mixed $d The data
      */
     protected function writeData($d) {
-        if ($this->packet->amfVersion == Amfphp_Core_Amf_Constants::AMF3_ENCODING) {
+        if ($this->packet->amfVersion == Amfphp_Core_Amf_Constants::AMF3_ENCODING) { //amf3 data. This is most current, so it's has been moved to the top's first
             $this->writeByte(0x11);
             $this->writeAmf3Data($d);
             return;
         } elseif (is_int($d) || is_float($d)) { // double
             $this->writeNumber($d);
             return;
-        } elseif (is_string($d)) { // string
+        } elseif (is_string($d)) { // string, long string
             $this->writeString($d);
             return;
         } elseif (is_bool($d)) { // boolean
@@ -477,30 +477,18 @@ class Amfphp_Core_Amf_Serializer {
         } elseif (Amfphp_Core_Amf_Util::is_date($d)) { // date
             $this->writeDate($d);
             return;
+        } elseif (Amfphp_Core_Amf_Util::is_Xml ($d)) { // Xml (note, no XmlDoc in AMF0)
+            $this->writeXML($d);
+            return;
         } elseif (is_object($d)) {
             $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
             $hasExplicitType = isset($d->$explicitTypeField);
             $className = get_class($d);
-            if ($className == 'Amfphp_Core_Amf_Types_Xml') {
-                $this->writeXML($d);
-                return;
-            } elseif ($className == "simplexmlelement") {
-                $this->writeXML($d->asXML());
-                return;
-            } else if ($className == 'stdclass' && !$hasExplicitType) {
-                $this->writeAnonymousObject($d);
-                return;
-            }
-            //Fix for PHP5 overriden ArrayAccess and ArrayObjects with an explcit type
-            //TODO not sure if this is still relevant. A.S.
-            elseif ((is_a($d, 'ArrayAccess') || is_a($d, 'ArrayObject')) && !$hasExplicitType) {
-                $this->writeArrayOrObject($d);
-                return;
-            } else if ($hasExplicitType) {
+            if ($hasExplicitType) {
                 $this->writeTypedObject($d);
                 return;
-            } else {
-                $this->writeArrayOrObject($d);
+            }else{
+                $this->writeAnonymousObject($d);
                 return;
             }
         }
@@ -519,8 +507,6 @@ class Amfphp_Core_Amf_Serializer {
      * @todo no type markers ("\6", for example) in this method!
      */
     protected function writeAmf3Data(& $d) {
-        $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
-        $hasExplicitType = isset($d->$explicitTypeField);
         if (is_int($d)) { //int
             $this->writeAmf3Number($d);
             return;
@@ -544,45 +530,23 @@ class Amfphp_Core_Amf_Serializer {
         } elseif (Amfphp_Core_Amf_Util::is_date($d)) { // date
             throw new Exception("writing date not supported in amf3 serializing");
             return;
-        } elseif (is_array($d) && !$hasExplicitType) { // array
+        } elseif (is_array($d)) { // array
             $this->writeAmf3Array($d);
             return;
         } elseif (Amfphp_Core_Amf_Util::is_byteArray($d)) { //byte array
             $this->writeAmf3ByteArray($d->data);
             return;
+        } elseif (Amfphp_Core_Amf_Util::is_Xml ($d)) { // Xml
+            $this->writeAmf3Xml($d);
+            return;
+        } elseif (Amfphp_Core_Amf_Util::is_XmlDocument ($d)) { // XmlDoc
+            $this->writeAmf3XmlDocument($d);
+            return;
         } elseif (is_object($d)) {
-            $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
-            $hasExplicitType = isset($d->$explicitTypeField);
-            $className = get_class($d);
-            
-            if ($className == 'Amfphp_Core_Amf_Types_Xml') {
-                $this->writeAmf3Xml($d);
-                return;
-            } elseif ($className == "Amfphp_Core_Amf_Types_XmlDocument") {
-                $this->writeAmf3XmlDocument($d);
-                return;
-            }
-            // Fix for PHP5 overriden ArrayAccess and ArrayObjects with an explcit type
-            elseif ((is_a($d, 'ArrayAccess') || is_a($d, 'ArrayObject')) && !$hasExplicitType) {
-                $this->writeAmf3Array($d, true);
-                return;
-            } else {
-                $this->writeAmf3Object($d);
-                return;
-            }
+            $this->writeAmf3Object($d);
+            return;
         }
         throw new Amfphp_Core_Exception("couldn't write object " . print_r($d, false));
-    }
-
-    /**
-     * Write an ArrayCollection
-     */
-    protected function writeAmf3ArrayCollectionPreamble() {
-        $this->writeByte(0x0a);
-        $this->writeByte(0x07);
-        $this->writeAmf3String("flex.messaging.io.ArrayCollection");
-        $this->storedDefinitions++;
-        $this->storedObjects[] = "";
     }
 
     /**
@@ -693,7 +657,7 @@ class Amfphp_Core_Amf_Serializer {
         }
     }
 
-    protected function writeAmf3Array(/* array */ $d, $arrayCollectionable = false) {
+    protected function writeAmf3Array(array $d, $arrayCollectionable = false) {
         //Circular referencing is disabled in arrays
         //Because if the array contains only primitive values,
         //Then === will say that the two arrays are strictly equal
@@ -726,10 +690,6 @@ class Amfphp_Core_Amf_Serializer {
         ) { // this is a mixed array
             $this->writeAmf3ObjectFromArray($numeric + $string); // write the numeric and string keys in the mixed array
         } else { // this is just an array
-            if ($arrayCollectionable) {
-                $this->writeAmf3ArrayCollectionPreamble();
-            }
-
             $num_count = count($numeric);
 
             $this->outBuffer .= "\11";
@@ -879,7 +839,7 @@ class Amfphp_Core_Amf_Serializer {
             $realObj = new stdClass();
             $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
             foreach ($d as $key => $val) {
-                if ($key[0] != "\0" && $key != $explicitTypeField) { //Don't show private members
+                if ($key[0] != "\0" && $key != $explicitTypeField) { //Don't show private members or explicit type
                     $realObj->$key = $val;
                 }
             }
