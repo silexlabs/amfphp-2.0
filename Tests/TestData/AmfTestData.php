@@ -418,13 +418,13 @@ class AmfTestData {
      * note: the writeXml method gets rids of CRs and LFs
      */
     public function buildXml(){
-        $this->dXml = "<testXml>test</testXml>";
+        $this->dXml = new Amfphp_Core_Amf_Types_Xml("<testXml>test</testXml>");
         //type : 0xOF
         $this->sXml = pack('C', 0x0F);
         //data length on a long
-        $this->sXml .= pack('N', strlen("<testXml>test</testXml>"));
+        $this->sXml .= pack('N', strlen($this->dXml->data));
         //data
-        $this->sXml .= "<testXml>test</testXml>";
+        $this->sXml .= $this->dXml->data;
     }
 
     /**
