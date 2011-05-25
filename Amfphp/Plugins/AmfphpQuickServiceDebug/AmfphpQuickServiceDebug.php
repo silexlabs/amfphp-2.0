@@ -231,7 +231,7 @@ class AmfphpQuickServiceDebug implements Amfphp_Core_Common_IDeserializer, Amfph
      * @see Amfphp_Core_Common_ISerializer
      */
     public function serialize($data) {
-        return $data;
+        return print_r($data, true);
     }
 
 }
