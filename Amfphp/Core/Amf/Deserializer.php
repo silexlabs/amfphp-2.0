@@ -355,23 +355,9 @@
 		protected function readDate()
 		{
 			$ms = $this->readDouble(); // date in milliseconds from 01/01/1970
-			$int = $this->readInt(); // nasty way to get timezone
-			if ($int > 720)
-			{
-				$int = -(65536 - $int);
-			}
-			$int *= -60;
-			//$int *= 1000;
-			//$min = $int % 60;
-			//$timezone = "GMT " . - $hr . ":" . abs($min);
-			// end nastiness
-
-			//We store the last timezone found in date fields in the request
-			//FOr most purposes, it's expected that the timezones
-			//don't change from one date object to the other (they change per client though)
-			//DateWrapper::setTimezone($int);
-			// TODO: Create new DateWrapper
-			return $ms;
+			$int = $this->readInt(); // unsupported timezone
+			$date = new Amfphp_Core_Amf_Types_Date($ms);
+                        return $date;
 		}
 
                 /**
@@ -517,26 +503,23 @@
 
 		protected function readAmf3Date()
 		{
-			$dateref = $this->readAmf3Int();
-			if (($dateref & 0x01) == 0)
+			$firstInt = $this->readAmf3Int();
+			if (($firstInt & 0x01) == 0)
 			{
-				$dateref = $dateref >> 1;
-				if ($dateref >= count($this->storedObjects))
+				$firstInt = $firstInt >> 1;
+				if ($firstInt >= count($this->storedObjects))
 				{
-					throw new Amfphp_Core_Exception('Undefined date reference: ' . $dateref);
+					throw new Amfphp_Core_Exception('Undefined date reference: ' . $firstInt);
 					return false;
 				}
-				return $this->storedObjects[$dateref];
+				return $this->storedObjects[$firstInt];
 			}
-			//$timeOffset = ($dateref >> 1) * 6000 * -1;
+
+
 			$ms = $this->readDouble();
-
-			//$date = $ms-$timeOffset;
-			$date = new Amfphp_Core_Amf_Types_Date();
-			$date->time = $ms;
-
+			$date = new Amfphp_Core_Amf_Types_Date($ms);
 			$this->storedObjects[] = & $date;
-			return $date;
+                        return $date;
 		}
 
 		/**

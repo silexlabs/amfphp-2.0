@@ -156,8 +156,17 @@ class Amf3TestData {
     }
 
     public function buildDate(){
-        //Amf3 date serialization not supported at the moment. 
-       //$this->dDate =
+        $this->dDate = new Amfphp_Core_Amf_Types_Date(1306926779576); //1st June 2011
+        //type: 0x08
+        $this->sDate = pack('C', 0x08);
+        //U29D-value = 1. Marker to distinguish from references, I think
+        $this->sDate .= pack('C', 0x01);
+        //date is a double, see writeDouble for little/big endian
+        $dateData = pack("d", 1306926779576);
+        if(Amfphp_Core_Amf_Util::isSystemBigEndian()){
+            $dateData = strrev($dateData);
+        }
+        $this->sDate .= $dateData;
         
     }
 

@@ -124,6 +124,13 @@ class Amf3SerializationTest extends PHPUnit_Framework_TestCase {
         $expectedSerialized = $testData->sXmlDocument;
         $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));
 
+        //date
+        $serializer = new AmfSerializerWrapper($emptyPacket);
+        $serializer->writeAmf3Date($testData->dDate);
+        $serialized = $serializer->getOutput();
+        $expectedSerialized = $testData->sDate;
+        $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));
+
         //array
         $serializer = new AmfSerializerWrapper($emptyPacket);
         $serializer->writeAmf3Array($testData->dEmptyArray);

@@ -18,9 +18,9 @@
 
 class Amfphp_Core_Amf_Types_ByteArray
 {
-	var $data;
+	public $data;
 
-	function Amfphp_Core_Amf_Types_ByteArray($data)
+	public function Amfphp_Core_Amf_Types_ByteArray($data)
 	{
 		$this->data = $data;
 	}

@@ -242,18 +242,13 @@ class Amfphp_Core_Amf_Serializer {
     }
 
     /**
-     * writeData writes the date code (0x0B) and the date value to the output stream
+     * writeData writes the date code (0x0B) and the date value (milliseconds from 1 January 1970) to the output stream, along with an empty unsupported timezone
      *
-     * @param date $d The date value
+     * @param Amfphp_Core_Amf_Types_Date $d The date value
      */
-    protected function writeDate($d) {
-        $this->writeByte(0x0B); // write  date code
-        $this->writeDouble($d->time); //  write date (milliseconds from 1 January 1970)
-        /**
-         * write timezone
-         * ?? this is wierd -- put what you like and it pumps it back into flash at the current GMT ??
-         * have a look at the Amf it creates...
-         */
+    protected function writeDate(Amfphp_Core_Amf_Types_Date $d) {
+        $this->writeByte(0x0B); 
+        $this->writeDouble($d->timeStamp); 
         $this->writeInt(0);
     }
 
@@ -528,7 +523,7 @@ class Amfphp_Core_Amf_Serializer {
             $this->writeAmf3Undefined();
             return;
         } elseif (Amfphp_Core_Amf_Util::is_date($d)) { // date
-            throw new Exception("writing date not supported in amf3 serializing");
+            $this->writeAmf3Date($d);
             return;
         } elseif (is_array($d)) { // array
             $this->writeAmf3Array($d);
@@ -801,6 +796,13 @@ class Amfphp_Core_Amf_Serializer {
         $this->writeByte(0x07);
         $this->writeAmf3String($d);
     }
+
+    protected function writeAmf3Date(Amfphp_Core_Amf_Types_Date $d) {
+        $this->writeByte(0x08);
+        $this->writeAmf3Int(1);
+        $this->writeDouble($d->timeStamp);
+    }
+
 
     protected function writeAmf3ByteArray($d) {
         $this->writeByte(0x0C);

@@ -102,6 +102,11 @@ class Amf3DeserializationTest extends PHPUnit_Framework_TestCase {
         $expectedDeserialized = $testData->dXmlDocument;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
+        $deserializer = new AmfDeserializerWrapper($testData->sDate);
+        $deserialized = $deserializer->readAmf3Data();
+        $expectedDeserialized = $testData->dDate;
+        $this->assertEquals($expectedDeserialized, $deserialized);
+
         //array
         $deserializer = new AmfDeserializerWrapper($testData->sEmptyArray);
         $deserialized = $deserializer->readAmf3Data();

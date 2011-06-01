@@ -19,9 +19,9 @@
 
 class Amfphp_Core_Amf_Types_XmlDocument
 {
-	var $data;
+	public $data;
 
-	function Amfphp_Core_Amf_Types_XmlDocument($data)
+	public function Amfphp_Core_Amf_Types_XmlDocument($data)
 	{
 		$this->data = $data;
 	}

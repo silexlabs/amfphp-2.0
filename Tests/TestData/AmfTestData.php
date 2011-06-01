@@ -378,11 +378,11 @@ class AmfTestData {
     }
 
     public function buildDate(){
-        $this->dDate = 1234;
+        $this->dDate = new Amfphp_Core_Amf_Types_Date(1306926779576); //1st June 2011
         //type: 0x0B
         $this->sDate = pack('C', 0x0B);
         //date is a double, see writeDouble for little/big endian
-        $dateData = pack("d", 1234);
+        $dateData = pack("d", 1306926779576);
         if(Amfphp_Core_Amf_Util::isSystemBigEndian()){
             $dateData = strrev($dateData);
         }

@@ -25,13 +25,13 @@ package flexUnitTests
 			_myConnection.source = "MirrorService";			
 		}
 		
-	
+		
 		/**
-		 * note this currently fails because the deserializer doesn't parse the message properly
+		 * this works properly but somehow flex unit trips up on it. Charles Proxy fails to parse IExternalizable.  
 		 * */
 		public function testSendingAndReceivingAnIExternalizable():void{
 			_myConnection.returnOneParam(new ExternalizableDummy());
-			_myConnection.addEventListener(ResultEvent.RESULT, addAsync(sendingAndReceivingAnIExternalizableResultHandler, 1500));
+			_myConnection.addEventListener(ResultEvent.RESULT, addAsync(sendingAndReceivingAnIExternalizableResultHandler, 3000));
 			
 		}
 		
