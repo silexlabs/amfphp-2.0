@@ -9,10 +9,6 @@
  * with this package in the file license.txt.
  * @package Amfphp_Plugins_QuickServiceDebug
  */
-/**
- *  includes
- *  */
-require dirname(__FILE__) . "/AmfphpQuickServiceDebugException.php";
 
 /**
  * A simple service browser with html only. Sometimes you don't need the full thing with AMF etc., so use this
@@ -36,6 +32,16 @@ class AmfphpQuickServiceDebug implements Amfphp_Core_Common_IDeserializer, Amfph
      * if content type is not set or content is set to "application/x-www-form-urlencoded", this plugin will handle the request
      */
     const CONTENT_TYPE = "application/x-www-form-urlencoded";
+
+    private $serviceName;
+
+    private $methodName;
+
+    private $parameters;
+
+    private $serviceRouter;
+
+    private $showResult;
 
     /**
      * constructor.
@@ -115,96 +121,51 @@ class AmfphpQuickServiceDebug implements Amfphp_Core_Common_IDeserializer, Amfph
     }
 
     /**
-     * throws an exception with an html fragment saying that the serviceName parameter is missing and containing information about available services
-     * @param Amfphp_Core_Common_ServiceRouter $serviceRouter
-     */
-    private function throwMissingServiceNameException(Amfphp_Core_Common_ServiceRouter $serviceRouter) {
-        $availableServiceNames = $this->getAvailableServiceNames($serviceRouter->serviceFolderPaths, $serviceRouter->serviceNames2ClassFindInfo);
-        $message = "Click below to use a service : ";
-        $message .= "\n<ul>";
-        foreach ($availableServiceNames as $serviceName) {
-            $message .= "\n     <li><a href='?serviceName=$serviceName'>$serviceName</a></li>";
-        }
-        $message .= "\n</ul>";
-        throw new AmfphpQuickServiceDebugException($message);
-    }
-
-    /**
-     * throws an Exception with an html fragment saying that the methodName parameter is missing and containing information about avialable methods
-     * @param Amfphp_Core_Common_ServiceRouter $serviceRouter
-     * @param <type> $serviceName
-     */
-    private function throwMissingMethodNameException(Amfphp_Core_Common_ServiceRouter $serviceRouter, $serviceName) {
-        $serviceObject = $serviceRouter->getServiceObject($serviceName);
-        $reflectionObj = new ReflectionObject($serviceObject);
-        $availablePublicMethods = $reflectionObj->getMethods(ReflectionMethod::IS_PUBLIC);
-
-        $message = "Click below to use a method on the $serviceName service : ";
-        $message .= "\n<ul>";
-        foreach ($availablePublicMethods as $methodDescriptor) {
-            $methodName = $methodDescriptor->name;
-            $message .= "\n     <li><a href='?serviceName=$serviceName&methodName=$methodName'>$methodName</a></li>";
-        }
-        $message .= "\n</ul>";
-        throw new AmfphpQuickServiceDebugException($message);
-    }
-
-    private function throwMissingParametersException(Amfphp_Core_Common_ServiceRouter $serviceRouter, $serviceName, $methodName) {
-        $serviceObject = $serviceRouter->getServiceObject($serviceName);
-        $reflectionObj = new ReflectionObject($serviceObject);
-        $method = $reflectionObj->getMethod($methodName);
-        $parameterDescriptors = $method->getParameters();
-        if (count($parameterDescriptors) > 0) {
-            $message = "Fill in the parameters below then click to call the $methodName method on $serviceName service. : ";
-            $message .= "\n<br>Use JSON notation for complex values. ";
-            $message .= "\n<form action='?serviceName=$serviceName&methodName=$methodName' method='POST'>\n<table>";
-            foreach ($parameterDescriptors as $parameterDescriptor) {
-                $parameterName = $parameterDescriptor->name;
-                $message .= "\n     <tr><td>$parameterName</td><td><input name='$parameterName'></td></tr>";
-            }
-            $message .= "\n</table>\n<input type='submit'></form>";
-        } else {
-            $message = "This method has no parameters. Click to call it.";
-            $message .= "\n<form action='?serviceName=$serviceName&methodName=$methodName&noParams' method='POST'>\n";
-            $message .= "\n<input type='submit'></form>";
-        }
-        throw new AmfphpQuickServiceDebugException($message);
-    }
-
-    /**
      * @see Amfphp_Core_Common_IDeserializedRequestHandler
      */
     public function handleDeserializedRequest($deserializedRequest, Amfphp_Core_Common_ServiceRouter $serviceRouter) {
-        $serviceName = null;
+        $this->serviceRouter = $serviceRouter;
+
         if (isset($deserializedRequest->get["serviceName"])) {
-            $serviceName = $deserializedRequest->get["serviceName"];
-        } else {
-            $this->throwMissingServiceNameException($serviceRouter);
+            $this->serviceName = $deserializedRequest->get["serviceName"];
         }
 
-        $methodName = null;
         if (isset($deserializedRequest->get["methodName"])) {
-            $methodName = $deserializedRequest->get["methodName"];
-        } else {
-            $this->throwMissingMethodNameException($serviceRouter, $serviceName);
+            $this->methodName = $deserializedRequest->get["methodName"];
         }
 
-        $parameters = null;
 
         //if a method has parameters, they are set in post. If it has no parameters, set noParams in the GET.
         //if neither case is applicable, an error message with a form allowing the user to set the values is shown
+        $paramsGiven = false;
         if (isset($deserializedRequest->post) && $deserializedRequest->post != null) {
-            $parameters = $deserializedRequest->post;
-        } else if (isset($deserializedRequest->get["noParams"])) {
-            $parameters = array();
-            for ($i = 0; $i < count($parameters); $i++) {
-                $parameters[$i] = json_decode($parameters[$i]);
+            $this->parameters = array();
+            //try to json decode each parameter, then push it to $thios->parameters
+            $numParams = count($deserializedRequest->post);
+            foreach($deserializedRequest->post as $value) {
+                $decodedValue = json_decode($value);
+                if($decoded){
+                    $this->parameters[] = $decodedValue;
+                }else{
+                    $this->parameters[] = $value;
+                }
             }
-        } else {
-            $this->throwMissingParametersException($serviceRouter, $serviceName, $methodName);
+            $paramsGiven = true;
+        } else if (isset($deserializedRequest->get["noParams"])) {
+            $this->parameters = array();
+            $paramsGiven = true;
+            //note: use $paramsGiven because somehow if $$this->parameters contains an empty array, ($this->parameters == null) is true. 
         }
-        //throw new Exception("debug exception " . print_r($parameters, true));
-        return $serviceRouter->executeServiceCall($serviceName, $methodName, $parameters);
+
+        //throw new Exception("debug exception " . print_r($deserializedRequest->post, true));
+        //throw new Exception("debug exception " . print_r($this->parameters, true));
+        if($this->serviceName && $this->methodName && $paramsGiven){
+            $this->showResult = true;
+            return $serviceRouter->executeServiceCall($this->serviceName, $this->methodName, $this->parameters);
+        }else{
+            $this->showResult = false;
+            return null;
+        }
     }
 
     /**
@@ -212,26 +173,71 @@ class AmfphpQuickServiceDebug implements Amfphp_Core_Common_IDeserializer, Amfph
      * @see Amfphp_Core_Common_IExceptionHandler
      */
     public function handleException(Exception $exception) {
-        $exceptionInfo = null;
-        if (is_a($exception, "AmfphpQuickServiceDebugException")) {
-            $exceptionInfo = $exception->getMessage();
-        } else {
-            $exceptionInfo = "Exception thrown\n<br>";
-            $exceptionInfo .= "message : " . $exception->getMessage() . "\n<br>";
-            $exceptionInfo .= "code : " . $exception->getCode() . "\n<br>";
-            $exceptionInfo .= "file : " . $exception->getFile() . "\n<br>";
-            $exceptionInfo .= "line : " . $exception->getLine() . "\n<br>";
+        $exceptionInfo = "Exception thrown\n<br>";
+        $exceptionInfo .= "message : " . $exception->getMessage() . "\n<br>";
+        $exceptionInfo .= "code : " . $exception->getCode() . "\n<br>";
+        $exceptionInfo .= "file : " . $exception->getFile() . "\n<br>";
+        $exceptionInfo .= "line : " . $exception->getLine() . "\n<br>";
             //$exceptionInfo .= "trace : " . str_replace("\n", "<br>\n", print_r($exception->getTrace(), true)) . "\n<br>";
-        }
-
-        return "<html>\n<body>\n $exceptionInfo \n</body>\n</html>";
+        $this->showResult = true;
+       return $exceptionInfo;
     }
 
     /**
      * @see Amfphp_Core_Common_ISerializer
      */
     public function serialize($data) {
-        return print_r($data, true);
+        $availableServiceNames = $this->getAvailableServiceNames($this->serviceRouter->serviceFolderPaths, $this->serviceRouter->serviceNames2ClassFindInfo);
+        $message = "<h2>amfPHP Quick Service Debug</h2>";
+        $message .= "<h3>Choose a Service</h3>";
+        $message .= "\n<ul>";
+        foreach ($availableServiceNames as $availableServiceName) {
+            $message .= "\n     <li><a href='?serviceName=$availableServiceName'>$availableServiceName</a></li>";
+        }
+        $message .= "\n</ul>";
+
+        if($this->serviceName){
+            $serviceObject = $this->serviceRouter->getServiceObject($this->serviceName);
+            $reflectionObj = new ReflectionObject($serviceObject);
+            $availablePublicMethods = $reflectionObj->getMethods(ReflectionMethod::IS_PUBLIC);
+
+            $message .= "<h3>Click below to use a method on the $this->serviceName service</h3>";
+            $message .= "\n<ul>";
+            foreach ($availablePublicMethods as $methodDescriptor) {
+                $availableMethodName = $methodDescriptor->name;
+                $message .= "\n     <li><a href='?serviceName=$this->serviceName&methodName=$availableMethodName'>$availableMethodName</a></li>";
+            }
+            $message .= "\n</ul>";
+        }
+
+        if($this->methodName){
+            $serviceObject = $this->serviceRouter->getServiceObject($this->serviceName);
+            $reflectionObj = new ReflectionObject($serviceObject);
+            $method = $reflectionObj->getMethod($this->methodName);
+            $parameterDescriptors = $method->getParameters();
+            if (count($parameterDescriptors) > 0) {
+                $message .= "<h3>Fill in the parameters below then click to call the $this->methodName method on $this->serviceName service</h3>";
+                $message .= "\n<br>Use JSON notation for complex values. ";
+                $message .= "\n<form action='?serviceName=$this->serviceName&methodName=$this->methodName' method='POST'>\n<table>";
+                foreach ($parameterDescriptors as $parameterDescriptor) {
+                    $availableParameterName = $parameterDescriptor->name;
+                    $message .= "\n     <tr><td>$availableParameterName</td><td><input name='$availableParameterName'></td></tr>";
+                }
+                $message .= "\n</table>\n<input type='submit' value='call'></form>";
+            } else {
+                $message .= "<h3>This method has no parameters. Click to call it.</h3>";
+                $message .= "\n<form action='?serviceName=$this->serviceName&methodName=$this->methodName&noParams' method='POST'>\n";
+                $message .= "\n<input type='submit' value='call'></form>";
+            }
+
+        }
+
+        if($this->showResult){
+            $message .= "<h3>Result</h3>";
+            $message .= print_r($data, true);
+        }
+        
+        return $message; 
     }
 
 }

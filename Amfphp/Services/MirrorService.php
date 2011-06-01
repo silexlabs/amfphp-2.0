@@ -25,5 +25,15 @@ class MirrorService {
     public function returnSum($number1, $number2){
         return $number1 + $number2;
     }
+
+    public function returnNull(){
+        return null;
+    }
+
+    public function returnBla(){
+        return "bla";
+    }
+
+
 }
 ?>
