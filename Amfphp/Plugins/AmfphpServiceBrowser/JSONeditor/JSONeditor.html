@@ -1,0 +1,22 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+<script src="JSONeditor.js"></script>
+<script>
+onload=function(){
+	JSONeditor.start('tree','jform',false,true)
+	Opera=(navigator.userAgent.toLowerCase().indexOf("opera")!=-1)
+	Safari=(navigator.userAgent.toLowerCase().indexOf("safari")!=-1)
+	Explorer=(document.all && (!(Opera || Safari)))
+	Explorer7=(Explorer && (navigator.userAgent.indexOf("MSIE 7.0")>=0))
+		
+	if(Explorer7 && location.href.indexOf("file:")!=0){prompt("This is just to get input boxes started in IE7 - who deems them unsecure.","I like input boxes...")}
+}
+</script>
+</head>
+<body>
+<div style="position:absolute;top:10px;left:10px" id="tree"></div>
+<div style="position:absolute;top:10px;left:400px" id="jform"></div>
+<div style="position:absolute;top:13px;left:750px;font-family:Verdana,Arial,Helvetica;font-size:11px"><a href="http://www.thomasfrank.se/json_editor.html" target="_blank">Help/info</a></div>
+</body>
+</html>

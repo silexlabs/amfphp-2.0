@@ -1,0 +1,33 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>amfPHP Service Browser</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="./Plugins/AmfphpServiceBrowser/jquery.js"></script>
+    <script src="./Plugins/AmfphpServiceBrowser/JSONeditor/JSONeditor.js"></script>
+    <script>
+    onload=function(){
+            JSONeditor.treeBuilder.images.path = './Plugins/AmfphpServiceBrowser/JSONeditor/treeBuilderImages/'
+            JSONeditor.start('tree','jform',false,true)
+            Opera=(navigator.userAgent.toLowerCase().indexOf("opera")!=-1)
+            Safari=(navigator.userAgent.toLowerCase().indexOf("safari")!=-1)
+            Explorer=(document.all && (!(Opera || Safari)))
+            Explorer7=(Explorer && (navigator.userAgent.indexOf("MSIE 7.0")>=0))
+
+            if(Explorer7 && location.href.indexOf("file:")!=0){prompt("This is just to get input boxes started in IE7 - who deems them unsecure.","I like input boxes...")}
+    }
+
+    function toggleJsonEditor(){
+        $("#jsonEditor").animate({"height": "toggle"}, { duration: 100 });
+    }
+
+    </script>
+  </head>
+  <body>
+    <h2>amfPHP Service Browser</h2>
+        <h3>Choose a Service</h3>
+        <ul>

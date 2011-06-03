@@ -7,7 +7,7 @@
  *
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
- * @package Amfphp_Plugins_QuickServiceDebug
+ * @package Amfphp_Plugins_ServiceBrowser
  */
 
 /**
@@ -20,14 +20,10 @@
  *
  * pass the parameters as POST data. Each will be JSON decoded to be able to pass complex parameters. This requires PHP 5.2 or higher
  *
- * if all goes well, the return value will be output. If there is an exception thrown in the plugin because something is missing
- * in the GET and POST data, some useful information and links should be displayed. If there is an exception elsewhere in the code,
- * either in the service object itself or in the rest of amfphp, information about the exception will be shown.
- *
- * @package Amfphp_Plugins_QuickServiceDebug
+ * @package Amfphp_Plugins_ServiceBrowser
  * @author Ariel Sommeria-Klein
  */
-class AmfphpQuickServiceDebug implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_IDeserializedRequestHandler, Amfphp_Core_Common_IExceptionHandler, Amfphp_Core_Common_ISerializer {
+class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_IDeserializedRequestHandler, Amfphp_Core_Common_IExceptionHandler, Amfphp_Core_Common_ISerializer {
     /**
      * if content type is not set or content is set to "application/x-www-form-urlencoded", this plugin will handle the request
      */
@@ -37,7 +33,18 @@ class AmfphpQuickServiceDebug implements Amfphp_Core_Common_IDeserializer, Amfph
 
     private $methodName;
 
+    /**
+     * used for service call
+     * @var array
+     */
     private $parameters;
+
+    /**
+     * associative array of parameters. Used to set the parameters input fields to the same values again after a call.
+     * note: stored encoded because that's the way we need them to show them in the dialog
+     * @var array
+     */
+    private $parametersAssoc;
 
     private $serviceRouter;
 
@@ -140,15 +147,17 @@ class AmfphpQuickServiceDebug implements Amfphp_Core_Common_IDeserializer, Amfph
         $paramsGiven = false;
         if (isset($deserializedRequest->post) && $deserializedRequest->post != null) {
             $this->parameters = array();
+            $this->parametersAssoc = array();
             //try to json decode each parameter, then push it to $thios->parameters
             $numParams = count($deserializedRequest->post);
-            foreach($deserializedRequest->post as $value) {
+            foreach($deserializedRequest->post as $key => $value) {
+                $this->parametersAssoc[$key] = $value;
                 $decodedValue = json_decode($value);
-                if($decoded){
-                    $this->parameters[] = $decodedValue;
-                }else{
-                    $this->parameters[] = $value;
+                $valueToUse = $value;
+                if($decodedValue){
+                    $valueToUse = $decodedValue;
                 }
+                $this->parameters[] = $valueToUse;
             }
             $paramsGiven = true;
         } else if (isset($deserializedRequest->get["noParams"])) {
@@ -156,9 +165,7 @@ class AmfphpQuickServiceDebug implements Amfphp_Core_Common_IDeserializer, Amfph
             $paramsGiven = true;
             //note: use $paramsGiven because somehow if $$this->parameters contains an empty array, ($this->parameters == null) is true. 
         }
-
-        //throw new Exception("debug exception " . print_r($deserializedRequest->post, true));
-        //throw new Exception("debug exception " . print_r($this->parameters, true));
+        
         if($this->serviceName && $this->methodName && $paramsGiven){
             $this->showResult = true;
             return $serviceRouter->executeServiceCall($this->serviceName, $this->methodName, $this->parameters);
@@ -188,9 +195,7 @@ class AmfphpQuickServiceDebug implements Amfphp_Core_Common_IDeserializer, Amfph
      */
     public function serialize($data) {
         $availableServiceNames = $this->getAvailableServiceNames($this->serviceRouter->serviceFolderPaths, $this->serviceRouter->serviceNames2ClassFindInfo);
-        $message = "<h2>amfPHP Quick Service Debug</h2>";
-        $message .= "<h3>Choose a Service</h3>";
-        $message .= "\n<ul>";
+        $message = file_get_contents(dirname(__FILE__) . "/Top.html");
         foreach ($availableServiceNames as $availableServiceName) {
             $message .= "\n     <li><a href='?serviceName=$availableServiceName'>$availableServiceName</a></li>";
         }
@@ -221,14 +226,20 @@ class AmfphpQuickServiceDebug implements Amfphp_Core_Common_IDeserializer, Amfph
                 $message .= "\n<form action='?serviceName=$this->serviceName&methodName=$this->methodName' method='POST'>\n<table>";
                 foreach ($parameterDescriptors as $parameterDescriptor) {
                     $availableParameterName = $parameterDescriptor->name;
-                    $message .= "\n     <tr><td>$availableParameterName</td><td><input name='$availableParameterName'></td></tr>";
+                    $message .= "\n     <tr><td>$availableParameterName</td><td><input name='$availableParameterName' ";
+                    if($this->parametersAssoc){
+                       $message .= "value='" . $this->parametersAssoc[$availableParameterName] . "'";
+                    }
+                    $message .= "></td></tr>";
                 }
                 $message .= "\n</table>\n<input type='submit' value='call'></form>";
+                $message .= file_get_contents(dirname(__FILE__) . "/JsonEditorFragment.html");
             } else {
                 $message .= "<h3>This method has no parameters. Click to call it.</h3>";
                 $message .= "\n<form action='?serviceName=$this->serviceName&methodName=$this->methodName&noParams' method='POST'>\n";
                 $message .= "\n<input type='submit' value='call'></form>";
             }
+
 
         }
 
@@ -236,6 +247,8 @@ class AmfphpQuickServiceDebug implements Amfphp_Core_Common_IDeserializer, Amfph
             $message .= "<h3>Result</h3>";
             $message .= print_r($data, true);
         }
+        $message .= file_get_contents(dirname(__FILE__) . "/Bottom.html");
+
         
         return $message; 
     }
