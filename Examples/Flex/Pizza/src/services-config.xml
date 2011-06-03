@@ -14,7 +14,7 @@
 	</services>
 	<channels>
 		<channel-definition id="amfphpExamplesGateway" class="mx.messaging.channels.AMFChannel">
-			<endpoint uri="../../../examplesGateway.php" class="flex.messaging.endpoints.AMFEndpoint"/>
+			<endpoint uri="../../../Php/" class="flex.messaging.endpoints.AMFEndpoint"/>
 		</channel-definition>		
 
 	</channels>

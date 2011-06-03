@@ -10,7 +10,7 @@
 function call()
 {  
    var testJson = '{"serviceName":"PizzaService", "methodName":"getPizza","parameters":[]}';
-   $.ajax("../../examplesGateway.php", {contentType:"json",data:testJson, processData:true, success:onSuccess, type:'POST'});
+   $.ajax("../../Php/", {contentType:"json",data:testJson, processData:true, success:onSuccess, type:'POST'});
   
    
 } 

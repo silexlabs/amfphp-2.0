@@ -13,7 +13,7 @@
  * a gateway php script like the normal gateway except that it uses example services
  * @author Ariel Sommeria-klein
  */
-require_once dirname(__FILE__) . '/../Amfphp/ClassLoader.php';
+require_once dirname(__FILE__) . '/../../Amfphp/ClassLoader.php';
 $config = new Amfphp_Core_Config();
 $config->serviceFolderPaths = array(dirname(__FILE__) . "/ExampleServices/");
 $gateway = Amfphp_Core_HttpRequestGatewayFactory::createGateway($config);

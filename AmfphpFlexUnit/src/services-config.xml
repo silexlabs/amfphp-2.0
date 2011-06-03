@@ -49,16 +49,16 @@
 			<endpoint uri="http://localhost:8888/workspacePhpStorm/amfphp_trunk/gateway.php" class="flex.messaging.endpoints.AMFEndpoint"/>
 		</channel-definition>
 		<channel-definition id="amfphp2TestGateway" class="mx.messaging.channels.AMFChannel">
-			<endpoint uri="http://localhost:8888/workspaceNetbeans/amfphp-2.0/tests/TestData/testGateway.php" class="flex.messaging.endpoints.AMFEndpoint"/>
+			<endpoint uri="http://localhost:8888/workspaceNetbeans/amfphp-2.0/tests/TestData/" class="flex.messaging.endpoints.AMFEndpoint"/>
 		</channel-definition>		
 		<channel-definition id="amfphp2" class="mx.messaging.channels.AMFChannel">
-			<endpoint uri="http://localhost:8888/workspaceNetbeans/amfphp-2.0/Amfphp/gateway.php" class="flex.messaging.endpoints.AMFEndpoint"/>
+			<endpoint uri="http://localhost:8888/workspaceNetbeans/amfphp-2.0/Amfphp/" class="flex.messaging.endpoints.AMFEndpoint"/>
 		</channel-definition>		
 		<channel-definition id="amfphp2alpha1" class="mx.messaging.channels.AMFChannel">
 			<endpoint uri="http://localhost:8888/amfphp_dist/amfPHP-2.0.alpha1/Amfphp/gateway.php" class="flex.messaging.endpoints.AMFEndpoint"/>
 		</channel-definition>		
 		<channel-definition id="amfphp2remote" class="mx.messaging.channels.AMFChannel">
-			<endpoint uri="http://arielsommeria.com/test/Amfphp/gateway.php" class="flex.messaging.endpoints.AMFEndpoint"/>
+			<endpoint uri="http://arielsommeria.com/test/Amfphp/" class="flex.messaging.endpoints.AMFEndpoint"/>
 		</channel-definition>		
 	</channels>
 </services-config>
