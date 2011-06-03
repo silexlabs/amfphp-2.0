@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+        This file is part of AMFPHP
+    
+        It is released under the GPL License:
+    
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License (GPL)
+        as published by the Free Software Foundation; either version 2
+        of the License, or (at your option) any later version.
+    
+        This program is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+        GNU General Public License for more details.
+        
+        To read the license please visit http://www.gnu.org/copyleft/gpl.html
+-->
+
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml">
+	
+	<mx:Metadata>
+		<![CDATA[
+			/**
+			 * This component allows the user to select a service from a tree of available services and it dispatches events
+			 * when a service is selected.
+			 * 
+			 * @see org.amfphp.components.ServiceTester
+			 * 
+			 * @author Danny Kopping danny@ria-coder.com
+			 */
+		]]>
+	</mx:Metadata>
+	
+	<mx:HBox width="100%" horizontalAlign="right" styleName="titleBox"
+			paddingBottom="4" paddingLeft="4" paddingRight="4" paddingTop="4" height="35"
+			creationComplete="init()">
+		<mx:Label text="Available services" fontWeight="normal"/>
+		<mx:Spacer width="100%"/>
+		<mx:Button toolTip="{servicesTreeExpanded ? 'Collapse' : 'Expand'} all"
+				icon="{servicesTreeExpanded ? zoomOut : zoomIn}" click="expandTreeNodes()"/>
+	</mx:HBox>
+	<mx:Tree id="servicesTree" width="100%" height="100%"
+			defaultLeafIcon="@Embed(source='../../../assets/icons/file.png')"
+			folderOpenIcon="@Embed(source='../../../assets/icons/folder.png')"
+			folderClosedIcon="@Embed(source='../../../assets/icons/folder.png')"
+			change="onTreeChange(event)" dataProvider="{services}"/>
+	
+	<mx:Script>
+		<![CDATA[
+			import org.amfphp.controllers.Controller;
+			import org.amfphp.events.BrowserEvent;
+			import mx.events.PropertyChangeEvent;
+			
+			private var _services:Array;
+			
+			[Bindable] private var servicesTreeExpanded:Boolean;
+			
+			[Bindable]
+			[Embed(source='../../../assets/icons/zoom_in.png')]
+			private var zoomIn:Class;
+			
+			[Bindable]
+			[Embed(source='../../../assets/icons/zoom_out.png')]
+			private var zoomOut:Class;
+			
+			private var controller:Controller;
+			
+			/**
+			 * Initialize component
+			 */
+			private function init():void
+			{
+				controller = Controller.instance;
+			}
+		
+			/**
+			 * Return list of services
+			 */
+		    public function get services():Array
+		    {
+		        return _services;
+		    }
+		
+			/**
+			 * Set list of services and set the tree's <code>dataProvider</code> property
+			 */
+		    public function set services(value:Array):void
+		    {
+		        if (_services !== value)
+		        {
+		            _services = value;
+		            servicesTreeExpanded = false;
+		            
+		            servicesTree.dataProvider = _services;
+		        }
+		    }
+			
+			/**
+			 * Event handler to handle the selection of services from the tree
+			 */
+			private function onTreeChange(event:Event):void
+			{
+				if(!servicesTree.selectedItem.hasOwnProperty("children"))
+				{
+					var serviceInfo:Object = servicesTree.selectedItem;
+					controller.dispatchEvent(new BrowserEvent(BrowserEvent.DESCRIBE_SERVICE, serviceInfo));
+				}
+			}
+			
+			/**
+			 * Loops through the tree's nodes, checks to see if they contain <code>children</code> properties and expands them. It will
+			 * contract if the <code>servicesTreeExpanded</code> flag is already indicating that the tree is expanded.
+			 */
+			private function expandTreeNodes():void
+			{
+				for each(var node:Object in servicesTree.dataProvider)
+				{
+					// loop through, see if they have a "children" node and expand it!
+					if(node.hasOwnProperty("children"))
+						servicesTree.expandItem(node, !servicesTreeExpanded);
+				}
+				
+				servicesTreeExpanded = !servicesTreeExpanded;
+			}
+		]]>
+	</mx:Script>
+
+</mx:VBox>

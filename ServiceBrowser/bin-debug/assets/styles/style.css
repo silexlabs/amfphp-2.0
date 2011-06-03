@@ -1,0 +1,1223 @@
+/*
+KingnareStyle by Jinxin.
+Based on instructions from Adobe and inspired by Express Photoshop. 
+
+Copyright (c) 2008 www.kingnare.com  See:
+http://code.google.com/p/kingnarestyle
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+Button.methodButton
+{
+	fontFamily: "Bitstream Vera Sans Mono";
+	fontWeight: bold;
+	fontSize: 13;
+	paddingTop: 5;
+	color: #FFFFFF;
+}
+VBox.tabBox
+{
+	paddingLeft: 8;
+	paddingRight: 8;
+	paddingTop: 8;
+	paddingBottom: 8;
+}
+FormItemLabel
+{
+	fontFamily: "Bitstream Vera Sans Mono";
+	fontWeight: bold;
+}
+Form
+{
+	paddingBottom: 0;
+	paddingLeft: 0;
+	paddingRight: 0;
+	paddingTop: 0;
+}
+TextInput.code
+{
+	fontFamily: "Bitstream Vera Sans Mono";
+	paddingLeft: 4;
+	paddingTop: 3;
+}
+ComboBox.code, AutoComplete.code
+{
+	fontFamily: "Bitstream Vera Sans Mono";
+	paddingLeft: 4;
+	leading: -2;
+}
+PromptTextInput
+{
+	backgroundAlpha: 1.0;
+	borderColor: #B7BABC;
+	color: #FFFFFF;
+	borderSkin: Embed(source="kingnarestyle.swf", symbol="TextInput_borderSkin");
+	borderStyle: none;
+	paddingTop: 2;
+}
+
+
+/*
+//------------------------------
+//  Application
+//------------------------------
+*/
+Application
+{
+	backgroundGradientAlphas: 1.0, 1.0;
+	backgroundGradientColors: #333333, #333333;
+	paddingLeft: 8;
+	paddingRight: 8;
+	paddingTop: 0;
+	paddingBottom: 8;
+}
+
+
+/*
+//------------------------------
+//  ApplicationControlBar
+//------------------------------
+*/
+ApplicationControlBar
+{
+	borderSkin: Embed(source="kingnarestyle.swf", symbol="ApplicationControlBar_BackgroundSkin");
+	paddingBottom: 8;
+	paddingTop: 8;
+}
+
+Box.codeBlock
+{
+	backgroundColor: #444444;
+	borderColor: #222222;
+	borderStyle: solid;
+	fontFamily: "Bitstream Vera Sans Mono";
+	fontWeight: normal;
+	paddingLeft: 4;
+	paddingRight: 4;
+	paddingTop: 4;
+	paddingBottom: 4;
+	fontStyle: normal;
+}
+
+
+/*
+//------------------------------
+//  global
+//------------------------------
+*/
+global
+{
+	backgroundGradientAlphas: 1.0, 1.0;
+	backgroundGradientColors: #000000, #000000;
+	backgroundDisabledColor: #DDDDDD;
+	focusThickness: 1;
+	/* focusAlpha: 0.05; */
+	focusAlpha: 1;
+	themeColor: #FF3200;
+	fontSize: 11;
+}
+
+
+/*
+//------------------------------
+//  Alert
+//------------------------------
+*/
+Alert
+{
+	backgroundAlpha:1;
+	borderAlpha:1;
+	backgroundColor:#333333;
+	borderColor:#555555;
+	buttonStyleName: Button;
+	paddingBottom: 8;
+}
+
+
+/*
+//------------------------------
+//  Accordion
+//------------------------------
+*/
+Accordion
+{
+	borderStyle:solid;
+	borderColor:#000000;
+	borderThickness:1;
+	fontWeight:normal;
+	color: #aaaaaa;
+	textRollOverColor: #FFFFFF;
+	textSelectedColor:#FFFFFF;
+	disabledColor:#5A5A5A;
+	backgroundColor: #333333;
+	/*backgroundImage: Embed(source="kingnarestyle.swf", symbol="Global_Bg");
+	backgroundSize:"100%";*/
+}
+
+
+/*
+//------------------------------
+//  AccordionHeader
+//------------------------------
+*/
+AccordionHeader
+{
+
+	disabledSkin: Embed(source="kingnarestyle.swf", symbol="AccordionHeader_disabledSkin");
+	downSkin: Embed(source="kingnarestyle.swf", symbol="AccordionHeader_downSkin");
+	overSkin: Embed(source="kingnarestyle.swf", symbol="AccordionHeader_overSkin");
+	selectedDisabledSkin: Embed(source="kingnarestyle.swf", symbol="AccordionHeader_disabledSkin");
+	selectedDownSkin: Embed(source="kingnarestyle.swf", symbol="AccordionHeader_downSkin");
+	selectedOverSkin: Embed(source="kingnarestyle.swf", symbol="AccordionHeader_overSkin");
+	selectedUpSkin: Embed(source="kingnarestyle.swf", symbol="AccordionHeader_selectedSkin");
+	upSkin: Embed(source="kingnarestyle.swf", symbol="AccordionHeader_upSkin");
+	color: #aaaaaa;
+	textRollOverColor: #ffffff;
+	textSelectedColor:#444444;
+	disabledColor:#111111;
+	selectedColor:#ffffff;
+}
+
+
+/*
+//------------------------------
+//  Button
+//------------------------------
+*/
+Button
+{
+	color: #AAAAAA;
+	textRollOverColor: #FFFFFF;
+	textSelectedColor:#FFFFFF;
+	disabledColor:#5A5A5A;
+	fontWeight:normal;
+	
+	upSkin: Embed(source="kingnarestyle.swf", symbol="Button_upSkin");
+	overSkin: Embed(source="kingnarestyle.swf", symbol="Button_overSkin");
+	downSkin: Embed(source="kingnarestyle.swf", symbol="Button_downSkin");
+	disabledSkin: Embed(source="kingnarestyle.swf", symbol="Button_disabledSkin");
+	
+	selectedUpSkin: Embed(source='kingnarestyle.swf', symbol='Button_selectedUpSkin');
+	selectedOverSkin: Embed(source='kingnarestyle.swf', symbol='Button_selectedOverSkin');
+	selectedDownSkin: Embed(source='kingnarestyle.swf', symbol='Button_selectedDownSkin');
+	selectedDisabledSkin: Embed(source='kingnarestyle.swf', symbol='Button_selectedDisabledSkin');
+}
+
+
+/*
+//------------------------------ 
+//  ButtonBar 
+//------------------------------ 
+*/ 
+
+ButtonBar 
+{ 
+        buttonStyleName: "middleButtonBarButton"; 
+        firstButtonStyleName: "firstButtonBarButton"; 
+        lastButtonStyleName: "lastButtonBarButton";
+}
+
+
+/*
+//------------------------------
+//  CheckBox
+//------------------------------
+*/
+CheckBox
+{
+	disabledIcon: Embed(source="kingnarestyle.swf", symbol="CheckBox_disabledIcon");
+	downIcon: Embed(source="kingnarestyle.swf", symbol="CheckBox_downIcon");
+	overIcon: Embed(source="kingnarestyle.swf", symbol="CheckBox_overIcon");
+	selectedDisabledIcon: Embed(source="kingnarestyle.swf", symbol="CheckBox_selectedDisabledIcon");
+	selectedDownIcon: Embed(source="kingnarestyle.swf", symbol="CheckBox_selectedDownIcon");
+	selectedOverIcon: Embed(source="kingnarestyle.swf", symbol="CheckBox_selectedOverIcon");
+	selectedUpIcon: Embed(source="kingnarestyle.swf", symbol="CheckBox_selectedUpIcon");
+	upIcon: Embed(source="kingnarestyle.swf", symbol="CheckBox_upIcon");
+}
+
+
+/*
+//------------------------------
+//  ColorPicker
+//------------------------------
+*/
+ColorPicker
+{
+	focusAlpha:	0;
+	swatchPanelStyleName:mySwatchPanelStyle;
+	disabledSkin: Embed(source="kingnarestyle.swf", symbol="ColorPicker_disabledSkin");
+	downSkin: Embed(source="kingnarestyle.swf", symbol="ColorPicker_downSkin");
+	overSkin: Embed(source="kingnarestyle.swf", symbol="ColorPicker_overSkin");
+	upSkin: Embed(source="kingnarestyle.swf", symbol="ColorPicker_upSkin");
+	editableDisabledSkin: Embed(source="kingnarestyle.swf", symbol="ColorPicker_disabledSkin");
+	editableDownSkin: Embed(source="kingnarestyle.swf", symbol="ColorPicker_downSkin");
+	editableOverSkin: Embed(source="kingnarestyle.swf", symbol="ColorPicker_overSkin");
+	editableUpSkin: Embed(source="kingnarestyle.swf", symbol="ColorPicker_upSkin");
+}
+.mySwatchPanelStyle{
+	backgroundColor:#222222;
+	highlightColor:#222222;
+	
+	borderStyle:solid;
+	borderColor:#000000;
+	borderThickness:1;
+	columnCount:20;
+	horizontalGap:0;
+	previewHeight:22;
+	previewWidth:50;
+	swatchBorderColor:#000000;
+	swatchGridBackgroundColor:#000000;
+	swatchGridBorderSize:0;
+	swatchHeight:12;
+	swatchHighlightColor:#ffffff;
+	swatchHighlightSize:1;
+	swatchWidth:12;
+	textFieldWidth:72;
+	verticalGap:0;
+}
+
+
+/*
+//------------------------------
+//  ComboBox
+//------------------------------
+*/
+ComboBox
+{	
+	upSkin: Embed(source="kingnarestyle.swf", symbol="ComboBoxArrow_upSkin");
+	overSkin: Embed(source="kingnarestyle.swf", symbol="ComboBoxArrow_overSkin");	
+	downSkin: Embed(source="kingnarestyle.swf", symbol="ComboBoxArrow_downSkin");
+	disabledSkin: Embed(source="kingnarestyle.swf", symbol="ComboBoxArrow_disabledSkin");
+
+	editableUpSkin: Embed(source="kingnarestyle.swf", symbol="ComboBoxArrow_editableUpSkin"); 
+	editableOverSkin: Embed(source="kingnarestyle.swf", symbol="ComboBoxArrow_editableOverSkin");
+	editableDownSkin: Embed(source="kingnarestyle.swf", symbol="ComboBoxArrow_editableDownSkin");
+	editableDisabledSkin: Embed(source="kingnarestyle.swf", symbol="ComboBoxArrow_editableDisabledSkin");
+	
+	color: #CCCCCC;
+	textRollOverColor: #ffffff;
+	textSelectedColor:#ffffff;
+	textDisabledColor: #1e1e1e;
+	cornerRadius: 0;
+	arrowButtonWidth: 18;
+	borderThickness: 0;
+	fontWeight: normal;
+	dropdownStyleName: dropDown;
+}
+
+.dropDown {
+	branchIcon: Embed(source="kingnarestyle.swf",symbol="Menu_branchIcon");
+	branchDisabledIcon: Embed(source="kingnarestyle.swf",symbol="Menu_branchDisabledIcon");
+	checkIcon: Embed(source="kingnarestyle.swf",symbol="Menu_checkIcon");
+	checkDisabledIcon: Embed(source="kingnarestyle.swf",symbol="Menu_checkDisabledIcon");
+	radioIcon: Embed(source="kingnarestyle.swf",symbol="Menu_radioIcon");
+	radioDisabledIcon: Embed(source="kingnarestyle.swf",symbol="Menu_radioDisabledIcon");
+	separatorSkin: Embed(source="kingnarestyle.swf",symbol="Menu_separatorSkin");
+	backgroundImage: Embed(source="kingnarestyle.swf", symbol="BackgroundSkin"); 
+	backgroundSize: "100%";  
+	backgroundAlpha: 1.0;
+	borderStyle: solid;
+	borderThickness: 1;
+	borderColor: #000000;
+	cornerRadius:0;
+	color: #CCCCCC;
+	textRollOverColor: #ffffff;
+	textSelectedColor:#dddddd;
+	rollOverColor: #333333;
+	selectionColor: #444444;
+}
+
+/*
+//------------------------------
+//  ControlBar
+//------------------------------
+*/
+ControlBar
+{
+	borderSkin: Embed(source="kingnarestyle.swf", symbol="Control_borderSkin");
+	/* paddingTop: 0;
+	paddingRight: 3;
+	paddingLeft: 3;
+	paddingBottom: 0;
+	horizontalGap: 5; */
+}
+
+
+/*
+//------------------------------
+//  CursorManager
+//------------------------------
+*/
+CursorManager
+{
+	busyCursor: Embed(source="kingnarestyle.swf", symbol="BusyCursor");
+	busyCursorBackground: Embed(source="kingnarestyle.swf",symbol="BusyCursor");
+}
+
+
+/*
+//------------------------------
+//  DataGrid
+//------------------------------
+*/
+DataGrid
+{
+	backgroundColor: #222222;
+	columnDropIndicatorSkin: Embed(source="kingnarestyle.swf", symbol="DataGrid_columnDropIndicatorSkin");
+	columnResizeSkin: Embed(source="kingnarestyle.swf", symbol="DataGrid_columnResizeSkin");
+	headerSeparatorSkin: Embed(source="kingnarestyle.swf", symbol="DataGrid_headerSeparatorSkin"); 
+	sortArrowSkin: Embed(source="kingnarestyle.swf", symbol="DataGrid_sortArrowSkin");
+	stretchCursor: Embed(source="kingnarestyle.swf",symbol="DividedBox_horizontalCursor");
+	headerStyleName: "dataGridHeader";
+	color:#BBBBBB;
+	rollOverColor: #555555;
+	selectionColor: #FF3200;
+	textRollOverColor:#ffffff;
+	textSelectedColor:#ffffff;
+	selectiondDisabledColor: #1e1e1e;
+	borderStyle: solid;
+	borderThickness:1;
+	borderColor: #000000;
+	alternatingItemColors: #333333, #303030;
+	disabledColor: #666666;
+	verticalGridLineColor: #444444;
+	headerColors: #2D2D2D, #222222;
+	verticalGridLines: true;
+	horizontalGridLines: true;
+	horizontalGridLineColor: #444444;
+	verticalScrollBarStyleName: dataGridVerticalScrollBar;
+}
+
+
+/*
+//------------------------------
+//  DataGridHeader
+//------------------------------
+*/
+.dataGridHeader
+{
+	color: #aaaaaa;
+	textRollOverColor:#ffffff;
+	textSelectedColor:#ffffff;
+	fontSize: 12;
+	fontWeight: bold;
+}
+
+
+/*
+//------------------------------
+//  DateChooser
+//------------------------------
+*/
+DateChooser
+{
+	headerColors: #2D2D2D, #222222;
+	cornerRadius:0;
+	borderColor:#000000;
+	backgroundColor:#444444;
+	color:#aaaaaa;
+	textRollOverColor:#ffffff;
+	textSelectedColor: #ffffff;
+	selectionColor:#222222;
+	
+	nextMonthDisabledSkin: Embed(source="kingnarestyle.swf", symbol="DateChooser_nextMonthDisabledSkin");
+	nextMonthDownSkin: Embed(source="kingnarestyle.swf", symbol="DateChooser_nextMonthDownSkin");
+	nextMonthOverSkin: Embed(source="kingnarestyle.swf", symbol="DateChooser_nextMonthOverSkin");
+	nextMonthUpSkin: Embed(source="kingnarestyle.swf", symbol="DateChooser_nextMonthUpSkin");
+	prevMonthDisabledSkin: Embed(source="kingnarestyle.swf", symbol="DateChooser_prevMonthDisabledSkin");
+	prevMonthDownSkin: Embed(source="kingnarestyle.swf", symbol="DateChooser_prevMonthDownSkin");
+	prevMonthOverSkin: Embed(source="kingnarestyle.swf", symbol="DateChooser_prevMonthOverSkin");
+	prevMonthUpSkin: Embed(source="kingnarestyle.swf", symbol="DateChooser_prevMonthUpSkin");
+	
+	nextYearDisabledSkin: Embed(source="kingnarestyle.swf", symbol="DateChooser_nextYearDisabledSkin");
+	nextYearDownSkin: Embed(source="kingnarestyle.swf", symbol="DateChooser_nextYearDownSkin");
+	nextYearOverSkin: Embed(source="kingnarestyle.swf", symbol="DateChooser_nextYearOverSkin");
+	nextYearUpSkin: Embed(source="kingnarestyle.swf", symbol="DateChooser_nextYearUpSkin");
+	prevYearDisabledSkin: Embed(source="kingnarestyle.swf", symbol="DateChooser_prevYearDisabledSkin");
+	prevYearDownSkin: Embed(source="kingnarestyle.swf", symbol="DateChooser_prevYearDownSkin");
+	prevYearOverSkin: Embed(source="kingnarestyle.swf", symbol="DateChooser_prevYearOverSkin");
+	prevYearUpSkin: Embed(source="kingnarestyle.swf", symbol="DateChooser_prevYearUpSkin");
+	
+	todayStyleName: "dateChooserToday";
+	headerStyleName: "dateChooserHeader";
+	weekDayStyleName: "dateChooserWeekDay";
+	/* 
+	todayIndicatorSkin: Embed(source="kingnarestyle.swf", symbol="DateChooser_todayIndicatorSkin",scaleGridRight="17",scaleGridLeft="3",scaleGridTop="3",scaleGridBottom="17");
+	rollOverIndicatorSkin: Embed(source="kingnarestyle.swf", symbol="DateChooser_rollOverIndicatorSkin");
+	selectionIndicatorSkin: Embed(source="kingnarestyle.swf", symbol="DateChooser_selectionIndicatorSkin");
+	*/
+	rollOverColor: #333333;
+	
+}
+
+
+/*
+//------------------------------
+//  DateField
+//------------------------------
+*/
+DateField
+{
+	dateChooserStyleName: DateChooser;
+	upSkin:	Embed(source="kingnarestyle.swf", symbol="DateField_upSkin");
+	overSkin:	Embed(source="kingnarestyle.swf", symbol="DateField_overSkin");
+	downSkin:	Embed(source="kingnarestyle.swf", symbol="DateField_downSkin");
+	disabledSkin:	Embed(source="kingnarestyle.swf", symbol="DateField_disabledSkin");
+}
+.dateChooserHeader
+{
+	color: #ffffff;
+	horizontalGap:4;
+	fontWeight:normal;
+	height:20px;
+}
+.dateChooserWeekDay
+{
+	color: #ffffff;
+	horizontalGap:4;
+	fontWeight:normal;
+}
+
+
+/*
+//------------------------------
+//  FormItem
+//------------------------------
+*/
+FormItem
+{
+	indicatorSkin: Embed(source="kingnarestyle.swf",symbol="FormItem_indicatorSkin");  
+}
+
+HBox.titleBox
+{
+	border-skin: Embed(source="kingnarestyle.swf", symbol="Panel_titleBackgroundSkin");
+}
+HBox
+{
+	verticalAlign: middle;
+}
+
+/*
+//------------------------------
+//  HDividedBox
+//------------------------------
+*/
+HDividedBox
+{
+	dividerSkin: Embed(source="kingnarestyle.swf",symbol="DividedBox_HDividerSkin");
+	horizontalDividerCursor: Embed(source="kingnarestyle.swf",symbol="DividedBox_horizontalCursor");
+	dividerColor: #FF3200;
+	horizontalGap: 6;
+	dividerAlpha: 1.0;
+}
+
+
+/*
+//------------------------------
+//  HRule
+//------------------------------
+*/
+HRule
+{
+	strokeColor: #000000;
+	shadowColor: #CCCCCC;
+	strokeWidth: 1;
+}
+
+
+/*
+//------------------------------
+//  HScrollBar
+//------------------------------
+*/
+HScrollBar
+{
+
+	trackSkin: Embed(source="kingnarestyle.swf", symbol="ScrollBars_trackSkin");
+	thumbUpSkin: Embed(source="kingnarestyle.swf", symbol="ScrollBars_thumbUpSkin");
+	thumbOverSkin: Embed(source="kingnarestyle.swf", symbol="ScrollBars_thumbOverSkin");
+	thumbDownSkin: Embed(source="kingnarestyle.swf", symbol="ScrollBars_thumbDownSkin");
+	thumbIcon:	Embed(source="kingnarestyle.swf", symbol="ScrollBars_thumbIcon");
+	upArrowSkin:  ClassReference(null);
+	downArrowSkin:  ClassReference(null);
+}
+
+
+/*
+//------------------------------
+//  HSlider
+//------------------------------
+*/
+HSlider
+{
+	trackSkin: Embed(source="kingnarestyle.swf", symbol="SliderTrack_Skin");
+	showTrackHighlight: true;
+	thumbUpSkin: Embed(source="kingnarestyle.swf", symbol="SliderThumb_upSkin",scaleGridBottom="10",scaleGridLeft="1",scaleGridTop="1",scaleGridRight="10");
+	thumbOverSkin: Embed(source="kingnarestyle.swf", symbol="SliderThumb_overSkin",scaleGridBottom="10",scaleGridLeft="1",scaleGridTop="1",scaleGridRight="10");
+	thumbDownSkin: Embed(source="kingnarestyle.swf", symbol="SliderThumb_downSkin",scaleGridBottom="10",scaleGridLeft="1",scaleGridTop="1",scaleGridRight="10");
+	thumbDisabledSkin: Embed(source="kingnarestyle.swf", symbol="SliderThumb_disabledSkin",scaleGridBottom="10",scaleGridLeft="1",scaleGridTop="1",scaleGridRight="10");
+	trackHighlightSkin: Embed(source="kingnarestyle.swf", symbol="SliderHighlight_Skin");
+	dataTipOffset: 5;
+}
+
+
+/*
+//------------------------------
+//  Label
+//------------------------------
+*/
+Label
+{
+	color: #FFFFFF;
+	disabledColor: #BBBBBB;
+}
+LinkBar
+{
+	horizontalGap: 0;
+	fontWeight: bold;
+	color: #FFFFFF;
+	textRollOverColor: #FF3200;
+	fontSize: 12;
+	textSelectedColor: #FFFFFF;
+	separatorColor: #FF3200;
+	separatorWidth: 2;
+	horizontalAlign: center;
+	text-selected-color: #FF3200;
+}
+
+
+/*
+//------------------------------
+//  LinkButton
+//------------------------------
+*/
+LinkButton
+{
+	rollOverColor: #222222;
+	selectionColor: #000000;
+	focusAlpha: 0.1;
+	cornerRadius: 0;
+}
+
+
+/*
+//------------------------------
+//  List
+//------------------------------
+*/
+List
+{
+	color: #BBBBBB;
+	rollOverColor: #555555;
+	selectionColor: #444444;
+	textRollOverColor: #FFFFFF;
+	textSelectedColor: #FFFFFF;
+	borderColor: #222222;
+	disabledColor: #666666;
+	backgroundColor: #333333;
+	borderStyle: solid;
+	
+}
+
+
+/*
+//------------------------------
+//  Menu
+//------------------------------
+*/
+Menu
+{
+	branchIcon: Embed(source="kingnarestyle.swf",symbol="Menu_branchIcon");
+	branchDisabledIcon: Embed(source="kingnarestyle.swf",symbol="Menu_branchDisabledIcon");
+	checkIcon: Embed(source="kingnarestyle.swf",symbol="Menu_checkIcon");
+	checkDisabledIcon: Embed(source="kingnarestyle.swf",symbol="Menu_checkDisabledIcon");
+	radioIcon: Embed(source="kingnarestyle.swf",symbol="Menu_radioIcon");
+	radioDisabledIcon: Embed(source="kingnarestyle.swf",symbol="Menu_radioDisabledIcon");
+	separatorSkin: Embed(source="kingnarestyle.swf",symbol="Menu_separatorSkin");
+	backgroundImage: Embed(source="kingnarestyle.swf", symbol="BackgroundSkin"); 
+	backgroundSize: "100%";  
+	backgroundColor: #111111;
+	backgroundAlpha: 1.0;
+	borderStyle: solid;
+	borderThickness: 1;
+	borderColor: #000000;
+	roundedCorners:0;
+	color: #CCCCCC;
+	textRollOverColor: #ffffff;
+	textSelectedColor:#dddddd;
+	rollOverColor: #333333;
+	selectionColor: #444444;
+	shadowDistance: 0;
+}
+
+
+/*
+//------------------------------
+//  MenuBar
+//------------------------------
+*/
+MenuBar
+{
+
+	backgroundSkin: Embed(source="kingnarestyle.swf", symbol="MenuBar_backgroundSkin");
+	itemUpSkin: Embed(source="kingnarestyle.swf", symbol="MenuBar_itemUpSkin");
+	itemOverSkin: Embed(source="kingnarestyle.swf", symbol="MenuBar_itemOverSkin");
+	itemDownSkin: Embed(source="kingnarestyle.swf", symbol="MenuBar_itemDownSkin");
+	color: #AAAAAA;
+	backgroundColor:#ffffff;
+	textSelectedColor:#ffffff;
+	textRollOverColor:#ffffff;
+	rollOverColor:#ffffff;
+	menuStyleName: "dropDown";
+	disabledColor: #AAB3B3;
+}
+
+
+/*
+//------------------------------
+//  NumericStepper
+//------------------------------
+*/
+NumericStepper
+{
+	downArrowDisabledSkin: Embed(source="kingnarestyle.swf", symbol="NumericStepperDownArrow_disabledSkin");
+	downArrowDownSkin: Embed(source="kingnarestyle.swf", symbol="NumericStepperDownArrow_downSkin");
+	downArrowOverSkin: Embed(source="kingnarestyle.swf", symbol="NumericStepperDownArrow_overSkin");
+	downArrowUpSkin: Embed(source="kingnarestyle.swf", symbol="NumericStepperDownArrow_upSkin");
+	upArrowDisabledSkin: Embed(source="kingnarestyle.swf", symbol="NumericStepperUpArrow_disabledSkin");
+	upArrowDownSkin: Embed(source="kingnarestyle.swf", symbol="NumericStepperUpArrow_downSkin");
+	upArrowOverSkin: Embed(source="kingnarestyle.swf", symbol="NumericStepperUpArrow_overSkin");
+	upArrowUpSkin: Embed(source="kingnarestyle.swf", symbol="NumericStepperUpArrow_upSkin");
+	
+	cornerRadius:0;
+	borderThickness:1;
+	borderStyle:inset;
+	borderColor:#000000;
+	fontWeight: normal;
+	backgroundColor:#666666;
+	color:#eeeeee;
+	textRollOverColor:#ffffff;
+}
+
+
+/*
+//------------------------------
+//  Panel
+//------------------------------
+*/
+/* Panel without backgroundImage and titleBackgroundSkin. */
+/* 
+{
+	cornerRadius: 2;
+	borderThicknessLeft: 5;
+	borderThicknessRight: 5;
+	color: #DDDDDD;
+	roundedBottomCorners: true;
+	shadowDistance: 1;
+	backgroundColor: #333333;
+	headerHeight: 22;
+	borderAlpha: 0.2;
+} */
+
+Panel
+{
+	color: #DDDDDD;
+	backgroundColor: #333333;
+	cornerRadius: 2;
+	roundedBottomCorners: true;
+	shadowDistance: 1;
+	dropShadowEnabled: true;
+	
+	borderColor: #555555;
+	borderAlpha: 0.9;
+	borderStyle: solid;
+	borderThickness:2;
+	
+	headerHeight: 28;
+	titleBackgroundSkin: Embed(source="kingnarestyle.swf", symbol="Panel_titleBackgroundSkin");
+	backgroundImage: Embed(source="kingnarestyle.swf", symbol="Panel_backgroundImage");
+	/* Panel_SpBackgroundImage */
+	backgroundSize: "100%";
+	titleStyleName: "windowTitle";
+	controlBarStyleName: ControlBar;
+	borderThicknessRight: 0;
+	borderThicknessLeft: 0;
+	borderThicknessBottom: 0;
+	borderThicknessTop: -1;
+}
+
+/* Panel with ControlBar. */
+.PanelWithControlBar
+{
+	backgroundImage: Embed(source="kingnarestyle.swf", symbol="Panel_SpBackgroundImage");
+}
+/*
+//------------------------------
+//  PopUpButton
+//------------------------------
+*/
+PopUpButton
+{
+	disabledSkin: Embed(source="kingnarestyle.swf", symbol="PopUpButton_disabledSkin");
+	downSkin: Embed(source="kingnarestyle.swf", symbol="PopUpButton_downLeftSkin");
+	overSkin: Embed(source="kingnarestyle.swf", symbol="PopUpButton_overLeftSkin");	
+	popUpDownSkin: Embed(source="kingnarestyle.swf", symbol="PopUpButton_downRightSkin");
+	popUpOverSkin: Embed(source="kingnarestyle.swf", symbol="PopUpButton_overRightSkin");
+	upSkin: Embed(source="kingnarestyle.swf", symbol="PopUpButton_upSkin");
+	
+	color: #cccccc;
+	textRollOverColor: #ffffff;
+	textSelectedColor:#ffffff;
+	textDisabledColor: #1e1e1e;
+	fontWeight:normal;
+	arrowButtonWidth:16;
+}
+
+
+/*
+//------------------------------
+//  PopUpMenuButton
+//------------------------------
+*/
+PopUpMenuButton
+{
+	disabledSkin: Embed(source="kingnarestyle.swf", symbol="PopUpButton_disabledSkin");
+	downSkin: Embed(source="kingnarestyle.swf", symbol="PopUpButton_downLeftSkin");
+	overSkin: Embed(source="kingnarestyle.swf", symbol="PopUpButton_overLeftSkin");	
+	popUpDownSkin: Embed(source="kingnarestyle.swf", symbol="PopUpButton_downRightSkin");
+	popUpOverSkin: Embed(source="kingnarestyle.swf", symbol="PopUpButton_overRightSkin");
+	upSkin: Embed(source="kingnarestyle.swf", symbol="PopUpButton_upSkin");
+	
+	color: #cccccc;
+	textRollOverColor: #ffffff;
+	textSelectedColor:#ffffff;
+	textDisabledColor: #1e1e1e;
+	fontWeight:normal;
+	arrowButtonWidth:16;
+}
+
+
+/*
+//------------------------------
+//  ProgressBar
+//------------------------------
+*/
+ProgressBar
+{
+	color: #CCCCCC;
+	barColor: #FFFFFF;
+	trackSkin: Embed(source="kingnarestyle.swf", symbol="ProgressBarTrackSkin");
+	barSkin: Embed(source="kingnarestyle.swf", symbol="ProgressBarSkin");
+	indeterminateSkin: Embed(source="kingnarestyle.swf", symbol="ProgressIndeterminateSkin",
+	scaleGridTop="1",
+	scaleGridLeft="1",
+	scaleGridRight="199",
+	scaleGridBottom="5");
+}
+
+
+/*
+//------------------------------
+//  RadioButton
+//------------------------------
+*/
+RadioButton
+{
+	upIcon: Embed(source="kingnarestyle.swf", symbol="RadioButton_upIcon");
+	selectedDisabledIcon: Embed(source="kingnarestyle.swf", symbol="RadioButtonSelected_disabledIcon");
+	selectedDownIcon: Embed(source="kingnarestyle.swf", symbol="RadioButtonSelected_downIcon");
+	selectedOverIcon: Embed(source="kingnarestyle.swf", symbol="RadioButtonSelected_overIcon");
+	overIcon: Embed(source="kingnarestyle.swf", symbol="RadioButton_overIcon");
+	downIcon: Embed(source="kingnarestyle.swf", symbol="RadioButton_downIcon");
+	disabledIcon: Embed(source="kingnarestyle.swf", symbol="RadioButton_disabledIcon");
+	selectedUpIcon: Embed(source="kingnarestyle.swf", symbol="RadioButtonSelected_upIcon");
+}
+
+
+/*
+//------------------------------
+//  RichTextEditor
+//------------------------------
+*/
+RichTextEditor
+{
+	/* borderColor: #333333;
+	borderAlpha: 1.0;
+	cornerRadius: 2; */
+}
+
+
+
+/*
+//------------------------------
+//  TabBar
+//------------------------------
+*/
+TabBar
+{
+	firstButtonStyleName: "tabStyle";
+	firstTabStyleName: "tabStyle";
+	tabStyleName: "tabStyle";
+	buttonStyleName: "tabStyle";
+	lastButtonStyleName: "tabStyle";
+	lastTabStyleName: "tabStyle";
+	selectedTabTextStyleName: "selectedTabText";
+	color: #FFFFFF;
+	textRollOverColor: #ffffff;
+	textSelectedColor:#CCCCCC;
+	disabledColor:#111111;
+}
+.tabStyle 
+{
+	disabledSkin: Embed(source="kingnarestyle.swf", symbol="Tab_disabledSkin");
+	downSkin: Embed(source="kingnarestyle.swf", symbol="Tab_downSkin"); 
+	overSkin: Embed(source="kingnarestyle.swf", symbol="Tab_overSkin"); 
+	selectedDisabledSkin: Embed(source="kingnarestyle.swf", symbol="TabSelected_disabledSkin");
+	selectedDownSkin: Embed(source="kingnarestyle.swf", symbol="TabSelected_upSkin");
+	selectedOverSkin: Embed(source="kingnarestyle.swf", symbol="TabSelected_upSkin");  
+	selectedUpSkin: Embed(source="kingnarestyle.swf", symbol="TabSelected_upSkin"); 
+	upSkin: Embed(source="kingnarestyle.swf", symbol="Tab_upSkin"); 
+	color:#FFFFFF;
+	textRollOverColor:#ffffff;
+	textSelectedColor:#FF3200;
+	fontSize: 12;
+	fontWeight: bold;
+}
+.selectedTabText 
+{
+	color: #FF3200;
+	textRollOverColor: #FF3200;
+	textSelectedColor:#FF3200;
+	disabledColor:#111111;
+}
+
+
+/*
+//------------------------------
+//  TabNavigator
+//------------------------------
+*/
+TabNavigator
+{
+	borderStyle:solid;
+	borderColor:#000000;
+	borderThickness:1;
+	backgroundColor:#333333;
+	fontWeight:normal;
+	color: #AAAAAA;
+	textRollOverColor: #ffffff;
+	textSelectedColor:#444444;
+	disabledColor:#111111;
+	paddingTop: 0;
+}
+
+
+/*
+//------------------------------
+//  TextArea
+//------------------------------
+*/
+TextArea
+{
+	color: #FFFFFF;
+	borderColor: #000000;
+	borderSkin: Embed(source="kingnarestyle.swf", symbol="TextAreaBackground");
+	backgroundAlpha: 1.0; 
+}
+
+
+/*
+//------------------------------
+//  TextInput
+//------------------------------
+*/
+TextInput
+{
+	backgroundAlpha: 1.0;
+	borderColor: #B7BABC;
+	color: #FFFFFF;
+	borderSkin: Embed(source="kingnarestyle.swf", symbol="TextInput_borderSkin");
+	borderStyle: none;
+	paddingTop: 2;
+	
+}
+
+
+/*
+//------------------------------
+//  TitleWindow
+//------------------------------
+*/
+TitleWindow
+{
+	closeButtonDisabledSkin: Embed(source="kingnarestyle.swf",symbol="Panel_closeButtonDisabledSkin");
+	closeButtonDownSkin: Embed(source="kingnarestyle.swf",symbol="Panel_closeButtonDownSkin");
+	closeButtonOverSkin: Embed(source="kingnarestyle.swf",symbol="Panel_closeButtonOverSkin");
+	closeButtonUpSkin: Embed(source="kingnarestyle.swf",symbol="Panel_closeButtonUpSkin");
+	titleStyleName: "windowTitle";
+	cornerRadius:2;
+	backgroundColor: #333333;
+	borderThickness:2;
+	controlBarStyleName: "windowControlBar";
+	borderStyle: solid; 
+}
+.windowTitle
+{
+	verticalAlign:middle;
+	fontSize: 14;
+	fontWeight: normal;
+	leading: 5; 
+}
+.windowControlBar
+{
+	backgroundImage: Embed(source="kingnarestyle.swf",symbol="ApplicationControlBar_BackgroundSkin");
+	backgroundSize:"100%";
+}
+
+
+/*
+//------------------------------
+//  ToggleButtonBar
+//------------------------------
+*/
+ToggleButtonBar 
+{ 
+        buttonStyleName: "middleButtonBarButton"; 
+        firstButtonStyleName: "firstButtonBarButton";
+        lastButtonStyleName: "lastButtonBarButton";
+}
+.firstButtonBarButton 
+{ 
+        disabledSkin: Embed(source="kingnarestyle.swf", symbol="ButtonBar_firstDisabledSkin"); 
+        downSkin: Embed(source="kingnarestyle.swf", symbol="ButtonBar_firstDownSkin"); 
+        overSkin: Embed(source="kingnarestyle.swf", symbol="ButtonBar_firstOverSkin"); 
+        selectedDisabledSkin: Embed(source="kingnarestyle.swf", symbol="ButtonBar_firstSelectedDisabledSkin"); 
+        selectedDownSkin: Embed(source="kingnarestyle.swf", symbol="ButtonBar_firstSelectedUpSkin"); 
+        selectedOverSkin: Embed(source="kingnarestyle.swf", symbol="ButtonBar_firstSelectedUpSkin");
+        selectedUpSkin: Embed(source="kingnarestyle.swf", symbol="ButtonBar_firstSelectedUpSkin");
+        upSkin: Embed(source="kingnarestyle.swf", symbol="ButtonBar_firstUpSkin");
+        color: #aaaaaa;
+		textRollOverColor: #ffffff;
+		textSelectedColor: #ffffff;
+		disabledColor:#444444;
+}
+.middleButtonBarButton 
+{ 
+        disabledSkin: Embed(source="kingnarestyle.swf", symbol="ButtonBar_buttonDisabledSkin"); 
+        downSkin: Embed(source="kingnarestyle.swf", symbol="ButtonBar_buttonDownSkin"); 
+        overSkin: Embed(source="kingnarestyle.swf", symbol="ButtonBar_buttonOverSkin"); 
+        selectedDisabledSkin: Embed(source="kingnarestyle.swf", symbol="ButtonBar_buttonSelectedDisabledSkin"); 
+        selectedDownSkin: Embed(source="kingnarestyle.swf", symbol="ButtonBar_buttonSelectedUpSkin"); 
+        selectedOverSkin: Embed(source="kingnarestyle.swf", symbol="ButtonBar_buttonSelectedUpSkin");
+        selectedUpSkin: Embed(source="kingnarestyle.swf", symbol="ButtonBar_buttonSelectedUpSkin");
+        upSkin: Embed(source="kingnarestyle.swf", symbol="ButtonBar_buttonUpSkin");
+        color: #aaaaaa;
+		textRollOverColor: #ffffff;
+		textSelectedColor: #ffffff;
+		disabledColor:#444444;
+}
+.lastButtonBarButton 
+{ 
+        disabledSkin: Embed(source="kingnarestyle.swf", symbol="ButtonBar_lastDisabledSkin"); 
+        downSkin: Embed(source="kingnarestyle.swf", symbol="ButtonBar_lastDownSkin"); 
+        overSkin: Embed(source="kingnarestyle.swf", symbol="ButtonBar_lastOverSkin"); 
+        selectedDisabledSkin: Embed(source="kingnarestyle.swf", symbol="ButtonBar_lastSelectedDisabledSkin"); 
+        selectedDownSkin: Embed(source="kingnarestyle.swf", symbol="ButtonBar_lastSelectedUpSkin"); 
+        selectedOverSkin: Embed(source="kingnarestyle.swf", symbol="ButtonBar_lastSelectedUpSkin");
+        selectedUpSkin: Embed(source="kingnarestyle.swf", symbol="ButtonBar_lastSelectedUpSkin");
+        upSkin: Embed(source="kingnarestyle.swf", symbol="ButtonBar_lastUpSkin");
+        color: #aaaaaa;
+		textRollOverColor: #ffffff;
+		textSelectedColor: #ffffff;
+		disabledColor:#444444; 
+}
+
+
+/*
+//------------------------------
+//  ToolTip
+//------------------------------
+*/
+ToolTip
+{
+	color: #FFFFFF;
+	backgroundColor: 0;
+	borderSkin: Embed(source="kingnarestyle.swf", symbol="ToolTip_Border");
+	paddingLeft: 10;
+	paddingRight: 10;
+	fontSize: 11;
+}
+
+
+/*
+//------------------------------
+//  Tree
+//------------------------------
+*/
+Tree
+{
+	defaultLeafIcon: Embed(source="kingnarestyle.swf",symbol="Tree_defaultLeafIcon");
+	disclosureClosedIcon: Embed(source="kingnarestyle.swf",symbol="Tree_disclosureClosedIcon");
+	disclosureOpenIcon: Embed(source="kingnarestyle.swf",symbol="Tree_disclosureOpenIcon");
+	folderClosedIcon: Embed(source="kingnarestyle.swf",symbol="Tree_folderClosedIcon");
+	folderOpenIcon: Embed(source="kingnarestyle.swf",symbol="Tree_folderOpenIcon");
+	useRollOver: false;
+	backgroundColor: #333333;
+	fontSize: 11;
+	rollOverColor: #DDDDDD;
+	textRollOverColor: #222222;
+	selectionColor: #FF3200;
+	textSelectedColor: #FFFFFF;
+	/* borderSkin: Embed(source="kingnarestyle.swf",symbol="Tree_borderSkin");  */
+}
+
+
+/*
+//------------------------------
+//  VDividedBox
+//------------------------------
+*/
+VDividedBox
+{
+	dividerSkin: Embed(source="kingnarestyle.swf",symbol="DividedBox_VDividerSkin");
+	verticalDividerCursor: Embed(source="kingnarestyle.swf",symbol="DividedBox_verticalCursor");
+	dividerColor: #FF3200;
+	verticalGap: 6;
+	verticalAlign: top;
+	dividerAlpha: 1.0;
+}
+
+
+/*
+//------------------------------
+//  VRule
+//------------------------------
+*/
+VRule
+{
+	strokeColor: #000000;
+	shadowColor: #CCCCCC;
+	strokeWidth: 1;
+}
+
+
+/*
+//------------------------------
+//  VScrollBar
+//------------------------------
+*/
+VScrollBar
+{
+	trackUpSkin: Embed(source="kingnarestyle.swf", symbol="ScrollBars_trackSkin");
+	trackOverSkin: Embed(source="kingnarestyle.swf", symbol="ScrollBars_trackSkin");
+	trackDownSkin: Embed(source="kingnarestyle.swf", symbol="ScrollBars_trackSkin");
+	trackDisabledSkin: Embed(source="kingnarestyle.swf", symbol="ScrollBars_trackSkin");
+	
+	thumbUpSkin: Embed(source="kingnarestyle.swf", symbol="ScrollBars_thumbUpSkin");
+	thumbOverSkin: Embed(source="kingnarestyle.swf", symbol="ScrollBars_thumbOverSkin");
+	thumbDownSkin: Embed(source="kingnarestyle.swf", symbol="ScrollBars_thumbDownSkin");
+	thumbIcon:	Embed(source="kingnarestyle.swf", symbol="ScrollBars_thumbIcon");
+	
+	downArrowUpSkin: Embed(source="kingnarestyle.swf", symbol="ScrollBars_downArrowUpSkin");
+	downArrowOverSkin: Embed(source="kingnarestyle.swf", symbol="ScrollBars_downArrowOverSkin");
+	downArrowDownSkin: Embed(source="kingnarestyle.swf", symbol="ScrollBars_downArrowDownSkin");
+	downArrowDisabledSkin: Embed(source="kingnarestyle.swf", symbol="ScrollBars_downArrowDisabledSkin");
+	upArrowUpSkin: Embed(source="kingnarestyle.swf", symbol="ScrollBars_upArrowUpSkin");
+	upArrowOverSkin: Embed(source="kingnarestyle.swf", symbol="ScrollBars_upArrowOverSkin");
+	upArrowDownSkin: Embed(source="kingnarestyle.swf", symbol="ScrollBars_upArrowDownSkin");
+	upArrowDisabledSkin: Embed(source="kingnarestyle.swf", symbol="ScrollBars_upArrowDisabledSkin");
+	
+	/* upArrowSkin:  ClassReference(null);
+	downArrowSkin:  ClassReference(null); */
+}
+
+
+/*
+//------------------------------
+//  VSlider
+//------------------------------
+*/
+VSlider
+{
+	trackSkin: Embed(source="kingnarestyle.swf", symbol="SliderTrack_Skin");
+	showTrackHighlight: true;
+	thumbUpSkin: Embed(source="kingnarestyle.swf", symbol="SliderThumb_upSkin",scaleGridBottom="10",scaleGridLeft="1",scaleGridTop="1",scaleGridRight="10");
+	thumbOverSkin: Embed(source="kingnarestyle.swf", symbol="SliderThumb_overSkin",scaleGridBottom="10",scaleGridLeft="1",scaleGridTop="1",scaleGridRight="10");
+	thumbDownSkin: Embed(source="kingnarestyle.swf", symbol="SliderThumb_downSkin",scaleGridBottom="10",scaleGridLeft="1",scaleGridTop="1",scaleGridRight="10");
+	thumbDisabledSkin: Embed(source="kingnarestyle.swf", symbol="SliderThumb_disabledSkin",scaleGridBottom="10",scaleGridLeft="1",scaleGridTop="1",scaleGridRight="10");
+	trackHighlightSkin: Embed(source="kingnarestyle.swf", symbol="SliderHighlight_Skin");
+	dataTipOffset: 5;
+}
+
+/*
+//------------------------------
+//  bg
+//------------------------------
+*/
+.bgSkin
+{
+	borderSkin: Embed(source="kingnarestyle.swf", symbol="ApplicationControlBar_BackgroundSkin");
+}
+.bgGreenSkin
+{
+	borderSkin: Embed(source="kingnarestyle.swf", symbol="GreenBackgroundSkin");
+}
+.bgRedSkin
+{
+	borderSkin: Embed(source="kingnarestyle.swf", symbol="RedBackgroundSkin");
+}
+.textBorder
+{
+	borderSkin: Embed(source="kingnarestyle.swf", symbol="TextInput_borderSkin"); 
+}
+
+/* AIR Part Test*/
+Window
+{
+	 statusBarBackgroundColor:#C0C0C0;
+}
+@font-face
+{
+	fontFamily: "Bitstream Vera Sans Mono";
+	fontWeight: normal;
+	fontStyle: normal;
+	src: url("assets/fonts/VeraMono.ttf");
+}
+@font-face
+{
+	fontFamily: "Bitstream Vera Sans Mono";
+	fontWeight: bold;
+	fontStyle: normal;
+	src: url("assets/fonts/VeraMoBd.ttf");
+}
+@font-face
+{
+	fontFamily: "Bitstream Vera Sans Mono";
+	fontWeight: normal;
+	fontStyle: italic;
+	src: url("assets/fonts/VeraMoIt.ttf");
+}
+.dataGridVerticalScrollBar
+{
+	up-arrow-skin: ClassReference(null);
+	down-arrow-skin: ClassReference(null);
+}
+
+/* End */

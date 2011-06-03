@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+        This file is part of AMFPHP
+    
+        It is released under the GPL License:
+    
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License (GPL)
+        as published by the Free Software Foundation; either version 2
+        of the License, or (at your option) any later version.
+    
+        This program is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+        GNU General Public License for more details.
+        
+        To read the license please visit http://www.gnu.org/copyleft/gpl.html
+-->
+
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" width="600" title="Preferences"
+		titleIcon="@Embed(source='../../../assets/icons/process.png')" showCloseButton="true"
+		paddingBottom="8" paddingLeft="8" paddingRight="8" paddingTop="8"
+		creationComplete="init()" xmlns:vo="org.amfphp.vo.*">
+	
+	<mx:Metadata>
+		<![CDATA[
+			/**
+			 * This class allows the user to store their preferences
+			 * 
+			 * @see org.amfphp.vo.Preferences
+			 * 
+			 * @author Danny Kopping danny@ria-coder.com
+			 */
+		]]>
+	</mx:Metadata>	
+	
+	<mx:Form width="100%" height="100%" defaultButton="{saveBtn}">
+		<mx:FormItem label="Gateway URL" width="100%">
+			<mx:HBox width="100%" verticalAlign="middle">
+				<mx:TextInput width="100%" text="{decodeURI(preferences.endpoint)}"
+						keyUp="preferences.endpoint = encodeURI(event.currentTarget.text)"/>
+				<mx:Button icon="@Embed(source='../../../assets/icons/computer.png')" toolTip="Get default gateway URL"
+						click="preferences.endpoint = ServerUtils.getEndpoint()"/>
+			</mx:HBox>
+		</mx:FormItem>
+		<mx:FormItem label="AMF Encoding" width="100%">
+			<mx:HBox width="100%" verticalAlign="middle">
+				<mx:RadioButton label="AMF0" selected="{preferences.encoding == ObjectEncoding.AMF0}" group="{encodingRadio}"
+						click="preferences.encoding = ObjectEncoding.AMF0"/>
+				<mx:RadioButton label="AMF3" selected="{preferences.encoding == ObjectEncoding.AMF3}" group="{encodingRadio}"
+						click="preferences.encoding = ObjectEncoding.AMF3"/>
+			</mx:HBox>
+		</mx:FormItem>
+		<mx:FormItem label="Default result page" width="100%">
+			<mx:HBox width="100%" verticalAlign="middle">
+				<mx:Label text="Open"/>
+				<mx:ComboBox id="defaultResultsPage" change="preferences.defaultPage = event.currentTarget.selectedItem"
+						dataProvider="{defaultPages}"/>
+				<mx:Label text="after method call"/>
+			</mx:HBox>
+		</mx:FormItem>
+		<mx:FormItem>
+			<mx:HBox width="100%" verticalAlign="middle">
+				<mx:Button id="saveBtn" label="Save" icon="@Embed(source='../../../assets/icons/accept.png')"
+						click="save = true; dispatchEvent(new CloseEvent(CloseEvent.CLOSE))"/>
+				<mx:Button label="Cancel" icon="@Embed(source='../../../assets/icons/delete.png')"
+						click="save = false; dispatchEvent(new CloseEvent(CloseEvent.CLOSE))"/>
+			</mx:HBox>
+		</mx:FormItem>
+	</mx:Form>
+	
+	<mx:Script>
+		<![CDATA[
+			import org.amfphp.utils.DefaultPage;
+			import mx.controls.RadioButtonGroup;
+			import org.amfphp.vo.Preferences;
+			import org.amfphp.utils.ServerUtils;
+			import mx.events.CloseEvent;
+			import mx.managers.PopUpManager;
+			
+			[Bindable]
+			/**
+			 * The Value Object in which to store (and from which to read) preferences
+			 */
+			public var preferences:Preferences = new Preferences();
+			 
+			[Bindable]
+			/**
+			 * The radio button group containing the choices of <code>flash.net.ObjectEncoding.AMF0</code> and 
+			 * <code>flash.net.ObjectEncoding.AMF3</code>
+			 */
+			public var encodingRadio:RadioButtonGroup;
+			 
+			[Bindable]
+			/**
+			 * Flag determining whether the newly selected values should be written to the SharedObject
+			 */
+			public var save:Boolean;
+			
+			[Bindable]
+			private var defaultPages:Array = [];
+			
+			/**
+			 * Detect if there is a value for <code>defaultPage</code> in the SharedObject, and - if so - select that particular page 
+			 * from the dropdown box containing the available options.
+			 * 
+			 * @see org.amfphp.vo.Preferences
+			 */
+			private function init():void
+			{
+				defaultPages = [DefaultPage.INFO, DefaultPage.RESULTS, DefaultPage.TREE, DefaultPage.TABLE, DefaultPage.TRACE];
+				
+				for each(var page:String in defaultResultsPage.dataProvider)
+				{
+					if(preferences.defaultPage == page)
+					{
+						defaultResultsPage.selectedItem = page;
+						break;
+					}
+				}
+			}
+		]]>
+	</mx:Script>
+</mx:TitleWindow>

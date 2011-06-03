@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+        This file is part of AMFPHP
+    
+        It is released under the GPL License:
+    
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License (GPL)
+        as published by the Free Software Foundation; either version 2
+        of the License, or (at your option) any later version.
+    
+        This program is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+        GNU General Public License for more details.
+        
+        To read the license please visit http://www.gnu.org/copyleft/gpl.html
+-->
+
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" width="100%" height="100%"
+		applicationComplete="init()" pageTitle="AMFPHP Service Browser" horizontalAlign="left"
+		xmlns:components="org.amfphp.components.*"
+		modalTransparencyColor="#111111" modalTransparencyDuration="200" modalTransparencyBlur="10"
+		xmlns:code="http://code.google.com/p/flexlib/" xmlns:utils="org.amfphp.utils.*">	
+	
+	<mx:Metadata>
+		<![CDATA[
+			/**
+			 * Main application file
+			 * 
+			 * @author Danny Kopping danny@ria-coder.com
+			 */
+		]]>
+	</mx:Metadata>
+		
+	<mx:states>
+		<mx:State name="testService">
+			<mx:AddChild relativeTo="{vdividedbox1}" position="lastChild">
+				<components:ServiceTester id="serviceTester" width="100%" height="100%" addedEffect="Fade" horizontalScrollPolicy="off"/>
+			</mx:AddChild>
+		</mx:State>
+	</mx:states>
+	
+	<mx:ApplicationControlBar width="100%" verticalAlign="middle">
+		<mx:Image source="@Embed(source='assets/images/amfphp-logo.png')" id="image1" width="233" height="50"/>
+		<mx:Spacer width="100%"/>
+		<mx:Button icon="@Embed(source='assets/icons/computer_process-32.png')"
+				click="openServerDetails()" toolTip="Open server details" paddingBottom="4" paddingTop="4"/>
+		<mx:Button icon="@Embed(source='assets/icons/process-32.png')"
+				click="openPrefs()" toolTip="Open Preferences" paddingBottom="4" paddingTop="4"/>
+		<mx:Button icon="@Embed(source='assets/icons/refresh-32.png')"
+				click="discoveryService.getServices(); currentState = null" toolTip="Refresh services" paddingBottom="4" paddingTop="4"/>
+	</mx:ApplicationControlBar>
+	<mx:HDividedBox width="100%" height="100%" id="hdividedbox1">
+		<components:ServicesTree id="servicesTree" width="300" height="100%"/>
+		<mx:VDividedBox width="100%" height="100%" id="vdividedbox1" horizontalScrollPolicy="off">
+		</mx:VDividedBox>
+	</mx:HDividedBox>
+		
+	<mx:Script>
+		<![CDATA[
+			import json.JParser;
+			
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.events.CloseEvent;
+			import mx.managers.PopUpManager;
+			import mx.messaging.messages.RemotingMessage;
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+			import mx.utils.ObjectUtil;
+			import mx.utils.URLUtil;
+			
+			import org.amfphp.components.JSONInput;
+			import org.amfphp.components.MethodButton;
+			import org.amfphp.controllers.Controller;
+			import org.amfphp.dialogs.ErrorWindow;
+			import org.amfphp.dialogs.PreferencesWindow;
+			import org.amfphp.dialogs.ServerDetails;
+			import org.amfphp.errors.AMFErrors;
+			import org.amfphp.events.BrowserEvent;
+			import org.amfphp.utils.AutocompleteManager;
+			import org.amfphp.utils.RawAMFService;
+			import org.amfphp.utils.ServerUtils;
+			import org.amfphp.vo.Preferences;
+			
+			private var controller:Controller;
+			
+			/**
+			 * Initializes the application and adds event listeners
+			 */
+			private function init():void
+			{
+				controller = Controller.instance;
+				controller.initialize();
+				
+				controller.addEventListener(BrowserEvent.PREFERENCES_UPDATED, onPrefsUpdated);
+				controller.dispatchEvent(new BrowserEvent(BrowserEvent.PREFERENCES_UPDATED));
+				
+				controller.addEventListener(BrowserEvent.REFRESH_SERVICES, refreshServices);
+				controller.dispatchEvent(new BrowserEvent(BrowserEvent.REFRESH_SERVICES));
+				
+				controller.addEventListener(BrowserEvent.DESCRIBE_SERVICE, describeService);
+			}
+			
+			/**
+			 * Refreshes the list of services
+			 */
+			private function refreshServices(event:BrowserEvent):void
+			{
+				(!controller.preferences.endpoint)
+				?	openPrefs()
+				:	discoveryService.getServices();
+			}
+			
+			/**
+			 * Calls the service to describe the selected service
+			 */
+			private function describeService(event:BrowserEvent):void
+			{
+				currentState = null;
+				
+				var service:Object = event.information;
+				currentService = service;
+				discoveryService.describeService(service);
+			}
+	        
+	        /**
+	         * Opens the server details window
+	         */
+	        private function openServerDetails():void
+	        {
+	        	var detailsWindow:ServerDetails = PopUpManager.createPopUp(this, ServerDetails, true) as ServerDetails;
+	        	PopUpManager.centerPopUp(detailsWindow);        	
+	        }
+	        
+	        /**
+	         * Opens the preferences window
+	         */ 
+	        private function openPrefs():void
+	        {
+	        	var prefsWindow:PreferencesWindow = PopUpManager.createPopUp(this, PreferencesWindow, true) as PreferencesWindow;
+	        	prefsWindow.preferences.endpoint = controller.endpoint;
+	        	prefsWindow.preferences.encoding = controller.encoding;
+	        	prefsWindow.preferences.defaultPage = controller.defaultPage;
+	        	
+	        	PopUpManager.centerPopUp(prefsWindow);
+	        	prefsWindow.addEventListener(CloseEvent.CLOSE, onPrefsClose);
+	        }
+	        
+	        /**
+	         * Updates the AMFPHP gateway URL of the <code>discoveryService</code>
+	         */
+	        private function onPrefsUpdated(event:BrowserEvent):void
+	        {
+	        	discoveryService.endpoint = controller.endpoint;
+	        }
+	        
+	        /**
+	         * Updates the application-wide preferences and saves them to the local storage
+	         */ 
+	        private function onPrefsClose(event:CloseEvent):void
+	        {
+	        	var prefsWindow:PreferencesWindow = event.currentTarget as PreferencesWindow;
+	        	if(prefsWindow.save)
+	        	{
+	        		var oldEndpoint:String = controller.endpoint;
+	        		
+	        		controller.encoding = prefsWindow.preferences.encoding;
+	        		controller.endpoint = prefsWindow.preferences.endpoint;
+	        		controller.defaultPage = prefsWindow.preferences.defaultPage;
+	        		
+	        		controller.dispatchEvent(new BrowserEvent(BrowserEvent.PREFERENCES_UPDATED));
+	        		
+	        		// refresh services
+	        		if(oldEndpoint != controller.endpoint)	        		
+						controller.dispatchEvent(new BrowserEvent(BrowserEvent.REFRESH_SERVICES));
+	        		
+	        		controller.setPreferences(prefsWindow.preferences);
+	        	}
+	        	
+	        	PopUpManager.removePopUp(prefsWindow);
+	        }
+			
+			/**
+			 * Handles the successful return of an AMF request
+			 */
+			private function result(event:ResultEvent):void
+			{		
+				var message:RemotingMessage = event.token.message as RemotingMessage;
+				
+				switch(message.operation)
+				{
+					case "getServices":
+						servicesTree.services = (event.result is Array) ? event.result as Array : (event.result as ArrayCollection).source;
+						break;
+					case "describeService":
+						var methods:ArrayCollection = new ArrayCollection();
+						currentState = 'testService';
+						
+						var info:Object = {service:currentService, methods:event.result};
+						serviceTester.dispatchEvent(new BrowserEvent(BrowserEvent.SERVICE_SELECTED, info));
+					break;
+				}
+			}
+			
+			/**
+			 * Handles the unsuccessful return of an AMF request
+			 */
+			private function fault(event:FaultEvent):void
+			{
+				var errorMessage:String;
+				var errorTitle:String = "An error occured!";
+				
+				var message:RemotingMessage = event.token.message as RemotingMessage;
+				
+				switch(message.operation)
+				{
+					case "getServices":
+						errorMessage = "An error occured while trying to fetch the services";
+						break;
+					case "describeService":
+						errorMessage = "An error occured while trying to fetch the details for <B>" + currentService.label + "<B>";
+						break;
+				}
+				
+				if(errorMessage)
+				{
+					errorMessage += "\n\n<U>Error details</U>:\n<I>" + event.fault.faultDetail + "</I>";
+					
+					var errorWindow:ErrorWindow = PopUpManager.createPopUp(this, ErrorWindow, true) as ErrorWindow;
+					errorWindow.error = errorMessage;
+					errorWindow.errorDump = ObjectUtil.toString(event.fault);
+					errorWindow.title = errorTitle;
+					
+					PopUpManager.centerPopUp(errorWindow);
+				}
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:Object id="currentService"/>
+	
+	<mx:Style source="assets/styles/style.css"/>
+	
+	<mx:RemoteObject id="discoveryService" destination="amfphp" source="amfphp.DiscoveryService"
+			result="result(event)" fault="fault(event)" showBusyCursor="true"/>
+</mx:Application>

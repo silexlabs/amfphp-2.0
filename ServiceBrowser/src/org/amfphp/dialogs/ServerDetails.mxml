@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+        This file is part of AMFPHP
+    
+        It is released under the GPL License:
+    
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License (GPL)
+        as published by the Free Software Foundation; either version 2
+        of the License, or (at your option) any later version.
+    
+        This program is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+        GNU General Public License for more details.
+        
+        To read the license please visit http://www.gnu.org/copyleft/gpl.html
+-->
+
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" width="600" title="Server details"
+		showCloseButton="true" horizontalAlign="center" close="PopUpManager.removePopUp(this)"
+		creationComplete="init()" currentState="loading" paddingBottom="8" paddingLeft="8" paddingRight="8" paddingTop="8"
+		resizeEffect="Resize">
+	
+	<mx:Metadata>
+		<![CDATA[
+			/**
+			 * This window shows the details of the server on which AMFPHP is running
+			 * 
+			 * @author Danny Kopping danny@ria-coder.com
+			 */
+		]]>
+	</mx:Metadata>
+	
+	<mx:states>
+		<mx:State name="loading">
+			<mx:RemoveChild target="{form1}"/>
+			<mx:AddChild position="lastChild">
+				<mx:Image source="@Embed(source='../../../assets/loaders/throbber.swf')"/>
+			</mx:AddChild>
+		</mx:State>
+	</mx:states>
+	<mx:titleIcon>@Embed(source='../../../assets/icons/computer_process.png')</mx:titleIcon>
+	
+	<mx:Form width="500" id="form1" addedEffect="Fade">
+		<mx:FormItem label="Server software" width="100%">
+			<mx:TextInput id="softwareTxt" width="100%" editable="false" styleName="code"/>
+		</mx:FormItem>
+		<mx:FormItem label="Hostname" width="100%">
+			<mx:TextInput id="hostnameTxt" width="100%" editable="false" styleName="code"/>
+		</mx:FormItem>
+		<mx:FormItem label="IP Address" width="100%">
+			<mx:TextInput id="ipTxt" width="100%" editable="false" styleName="code"/>
+		</mx:FormItem>
+		<mx:FormItem label="User Agent" width="100%">
+			<mx:TextInput id="userAgentTxt" width="100%" editable="false" styleName="code"/>
+		</mx:FormItem>
+		<mx:FormItem width="100%">
+			<mx:Button label="Close" click="dispatchEvent(new CloseEvent(CloseEvent.CLOSE))"
+					icon="@Embed(source='../../../assets/icons/accept.png')"/>
+		</mx:FormItem>
+	</mx:Form>
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.events.CloseEvent;
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+			import org.amfphp.controllers.Controller;
+			import mx.managers.PopUpManager;
+			
+			private var controller:Controller;
+			
+			/**
+			 * Initializes the window, sets the <code>detailsService</code>'s <code>endpoint</code> property and calls the 
+			 * <code>getServerDetails</code> method from the <code>amfphp.DiscoveryService</code> service
+			 */
+			private function init():void
+			{
+				controller = Controller.instance;
+				detailsService.endpoint = controller.endpoint;
+				
+				detailsService.getServerDetails();
+			}
+			
+			/**
+			 * Handles the successful return of an AMF request and displays the returned values
+			 */
+			private function result(event:ResultEvent):void
+			{
+				currentState = null;
+				
+				softwareTxt.text = event.result.software;
+				hostnameTxt.text = event.result.name;
+				ipTxt.text = event.result.address;
+				userAgentTxt.text = event.result.userAgent;
+			}
+			
+			/**
+			 * Handles the unsuccessful return of an AMF request and closes this window
+			 */
+			private function fault(event:FaultEvent):void
+			{
+				Alert.show("Error fetching server details!", "Error");
+				dispatchEvent(new CloseEvent(CloseEvent.CLOSE));
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:RemoteObject id="detailsService" destination="amfphp" source="amfphp.DiscoveryService"
+			result="result(event)" fault="fault(event)"/>
+</mx:TitleWindow>

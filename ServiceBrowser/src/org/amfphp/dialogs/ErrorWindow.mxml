@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+        This file is part of AMFPHP
+    
+        It is released under the GPL License:
+    
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License (GPL)
+        as published by the Free Software Foundation; either version 2
+        of the License, or (at your option) any later version.
+    
+        This program is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+        GNU General Public License for more details.
+        
+        To read the license please visit http://www.gnu.org/copyleft/gpl.html
+-->
+
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" width="600" showCloseButton="true"
+		close="PopUpManager.removePopUp(this)" titleIcon="@Embed(source='../../../assets/icons/warning.png')" height="300">
+		
+	<mx:Metadata>
+		<![CDATA[
+			/**
+			 * This class displays any and all errors caught throughout the application execution
+			 * 
+			 * @author Danny Kopping danny@ria-coder.com
+			 */
+		]]>
+	</mx:Metadata>	
+		
+	<mx:TextArea id="errorTxt" width="100%" height="100%" styleName="code" htmlText="{showingDump ? errorDump : error}" editable="false"/>
+	<mx:HBox width="100%" horizontalAlign="center">
+		<mx:Button label="OK" height="30" icon="@Embed(source='../../../assets/icons/delete.png')" width="180"
+				click="dispatchEvent(new CloseEvent(CloseEvent.CLOSE))"/>
+		<mx:Button label="{showingDump ? 'Show error message' : 'Show full error dump'}" height="30"
+				icon="@Embed(source='../../../assets/icons/comment.png')" width="180"
+				click="showingDump = !showingDump"/>
+	</mx:HBox>
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.events.CloseEvent;
+			import mx.managers.PopUpManager;
+			
+			[Bindable]
+			/**
+			 * The error string
+			 */
+			public var error:String;
+			
+			
+			[Bindable]
+			/**
+			 * The full error dump
+			 * 
+			 * @see mx.utils.ObjectUtil#toString()
+			 */
+			 public var errorDump:String;
+			
+			[Bindable]
+			/**
+			 * Is the dump showing? This property acts as a flag to change the button label
+			 */
+			public var showingDump:Boolean;
+		]]>
+	</mx:Script>
+</mx:TitleWindow>

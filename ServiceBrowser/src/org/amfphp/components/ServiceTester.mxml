@@ -1,0 +1,726 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+        This file is part of AMFPHP
+    
+        It is released under the GPL License:
+    
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License (GPL)
+        as published by the Free Software Foundation; either version 2
+        of the License, or (at your option) any later version.
+    
+        This program is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+        GNU General Public License for more details.
+        
+        To read the license please visit http://www.gnu.org/copyleft/gpl.html
+-->
+
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:code="http://code.google.com/p/flexlib/"
+		xmlns:components="org.amfphp.components.*" initialize="init()">
+	
+	<mx:Metadata>
+		<![CDATA[
+			/**
+			 * This component allows the user to test the selected service's methods
+			 * 
+			 * @see org.amfphp.components.ServicesTree
+			 * 
+			 * @author Danny Kopping danny@ria-coder.com
+			 */
+		]]>
+	</mx:Metadata>
+	
+	<mx:states>
+		<mx:State name="results">
+			<mx:AddChild relativeTo="{vbox2}" position="lastChild">
+				<mx:VBox width="100%" addedEffect="Fade" resizeEffect="Resize" height="100%">
+					<mx:TabNavigator height="100%" width="100%" id="resultTabs">
+						<mx:VBox label="Info" icon="@Embed(source='../../../assets/icons/info.png')" styleName="tabBox">						
+							<mx:VBox width="100%" styleName="codeBlock">
+								<mx:HBox width="100%" horizontalGap="0">
+									<mx:Image source="@Embed(source='../../../assets/icons/clock.png')"/>
+									<mx:Label text="General time statistics" fontSize="12" paddingBottom="-5" fontWeight="bold"/>
+								</mx:HBox>
+								
+								<mx:Form width="100%" labelWidth="180">
+									<mx:FormItem width="100%" label="Total">
+										<mx:Label width="100%" text="{totalTime}"/>
+									</mx:FormItem>
+									<mx:FormItem width="100%" label="Encode">
+										<mx:Label width="100%" text="{encodeTime}"/>
+									</mx:FormItem>
+									<mx:FormItem width="100%" label="Send/receive">
+										<mx:Label width="100%" text="{sendReceiveTime}"/>
+									</mx:FormItem>
+									<mx:FormItem width="100%" label="Decode">
+										<mx:Label width="100%" text="{decodeTime}"/>
+									</mx:FormItem>
+									<mx:FormItem width="100%" label="Network">
+										<mx:Label width="100%" text="{networkTime}"/>
+									</mx:FormItem>
+								</mx:Form>
+							</mx:VBox>
+							
+							<mx:VBox width="100%" styleName="codeBlock">
+								<mx:HBox width="100%" horizontalGap="0">
+									<mx:Image source="@Embed(source='../../../assets/icons/clock.png')"/>
+									<mx:Label text="AMFPHP time statistics" fontSize="12" paddingBottom="-5" fontWeight="bold"/>
+								</mx:HBox>
+								
+								<mx:Form width="100%" labelWidth="180">
+									<mx:FormItem width="100%" label="Total">
+										<mx:Label width="100%" text="{totalAMF}"/>
+									</mx:FormItem>
+									<mx:FormItem width="100%" label="Framework">
+										<mx:Label width="100%" text="{frameworkAMF}"/>
+									</mx:FormItem>
+									<mx:FormItem width="100%" label="Decode">
+										<mx:Label width="100%" text="{decodeAMF}"/>
+									</mx:FormItem>
+									<mx:FormItem width="100%" label="Service include">
+										<mx:Label width="100%" text="{serviceIncludeAMF}"/>
+									</mx:FormItem>
+									<mx:FormItem width="100%" label="Service call">
+										<mx:Label width="100%" text="{serviceCallAMF}"/>
+									</mx:FormItem>
+									<mx:FormItem width="100%" label="Encode">
+										<mx:Label width="100%" text="{encodeAMF}"/>
+									</mx:FormItem>
+								</mx:Form>
+							</mx:VBox>
+							
+							<mx:VBox width="100%" styleName="codeBlock">
+								<mx:HBox width="100%" horizontalGap="0">
+									<mx:Image source="@Embed(source='../../../assets/icons/puzzle.png')"/>
+									<mx:Label text="Data statistics" fontSize="12" paddingBottom="-5" fontWeight="bold"/>
+								</mx:HBox>
+								
+								<mx:Form width="100%" labelWidth="180">
+									<mx:FormItem label="Sent data">
+										<mx:Label width="100%" text="{sendData}"/>
+									</mx:FormItem>
+									<mx:FormItem label="Received data">
+										<mx:Label width="100%" text="{receiveData}"/>
+									</mx:FormItem>
+									<mx:FormItem label="Average network speed">
+										<mx:Label width="100%" text="{avgNetwork}"/>
+									</mx:FormItem>
+								</mx:Form>
+							</mx:VBox>
+						</mx:VBox>
+						<mx:VBox label="Results" icon="@Embed(source='../../../assets/icons/process.png')" styleName="tabBox">
+							<mx:TextArea width="100%" editable="false" text="{resultTxt}" height="100%" styleName="code"/>
+						</mx:VBox>
+						<mx:Canvas label="Tree" icon="@Embed(source='../../../assets/icons/navigate.png')" styleName="tabBox">
+							<mx:Tree id="resultTree" left="8" top="8" right="8" bottom="8"/>
+							<mx:Button toolTip="{resultTreeExpanded ? 'Collapse' : 'Expand'} all"
+								icon="{resultTreeExpanded ? zoomOut : zoomIn}" click="expandResultTreeNodes()"
+								right="25" top="12"/>
+						</mx:Canvas>
+						<mx:VBox label="Table" icon="@Embed(source='../../../assets/icons/table.png')" styleName="tabBox">
+							<mx:DataGrid width="100%" height="100%" dataProvider="{resultData}"/>
+						</mx:VBox>
+						<mx:VBox label="Trace" icon="@Embed(source='../../../assets/icons/comment.png')" styleName="tabBox">
+							<mx:TextArea width="100%" editable="false" text="{traceTxt}" height="100%" styleName="code"/>
+						</mx:VBox>
+					</mx:TabNavigator>
+				</mx:VBox>
+			</mx:AddChild>
+		</mx:State>
+		<mx:State name="noMethods">
+			<mx:RemoveChild target="{hbox2}"/>
+			<mx:RemoveChild target="{vbox2}"/>
+			<mx:SetStyle name="horizontalAlign" value="center"/>
+			<mx:SetStyle name="verticalAlign" value="middle"/>
+			<mx:AddChild position="lastChild">
+				<mx:HBox>
+					<mx:Image source="@Embed(source='../../../assets/icons/comment-large.png')"/>
+					<mx:Label text="No methods found in {currentService.label}.php!" styleName="code" fontWeight="bold" fontSize="14" id="label1"/>
+				</mx:HBox>
+			</mx:AddChild>
+		</mx:State>
+	</mx:states>
+	<mx:HBox width="100%" styleName="titleBox" paddingBottom="4" paddingLeft="4"
+			paddingRight="4" paddingTop="4" minHeight="35" id="hbox2">
+		<code:FlowContainer id="availableMethods" width="100%"/>
+	</mx:HBox>
+	<mx:VDividedBox width="100%" height="100%" borderColor="#222222" borderStyle="solid" id="vbox2"
+			paddingBottom="8" paddingLeft="8" paddingRight="8" paddingTop="8">
+		<mx:VBox width="100%" height="100%">
+			<mx:HBox width="100%" styleName="codeBlock" horizontalGap="5">
+				<mx:Image source="@Embed(source='../../../assets/icons/file-32.png')"/>
+				<mx:VBox width="100%" verticalGap="-2">
+					<mx:Label text="{methodSignature}" fontWeight="bold" fontSize="12" width="100%"/>
+					<mx:Text text="{currentMethod.descriptor.description}" width="100%" fontStyle="italic" fontSize="9"/>
+				</mx:VBox>
+				<mx:Button icon="@Embed(source='../../../assets/icons/refresh-32.png')" toolTip="Refresh service"
+						click="controller.dispatchEvent(new BrowserEvent(BrowserEvent.DESCRIBE_SERVICE, currentService))"/>
+			</mx:HBox>
+			<mx:Form width="100%" defaultButton="{runBtn}" resizeEffect="Resize">
+				<mx:Repeater id="argumentFieldRep" recycleChildren="true">
+					<mx:FormItem label="{argumentFieldRep.currentItem.name}" width="100%" toolTip="{argumentFieldRep.currentItem.tooltip}">
+						<mx:HBox width="100%">
+							<components:JSONInput id="argumentFields" width="100%" addedEffect="WipeRight"
+									autocomplete="{autocomplete.getOptionsArray(methodSignature)}"/>
+						</mx:HBox>
+					</mx:FormItem>
+				</mx:Repeater>
+			</mx:Form>
+			<mx:HBox width="100%" id="hbox1" height="32">
+				<mx:Button id="runBtn" label="{rawAMFService.isRunning ? 'Kill request' : 'Execute request'}"
+						color="#FFFFFF" fontWeight="bold"
+						icon="{rawAMFService.isRunning ? killIcon : runIcon}" labelPlacement="left" width="175" click="runMethod()"
+						focusIn="checkValidityOfFields()" mouseOver="checkValidityOfFields()" height="25"/>
+				<mx:Image source="@Embed(source='../../../assets/icons/warning.png')"
+						visible="{!allFieldsValid}" includeInLayout="{!allFieldsValid}" showEffect="Fade"/>
+				<mx:Label text="One or more fields have invalid JSON input!" fontWeight="bold"
+						visible="{!allFieldsValid}" includeInLayout="{!allFieldsValid}" showEffect="Fade"/>
+				<mx:Label id="methodTimerLabel" styleName="code" width="100%" textAlign="right"/>
+				<mx:Image source="@Embed(source='../../../assets/loaders/throbber.swf')"
+						showEffect="Fade" hideEffect="Fade" width="32" height="32"
+						visible="{timerRunning}" includeInLayout="{timerRunning}"/>
+			</mx:HBox>
+		</mx:VBox>	
+	</mx:VDividedBox>
+	
+	<mx:String id="totalTime"/>
+	<mx:String id="encodeTime"/>
+	<mx:String id="sendReceiveTime"/>
+	<mx:String id="decodeTime"/>
+	<mx:String id="networkTime"/>
+	
+	<mx:String id="totalAMF"/>
+	<mx:String id="frameworkAMF"/>
+	<mx:String id="decodeAMF"/>
+	<mx:String id="serviceIncludeAMF"/>
+	<mx:String id="serviceCallAMF"/>
+	<mx:String id="encodeAMF"/>
+	
+	<mx:String id="sendData"/>
+	<mx:String id="receiveData"/>
+	<mx:String id="avgNetwork"/>
+	
+	<mx:String id="resultTxt"/>
+	<mx:String id="traceTxt"/>
+	
+	<mx:Object id="resultData"/>
+	<mx:String id="serviceActivity"/>
+	
+	<mx:Array id="treeData"/>
+	<mx:Boolean id="resultTreeExpanded"/>
+	
+	<mx:Script>
+		<![CDATA[
+			import org.amfphp.errors.AMFErrors;
+			import mx.core.Container;
+			import mx.core.Application;
+			import mx.utils.ObjectUtil;
+			import mx.managers.PopUpManager;
+			import org.amfphp.dialogs.ErrorWindow;
+			import json.JParser;
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.InvokeEvent;
+			import mx.rpc.events.ResultEvent;
+			import org.amfphp.controllers.Controller;
+			import org.amfphp.utils.RawAMFService;
+			import com.adobe.serialization.json.JSON;
+			import mx.collections.ArrayCollection;
+			import org.amfphp.events.BrowserEvent;
+			import org.amfphp.utils.AutocompleteManager;
+			
+			[Bindable] private var autocomplete:AutocompleteManager;
+			
+			[Bindable] private var currentMethod:Object;
+			[Bindable] private var currentService:Object;
+			
+			[Bindable] private var allFieldsValid:Boolean = true;
+			
+			[Bindable] private var rawAMFService:RawAMFService;
+			private var controller:Controller;
+				
+			[Bindable] private var methodTimer:Timer;
+			private var lastMethodTestTime:uint;
+			[Bindable] private var timerRunning:Boolean;
+			private var timerStart:uint = 0;
+			
+			[Bindable]
+			[Embed(source='../../../assets/icons/next.png')]
+			private var runIcon:Class;
+			
+			[Bindable]
+			[Embed(source='../../../assets/icons/delete.png')]
+			private var killIcon:Class;
+			
+			[Bindable]
+			[Embed(source='../../../assets/icons/zoom_in.png')]
+			private var zoomIn:Class;
+			
+			[Bindable]
+			[Embed(source='../../../assets/icons/zoom_out.png')]
+			private var zoomOut:Class;
+		
+			/**
+			 * Initialize the component by initializing the <code>rawAMFService</code> property, add various event listeners
+			 * and initialize the <code>methodTimer</code>
+			 */
+			private function init():void
+			{
+				controller = Controller.instance;
+				
+				rawAMFService = new RawAMFService();
+				
+				controller.addEventListener(BrowserEvent.PREFERENCES_UPDATED, onPrefsUpdated);
+				controller.dispatchEvent(new BrowserEvent(BrowserEvent.PREFERENCES_UPDATED));				
+				
+				autocomplete = AutocompleteManager.instance;
+				autocomplete.initialize();
+				
+				addEventListener(BrowserEvent.SERVICE_SELECTED, onServiceSelected);
+				
+				rawAMFService.addEventListener(ResultEvent.RESULT, result);
+				rawAMFService.addEventListener(InvokeEvent.INVOKE, invoked);
+				rawAMFService.addEventListener(BrowserEvent.KILL_REQUEST, killed);
+				rawAMFService.addEventListener(FaultEvent.FAULT, fault);
+					
+				methodTimer = new Timer(10);
+				methodTimer.addEventListener(TimerEvent.TIMER, onMethodTimerTick);
+			}
+			
+			/**
+			 * Sets the <code>methodTimerLabel</code>'s text value to the current timer's value
+			 */
+			private function onMethodTimerTick(event:TimerEvent):void
+			{
+				lastMethodTestTime = event.currentTarget.currentCount as uint;
+				methodTimerLabel.text = (getTimer() - timerStart) + " ms";
+			}
+			
+			/**
+			 * Handles the event that is dispatched once a new service is selected
+			 */
+			private function onServiceSelected(event:BrowserEvent):void
+			{
+				currentState = null;
+				methodTimer.reset();
+				methodTimerLabel.text = "";
+				
+				currentService = event.information.service;
+				allFieldsValid = true;
+				
+				var methods:ArrayCollection = new ArrayCollection();
+				var descriptions:Object = event.information.methods[0];
+				
+				if(availableMethods)
+					availableMethods.removeAllChildren();
+				
+				for(var method:String in descriptions)
+					methods.addItem({name:method, descriptor:descriptions[method]});
+				
+				methods = new ArrayCollection(methods.toArray().sortOn("name"));
+				
+				if(methods.length > 0)
+				{
+					currentState = null;
+					currentMethod = null;
+					
+					/**
+					 * Adds the buttons at the top of the component according to the list of methods found in the selected service
+					 */
+					for each(var methedObj:Object in methods.toArray())
+					{
+						var methodBtn:MethodButton = new MethodButton();
+						methodBtn.label = methedObj.name;
+						methodBtn.minWidth = 150;
+						methodBtn.height = 25;
+						methodBtn.methodDescriptor = methedObj;
+						methodBtn.addEventListener(MouseEvent.CLICK, changeMethod);
+						
+						methedObj.descriptor.description = methedObj.descriptor.description.replace(/\\n/gi, "\n");
+						
+						if(!currentMethod)
+						{
+							currentMethod = methedObj;
+							loadMethod();
+						}
+							
+						availableMethods.addChild(methodBtn);
+					}
+				}
+				else
+					currentState = "noMethods";
+			}
+			
+			/**
+			 * Updates the <code>rawAMFService</code>'s properties once the <code>PreferencesWindow</code> is closed
+			 */
+			private function onPrefsUpdated(event:BrowserEvent):void
+			{
+				rawAMFService.endpoint = controller.endpoint;
+				rawAMFService.encoding = controller.encoding;
+			}
+			
+			/**
+			 * Sets the <code>currentMethod</code> property and loads the method
+			 */
+			private function changeMethod(event:MouseEvent):void
+			{
+	        	currentMethod = MethodButton(event.currentTarget).methodDescriptor;
+				loadMethod();
+			}
+			
+			/**
+			 * Sets the <code>argumentFieldRep</code>'s <code>dataProvider</code> property to the list of arguments found
+			 * in the selected method
+			 */
+			private function loadMethod():void
+			{
+				argumentFieldRep.dataProvider = null;
+				allFieldsValid = true;
+				
+				var arguments:ArrayCollection = new ArrayCollection();
+				for each(var argument:String in currentMethod.descriptor.arguments)
+				{
+					var argumentName:String = "$" + argument.split(/\s/)[0];
+					var description:String = argument.substr((argumentName + " - ").length -1);
+					arguments.addItem({name:argumentName, tooltip:description});
+				}
+				
+				argumentFieldRep.dataProvider = arguments;
+				
+				dispatchEvent(new Event("methodRefreshed"));	
+			}
+			
+			/**
+			 * Checks to see if the <code>rawAMFService</code> is running, and - if not - proceeds to pull the input values from the 
+			 * <code>argumentFields</code> array, parse them and send off the AMF request. If the <code>rawAMFService</code> is
+			 * already running, it kills the current AMF request
+			 */
+			private function runMethod():void
+			{
+				if(!rawAMFService.isRunning)
+				{
+					for each(var field:JSONInput in argumentFields)
+					{
+						if(!autocomplete.options[methodSignature])
+							autocomplete.options[methodSignature] = [];
+						
+						autocomplete.options[methodSignature].push(field.text);
+						field.autocomplete = autocomplete.getOptionsArray(methodSignature);
+					}
+					
+					var source:String = currentService.data.split('/').join('.').split('\\').join('.') + currentService.label;
+					var arguments:Array = parseArguments();
+					
+					if(arguments)
+						rawAMFService.send(source, currentMethod.name, arguments);
+				}
+				else
+				{
+					rawAMFService.kill();
+					timerRunning = false;
+					
+					methodTimer.reset();
+					methodTimer.stop();
+				}
+			}
+			
+			/**
+			 * Attempts to parse the arguments provided to the <code>rawAMFService</code> from the <code>argumentFields</code> array.
+			 * This method will attempt to detect the datatype of the inputted values and add them to the <code>parsed</code> array.
+			 * If there is an error while attempting to parse any of the arguments, an error window will pop up
+			 */
+			private function parseArguments():Array
+			{
+				var parsed:Array = [];
+
+				if(argumentFields && argumentFields.length > 0)
+				{
+					for each(var field:JSONInput in argumentFields)
+					{
+						var fieldValue:Object = !field.text ? "" : field.text;
+						// if text is a complex object, don't touch it... else, check type
+
+						if(fieldValue.toString().indexOf('{') == -1 && fieldValue.toString().indexOf('[') == -1 &&
+						   fieldValue.toString().indexOf('"') == -1 && fieldValue.toString().indexOf("'") == -1)
+						{
+							var isBoolean:Boolean = fieldValue.toString().match(/^(true|false)$/) != null;
+							var isFloat:Boolean = fieldValue.toString().match(/^-?(\d|\.)+$/) != null;
+							var isInt:Boolean = fieldValue.toString().match(/^-?\d+$/) != null;
+							var isBlank:Boolean = fieldValue.toString().match(/^(\s+)?$/) != null;
+
+							if(isBoolean)
+								fieldValue = fieldValue == "true";
+							else if(isFloat)
+								fieldValue = parseFloat(fieldValue.toString());
+							else if(isInt)
+								fieldValue = parseInt(fieldValue.toString());
+							else if(isBlank)
+								fieldValue = null;
+						}
+						
+						try
+						{
+							parsed.push(fieldValue is String ? JParser.decode(fieldValue.toString()) : fieldValue);
+						}
+						catch(e:Error)
+						{
+							var errorWindow:ErrorWindow = PopUpManager.createPopUp(DisplayObject(Application.application),
+															ErrorWindow, true) as ErrorWindow;
+							errorWindow.error = "A JSON parsing error occured. Your string <b>" + fieldValue.toString() + "</b> " + 
+												"could not be parsed. Please correct this and run the method again.";
+							errorWindow.errorDump = ObjectUtil.toString(e);
+							errorWindow.title = "JSON Parsing error";
+							PopUpManager.centerPopUp(errorWindow);
+							
+							parsed = null;
+							break;
+						}
+					}
+				}
+				
+				return parsed;
+			}
+			
+			/**
+			 * Checks that all fields in the <code>argumentFields</code> array are valid JSON strings and sets the 
+			 * <code>allFieldsValid</code> property accordingly
+			 */
+			private function checkValidityOfFields():void
+			{
+				var valid:Boolean = true;
+				for each(var field:JSONInput in argumentFields)
+					if(!field.valid)
+					{
+						valid = false;
+						break;
+					}
+				
+				allFieldsValid = valid;
+			}
+			
+			[Bindable(event="methodRefreshed")]
+			/**
+			 * Processes the selected service and selected method to build a method signature for both display purposes and unique
+			 * identification in the autocompletion manager
+			 */
+			private function get methodSignature():String
+			{
+				var arguments:String = "";
+				for each(var argument:String in currentMethod.descriptor.arguments)
+					arguments += "$" + argument.split(/\s/)[0] + ", ";
+				
+				arguments = arguments.substr(0, arguments.length - 2);
+				return currentService.label + "." + currentMethod.name + "(" + arguments + ")";
+			}
+			
+			/**
+			 * Expands all tree nodes in the <code>resultTree</code>
+			 */
+			private function expandResultTreeNodes():void
+			{
+				for each(var node:Object in resultTree.dataProvider)
+				{
+					// loop through, see if they have a "children" node and expand it!
+					if(node.hasOwnProperty("children"))
+						resultTree.expandItem(node, !resultTreeExpanded);
+				}
+				
+				resultTreeExpanded = !resultTreeExpanded;
+			}
+			
+			/**
+			 * Formats the AMF diagnostic data returned from an AMF request to be more readble
+			 */
+			private function formatBytes(size:uint):String
+	        {
+	            if (size < 1024)
+	                return Math.round(size) + " bytes";
+	                
+	            if (size < 1024 * 1024)
+	                return Math.round(size / 1024 * 10) / 10 + " Kb";
+	                
+	            return Math.round(size / 1024 / 1024 * 10) / 10 + " Mb";
+	        }
+			
+			/**
+			 * Recursively scans an array returned by <code>rawAMFService</code> to more effectively visualize complex objects
+			 */
+			private function renderComplexTree(obj:*, dp:Array=null):void
+			{
+				if(getQualifiedClassName(obj) == "Object")
+				{
+					for(var p:String in obj)
+					{
+						if(getQualifiedClassName(obj[p]) == "Object" || getQualifiedClassName(obj[p]) == "Array")
+						{
+							dp.push({children:[], label:p, data:obj[p], type:getQualifiedClassName(obj[p])});
+							renderComplexTree(obj[p], dp[dp.length - 1]["children"]);
+						}
+						else
+						{
+							var label:String = "";
+							label = p + " = " + (getQualifiedClassName(obj[p]) == "String" ? '"' + obj[p] + '"' : obj[p]);
+							dp.push({label:label, data:obj[p], type:getQualifiedClassName(obj[p])});
+						}
+					}
+				}
+				else if(getQualifiedClassName(obj) == "Array")
+				{
+					var counter:uint = 0;
+					for each(var el:Object in obj)
+					{
+						if(getQualifiedClassName(el) == "Object" || getQualifiedClassName(el) == "Array")
+						{
+							dp.push({children:[], label:counter.toString(), data:el, type:getQualifiedClassName(el)});
+							renderComplexTree(el, dp[dp.length - 1]["children"]);
+						}
+						else
+						{
+							var label:String = "";
+							label = counter + " = " + (getQualifiedClassName(el) == "String" ? '"' + el + '"' : el);
+							dp.push({label:label, data:el.toString(), type:getQualifiedClassName(el)});
+						}
+							
+						counter++;		
+					}
+				}
+			}
+			
+			/**
+			 * Handles the success of an AMF request by <code>rawAMFService</code>
+			 */
+			private function result(event:ResultEvent):void
+			{
+				timerRunning = false;
+				
+				methodTimer.reset();
+				methodTimer.stop();
+									
+				currentState = 'results';					
+				
+				var service:RawAMFService = event.currentTarget as RawAMFService;
+				
+				totalTime = (getTimer() - timerStart) + " ms";
+				methodTimerLabel.htmlText = "<B>" + currentService.label + "." + service.operation + 
+												"</B> executed <U>successfully</U> in <I>" + totalTime + "</I>"; 
+				
+				// read diagnostic and profiling data from the service
+				var diagnostic:Object = service.diagnostic;
+				var profiling:Object = service.profiling;
+				
+				encodeTime = diagnostic.encodeTime + " ms";
+				sendReceiveTime = diagnostic.pingTime + " ms";
+				decodeTime = diagnostic.decodeTime + " ms";
+				networkTime = (diagnostic.pingTime - methodTimer.currentCount) + " ms";
+				
+				totalAMF = profiling.totalTime + " ms";
+				frameworkAMF = profiling.frameworkTime + " ms";
+				decodeAMF = profiling.decodeTime + " ms";
+				serviceIncludeAMF = profiling.includeTime + " ms";
+				serviceCallAMF = profiling.callTime + " ms";
+				encodeAMF = profiling.encodeTime + " ms";
+				
+				sendData = formatBytes(diagnostic.sentSize);
+				receiveData = formatBytes(diagnostic.receivedSize);
+				avgNetwork = formatBytes(1000 * (diagnostic.sentSize + diagnostic.receivedSize)
+										/ (diagnostic.pingTime - profiling.totalTime)) + "/s";
+										
+				resultTxt = ObjectUtil.toString(event.result);
+				traceTxt = service.traceMessages.join("\n");
+				
+				resultData = event.result ? event.result : {};
+				treeData = [];
+				
+				// determines whether to visualize the data in a simple manner or whether it needs complex analysis
+				if(getQualifiedClassName(resultData) == "Array" || getQualifiedClassName(resultData) == "Object")
+				{
+					renderComplexTree(resultData, treeData);
+					resultTree.dataProvider = treeData;
+				}
+				else
+					resultTree.dataProvider = resultData;
+				
+				// shows default page according to user's choice in the PreferencesWindow
+				for each(var pageContainer:Container in resultTabs.getChildren())
+					if(pageContainer.label == controller.defaultPage)
+					{
+						resultTabs.selectedChild = pageContainer;
+						break;
+					}
+			}
+			
+			/**
+			 * Handles the invocation of an AMF request and starts the timers
+			 */
+			private function invoked(event:InvokeEvent):void
+			{
+				timerStart = getTimer();
+			
+				timerRunning = true;
+				methodTimer.start();
+			}
+			
+			/**
+			 * Handles the death (how dramatic) of an AMF request and shows debugging information
+			 */
+			private function killed(event:BrowserEvent):void
+			{
+				totalTime = (getTimer() - timerStart) + " ms";
+				methodTimerLabel.htmlText = "<B>" + currentService.label + "." + currentMethod.name + 
+												"</B> <U>killed</U> after <I>" + totalTime + "</I>";
+			}
+			
+			/**
+			 * Handles errors encountered during the process of an AMF request
+			 */
+			private function fault(event:FaultEvent):void
+			{				
+				var errorMessage:String;
+				var errorTitle:String = "An error occured!";
+				
+				switch(event.fault.faultCode)
+				{
+					case AMFErrors.INVALID_AMF_MESSAGE:							
+						errorMessage = (errorMessage)
+						?	errorMessage + " possibly"
+						:	"An error occured. This is possibly";
+						
+						errorMessage += " because there is a script error in <B>" + currentService.label + ".php</B>";
+						break;
+					default:
+						errorMessage = event.fault.faultString;
+						errorMessage = errorMessage.replace(/{/g, "<B>");			// Replace curly braces from 
+						errorMessage = errorMessage.replace(/}/g, "</B>");			// AMFPHP error description
+						break;
+				}
+				
+				var service:RawAMFService = event.currentTarget as RawAMFService;
+				
+				totalTime = (getTimer() - timerStart) + " ms";
+				methodTimerLabel.htmlText = "<B>" + currentService.label + "." + service.operation + 
+												"</B> executed <U>unsuccessfully</U> in <I>" + totalTime + "</I>"; 
+				
+				timerRunning = false;
+				
+				methodTimer.reset();
+				methodTimer.stop();
+				
+				if(errorMessage)
+				{
+					errorMessage += "\n\n<U>Error details</U>:\n<I>" + event.fault.faultDetail + "</I>";
+					
+					var errorWindow:ErrorWindow = PopUpManager.createPopUp(DisplayObject(Application.application),
+																			ErrorWindow, true) as ErrorWindow;
+					errorWindow.error = errorMessage;
+					errorWindow.errorDump = ObjectUtil.toString(event.fault);
+					errorWindow.title = errorTitle;
+					
+					PopUpManager.centerPopUp(errorWindow);
+				}
+			}
+		]]>
+	</mx:Script>
+</mx:VBox>
