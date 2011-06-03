@@ -64,14 +64,8 @@ class Amfphp_Core_Config {
         $this->disabledPlugins = array();
         //disable logging by default
         $this->disabledPlugins[] = "AmfphpLogger";
-        
-        //disable if not needed
-        
-        //$this->disabledPlugins[] = "AmfphpAuthentication";
-        //$this->disabledPlugins[] = "AmfphpCharsetConverter";
-        //$this->disabledPlugins[] = "AmfphpCustomClassConverter";
-        //$this->disabledPlugins[] = "AmfphpFlexMessaging";
-        //$this->disabledPlugins[] = "AmfphpquickServiceDebug";
+        //this is a bit experimental and only really useful when getting badly formed responses through errors. so disabled by default
+        $this->disabledPlugins[] = "AmfphpErrorHandler";
         
     }
 }
