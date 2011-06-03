@@ -22,7 +22,7 @@ class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common
     /**
     * the content-type string indicating a JSON content
     */
-    const JSON_CONTENT_TYPE = "json";
+    const JSON_CONTENT_TYPE = "application/json";
 	
     /**
      * constructor. Add filters on the HookManager.
@@ -73,10 +73,9 @@ class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common
         }else{
             throw new Exception("MethodName field missing in POST parameters \n" . print_r($deserializedRequest, true));
         }
+        $parameters = array();
         if(isset ($deserializedRequest->parameters)){
             $parameters = $deserializedRequest->parameters;
-        }else{
-            throw new Exception("Parameters field missing in POST parameters \n" . print_r($deserializedRequest, true));
         }
         return $serviceRouter->executeServiceCall($serviceName, $methodName, $parameters);
         
