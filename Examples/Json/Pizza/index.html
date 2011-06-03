@@ -8,17 +8,24 @@
 
 <script language="javascript">
 function call()
-{  
+{
+   /**
+    * notes:
+    * - parameters here could be left empty, they are just here to make the code easier to adapt
+    * - it would be nice to be able to use $.getJSON, but then the content type messes up. I tried using $.ajaxSetup first, but that doesn't work either
+    * - somehow passing testJson as an object instead of a string makes things mess up. Ideas anyone?
+    * A.S.
+    */
    var testJson = '{"serviceName":"PizzaService", "methodName":"getPizza","parameters":[]}';
-   $.ajax("../../Php/", {contentType:"json",data:testJson, processData:true, success:onSuccess, type:'POST'});
+
+   $.ajax("../../Php/", {contentType:"application/json",data:testJson, success:onSuccess, type:'POST'});
   
    
 } 
 
 function onSuccess(data)
 {
-	var response = eval('(' + data + ')');
-	alert("pizza : "  + response);
+	alert("pizza : "  + data);
 }
 </script>
 
