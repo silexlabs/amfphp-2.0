@@ -4,7 +4,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <LINK href="style.css" rel="stylesheet" type="text/css">
 <title>amfPHP JSON Pizza Example</title>
-<script type="text/javascript" src="jquery-1.5.min.js"></script>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="json2.js"></script>
 
 <script language="javascript">
 function call()
@@ -12,14 +13,13 @@ function call()
    /**
     * notes:
     * - parameters here could be left empty, they are just here to make the code easier to adapt
-    * - it would be nice to be able to use $.getJSON, but then the content type messes up. I tried using $.ajaxSetup first, but that doesn't work either
-    * - somehow passing testJson as an object instead of a string makes things mess up. Ideas anyone?
-    * A.S.
+    * - $.post method here is used because amfPHP JSON plugin expects data as POST. So can't use more obvious getJSON
+    * - if you always use the same parameters, you can do without json2.js, by setting for example
+    * callData = '{"serviceName":"PizzaService", "methodName":"getPizza","parameters":[]}'
     */
-   var testJson = '{"serviceName":"PizzaService", "methodName":"getPizza","parameters":[]}';
 
-   $.ajax("../../Php/", {contentType:"application/json",data:testJson, success:onSuccess, type:'POST'});
-  
+   var callData = JSON.stringify({"serviceName":"PizzaService", "methodName":"getPizza","parameters":[]});
+    $.post("../../Php/?contentType=application/json", callData, onSuccess);
    
 } 
 
