@@ -98,10 +98,11 @@ class AmfphpAuthentication {
      * Throws an exception if the roles don't match
      *
      * @param <Object> $serviceObject
+     * @param <String> $serviceName
      * @param <String> $methodName
      * @return <array>
      */
-    public function filterServiceObject($serviceObject, $methodName){
+    public function filterServiceObject($serviceObject, $serviceName, $methodName){
         if(!method_exists($serviceObject, self::METHOD_GET_METHOD_ROLES)){
             return;
         }
