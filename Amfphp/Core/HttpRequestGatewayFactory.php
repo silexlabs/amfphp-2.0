@@ -36,15 +36,16 @@ class Amfphp_Core_HttpRequestGatewayFactory {
     }
 
     /**
-     * create the gateway
+     * create the gateway.
+     * content type is recovered by looking at the GET parameter contentType. If it isn't set, it looks in the content headers.
      * @param Amfphp_Core_Config $config optional. If null, the gateway will use the default
      * @return Amfphp_Core_Gateway
      */
     static public function createGateway(Amfphp_Core_Config $config = null){
         $contentType = null;
-        //for debugging
-        //throw new Exception("bla" . print_r($_SERVER, true));
-        if(isset ($_SERVER["CONTENT_TYPE"])){
+        if(isset ($_GET["contentType"])){
+            $contentType = $_GET["contentType"];
+        }else if(isset ($_SERVER["CONTENT_TYPE"])){
 
             $contentType = $_SERVER["CONTENT_TYPE"];
         }
