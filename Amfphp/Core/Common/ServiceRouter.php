@@ -89,7 +89,7 @@ class Amfphp_Core_Common_ServiceRouter{
     */
     public function executeServiceCall($serviceName, $methodName, array $parameters){
         $serviceObject = $this->getServiceObject($serviceName);
-        Amfphp_Core_FilterManager::getInstance()->callFilters(self::FILTER_SERVICE_OBJECT, $serviceObject, $methodName);
+        $serviceObject = Amfphp_Core_FilterManager::getInstance()->callFilters(self::FILTER_SERVICE_OBJECT, $serviceObject, $serviceName, $methodName);
 
         if(!method_exists($serviceObject, $methodName)){
             throw new Amfphp_Core_Exception("method $methodName not found on $serviceName object ");
