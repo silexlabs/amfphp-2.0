@@ -76,15 +76,15 @@ class Amfphp_Core_PluginManager {
             }
 
             //check first if plugin is disabled
-            $shouldInstanciatePlugin = true;
+            $shouldLoadPlugin = true;
             if($disabledPlugins){
                 foreach($disabledPlugins as $disabledPlugin){
                     if($disabledPlugin == $pluginName){
-                        $shouldInstanciatePlugin = false;
+                        $shouldLoadPlugin = false;
                     }
                 }
             }
-            if(!$shouldInstanciatePlugin){
+            if(!$shouldLoadPlugin){
                 continue;
             }
             
