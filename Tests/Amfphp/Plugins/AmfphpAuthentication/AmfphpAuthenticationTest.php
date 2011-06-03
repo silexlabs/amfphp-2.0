@@ -70,11 +70,11 @@ class AmfphpAuthenticationTest extends PHPUnit_Framework_TestCase
 
     public function testLoginAndAccess(){
         $this->serviceObj->login("admin", "adminPassword");
-        $this->object->filterServiceObject($this->serviceObj, "adminMethod");
+        $this->object->filterServiceObject($this->serviceObj, "AnyService", "adminMethod");
     }
 
     public function testNormalAccessToUnprotectedMethods(){
-        $this->object->filterServiceObject($this->serviceObj, "logout");
+        $this->object->filterServiceObject($this->serviceObj, "AnyService", "logout");
 
     }
 
@@ -83,16 +83,16 @@ class AmfphpAuthenticationTest extends PHPUnit_Framework_TestCase
      */
     public function testLogout(){
         $this->serviceObj->login("admin", "adminPassword");
-        $this->object->filterServiceObject($this->serviceObj, "adminMethod");
+        $this->object->filterServiceObject($this->serviceObj, "AnyService", "adminMethod");
         $this->serviceObj->logout();
-        $this->object->filterServiceObject($this->serviceObj, "adminMethod");
+        $this->object->filterServiceObject($this->serviceObj, "AnyService", "adminMethod");
     }
     /**
      * @expectedException Amfphp_Core_Exception
      */
     public function testAccessWithoutAuthentication()
     {
-        $this->object->filterServiceObject($this->serviceObj, "adminMethod");
+        $this->object->filterServiceObject($this->serviceObj, "AnyService", "adminMethod");
     }
 
     /**
@@ -100,7 +100,7 @@ class AmfphpAuthenticationTest extends PHPUnit_Framework_TestCase
      */
     public function testBadRole(){
         $this->serviceObj->login("user", "userPassword");
-        $this->object->filterServiceObject($this->serviceObj, "adminMethod");
+        $this->object->filterServiceObject($this->serviceObj, "AnyService", "adminMethod");
 
     }
     
@@ -124,7 +124,7 @@ class AmfphpAuthenticationTest extends PHPUnit_Framework_TestCase
      * @expectedException Amfphp_Core_Exception
      */
     public function testWithFiltersBlockAccess(){
-        Amfphp_Core_FilterManager::getInstance()->callFilters(Amfphp_Core_Common_ServiceRouter::FILTER_SERVICE_OBJECT, $this->serviceObj, "adminMethod");
+        Amfphp_Core_FilterManager::getInstance()->callFilters(Amfphp_Core_Common_ServiceRouter::FILTER_SERVICE_OBJECT, $this->serviceObj, "TestService", "adminMethod");
     }
 
     public function testWithFiltersGrantAccess(){
@@ -137,7 +137,7 @@ class AmfphpAuthenticationTest extends PHPUnit_Framework_TestCase
         $filterManager = Amfphp_Core_FilterManager::getInstance();
         $ret = $filterManager->callFilters(Amfphp_Core_Amf_Handler::FILTER_AMF_REQUEST_HEADER_HANDLER, null, $credentialsHeader);
         $ret->handleRequestHeader($credentialsHeader);
-        $ret->filterServiceObject($this->serviceObj, "adminMethod");
+        $ret->filterServiceObject($this->serviceObj, "AnyService", "adminMethod");
     }
 
 
