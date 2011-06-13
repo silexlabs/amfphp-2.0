@@ -77,6 +77,13 @@ class Amfphp_Core_Gateway {
      */
     const FILTER_SERIALIZED_RESPONSE = "FILTER_SERIALIZED_RESPONSE";
 
+    /**
+     * filter called to get the headers
+     * @param array $headers an associative array of headers. For example array("Content-Type" => "application/x-amf")
+     * @param String $contentType
+     */
+    const FILTER_HEADERS = "FILTER_HEADERS";
+
 
     /**
      * config.
@@ -182,7 +189,7 @@ class Amfphp_Core_Gateway {
 
         //serialize
         $rawOutputData = $serializer->serialize($deserializedResponse);
-        
+
         //call filter for filtering the serialized response packet
         $rawOutputData = $filterManager->callFilters(self::FILTER_SERIALIZED_RESPONSE, $rawOutputData);
 
@@ -191,11 +198,19 @@ class Amfphp_Core_Gateway {
     }
 
     /**
-     * get the response headers. This might be expanded for stuff like gzip, etc. For now just a content type
+     * get the response headers. Creates an associative array of headers, then filters them, then returns an array of strings
      * @return array
      */
     public function getResponseHeaders(){
-        return array("Content-type : " . $this->contentType);
+        
+        $filterManager = Amfphp_Core_FilterManager::getInstance();
+        $headers = array("Content-Type" => $this->contentType);
+        $headers = $filterManager->callFilters(self::FILTER_HEADERS, $headers, $this->contentType);
+        $ret = array();
+        foreach($headers as $key => $value){
+            $ret[] = $key . ": " . $value;
+        }
+        return $ret;
     }
 
 
