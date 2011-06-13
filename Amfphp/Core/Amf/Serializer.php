@@ -53,14 +53,6 @@ class Amfphp_Core_Amf_Serializer {
      * @var array
      */
     private $storedStrings;
-    /**
-     * Count the number of unique sent strings.
-     * The number is used as reference in case an already
-     * sent string should be sent again.
-     *
-     * @var int
-     */
-    private $encounteredStrings;
 
     /**
      *
@@ -68,10 +60,17 @@ class Amfphp_Core_Amf_Serializer {
      */
     public function __construct(Amfphp_Core_Amf_Packet $packet) {
         $this->packet = $packet;
+        $this->resetReferences();
+    }
+    
+    /**
+     * initialize reference arrays and counters. Call before writing a body or a header, as the indices are local to each message body or header
+     */
+    private function resetReferences(){
         $this->Amf0StoredObjects = array();
-        $this->storedObjects = array();
         $this->storedStrings = array();
-        $this->encounteredStrings = 0;
+        $this->storedObjects = array();
+
     }
 
     /**
@@ -83,7 +82,8 @@ class Amfphp_Core_Amf_Serializer {
         $count = count($this->packet->headers);
         $this->writeInt($count); // write header count
         for ($i = 0; $i < $count; $i++) {
-            //write headers
+            $this->resetReferences();
+            //write header
             $header = $this->packet->headers[$i];
             $this->writeUTF($header->name);
             if ($header->required) {
@@ -102,12 +102,8 @@ class Amfphp_Core_Amf_Serializer {
         $count = count($this->packet->messages);
         $this->writeInt($count); // write the Message  count
         for ($i = 0; $i < $count; $i++) {
-            //write Message
-            $this->Amf0StoredObjects = array();
-            $this->storedStrings = array();
-            $this->storedObjects = array();
-            $this->encounteredStrings = 0;
-            $this->storedDefinitions = 0;
+            $this->resetReferences();
+            //write body.
             $message = $this->packet->messages[$i];
             $this->currentMessage = & $message;
             $this->writeUTF($message->targetUri);
@@ -122,6 +118,7 @@ class Amfphp_Core_Amf_Serializer {
             $this->outBuffer .= $serializedMessage;
         }
 
+        //throw new Exception("debug exception " . print_r($this->Amf0StoredObjects, true));
         return $this->outBuffer;
     }
 
@@ -235,7 +232,7 @@ class Amfphp_Core_Amf_Serializer {
      * @param string $d The XML string
      */
     protected function writeXML(Amfphp_Core_Amf_Types_Xml $d) {
-        if (!$this->writeReferenceIfExists($d->data)) {
+        if (!$this->handleReference($d->data, $this->Amf0StoredObjects)) {
             $this->writeByte(0x0F);
             $this->writeLongUTF(preg_replace('/\>(\n|\r|\r\n| |\t)*\</', '><', trim($d->data)));
         }
@@ -293,7 +290,7 @@ class Amfphp_Core_Amf_Serializer {
      * @param array $d The php array
      */
     protected function writeArrayOrObject($d) {
-        if ($this->writeReferenceIfExists($d)) {
+        if ($this->handleReference($d, $this->Amf0StoredObjects)) {
             return;
         }
 
@@ -333,23 +330,6 @@ class Amfphp_Core_Amf_Serializer {
             $this->writeInt(0); //  give it 0 elements
             $this->writeInt(0); //  give it an element pad, this looks like a bug in Flash,
             //but keeps the next alignment proper
-        }
-    }
-
-    protected function writeReferenceIfExists($d) {
-        if (count($this->Amf0StoredObjects) >= self::MAX_STORED_OBJECTS) {
-            return false;
-        }
-        if (is_array($d)) {
-            $this->Amf0StoredObjects[] = "";
-            return false;
-        }
-        if (($key = array_search($d, $this->Amf0StoredObjects, true)) !== FALSE) {
-            $this->writeReference($key);
-            return true;
-        } else {
-            $this->Amf0StoredObjects[] = & $d;
-            return false;
         }
     }
 
@@ -395,7 +375,7 @@ class Amfphp_Core_Amf_Serializer {
      * @param array $d The php array with string keys
      */
     protected function writeAnonymousObject($d) {
-        if (!$this->writeReferenceIfExists($d)) {
+        if (!$this->handleReference($d, $this->Amf0StoredObjects)) {
             $this->writeByte(3);
             $objVars = (array) $d;
             foreach ($d as $key => $data) { // loop over each element
@@ -416,10 +396,9 @@ class Amfphp_Core_Amf_Serializer {
      * @param object $d The object to serialize the properties. The deserializer looks for Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE on this object and writes it as the class name.
      */
     protected function writeTypedObject($d) {
-        if ($this->writeReferenceIfExists($d)) {
+        if ($this->handleReference($d, $this->Amf0StoredObjects)) {
             return;
         }
-
         $this->writeByte(16); // write  the custom class code
 
         $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
@@ -447,7 +426,7 @@ class Amfphp_Core_Amf_Serializer {
      * @param mixed $d The data
      */
     protected function writeData($d) {
-        if ($this->packet->amfVersion == Amfphp_Core_Amf_Constants::AMF3_ENCODING) { //amf3 data. This is most current, so it's has been moved to the top's first
+        if ($this->packet->amfVersion == Amfphp_Core_Amf_Constants::AMF3_ENCODING) { //amf3 data. This is most often, so it's has been moved to the top to be first
             $this->writeByte(0x11);
             $this->writeAmf3Data($d);
             return;
@@ -602,54 +581,17 @@ class Amfphp_Core_Amf_Serializer {
      */
     protected function writeAmf3String($d) {
 
-        /**
-         * @todo This method is writes a string, so the argument is expected to be a string!
-         * Add an is_string() check and throw an exception and then fix the errors. For now,
-         * the given value is casted into a string to "work around" the issues.
-         */
-        $d = (string) $d;
-
         if ($d === '') {
             //Write 0x01 to specify the empty string ("UTF-8-empty")
             $this->outBuffer .= "\1";
-            return NULL;
-        } else {
-            if (!isset($this->storedStrings[$d])) {
+            return;
+        } 
 
-                // The string is not yet available in the reference lookup table.
-                // If the string is shorter than 64 byte, add it to the lookup cache;
-                // if it is longer, do not store it locally. This way, it cannot be
-                // referenced once it is encountered again. However, the Amf client
-                // builds the reference lookup table as well, so in all cases this
-                // string must increment the reference lookup table index.
-                // The whole purpose of not storing long strings in PHP is to
-                // save memory (in PHP script), as long strings are likely not to occur again.
-
-                if (strlen($d) < 64) {
-                    $this->storedStrings[$d] = $this->encounteredStrings;
-                }
-
-                // In case transliteration should take place, the original
-                // string is stored in the reference lookup table, but the
-                // transliterated string is sent. This is no issue as further
-                // occurrences of the to be transliterated string are sent
-                // as references.
-                /*
-                  //no longer valid here, there is no charset handler anymore. @todo clean this when charset plugin done
-                  if(!$raw)
-                  {
-                  $d = $this->charsetHandler->transliterate($d);
-                  }
-                 */
-                $this->writeAmf3Int(strlen($d) << 1 | 1); // U29S-value
-                $this->outBuffer .= $d;
-                return $this->encounteredStrings++; // return the "previous" value
-            } else {
-                $key = $this->storedStrings[$d];
-                $this->writeAmf3Int($key << 1); // U29S-ref
-                return $key;
-            }
+        if (!$this->handleReference($d, $this->storedStrings)) {
+            $this->writeAmf3Int(strlen($d) << 1 | 1); // U29S-value
+            $this->outBuffer .= $d;
         }
+
     }
 
     protected function writeAmf3Array(array $d, $arrayCollectionable = false) {
@@ -701,13 +643,6 @@ class Amfphp_Core_Amf_Serializer {
                 $this->writeAmf3Data($numeric[$i]);
             }
         }
-        //}
-        //else
-        //{
-        //	$handle = $key << 1;
-        //	$this->outBuffer .= "\11";
-        //	$this->writeAmf3Int($handle);
-        //}
     }
 
     /**
@@ -717,7 +652,7 @@ class Amfphp_Core_Amf_Serializer {
      *
      * @return nothing
      */
-    protected function writeAmf3ObjectFromArray(/* array */ $d) {
+    protected function writeAmf3ObjectFromArray(array $d) {
         //Type this as a dynamic object
         $this->outBuffer .= "\12\13\1";
 
@@ -810,17 +745,63 @@ class Amfphp_Core_Amf_Serializer {
     }
 
     protected function writeAmf3ByteArrayMessage($d) {
-        if (($key = array_search($d, $this->storedObjects, TRUE)) === FALSE && $key === FALSE) {
-            if (count($this->storedObjects) < self::MAX_STORED_OBJECTS) {
-                $this->storedObjects[] = & $d;
-            }
-            $this->storedDefinitions++;
+        if (!$this->handleReference($d, $this->storedObjects)) {
             $obj_length = strlen($d);
             $this->writeAmf3Int($obj_length << 1 | 0x01);
             $this->outBuffer .= $d;
-        } else {
-            $handle = $key << 1;
-            $this->writeAmf3Int($handle);
+        }
+    }
+
+    /**
+     * looks if $obj already has a reference. If it does, write it, and return true. If not, add it to the references array.
+     * Depending on whether or not the spl_object_hash function is available (PHP >= 5.2), things are handled a bit differently:
+     * - if it is available, objects are hashed and the hash is used as a key to the references array. So the array has the structure hash => reference
+     * - if not, the object is pushed to the references array, and array_search is used. So the array has the structure reference => object. this is why we have
+     * different arrays for different types, so as to reduce the search, and also a MAX_STORED_OBJECTS. If we drop support for PHP < 5.2, we can move
+     * to a unique array for references
+     * This also means that 2 completely separate instances of a class but with the same values will be written fully twice if we can't use the hash system
+     * 
+     * @param mixed $obj
+     * @param array $references
+     */
+    private function handleReference(&$obj, array &$references){
+        $key = false;
+        if(function_exists("spl_object_hash") && is_object($obj)){
+            $hash = spl_object_hash($obj);
+            if(array_key_exists($hash, $references)){
+                $key = $references[$hash];
+            }else{
+                $references[$hash] = count($references);
+            }
+        }else{
+            //no hash available, use array with simple numeric keys
+            $key = array_search($obj, $references, TRUE);
+            
+            //only store the object for future reference if it isn't already stored, if there is space left and if it isn't a big string
+            $doStore = true;
+            if($key !== false){
+                $doStore = false;
+            }else if(count($references) >= self::MAX_STORED_OBJECTS){
+                $doStore = false;
+            }else if(is_string($obj) && strlen($obj) > 64){
+                $doStore = false;
+            }
+            if($doStore){
+                $references[] = &$obj;
+            }
+        }
+        
+        if($key !== false){
+            //reference exists. write it and return true
+            if($this->packet->amfVersion == Amfphp_Core_Amf_Constants::AMF0_ENCODING){
+                $this->writeReference($key);
+            }else{
+                $handle = $key << 1;
+                $this->writeAmf3Int($handle);
+            }
+            return true;
+        }else{
+            return false;
         }
     }
 
@@ -831,13 +812,7 @@ class Amfphp_Core_Amf_Serializer {
     protected function writeAmf3Object($d) {
         //Write the object tag
         $this->outBuffer .= "\12";
-        if (($key = array_search($d, $this->storedObjects, TRUE)) === FALSE && $key === FALSE) {
-            if (count($this->storedObjects) < self::MAX_STORED_OBJECTS) {
-                $this->storedObjects[] = & $d;
-            }
-
-            $this->storedDefinitions++;
-
+        if (!$this->handleReference($d, $this->storedObjects)) {
             $realObj = new stdClass();
             $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
             foreach ($d as $key => $val) {
@@ -863,10 +838,8 @@ class Amfphp_Core_Amf_Serializer {
             }
             //Now we close the open object
             $this->outBuffer .= "\1";
-        } else {
-            $handle = $key << 1;
-            $this->writeAmf3Int($handle);
-        }
+
+        } 
     }
 
 }
