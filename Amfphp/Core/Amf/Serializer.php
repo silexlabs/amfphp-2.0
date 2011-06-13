@@ -773,7 +773,7 @@ class Amfphp_Core_Amf_Serializer {
      */
     private function handleReference(&$obj, array &$references){
         $key = false;
-        if(function_exists("spl_object_hash") && is_object($obj)){
+        if(is_object($obj) && function_exists("spl_object_hash")){
             $hash = spl_object_hash($obj);
             if(isset($references[$hash])){
                 $key = $references[$hash];
