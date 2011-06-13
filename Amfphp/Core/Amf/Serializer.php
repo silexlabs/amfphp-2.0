@@ -55,6 +55,12 @@ class Amfphp_Core_Amf_Serializer {
     private $storedStrings;
 
     /**
+     * used for traits references. key: class name. value: array(reference id, array(property names))
+     * @var array
+     */
+    private $className2TraitsInfo;
+
+    /**
      *
      * @param <Amfphp_Core_Amf_Packet> $packet
      */
@@ -70,6 +76,7 @@ class Amfphp_Core_Amf_Serializer {
         $this->Amf0StoredObjects = array();
         $this->storedStrings = array();
         $this->storedObjects = array();
+        $this->className2TraitsInfo = array();
 
     }
 
@@ -768,7 +775,7 @@ class Amfphp_Core_Amf_Serializer {
         $key = false;
         if(function_exists("spl_object_hash") && is_object($obj)){
             $hash = spl_object_hash($obj);
-            if(array_key_exists($hash, $references)){
+            if(isset($references[$hash])){
                 $key = $references[$hash];
             }else{
                 $references[$hash] = count($references);
@@ -806,40 +813,78 @@ class Amfphp_Core_Amf_Serializer {
     }
 
     /**
-     * @TODO better support for traits. Right now the object is considered dynamic, and that's all
-     * @param <mixed> $d
+     * writes an object. 
+     * @param object $d
      */
     protected function writeAmf3Object($d) {
         //Write the object tag
         $this->outBuffer .= "\12";
-        if (!$this->handleReference($d, $this->storedObjects)) {
-            $realObj = new stdClass();
-            $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
-            foreach ($d as $key => $val) {
-                if ($key[0] != "\0" && $key != $explicitTypeField) { //Don't show private members or explicit type
-                    $realObj->$key = $val;
-                }
+        if ($this->handleReference($d, $this->storedObjects)) {
+            return;
+        }
+        
+        $realObj = new stdClass();
+        $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
+        foreach ($d as $key => $value) {
+            if ($key[0] != "\0" && $key != $explicitTypeField) { //Don't show private members or explicit type
+                $realObj->$key = $value;
             }
+        }
 
-            //Type this as a dynamic object
-            $this->outBuffer .= "\13";
+        if(isset ($d->$explicitTypeField)){
+            //class name is set. send all properties as sealed members.
+            $className = $d->$explicitTypeField;
+            $propertyNames = null;
 
-            //if there is an explicit type, use it, otherwise set the class name to an empty string
-            if(isset ($d->$explicitTypeField)){
-                $className = $d->$explicitTypeField;
-                $this->writeAmf3String($className);
+            if(isset ($this->className2TraitsInfo[$className])){
+                //we have traits information and a reference for it, so use a traits reference
+                $traitsInfo = $this->className2TraitsInfo[$className];
+                $propertyNames = $traitsInfo["propertyNames"];
+                $referenceId = $traitsInfo["referenceId"];
+                $traitsReference = $referenceId << 2 | 1;
+                $this->writeAmf3Int($traitsReference);
             }else{
-                $this->writeAmf3String("");
+                //no available traits information. Write the full object
+                $propertyNames = array();
+                foreach ($realObj as $key => $value) {
+                    $propertyNames[] = $key;
+                }
+
+                //U29O-traits:  0011 in LSBs, and number of properties
+                $numProperties = count($propertyNames);
+                $traits = $numProperties << 4 | 3;
+                $this->writeAmf3Int($traits);
+                //class name
+                $this->writeAmf3String($className);
+                //list of property names
+                foreach ($propertyNames as $propertyName){
+                    $this->writeAmf3String($propertyName);
+                }
+                
+                //save for reference
+                $traitsInfo = array("referenceId" => count($this->className2TraitsInfo), "propertyNames" => $propertyNames);
+                $this->className2TraitsInfo[$className] = $traitsInfo;
+            }
+            //list of values
+            foreach ($propertyNames as $propertyName){
+                $this->writeAmf3Data($realObj->$propertyName);
             }
 
-            foreach ($realObj as $key => $val) {
+        }else{
+            //anonymous object. So type this as a dynamic object with no sealed members.
+            //U29O-traits : 1011.
+            $this->writeAmf3Int(0xB);
+            //no class name. empty string for anonymous object
+            $this->writeAmf3String("");
+            //name/value pairs for dynamic properties
+            foreach ($realObj as $key => $value) {
                 $this->writeAmf3String($key);
-                $this->writeAmf3Data($val);
+                $this->writeAmf3Data($value);
             }
-            //Now we close the open object
+            //empty string, marks end of dynamic members
             $this->outBuffer .= "\1";
+        }
 
-        } 
     }
 
 }
