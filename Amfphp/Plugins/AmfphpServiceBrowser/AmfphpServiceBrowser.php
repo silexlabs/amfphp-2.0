@@ -60,6 +60,7 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_REQUEST_HANDLER, $this, "filterHandler");
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_EXCEPTION_HANDLER, $this, "filterHandler");
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_SERIALIZER, $this, "filterHandler");
+        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_HEADERS, $this, "filterHeaders");
     }
 
     /**
@@ -253,6 +254,18 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
         return $message; 
     }
 
+    
+    /**
+     * filter the headers to make sure the content type is set to text/html if the request was handled by the service browser
+     * @param array $headers
+     * @return array
+     */
+    public function filterHeaders($headers, $contentType){
+        if (!$contentType || $contentType == self::CONTENT_TYPE) {
+            $headers["Content-Type"] = "text/html";
+            return $headers;
+        }
+    }
 }
 
 ?>
