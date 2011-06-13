@@ -761,11 +761,13 @@ class Amfphp_Core_Amf_Serializer {
 
     /**
      * looks if $obj already has a reference. If it does, write it, and return true. If not, add it to the references array.
-     * Depending on whether or not the spl_object_hash function is available (PHP >= 5.2), things are handled a bit differently:
-     * - if it is available, objects are hashed and the hash is used as a key to the references array. So the array has the structure hash => reference
-     * - if not, the object is pushed to the references array, and array_search is used. So the array has the structure reference => object. this is why we have
-     * different arrays for different types, so as to reduce the search, and also a MAX_STORED_OBJECTS. If we drop support for PHP < 5.2, we can move
-     * to a unique array for references
+     * Depending on whether or not the spl_object_hash function can be used ( available (PHP >= 5.2), and can only be used on an object)
+     * things are handled a bit differently:
+     * - if possible, objects are hashed and the hash is used as a key to the references array. So the array has the structure hash => reference
+     * - if not, the object is pushed to the references array, and array_search is used. So the array has the structure reference => object.
+     * maxing out the number of stored references improves performance(tested with an array of 9000 identical objects). This may be because isset's performance
+     * is linked to the size of the array. weird...
+     * 
      * This also means that 2 completely separate instances of a class but with the same values will be written fully twice if we can't use the hash system
      * 
      * @param mixed $obj
@@ -778,7 +780,9 @@ class Amfphp_Core_Amf_Serializer {
             if(isset($references[$hash])){
                 $key = $references[$hash];
             }else{
-                $references[$hash] = count($references);
+                if(count($references) >= self::MAX_STORED_OBJECTS){
+                    $references[$hash] = count($references);
+                }
             }
         }else{
             //no hash available, use array with simple numeric keys
@@ -822,14 +826,8 @@ class Amfphp_Core_Amf_Serializer {
         if ($this->handleReference($d, $this->storedObjects)) {
             return;
         }
-        
-        $realObj = new stdClass();
+       
         $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
-        foreach ($d as $key => $value) {
-            if ($key[0] != "\0" && $key != $explicitTypeField) { //Don't show private members or explicit type
-                $realObj->$key = $value;
-            }
-        }
 
         if(isset ($d->$explicitTypeField)){
             //class name is set. send all properties as sealed members.
@@ -846,8 +844,10 @@ class Amfphp_Core_Amf_Serializer {
             }else{
                 //no available traits information. Write the full object
                 $propertyNames = array();
-                foreach ($realObj as $key => $value) {
-                    $propertyNames[] = $key;
+                foreach ($d as $key => $value) {
+                    if ($key[0] != "\0" && $key != $explicitTypeField) { //Don't show private members or explicit type
+                        $propertyNames[] = $key;
+                    }
                 }
 
                 //U29O-traits:  0011 in LSBs, and number of properties
@@ -867,7 +867,7 @@ class Amfphp_Core_Amf_Serializer {
             }
             //list of values
             foreach ($propertyNames as $propertyName){
-                $this->writeAmf3Data($realObj->$propertyName);
+                $this->writeAmf3Data($d->$propertyName);
             }
 
         }else{
@@ -877,9 +877,11 @@ class Amfphp_Core_Amf_Serializer {
             //no class name. empty string for anonymous object
             $this->writeAmf3String("");
             //name/value pairs for dynamic properties
-            foreach ($realObj as $key => $value) {
-                $this->writeAmf3String($key);
-                $this->writeAmf3Data($value);
+            foreach ($d as $key => $value) {
+                if ($key[0] != "\0" && $key != $explicitTypeField) { //Don't show private members or explicit type
+                    $this->writeAmf3String($key);
+                    $this->writeAmf3Data($value);
+                }
             }
             //empty string, marks end of dynamic members
             $this->outBuffer .= "\1";
