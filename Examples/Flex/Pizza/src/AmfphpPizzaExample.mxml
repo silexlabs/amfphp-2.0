@@ -25,6 +25,7 @@
 			{
 				_myConnection = new RemoteObject;	
 				_myConnection.destination = "amfphpExamplesGateway"; 
+				_myConnection.endpoint = "../../../Php/";
 				_myConnection.source = "PizzaService";						
 				_myConnection.addEventListener(ResultEvent.RESULT, handleResult);
 			}
