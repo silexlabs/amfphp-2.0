@@ -232,8 +232,8 @@ class Amf3TestData {
         $this->dObject->$explicitTypeField ="DummyClass2";
         //object marker
         $this->sObject = pack("C", 0x0A);
-        //dynamic marker. This is hard coded.
-        $this->sObject .= pack("C", 0x0B);
+        //traits.
+        $this->sObject .= pack("C", 0x13);
         //class name length, on a U29-1 : 11 << 1 | 1 = 23 
         $this->sObject .= pack("C", 0x17);
         //class name
@@ -248,8 +248,6 @@ class Amf3TestData {
         $this->sObject .= pack("C", 0x9);
         //member value
         $this->sObject .= "test";
-        //close object
-        $this->sObject .= pack("C", 1);
         
     }
 
