@@ -114,9 +114,9 @@ class AmfSerializerWrapper extends Amfphp_Core_Amf_Serializer
     }
 
 
-    public function writeAmf3String($d, $raw = FALSE)
+    public function writeAmf3String($d)
     {
-        return parent::writeAmf3String($d, $raw);
+        parent::writeAmf3String($d);
     }
 
 
