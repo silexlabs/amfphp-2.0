@@ -234,7 +234,6 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
                     $message .= "></td></tr>";
                 }
                 $message .= "\n</table>\n<input type='submit' value='call'></form>";
-                $message .= file_get_contents(dirname(__FILE__) . "/JsonEditorFragment.html");
             } else {
                 $message .= "<h3>This method has no parameters. Click to call it.</h3>";
                 $message .= "\n<form action='?serviceName=$this->serviceName&methodName=$this->methodName&noParams' method='POST'>\n";
