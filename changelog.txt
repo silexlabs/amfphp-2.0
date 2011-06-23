@@ -1,5 +1,9 @@
 Version history
---------- 2.0 ---------
+--------- 2.0 beta ---------
+better serialization of typed objects.
+enhanced service browser plugin
+miscellaneous bug fixes
+--------- 2.0 alpha---------
 Just about everything is rewritten and rethought except the AMF serializer/deserializer.
 Introduction of the plugin/filter system
 --------- 1.9 --------- 
