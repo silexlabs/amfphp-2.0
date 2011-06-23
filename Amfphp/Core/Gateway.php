@@ -104,16 +104,23 @@ class Amfphp_Core_Gateway {
     private $postData;
 
     /**
+     * the content type. For example for amf, application/x-amf
+     * @var String
+     */
+    private $contentType;
+
+    /**
      * the serialized request 
      * @var String 
      */
     private $rawInputData;
 
     /**
-     * the content type. For example for amf, application/x-amf
+     * the serialized response
      * @var String
      */
-    private $contentType;
+    private $rawOutputData;
+
     /**
      *
      */
@@ -188,12 +195,12 @@ class Amfphp_Core_Gateway {
         $serializer = $filterManager->callFilters(self::FILTER_SERIALIZER, $defaultHandler, $this->contentType);
 
         //serialize
-        $rawOutputData = $serializer->serialize($deserializedResponse);
+        $this->rawOutputData = $serializer->serialize($deserializedResponse);
 
         //call filter for filtering the serialized response packet
-        $rawOutputData = $filterManager->callFilters(self::FILTER_SERIALIZED_RESPONSE, $rawOutputData);
+        $this->rawOutputData = $filterManager->callFilters(self::FILTER_SERIALIZED_RESPONSE, $this->rawOutputData);
 
-        return $rawOutputData;
+        return $this->rawOutputData;
 
     }
 
@@ -213,6 +220,17 @@ class Amfphp_Core_Gateway {
         return $ret;
     }
 
+    /**
+     * helper function for sending gateway data to output stream
+     */
+    public function output(){
+
+        $responseHeaders = $this->getResponseHeaders();
+        foreach($responseHeaders as $header){
+            header($header);
+        }
+        echo $this->rawOutputData;
+    }
 
 }
 ?>

@@ -26,13 +26,8 @@ $gateway = Amfphp_Core_HttpRequestGatewayFactory::createGateway();
 //This was done in 1.9 and can be used to support relative includes, and should be used when upgrading from 1.9 to 2.0 if you use relative includes
 //chdir(dirname(__FILE__) . "/Services");
 
-$serializedResponse = $gateway->service();
-$responseHeaders = $gateway->getResponseHeaders();
-foreach($responseHeaders as $header){
-    header($header);
-}
-echo $serializedResponse;
-
+$gateway->service();
+$gateway->output();
 
 
 ?>

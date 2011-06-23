@@ -17,11 +17,8 @@ require_once dirname(__FILE__) . '/../../Amfphp/ClassLoader.php';
 $config = new Amfphp_Core_Config();
 $config->serviceFolderPaths = array(dirname(__FILE__) . "/ExampleServices/");
 $gateway = Amfphp_Core_HttpRequestGatewayFactory::createGateway($config);
-$serializedResponse = $gateway->service();
-$responseHeaders = $gateway->getResponseHeaders();
-foreach($responseHeaders as $header){
-    header($header);
-}
-echo $serializedResponse;
+$gateway->service();
+$gateway->output();
+
 
 ?>
