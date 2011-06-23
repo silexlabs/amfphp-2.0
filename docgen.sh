@@ -1,0 +1,1 @@
+phpdoc -d . -t ./doc/
