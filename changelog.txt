@@ -2,6 +2,11 @@ Version history
 --------- 2.0 rc1 ---------
 better serialization of typed objects.
 enhanced service browser plugin
+IExternalizable support
+fix xml, xmldoc, date types
+examples
+refactor for phpdoc compatibility
+change from gateway.php to index.php
 miscellaneous bug fixes
 --------- 2.0 alpha---------
 Just about everything is rewritten and rethought except the AMF serializer/deserializer.
