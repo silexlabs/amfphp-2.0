@@ -1,5 +1,5 @@
 Version history
---------- 2.0 beta ---------
+--------- 2.0 rc1 ---------
 better serialization of typed objects.
 enhanced service browser plugin
 miscellaneous bug fixes
