@@ -245,12 +245,14 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
 
         if($this->showResult){
             $message .= "<h3>Result</h3>";
+            $message .= "<pre>";
             $message .= print_r($data, true);
+            $message .= "</pre>";
         }
         $message .= file_get_contents(dirname(__FILE__) . "/Bottom.html");
 
         
-        return $message; 
+        return $message;  
     }
 
     
