@@ -601,6 +601,11 @@ class Amfphp_Core_Amf_Serializer {
 
     }
 
+    /**
+     *@todo understand this bit about circular references! so can use handleReference like everywhere else
+     * @param array $d
+     * @param <type> $arrayCollectionable
+     */
     protected function writeAmf3Array(array $d, $arrayCollectionable = false) {
         //Circular referencing is disabled in arrays
         //Because if the array contains only primitive values,
@@ -631,8 +636,15 @@ class Amfphp_Core_Amf_Serializer {
         if (
                 ($str_count > 0 && $num_count == 0) || // Only strings or negative integer keys are present.
                 ($num_count > 0 && $largestKey != $num_count - 1) // Non-negative integer keys are present, but the array is not "dense" (it has gaps).
-        ) { // this is a mixed array
-            $this->writeAmf3ObjectFromArray($numeric + $string); // write the numeric and string keys in the mixed array
+        ) { // this is a mixed array. Convert it to an anonymous object(to get get an Object type on the client)
+            $anonymousObject = new stdClass();
+            foreach($numeric as $key => $data){
+                $anonymousObject->$key = $numeric[$key];
+            }
+            foreach($string as $key => $data){
+                $anonymousObject->$key = $string[$key];
+            }
+            $this->writeAmf3Object($anonymousObject);
         } else { // this is just an array
             $num_count = count($numeric);
 
@@ -652,25 +664,6 @@ class Amfphp_Core_Amf_Serializer {
         }
     }
 
-    /**
-     * Serialise the array as if it is an object.
-     *
-     * @param array $d the array to serialise
-     *
-     * @return nothing
-     */
-    protected function writeAmf3ObjectFromArray(array $d) {
-        //Type this as a dynamic object
-        $this->outBuffer .= "\12\13\1";
-
-        foreach ($d as $key => $val) {
-            $this->writeAmf3String($key);
-            $this->writeAmf3Data($val);
-        }
-
-        //Now we close the open object
-        $this->outBuffer .= "\1";
-    }
 
     /**
      * Return the serialisation of the given integer (Amf3).
@@ -788,13 +781,11 @@ class Amfphp_Core_Amf_Serializer {
             //no hash available, use array with simple numeric keys
             $key = array_search($obj, $references, TRUE);
             
-            //only store the object for future reference if it isn't already stored, if there is space left and if it isn't a big string
+            //only store the object for future reference if it isn't already stored, and if there is space left
             $doStore = true;
             if($key !== false){
                 $doStore = false;
             }else if(count($references) >= self::MAX_STORED_OBJECTS){
-                $doStore = false;
-            }else if(is_string($obj) && strlen($obj) > 64){
                 $doStore = false;
             }
             if($doStore){
