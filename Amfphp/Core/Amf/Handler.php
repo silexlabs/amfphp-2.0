@@ -143,6 +143,7 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
 
     /**
      * @see Amfphp_Core_Common_IExceptionHandler
+     * @todo option for production, don't send exception trace
      */
     public function handleException(Exception $exception){
         $errorPacket = new Amfphp_Core_Amf_Packet();
