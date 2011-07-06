@@ -20,6 +20,18 @@
 class Amfphp_Core_Gateway {
 
     /**
+     * filter just after plugin init. Use this to add a service folder for a plugin
+     * @param array serviceFolderPaths array of absolute paths
+     */
+    const FILTER_SERVICE_FOLDER_PATHS = "FILTER_SERVICE_FOLDER_PATHS";
+
+    /**
+     * filter just after plugin init. Use this to add a service for a plugin when a service folder isn't enough
+     * @param array serviceNames2ClassFindInfo array of ClassFindInfo. Key is the service nane
+     */
+    const FILTER_SERVICE_NAMES_2_CLASS_FIND_INFO = "FILTER_SERVICE_NAMES_2_CLASS_FIND_INFO";
+
+    /**
      * filter called when the serialized request comes in.
      * @todo this filter only allows manipulation of raw post data, and is as such a bit misleading. Maybe rename and do filters for GET and POST
      * @param String $rawData the raw http data
@@ -158,32 +170,39 @@ class Amfphp_Core_Gateway {
         $deserializedResponse = null;
         try{
             Amfphp_Core_PluginManager::getInstance()->loadPlugins($this->config->pluginsFolder, $this->config->pluginsConfig, $this->config->disabledPlugins);
-            //call filter for filtering serialized incoming packet
+            
+            //filter service folder paths
+            $this->config->serviceFolderPaths = $filterManager->callFilters(self::FILTER_SERVICE_FOLDER_PATHS, $this->config->serviceFolderPaths);
+
+            //filter service names 2 class find info
+            $this->config->serviceNames2ClassFindInfo = $filterManager->callFilters(self::FILTER_SERVICE_NAMES_2_CLASS_FIND_INFO, $this->config->serviceNames2ClassFindInfo);
+
+            //filter serialized request 
             $this->rawInputData = $filterManager->callFilters(self::FILTER_SERIALIZED_REQUEST, $this->rawInputData);
 
-            //call filter to get the deserializer
+            //filter deserializer
             $deserializer = $filterManager->callFilters(self::FILTER_DESERIALIZER, $defaultHandler, $this->contentType);
             
             //deserialize
             $deserializedRequest = $deserializer->deserialize($this->getData, $this->postData, $this->rawInputData);
 
-            //call filter for filtering deserialized request
+            //filter deserialized request
             $deserializedRequest = $filterManager->callFilters(self::FILTER_DESERIALIZED_REQUEST, $deserializedRequest);
 
             //create service router
             $serviceRouter = new Amfphp_Core_Common_ServiceRouter($this->config->serviceFolderPaths, $this->config->serviceNames2ClassFindInfo);
 
-            //call filter to get the deserialized request handler
+            //filter deserialized request handler
             $deserializedRequestHandler = $filterManager->callFilters(self::FILTER_DESERIALIZED_REQUEST_HANDLER, $defaultHandler, $this->contentType);
 
             //handle request
             $deserializedResponse = $deserializedRequestHandler->handleDeserializedRequest($deserializedRequest, $serviceRouter);
 
-            //call filter for filtering the deserialized response
+            //filter deserialized response
             $deserializedResponse = $filterManager->callFilters(self::FILTER_DESERIALIZED_RESPONSE, $deserializedResponse);
 
         }catch(Exception $exception){
-            //call filter to get the exception handler
+            //filter exception handler
             $exceptionHandler = $filterManager->callFilters(self::FILTER_EXCEPTION_HANDLER, $defaultHandler, $this->contentType);
 
             //handle exception
@@ -191,13 +210,13 @@ class Amfphp_Core_Gateway {
 
         }
 
-        //call filter to get the serializer
+        //filter serializer
         $serializer = $filterManager->callFilters(self::FILTER_SERIALIZER, $defaultHandler, $this->contentType);
 
         //serialize
         $this->rawOutputData = $serializer->serialize($deserializedResponse);
 
-        //call filter for filtering the serialized response packet
+        //filter serialized response 
         $this->rawOutputData = $filterManager->callFilters(self::FILTER_SERIALIZED_RESPONSE, $this->rawOutputData);
 
         return $this->rawOutputData;
