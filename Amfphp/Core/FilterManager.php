@@ -64,7 +64,7 @@ class Amfphp_Core_FilterManager{
             // loop on registered filters
             foreach($this->filtersArray[$filterName] as $callBack){
                 $fromCallee = call_user_func_array($callBack, $filterArgs);
-                if($fromCallee){
+                if($fromCallee !== null){ //!== null because otherwise array() doesn't qualify
                     $filtered = $filterArgs[0] = $fromCallee;
                 }
             }
