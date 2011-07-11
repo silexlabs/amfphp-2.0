@@ -43,9 +43,9 @@ class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common
      * @return this or null
      */
     public function filterHandler($handler, $contentType){
-        if(strpos($contentType, self::JSON_CONTENT_TYPE) !== false)
+        if(strpos($contentType, self::JSON_CONTENT_TYPE) !== false){
             return $this;
-		return $handler;
+        }
     }
 
     /**
