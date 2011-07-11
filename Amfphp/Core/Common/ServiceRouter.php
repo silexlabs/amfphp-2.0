@@ -49,6 +49,7 @@ class Amfphp_Core_Common_ServiceRouter{
     /**
      * get a service object by its name. Looks for a match in serviceNames2ClassFindInfo, then in the defined service folders.
      * If none found, an exception is thrown
+     * @todo maybe option for a fully qualified class name. 
      * @param String $serviceName
      * @return serviceName
      */
@@ -59,12 +60,17 @@ class Amfphp_Core_Common_ServiceRouter{
             require_once $classFindInfo->absolutePath;
             $serviceObject = new $classFindInfo->className();
         }else{
+            $serviceNameWithSlashes = str_replace(".", "/", $serviceName);
+            $serviceIncludePath = $serviceNameWithSlashes . ".php";
+            $exploded = explode("/", $serviceNameWithSlashes);
+            $className = $exploded[count($exploded) - 1];
             //no class find info. try to look in the folders
             foreach($this->serviceFolderPaths as $folderPath){
-                $servicePath = $folderPath . $serviceName . ".php";
+                $servicePath = $folderPath .  $serviceIncludePath;
                 if(file_exists($servicePath)){
                     require_once $servicePath;
-                    $serviceObject = new $serviceName();
+                    $serviceObject = new $className();
+                    break;
                 }
             }
 
