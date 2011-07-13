@@ -71,7 +71,8 @@ class Amfphp_Core_PluginManager {
             if(!is_dir($rootFolder . "/" . $pluginName)){
                 continue;
             }
-            if(($pluginName == ".") || ($pluginName == "..")){
+			//avoid system folders
+            if($pluginName[0] == "."){
                 continue;
             }
 
