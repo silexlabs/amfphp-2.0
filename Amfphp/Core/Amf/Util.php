@@ -37,12 +37,12 @@ class Amfphp_Core_Amf_Util {
      * @param bool $ignoreAmfTypes ignore objects with type in Amfphp_Core_Amf_Types package. could maybe be replaced by a regexp, but this is better for performance
      * @return mixed array or object, depending on type of $obj
      */
-    static public function applyFunctionToContainedObjects($obj, $callBack, $recursionDepth = 0, $maxRecursionDepth = 30, $ignoreAmfTypes) {
+    static public function applyFunctionToContainedObjects($obj, $callBack, $recursionDepth = 0, $maxRecursionDepth = 30, $ignoreAmfTypes = true) {
         if ($recursionDepth == $maxRecursionDepth) {
             throw new Amfphp_Core_Exception("couldn't recurse deeper on object. Probably a looped reference");
         }
         //don't apply to Amfphp types such as byte array
-        if(is_object($obj) && substr(get_class($obj),0, 21) == "Amfphp_Core_Amf_Types" ){
+        if($ignoreAmfTypes && is_object($obj) && substr(get_class($obj),0, 21) == "Amfphp_Core_Amf_Types" ){
             return $obj;
         }
 
