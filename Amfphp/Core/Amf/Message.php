@@ -49,6 +49,12 @@ class Amfphp_Core_Amf_Message {
     public $data;
 
 
+    /**
+     *
+     * @param String $targetUri
+     * @param String $responseUri
+     * @param mixed $data
+     */
     public function  __construct($targetUri = "", $responseUri = "", $data = null) {
         $this->targetUri = $targetUri;
         $this->responseUri = $responseUri;
