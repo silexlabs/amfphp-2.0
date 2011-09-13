@@ -48,12 +48,14 @@ class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common
         }
     }
 
-    /**
-     * @see Amfphp_Core_Common_IDeserializer
-     */
     public function deserialize(array $getData, array $postData, $rawPostData){
-		return json_decode($rawPostData);
+        if($rawPostData != ""){
+            return json_decode($rawPostData);
+        }else{
+            throw new Exception("json call data not found. It must be sent in the post data");
+        }
     }
+
 
     /**
      * Retrieve the serviceName, methodName and parameters from the PHP object
