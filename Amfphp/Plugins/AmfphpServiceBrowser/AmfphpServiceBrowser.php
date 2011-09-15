@@ -196,36 +196,40 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
      * @see Amfphp_Core_Common_ISerializer
      */
     public function serialize($data) {
-        $availableServiceNames = $this->getAvailableServiceNames($this->serviceRouter->serviceFolderPaths, $this->serviceRouter->serviceNames2ClassFindInfo);
-        $message = file_get_contents(dirname(__FILE__) . "/Top.html");
-        foreach ($availableServiceNames as $availableServiceName) {
-            $message .= "\n     <li><a href='?serviceName=$availableServiceName'>$availableServiceName</a></li>";
-        }
-        $message .= "\n</ul>";
 
-        if ($this->serviceName) {
-            $serviceObject = $this->serviceRouter->getServiceObject($this->serviceName);
+        $availableServiceNames = $this->getAvailableServiceNames($this->serviceRouter->serviceFolderPaths, $this->serviceRouter->serviceNames2ClassFindInfo);
+        include(dirname(__FILE__) . "/Top.php");
+        $message = "\n<ul id='menu'>";
+        foreach ($availableServiceNames as $availableServiceName) {
+            $message .= "\n <li><b>$availableServiceName</b>";
+
+            $serviceObject = $this->serviceRouter->getServiceObject($availableServiceName);
+
             $reflectionObj = new ReflectionObject($serviceObject);
             $availablePublicMethods = $reflectionObj->getMethods(ReflectionMethod::IS_PUBLIC);
 
-            $message .= "<h3>Click below to use a method on the $this->serviceName service</h3>";
-            $message .= "\n<ul>";
-            foreach ($availablePublicMethods as $methodDescriptor) {
-                $availableMethodName = $methodDescriptor->name;
-                $message .= "\n     <li><a href='?serviceName=$this->serviceName&methodName=$availableMethodName'>$availableMethodName</a></li>";
+            if (count($availablePublicMethods) > 0) {
+                $message .= "\n<ul>";
+                foreach ($availablePublicMethods as $methodDescriptor) {
+                    $availableMethodName = $methodDescriptor->name;
+                    $message .= "\n     <li><a href='?serviceName=$availableServiceName&amp;methodName=$availableMethodName'>$availableMethodName</a></li>";
+                }
+                $message .= "\n</ul>";
             }
-            $message .= "\n</ul>";
+            $message .= "</li>";
         }
+        $message .= "\n</ul><div id='content'>";
 
         if ($this->methodName) {
             $serviceObject = $this->serviceRouter->getServiceObject($this->serviceName);
             $reflectionObj = new ReflectionObject($serviceObject);
             $method = $reflectionObj->getMethod($this->methodName);
             $parameterDescriptors = $method->getParameters();
+            $message .= "<h3>$this->methodName method on $this->serviceName service</h3>";
             if (count($parameterDescriptors) > 0) {
-                $message .= "<h3>Fill in the parameters below then click to call the $this->methodName method on $this->serviceName service</h3>";
-                $message .= "\n<br>Use JSON notation for complex values. ";
-                $message .= "\n<form action='?serviceName=$this->serviceName&methodName=$this->methodName' method='POST'>\n<table>";
+
+                $message .= "\nUse JSON notation for complex values. ";
+                $message .= "\n<form action='?serviceName=$this->serviceName&amp;methodName=$this->methodName' method='POST'>\n<table>";
                 foreach ($parameterDescriptors as $parameterDescriptor) {
                     $availableParameterName = $parameterDescriptor->name;
                     $message .= "\n     <tr><td>$availableParameterName</td><td><input name='$availableParameterName' ";
@@ -234,21 +238,21 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
                     }
                     $message .= "></td></tr>";
                 }
-                $message .= "\n</table>\n<input type='submit' value='call'></form>";
+                $message .= "\n</table>\n<input type='submit' value='Call method &raquo;'></form>";
             } else {
-                $message .= "<h3>This method has no parameters. Click to call it.</h3>";
-                $message .= "\n<form action='?serviceName=$this->serviceName&methodName=$this->methodName&noParams' method='POST'>\n";
-                $message .= "\n<input type='submit' value='call'></form>";
+                $message .= "This method has no parameters.";
+                $message .= "\n<form action='?serviceName=$this->serviceName&amp;methodName=$this->methodName&amp;noParams' method='POST'>\n";
+                $message .= "\n<input type='submit' value='Call method'></form>";
             }
         }
 
         if ($this->showResult) {
             $message .= "<h3>Result</h3>";
-            $message .= "<pre>";
+            $message .= '<pre>';
             $message .= print_r($data, true);
-            $message .= "</pre>";
+            $message .= '</pre>';
         }
-        $message .= file_get_contents(dirname(__FILE__) . "/Bottom.html");
+        $message .= "</div>" . file_get_contents(dirname(__FILE__) . "/Bottom.html");
 
 
         return $message;
@@ -261,8 +265,7 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
      */
     public function filterHeaders($headers, $contentType) {
         if (!$contentType || $contentType == self::CONTENT_TYPE) {
-            $headers["Content-Type"] = "text/html";
-            return $headers;
+            return array();
         }
     }
 
