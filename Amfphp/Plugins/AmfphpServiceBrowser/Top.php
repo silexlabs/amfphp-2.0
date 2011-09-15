@@ -16,11 +16,11 @@ echo file_get_contents(dirname(__FILE__) . '/style.css');
     <div id="header">
  		<b>AmfPHP</b> Service Browser
  		<ul>
-        <li><a href="http://projects.silexlabs.org/?/amfphp#/php.remoting/what.is.amfphp">AmfPHP Website</a></li>
-        <li><a href="http://community.silexlabs.org/amfphp/documentation/">Documentation</a></li>
-        <li><a href="http://community.silexlabs.org/amfphp/reference/">Class Reference</a></li>
         <li><a href="http://sourceforge.net/projects/amfphp/forums">Forums</a></li>
+        <li><a href="http://www.silexlabs.org/amfphp/docs-amfphp/">Documentation</a></li>
+        <li><a href="http://community.silexlabs.org/amfphp/reference/">Class Reference</a></li>
         <li><a href="https://github.com/amfphp/amfphp-2.0">Source Code</a></li>
+        <li><a href="http://projects.silexlabs.org/?/amfphp#/php.remoting/what.is.amfphp">AmfPHP Website</a></li>
         <li><a href="http://www.silexlabs.org/">Silex Labs</a></li>
         </ul>
     </div>
