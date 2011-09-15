@@ -21,7 +21,7 @@
  * pass the parameters as POST data. Each will be JSON decoded to be able to pass complex parameters. This requires PHP 5.2 or higher
  *
  * @package Amfphp_Plugins_ServiceBrowser
- * @author Ariel Sommeria-Klein
+ * @author Ariel Sommeria-Klein, design by Daniel Hoffmann, hoffmann [at] intermedi8.de 
  */
 class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_IDeserializedRequestHandler, Amfphp_Core_Common_IExceptionHandler, Amfphp_Core_Common_ISerializer {
     /**
@@ -30,7 +30,6 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
     const CONTENT_TYPE = "application/x-www-form-urlencoded";
 
     private $serviceName;
-
     private $methodName;
 
     /**
@@ -45,11 +44,8 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
      * @var array
      */
     private $parametersAssoc;
-
     private $serviceRouter;
-
     private $showResult;
-    
     private $returnErrorDetails = false;
 
     /**
@@ -63,8 +59,7 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_EXCEPTION_HANDLER, $this, "filterHandler");
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_SERIALIZER, $this, "filterHandler");
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_HEADERS, $this, "filterHeaders");
-        $this->returnErrorDetails = (isset ($config[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]) && $config[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]);
-        
+        $this->returnErrorDetails = (isset($config[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]) && $config[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]);
     }
 
     /**
@@ -114,7 +109,7 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
         foreach ($serviceFolderPaths as $serviceFolderPath) {
             $folderContent = scandir($serviceFolderPath);
 
-            if ($folderContent){
+            if ($folderContent) {
                 foreach ($folderContent as $fileName) {
                     //add all .php file names, but removing the .php suffix
                     if (strpos($fileName, ".php")) {
@@ -155,11 +150,11 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
             $this->parametersAssoc = array();
             //try to json decode each parameter, then push it to $thios->parameters
             $numParams = count($deserializedRequest->post);
-            foreach($deserializedRequest->post as $key => $value) {
+            foreach ($deserializedRequest->post as $key => $value) {
                 $this->parametersAssoc[$key] = $value;
                 $decodedValue = json_decode($value);
                 $valueToUse = $value;
-                if($decodedValue){
+                if ($decodedValue) {
                     $valueToUse = $decodedValue;
                 }
                 $this->parameters[] = $valueToUse;
@@ -170,11 +165,11 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
             $paramsGiven = true;
             //note: use $paramsGiven because somehow if $$this->parameters contains an empty array, ($this->parameters == null) is true. 
         }
-        
-        if($this->serviceName && $this->methodName && $paramsGiven){
+
+        if ($this->serviceName && $this->methodName && $paramsGiven) {
             $this->showResult = true;
             return $serviceRouter->executeServiceCall($this->serviceName, $this->methodName, $this->parameters);
-        }else{
+        } else {
             $this->showResult = false;
             return null;
         }
@@ -188,13 +183,13 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
         $exceptionInfo = "Exception thrown\n<br>";
         $exceptionInfo .= "message : " . $exception->getMessage() . "\n<br>";
         $exceptionInfo .= "code : " . $exception->getCode() . "\n<br>";
-        if($this->returnErrorDetails){
+        if ($this->returnErrorDetails) {
             $exceptionInfo .= "file : " . $exception->getFile() . "\n<br>";
             $exceptionInfo .= "line : " . $exception->getLine() . "\n<br>";
         }
-            //$exceptionInfo .= "trace : " . str_replace("\n", "<br>\n", print_r($exception->getTrace(), true)) . "\n<br>";
+        //$exceptionInfo .= "trace : " . str_replace("\n", "<br>\n", print_r($exception->getTrace(), true)) . "\n<br>";
         $this->showResult = true;
-       return $exceptionInfo;
+        return $exceptionInfo;
     }
 
     /**
@@ -208,7 +203,7 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
         }
         $message .= "\n</ul>";
 
-        if($this->serviceName){
+        if ($this->serviceName) {
             $serviceObject = $this->serviceRouter->getServiceObject($this->serviceName);
             $reflectionObj = new ReflectionObject($serviceObject);
             $availablePublicMethods = $reflectionObj->getMethods(ReflectionMethod::IS_PUBLIC);
@@ -222,7 +217,7 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
             $message .= "\n</ul>";
         }
 
-        if($this->methodName){
+        if ($this->methodName) {
             $serviceObject = $this->serviceRouter->getServiceObject($this->serviceName);
             $reflectionObj = new ReflectionObject($serviceObject);
             $method = $reflectionObj->getMethod($this->methodName);
@@ -234,8 +229,8 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
                 foreach ($parameterDescriptors as $parameterDescriptor) {
                     $availableParameterName = $parameterDescriptor->name;
                     $message .= "\n     <tr><td>$availableParameterName</td><td><input name='$availableParameterName' ";
-                    if($this->parametersAssoc){
-                       $message .= "value='" . $this->parametersAssoc[$availableParameterName] . "'";
+                    if ($this->parametersAssoc) {
+                        $message .= "value='" . $this->parametersAssoc[$availableParameterName] . "'";
                     }
                     $message .= "></td></tr>";
                 }
@@ -245,11 +240,9 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
                 $message .= "\n<form action='?serviceName=$this->serviceName&methodName=$this->methodName&noParams' method='POST'>\n";
                 $message .= "\n<input type='submit' value='call'></form>";
             }
-
-
         }
 
-        if($this->showResult){
+        if ($this->showResult) {
             $message .= "<h3>Result</h3>";
             $message .= "<pre>";
             $message .= print_r($data, true);
@@ -257,22 +250,22 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
         }
         $message .= file_get_contents(dirname(__FILE__) . "/Bottom.html");
 
-        
-        return $message;  
+
+        return $message;
     }
 
-    
     /**
      * filter the headers to make sure the content type is set to text/html if the request was handled by the service browser
      * @param array $headers
      * @return array
      */
-    public function filterHeaders($headers, $contentType){
+    public function filterHeaders($headers, $contentType) {
         if (!$contentType || $contentType == self::CONTENT_TYPE) {
             $headers["Content-Type"] = "text/html";
             return $headers;
         }
     }
+
 }
 
 ?>
