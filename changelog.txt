@@ -1,6 +1,8 @@
 Version history
 --------- 2.0 -------------
 AmfPhpGet plugin, for requests just using GET, and cross domain AJAX calls
+config shared between plugins support added
+switch to return or not error details
 --------- 2.0 rc1 ---------
 better serialization of typed objects.
 enhanced service browser plugin
