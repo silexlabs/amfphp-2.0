@@ -56,10 +56,12 @@ class Amfphp_Core_PluginManager {
     /**
      * load the plugins
      * @param String $rootFolder where to load the plugins from. Absolute path.
-     * @param array $pluginConfig . optional. an array containing the plugin configuration, using the plugin name as key.
+     * @param array $pluginsConfig . optional. an array containing the plugin configuration, using the plugin name as key.
+     * @param array $sharedConfig. optional. if both a specific config and a shared config are available, concatenate them to create the plugin config. 
+     * Otherwise use whatever is not null
      * @param array $disabledPlugins . optional.  an array of names of plugins to disable
      */
-    public function loadPlugins($rootFolder, array $pluginsConfig = null, array $disabledPlugins = null){
+    public function loadPlugins($rootFolder, array $pluginsConfig = null, array $sharedConfig = null, array $disabledPlugins = null){
         $pluginsFolderRootPath = $rootFolder;
         if(!is_dir($rootFolder)){
             throw new Amfphp_Core_Exception("invalid path for loading plugins at " . $rootFolder);
@@ -92,10 +94,16 @@ class Amfphp_Core_PluginManager {
             if(!class_exists($pluginName)){
                 require_once $pluginsFolderRootPath . "/" . $pluginName . "/" . $pluginName . ".php";
             }
-            $pluginConfig = null;
-            if(isset($pluginsConfig[$pluginName])){
+            
+            $pluginConfig = array();
+            if($pluginsConfig && isset($pluginsConfig[$pluginName])){
                 $pluginConfig = $pluginsConfig[$pluginName];
             }
+            if($sharedConfig){
+                $pluginConfig += $sharedConfig;
+            }
+            
+            
             $pluginInstance = new $pluginName($pluginConfig);
             $this->pluginInstances[] = $pluginInstance;
         }

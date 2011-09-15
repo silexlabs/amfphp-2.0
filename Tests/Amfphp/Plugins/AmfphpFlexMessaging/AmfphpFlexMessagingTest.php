@@ -89,7 +89,7 @@ class AmfphpFlexMessagingTest extends PHPUnit_Framework_TestCase {
         $remoting = new stdClass();
         $remoting->_explicitType = AmfphpFlexMessaging::FLEX_TYPE_REMOTING_MESSAGE;
         $remoting->messageId = "690D76D5-13C0-DFBD-7F2F-9E3786B59EB5";
-        $remoting->source = "MirrorService";
+        $remoting->source = "TestService";
         $remoting->operation = "returnOneParam";
         $remoting->body = array("boo");
         $requestMessage->data[] = $remoting;

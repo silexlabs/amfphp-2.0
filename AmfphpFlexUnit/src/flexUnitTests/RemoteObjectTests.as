@@ -19,7 +19,7 @@ package flexUnitTests
 			_myConnection = new RemoteObject;	
 
 			_myConnection.destination = "amfphp2TestGateway"; 
-			_myConnection.source = "MirrorService";			
+			_myConnection.source = "TestService";			
 		}
 		
 		[After]

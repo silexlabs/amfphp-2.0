@@ -39,6 +39,8 @@ class AmfphpGet implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_
     * the content-type string indicating a cross domain ajax call
     */
     const CONTENT_TYPE = "text/amfphpget";
+    
+    private $returnErrorDetails = false;
 	
     /**
      * constructor. Add filters on the HookManager.
@@ -51,6 +53,8 @@ class AmfphpGet implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_EXCEPTION_HANDLER, $this, "filterHandler");
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_SERIALIZER, $this, "filterHandler");
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_HEADERS, $this, "filterHeaders");
+        $this->returnErrorDetails = (isset ($config[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]) && $config[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]);
+        
     }
 
     /**
@@ -104,7 +108,15 @@ class AmfphpGet implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_
      * @see Amfphp_Core_Common_IExceptionHandler
      */
     public function handleException(Exception $exception){
-        return str_replace("\n", "<br>", $exception->__toString());
+        $error = new stdClass();
+        $error->message = $exception->getMessage();
+        $error->code = $exception->getCode();
+        if($this->returnErrorDetails){
+            $error->file = $exception->getFile();
+            $error->line = $exception->getLine();
+            $error->stack = $exception->getTraceAsString();
+        }        
+        return (object)array('error' => $error);
         
     }
     

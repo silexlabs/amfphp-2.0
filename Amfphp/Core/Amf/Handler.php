@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of amfPHP
  *
@@ -14,9 +15,7 @@
  * @package Amfphp_Core_Amf
  * @author Ariel Sommeria-Klein
  */
-class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_IDeserializedRequestHandler, Amfphp_Core_Common_IExceptionHandler, Amfphp_Core_Common_ISerializer{
-
-
+class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_IDeserializedRequestHandler, Amfphp_Core_Common_IExceptionHandler, Amfphp_Core_Common_ISerializer {
     /**
      * filter called for each amf request header, to give a plugin the chance to handle it.
      * Unless a plugin handles them, amf headers are ignored
@@ -50,23 +49,26 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      * @var String
      */
     private $lastRequestMessageResponseUri;
-
-	private $objectEncoding = Amfphp_Core_Amf_Constants::AMF0_ENCODING;
-
-    public function  __construct() {
-        $this->lastRequestMessageResponseUri = "/1";
-    }
+    private $objectEncoding = Amfphp_Core_Amf_Constants::AMF0_ENCODING;
     
+    private $returnErrorDetails = false;
+    
+
+    public function __construct($sharedConfig) {
+        $this->lastRequestMessageResponseUri = "/1";
+        $this->returnErrorDetails = (isset ($sharedConfig[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]) && $sharedConfig[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]);
+    }
+
     /**
      * @see Amfphp_Core_Common_IDeserializer
      */
-    public function deserialize(array $getData, array $postData, $rawPostData){
+    public function deserialize(array $getData, array $postData, $rawPostData) {
         $deserializer = new Amfphp_Core_Amf_Deserializer($rawPostData);
         $requestPacket = $deserializer->deserialize();
 
-	    $this->objectEncoding = $requestPacket->amfVersion;
+        $this->objectEncoding = $requestPacket->amfVersion;
 
-	    return $requestPacket;
+        return $requestPacket;
     }
 
     /**
@@ -75,7 +77,7 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      * @param Amfphp_Core_Amf_Message $Amfphp_Core_Amf_Message
      * @return Amfphp_Core_Common_ServiceCallParameters
      */
-    private function getServiceCallParameters(Amfphp_Core_Amf_Message $Amfphp_Core_Amf_Message){
+    private function getServiceCallParameters(Amfphp_Core_Amf_Message $Amfphp_Core_Amf_Message) {
         $targetUri = str_replace(".", "/", $Amfphp_Core_Amf_Message->targetUri);
         $split = explode("/", $targetUri);
         $ret = new Amfphp_Core_Common_ServiceCallParameters();
@@ -92,14 +94,14 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      * @param Amfphp_Core_Amf_Message $requestMessage
      * @return Amfphp_Core_Amf_Message the response Message for the request
      */
-    private function handleRequestMessage(Amfphp_Core_Amf_Message $requestMessage, Amfphp_Core_Common_ServiceRouter $serviceRouter){
+    private function handleRequestMessage(Amfphp_Core_Amf_Message $requestMessage, Amfphp_Core_Common_ServiceRouter $serviceRouter) {
         $filterManager = Amfphp_Core_FilterManager::getInstance();
         $fromFilters = $filterManager->callFilters(self::FILTER_AMF_REQUEST_MESSAGE_HANDLER, null, $requestMessage);
-        if($fromFilters){
+        if ($fromFilters) {
             $handler = $fromFilters;
             return $handler->handleRequestMessage($requestMessage, $serviceRouter);
         }
-        
+
         //plugins didn't do any special handling. Assumes this is a simple Amfphp_Core_Amf_ RPC call
         $serviceCallParameters = $this->getServiceCallParameters($requestMessage);
         $ret = $serviceRouter->executeServiceCall($serviceCallParameters->serviceName, $serviceCallParameters->methodName, $serviceCallParameters->methodParameters);
@@ -111,17 +113,16 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
         return $responseMessage;
     }
 
-
     /**
      * @see Amfphp_Core_Common_IDeserializedRequestHandler
      */
-    public function handleDeserializedRequest($deserializedRequest, Amfphp_Core_Common_ServiceRouter $serviceRouter){
+    public function handleDeserializedRequest($deserializedRequest, Amfphp_Core_Common_ServiceRouter $serviceRouter) {
         $numHeaders = count($deserializedRequest->headers);
-        for($i = 0; $i < $numHeaders; $i++){
+        for ($i = 0; $i < $numHeaders; $i++) {
             $requestHeader = $deserializedRequest->headers[$i];
             //handle a header. This is a job for plugins, unless comes a header that is so fundamental that it needs to be handled by the core
             $fromFilters = Amfphp_Core_FilterManager::getInstance()->callFilters(self::FILTER_AMF_REQUEST_HEADER_HANDLER, null, $requestHeader);
-            if($fromFilters){
+            if ($fromFilters) {
                 $handler = $fromFilters;
                 $handler->handleRequestHeader($requestHeader);
             }
@@ -131,25 +132,24 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
         $rawOutputData = "";
         $responsePacket = new Amfphp_Core_Amf_Packet();
         $responsePacket->amfVersion = $deserializedRequest->amfVersion;
-        for($i = 0; $i < $numMessages; $i++){
+        for ($i = 0; $i < $numMessages; $i++) {
             $requestMessage = $deserializedRequest->messages[$i];
             $this->lastRequestMessageResponseUri = $requestMessage->responseUri;
             $responseMessage = $this->handleRequestMessage($requestMessage, $serviceRouter);
             $responsePacket->messages[] = $responseMessage;
         }
         return $responsePacket;
-
     }
 
     /**
      * @see Amfphp_Core_Common_IExceptionHandler
      * @todo option for production, don't send exception trace
      */
-    public function handleException(Exception $exception){
+    public function handleException(Exception $exception) {
         $errorPacket = new Amfphp_Core_Amf_Packet();
         $filterManager = Amfphp_Core_FilterManager::getInstance();
         $fromFilters = $filterManager->callFilters(self::FILTER_AMF_EXCEPTION_HANDLER, null);
-        if($fromFilters){
+        if ($fromFilters) {
             $handler = $fromFilters;
             return $handler->generateErrorResponse($exception);
         }
@@ -160,26 +160,30 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
         $errorResponseMessage->targetUri = $this->lastRequestMessageResponseUri . Amfphp_Core_Amf_Constants::CLIENT_FAILURE_METHOD;
         //not specified
         $errorResponseMessage->responseUri = "null";
-        $errorResponseMessage->data = new stdClass();
-        $errorResponseMessage->data->faultCode = $exception->getCode();
-        $errorResponseMessage->data->faultString = $exception->getMessage();
-        $errorResponseMessage->data->faultDetail = $exception->getTraceAsString();
+        $data = new stdClass();
+        $data->faultCode = $exception->getCode();
+        if($this->returnErrorDetails){
+            $data->faultDetail = $exception->getTraceAsString();
+            $data->faultString = $exception->getMessage();
+        }else{
+            $data->faultDetail = $data->faultString = "";
+        }
+        $errorResponseMessage->data = $data;
 
         $errorPacket->messages[] = $errorResponseMessage;
         return $errorPacket;
-        
     }
 
     /**
      * @see Amfphp_Core_Common_ISerializer
      */
-    public function serialize($data){
-	    $data->amfVersion = $this->objectEncoding;
+    public function serialize($data) {
+        $data->amfVersion = $this->objectEncoding;
 
         $serializer = new Amfphp_Core_Amf_Serializer($data);
         return $serializer->serialize();
-
     }
 
 }
+
 ?>

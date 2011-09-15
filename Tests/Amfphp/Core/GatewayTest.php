@@ -30,9 +30,9 @@ class Amfphp_Core_GatewayTest extends PHPUnit_Framework_TestCase {
         $testServiceConfig = new TestServicesConfig();
         $config->serviceFolderPaths = $testServiceConfig->serviceFolderPaths;
         $config->serviceNames2ClassFindInfo = $testServiceConfig->serviceNames2ClassFindInfo;
-        $gateway = new Amfphp_Core_Gateway(array(), array(), $amfTestData->mirrorServiceRequestPacket, Amfphp_Core_Amf_Constants::CONTENT_TYPE, $config);
+        $gateway = new Amfphp_Core_Gateway(array(), array(), $amfTestData->testServiceRequestPacket, Amfphp_Core_Amf_Constants::CONTENT_TYPE, $config);
         $ret = $gateway->service();
-        $this->assertEquals(bin2hex($amfTestData->mirrorServiceResponsePacket), bin2hex($ret));
+        $this->assertEquals(bin2hex($amfTestData->testServiceResponsePacket), bin2hex($ret));
     }
 
     public function testEmptyMessage(){

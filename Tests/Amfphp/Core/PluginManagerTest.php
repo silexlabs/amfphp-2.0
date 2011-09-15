@@ -49,7 +49,7 @@ class Amfphp_Core_PluginManagerTest extends PHPUnit_Framework_TestCase {
 
     public function testDisabled(){
         $disabledPluginLoadCount = DisabledPlugin::$instanciationCounter;
-        $this->pluginManager->loadPlugins(dirname(__FILE__) . "/../../TestData/TestPlugins/", null, array("DisabledPlugin"));
+        $this->pluginManager->loadPlugins(dirname(__FILE__) . "/../../TestData/TestPlugins/", null, null, array("DisabledPlugin"));
         $this->assertEquals($disabledPluginLoadCount, DisabledPlugin::$instanciationCounter);
 
     }

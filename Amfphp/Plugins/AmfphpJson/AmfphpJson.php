@@ -23,6 +23,8 @@ class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common
     * the content-type string indicating a JSON content
     */
     const JSON_CONTENT_TYPE = "application/json";
+    
+    private $returnErrorDetails = false;
 	
     /**
      * constructor. Add filters on the HookManager.
@@ -34,6 +36,8 @@ class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_REQUEST_HANDLER, $this, "filterHandler");
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_EXCEPTION_HANDLER, $this, "filterHandler");
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_SERIALIZER, $this, "filterHandler");
+        $this->returnErrorDetails = (isset ($config[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]) && $config[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]);
+        
     }
 
     /**
@@ -86,8 +90,16 @@ class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common
     /**
      * @see Amfphp_Core_Common_IExceptionHandler
      */
-    public function handleException(Exception $exception){
-        return str_replace("\n", "<br>", $exception->__toString());
+    public function handleException(Exception $exception){        
+        $error = new stdClass();
+        $error->message = $exception->getMessage();
+        $error->code = $exception->getCode();
+        if($this->returnErrorDetails){
+            $error->file = $exception->getFile();
+            $error->line = $exception->getLine();
+            $error->stack = $exception->getTraceAsString();
+        }        
+        return (object)array('error' => $error);
         
     }
     

@@ -82,8 +82,8 @@ class AmfTestData {
     public $s2Headers2MessagesPacket;
     public $d2Headers2MessagesPacket;
 
-    public $mirrorServiceRequestPacket;
-    public $mirrorServiceResponsePacket;
+    public $testServiceRequestPacket;
+    public $testServiceResponsePacket;
     
     public function  __construct() {
         $this->buildByte();
@@ -113,7 +113,7 @@ class AmfTestData {
         $this->buildNullMessagePacket();
         $this->buildStringMessagePacket();
         $this->build2HeadersAndTwoMessagesPacket();
-        $this->buildSimpleMirrorServiceRequestAndResponse();
+        $this->buildSimpleTestServiceRequestAndResponse();
         //$this->build;
 
     }
@@ -732,11 +732,11 @@ class AmfTestData {
     /**
      *
      */
-    public function buildSimpleMirrorServiceRequestAndResponse(){
+    public function buildSimpleTestServiceRequestAndResponse(){
 
         //request
 
-        $requestTargetUri = "MirrorService/returnOneParam";
+        $requestTargetUri = "TestService/returnOneParam";
         $requestResponseUri = "/1";
 
         //version (int)
@@ -775,7 +775,7 @@ class AmfTestData {
         //add the Message itself
         $requestPacket .= $requestMessage;
 
-        $this->mirrorServiceRequestPacket = $requestPacket;
+        $this->testServiceRequestPacket = $requestPacket;
 
 
 
@@ -816,7 +816,7 @@ class AmfTestData {
         $responsePacket .= $responseMessage;
 
 
-        $this->mirrorServiceResponsePacket = $responsePacket;
+        $this->testServiceResponsePacket = $responsePacket;
 
     }
 

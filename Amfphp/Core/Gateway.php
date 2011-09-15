@@ -166,10 +166,10 @@ class Amfphp_Core_Gateway {
      */
     public function service(){
         $filterManager = Amfphp_Core_FilterManager::getInstance();
-        $defaultHandler = new Amfphp_Core_Amf_Handler();
+        $defaultHandler = new Amfphp_Core_Amf_Handler($this->config->sharedConfig);
         $deserializedResponse = null;
         try{
-            Amfphp_Core_PluginManager::getInstance()->loadPlugins($this->config->pluginsFolder, $this->config->pluginsConfig, $this->config->disabledPlugins);
+            Amfphp_Core_PluginManager::getInstance()->loadPlugins($this->config->pluginsFolder, $this->config->pluginsConfig, $this->config->sharedConfig, $this->config->disabledPlugins);
             
             //filter service folder paths
             $this->config->serviceFolderPaths = $filterManager->callFilters(self::FILTER_SERVICE_FOLDER_PATHS, $this->config->serviceFolderPaths);

@@ -11,12 +11,12 @@
 
 
 /**
- * MirrorService is a test/example service. Remove it for production use
+ * This is a test/example service. 
  *
  * @package Amfphp_Services
  * @author Ariel Sommeria-klein
  */
-class MirrorService {
+class TestService {
 
     public function returnOneParam($param){
         return $param;
@@ -32,6 +32,10 @@ class MirrorService {
 
     public function returnBla(){
         return "bla";
+    }
+    
+    public function throwException(){
+        throw new Exception("test exception", 123);
     }
 
 

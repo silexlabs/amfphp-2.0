@@ -20,8 +20,8 @@ class Amfphp_Core_Amf_Message {
     /**
      * inthe case of a request:
      * parsed to a service name and a function name. supported separators for the targetUri are "." and "/"
-     * The service name can either be just the name of the class (MirrorService) or include a path(package/MirrorService)
-     * example of full targetUri package/MirrorService/mirrorFunction
+     * The service name can either be just the name of the class (TestService) or include a path(package/TestService)
+     * example of full targetUri package/TestService/mirrorFunction
      *
      * in the case of a response:
      * the request responseUri + OK/KO

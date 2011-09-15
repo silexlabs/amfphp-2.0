@@ -22,9 +22,9 @@ class TestServicesConfig {
 
     public function  __construct() {
         $this->serviceFolderPaths  = array(dirname(__FILE__) . "/Services/");
-        $mirrorServicePath = dirname(__FILE__) . '/../../Amfphp/Services/MirrorService.php';
-        $mirrorServiceAmfphp_Core_Common_ClassFindInfo = new Amfphp_Core_Common_ClassFindInfo($mirrorServicePath, "MirrorService");
-        $this->serviceNames2ClassFindInfo = array("MirrorService" => $mirrorServiceAmfphp_Core_Common_ClassFindInfo);
+        $testServicePath = dirname(__FILE__) . '/TestService.php';
+        $classFindInfo = new Amfphp_Core_Common_ClassFindInfo($testServicePath, "TestService");
+        $this->serviceNames2ClassFindInfo = array("TestService" => $classFindInfo);
     }
 
 }

@@ -48,6 +48,22 @@ class Amfphp_Core_Config {
      * @var array
      */
     public $pluginsConfig;
+    
+    /**
+     * array containing configuration data that is shared between the plugins. The format is paramName/paramValue pairs as an array.
+     * 
+     * @var array
+     */
+    public $sharedConfig;
+    
+    /**
+     * if true, there will be detailed information in the error messages, including confidential information like paths.
+     * So it is advised to set to true for development purposes and to false in production.
+     * Set in the shared config.
+     * @var Boolean
+     */
+    const CONFIG_RETURN_ERROR_DETAILS = "returnErrorDetails";
+    
 
     /**
      * array of plugins that are available but should be disabled
@@ -61,6 +77,10 @@ class Amfphp_Core_Config {
         $this->serviceNames2ClassFindInfo = array();
         $this->pluginsFolder = Amfphp_ROOTPATH . "/Plugins/";
         $this->pluginsConfig = array();
+        
+        $this->sharedConfig = array();
+        $this->sharedConfig[self::CONFIG_RETURN_ERROR_DETAILS] = true;
+        
         $this->disabledPlugins = array();
         //disable logging by default
         $this->disabledPlugins[] = "AmfphpLogger";

@@ -49,6 +49,8 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
     private $serviceRouter;
 
     private $showResult;
+    
+    private $returnErrorDetails = false;
 
     /**
      * constructor.
@@ -61,6 +63,8 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_EXCEPTION_HANDLER, $this, "filterHandler");
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_SERIALIZER, $this, "filterHandler");
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_HEADERS, $this, "filterHeaders");
+        $this->returnErrorDetails = (isset ($config[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]) && $config[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]);
+        
     }
 
     /**
@@ -184,8 +188,10 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
         $exceptionInfo = "Exception thrown\n<br>";
         $exceptionInfo .= "message : " . $exception->getMessage() . "\n<br>";
         $exceptionInfo .= "code : " . $exception->getCode() . "\n<br>";
-        $exceptionInfo .= "file : " . $exception->getFile() . "\n<br>";
-        $exceptionInfo .= "line : " . $exception->getLine() . "\n<br>";
+        if($this->returnErrorDetails){
+            $exceptionInfo .= "file : " . $exception->getFile() . "\n<br>";
+            $exceptionInfo .= "line : " . $exception->getLine() . "\n<br>";
+        }
             //$exceptionInfo .= "trace : " . str_replace("\n", "<br>\n", print_r($exception->getTrace(), true)) . "\n<br>";
         $this->showResult = true;
        return $exceptionInfo;
