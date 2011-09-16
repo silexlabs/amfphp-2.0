@@ -26,6 +26,7 @@ class AmfphpFlexMessaging_ErrorMessage
 	public $faultCode;
 	public $faultDetail;
 	public $faultString;
+        public $rootCause;
 
         public function  __construct($correlationId) {
             $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;

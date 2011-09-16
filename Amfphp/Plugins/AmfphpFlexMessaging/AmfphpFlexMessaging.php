@@ -49,6 +49,7 @@ class AmfphpFlexMessaging{
      */
     private $lastFlexMessageResponseUri;
 
+    private $returnErrorDetails = false;
     /**
      * constructor.
      * @param array $config optional key/value pairs in an associative array. Used to override default configuration values.
@@ -57,6 +58,8 @@ class AmfphpFlexMessaging{
         Amfphp_Core_FilterManager::getInstance()->addFilter(Amfphp_Core_Amf_Handler::FILTER_AMF_REQUEST_MESSAGE_HANDLER, $this, "filterAmfRequestMessageHandler");
         Amfphp_Core_FilterManager::getInstance()->addFilter(Amfphp_Core_Amf_Handler::FILTER_AMF_EXCEPTION_HANDLER, $this, "filterAmfExceptionHandler");
         $this->clientUsesFlexMessaging = false;
+        $this->returnErrorDetails = (isset ($config[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]) && $config[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]);
+
     }
 
     /**
@@ -145,7 +148,10 @@ class AmfphpFlexMessaging{
         $error = new AmfphpFlexMessaging_ErrorMessage($this->lastFlexMessageId);
         $error->faultCode = $exception->getCode();
         $error->faultString = $exception->getMessage();
-        $error->faultDetail = $exception->getTraceAsString();
+        if($this->returnErrorDetails){
+            $error->faultDetail = $exception->getTraceAsString();
+            $error->rootCause = $exception;
+        }
         $errorMessage = new Amfphp_Core_Amf_Message($this->lastFlexMessageResponseUri . Amfphp_Core_Amf_Constants::CLIENT_FAILURE_METHOD, null, $error);
         $errorPacket = new Amfphp_Core_Amf_Packet();
         $errorPacket->messages[] = $errorMessage;

@@ -162,11 +162,12 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
         $errorResponseMessage->responseUri = "null";
         $data = new stdClass();
         $data->faultCode = $exception->getCode();
+        $data->faultString = $exception->getMessage();
         if($this->returnErrorDetails){
             $data->faultDetail = $exception->getTraceAsString();
-            $data->faultString = $exception->getMessage();
+            $data->rootCause = $exception;
         }else{
-            $data->faultDetail = $data->faultString = "";
+            $data->faultDetail = "";
         }
         $errorResponseMessage->data = $data;
 

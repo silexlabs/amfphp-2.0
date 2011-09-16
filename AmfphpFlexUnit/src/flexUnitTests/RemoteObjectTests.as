@@ -38,7 +38,7 @@ package flexUnitTests
 		}
 		
 		public function testBadRequest():void{
-			_myConnection.getInexistantMethod();
+			_myConnection.throwException();
 			_myConnection.addEventListener(FaultEvent.FAULT, addAsync(badRequestFaultHandler, 1000));
 		}
 		
