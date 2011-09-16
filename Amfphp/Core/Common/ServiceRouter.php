@@ -21,7 +21,10 @@
 class Amfphp_Core_Common_ServiceRouter{
     /**
 * filter called when the service object is created. Useful for authentication
-* @param String the raw http data
+     * @param Object $serviceObject 
+    * @param string $serviceName
+    * @param string $methodName
+    * @param array $parameters
 */
     const FILTER_SERVICE_OBJECT = "FILTER_SERVICE_OBJECT";
      /**
@@ -95,7 +98,7 @@ class Amfphp_Core_Common_ServiceRouter{
     */
     public function executeServiceCall($serviceName, $methodName, array $parameters){
         $serviceObject = $this->getServiceObject($serviceName);
-        $serviceObject = Amfphp_Core_FilterManager::getInstance()->callFilters(self::FILTER_SERVICE_OBJECT, $serviceObject, $serviceName, $methodName);
+        $serviceObject = Amfphp_Core_FilterManager::getInstance()->callFilters(self::FILTER_SERVICE_OBJECT, $serviceObject, $serviceName, $methodName, $parameters);
 
         if(!method_exists($serviceObject, $methodName)){
             throw new Amfphp_Core_Exception("method $methodName not found on $serviceName object ");
