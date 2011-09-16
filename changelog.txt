@@ -5,7 +5,7 @@ config shared between plugins support added
 switch to return or not error details
 service browser design
 support for multiple plugin folders
-
+plugins can now add services
 --------- 2.0 rc1 ---------
 better serialization of typed objects.
 enhanced service browser plugin

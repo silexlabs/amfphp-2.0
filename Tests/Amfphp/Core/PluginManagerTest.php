@@ -43,20 +43,20 @@ class Amfphp_Core_PluginManagerTest extends PHPUnit_Framework_TestCase {
      */
     public function testSimple(){
         
-        $this->pluginManager->loadPlugins(dirname(__FILE__) . "/../../TestData/TestPlugins/");
+        $this->pluginManager->loadPlugins(array(dirname(__FILE__) . "/../../TestData/TestPlugins/"));
         $this->assertEquals(1, DummyPlugin::$instanciationCounter);
     }
 
     public function testDisabled(){
         $disabledPluginLoadCount = DisabledPlugin::$instanciationCounter;
-        $this->pluginManager->loadPlugins(dirname(__FILE__) . "/../../TestData/TestPlugins/", null, null, array("DisabledPlugin"));
+        $this->pluginManager->loadPlugins(array(dirname(__FILE__) . "/../../TestData/TestPlugins/"), null, null, array("DisabledPlugin"));
         $this->assertEquals($disabledPluginLoadCount, DisabledPlugin::$instanciationCounter);
 
     }
 
     public function testConfig(){
         $pluginsConfig = array("DummyPlugin" => array("dummyConfVar" => "custom"));
-        $this->pluginManager->loadPlugins(dirname(__FILE__) . "/../../TestData/TestPlugins/", $pluginsConfig);
+        $this->pluginManager->loadPlugins(array(dirname(__FILE__) . "/../../TestData/TestPlugins/"), $pluginsConfig);
         $this->assertEquals("custom", DummyPlugin::$dummyConfVar);
 
 
@@ -67,7 +67,7 @@ class Amfphp_Core_PluginManagerTest extends PHPUnit_Framework_TestCase {
      * @expectedException Amfphp_Core_Exception
      */
     public function testBadFolder(){
-        $this->pluginManager->loadPlugins("bla");
+        $this->pluginManager->loadPlugins(array("bla"));
 
     }
 
