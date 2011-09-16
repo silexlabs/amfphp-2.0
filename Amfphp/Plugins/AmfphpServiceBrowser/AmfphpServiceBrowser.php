@@ -83,21 +83,31 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
         $ret->post = $postData;
         return $ret;
     }
-
+    
     /**
-     * adds an item to an array if and only if a duplicate is not already in the array
-     * @param array $targetArray
-     * @param <type> $toAdd
-     * @return array
+     * finds classes in folder. If in subfolders add the relative path to the name.
+     * recursive, so use with care.
+     * @param type $rootPath
+     * @param type $subFolder
+     * @return type 
      */
-    private function addToArrayIfUnique(array $targetArray, $toAdd) {
-        foreach ($targetArray as $value) {
-            if ($value == $toAdd) {
-                return $targetArray;
+    private function searchFolderForServices($rootPath, $subFolder){
+        $ret = array();
+        $folderContent = scandir($rootPath . $subFolder);
+
+        if ($folderContent) {
+            foreach ($folderContent as $fileName) {
+                //add all .php file names, but removing the .php suffix
+                if (strpos($fileName, ".php")) {
+                    $serviceName = substr($fileName, 0, strlen($fileName) - 4);
+                    $ret[] = $subFolder . $serviceName;
+                }else if((substr ($fileName, 0, 1) != '.') &&  is_dir($rootPath . $subFolder . $fileName)){
+                    $ret = array_merge($ret, $this->searchFolderForServices($rootPath, $subFolder . $fileName . '/'));
+                }
             }
         }
-        $targetArray[] = $toAdd;
-        return $targetArray;
+        return $ret;
+        
     }
 
     /**
@@ -107,21 +117,11 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
     private function getAvailableServiceNames(array $serviceFolderPaths, array $serviceNames2ClassFindInfo) {
         $ret = array();
         foreach ($serviceFolderPaths as $serviceFolderPath) {
-            $folderContent = scandir($serviceFolderPath);
-
-            if ($folderContent) {
-                foreach ($folderContent as $fileName) {
-                    //add all .php file names, but removing the .php suffix
-                    if (strpos($fileName, ".php")) {
-                        $serviceName = substr($fileName, 0, strlen($fileName) - 4);
-                        $ret = $this->addToArrayIfUnique($ret, $serviceName);
-                    }
-                }
-            }
+            $ret += $this->searchFolderForServices($serviceFolderPath, '');
         }
 
         foreach ($serviceNames2ClassFindInfo as $key => $value) {
-            $ret = $this->addToArrayIfUnique($ret, $key);
+            $ret[] = $key;
         }
 
         return $ret;
