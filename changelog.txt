@@ -2,7 +2,7 @@ Version history
 --------- 2.0 -------------
 AmfPhpGet plugin, for requests just using GET, and cross domain AJAX calls
 config shared between plugins support added
-switch to return or not error details
+switch to return or not error details, and support for custom error messages
 service browser design
 support for multiple plugin folders
 plugins can now add services

@@ -10,11 +10,10 @@ package flexUnitTests
 	import org.amfphp.test.ObjEvent;
 	
 	/**
-	 * test sending all basic object types from the AMF0 and making sure the returned data is the same.
-	 * These tests run using AMF0, but they can also be used for AM3, just override the setup method
+	 * test sending stock messages in AMF0. for AM3, just override the setup method
 	 * note: references are tricky, as they can only be indirectly observed, and there is no "object end" test case
 	 * */
-	public class AmfCommonTypeTests extends TestCase
+	public class AmfCommonTests extends TestCase
 	{		
 		
 		protected var _nc:EnhancedNetConnection;
@@ -220,6 +219,17 @@ package flexUnitTests
 			assertTrue(event.obj is XMLDocument);
 		}		
 		
+		public function testException():void{
+			_nc.addEventListener(EnhancedNetConnection.EVENT_ONSTATUS, addAsync(verifyStatus, 1000));
+			var testVar:int = -1;
+			_nc.simpleCall("TestService/throwException", testVar);	
+			
+		}
+		
+		private function verifyStatus(event:ObjEvent):void{
+			assertEquals(123,event.obj.faultCode);
+			assertEquals("test exception", event.obj.faultString);
+		}		
 		
 	}
 }

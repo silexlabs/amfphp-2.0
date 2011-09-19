@@ -2,6 +2,7 @@ package flexUnitTests
 {
 	import flexunit.framework.TestCase;
 	
+	import mx.collections.ArrayCollection;
 	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
 	import mx.rpc.remoting.RemoteObject;
@@ -51,9 +52,19 @@ package flexUnitTests
 			_myConnection.addEventListener(ResultEvent.RESULT, addAsync(sendingAndReceivingATypedObjectResultHandler, 1000));
 			
 		}
-
+		
 		public function sendingAndReceivingATypedObjectResultHandler(event:ResultEvent):void{
 			assertTrue(event.result is TestCustomClass1);
+		}
+		
+		public function testSendingAndReceivingArrayCollection():void{
+			_myConnection.returnOneParam(new ArrayCollection());
+			_myConnection.addEventListener(ResultEvent.RESULT, addAsync(sendingAndReceivingArrayCollectionResultHandler, 1000));
+			
+		}
+		
+		public function sendingAndReceivingArrayCollectionResultHandler(event:ResultEvent):void{
+			assertTrue(event.result is ArrayCollection);
 		}
 		
 		
