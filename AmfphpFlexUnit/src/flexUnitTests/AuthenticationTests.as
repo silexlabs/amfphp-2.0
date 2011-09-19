@@ -68,6 +68,18 @@ package flexUnitTests
 			
 		}
 		
+		public function testCalling_getMethodRoles():void{
+			_nc.addEventListener(EnhancedNetConnection.EVENT_ONSTATUS, addAsync(verifyAccessDenied_getMethodRoles, 1000));
+			_nc.simpleCall("AuthenticationService/_getMethodRoles");	
+		}
+		
+		public function verifyAccessDenied_getMethodRoles(event:ObjEvent):void{
+			assertTrue(event.obj.faultString.indexOf("_getMethodRoles method access forbidden") != -1);
+			
+		}
+		
+		
+		
 
 		
 		

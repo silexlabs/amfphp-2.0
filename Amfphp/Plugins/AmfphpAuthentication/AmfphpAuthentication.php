@@ -11,14 +11,14 @@
 
 /** 
  * Authentication for Amfphp.
- * On a service object, the plugin looks for a method called getMethodRoles. If the method exists, the plugin will look for a role in the session that matches the role.
+ * On a service object, the plugin looks for a method called _getMethodRoles. If the method exists, the plugin will look for a role in the session that matches the role.
  * If the roles don't match, an Exception is thrown.
- * The getMethodRoles takes a parameter $methodName, and must return an array of strings containing acceptable roles for the method. If the return value is null,
+ * The _getMethodRoles takes a parameter $methodName, and must return an array of strings containing acceptable roles for the method. If the return value is null,
  * it is considered that that particular method is not protected.
  * 
  * For example:
  * <code>
- * public function getMethodRoles($methodName){
+ * public function _getMethodRoles($methodName){
  *    if($methodName == "adminMethod"){
  *        return array("admin");
  *    }else{
@@ -48,7 +48,7 @@ class AmfphpAuthentication {
     /**
      * the name of the method on the service where the method roles are given
      */
-    const METHOD_GET_METHOD_ROLES = "getMethodRoles";
+    const METHOD_GET_METHOD_ROLES = "_getMethodRoles";
 
     /**
      * the name of the login method
@@ -106,8 +106,12 @@ class AmfphpAuthentication {
         if(!method_exists($serviceObject, self::METHOD_GET_METHOD_ROLES)){
             return;
         }
+        
+        if($methodName == self::METHOD_GET_METHOD_ROLES){
+            throw new Exception("_getMethodRoles method access forbidden");
+        }
 
-        //the service object has a "getMethodRoles" method. role checking is necessary if the returned value is not null
+        //the service object has a "_getMethodRoles" method. role checking is necessary if the returned value is not null
         $acceptedRoles = call_user_func(array($serviceObject, self::METHOD_GET_METHOD_ROLES), $methodName);
         if(!$acceptedRoles){
             return;

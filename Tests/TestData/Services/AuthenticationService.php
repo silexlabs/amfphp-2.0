@@ -50,7 +50,7 @@ class AuthenticationService {
      * @param <String> $methodName
      * @return <array>
      */
-    public function getMethodRoles($methodName){
+    public function _getMethodRoles($methodName){
        if($methodName == "adminMethod"){
            return array("admin");
        }else{
@@ -59,7 +59,7 @@ class AuthenticationService {
     }
 
     /**
-     * method that is protected by authentication. Only "admin" role is authorized. (see getMethodRoles)
+     * method that is protected by authentication. Only "admin" role is authorized. (see _getMethodRoles)
      * @return <String> "ok"
      */
     public function adminMethod(){
