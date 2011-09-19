@@ -21,7 +21,7 @@
  * pass the parameters as POST data. Each will be JSON decoded to be able to pass complex parameters. This requires PHP 5.2 or higher
  *
  * @package Amfphp_Plugins_ServiceBrowser
- * @author Ariel Sommeria-Klein, design by Daniel Hoffmann (intermedi8.de) 
+ * @author Ariel Sommeria-Klein, Daniel Hoffmann (intermedi8.de) 
  */
 class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_IDeserializedRequestHandler, Amfphp_Core_Common_IExceptionHandler, Amfphp_Core_Common_ISerializer {
     /**
