@@ -50,7 +50,7 @@
 												<div class="method-definition">
 					static 						<span class="method-result">mixed</span>
 										<a href="#applyFunctionToContainedObjects" title="details" class="method-name">applyFunctionToContainedObjects</a>
-											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$obj</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$callBack</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$recursionDepth</span> = <span class="var-default">0</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$maxRecursionDepth</span> = <span class="var-default">30</span>], <span class="var-type">int</span>&nbsp;<span class="var-name">$maxRecursionDepth.</span>)
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$obj</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$callBack</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$recursionDepth</span> = <span class="var-default">0</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$maxRecursionDepth</span> = <span class="var-default">30</span>], [<span class="var-type">bool</span>&nbsp;<span class="var-name">$ignoreAmfTypes</span> = <span class="var-default">true</span>], <span class="var-type">int</span>&nbsp;<span class="var-name">$maxRecursionDepth.</span>)
 									</div>
 																<div class="method-definition">
 					static 						<span class="method-result"><Boolean></span>
@@ -99,10 +99,10 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="methodapplyFunctionToContainedObjects" id="applyFunctionToContainedObjects"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method applyFunctionToContainedObjects</span> (line <span class="line-number">39</span>)
+		<span class="method-title">static method applyFunctionToContainedObjects</span> (line <span class="line-number">40</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -119,7 +119,7 @@
 		<span class="method-name">
 			applyFunctionToContainedObjects
 		</span>
-					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$obj</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$callBack</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$recursionDepth</span> = <span class="var-default">0</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$maxRecursionDepth</span> = <span class="var-default">30</span>], <span class="var-type">int</span>&nbsp;<span class="var-name">$maxRecursionDepth.</span>)
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$obj</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$callBack</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$recursionDepth</span> = <span class="var-default">0</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$maxRecursionDepth</span> = <span class="var-default">30</span>], [<span class="var-type">bool</span>&nbsp;<span class="var-name">$ignoreAmfTypes</span> = <span class="var-default">true</span>], <span class="var-type">int</span>&nbsp;<span class="var-name">$maxRecursionDepth.</span>)
 			</div>
 	
 			<ul class="parameters">
@@ -136,6 +136,9 @@
 				<span class="var-type">int</span>
 				<span class="var-name">$maxRecursionDepth.</span><span class="var-description">: default is 30</span>			</li>
 					<li>
+				<span class="var-type">bool</span>
+				<span class="var-name">$ignoreAmfTypes</span><span class="var-description">: ignore objects with type in Amfphp_Core_Amf_Types package. could maybe be replaced by a regexp, but this is better for performance</span>			</li>
+					<li>
 				<span class="var-type"></span>
 				<span class="var-name">$maxRecursionDepth</span>			</li>
 				</ul>
@@ -143,7 +146,7 @@
 			
 	</div>
 <a name="methodisSystemBigEndian" id="isSystemBigEndian"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<span class="method-title">static method isSystemBigEndian</span> (line <span class="line-number">25</span>)
@@ -168,10 +171,10 @@
 			
 	</div>
 <a name="methodis_byteArray" id="is_byteArray"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method is_byteArray</span> (line <span class="line-number">86</span>)
+		<span class="method-title">static method is_byteArray</span> (line <span class="line-number">95</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -198,10 +201,10 @@
 			
 	</div>
 <a name="methodis_date" id="is_date"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method is_date</span> (line <span class="line-number">97</span>)
+		<span class="method-title">static method is_date</span> (line <span class="line-number">106</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -228,10 +231,10 @@
 			
 	</div>
 <a name="methodis_undefined" id="is_undefined"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method is_undefined</span> (line <span class="line-number">75</span>)
+		<span class="method-title">static method is_undefined</span> (line <span class="line-number">84</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -258,10 +261,10 @@
 			
 	</div>
 <a name="methodis_Xml" id="is_Xml"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method is_Xml</span> (line <span class="line-number">108</span>)
+		<span class="method-title">static method is_Xml</span> (line <span class="line-number">117</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -288,10 +291,10 @@
 			
 	</div>
 <a name="methodis_XmlDocument" id="is_XmlDocument"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method is_XmlDocument</span> (line <span class="line-number">118</span>)
+		<span class="method-title">static method is_XmlDocument</span> (line <span class="line-number">127</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -324,7 +327,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Thu, 23 Jun 2011 13:03:24 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 20 Sep 2011 17:34:32 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

@@ -37,13 +37,26 @@
 <ul>
     <li>consider an interface for $handler. Maybe overkill here</li>
 </ul>
+<h3><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Handler.html#methodhandleException">Amfphp_Core_Amf_Handler::handleException()</a></h3>
+<ul>
+    <li>option for production, don't send exception trace</li>
+</ul>
+<h3><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3Array">Amfphp_Core_Amf_Serializer::writeAmf3Array()</a></h3>
+<ul>
+    <li>understand this bit about circular references! so can use handleReference like everywhere else</li>
+</ul>
 <h3><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3Data">Amfphp_Core_Amf_Serializer::writeAmf3Data()</a></h3>
 <ul>
     <li>Is the reference still needed? PHP4 needed it for objects, but PHP5 always  passes objects by reference. And PHP5 uses a copy-on-write approach, so that all  values are passed as &quot;reference&quot;, in case no changes take place.</li>
     <li>no type markers (&quot;\6&quot;, for example) in this method!</li>
 </ul>
+<h2>Amfphp_Core_Common</h2>
+<h3><a href="Amfphp_Core_Common/Amfphp_Core_Common_ServiceRouter.html#methodgetServiceObject">Amfphp_Core_Common_ServiceRouter::getServiceObject()</a></h3>
+<ul>
+    <li>maybe option for a fully qualified class name.</li>
+</ul>
 	<p class="notes" id="credit">
-		Documentation generated on Thu, 23 Jun 2011 13:03:24 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 20 Sep 2011 17:34:32 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</body>
 </html>

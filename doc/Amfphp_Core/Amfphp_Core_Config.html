@@ -19,7 +19,9 @@
 													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
 						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
 						
-					</div>
+											<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+						
+			</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">responsable for loading and maintaining Amfphp configuration</p>
@@ -37,6 +39,29 @@
 </div>
 
 
+	<a name="sec-const-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constant Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Constants</span> (<a href="#sec-consts">details</a>)
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="const-summary">
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#CONFIG_RETURN_ERROR_DETAILS" title="details" class="const-name">CONFIG_RETURN_ERROR_DETAILS</a> = 					<span class="var-type"> &quot;returnErrorDetails&quot;</span>
+
+				</div>
+							</div>
+		</div>
+	</div>
 
 	<a name="sec-var-summary"></a>
 	<div class="info-box">
@@ -47,10 +72,12 @@
 							| 
 									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
 							
-								</div>
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+					</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-																																																								<div class="var-title">
+																																																																<div class="var-title">
 					<span class="var-type">array</span>
 					<a href="#$disabledPlugins" title="details" class="var-name">$disabledPlugins</a>
 				</div>
@@ -59,8 +86,8 @@
 					<a href="#$pluginsConfig" title="details" class="var-name">$pluginsConfig</a>
 				</div>
 																<div class="var-title">
-					<span class="var-type">String</span>
-					<a href="#$pluginsFolder" title="details" class="var-name">$pluginsFolder</a>
+					<span class="var-type">array</span>
+					<a href="#$pluginsFolders" title="details" class="var-name">$pluginsFolders</a>
 				</div>
 																<div class="var-title">
 					<span class="var-type"><array></span>
@@ -69,6 +96,10 @@
 																<div class="var-title">
 					<span class="var-type"><array></span>
 					<a href="#$serviceNames2ClassFindInfo" title="details" class="var-name">$serviceNames2ClassFindInfo</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$sharedConfig" title="details" class="var-name">$sharedConfig</a>
 				</div>
 											</div>
 		</div>
@@ -79,7 +110,9 @@
 		<div class="info-box-title">Method Summary</span></div>
 		<div class="nav-bar">
 			<a href="#sec-description">Description</a> |
-																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
 				 
 				|
 						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
@@ -104,6 +137,8 @@
 										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
 						
 			
+												<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
 										| 
 									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
 							
@@ -116,7 +151,7 @@
 		<span class="var-title">
 			<span class="var-type">array</span>
 			<span class="var-name">$disabledPlugins</span>
-						(line <span class="line-number">56</span>)
+						(line <span class="line-number">72</span>)
 		</span>
 	</div>
 
@@ -154,19 +189,19 @@
 		
 
 </div>
-<a name="var$pluginsFolder" id="$pluginsFolder"><!-- --></A>
+<a name="var$pluginsFolders" id="$pluginsFolders"><!-- --></A>
 <div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
-			<span class="var-type">String</span>
-			<span class="var-name">$pluginsFolder</span>
+			<span class="var-type">array</span>
+			<span class="var-name">$pluginsFolders</span>
 						(line <span class="line-number">40</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">path to the folder containing the plugins. defaults to Amfphp_ROOTPATH . &quot;/Plugins/&quot;</p>
+<p class="short-description">paths to the folder containing the plugins. defaults to Amfphp_ROOTPATH . &quot;/Plugins/&quot;</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -223,6 +258,28 @@
 		
 
 </div>
+<a name="var$sharedConfig" id="$sharedConfig"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$sharedConfig</span>
+						(line <span class="line-number">57</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">array containing configuration data that is shared between the plugins. The format is paramName/paramValue pairs as an array.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
 						
 		</div>
 	</div>
@@ -233,17 +290,19 @@
 		<div class="nav-bar">
 			<a href="#sec-description">Description</a> |
 															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
-																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+																			<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+										<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
 						
 		</div>
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 
 <a name="method__construct" id="__construct"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">58</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">74</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -266,9 +325,44 @@
 		</div>
 	</div>
 
+	<a name="sec-consts"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constants</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+														| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="constCONFIG_RETURN_ERROR_DETAILS" id="CONFIG_RETURN_ERROR_DETAILS"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">CONFIG_RETURN_ERROR_DETAILS</span>
+			 = <span class="const-default"> &quot;returnErrorDetails&quot;</span>
+			(line <span class="line-number">65</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">if true, there will be detailed information in the error messages, including confidential information like paths.</p>
+<p class="description"><p>So it is advised to set to true for development purposes and to false in production.  Set in the shared config.</p></p>
+	
+	
+</div>
+						
+		</div>
+	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Thu, 23 Jun 2011 13:03:14 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 20 Sep 2011 17:34:29 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

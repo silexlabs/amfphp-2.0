@@ -21,10 +21,12 @@
 					<li><a href="elementindex_Amfphp_Plugins_CustomClassConverter.html">Amfphp_Plugins_CustomClassConverter</a></li>
 					<li><a href="elementindex_Amfphp_Plugins_ErrorHandler.html">Amfphp_Plugins_ErrorHandler</a></li>
 					<li><a href="elementindex_Amfphp_Plugins_FlexMessaging.html">Amfphp_Plugins_FlexMessaging</a></li>
+					<li><a href="elementindex_Amfphp_Plugins_Get.html">Amfphp_Plugins_Get</a></li>
 					<li><a href="elementindex_Amfphp_Plugins_Json.html">Amfphp_Plugins_Json</a></li>
 					<li><a href="elementindex_Amfphp_Plugins_Logger.html">Amfphp_Plugins_Logger</a></li>
 					<li><a href="elementindex_AmfphpLogger.html">AmfphpLogger</a></li>
 					<li><a href="elementindex_Amfphp_Plugins_ServiceBrowser.html">Amfphp_Plugins_ServiceBrowser</a></li>
+					<li><a href="elementindex_Sommeria_Search.html">Sommeria_Search</a></li>
 					<li><a href="elementindex_Amfphp_Services.html">Amfphp_Services</a></li>
 					<li><a href="elementindex_Amfphp_Examples_ExampleService.html">Amfphp_Examples_ExampleService</a></li>
 					<li><a href="elementindex_Amfphp_Examples.html">Amfphp_Examples</a></li>
@@ -172,6 +174,13 @@
 							<div class="index-item-description">call the functions registered for the given filter. There can be as many parameters as necessary, but only the first  one can be changed and and returned by the callees.</div>
 					</dd>
 			<dt class="field">
+						CONFIG_RETURN_ERROR_DETAILS
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_Config.html#constCONFIG_RETURN_ERROR_DETAILS">Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS</a> in Config.php</div>
+							<div class="index-item-description">if true, there will be detailed information in the error messages, including confidential information like paths.</div>
+					</dd>
+			<dt class="field">
 						<span class="method-title">createGateway</span>
 					</dt>
 		<dd class="index-item-body">
@@ -284,6 +293,20 @@
 			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_Gateway.html#constFILTER_SERIALIZER">Amfphp_Core_Gateway::FILTER_SERIALIZER</a> in Gateway.php</div>
 							<div class="index-item-description">filter called to allow a plugin to override the default amf serializer.</div>
 					</dd>
+			<dt class="field">
+						FILTER_SERVICE_FOLDER_PATHS
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_Gateway.html#constFILTER_SERVICE_FOLDER_PATHS">Amfphp_Core_Gateway::FILTER_SERVICE_FOLDER_PATHS</a> in Gateway.php</div>
+							<div class="index-item-description">filter just after plugin init. Use this to add a service folder for a plugin</div>
+					</dd>
+			<dt class="field">
+						FILTER_SERVICE_NAMES_2_CLASS_FIND_INFO
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_Gateway.html#constFILTER_SERVICE_NAMES_2_CLASS_FIND_INFO">Amfphp_Core_Gateway::FILTER_SERVICE_NAMES_2_CLASS_FIND_INFO</a> in Gateway.php</div>
+							<div class="index-item-description">filter just after plugin init. Use this to add a service for a plugin when a service folder isn't enough</div>
+					</dd>
 		</dl>
 	<a name="g"></a>
 	<div class="index-letter-section">
@@ -378,11 +401,11 @@
 							<div class="index-item-description">array containing untyped plugin configuration data. Add as needed. The advised format is the name of the plugin as key, and then  paramName/paramValue pairs as an array.</div>
 					</dd>
 			<dt class="field">
-						<span class="var-title">$pluginsFolder</span>
+						<span class="var-title">$pluginsFolders</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_Config.html#var$pluginsFolder">Amfphp_Core_Config::$pluginsFolder</a> in Config.php</div>
-							<div class="index-item-description">path to the folder containing the plugins. defaults to Amfphp_ROOTPATH . &quot;/Plugins/&quot;</div>
+			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_Config.html#var$pluginsFolders">Amfphp_Core_Config::$pluginsFolders</a> in Config.php</div>
+							<div class="index-item-description">paths to the folder containing the plugins. defaults to Amfphp_ROOTPATH . &quot;/Plugins/&quot;</div>
 					</dd>
 			<dt class="field">
 						<span class="include-title">PluginManager.php</span>
@@ -411,6 +434,13 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_Config.html#var$serviceNames2ClassFindInfo">Amfphp_Core_Config::$serviceNames2ClassFindInfo</a> in Config.php</div>
 							<div class="index-item-description">a dictionary of service classes represented in a ClassFindInfo.</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$sharedConfig</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_Config.html#var$sharedConfig">Amfphp_Core_Config::$sharedConfig</a> in Config.php</div>
+							<div class="index-item-description">array containing configuration data that is shared between the plugins. The format is paramName/paramValue pairs as an array.</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">service</span>

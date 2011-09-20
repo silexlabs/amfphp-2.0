@@ -98,7 +98,7 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																																																																																																																																																																																																																																																																																																																				
+																																																																																																																																																																																																																																																																																																																												
 												<div class="method-definition">
 											<span class="method-result">Amfphp_Core_Amf_Serializer</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
@@ -122,7 +122,7 @@
 																<div class="method-definition">
 											<span class="method-result">void</span>
 										<a href="#writeAmf3Array" title="details" class="method-name">writeAmf3Array</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$d</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$arrayCollectionable</span> = <span class="var-default">false</span>])
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$d</span>, <span class="var-type"><type></span>&nbsp;<span class="var-name">$arrayCollectionable</span>)
 									</div>
 																<div class="method-definition">
 											<span class="method-result">nothing</span>
@@ -168,11 +168,6 @@
 											<span class="method-result">void</span>
 										<a href="#writeAmf3Object" title="details" class="method-name">writeAmf3Object</a>
 											(<span class="var-type">object</span>&nbsp;<span class="var-name">$d</span>)
-									</div>
-																<div class="method-definition">
-											<span class="method-result">nothing</span>
-										<a href="#writeAmf3ObjectFromArray" title="details" class="method-name">writeAmf3ObjectFromArray</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$d</span>)
 									</div>
 																<div class="method-definition">
 											<span class="method-result">The</span>
@@ -350,7 +345,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getAmf3Int</span> (line <span class="line-number">690</span>)
+		<span class="method-title">getAmf3Int</span> (line <span class="line-number">682</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -381,7 +376,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getOutput</span> (line <span class="line-number">132</span>)
+		<span class="method-title">getOutput</span> (line <span class="line-number">131</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -428,11 +423,12 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeAmf3Array</span> (line <span class="line-number">604</span>)
+		<span class="method-title">writeAmf3Array</span> (line <span class="line-number">608</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 	<ul class="tags">
+				<li><span class="field">todo:</span> understand this bit about circular references! so can use handleReference like everywhere else</li>
 				<li><span class="field">access:</span> protected</li>
 			</ul>
 	
@@ -441,7 +437,7 @@
 		<span class="method-name">
 			writeAmf3Array
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$d</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$arrayCollectionable</span> = <span class="var-default">false</span>])
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$d</span>, <span class="var-type"><type></span>&nbsp;<span class="var-name">$arrayCollectionable</span>)
 			</div>
 	
 			<ul class="parameters">
@@ -449,7 +445,7 @@
 				<span class="var-type">array</span>
 				<span class="var-name">$d</span>			</li>
 					<li>
-				<span class="var-type"></span>
+				<span class="var-type"><type></span>
 				<span class="var-name">$arrayCollectionable</span>			</li>
 				</ul>
 		
@@ -466,7 +462,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeAmf3Bool</span> (line <span class="line-number">558</span>)
+		<span class="method-title">writeAmf3Bool</span> (line <span class="line-number">557</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -502,7 +498,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeAmf3ByteArray</span> (line <span class="line-number">749</span>)
+		<span class="method-title">writeAmf3ByteArray</span> (line <span class="line-number">741</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -537,7 +533,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeAmf3ByteArrayMessage</span> (line <span class="line-number">754</span>)
+		<span class="method-title">writeAmf3ByteArrayMessage</span> (line <span class="line-number">746</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -565,7 +561,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeAmf3Data</span> (line <span class="line-number">490</span>)
+		<span class="method-title">writeAmf3Data</span> (line <span class="line-number">489</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -602,7 +598,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeAmf3Date</span> (line <span class="line-number">742</span>)
+		<span class="method-title">writeAmf3Date</span> (line <span class="line-number">734</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -637,7 +633,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeAmf3Int</span> (line <span class="line-number">571</span>)
+		<span class="method-title">writeAmf3Int</span> (line <span class="line-number">570</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -667,7 +663,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeAmf3Null</span> (line <span class="line-number">547</span>)
+		<span class="method-title">writeAmf3Null</span> (line <span class="line-number">546</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -698,7 +694,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeAmf3Number</span> (line <span class="line-number">719</span>)
+		<span class="method-title">writeAmf3Number</span> (line <span class="line-number">711</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -733,7 +729,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeAmf3Object</span> (line <span class="line-number">823</span>)
+		<span class="method-title">writeAmf3Object</span> (line <span class="line-number">813</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -765,40 +761,11 @@
 							</li>
 				</ul>
 	</div>
-<a name="methodwriteAmf3ObjectFromArray" id="writeAmf3ObjectFromArray"><!-- --></a>
+<a name="methodwriteAmf3String" id="writeAmf3String"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeAmf3ObjectFromArray</span> (line <span class="line-number">662</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Serialise the array as if it is an object.</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">nothing</span>
-		<span class="method-name">
-			writeAmf3ObjectFromArray
-		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$d</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$d</span><span class="var-description">: the array to serialise</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodwriteAmf3String" id="writeAmf3String"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<span class="method-title">writeAmf3String</span> (line <span class="line-number">589</span>)
+		<span class="method-title">writeAmf3String</span> (line <span class="line-number">588</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -833,10 +800,10 @@
 				</ul>
 	</div>
 <a name="methodwriteAmf3Undefined" id="writeAmf3Undefined"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeAmf3Undefined</span> (line <span class="line-number">538</span>)
+		<span class="method-title">writeAmf3Undefined</span> (line <span class="line-number">537</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -864,10 +831,10 @@
 				</ul>
 	</div>
 <a name="methodwriteAmf3Xml" id="writeAmf3Xml"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeAmf3Xml</span> (line <span class="line-number">730</span>)
+		<span class="method-title">writeAmf3Xml</span> (line <span class="line-number">722</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -899,10 +866,10 @@
 				</ul>
 	</div>
 <a name="methodwriteAmf3XmlDocument" id="writeAmf3XmlDocument"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeAmf3XmlDocument</span> (line <span class="line-number">736</span>)
+		<span class="method-title">writeAmf3XmlDocument</span> (line <span class="line-number">728</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -934,10 +901,10 @@
 				</ul>
 	</div>
 <a name="methodwriteAnonymousObject" id="writeAnonymousObject"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeAnonymousObject</span> (line <span class="line-number">384</span>)
+		<span class="method-title">writeAnonymousObject</span> (line <span class="line-number">383</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -963,14 +930,14 @@
 			
 	</div>
 <a name="methodwriteArrayOrObject" id="writeArrayOrObject"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeArrayOrObject</span> (line <span class="line-number">299</span>)
+		<span class="method-title">writeArrayOrObject</span> (line <span class="line-number">298</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">writeArrayOrObject first deterines if the PHP array contains all numeric indexes  or a mix of keys.  Then it either writes the array code (0x0A) or the  object code (0x03) and then the associated data.</p>
+<p class="short-description">writeArrayOrObject first determines if the PHP array contains all numeric indexes  or a mix of keys.  Then it either writes the array code (0x0A) or the  object code (0x03) and then the associated data.</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> protected</li>
 			</ul>
@@ -999,10 +966,10 @@
 				</ul>
 	</div>
 <a name="methodwriteBoolean" id="writeBoolean"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeBoolean</span> (line <span class="line-number">212</span>)
+		<span class="method-title">writeBoolean</span> (line <span class="line-number">211</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1035,10 +1002,10 @@
 				</ul>
 	</div>
 <a name="methodwriteByte" id="writeByte"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeByte</span> (line <span class="line-number">142</span>)
+		<span class="method-title">writeByte</span> (line <span class="line-number">141</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1071,10 +1038,10 @@
 				</ul>
 	</div>
 <a name="methodwriteData" id="writeData"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeData</span> (line <span class="line-number">435</span>)
+		<span class="method-title">writeData</span> (line <span class="line-number">434</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1100,10 +1067,10 @@
 			
 	</div>
 <a name="methodwriteDate" id="writeDate"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeDate</span> (line <span class="line-number">253</span>)
+		<span class="method-title">writeDate</span> (line <span class="line-number">252</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1136,10 +1103,10 @@
 				</ul>
 	</div>
 <a name="methodwriteDouble" id="writeDouble"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeDouble</span> (line <span class="line-number">173</span>)
+		<span class="method-title">writeDouble</span> (line <span class="line-number">172</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1173,10 +1140,10 @@
 				</ul>
 	</div>
 <a name="methodwriteInt" id="writeInt"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeInt</span> (line <span class="line-number">152</span>)
+		<span class="method-title">writeInt</span> (line <span class="line-number">151</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1209,10 +1176,10 @@
 				</ul>
 	</div>
 <a name="methodwriteLong" id="writeLong"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeLong</span> (line <span class="line-number">162</span>)
+		<span class="method-title">writeLong</span> (line <span class="line-number">161</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1245,10 +1212,10 @@
 				</ul>
 	</div>
 <a name="methodwriteLongUtf" id="writeLongUtf"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeLongUtf</span> (line <span class="line-number">202</span>)
+		<span class="method-title">writeLongUtf</span> (line <span class="line-number">201</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1282,10 +1249,10 @@
 				</ul>
 	</div>
 <a name="methodwriteNull" id="writeNull"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeNull</span> (line <span class="line-number">273</span>)
+		<span class="method-title">writeNull</span> (line <span class="line-number">272</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1313,10 +1280,10 @@
 				</ul>
 	</div>
 <a name="methodwriteNumber" id="writeNumber"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeNumber</span> (line <span class="line-number">265</span>)
+		<span class="method-title">writeNumber</span> (line <span class="line-number">264</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1349,10 +1316,10 @@
 				</ul>
 	</div>
 <a name="methodwriteObjectEnd" id="writeObjectEnd"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeObjectEnd</span> (line <span class="line-number">287</span>)
+		<span class="method-title">writeObjectEnd</span> (line <span class="line-number">286</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1380,10 +1347,10 @@
 				</ul>
 	</div>
 <a name="methodwriteObjectFromArray" id="writeObjectFromArray"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeObjectFromArray</span> (line <span class="line-number">369</span>)
+		<span class="method-title">writeObjectFromArray</span> (line <span class="line-number">368</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1409,10 +1376,10 @@
 			
 	</div>
 <a name="methodwritePlainArray" id="writePlainArray"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">writePlainArray</span> (line <span class="line-number">351</span>)
+		<span class="method-title">writePlainArray</span> (line <span class="line-number">350</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1438,10 +1405,10 @@
 			
 	</div>
 <a name="methodwriteReference" id="writeReference"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeReference</span> (line <span class="line-number">343</span>)
+		<span class="method-title">writeReference</span> (line <span class="line-number">342</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1473,10 +1440,10 @@
 				</ul>
 	</div>
 <a name="methodwriteString" id="writeString"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeString</span> (line <span class="line-number">225</span>)
+		<span class="method-title">writeString</span> (line <span class="line-number">224</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1510,10 +1477,10 @@
 				</ul>
 	</div>
 <a name="methodwriteTypedObject" id="writeTypedObject"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeTypedObject</span> (line <span class="line-number">405</span>)
+		<span class="method-title">writeTypedObject</span> (line <span class="line-number">404</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1547,10 +1514,10 @@
 				</ul>
 	</div>
 <a name="methodwriteUndefined" id="writeUndefined"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeUndefined</span> (line <span class="line-number">280</span>)
+		<span class="method-title">writeUndefined</span> (line <span class="line-number">279</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1578,10 +1545,10 @@
 				</ul>
 	</div>
 <a name="methodwriteUtf" id="writeUtf"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeUtf</span> (line <span class="line-number">190</span>)
+		<span class="method-title">writeUtf</span> (line <span class="line-number">189</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1614,10 +1581,10 @@
 				</ul>
 	</div>
 <a name="methodwriteXML" id="writeXML"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeXML</span> (line <span class="line-number">241</span>)
+		<span class="method-title">writeXML</span> (line <span class="line-number">240</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1669,7 +1636,7 @@
 					</div>
 		<div class="info-box-body">
 			<a name="constMAX_STORED_OBJECTS" id="MAX_STORED_OBJECTS"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="const-header">
 		<img src="../media/images/Variable.png" />
@@ -1690,7 +1657,7 @@
 	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Thu, 23 Jun 2011 13:03:21 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 20 Sep 2011 17:34:31 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

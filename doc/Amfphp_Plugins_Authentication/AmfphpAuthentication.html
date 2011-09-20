@@ -25,7 +25,7 @@
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Authentication for Amfphp.</p>
-<p class="description"><p>On a service object, the plugin looks for a method called getMethodRoles. If the method exists, the plugin will look for a role in the session that matches the role.  If the roles don't match, an Exception is thrown.  The getMethodRoles takes a parameter $methodName, and must return an array of strings containing acceptable roles for the method. If the return value is null,  it is considered that that particular method is not protected.</p><p>For example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-key">public&nbsp;</span><span class="src-key">function&nbsp;</span><span class="src-id">getMethodRoles</span><span class="src-sym">(</span><span class="src-var">$methodName</span><span class="src-sym">)</span><span class="src-sym">{</span></div></li>
+<p class="description"><p>On a service object, the plugin looks for a method called _getMethodRoles. If the method exists, the plugin will look for a role in the session that matches the role.  If the roles don't match, an Exception is thrown.  The _getMethodRoles takes a parameter $methodName, and must return an array of strings containing acceptable roles for the method. If the return value is null,  it is considered that that particular method is not protected.</p><p>For example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-key">public&nbsp;</span><span class="src-key">function&nbsp;</span><span class="src-id">_getMethodRoles</span><span class="src-sym">(</span><span class="src-var">$methodName</span><span class="src-sym">)</span><span class="src-sym">{</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if</span><span class="src-sym">(</span><span class="src-var">$methodName&nbsp;</span>==&nbsp;<span class="src-str">&quot;adminMethod&quot;</span><span class="src-sym">)</span><span class="src-sym">{</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">&quot;admin&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span><span class="src-key">else</span><span class="src-sym">{</span></div></li>
@@ -64,7 +64,7 @@
 			<div class="const-summary">
 								<div class="const-title">
 					<img src="../media/images/Constant.png" alt=" " />
-					<a href="#METHOD_GET_METHOD_ROLES" title="details" class="const-name">METHOD_GET_METHOD_ROLES</a> = 					<span class="var-type"> &quot;getMethodRoles&quot;</span>
+					<a href="#METHOD_GET_METHOD_ROLES" title="details" class="const-name">METHOD_GET_METHOD_ROLES</a> = 					<span class="var-type"> &quot;_getMethodRoles&quot;</span>
 
 				</div>
 								<div class="const-title">
@@ -210,7 +210,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method addRole</span> (line <span class="line-number">173</span>)
+		<span class="method-title">static method addRole</span> (line <span class="line-number">177</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -242,7 +242,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method clearSessionInfo</span> (line <span class="line-number">159</span>)
+		<span class="method-title">static method clearSessionInfo</span> (line <span class="line-number">163</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -364,7 +364,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">handleRequestHeader</span> (line <span class="line-number">198</span>)
+		<span class="method-title">handleRequestHeader</span> (line <span class="line-number">202</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -414,7 +414,7 @@
 		<img src="../media/images/Variable.png" />
 		<span class="const-title">
 			<span class="const-name">METHOD_GET_METHOD_ROLES</span>
-			 = <span class="const-default"> &quot;getMethodRoles&quot;</span>
+			 = <span class="const-default"> &quot;_getMethodRoles&quot;</span>
 			(line <span class="line-number">51</span>)
 		</span>
 	</div>
@@ -463,7 +463,7 @@
 	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Thu, 23 Jun 2011 13:03:01 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 20 Sep 2011 17:34:26 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

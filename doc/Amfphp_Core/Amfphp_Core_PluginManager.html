@@ -27,7 +27,7 @@
 				<li><span class="field">author:</span> Ariel Sommeria-Klein</li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_Amfphp---Core---PluginManager.php.html">/Amfphp/Core/PluginManager.php</a> (line <span class="field">23</span>)
+			Located in <a class="field" href="_Amfphp---Core---PluginManager.php.html">/Amfphp/Core/PluginManager.php</a> (line <span class="field">24</span>)
 		</p>
 		
 				
@@ -57,7 +57,7 @@
 																				<div class="method-definition">
 											<span class="method-result">void</span>
 										<a href="#loadPlugins" title="details" class="method-name">loadPlugins</a>
-											(<span class="var-type">String</span>&nbsp;<span class="var-name">$rootFolder</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$pluginsConfig</span> = <span class="var-default">null</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$disabledPlugins</span> = <span class="var-default">null</span>], <span class="var-type">array</span>&nbsp;<span class="var-name">$pluginConfig</span>)
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$pluginFolders</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$pluginsConfig</span> = <span class="var-default">null</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$sharedConfig</span> = <span class="var-default">null</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$disabledPlugins</span> = <span class="var-default">null</span>], <span class="var-type">array</span>&nbsp;<span class="var-name">$sharedConfig.</span>)
 									</div>
 								</div>
 		</div>
@@ -78,7 +78,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method getInstance</span> (line <span class="line-number">49</span>)
+		<span class="method-title">static method getInstance</span> (line <span class="line-number">50</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -104,7 +104,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">loadPlugins</span> (line <span class="line-number">62</span>)
+		<span class="method-title">loadPlugins</span> (line <span class="line-number">65</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -118,22 +118,25 @@
 		<span class="method-name">
 			loadPlugins
 		</span>
-					(<span class="var-type">String</span>&nbsp;<span class="var-name">$rootFolder</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$pluginsConfig</span> = <span class="var-default">null</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$disabledPlugins</span> = <span class="var-default">null</span>], <span class="var-type">array</span>&nbsp;<span class="var-name">$pluginConfig</span>)
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$pluginFolders</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$pluginsConfig</span> = <span class="var-default">null</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$sharedConfig</span> = <span class="var-default">null</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$disabledPlugins</span> = <span class="var-default">null</span>], <span class="var-type">array</span>&nbsp;<span class="var-name">$sharedConfig.</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type">String</span>
-				<span class="var-name">$rootFolder</span><span class="var-description">: where to load the plugins from. Absolute path.</span>			</li>
+				<span class="var-type">array</span>
+				<span class="var-name">$pluginFolders</span><span class="var-description">: where to load the plugins from. Absolute paths. For example Amfphp/Plugins/</span>			</li>
 					<li>
 				<span class="var-type">array</span>
-				<span class="var-name">$pluginConfig</span><span class="var-description">: . optional. an array containing the plugin configuration, using the plugin name as key.</span>			</li>
+				<span class="var-name">$pluginsConfig</span><span class="var-description">: . optional. an array containing the plugin configuration, using the plugin name as key.</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$sharedConfig.</span><span class="var-description">: optional. if both a specific config and a shared config are available, concatenate them to create the plugin config.  Otherwise use whatever is not null</span>			</li>
 					<li>
 				<span class="var-type">array</span>
 				<span class="var-name">$disabledPlugins</span><span class="var-description">: . optional.  an array of names of plugins to disable</span>			</li>
 					<li>
 				<span class="var-type">array</span>
-				<span class="var-name">$pluginsConfig</span>			</li>
+				<span class="var-name">$sharedConfig</span>			</li>
 				</ul>
 		
 			
@@ -144,7 +147,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Thu, 23 Jun 2011 13:03:20 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 20 Sep 2011 17:34:31 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
