@@ -125,7 +125,6 @@ class Amfphp_Core_Amf_Serializer {
             $this->outBuffer .= $serializedMessage;
         }
 
-        //throw new Exception("debug exception " . print_r($this->Amf0StoredObjects, true));
         return $this->outBuffer;
     }
 
@@ -290,7 +289,7 @@ class Amfphp_Core_Amf_Serializer {
     }
 
     /**
-     * writeArrayOrObject first deterines if the PHP array contains all numeric indexes
+     * writeArrayOrObject first determines if the PHP array contains all numeric indexes
      * or a mix of keys.  Then it either writes the array code (0x0A) or the
      * object code (0x03) and then the associated data.
      *
@@ -606,7 +605,7 @@ class Amfphp_Core_Amf_Serializer {
      * @param array $d
      * @param <type> $arrayCollectionable
      */
-    protected function writeAmf3Array(array $d, $arrayCollectionable = false) {
+    protected function writeAmf3Array(array $d) {
         //Circular referencing is disabled in arrays
         //Because if the array contains only primitive values,
         //Then === will say that the two arrays are strictly equal
