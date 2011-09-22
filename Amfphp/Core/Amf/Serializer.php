@@ -472,7 +472,7 @@ class Amfphp_Core_Amf_Serializer {
                 return;
             }
         }
-        throw new Amfphp_Core_Exception("couldn't write data ");
+        throw new Amfphp_Core_Exception("couldn't write data " . print_r($d));
     }
 
     /*     * ******************************************************************************
