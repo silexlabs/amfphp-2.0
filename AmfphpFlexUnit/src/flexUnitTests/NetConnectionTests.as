@@ -70,6 +70,15 @@ package flexUnitTests
 			assertTrue(event.obj is ExternalizableDummy);
 		}
 		
+		public function testDoubleCall():void{
+			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyDoubleCall, 1000));
+			_nc.simpleCall("TestService/returnOneParam", "testString");	
+			_nc.simpleCall("TestService/returnOneParam", "testString");	
+		}
+		private function verifyDoubleCall(event:ObjEvent):void{
+			assertTrue(event.obj is String);
+			assertEquals("testString", event.obj);
+		}
 		
 
 		

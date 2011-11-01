@@ -78,6 +78,16 @@ package flexUnitTests
 			
 		}
 		
+		public function testDoubleCall():void{
+			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyDoubleCall, 1000));
+			_nc.addHeader("Credentials", true, {userid:"admin", password:"adminPassword"});
+			_nc.simpleCall("AuthenticationService/adminMethod");	
+			_nc.simpleCall("AuthenticationService/logout");	
+		}
+		private function verifyDoubleCall(event:ObjEvent):void{
+			assertTrue(event.obj is String);
+			assertEquals("ok", event.obj);
+		}
 		
 		
 
