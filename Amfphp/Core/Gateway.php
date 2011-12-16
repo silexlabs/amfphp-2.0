@@ -198,9 +198,6 @@ class Amfphp_Core_Gateway {
             //handle request
             $deserializedResponse = $deserializedRequestHandler->handleDeserializedRequest($deserializedRequest, $serviceRouter);
 
-            //filter deserialized response
-            $deserializedResponse = $filterManager->callFilters(self::FILTER_DESERIALIZED_RESPONSE, $deserializedResponse);
-
         }catch(Exception $exception){
             //filter exception handler
             $exceptionHandler = $filterManager->callFilters(self::FILTER_EXCEPTION_HANDLER, $defaultHandler, $this->contentType);
@@ -209,6 +206,9 @@ class Amfphp_Core_Gateway {
             $deserializedResponse = $exceptionHandler->handleException($exception);
 
         }
+        //filter deserialized response
+        $deserializedResponse = $filterManager->callFilters(self::FILTER_DESERIALIZED_RESPONSE, $deserializedResponse);
+
 
         //filter serializer
         $serializer = $filterManager->callFilters(self::FILTER_SERIALIZER, $defaultHandler, $this->contentType);
