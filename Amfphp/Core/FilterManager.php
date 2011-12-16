@@ -20,16 +20,16 @@ class Amfphp_Core_FilterManager{
     /**
      * registered filters
      */
-    private $filtersArray = NULL;
+    protected $filtersArray = NULL;
 
     /**
-    *private instance of singleton
+    *protected instance of singleton
     */
-    private static $instance = NULL;
+    protected static $instance = NULL;
     /**
      * constructor
      */
-    private function __construct(){
+    protected function __construct(){
         $this->filtersArray = Array();
     }
 

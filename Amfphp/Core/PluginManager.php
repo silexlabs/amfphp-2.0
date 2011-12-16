@@ -24,22 +24,22 @@
 class Amfphp_Core_PluginManager {
 
     /**
-     * private instance of singleton
+     * protected instance of singleton
      * @var Amfphp_Core_PluginManager
      *
      */
-    private static $instance = NULL;
+    protected static $instance = NULL;
 
     /**
      *
      * @var array
      */
-    private $pluginInstances;
+    protected $pluginInstances;
 
     /**
      * constructor
      */
-    private function __construct() {
+    protected function __construct() {
         $this->pluginInstances = array();
     }
 

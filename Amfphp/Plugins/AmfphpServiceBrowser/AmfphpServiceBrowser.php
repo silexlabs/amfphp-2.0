@@ -29,24 +29,24 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
      */
     const CONTENT_TYPE = "application/x-www-form-urlencoded";
 
-    private $serviceName;
-    private $methodName;
+    protected $serviceName;
+    protected $methodName;
 
     /**
      * used for service call
      * @var array
      */
-    private $parameters;
+    protected $parameters;
 
     /**
      * associative array of parameters. Used to set the parameters input fields to the same values again after a call.
      * note: stored encoded because that's the way we need them to show them in the dialog
      * @var array
      */
-    private $parametersAssoc;
-    private $serviceRouter;
-    private $showResult;
-    private $returnErrorDetails = false;
+    protected $parametersAssoc;
+    protected $serviceRouter;
+    protected $showResult;
+    protected $returnErrorDetails = false;
 
     /**
      * constructor.
@@ -91,7 +91,7 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
      * @param type $subFolder
      * @return type 
      */
-    private function searchFolderForServices($rootPath, $subFolder){
+    protected function searchFolderForServices($rootPath, $subFolder){
         $ret = array();
         $folderContent = scandir($rootPath . $subFolder);
 
@@ -114,7 +114,7 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
      * returns a list of available services
      * @return array of service names
      */
-    private function getAvailableServiceNames(array $serviceFolderPaths, array $serviceNames2ClassFindInfo) {
+    protected function getAvailableServiceNames(array $serviceFolderPaths, array $serviceNames2ClassFindInfo) {
         $ret = array();
         foreach ($serviceFolderPaths as $serviceFolderPath) {
             $ret += $this->searchFolderForServices($serviceFolderPath, '');

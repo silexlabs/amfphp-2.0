@@ -140,7 +140,7 @@ class AmfphpCharsetConverter {
      * @param int $direction one of the DIRECTION_XXX consts described above
      * @return String
      */
-    private function transliterate($string, $direction)
+    protected function transliterate($string, $direction)
     {
         if($this->clientCharset == $this->phpCharset){
             return $string;

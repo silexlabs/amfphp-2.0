@@ -65,7 +65,7 @@ class AmfphpAuthentication {
      * the password passed in the credentials header
      * @var String
      */
-    private $headerPassword;
+    protected $headerPassword;
 
     /**
      * constructor.
@@ -143,7 +143,7 @@ class AmfphpAuthentication {
      * @param <type> $acceptedRoles
      * @return <type>
      */
-    private function doRolesMatch($userRoles, $acceptedRoles){
+    protected function doRolesMatch($userRoles, $acceptedRoles){
             foreach($userRoles as $userRole){
                 foreach($acceptedRoles as $acceptedRole){
                     if($userRole == $acceptedRole){

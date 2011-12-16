@@ -40,7 +40,7 @@ class AmfphpGet implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_
     */
     const CONTENT_TYPE = "text/amfphpget";
     
-    private $returnErrorDetails = false;
+    protected $returnErrorDetails = false;
 	
     /**
      * constructor. Add filters on the HookManager.

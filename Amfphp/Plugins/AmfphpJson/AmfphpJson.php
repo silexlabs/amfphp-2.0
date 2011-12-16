@@ -24,7 +24,7 @@ class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common
     */
     const JSON_CONTENT_TYPE = "application/json";
     
-    private $returnErrorDetails = false;
+    protected $returnErrorDetails = false;
 	
     /**
      * constructor. Add filters on the HookManager.

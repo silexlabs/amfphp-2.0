@@ -23,7 +23,7 @@ class Amfphp_Core_Amf_Deserializer {
     /**
      * The number of Messages in the packet left to process
      *
-     * @access private
+     * @access protected
      * @var int
      */
     protected $messagesLeftToProcess;
@@ -31,7 +31,7 @@ class Amfphp_Core_Amf_Deserializer {
     /**
      * The current seek cursor of the stream
      *
-     * @access private
+     * @access protected
      * @var int
      */
     protected $currentByte;
@@ -39,7 +39,7 @@ class Amfphp_Core_Amf_Deserializer {
     /**
      * The number of headers in the packet left to process
      *
-     * @access private
+     * @access protected
      * @var int
      */
     protected $headersLeftToProcess;

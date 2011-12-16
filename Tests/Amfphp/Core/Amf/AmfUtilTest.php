@@ -31,7 +31,7 @@ class Amfphp_Core_Amf_UtilTest extends PHPUnit_Framework_TestCase {
      * for testApplyFunc
      * @var int
      */
-    private $counter;
+    protected $counter;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

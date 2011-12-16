@@ -26,7 +26,7 @@ class Amfphp_Core_PluginManagerTest extends PHPUnit_Framework_TestCase {
      *
      * @var Amfphp_Core_PluginManager
      */
-    private $pluginManager;
+    protected $pluginManager;
 
 
     /**

@@ -48,10 +48,10 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      * in case of an exception during the handling of the message. The default is "/1", because a response Uri is not always available
      * @var String
      */
-    private $lastRequestMessageResponseUri;
-    private $objectEncoding = Amfphp_Core_Amf_Constants::AMF0_ENCODING;
+    protected $lastRequestMessageResponseUri;
+    protected $objectEncoding = Amfphp_Core_Amf_Constants::AMF0_ENCODING;
     
-    private $returnErrorDetails = false;
+    protected $returnErrorDetails = false;
     
 
     public function __construct($sharedConfig) {
@@ -77,7 +77,7 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      * @param Amfphp_Core_Amf_Message $Amfphp_Core_Amf_Message
      * @return Amfphp_Core_Common_ServiceCallParameters
      */
-    private function getServiceCallParameters(Amfphp_Core_Amf_Message $Amfphp_Core_Amf_Message) {
+    protected function getServiceCallParameters(Amfphp_Core_Amf_Message $Amfphp_Core_Amf_Message) {
         $targetUri = str_replace(".", "/", $Amfphp_Core_Amf_Message->targetUri);
         $split = explode("/", $targetUri);
         $ret = new Amfphp_Core_Common_ServiceCallParameters();
@@ -94,7 +94,7 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      * @param Amfphp_Core_Amf_Message $requestMessage
      * @return Amfphp_Core_Amf_Message the response Message for the request
      */
-    private function handleRequestMessage(Amfphp_Core_Amf_Message $requestMessage, Amfphp_Core_Common_ServiceRouter $serviceRouter) {
+    protected function handleRequestMessage(Amfphp_Core_Amf_Message $requestMessage, Amfphp_Core_Common_ServiceRouter $serviceRouter) {
         $filterManager = Amfphp_Core_FilterManager::getInstance();
         $fromFilters = $filterManager->callFilters(self::FILTER_AMF_REQUEST_MESSAGE_HANDLER, null, $requestMessage);
         if ($fromFilters) {

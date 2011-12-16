@@ -101,37 +101,37 @@ class Amfphp_Core_Gateway {
      * config.
      * @var Amfphp_Core_Config
      */
-    private $config;
+    protected $config;
 
     /**
      * typically the $_GET array.
      * @var array
      */
-    private $getData;
+    protected $getData;
 
     /**
      * typically the $_POST array.
      * @var array
      */
-    private $postData;
+    protected $postData;
 
     /**
      * the content type. For example for amf, application/x-amf
      * @var String
      */
-    private $contentType;
+    protected $contentType;
 
     /**
      * the serialized request 
      * @var String 
      */
-    private $rawInputData;
+    protected $rawInputData;
 
     /**
      * the serialized response
      * @var String
      */
-    private $rawOutputData;
+    protected $rawOutputData;
 
     /**
      *

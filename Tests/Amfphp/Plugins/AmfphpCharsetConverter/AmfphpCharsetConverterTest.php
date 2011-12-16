@@ -28,9 +28,9 @@ class AmfphpCharsetConverterTest extends PHPUnit_Framework_TestCase {
      */
     protected $object;
 
-    private $textInClientCharset;
+    protected $textInClientCharset;
 
-    private $textInPhpCharset;
+    protected $textInPhpCharset;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

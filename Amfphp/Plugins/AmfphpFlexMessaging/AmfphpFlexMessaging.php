@@ -35,21 +35,21 @@ class AmfphpFlexMessaging{
      * if this is set, special error handling applies
      * @var Boolean
      */
-    private $clientUsesFlexMessaging;
+    protected $clientUsesFlexMessaging;
 
     /**
      * the messageId of the last flex message. Used for error generation
      * @var String
      */
-    private $lastFlexMessageId;
+    protected $lastFlexMessageId;
 
     /**
      * the response uri of the last flex message. Used for error generation
      * @var String
      */
-    private $lastFlexMessageResponseUri;
+    protected $lastFlexMessageResponseUri;
 
-    private $returnErrorDetails = false;
+    protected $returnErrorDetails = false;
     /**
      * constructor.
      * @param array $config optional key/value pairs in an associative array. Used to override default configuration values.

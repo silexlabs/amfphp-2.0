@@ -25,12 +25,12 @@ class Amfphp_Core_Amf_Serializer {
      *
      * @var String the output stream
      */
-    private $outBuffer;
+    protected $outBuffer;
     /**
      *
      * @var Amfphp_Core_Amf_Packet
      */
-    private $packet;
+    protected $packet;
 
     /**
      * the maximum amount of objects stored for reference
@@ -41,24 +41,24 @@ class Amfphp_Core_Amf_Serializer {
      * used for Amf0 references
      * @var array
      */
-    private $Amf0StoredObjects;
+    protected $Amf0StoredObjects;
     /**
      *
      * used for Amf3 references
      * @var array
      */
-    private $storedObjects;
+    protected $storedObjects;
     /**
      * amf3 references to strings
      * @var array
      */
-    private $storedStrings;
+    protected $storedStrings;
 
     /**
      * used for traits references. key: class name. value: array(reference id, array(property names))
      * @var array
      */
-    private $className2TraitsInfo;
+    protected $className2TraitsInfo;
 
     /**
      *
@@ -72,7 +72,7 @@ class Amfphp_Core_Amf_Serializer {
     /**
      * initialize reference arrays and counters. Call before writing a body or a header, as the indices are local to each message body or header
      */
-    private function resetReferences(){
+    protected function resetReferences(){
         $this->Amf0StoredObjects = array();
         $this->storedStrings = array();
         $this->storedObjects = array();
@@ -765,7 +765,7 @@ class Amfphp_Core_Amf_Serializer {
      * @param mixed $obj
      * @param array $references
      */
-    private function handleReference(&$obj, array &$references){
+    protected function handleReference(&$obj, array &$references){
         $key = false;
         if(is_object($obj) && function_exists("spl_object_hash")){
             $hash = spl_object_hash($obj);
@@ -835,7 +835,7 @@ class Amfphp_Core_Amf_Serializer {
                 //no available traits information. Write the full object
                 $propertyNames = array();
                 foreach ($d as $key => $value) {
-                    if ($key[0] != "\0" && $key != $explicitTypeField) { //Don't show private members or explicit type
+                    if ($key[0] != "\0" && $key != $explicitTypeField) { //Don't show protected members or explicit type
                         $propertyNames[] = $key;
                     }
                 }
@@ -868,7 +868,7 @@ class Amfphp_Core_Amf_Serializer {
             $this->writeAmf3String("");
             //name/value pairs for dynamic properties
             foreach ($d as $key => $value) {
-                if ($key[0] != "\0" && $key != $explicitTypeField) { //Don't show private members or explicit type
+                if ($key[0] != "\0" && $key != $explicitTypeField) { //Don't show protected members or explicit type
                     $this->writeAmf3String($key);
                     $this->writeAmf3Data($value);
                 }
