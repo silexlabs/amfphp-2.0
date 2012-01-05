@@ -27,7 +27,7 @@ package flexUnitTests
 		
 		
 		/**
-		 * this works properly but somehow flex unit trips up on it. Charles Proxy fails to parse IExternalizable.  
+		 * This fails, but it seems it doesn't work properly in flash or Charles Proxy either. strange.  
 		 * */
 		public function testSendingAndReceivingAnIExternalizable():void{
 			_myConnection.returnOneParam(new ExternalizableDummy());

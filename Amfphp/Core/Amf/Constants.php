@@ -38,6 +38,10 @@ class Amfphp_Core_Amf_Constants {
      * try to use this where possible, but it can't be everywhere because we would need to use ReflectionClass::hasProperty, and that is only with PHP 5.1
      */
     const FIELD_EXPLICIT_TYPE = "_explicitType";
+    /**
+     * if an object is marked as externalizable(AMF3 and later), this is where the externalized data goes.
+     */
+    const FIELD_EXTERNALIZED_DATA = "_externalizedData";
 
     /**
      * this is the name of the credentials header. can be used for AS3, but is mostly AS2 only

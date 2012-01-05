@@ -599,9 +599,6 @@ class Amfphp_Core_Amf_Deserializer {
                 for ($i = 0; $i < $classMemberCount; $i++) {
                     $classMemberDefinitions[] = $this->readAmf3String();
                 }
-                //string mappedTypeName = typeIdentifier;
-                //if( applicationContext != null )
-                //	mappedTypeName = applicationContext.GetMappedTypeName(typeIdentifier);
 
                 $classDefinition = array("type" => $typeIdentifier, "members" => $classMemberDefinitions,
                     "externalizable" => $externalizable, "dynamic" => $dynamic);
@@ -621,21 +618,26 @@ class Amfphp_Core_Amf_Deserializer {
 
         //Add to references as circular references may search for this object
         $this->storedObjects[] = & $obj;
+            
+        if($classDefinition["externalizable"]){
+            $externalizedDataField = Amfphp_Core_Amf_Constants::FIELD_EXTERNALIZED_DATA;
+            $obj->$externalizedDataField = $this->readAmf3Data();
+        }else{
+            $members = $classDefinition['members'];
+            $memberCount = count($members);
+            for ($i = 0; $i < $memberCount; $i++) {
+                $val = $this->readAmf3Data();
+                $key = $members[$i];
+                $obj->$key = $val;
+            }
 
-        $members = $classDefinition['members'];
-        $memberCount = count($members);
-        for ($i = 0; $i < $memberCount; $i++) {
-            $val = $this->readAmf3Data();
-            $key = $members[$i];
-            $obj->$key = $val;
-        }
-
-        if ($classDefinition['dynamic'] /* && obj is ASObject */) {
-            $key = $this->readAmf3String();
-            while ($key != "") {
-                $value = $this->readAmf3Data();
-                $obj->$key = $value;
+            if ($classDefinition['dynamic'] /* && obj is ASObject */) {
                 $key = $this->readAmf3String();
+                while ($key != "") {
+                    $value = $this->readAmf3Data();
+                    $obj->$key = $value;
+                    $key = $this->readAmf3String();
+                }
             }
         }
 

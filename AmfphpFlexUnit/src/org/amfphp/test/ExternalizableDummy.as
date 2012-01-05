@@ -5,6 +5,9 @@ package org.amfphp.test
 	import flash.utils.IDataOutput;
 	import flash.utils.IExternalizable;
 	
+	/**
+	 * must have an explicit registered type because somehow otherwise netconnection fails to encode it.
+	 * */
 	[RemoteClass(alias="ExternalizableDummy")]
 	public class ExternalizableDummy implements IExternalizable {
 		
