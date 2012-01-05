@@ -2,9 +2,12 @@
 ###################
 nbproject/
 
-#compiled flex
+#Flex Unit temp files
 ###################
 AmfphpFlexUnit/bin-debug/
+AmfphpFlexUnit/.FlexUnitSttings/
+
+
 
 # Compiled source #
 ###################
