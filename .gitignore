@@ -5,7 +5,8 @@ nbproject/
 #Flex Unit temp files
 ###################
 AmfphpFlexUnit/bin-debug/
-AmfphpFlexUnit/.FlexUnitSttings/
+AmfphpFlexUnit/src/
+AmfphpFlexUnit/.FlexUnitSettings/
 
 
 
