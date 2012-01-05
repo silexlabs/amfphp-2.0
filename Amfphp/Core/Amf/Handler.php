@@ -53,6 +53,17 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
     
     protected $returnErrorDetails = false;
     
+    /**
+     * set this if you need additional headers in the response.  They will be added after normal treatment
+     * @var type array of Amfphp_Core_Amf_Header
+     */
+    public static $additionnalResponseHeaders = null;
+    /**
+     * set this if you need additional messages in the response. They will be added after normal treatment
+     * @var array of Amfphp_Core_Amf_Message 
+     */
+    public static $additionnalResponseMessages = null;
+    
 
     public function __construct($sharedConfig) {
         $this->lastRequestMessageResponseUri = "/1";
@@ -122,7 +133,7 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
             $requestHeader = $deserializedRequest->headers[$i];
             //handle a header. This is a job for plugins, unless comes a header that is so fundamental that it needs to be handled by the core
             $fromFilters = Amfphp_Core_FilterManager::getInstance()->callFilters(self::FILTER_AMF_REQUEST_HEADER_HANDLER, null, $requestHeader);
-            if ($fromFilters) {
+            if ($fromFilters) {         
                 $handler = $fromFilters;
                 $handler->handleRequestHeader($requestHeader);
             }
@@ -131,19 +142,28 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
         $numMessages = count($deserializedRequest->messages);
         $rawOutputData = "";
         $responsePacket = new Amfphp_Core_Amf_Packet();
+        //set amf version to the one detected in request
         $responsePacket->amfVersion = $deserializedRequest->amfVersion;
+        //handle each message
         for ($i = 0; $i < $numMessages; $i++) {
             $requestMessage = $deserializedRequest->messages[$i];
             $this->lastRequestMessageResponseUri = $requestMessage->responseUri;
             $responseMessage = $this->handleRequestMessage($requestMessage, $serviceRouter);
             $responsePacket->messages[] = $responseMessage;
         }
+        
+        //add any eventual additionnal headers or messages
+        if(self::$additionnalResponseHeaders){
+            $responsePacket->headers += self::$additionnalResponseHeaders;    
+        }
+        if(self::$additionnalResponseMessages){
+            $responsePacket->messages += self::$additionnalResponseMessages;    
+        }
         return $responsePacket;
     }
 
     /**
      * @see Amfphp_Core_Common_IExceptionHandler
-     * @todo option for production, don't send exception trace
      */
     public function handleException(Exception $exception) {
         $errorPacket = new Amfphp_Core_Amf_Packet();
