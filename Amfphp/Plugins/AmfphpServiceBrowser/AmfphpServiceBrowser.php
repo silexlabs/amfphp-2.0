@@ -46,6 +46,8 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
     protected $parametersAssoc;
     protected $serviceRouter;
     protected $showResult;
+    protected $callStartTimeMs;
+    protected $callDurationMs;
     protected $returnErrorDetails = false;
 
     /**
@@ -168,7 +170,10 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
 
         if ($this->serviceName && $this->methodName && $paramsGiven) {
             $this->showResult = true;
-            return $serviceRouter->executeServiceCall($this->serviceName, $this->methodName, $this->parameters);
+            $this->callStartTimeMs = microtime(true);
+            $ret = $serviceRouter->executeServiceCall($this->serviceName, $this->methodName, $this->parameters);
+            $this->callDurationMs = round((microtime(true) - $this->callStartTimeMs) * 1000);
+            return $ret;
         } else {
             $this->showResult = false;
             return null;
@@ -189,6 +194,7 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
         }
         //$exceptionInfo .= "trace : " . str_replace("\n", "<br>\n", print_r($exception->getTrace(), true)) . "\n<br>";
         $this->showResult = true;
+        $this->callDurationMs = round((microtime(true) - $this->callStartTimeMs) * 1000);
         return $exceptionInfo;
     }
 
@@ -247,7 +253,7 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
         }
 
         if ($this->showResult) {
-            $message .= "<h3>Result</h3>";
+            $message .= "<h3>Result ( call took " . $this->callDurationMs . " ms )</h3>";
             $message .= '<pre>';
             $message .= print_r($data, true);
             $message .= '</pre>';
