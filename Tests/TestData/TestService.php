@@ -37,6 +37,11 @@ class TestService {
     public function throwException(){
         throw new Exception("test exception", 123);
     }
+    
+    public function returnAfterOneSecond(){
+        sleep(1);
+        return "slept for 1 second";
+    }
 
 
 }
