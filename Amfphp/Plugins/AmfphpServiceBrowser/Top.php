@@ -32,7 +32,7 @@ echo file_get_contents(dirname(__FILE__) . '/style.css');
   </head>
   <body>
     <div id="header">
- 		<b>AmfPHP</b> Service Browser
+                <a href="?"><b>AmfPHP Service Browser</b></a>
  		<ul>
         <li><a href="http://sourceforge.net/projects/amfphp/forums">Forums</a></li>
         <li><a href="http://www.silexlabs.org/amfphp/documentation/">Documentation</a></li>
@@ -40,5 +40,7 @@ echo file_get_contents(dirname(__FILE__) . '/style.css');
         <li><a href="https://github.com/silexlabs/amfphp-2.0">Source Code</a></li>
         <li><a href="http://www.silexlabs.org/amfphp/">AmfPHP Website</a></li>
         <li><a href="http://www.silexlabs.org/">Silex Labs</a></li>
+        <li><a href="http://www.silexlabs.org/category/exchange/exchange-amfphp/">More Plugins</a></li>
+        
         </ul>
     </div>
