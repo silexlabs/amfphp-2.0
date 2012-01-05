@@ -19,9 +19,7 @@
   </compiler>
   <applications>
     <application path="AmfphpFlexUnit.mxml"/>
-    <application path="FlexUnitCompilerApplication.mxml"/>
     <application path="FlexUnitApplication.mxml"/>
-    <application path="Test.mxml"/>
   </applications>
   <modules/>
   <buildCSSFiles/>
