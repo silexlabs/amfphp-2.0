@@ -603,7 +603,6 @@ class Amfphp_Core_Amf_Serializer {
     /**
      *@todo understand this bit about circular references! so can use handleReference like everywhere else
      * @param array $d
-     * @param <type> $arrayCollectionable
      */
     protected function writeAmf3Array(array $d) {
         //Circular referencing is disabled in arrays

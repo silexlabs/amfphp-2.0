@@ -136,9 +136,9 @@ class AmfSerializerWrapper extends Amfphp_Core_Amf_Serializer
     }
 
 
-    public function writeAmf3Array(/* array */ $d, $arrayCollectionable = FALSE)
+    public function writeAmf3Array(/* array */ $d)
     {
-        return parent::writeAmf3Array($d, $arrayCollectionable);
+        return parent::writeAmf3Array($d);
     }
 
     public function writeAmf3Object(/* object */ $d)
