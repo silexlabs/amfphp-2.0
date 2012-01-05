@@ -1,4 +1,8 @@
 Version history
+
+--------- 2.0.1 -----------
+change everything from private to protected to allow better extensibility
+possibility to add headers and messages in AMF response
 --------- 2.0 -------------
 AmfPhpGet plugin, for requests just using GET, and cross domain AJAX calls
 config shared between plugins support added
