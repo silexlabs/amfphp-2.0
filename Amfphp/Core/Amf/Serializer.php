@@ -296,8 +296,12 @@ class Amfphp_Core_Amf_Serializer {
      * @param array $d The php array
      */
     protected function writeArrayOrObject($d) {
-        if ($this->handleReference($d, $this->Amf0StoredObjects)) {
-            return;
+        // referencing is disabled in arrays
+        //Because if the array contains only primitive values,
+        //Then === will say that the two arrays are strictly equal
+        //if they contain the same values, even if they are really distinct
+        if (count($this->Amf0StoredObjects) < self::MAX_STORED_OBJECTS) {
+            $this->Amf0StoredObjects[] = & $d;
         }
 
         $numeric = array(); // holder to store the numeric keys
@@ -463,7 +467,6 @@ class Amfphp_Core_Amf_Serializer {
         } elseif (is_object($d)) {
             $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
             $hasExplicitType = isset($d->$explicitTypeField);
-            $className = get_class($d);
             if ($hasExplicitType) {
                 $this->writeTypedObject($d);
                 return;
@@ -605,12 +608,10 @@ class Amfphp_Core_Amf_Serializer {
      * @param array $d
      */
     protected function writeAmf3Array(array $d) {
-        //Circular referencing is disabled in arrays
+        // referencing is disabled in arrays
         //Because if the array contains only primitive values,
         //Then === will say that the two arrays are strictly equal
         //if they contain the same values, even if they are really distinct
-        //if(($key = array_search($d, $this->storedObjects, TRUE)) === FALSE )
-        //{
         if (count($this->storedObjects) < self::MAX_STORED_OBJECTS) {
             $this->storedObjects[] = & $d;
         }

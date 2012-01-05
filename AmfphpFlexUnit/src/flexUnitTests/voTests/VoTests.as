@@ -23,7 +23,7 @@ package flexUnitTests.voTests
 		{
 			_nc = new EnhancedNetConnection();
 			_nc.connect(TestConfig.NC_GATEWAY_URL);
-			_nc.objectEncoding = ObjectEncoding.AMF0;
+			//_nc.objectEncoding = ObjectEncoding.AMF0;
 			
 			VoWithArrays.register();
 		}
