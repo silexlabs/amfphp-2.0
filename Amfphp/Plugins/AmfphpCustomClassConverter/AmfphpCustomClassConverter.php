@@ -34,7 +34,7 @@ class AmfphpCustomClassConverter {
      */
     public function  __construct(array $config = null) {
         //default
-        $this->customClassFolderPaths = array(Amfphp_ROOTPATH . "/Services/Vo/");
+        $this->customClassFolderPaths = array(AMFPHP_ROOTPATH . "/Services/Vo/");
         if($config){
             if(isset($config["customClassFolderPaths"])){
                 $this->customClassFolderPaths = $config["customClassFolderPaths"];

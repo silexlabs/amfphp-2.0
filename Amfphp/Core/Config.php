@@ -34,7 +34,7 @@ class Amfphp_Core_Config {
     public $serviceNames2ClassFindInfo;
 
     /**
-     * paths to the folder containing the plugins. defaults to Amfphp_ROOTPATH . "/Plugins/"
+     * paths to the folder containing the plugins. defaults to AMFPHP_ROOTPATH . "/Plugins/"
      * @var array
      */
     public $pluginsFolders;
@@ -75,7 +75,7 @@ class Amfphp_Core_Config {
         $this->serviceFolderPaths = array();
         $this->serviceFolderPaths [] = dirname(__FILE__) . "/../Services/";
         $this->serviceNames2ClassFindInfo = array();
-        $this->pluginsFolders = array(Amfphp_ROOTPATH . "Plugins/");
+        $this->pluginsFolders = array(AMFPHP_ROOTPATH . "Plugins/");
         $this->pluginsConfig = array();
         
         $this->sharedConfig = array();
