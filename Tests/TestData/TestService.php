@@ -34,8 +34,8 @@ class TestService {
         return "bla";
     }
     
-    public function throwException(){
-        throw new Exception("test exception", 123);
+    public function throwException($arg1){
+        throw new Exception("test exception $arg1", 123);
     }
     
     public function returnAfterOneSecond(){

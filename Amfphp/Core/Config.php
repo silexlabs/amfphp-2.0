@@ -32,6 +32,13 @@ class Amfphp_Core_Config {
      * @var <array> of ClassFindInfo
      */
     public $serviceNames2ClassFindInfo;
+    
+    /**
+     * set to true if you want the service router to check if the number of arguments received by amfPHP matches with the method being called.
+     * This should be set to false in production for performance reasons
+     * @var Boolean
+     */
+    public $checkArgumentCount;
 
     /**
      * paths to the folder containing the plugins. defaults to AMFPHP_ROOTPATH . "/Plugins/"
@@ -77,6 +84,8 @@ class Amfphp_Core_Config {
         $this->serviceNames2ClassFindInfo = array();
         $this->pluginsFolders = array(AMFPHP_ROOTPATH . "Plugins/");
         $this->pluginsConfig = array();
+        //set to false for production
+        $this->checkArgumentCount = true;
         
         $this->sharedConfig = array();
         $this->sharedConfig[self::CONFIG_RETURN_ERROR_DETAILS] = true;
