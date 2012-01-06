@@ -66,10 +66,12 @@ package flexUnitTests
 		}
 		
 		/**
-		 * this fails, as sending an externalized object from amfphp is not yet supported(an array collection is externalized, this is a speacial amf trait. see spec for details)
+		 * this fails, as sending an externalized object from amfphp is not yet supported(an array collection is externalized, 
+		 * this is a special amf trait. see spec for details
 		 * */
 		public function sendingAndReceivingArrayCollectionResultHandler(event:ResultEvent):void{
 			assertTrue(event.result is ArrayCollection);
+			assertEquals(1, event.result.length);
 			assertEquals("bla", event.result.getItemAt(0));
 		}
 		
