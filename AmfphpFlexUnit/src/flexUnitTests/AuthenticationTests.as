@@ -43,13 +43,13 @@ package flexUnitTests
 		public function testAccessingUnauthorizedMethod():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONSTATUS, addAsync(verifyAccessDenied, 1000));
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, afterLogoutTryToAccessAdminMethod);
-			_nc.simpleCall("AuthenticationService/logout");	
+			_nc.callWithEvents("AuthenticationService/logout");	
 			
 		}
 		
 		
 		private function afterLogoutTryToAccessAdminMethod(event:ObjEvent):void{
-			_nc.simpleCall("AuthenticationService/adminMethod");	
+			_nc.callWithEvents("AuthenticationService/adminMethod");	
 		} 
 		
 		public function verifyAccessDenied(event:ObjEvent):void{
@@ -60,7 +60,7 @@ package flexUnitTests
 		public function testAccessingProtectedMethodStep2WithCredentialsHeader():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyAccessGranted, 1000));
 			_nc.addHeader("Credentials", true, {userid:"admin", password:"adminPassword"});
-			_nc.simpleCall("AuthenticationService/adminMethod");	
+			_nc.callWithEvents("AuthenticationService/adminMethod");	
 		}
 		
 		public function verifyAccessGranted(event:ObjEvent):void{
@@ -70,7 +70,7 @@ package flexUnitTests
 		
 		public function testCalling_getMethodRoles():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONSTATUS, addAsync(verifyAccessDenied_getMethodRoles, 1000));
-			_nc.simpleCall("AuthenticationService/_getMethodRoles");	
+			_nc.callWithEvents("AuthenticationService/_getMethodRoles");	
 		}
 		
 		public function verifyAccessDenied_getMethodRoles(event:ObjEvent):void{
@@ -81,8 +81,8 @@ package flexUnitTests
 		public function testDoubleCall():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyDoubleCall, 1000));
 			_nc.addHeader("Credentials", true, {userid:"admin", password:"adminPassword"});
-			_nc.simpleCall("AuthenticationService/adminMethod");	
-			_nc.simpleCall("AuthenticationService/logout");	
+			_nc.callWithEvents("AuthenticationService/adminMethod");	
+			_nc.callWithEvents("AuthenticationService/logout");	
 		}
 		private function verifyDoubleCall(event:ObjEvent):void{
 			assertTrue(event.obj is String);

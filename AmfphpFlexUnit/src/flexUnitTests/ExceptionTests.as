@@ -24,15 +24,27 @@ package flexUnitTests
 		}
 		
 		public function testException():void{
-			_nc.addEventListener(EnhancedNetConnection.EVENT_ONSTATUS, addAsync(verifyStatus, 1000));
+			_nc.addEventListener(EnhancedNetConnection.EVENT_ONSTATUS, addAsync(verifyTestExceptionStatus, 1000));
 			var testVar:int = -1;
-			_nc.simpleCall("TestService/throwException", testVar);	
+			_nc.callWithEvents("TestService/throwException", testVar);	
 			
 		}
 		
-		private function verifyStatus(event:ObjEvent):void{
+		private function verifyTestExceptionStatus(event:ObjEvent):void{
 			assertEquals(123,event.obj.faultCode);
-			assertEquals("test exception", event.obj.faultString);
+			assertEquals("test exception -1", event.obj.faultString);
 		}
+		
+		
+		public function testWrongNumberOfArguments():void{
+			_nc.addEventListener(EnhancedNetConnection.EVENT_ONSTATUS, addAsync(verifyWrongNumberOfArgumentsStatus, 1000));
+			var testVar:int = -1;
+			_nc.callWithEvents("TestService/returnSum", testVar);	
+			
+		}
+		
+		private function verifyWrongNumberOfArgumentsStatus(event:ObjEvent):void{
+			assertEquals("Invalid number of parameters for method returnSum in service TestService : 2  required, 2 total, 1 provided", event.obj.faultString);
+		}		
 	}
 }

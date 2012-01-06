@@ -58,10 +58,14 @@ package org.amfphp.test
 		}
 		
 		/**
-		 * like call, but with out responder
+		 * like call, but with out responder, and events instead. necessary for use with flex unit
 		 * */
-		public function simpleCall(command:String, param1:Object = null):void{
-			call(command, new Responder(onResult, onStatus), param1);
+		public function callWithEvents(command:String, ... args):void{
+			var callArgs:Array = new Array(command, new Responder(onResult, onStatus));
+			for each(var arg:* in args){
+				callArgs.push(arg);
+			}
+			call.apply(this, callArgs);
 		}
 	}
 }

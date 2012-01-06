@@ -39,7 +39,7 @@ package flexUnitTests
 		public function testNumber():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnNumber, 1000));
 			var testVar:Number = 0.15;
-			_nc.simpleCall("TestService/returnOneParam", testVar);	
+			_nc.callWithEvents("TestService/returnOneParam", testVar);	
 			
 		}
 		
@@ -53,7 +53,7 @@ package flexUnitTests
 		public function testFalse():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnFalse, 1000));
 			var testVar:Boolean = false;
-			_nc.simpleCall("TestService/returnOneParam", testVar);	
+			_nc.callWithEvents("TestService/returnOneParam", testVar);	
 			
 		}
 		
@@ -68,7 +68,7 @@ package flexUnitTests
 		public function testTrue():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnTrue, 1000));
 			var testVar:Boolean = true;
-			_nc.simpleCall("TestService/returnOneParam", testVar);	
+			_nc.callWithEvents("TestService/returnOneParam", testVar);	
 			
 		}
 		
@@ -83,7 +83,7 @@ package flexUnitTests
 		public function testString():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnString, 1000));
 			var testVar:String = "hi";
-			_nc.simpleCall("TestService/returnOneParam", testVar);	
+			_nc.callWithEvents("TestService/returnOneParam", testVar);	
 			
 		}
 		
@@ -98,7 +98,7 @@ package flexUnitTests
 		public function testObject():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnObject, 1000));
 			var testVar:Object = new Object();
-			_nc.simpleCall("TestService/returnOneParam", testVar);	
+			_nc.callWithEvents("TestService/returnOneParam", testVar);	
 			
 		}
 		
@@ -112,7 +112,7 @@ package flexUnitTests
 		public function testNull():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnNull, 1000));
 			var testVar:Object = null;
-			_nc.simpleCall("TestService/returnOneParam", testVar);	
+			_nc.callWithEvents("TestService/returnOneParam", testVar);	
 			
 		}
 		
@@ -129,7 +129,7 @@ package flexUnitTests
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnUndefined, 1000));
 			var testVar:*;
 			trace("testUndefined " + testVar);
-			_nc.simpleCall("TestService/returnOneParam", testVar);	
+			_nc.callWithEvents("TestService/returnOneParam", testVar);	
 			
 		}
 		
@@ -148,7 +148,7 @@ package flexUnitTests
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnReference, 1000));
 			var refferedArray:Array = ["bla"];
 			var testVar:Array = [refferedArray, refferedArray];
-			_nc.simpleCall("TestService/returnOneParam", testVar);	
+			_nc.callWithEvents("TestService/returnOneParam", testVar);	
 			
 		}
 		
@@ -164,7 +164,7 @@ package flexUnitTests
 		public function testEcmaArray():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnEcmaArray, 1000));
 			var testVar:Object = {testName:"testVal"};
-			_nc.simpleCall("TestService/returnOneParam", testVar);	
+			_nc.callWithEvents("TestService/returnOneParam", testVar);	
 			
 		}
 		
@@ -178,7 +178,7 @@ package flexUnitTests
 		public function testStrictArray():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnStrictArray, 1000));
 			var testVar:Array = ["first", "second"];
-			_nc.simpleCall("TestService/returnOneParam", testVar);	
+			_nc.callWithEvents("TestService/returnOneParam", testVar);	
 			
 		}
 		
@@ -194,7 +194,7 @@ package flexUnitTests
 		public function testDate():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnDate, 1000));
 			var testVar:Date = new Date();
-			_nc.simpleCall("TestService/returnOneParam", testVar);	
+			_nc.callWithEvents("TestService/returnOneParam", testVar);	
 			
 		}
 		
@@ -211,7 +211,7 @@ package flexUnitTests
 		public function testXMLDocument():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnXMLDocument, 1000));
 			var testVar:XMLDocument = new XMLDocument("<root>bla</root>");
-			_nc.simpleCall("TestService/returnOneParam", testVar);	
+			_nc.callWithEvents("TestService/returnOneParam", testVar);	
 			
 		}
 		
@@ -222,13 +222,13 @@ package flexUnitTests
 		public function testException():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONSTATUS, addAsync(verifyStatus, 1000));
 			var testVar:int = -1;
-			_nc.simpleCall("TestService/throwException", testVar);	
+			_nc.callWithEvents("TestService/throwException", testVar);	
 			
 		}
 		
 		private function verifyStatus(event:ObjEvent):void{
 			assertEquals(123,event.obj.faultCode);
-			assertEquals("test exception", event.obj.faultString);
+			assertEquals("test exception -1", event.obj.faultString);
 		}		
 		
 	}

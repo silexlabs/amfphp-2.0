@@ -30,7 +30,7 @@ package flexUnitTests
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnByteArray, 1000));
 			var testByteArray:ByteArray = new ByteArray();
 			testByteArray.writeBoolean(false);
-			_nc.simpleCall("TestService/returnOneParam", testByteArray);	
+			_nc.callWithEvents("TestService/returnOneParam", testByteArray);	
 			
 		}
 		
@@ -47,7 +47,7 @@ package flexUnitTests
 		public function testXml():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnXml, 1000));
 			var testVar:XML = new XML("<root>bla</root>");
-			_nc.simpleCall("TestService/returnOneParam", testVar);	
+			_nc.callWithEvents("TestService/returnOneParam", testVar);	
 			
 		}
 		
