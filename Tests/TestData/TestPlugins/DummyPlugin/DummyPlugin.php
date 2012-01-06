@@ -18,13 +18,13 @@
 class DummyPlugin {
     public static $instanciationCounter = 0;
 
-    public static $dummyConfVar = "default";
+    public static $dummyConfVar = 'default';
     
     public function  __construct(array $pluginConfig = null) {
         self::$instanciationCounter++;
         if($pluginConfig){
-            if(isset($pluginConfig["dummyConfVar"])){
-                self::$dummyConfVar = $pluginConfig["dummyConfVar"];
+            if(isset($pluginConfig['dummyConfVar'])){
+                self::$dummyConfVar = $pluginConfig['dummyConfVar'];
             }
         }
     }

@@ -22,7 +22,7 @@ class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common
     /**
     * the content-type string indicating a JSON content
     */
-    const JSON_CONTENT_TYPE = "application/json";
+    const JSON_CONTENT_TYPE = 'application/json';
     
     protected $returnErrorDetails = false;
 	
@@ -32,16 +32,16 @@ class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common
      */
     public function  __construct(array $config = null) {
         $filterManager = Amfphp_Core_FilterManager::getInstance();
-        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZER, $this, "filterHandler");
-        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_REQUEST_HANDLER, $this, "filterHandler");
-        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_EXCEPTION_HANDLER, $this, "filterHandler");
-        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_SERIALIZER, $this, "filterHandler");
+        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZER, $this, 'filterHandler');
+        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_REQUEST_HANDLER, $this, 'filterHandler');
+        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_EXCEPTION_HANDLER, $this, 'filterHandler');
+        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_SERIALIZER, $this, 'filterHandler');
         $this->returnErrorDetails = (isset ($config[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]) && $config[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]);
         
     }
 
     /**
-     * If the content type contains the "json" string, returns this plugin
+     * If the content type contains the 'json' string, returns this plugin
      * @param mixed null at call in gateway.
      * @param String $contentType
      * @return this or null
@@ -53,10 +53,10 @@ class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common
     }
 
     public function deserialize(array $getData, array $postData, $rawPostData){
-        if($rawPostData != ""){
+        if($rawPostData != ''){
             return json_decode($rawPostData);
         }else{
-            throw new Exception("json call data not found. It must be sent in the post data");
+            throw new Exception('json call data not found. It must be sent in the post data');
         }
     }
 
@@ -72,12 +72,12 @@ class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common
 		if(isset ($deserializedRequest->serviceName)){
             $serviceName = $deserializedRequest->serviceName;
         }else{
-            throw new Exception("Service name field missing in POST parameters \n" . print_r($deserializedRequest, true));
+            throw new Exception('Service name field missing in POST parameters \n' . print_r($deserializedRequest, true));
         }
         if(isset ($deserializedRequest->methodName)){
             $methodName = $deserializedRequest->methodName;
         }else{
-            throw new Exception("MethodName field missing in POST parameters \n" . print_r($deserializedRequest, true));
+            throw new Exception('MethodName field missing in POST parameters \n' . print_r($deserializedRequest, true));
         }
         $parameters = array();
         if(isset ($deserializedRequest->parameters)){

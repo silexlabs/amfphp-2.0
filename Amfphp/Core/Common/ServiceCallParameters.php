@@ -22,7 +22,7 @@ class Amfphp_Core_Common_ServiceCallParameters {
     /**
      * the name of the service. 
      * The service name can either be just the name of the class (TestService) or include a path(package/TestService)
-     * separator for path can only be "/"
+     * separator for path can only be '/'
      *
      * @var String
      */

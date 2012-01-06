@@ -23,10 +23,10 @@ class Amfphp_Core_FilterManagerTest extends PHPUnit_Framework_TestCase {
     public function testFilter() {
         $filterManager = Amfphp_Core_FilterManager::getInstance();
         //add the same filter twice to test filtering
-        $filterManager->addFilter("TESTFILTER", $this, "double");
-        $filterManager->addFilter("TESTFILTER", $this, "double");
+        $filterManager->addFilter('TESTFILTER', $this, 'double');
+        $filterManager->addFilter('TESTFILTER', $this, 'double');
 
-        $ret = $filterManager->callFilters("TESTFILTER", 1);
+        $ret = $filterManager->callFilters('TESTFILTER', 1);
         $this->assertEquals(4, $ret);
 
 

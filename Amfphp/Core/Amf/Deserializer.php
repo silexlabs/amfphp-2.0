@@ -91,7 +91,7 @@ class Amfphp_Core_Amf_Deserializer {
         //If firstByte != 0, then the Amf data is corrupted, for example the transmission
         //
 			if (!($topByte == 0 || $topByte == 3)) {
-            throw new Amfphp_Core_Exception("Malformed Amf Packet, connection may have dropped");
+            throw new Amfphp_Core_Exception('Malformed Amf Packet, connection may have dropped');
         }
         $this->headersLeftToProcess = $this->readInt(); //  find the total number of header elements
 
@@ -150,7 +150,7 @@ class Amfphp_Core_Amf_Deserializer {
         $length = $this->readInt(); // get the length of the string (1st 2 bytes)
         //BUg fix:: if string is empty skip ahead
         if ($length == 0) {
-            return "";
+            return '';
         } else {
             $val = substr($this->rawData, $this->currentByte, $length); // grab the string
             $this->currentByte += $length; // move the seek head to the end of the string
@@ -214,7 +214,7 @@ class Amfphp_Core_Amf_Deserializer {
             case 0x10: // Custom Class
                 return $this->readCustomClass();
             default: // unknown case
-                throw new Amfphp_Core_Exception("Found unhandled type with code: $type");
+                throw new Amfphp_Core_Exception('Found unhandled type with code: $type');
                 exit();
                 break;
         }
@@ -233,7 +233,7 @@ class Amfphp_Core_Amf_Deserializer {
         if (Amfphp_Core_Amf_Util::isSystemBigEndian()) {
             $bytes = strrev($bytes);
         }
-        $zz = unpack("dflt", $bytes); // unpack the bytes
+        $zz = unpack('dflt', $bytes); // unpack the bytes
         return $zz['flt']; // return the number from the associative array
     }
 
@@ -410,7 +410,7 @@ class Amfphp_Core_Amf_Deserializer {
             case 0x0C :
                 return $this->readAmf3ByteArray();
             default:
-                throw new Amfphp_Core_Exception("undefined Amf3 type encountered: " . $type);
+                throw new Amfphp_Core_Exception('undefined Amf3 type encountered: ' . $type);
         }
     }
 
@@ -490,7 +490,7 @@ class Amfphp_Core_Amf_Deserializer {
             return $this->storedStrings[$strref];
         } else {
             $strlen = $strref >> 1;
-            $str = "";
+            $str = '';
             if ($strlen > 0) {
                 $str = $this->readBuffer($strlen);
                 $this->storedStrings[] = $str;
@@ -554,7 +554,7 @@ class Amfphp_Core_Amf_Deserializer {
             $hashtable = array();
             $this->storedObjects[] = & $hashtable;
             $key = $this->readAmf3String();
-            while ($key != "") {
+            while ($key != '') {
                 $value = $this->readAmf3Data();
                 $hashtable[$key] = $value;
                 $key = $this->readAmf3String();
@@ -587,7 +587,7 @@ class Amfphp_Core_Amf_Deserializer {
             if ($inlineClassDef) {
                 //inline class-def
                 $typeIdentifier = $this->readAmf3String();
-                $typedObject = !is_null($typeIdentifier) && $typeIdentifier != "";
+                $typedObject = !is_null($typeIdentifier) && $typeIdentifier != '';
                 //flags that identify the way the object is serialized/deserialized
                 $externalizable = (($handle & 1) != 0);
                 $handle = $handle >> 1;
@@ -600,8 +600,8 @@ class Amfphp_Core_Amf_Deserializer {
                     $classMemberDefinitions[] = $this->readAmf3String();
                 }
 
-                $classDefinition = array("type" => $typeIdentifier, "members" => $classMemberDefinitions,
-                    "externalizable" => $externalizable, "dynamic" => $dynamic);
+                $classDefinition = array('type' => $typeIdentifier, 'members' => $classMemberDefinitions,
+                    'externalizable' => $externalizable, 'dynamic' => $dynamic);
                 $this->storedDefinitions[] = $classDefinition;
             } else {
                 //a reference to a previously passed class-def
@@ -619,7 +619,7 @@ class Amfphp_Core_Amf_Deserializer {
         //Add to references as circular references may search for this object
         $this->storedObjects[] = & $obj;
             
-        if($classDefinition["externalizable"]){
+        if($classDefinition['externalizable']){
             $externalizedDataField = Amfphp_Core_Amf_Constants::FIELD_EXTERNALIZED_DATA;
             $obj->$externalizedDataField = $this->readAmf3Data();
         }else{
@@ -633,7 +633,7 @@ class Amfphp_Core_Amf_Deserializer {
 
             if ($classDefinition['dynamic'] /* && obj is ASObject */) {
                 $key = $this->readAmf3String();
-                while ($key != "") {
+                while ($key != '') {
                     $value = $this->readAmf3Data();
                     $obj->$key = $value;
                     $key = $this->readAmf3String();
@@ -665,7 +665,7 @@ class Amfphp_Core_Amf_Deserializer {
      * Taken from SabreAmf
      */
     protected function readBuffer($len) {
-        $data = "";
+        $data = '';
         for ($i = 0; $i < $len; $i++) {
             $data .= $this->rawData
                     {$i + $this->currentByte};

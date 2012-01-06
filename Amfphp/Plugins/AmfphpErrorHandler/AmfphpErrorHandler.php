@@ -24,12 +24,12 @@ class AmfphpErrorHandler {
      * @param array $config optional key/value pairs in an associative array. Used to override default configuration values.
      */
     public function  __construct(array $config = null) {
-        set_error_handler("custom_warning_handler");
+        set_error_handler('custom_warning_handler');
     }
 }
 
 function custom_warning_handler($errno, $errstr, $errfile, $errline, $errcontext) {
-    throw new Exception($errstr . "\n<br>file: " . $errfile . "\n<br>line:" . $errline . "\n<br>context: " . print_r($errcontext, true), $errno);
+    throw new Exception("$errstr . \n<br>file:  $errfile \n<br>line: $errline \n<br>context: " . print_r($errcontext, true), $errno);
 }
 
 ?>

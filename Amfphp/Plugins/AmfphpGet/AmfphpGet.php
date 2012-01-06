@@ -20,7 +20,7 @@
  * follow this format to make your call(here the content type is passed as a parameter):
  * http://youserver/?contentType=text/amfphpget&serviceName=YourService&methodName=yourMethod&p01=value1&p2=value2 etc.
  * 
- * If you are using this for crossdomain ajax with JSONP, the expected format of the request is to add the extra "callback" parameter.
+ * If you are using this for crossdomain ajax with JSONP, the expected format of the request is to add the extra 'callback' parameter.
  * If no callback id is found, the answer simply contains the json encoded return data.
  * If the callback is found, the answer is wrapped so that it can be used for JSONP.
  * 
@@ -38,7 +38,7 @@ class AmfphpGet implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_
     /**
     * the content-type string indicating a cross domain ajax call
     */
-    const CONTENT_TYPE = "text/amfphpget";
+    const CONTENT_TYPE = 'text/amfphpget';
     
     protected $returnErrorDetails = false;
 	
@@ -48,17 +48,17 @@ class AmfphpGet implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_
      */
     public function  __construct(array $config = null) {
         $filterManager = Amfphp_Core_FilterManager::getInstance();
-        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZER, $this, "filterHandler");
-        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_REQUEST_HANDLER, $this, "filterHandler");
-        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_EXCEPTION_HANDLER, $this, "filterHandler");
-        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_SERIALIZER, $this, "filterHandler");
-        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_HEADERS, $this, "filterHeaders");
+        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZER, $this, 'filterHandler');
+        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_REQUEST_HANDLER, $this, 'filterHandler');
+        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_EXCEPTION_HANDLER, $this, 'filterHandler');
+        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_SERIALIZER, $this, 'filterHandler');
+        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_HEADERS, $this, 'filterHeaders');
         $this->returnErrorDetails = (isset ($config[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]) && $config[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]);
         
     }
 
     /**
-     * If the content type contains the "json" string, returns this plugin
+     * If the content type contains the 'json' string, returns this plugin
      * @param mixed null at call in gateway.
      * @param String $contentType
      * @return this or null
@@ -87,17 +87,17 @@ class AmfphpGet implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_
 		if(isset ($deserializedRequest['serviceName'])){
             $serviceName = $deserializedRequest['serviceName'];
         }else{
-            throw new Exception("Service name field missing in call parameters \n" . print_r($deserializedRequest, true));
+            throw new Exception('Service name field missing in call parameters \n' . print_r($deserializedRequest, true));
         }
         if(isset ($deserializedRequest['methodName'])){
             $methodName = $deserializedRequest['methodName'];
         }else{
-            throw new Exception("MethodName field missing in call parameters \n" . print_r($deserializedRequest, true));
+            throw new Exception('MethodName field missing in call parameters \n' . print_r($deserializedRequest, true));
         }
         $parameters = array();
         $paramCounter = 1;
-        while(isset ($deserializedRequest["p$paramCounter"])){
-            $parameters[] = $deserializedRequest["p$paramCounter"];
+        while(isset ($deserializedRequest['p$paramCounter'])){
+            $parameters[] = $deserializedRequest['p$paramCounter'];
             $paramCounter++;
         }
         return $serviceRouter->executeServiceCall($serviceName, $methodName, $parameters);
@@ -127,8 +127,8 @@ class AmfphpGet implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_
      */
     public function serialize($data){
         $encoded = json_encode($data);
-        if(isset ($_GET["callback"])){
-            return $_GET["callback"] . '(' . $encoded . ');';
+        if(isset ($_GET['callback'])){
+            return $_GET['callback'] . '(' . $encoded . ');';
         }else{
             return $encoded;
         }
@@ -142,7 +142,7 @@ class AmfphpGet implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_
      */
     public function filterHeaders($headers, $contentType){
         if ($contentType == self::CONTENT_TYPE) {
-            $headers['Content-Type'] =  "application/json";
+            $headers['Content-Type'] =  'application/json';
             return $headers;
         }
     }    

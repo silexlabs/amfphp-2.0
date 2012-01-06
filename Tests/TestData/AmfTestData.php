@@ -11,7 +11,7 @@
 
     /**
  * test data for the Amfphp unit tests
- * data types have the s prefix for "serialized" and "d" prefix for "deserialized"
+ * data types have the s prefix for 'serialized' and 'd' prefix for 'deserialized'
  * for Packets there is a flaw in the Amfphp design which means that serializng and deserializing is not symmetrical.
  * so use s for serialized, d for deserialized for the serialization tests and dd for the deserialation tests, the idea being that dd will disappear for v2
  *
@@ -150,7 +150,7 @@ class AmfTestData {
      */
     public function buildDouble(){
         $this->dDouble = 42;
-        $this->sDouble = pack("d", 42);
+        $this->sDouble = pack('d', 42);
         if(Amfphp_Core_Amf_Util::isSystemBigEndian()){
             $this->sDouble = strrev($this->sDouble);
         }
@@ -161,7 +161,7 @@ class AmfTestData {
      * utf: the length of the data on 2 bytes and then the char data
      */
     public function buildUtf(){
-        $testString = "test string";
+        $testString = 'test string';
         $this->dUtf = $testString;
         $this->sUtf = pack('n', strLen($testString));
         $this->sUtf .= $testString;
@@ -172,7 +172,7 @@ class AmfTestData {
      * long utf: the length of the data on 4 bytes and then the char data. The char data is more than 65xxx long
      */
     public function buildLongUtf(){
-        $testString = str_repeat("a", 70000);
+        $testString = str_repeat('a', 70000);
         $this->dLongUtf = $testString;
         $this->sLongUtf = pack('N', strLen($testString));
         $this->sLongUtf .= $testString;
@@ -191,7 +191,7 @@ class AmfTestData {
         //type: 0
         $this->sNumber = pack('C', 0);
         //number
-        $numberData = pack("d", 42);
+        $numberData = pack('d', 42);
         if(Amfphp_Core_Amf_Util::isSystemBigEndian()){
             $numberData = strrev($numberData);
         }
@@ -210,20 +210,20 @@ class AmfTestData {
 
 
     public function buildString(){
-        $this->dString = "test string";
+        $this->dString = 'test string';
         //type : 2
         $this->sString = pack('C', 2);
         //data length on an int
-        $this->sString .= pack('n', strlen("test string"));
+        $this->sString .= pack('n', strlen('test string'));
         //data
-        $this->sString .= "test string";
+        $this->sString .= 'test string';
     }
 
 
     public function buildObject(){
         $this->dObject = new stdClass();
-        $this->dObject->firstKey = "firstValue";
-        $this->dObject->secondKey = "secondValue";
+        $this->dObject->firstKey = 'firstValue';
+        $this->dObject->secondKey = 'secondValue';
         //type : 3
         $this->sObject = pack('C', 3);
 
@@ -232,33 +232,33 @@ class AmfTestData {
          */
 
         //key length on an int
-        $this->sObject .= pack('n', strLen("firstKey"));
+        $this->sObject .= pack('n', strLen('firstKey'));
         //data
-        $this->sObject .= "firstKey";
+        $this->sObject .= 'firstKey';
         //data type is string, so use string(2)
         $this->sObject .= pack('C', 2);
         //data length
-        $this->sObject .= pack('n', strLen("firstValue"));
+        $this->sObject .= pack('n', strLen('firstValue'));
         //data
-        $this->sObject .= "firstValue";
+        $this->sObject .= 'firstValue';
 
         /**
          * second entry in object
          */
 
         //key length on an int
-        $this->sObject .= pack('n', strLen("secondKey"));
+        $this->sObject .= pack('n', strLen('secondKey'));
         //data
-        $this->sObject .= "secondKey";
+        $this->sObject .= 'secondKey';
         //data type is string, so use string(2)
         $this->sObject .= pack('C', 2);
         //data length
-        $this->sObject .= pack('n', strLen("secondValue"));
+        $this->sObject .= pack('n', strLen('secondValue'));
         //data
-        $this->sObject .= "secondValue";
+        $this->sObject .= 'secondValue';
 
         //object end
-        $this->sObject .= pack("Cn", 0, 9);
+        $this->sObject .= pack('Cn', 0, 9);
     }
 
 
@@ -291,7 +291,7 @@ class AmfTestData {
      * it also sorts the data and writes the data with numerical keys first, then the data with string keys
      */
     public function buildEcmaArray(){
-        $this->dEcmaArray = Array("firstKey" => "firstValue", 0 =>"secondValue");
+        $this->dEcmaArray = Array('firstKey' => 'firstValue', 0 =>'secondValue');
         //type : 8
         $this->sEcmaArray = pack('C', 8);
         //number of sub objects on a long
@@ -303,33 +303,33 @@ class AmfTestData {
          * first entry in object. (0->secondValue, because of sorting)
          */
         //key length on an int
-        $this->sEcmaArray .= pack('n', strLen("0"));
+        $this->sEcmaArray .= pack('n', strLen('0'));
         //data
-        $this->sEcmaArray .= "0";
+        $this->sEcmaArray .= '0';
         //data type is string, so use string(2)
         $this->sEcmaArray .= pack('C', 2);
         //data length
-        $this->sEcmaArray .= pack('n', strLen("secondValue"));
+        $this->sEcmaArray .= pack('n', strLen('secondValue'));
         //data
-        $this->sEcmaArray .= "secondValue";
+        $this->sEcmaArray .= 'secondValue';
 
         /**
          * second entry in object
          */
 
         //key length on an int
-        $this->sEcmaArray .= pack('n', strLen("firstKey"));
+        $this->sEcmaArray .= pack('n', strLen('firstKey'));
         //data
-        $this->sEcmaArray .= "firstKey";
+        $this->sEcmaArray .= 'firstKey';
         //data type is string, so use string(2)
         $this->sEcmaArray .= pack('C', 2);
         //data length
-        $this->sEcmaArray .= pack('n', strLen("firstValue"));
+        $this->sEcmaArray .= pack('n', strLen('firstValue'));
         //data
-        $this->sEcmaArray .= "firstValue";
+        $this->sEcmaArray .= 'firstValue';
 
 
-        $this->sEcmaArray .= pack("Cn", 0, 9);
+        $this->sEcmaArray .= pack('Cn', 0, 9);
 
     }
     
@@ -342,7 +342,7 @@ class AmfTestData {
 
 
     public function buildStrictArray(){
-        $this->dStrictArray = Array("firstValue", "secondValue");
+        $this->dStrictArray = Array('firstValue', 'secondValue');
         //type : 0x0A
         $this->sStrictArray = pack('C', 0x0A);
         //number of sub objects on a long
@@ -355,9 +355,9 @@ class AmfTestData {
         //data type is string, so use string(2)
         $this->sStrictArray .= pack('C', 2);
         //data length
-        $this->sStrictArray .= pack('n', strLen("firstValue"));
+        $this->sStrictArray .= pack('n', strLen('firstValue'));
         //data
-        $this->sStrictArray .= "firstValue";
+        $this->sStrictArray .= 'firstValue';
 
         /**
          * second entry in object
@@ -366,9 +366,9 @@ class AmfTestData {
         //data type is string, so use string(2)
         $this->sStrictArray .= pack('C', 2);
         //data length
-        $this->sStrictArray .= pack('n', strLen("secondValue"));
+        $this->sStrictArray .= pack('n', strLen('secondValue'));
         //data
-        $this->sStrictArray .= "secondValue";
+        $this->sStrictArray .= 'secondValue';
 
 
         /**
@@ -382,7 +382,7 @@ class AmfTestData {
         //type: 0x0B
         $this->sDate = pack('C', 0x0B);
         //date is a double, see writeDouble for little/big endian
-        $dateData = pack("d", 1306926779576);
+        $dateData = pack('d', 1306926779576);
         if(Amfphp_Core_Amf_Util::isSystemBigEndian()){
             $dateData = strrev($dateData);
         }
@@ -395,7 +395,7 @@ class AmfTestData {
 
     public function buildLongString(){
         //needs to be more than 65535 characters.
-        $this->dLongString = str_repeat("a", 70000);
+        $this->dLongString = str_repeat('a', 70000);
         //type : 0x0C
         $this->sLongString = pack('C', 0x0C);
         //data length on a long
@@ -409,7 +409,7 @@ class AmfTestData {
      * TODO: no writeUnsupported method, and no PHP for unsupported. Write it A.S.
      */
     public function buildUnsupported(){
-        $this->dUnsupported = "unsupported";
+        $this->dUnsupported = 'unsupported';
         //type: 0x0D
         $this->sUnsupported = pack('C', 0x0D);
     }
@@ -418,7 +418,7 @@ class AmfTestData {
      * note: the writeXml method gets rids of CRs and LFs
      */
     public function buildXml(){
-        $this->dXml = new Amfphp_Core_Amf_Types_Xml("<testXml>test</testXml>");
+        $this->dXml = new Amfphp_Core_Amf_Types_Xml('<testXml>test</testXml>');
         //type : 0xOF
         $this->sXml = pack('C', 0x0F);
         //data length on a long
@@ -432,26 +432,26 @@ class AmfTestData {
      */
     public function buildTypedObject(){
         $this->dTypedObject = new stdClass();
-        $this->dTypedObject->data = "dummyData";
-        $this->dTypedObject->_explicitType = "DummyClass";
+        $this->dTypedObject->data = 'dummyData';
+        $this->dTypedObject->_explicitType = 'DummyClass';
         //type : 0x10
         $this->sTypedObject = pack('C', 0x10);
         //class name length on a int
-        $this->sTypedObject .= pack('n', strLen("DummyClass"));
+        $this->sTypedObject .= pack('n', strLen('DummyClass'));
         //class name
-        $this->sTypedObject .= "DummyClass";
+        $this->sTypedObject .= 'DummyClass';
         //length of member obj name on an int
-        $this->sTypedObject .= pack('n', strLen("data"));
+        $this->sTypedObject .= pack('n', strLen('data'));
         //member obj
-        $this->sTypedObject .= "data";
+        $this->sTypedObject .= 'data';
         //type of member obj: string (0x02)
         $this->sTypedObject .= pack('C', 0x02);
         //length of member obj value on an int
-        $this->sTypedObject .= pack('n', strLen("dummyData"));
+        $this->sTypedObject .= pack('n', strLen('dummyData'));
         //member obj value
-        $this->sTypedObject .= "dummyData";
+        $this->sTypedObject .= 'dummyData';
         // end object marker
-        $this->sTypedObject .= pack("Cn", 0, 9);
+        $this->sTypedObject .= pack('Cn', 0, 9);
     }
 
 
@@ -476,7 +476,7 @@ class AmfTestData {
      * one header containing a null, and with required set to true
      */
     public function buildNullHeaderPacket(){
-        $nullHeader = new Amfphp_Core_Amf_Header("null header", TRUE, NULL);
+        $nullHeader = new Amfphp_Core_Amf_Header('null header', TRUE, NULL);
 
         $this->dNullHeaderPacket = new Amfphp_Core_Amf_Packet();
 	$this->dNullHeaderPacket->headers[] = $nullHeader;
@@ -509,7 +509,7 @@ class AmfTestData {
      *  with one header containing a string
      */
     public function buildStringHeaderPacket(){
-        $stringHeader = new Amfphp_Core_Amf_Header("string header", FALSE, "zzzzzz");
+        $stringHeader = new Amfphp_Core_Amf_Header('string header', FALSE, 'zzzzzz');
 
         $this->dStringHeaderPacket = new Amfphp_Core_Amf_Packet();
 	$this->dStringHeaderPacket->headers[] = $stringHeader;
@@ -547,8 +547,8 @@ class AmfTestData {
      */
     public function buildNullMessagePacket(){
         $nullMessage = new Amfphp_Core_Amf_Message();
-        $nullMessage->targetUri = "/onStatus";
-        $nullMessage->responseUri = "null";
+        $nullMessage->targetUri = '/onStatus';
+        $nullMessage->responseUri = 'null';
         $this->dNullMessagePacket = new Amfphp_Core_Amf_Packet();
 	$this->dNullMessagePacket->messages[] = $nullMessage;
 
@@ -561,11 +561,11 @@ class AmfTestData {
         //target uri length
         $this->sNullMessagePacket .= pack('n', 9);
         //target uri.
-        $this->sNullMessagePacket .= "/onStatus";
+        $this->sNullMessagePacket .= '/onStatus';
         //response uri length
         $this->sNullMessagePacket .= pack('n', 4);
         //response uri.
-        $this->sNullMessagePacket .= "null";
+        $this->sNullMessagePacket .= 'null';
 
         //result is NULL by default. this is one byte for type that is worth 5, and no data
         $messageResultsData = pack('C', 5);
@@ -581,9 +581,9 @@ class AmfTestData {
      */
     public function buildStringMessagePacket(){
         $stringMessage = new Amfphp_Core_Amf_Message();
-        $testString = "test string";
-        $stringMessage->targetUri = "/onStatus";
-        $stringMessage->responseUri = "null";
+        $testString = 'test string';
+        $stringMessage->targetUri = '/onStatus';
+        $stringMessage->responseUri = 'null';
         $stringMessage->data = $testString;
         $this->dStringMessagePacket = new Amfphp_Core_Amf_Packet();
         $this->dStringMessagePacket->messages[] = $stringMessage;
@@ -597,11 +597,11 @@ class AmfTestData {
         //target uri length
         $this->sStringMessagePacket .= pack('n', 9);
         //target uri.
-        $this->sStringMessagePacket .= "/onStatus";
+        $this->sStringMessagePacket .= '/onStatus';
         //response uri length
         $this->sStringMessagePacket .= pack('n', 4);
-        //response uri. default is "null"
-        $this->sStringMessagePacket .= "null";
+        //response uri. default is 'null'
+        $this->sStringMessagePacket .= 'null';
 
         //result is string. byte with '2' as data type, then length, then char data
         $messageResultsData = pack('C', 2) . pack('n', strLen($testString)) . $testString;
@@ -617,15 +617,15 @@ class AmfTestData {
      * an Amfphp_Core_Amf_Packet with two headers one with a string and one with a null , and two Messages, one with a string and one with a null
      */
     public function build2HeadersAndTwoMessagesPacket(){
-        $nullHeader = new Amfphp_Core_Amf_Header("null header", TRUE, NULL);
-        $stringHeader = new Amfphp_Core_Amf_Header("string header", FALSE, "zzzzzz");
+        $nullHeader = new Amfphp_Core_Amf_Header('null header', TRUE, NULL);
+        $stringHeader = new Amfphp_Core_Amf_Header('string header', FALSE, 'zzzzzz');
         $nullMessage = new Amfphp_Core_Amf_Message();
-        $nullMessage->targetUri = "/onStatus";
-        $nullMessage->responseUri = "null";
+        $nullMessage->targetUri = '/onStatus';
+        $nullMessage->responseUri = 'null';
         $stringMessage = new Amfphp_Core_Amf_Message();
-        $testString = "test string";
-        $stringMessage->targetUri = "/onStatus";
-        $stringMessage->responseUri = "null";
+        $testString = 'test string';
+        $stringMessage->targetUri = '/onStatus';
+        $stringMessage->responseUri = 'null';
         $stringMessage->data = $testString;
 
         $this->d2Headers2MessagesPacket = new Amfphp_Core_Amf_Packet();
@@ -688,12 +688,12 @@ class AmfTestData {
          */
         //target uri length
         $this->s2Headers2MessagesPacket .= pack('n', 9);
-        //target uri. This is responseIndex (default is "") + "/onStatus"
-        $this->s2Headers2MessagesPacket .= "/onStatus";
+        //target uri. This is responseIndex (default is '') + '/onStatus'
+        $this->s2Headers2MessagesPacket .= '/onStatus';
         //response uri length
         $this->s2Headers2MessagesPacket .= pack('n', 4);
-        //response uri. default is "null"
-        $this->s2Headers2MessagesPacket .= "null";
+        //response uri. default is 'null'
+        $this->s2Headers2MessagesPacket .= 'null';
 
         //result is string. byte with '2' as data type, then length, then char data
         $messageResultsData = pack('C', 2) . pack('n', strLen($testString)) . $testString;
@@ -707,12 +707,12 @@ class AmfTestData {
          */
         //target uri length
         $this->s2Headers2MessagesPacket .= pack('n', 9);
-        //target uri. This is responseIndex (default is "") + "/onStatus"
-        $this->s2Headers2MessagesPacket .= "/onStatus";
+        //target uri. This is responseIndex (default is '') + '/onStatus'
+        $this->s2Headers2MessagesPacket .= '/onStatus';
         //response uri length
         $this->s2Headers2MessagesPacket .= pack('n', 4);
-        //response uri. default is "null"
-        $this->s2Headers2MessagesPacket .= "null";
+        //response uri. default is 'null'
+        $this->s2Headers2MessagesPacket .= 'null';
 
         //result is null
         $messageResultsData = pack('C', 5);
@@ -736,8 +736,8 @@ class AmfTestData {
 
         //request
 
-        $requestTargetUri = "TestService/returnOneParam";
-        $requestResponseUri = "/1";
+        $requestTargetUri = 'TestService/returnOneParam';
+        $requestResponseUri = '/1';
 
         //version (int)
         $requestPacket = pack('n', 0);
@@ -765,9 +765,9 @@ class AmfTestData {
         //data type is string, so use string(2)
         $requestMessage .= pack('C', 2);
         //data length
-        $requestMessage .= pack('n', strLen("testString"));
+        $requestMessage .= pack('n', strLen('testString'));
         //data
-        $requestMessage .= "testString";
+        $requestMessage .= 'testString';
         $requestMessageLength = strLen($requestMessage);
 
         //Message length, long
@@ -783,8 +783,8 @@ class AmfTestData {
 
         //response
 
-        $responseTargetUri = "/1/onResult";
-        $responseResponseUri = "null";
+        $responseTargetUri = '/1/onResult';
+        $responseResponseUri = 'null';
 
         //version (int)
         $responsePacket = pack('n', 0);
@@ -805,9 +805,9 @@ class AmfTestData {
         //data type is string, so use string(2)
         $responseMessage = pack('C', 2);
         //data length
-        $responseMessage .= pack('n', strLen("testString"));
+        $responseMessage .= pack('n', strLen('testString'));
         //data
-        $responseMessage .= "testString";
+        $responseMessage .= 'testString';
         $responseMessageLength = strLen($responseMessage);
 
         //Message length, long

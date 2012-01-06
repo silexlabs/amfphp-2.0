@@ -99,7 +99,7 @@ class Amfphp_Core_Amf_Serializer {
                 $this->writeByte(0);
             }
             $tempBuf = $this->outBuffer;
-            $this->outBuffer = "";
+            $this->outBuffer = '';
             $this->writeData($header->data);
             $serializedHeader = $this->outBuffer;
             $this->outBuffer = $tempBuf;
@@ -117,7 +117,7 @@ class Amfphp_Core_Amf_Serializer {
             $this->writeUTF($message->responseUri);
             //save the current buffer, and flush it to write the Message
             $tempBuf = $this->outBuffer;
-            $this->outBuffer = "";
+            $this->outBuffer = '';
             $this->writeData($message->data);
             $serializedMessage = $this->outBuffer;
             $this->outBuffer = $tempBuf;
@@ -139,7 +139,7 @@ class Amfphp_Core_Amf_Serializer {
      * @param int $b An int that can be converted to a byte
      */
     protected function writeByte($b) {
-        $this->outBuffer .= pack("c", $b); // use pack with the c flag
+        $this->outBuffer .= pack('c', $b); // use pack with the c flag
     }
 
     /**
@@ -149,7 +149,7 @@ class Amfphp_Core_Amf_Serializer {
      * @param int $n An integer to convert to a 2 byte binary string
      */
     protected function writeInt($n) {
-        $this->outBuffer .= pack("n", $n); // use pack with the n flag
+        $this->outBuffer .= pack('n', $n); // use pack with the n flag
     }
 
     /**
@@ -159,7 +159,7 @@ class Amfphp_Core_Amf_Serializer {
      * @param long $l A long to convert to a 4 byte binary string
      */
     protected function writeLong($l) {
-        $this->outBuffer .= pack("N", $l); // use pack with the N flag
+        $this->outBuffer .= pack('N', $l); // use pack with the N flag
     }
 
     /**
@@ -170,7 +170,7 @@ class Amfphp_Core_Amf_Serializer {
      * @param double $d The double to add to the output buffer
      */
     protected function writeDouble($d) {
-        $b = pack("d", $d); // pack the bytes
+        $b = pack('d', $d); // pack the bytes
         if (Amfphp_Core_Amf_Util::isSystemBigEndian()) { // if we are a big-endian processor
             $r = strrev($b);
         } else { // add the bytes to the output
@@ -209,7 +209,7 @@ class Amfphp_Core_Amf_Serializer {
      * @param bool $d The boolean value
      */
     protected function writeBoolean($d) {
-        $this->writeByte(1); // write the "boolean-marker"
+        $this->writeByte(1); // write the 'boolean-marker'
         $this->writeByte($d); // write the boolean byte (0 = FALSE; rest = TRUE)
     }
 
@@ -414,7 +414,7 @@ class Amfphp_Core_Amf_Serializer {
         $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
         $className = $d->$explicitTypeField;
         if (!$className) {
-            throw new Amfphp_Core_Exception(Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE . " not found on a object that is to be sent as typed. " . print_r($d, true));
+            throw new Amfphp_Core_Exception(Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE . ' not found on a object that is to be sent as typed. ' . print_r($d, true));
         }
         unset($d->$explicitTypeField);
         $this->writeUTF($className); // write the class name
@@ -485,9 +485,9 @@ class Amfphp_Core_Amf_Serializer {
     /**
      * @todo Is the reference still needed? PHP4 needed it for objects, but PHP5 always
      * passes objects by reference. And PHP5 uses a copy-on-write approach, so that all
-     * values are passed as "reference", in case no changes take place.
+     * values are passed as 'reference', in case no changes take place.
      *
-     * @todo no type markers ("\6", for example) in this method!
+     * @todo no type markers ("\6', for example) in this method!
      */
     protected function writeAmf3Data(& $d) {
         if (is_int($d)) { //int
@@ -591,7 +591,7 @@ class Amfphp_Core_Amf_Serializer {
     protected function writeAmf3String($d) {
 
         if ($d === '') {
-            //Write 0x01 to specify the empty string ("UTF-8-empty")
+            //Write 0x01 to specify the empty string ('UTF-8-empty')
             $this->outBuffer .= "\1";
             return;
         } 
@@ -634,7 +634,7 @@ class Amfphp_Core_Amf_Serializer {
 
         if (
                 ($str_count > 0 && $num_count == 0) || // Only strings or negative integer keys are present.
-                ($num_count > 0 && $largestKey != $num_count - 1) // Non-negative integer keys are present, but the array is not "dense" (it has gaps).
+                ($num_count > 0 && $largestKey != $num_count - 1) // Non-negative integer keys are present, but the array is not 'dense' (it has gaps).
         ) { // this is a mixed array. Convert it to an anonymous object(to get get an Object type on the client)
             $anonymousObject = new stdClass();
             foreach($numeric as $key => $data){
@@ -655,7 +655,7 @@ class Amfphp_Core_Amf_Serializer {
                 $this->writeAmf3String($key);
                 $this->writeAmf3Data($val);
             }
-            $this->writeAmf3String(""); //End start hash
+            $this->writeAmf3String(''); //End start hash
 
             for ($i = 0; $i < $num_count; $i++) {
                 $this->writeAmf3Data($numeric[$i]);
@@ -767,7 +767,7 @@ class Amfphp_Core_Amf_Serializer {
      */
     protected function handleReference(&$obj, array &$references){
         $key = false;
-        if(is_object($obj) && function_exists("spl_object_hash")){
+        if(is_object($obj) && function_exists('spl_object_hash')){
             $hash = spl_object_hash($obj);
             if(isset($references[$hash])){
                 $key = $references[$hash];
@@ -827,8 +827,8 @@ class Amfphp_Core_Amf_Serializer {
             if(isset ($this->className2TraitsInfo[$className])){
                 //we have traits information and a reference for it, so use a traits reference
                 $traitsInfo = $this->className2TraitsInfo[$className];
-                $propertyNames = $traitsInfo["propertyNames"];
-                $referenceId = $traitsInfo["referenceId"];
+                $propertyNames = $traitsInfo['propertyNames'];
+                $referenceId = $traitsInfo['referenceId'];
                 $traitsReference = $referenceId << 2 | 1;
                 $this->writeAmf3Int($traitsReference);
             }else{
@@ -852,7 +852,7 @@ class Amfphp_Core_Amf_Serializer {
                 }
                 
                 //save for reference
-                $traitsInfo = array("referenceId" => count($this->className2TraitsInfo), "propertyNames" => $propertyNames);
+                $traitsInfo = array('referenceId' => count($this->className2TraitsInfo), 'propertyNames' => $propertyNames);
                 $this->className2TraitsInfo[$className] = $traitsInfo;
             }
             //list of values
@@ -865,7 +865,7 @@ class Amfphp_Core_Amf_Serializer {
             //U29O-traits : 1011.
             $this->writeAmf3Int(0xB);
             //no class name. empty string for anonymous object
-            $this->writeAmf3String("");
+            $this->writeAmf3String('');
             //name/value pairs for dynamic properties
             foreach ($d as $key => $value) {
                 if ($key[0] != "\0" && $key != $explicitTypeField) { //Don't show protected members or explicit type

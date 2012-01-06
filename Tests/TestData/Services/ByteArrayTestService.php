@@ -26,7 +26,7 @@ class ByteArrayTestService {
     public function uploadCompressedByteArray(Amfphp_Core_Amf_Types_ByteArray $ba){
         $uncompressed = gzuncompress($ba->data);
         //uncomment to save file to jpeg
-        //file_put_contents("received.jpg", $uncompressed);
+        //file_put_contents('received.jpg', $uncompressed);
         return true;
 
     }

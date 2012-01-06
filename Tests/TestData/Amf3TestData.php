@@ -81,8 +81,8 @@ class Amf3TestData {
 // A negative integer is always serialised as U29-4.
 // This method is not supposed to output the value type.
 
-// For a "-1", all bits are set.
-// All four bytes thus are "255".
+// For a '-1', all bits are set.
+// All four bytes thus are '255'.
 
         $this->dInt1 = -1;
         $this->sInt1 = pack('C', 4) . pack('C4', 255, 255, 255, 255);
@@ -106,7 +106,7 @@ class Amf3TestData {
      */
     public function buildDouble(){
         $this->dDouble = 0.42;
-        $packedData = pack("d", 0.42);
+        $packedData = pack('d', 0.42);
         if(Amfphp_Core_Amf_Util::isSystemBigEndian()){
             $packedData = strrev($packedData);
         }
@@ -119,24 +119,24 @@ class Amf3TestData {
      *
      */
     public function buildString(){
-        $this->dEmptyString = "";
-        $this->sEmptyString = pack("C", "1");
+        $this->dEmptyString = '';
+        $this->sEmptyString = pack('C', '1');
 
-        $this->dString = "This is a test!";
+        $this->dString = 'This is a test!';
 // The string is seen for the first time. So no reference can be used.
 // This method is not supposed to output the value type.
 
-// "U29S-value" (15 << 1 | 1 = 0x1f)
-// "This is a test!"
+// 'U29S-value' (15 << 1 | 1 = 0x1f)
+// 'This is a test!'
         $this->sString = pack('C', 0x1f) . 'This is a test!';
 
 // The string is added twice. It first is added as value,
 // the second time it should be added as reference.
 // This method is not supposed to output the value type.
 
-// "U29S-value" (15 << 1 | 1 = 0x1f)
-// "This is a test!"
-// "U29S-ref" for lookup table index 0) (0 << 1 = 0x00)
+// 'U29S-value' (15 << 1 | 1 = 0x1f)
+// 'This is a test!'
+// 'U29S-ref' for lookup table index 0) (0 << 1 = 0x00)
         $this->sStringTwice = pack('C', 31) . 'This is a test!' . pack('C', 0);
 
 
@@ -145,13 +145,13 @@ class Amf3TestData {
     }
 
     public function buildXml(){
-        $this->dXmlDocument = new Amfphp_Core_Amf_Types_XmlDocument("<?xml version=\"1.0\"?><testRoot><testChild1>testChild1Value</testChild1></testRoot>");
+        $this->dXmlDocument = new Amfphp_Core_Amf_Types_XmlDocument('<?xml version=\'1.0\'?><testRoot><testChild1>testChild1Value</testChild1></testRoot>');
         //2nd is u29s-value : length << 1 | 1.
-        $this->sXmlDocument = pack('C', 7) . pack("C2", 0x81, 0x25) . $this->dXmlDocument->data;
+        $this->sXmlDocument = pack('C', 7) . pack('C2', 0x81, 0x25) . $this->dXmlDocument->data;
 
         //xml and xml doc treated the same. So do no tests for xml(not doc!) only for deserializer
-        $this->dXml = new Amfphp_Core_Amf_Types_Xml("<?xml version=\"1.0\"?><testRoot><testChild1>testChild1Value</testChild1></testRoot>");
-        $this->sXml = pack('C', 0x0B) . pack("C2", 0x81, 0x25) . $this->dXml->data;
+        $this->dXml = new Amfphp_Core_Amf_Types_Xml('<?xml version=\'1.0\'?><testRoot><testChild1>testChild1Value</testChild1></testRoot>');
+        $this->sXml = pack('C', 0x0B) . pack('C2', 0x81, 0x25) . $this->dXml->data;
 
     }
 
@@ -162,7 +162,7 @@ class Amf3TestData {
         //U29D-value = 1. Marker to distinguish from references, I think
         $this->sDate .= pack('C', 0x01);
         //date is a double, see writeDouble for little/big endian
-        $dateData = pack("d", 1306926779576);
+        $dateData = pack('d', 1306926779576);
         if(Amfphp_Core_Amf_Util::isSystemBigEndian()){
             $dateData = strrev($dateData);
         }
@@ -172,94 +172,94 @@ class Amf3TestData {
 
     public function buildArray(){
         $this->dEmptyArray = array();
-// "array_marker" (0x09)
-// "U29A-value" with size of "dense portion" (0 << 1 | 1 = 0x01)
-// "UTF-8-empty" flagging end of "associative portion" (0x01)
+// 'array_marker' (0x09)
+// 'U29A-value' with size of 'dense portion' (0 << 1 | 1 = 0x01)
+// 'UTF-8-empty' flagging end of 'associative portion' (0x01)
         $this->sEmptyArray = pack('C3', 9, 1, 1);
 
 
 
-// Serialise an array with 0-based integer keys (Adobe calls it "dense array").
+// Serialise an array with 0-based integer keys (Adobe calls it 'dense array').
         $this->dDenseArray = array(0 => 'zero', 1 => 'one');
-// "array_marker" (0x09)
-// "U29A-value" with size of "dense portion" (2 << 1 | 1 = 0x05)
-// "UTF-8-empty" flagging end of "associative portion" (0x01)
-// "string-marker" (0x06)
-// "U29S-value" with string length (4 << 1 | 1 = 0x09)
-// "zero"
-// "string-marker" (0x06)
-// "U29S-value" with string length (3 << 1 | 1 = 0x07)
-// "one"
+// 'array_marker' (0x09)
+// 'U29A-value' with size of 'dense portion' (2 << 1 | 1 = 0x05)
+// 'UTF-8-empty' flagging end of 'associative portion' (0x01)
+// 'string-marker' (0x06)
+// 'U29S-value' with string length (4 << 1 | 1 = 0x09)
+// 'zero'
+// 'string-marker' (0x06)
+// 'U29S-value' with string length (3 << 1 | 1 = 0x07)
+// 'one'
         $this->sDenseArray = pack('C5', 9, 5, 1, 6, 9) . 'zero' . pack('CC', 6, 7) . 'one';
 
 
-// Serialise an array with 0-based integer keys ("dense portion") plus
-// non-integer keys ("associative portion").
+// Serialise an array with 0-based integer keys ('dense portion') plus
+// non-integer keys ('associative portion').
         $this->dMixedArray =  array(0 => 'zero', 1 => 'one', 's' => 'sv', 'xyz' => 'tvxyz');
 
-// "array_marker" (0x09)
-// "U29A-value" with size of "dense portion" (2 << 1 | 1 = 0x05)
-// 1st "assoc-value":
-// - "U29S-value" for string of length 1 (1 << 1 | 1 = 0x03)
-// - "s"
+// 'array_marker' (0x09)
+// 'U29A-value' with size of 'dense portion' (2 << 1 | 1 = 0x05)
+// 1st 'assoc-value':
+// - 'U29S-value' for string of length 1 (1 << 1 | 1 = 0x03)
+// - 's'
 // value:
-// - "string-marker" (0x06)
-// - "U29S-value" with string length (2 << 1 | 1 = 0x05)
-// - "sv"
-// 2nd "assoc-value":
-// - "U29S-value" for string of length 3 (3 << 1 | 1 = 0x07)
-// - "xyz"
+// - 'string-marker' (0x06)
+// - 'U29S-value' with string length (2 << 1 | 1 = 0x05)
+// - 'sv'
+// 2nd 'assoc-value':
+// - 'U29S-value' for string of length 3 (3 << 1 | 1 = 0x07)
+// - 'xyz'
 // value:
-// - "string-marker" (0x06)
-// - "U29S-value" with string length (5 << 1 | 1 = 0x0b)
-// - "tvxyz"
-// "UTF-8-empty" flagging end of "associative portion" (0x01)
-// "dense portion" values:
-// - "string-marker" (0x06)
-// - "U29S-value" with string length (4 << 1 | 1 = 0x09)
-// - "zero"
-// "dense portion" values:
-// - "string-marker" (0x06)
-// - "U29S-value" with string length (3 << 1 | 1 = 0x07)
-// - "one"
+// - 'string-marker' (0x06)
+// - 'U29S-value' with string length (5 << 1 | 1 = 0x0b)
+// - 'tvxyz'
+// 'UTF-8-empty' flagging end of 'associative portion' (0x01)
+// 'dense portion' values:
+// - 'string-marker' (0x06)
+// - 'U29S-value' with string length (4 << 1 | 1 = 0x09)
+// - 'zero'
+// 'dense portion' values:
+// - 'string-marker' (0x06)
+// - 'U29S-value' with string length (3 << 1 | 1 = 0x07)
+// - 'one'
         $this->sMixedArray = pack('C3', 9, 5, 3) . 's' . pack('CC', 6, 5) . 'sv' . pack('C', 7) . 'xyz' . pack('CC', 6, 11) . 'tvxyz' . pack('C3', 1, 6, 9) . 'zero' . pack('CC', 6, 7) . 'one';
     }
 
     public function buildObject(){
         $this->dObject = new stdClass();
-        $this->dObject->data= "test";
+        $this->dObject->data= 'test';
         $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
-        $this->dObject->$explicitTypeField ="DummyClass2";
+        $this->dObject->$explicitTypeField ='DummyClass2';
         //object marker
-        $this->sObject = pack("C", 0x0A);
+        $this->sObject = pack('C', 0x0A);
         //traits.
-        $this->sObject .= pack("C", 0x13);
+        $this->sObject .= pack('C', 0x13);
         //class name length, on a U29-1 : 11 << 1 | 1 = 23 
-        $this->sObject .= pack("C", 0x17);
+        $this->sObject .= pack('C', 0x17);
         //class name
-        $this->sObject .= "DummyClass2";
+        $this->sObject .= 'DummyClass2';
         //member name length, on a U29-1 : 4 << 1 | 1 = 9
-        $this->sObject .= pack("C", 0x9);
+        $this->sObject .= pack('C', 0x9);
         //member name
-        $this->sObject .= "data";
+        $this->sObject .= 'data';
         //string marker
-        $this->sObject .= pack("C", 6);
+        $this->sObject .= pack('C', 6);
         //member value length, on a U29-1 : 4 << 1 | 1 = 9
-        $this->sObject .= pack("C", 0x9);
+        $this->sObject .= pack('C', 0x9);
         //member value
-        $this->sObject .= "test";
+        $this->sObject .= 'test';
         
     }
 
     public function buildByteArray(){
-        $this->dByteArray = new Amfphp_Core_Amf_Types_ByteArray("test");
+        $this->dByteArray = new Amfphp_Core_Amf_Types_ByteArray('test');
         //Byte Array Marker
-        $this->sByteArray = pack("C", 0x0C);
+        $this->sByteArray = pack('C', 0x0C);
         //only the data field of ByteArray is encoded, the class is just a wrapper!
         //data length, on a U29-1 : 4 << 1 | 1 = 9
-        $this->sByteArray .= pack("C", 9);
+        $this->sByteArray .= pack('C', 9);
         //data bytes
-        $this->sByteArray .= "test";
+        $this->sByteArray .= 'test';
 
         
     }

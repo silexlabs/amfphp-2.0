@@ -14,7 +14,7 @@
  * @author Ariel Sommeria-klein
  */
 require_once dirname(__FILE__) . '/../../Amfphp/ClassLoader.php';
-require_once dirname(__FILE__) . "/TestServicesConfig.php";
+require_once dirname(__FILE__) . '/TestServicesConfig.php';
 $config = new Amfphp_Core_Config();
 $testServiceConfig = new TestServicesConfig();
 $config->serviceFolderPaths = $testServiceConfig->serviceFolderPaths;

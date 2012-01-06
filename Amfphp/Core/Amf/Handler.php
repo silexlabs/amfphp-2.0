@@ -24,7 +24,7 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      * @param Amfphp_Core_Amf_Header $header the request header
      * @todo consider an interface for $handler. Maybe overkill here
      */
-    const FILTER_AMF_REQUEST_HEADER_HANDLER = "FILTER_AMF_REQUEST_HEADER_HANDLER";
+    const FILTER_AMF_REQUEST_HEADER_HANDLER = 'FILTER_AMF_REQUEST_HEADER_HANDLER';
 
     /**
      * filter called for each amf request message, to give a plugin the chance to handle it.
@@ -33,7 +33,7 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      * @param Amfphp_Core_Amf_Message $requestMessage the request message
      * @todo consider an interface for $handler. Maybe overkill here
      */
-    const FILTER_AMF_REQUEST_MESSAGE_HANDLER = "FILTER_AMF_REQUEST_MESSAGE_HANDLER";
+    const FILTER_AMF_REQUEST_MESSAGE_HANDLER = 'FILTER_AMF_REQUEST_MESSAGE_HANDLER';
 
     /**
      * filter called for exception handling an Amf packet/message, to give a plugin the chance to handle it.
@@ -41,11 +41,11 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      * @param Object $handler. null at call. Return if the plugin can handle
      * @todo consider an interface for $handler. Maybe overkill here
      */
-    const FILTER_AMF_EXCEPTION_HANDLER = "FILTER_AMF_EXCEPTION_HANDLER";
+    const FILTER_AMF_EXCEPTION_HANDLER = 'FILTER_AMF_EXCEPTION_HANDLER';
 
     /**
      * Amf specifies that an error message must be aimed at an end point. This stores the last message's response Uri to be able to give this end point
-     * in case of an exception during the handling of the message. The default is "/1", because a response Uri is not always available
+     * in case of an exception during the handling of the message. The default is '/1', because a response Uri is not always available
      * @var String
      */
     protected $lastRequestMessageResponseUri;
@@ -66,7 +66,7 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
     
 
     public function __construct($sharedConfig) {
-        $this->lastRequestMessageResponseUri = "/1";
+        $this->lastRequestMessageResponseUri = '/1';
         $this->returnErrorDetails = (isset ($sharedConfig[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]) && $sharedConfig[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]);
     }
 
@@ -84,16 +84,16 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
 
     /**
      * creates a ServiceCallParamaeters object from an Amfphp_Core_Amf_Message
-     * supported separators in the targetUri are "/" and "."
+     * supported separators in the targetUri are '/' and '.'
      * @param Amfphp_Core_Amf_Message $Amfphp_Core_Amf_Message
      * @return Amfphp_Core_Common_ServiceCallParameters
      */
     protected function getServiceCallParameters(Amfphp_Core_Amf_Message $Amfphp_Core_Amf_Message) {
-        $targetUri = str_replace(".", "/", $Amfphp_Core_Amf_Message->targetUri);
-        $split = explode("/", $targetUri);
+        $targetUri = str_replace('.', '/', $Amfphp_Core_Amf_Message->targetUri);
+        $split = explode('/', $targetUri);
         $ret = new Amfphp_Core_Common_ServiceCallParameters();
         $ret->methodName = array_pop($split);
-        $ret->serviceName = join($split, "/");
+        $ret->serviceName = join($split, '/');
         $ret->methodParameters = $Amfphp_Core_Amf_Message->data;
         return $ret;
     }
@@ -120,7 +120,7 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
         $responseMessage->data = $ret;
         $responseMessage->targetUri = $requestMessage->responseUri . Amfphp_Core_Amf_Constants::CLIENT_SUCCESS_METHOD;
         //not specified
-        $responseMessage->responseUri = "null";
+        $responseMessage->responseUri = 'null';
         return $responseMessage;
     }
 
@@ -140,7 +140,7 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
         }
 
         $numMessages = count($deserializedRequest->messages);
-        $rawOutputData = "";
+        $rawOutputData = '';
         $responsePacket = new Amfphp_Core_Amf_Packet();
         //set amf version to the one detected in request
         $responsePacket->amfVersion = $deserializedRequest->amfVersion;
@@ -179,7 +179,7 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
         $errorResponseMessage = new Amfphp_Core_Amf_Message();
         $errorResponseMessage->targetUri = $this->lastRequestMessageResponseUri . Amfphp_Core_Amf_Constants::CLIENT_FAILURE_METHOD;
         //not specified
-        $errorResponseMessage->responseUri = "null";
+        $errorResponseMessage->responseUri = 'null';
         $data = new stdClass();
         $data->faultCode = $exception->getCode();
         $data->faultString = $exception->getMessage();
@@ -187,7 +187,7 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
             $data->faultDetail = $exception->getTraceAsString();
             $data->rootCause = $exception;
         }else{
-            $data->faultDetail = "";
+            $data->faultDetail = '';
         }
         $errorResponseMessage->data = $data;
 

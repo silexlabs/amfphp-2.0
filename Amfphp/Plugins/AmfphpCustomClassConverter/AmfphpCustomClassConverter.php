@@ -34,15 +34,15 @@ class AmfphpCustomClassConverter {
      */
     public function  __construct(array $config = null) {
         //default
-        $this->customClassFolderPaths = array(AMFPHP_ROOTPATH . "/Services/Vo/");
+        $this->customClassFolderPaths = array(AMFPHP_ROOTPATH . '/Services/Vo/');
         if($config){
-            if(isset($config["customClassFolderPaths"])){
-                $this->customClassFolderPaths = $config["customClassFolderPaths"];
+            if(isset($config['customClassFolderPaths'])){
+                $this->customClassFolderPaths = $config['customClassFolderPaths'];
             }
         }
         $filterManager = Amfphp_Core_FilterManager::getInstance();
-        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_REQUEST, $this, "filterDeserializedRequest");
-        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_RESPONSE, $this, "filterDeserializedResponse");
+        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_REQUEST, $this, 'filterDeserializedRequest');
+        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_RESPONSE, $this, 'filterDeserializedResponse');
     }
 
 
@@ -52,7 +52,7 @@ class AmfphpCustomClassConverter {
      * @return mixed
      */
     public function filterDeserializedRequest($deserializedRequest){
-        $deserializedRequest = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($deserializedRequest, array($this, "convertToTyped"));
+        $deserializedRequest = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($deserializedRequest, array($this, 'convertToTyped'));
         return $deserializedRequest;
 
     }
@@ -63,7 +63,7 @@ class AmfphpCustomClassConverter {
      * @return mixed
      */
     public function filterDeserializedResponse($deserializedResponse){
-        $deserializedResponse = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($deserializedResponse, array($this, "markExplicitType"));
+        $deserializedResponse = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($deserializedResponse, array($this, 'markExplicitType'));
         return $deserializedResponse;
 
     }
@@ -87,7 +87,7 @@ class AmfphpCustomClassConverter {
             $customClassName = $obj->$explicitTypeField;
             if(!class_exists($customClassName)){
                 foreach($this->customClassFolderPaths as $folderPath){
-                    $customClassPath = $folderPath . "/" . $customClassName . ".php";
+                    $customClassPath = $folderPath . '/' . $customClassName . '.php';
                     if(file_exists($customClassPath)){
                         require_once $customClassPath;
                         break;
@@ -127,7 +127,7 @@ class AmfphpCustomClassConverter {
         }
         $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
         $className = get_class ($obj);
-        if($className != "stdClass" && !isset($obj->$explicitTypeField)){
+        if($className != 'stdClass' && !isset($obj->$explicitTypeField)){
             $obj->$explicitTypeField = $className;
         }
         return $obj;

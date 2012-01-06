@@ -37,10 +37,10 @@ class AmfphpCharsetConverterTest extends PHPUnit_Framework_TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp() {
-        $pluginConfig = array("clientCharset" => "UTF-8", "phpCharset" => "ISO-8859-1", "method" =>AmfphpCharsetConverter::METHOD_ICONV);
+        $pluginConfig = array('clientCharset' => 'UTF-8', 'phpCharset' => 'ISO-8859-1', 'method' =>AmfphpCharsetConverter::METHOD_ICONV);
         $this->object = new AmfphpCharsetConverter($pluginConfig);
-        $this->textInClientCharset = "éèê"; //utf-8
-        $this->textInPhpCharset = iconv("UTF-8", "ISO-8859-1", $this->textInClientCharset);
+        $this->textInClientCharset = 'éèê'; //utf-8
+        $this->textInPhpCharset = iconv('UTF-8', 'ISO-8859-1', $this->textInClientCharset);
 
     }
 

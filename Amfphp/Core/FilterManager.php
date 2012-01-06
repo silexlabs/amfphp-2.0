@@ -58,7 +58,7 @@ class Amfphp_Core_FilterManager{
         //get arguments with which to call the function. All except first, which is the filter name
         $filterArgs = func_get_args();
         $filterName = array_shift($filterArgs);
-        //throw new Exception("filterArgs " . print_r($filterArgs, true));
+        //throw new Exception('filterArgs ' . print_r($filterArgs, true));
         $filtered = $filterArgs[0];
         if (isset($this->filtersArray[$filterName])){
             // loop on registered filters

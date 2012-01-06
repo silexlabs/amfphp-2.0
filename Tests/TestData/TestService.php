@@ -31,7 +31,7 @@ class TestService {
     }
 
     public function returnBla(){
-        return "bla";
+        return 'bla';
     }
     
     public function throwException($arg1){
@@ -40,7 +40,7 @@ class TestService {
     
     public function returnAfterOneSecond(){
         sleep(1);
-        return "slept for 1 second";
+        return 'slept for 1 second';
     }
 
 

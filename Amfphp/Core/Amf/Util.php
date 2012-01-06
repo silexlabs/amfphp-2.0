@@ -23,7 +23,7 @@ class Amfphp_Core_Amf_Util {
      * @return <Boolean>
      */
     static public function isSystemBigEndian() {
-        $tmp = pack("d", 1); // determine the multi-byte ordering of this machine temporarily pack 1
+        $tmp = pack('d', 1); // determine the multi-byte ordering of this machine temporarily pack 1
         return ($tmp == "\0\0\0\0\0\0\360\77");
     }
 
@@ -42,7 +42,7 @@ class Amfphp_Core_Amf_Util {
             throw new Amfphp_Core_Exception("couldn't recurse deeper on object. Probably a looped reference");
         }
         //don't apply to Amfphp types such as byte array
-        if($ignoreAmfTypes && is_object($obj) && substr(get_class($obj),0, 21) == "Amfphp_Core_Amf_Types" ){
+        if($ignoreAmfTypes && is_object($obj) && substr(get_class($obj),0, 21) == 'Amfphp_Core_Amf_Types' ){
             return $obj;
         }
 
@@ -75,57 +75,57 @@ class Amfphp_Core_Amf_Util {
     }
 
     /**
-     * Determines whether an object is the ActionScript type "undefined"
+     * Determines whether an object is the ActionScript type 'undefined'
      *
      * @static
      * @param  $obj
      * @return bool
      */
     static public function is_undefined($obj) {
-        return is_object($obj) ? get_class($obj) == "Amfphp_Core_Amf_Types_Undefined" : false;
+        return is_object($obj) ? get_class($obj) == 'Amfphp_Core_Amf_Types_Undefined' : false;
     }
 
     /**
-     * Determines whether an object is the ActionScript type "ByteArray"
+     * Determines whether an object is the ActionScript type 'ByteArray'
      *
      * @static
      * @param  $obj
      * @return bool
      */
     static public function is_byteArray($obj) {
-        return is_object($obj) ? get_class($obj) == "Amfphp_Core_Amf_Types_ByteArray" : false;
+        return is_object($obj) ? get_class($obj) == 'Amfphp_Core_Amf_Types_ByteArray' : false;
     }
 
     /**
-     * Determines whether an object is the ActionScript type "Date"
+     * Determines whether an object is the ActionScript type 'Date'
      *
      * @static
      * @param  $obj
      * @return bool
      */
     static public function is_date($obj) {
-        return is_object($obj) ? get_class($obj) == "Amfphp_Core_Amf_Types_Date" : false;
+        return is_object($obj) ? get_class($obj) == 'Amfphp_Core_Amf_Types_Date' : false;
     }
 
     /**
-     * Determines whether an object is the ActionScript type "XML"
+     * Determines whether an object is the ActionScript type 'XML'
      *
      * @static
      * @param  $obj
      * @return bool
      */
     static public function is_Xml($obj) {
-        return is_object($obj) ? get_class($obj) == "Amfphp_Core_Amf_Types_Xml" : false;
+        return is_object($obj) ? get_class($obj) == 'Amfphp_Core_Amf_Types_Xml' : false;
     }
         /**
-     * Determines whether an object is the ActionScript type "XmlDoument"
+     * Determines whether an object is the ActionScript type 'XmlDoument'
      *
      * @static
      * @param  $obj
      * @return bool
      */
     static public function is_XmlDocument($obj) {
-        return is_object($obj) ? get_class($obj) == "Amfphp_Core_Amf_Types_XmlDocument" : false;
+        return is_object($obj) ? get_class($obj) == 'Amfphp_Core_Amf_Types_XmlDocument' : false;
     }
 
 

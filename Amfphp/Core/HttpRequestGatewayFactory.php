@@ -43,11 +43,11 @@ class Amfphp_Core_HttpRequestGatewayFactory {
      */
     static public function createGateway(Amfphp_Core_Config $config = null){
         $contentType = null;
-        if(isset ($_GET["contentType"])){
-            $contentType = $_GET["contentType"];
-        }else if(isset ($_SERVER["CONTENT_TYPE"])){
+        if(isset ($_GET['contentType'])){
+            $contentType = $_GET['contentType'];
+        }else if(isset ($_SERVER['CONTENT_TYPE'])){
 
-            $contentType = $_SERVER["CONTENT_TYPE"];
+            $contentType = $_SERVER['CONTENT_TYPE'];
         }
         $rawInputData = self::getRawPostData();
         return new Amfphp_Core_Gateway($_GET, $_POST, $rawInputData, $contentType, $config);

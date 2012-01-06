@@ -12,8 +12,8 @@
 /**
 *  includes
 *  */
-require_once dirname(__FILE__) . "/AcknowledgeMessage.php";
-require_once dirname(__FILE__) . "/ErrorMessage.php";
+require_once dirname(__FILE__) . '/AcknowledgeMessage.php';
+require_once dirname(__FILE__) . '/ErrorMessage.php';
 /**
  * Support for flex messaging.
  * Flex doesn't use the basic packet system. When using a remote objct, first a CommandMessage is sent, expecting an AcknowledgeMessage in return.
@@ -29,7 +29,7 @@ class AmfphpFlexMessaging{
     const FLEX_TYPE_ACKNOWLEDGE_MESSAGE = 'flex.messaging.messages.AcknowledgeMessage';
     const FLEX_TYPE_ERROR_MESSAGE = 'flex.messaging.messages.ErrorMessage';
     
-    const FIELD_MESSAGE_ID = "messageId";
+    const FIELD_MESSAGE_ID = 'messageId';
 
     /**
      * if this is set, special error handling applies
@@ -55,8 +55,8 @@ class AmfphpFlexMessaging{
      * @param array $config optional key/value pairs in an associative array. Used to override default configuration values.
      */
     public function  __construct(array $config = null) {
-        Amfphp_Core_FilterManager::getInstance()->addFilter(Amfphp_Core_Amf_Handler::FILTER_AMF_REQUEST_MESSAGE_HANDLER, $this, "filterAmfRequestMessageHandler");
-        Amfphp_Core_FilterManager::getInstance()->addFilter(Amfphp_Core_Amf_Handler::FILTER_AMF_EXCEPTION_HANDLER, $this, "filterAmfExceptionHandler");
+        Amfphp_Core_FilterManager::getInstance()->addFilter(Amfphp_Core_Amf_Handler::FILTER_AMF_REQUEST_MESSAGE_HANDLER, $this, 'filterAmfRequestMessageHandler');
+        Amfphp_Core_FilterManager::getInstance()->addFilter(Amfphp_Core_Amf_Handler::FILTER_AMF_EXCEPTION_HANDLER, $this, 'filterAmfExceptionHandler');
         $this->clientUsesFlexMessaging = false;
         $this->returnErrorDetails = (isset ($config[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]) && $config[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]);
 
@@ -136,7 +136,7 @@ class AmfphpFlexMessaging{
             return new Amfphp_Core_Amf_Message($requestMessage->responseUri . Amfphp_Core_Amf_Constants::CLIENT_SUCCESS_METHOD, null, $acknowledge);
 
         }
-        throw new Amfphp_Core_Exception("unrecognized flex message");
+        throw new Amfphp_Core_Exception('unrecognized flex message');
     }
 
     /**

@@ -20,27 +20,27 @@ class AmfphpCharsetConverter {
     /**
      * don't do anything
      */
-    const METHOD_NONE = "none";
+    const METHOD_NONE = 'none';
 
     /**
      * uses the iconv library for reencoding
      */
-    const METHOD_ICONV = "iconv";
+    const METHOD_ICONV = 'iconv';
 
     /**
      * uses the mbstring library for reencoding
      */
-    const METHOD_MBSTRING = "mbstring";
+    const METHOD_MBSTRING = 'mbstring';
 
     /**
      * uses the recode library for reencoding
      */
-    const METHOD_RECODE = "recode";
+    const METHOD_RECODE = 'recode';
     
     /**
      *  uses the XML function utf8_decode and encode for reencoding - ISO-8859-1 only
      */
-    const METHOD_UTF8_DECODE = "utf8_decode";
+    const METHOD_UTF8_DECODE = 'utf8_decode';
     
     /**
      * the reencoding method. One of the METHOD_XXX consts defined above.
@@ -83,18 +83,18 @@ class AmfphpCharsetConverter {
      */
     public function  __construct(array $config = null) {
         //defaults
-        $this->clientCharset = "utf-8";
-        $this->phpCharset = "utf-8";
+        $this->clientCharset = 'utf-8';
+        $this->phpCharset = 'utf-8';
         $this->method = self::METHOD_NONE;
         if($config){
-            if(isset ($config["clientCharset"])){
-                $this->clientCharset = $config["clientCharset"];
+            if(isset ($config['clientCharset'])){
+                $this->clientCharset = $config['clientCharset'];
             }
-            if(isset ($config["phpCharset"])){
-                $this->phpCharset = $config["phpCharset"];
+            if(isset ($config['phpCharset'])){
+                $this->phpCharset = $config['phpCharset'];
             }
-            if(isset ($config["method"])){
-                $this->method = $config["method"];
+            if(isset ($config['method'])){
+                $this->method = $config['method'];
             }
         }
 
@@ -106,8 +106,8 @@ class AmfphpCharsetConverter {
             return;
         }
         $filterManager = Amfphp_Core_FilterManager::getInstance();
-        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_REQUEST, $this, "filterDeserializedRequest");
-        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_RESPONSE, $this, "filterDeserializedResponse");
+        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_REQUEST, $this, 'filterDeserializedRequest');
+        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_RESPONSE, $this, 'filterDeserializedResponse');
     }
 
 
@@ -117,7 +117,7 @@ class AmfphpCharsetConverter {
      * @return mixed
      */
     public function filterDeserializedRequest($deserializedRequest){
-        $deserializedRequest = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($deserializedRequest, array($this, "convertStringFromClientToPhpCharsets"));
+        $deserializedRequest = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($deserializedRequest, array($this, 'convertStringFromClientToPhpCharsets'));
         return $deserializedRequest;
 
     }
@@ -128,7 +128,7 @@ class AmfphpCharsetConverter {
      * @return mixed
      */
     public function filterDeserializedResponse($deserializedResponse){
-        $deserializedResponse = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($deserializedResponse, array($this, "convertStringFromPhpToClientCharsets"));
+        $deserializedResponse = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($deserializedResponse, array($this, 'convertStringFromPhpToClientCharsets'));
         return $deserializedResponse;
 
     }
@@ -167,7 +167,7 @@ class AmfphpCharsetConverter {
             case self::METHOD_MBSTRING:
                 return mb_convert_encoding($string, $fromCharset, $toCharset);
             case self::METHOD_RECODE:
-                return recode_string($fromCharset . ".." . $toCharset, $string);
+                return recode_string($fromCharset . '..' . $toCharset, $string);
             default:
                 return $string;
         }

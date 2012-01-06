@@ -12,7 +12,7 @@
 
 /**
  * The Service Router class is responsible for executing the remote service method and returning it's value.
- * based on the old "Executive" of php 1.9. It looks for a service either explicitely defined in a
+ * based on the old 'Executive' of php 1.9. It looks for a service either explicitely defined in a
  * ClassFindInfo object, or in a service folder.
  *
  * @package Amfphp_Core_Common
@@ -26,7 +26,7 @@ class Amfphp_Core_Common_ServiceRouter {
      * @param string $methodName
      * @param array $parameters
      */
-    const FILTER_SERVICE_OBJECT = "FILTER_SERVICE_OBJECT";
+    const FILTER_SERVICE_OBJECT = 'FILTER_SERVICE_OBJECT';
     /**
      * paths to folders containing services(relative or absolute)
      * @var array of paths
@@ -71,9 +71,9 @@ class Amfphp_Core_Common_ServiceRouter {
             require_once $classFindInfo->absolutePath;
             $serviceObject = new $classFindInfo->className();
         } else {
-            $serviceNameWithSlashes = str_replace(".", "/", $serviceName);
-            $serviceIncludePath = $serviceNameWithSlashes . ".php";
-            $exploded = explode("/", $serviceNameWithSlashes);
+            $serviceNameWithSlashes = str_replace('.', '/', $serviceName);
+            $serviceIncludePath = $serviceNameWithSlashes . '.php';
+            $exploded = explode('/', $serviceNameWithSlashes);
             $className = $exploded[count($exploded) - 1];
             //no class find info. try to look in the folders
             foreach ($this->serviceFolderPaths as $folderPath) {
@@ -87,7 +87,7 @@ class Amfphp_Core_Common_ServiceRouter {
         }
 
         if (!$serviceObject) {
-            throw new Amfphp_Core_Exception("$serviceName service not found ");
+            throw new Amfphp_Core_Exception('$serviceName service not found ');
         }
         return $serviceObject;
     }
@@ -108,7 +108,7 @@ class Amfphp_Core_Common_ServiceRouter {
         $serviceObject = Amfphp_Core_FilterManager::getInstance()->callFilters(self::FILTER_SERVICE_OBJECT, $serviceObject, $serviceName, $methodName, $parameters);
 
         if (!method_exists($serviceObject, $methodName)) {
-            throw new Amfphp_Core_Exception("method $methodName not found on $serviceName object ");
+            throw new Amfphp_Core_Exception('method $methodName not found on $serviceName object ');
         }
         
         if($this->checkArgumentCount){

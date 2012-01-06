@@ -19,7 +19,7 @@
 class Amfphp_Core_Amf_Message {
     /**
      * inthe case of a request:
-     * parsed to a service name and a function name. supported separators for the targetUri are "." and "/"
+     * parsed to a service name and a function name. supported separators for the targetUri are '.' and '/'
      * The service name can either be just the name of the class (TestService) or include a path(package/TestService)
      * example of full targetUri package/TestService/mirrorFunction
      *
@@ -29,7 +29,7 @@ class Amfphp_Core_Amf_Message {
      *
      * @var String
      */
-    public $targetUri = "";
+    public $targetUri = '';
 
     /**
      * in the case of a request:
@@ -40,7 +40,7 @@ class Amfphp_Core_Amf_Message {
      * 
      * @var String
      */
-    public $responseUri = "";
+    public $responseUri = '';
 
     /**
      *
@@ -55,7 +55,7 @@ class Amfphp_Core_Amf_Message {
      * @param String $responseUri
      * @param mixed $data
      */
-    public function  __construct($targetUri = "", $responseUri = "", $data = null) {
+    public function  __construct($targetUri = '', $responseUri = '', $data = null) {
         $this->targetUri = $targetUri;
         $this->responseUri = $responseUri;
         $this->data = $data;

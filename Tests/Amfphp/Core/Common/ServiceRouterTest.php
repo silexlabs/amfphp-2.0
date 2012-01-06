@@ -16,7 +16,7 @@
 require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
 require_once dirname(__FILE__) . '/../../../TestData/AmfTestData.php';
 require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
-require_once dirname(__FILE__) . "/../../../TestData/TestServicesConfig.php";
+require_once dirname(__FILE__) . '/../../../TestData/TestServicesConfig.php';
 
 /**
  * Test class for Amfphp_Core_Common_ServiceRouter.
@@ -41,18 +41,18 @@ class Amfphp_Core_Common_ServiceRouterTest extends PHPUnit_Framework_TestCase {
 
     public function testExecuteTestServiceCall(){
         //return one param
-        $testParamsArray = array("a");
-        $mirrored = $this->object->executeServiceCall("TestService", "returnOneParam", $testParamsArray);
-        $this->assertEquals($mirrored, "a");
+        $testParamsArray = array('a');
+        $mirrored = $this->object->executeServiceCall('TestService', 'returnOneParam', $testParamsArray);
+        $this->assertEquals($mirrored, 'a');
 
         // return sum
         $testParamsArray = array(1, 2);
-        $mirrored = $this->object->executeServiceCall("TestService", "returnSum", $testParamsArray);
+        $mirrored = $this->object->executeServiceCall('TestService', 'returnSum', $testParamsArray);
         $this->assertEquals($mirrored, 3);
     }
 
     public function testFindDummyServiceInFolder(){
-        $ret = $this->object->executeServiceCall("DummyService", "returnNull", array());
+        $ret = $this->object->executeServiceCall('DummyService', 'returnNull', array());
         $this->assertEquals($ret, null);
     }
 
@@ -61,7 +61,7 @@ class Amfphp_Core_Common_ServiceRouterTest extends PHPUnit_Framework_TestCase {
      */
     public function testNoServiceException()
     {
-        $ret = $this->object->executeServiceCall("NoService", "noFunction", array());
+        $ret = $this->object->executeServiceCall('NoService', 'noFunction', array());
     }
 
      /**
@@ -69,7 +69,7 @@ class Amfphp_Core_Common_ServiceRouterTest extends PHPUnit_Framework_TestCase {
      */
     public function testNoFunctionException()
     {
-        $ret = $this->object->executeServiceCall("DummyService", "noFunction", array());
+        $ret = $this->object->executeServiceCall('DummyService', 'noFunction', array());
         $this->assertEquals($ret, null);
     }
 }

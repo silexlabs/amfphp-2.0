@@ -11,7 +11,7 @@
  */
 
 /**
- * an example plugin as in the documentation. It takes a sourceUrl param in the configuration, and changes the deserialized request to "bla". Useless, but explanatory.
+ * an example plugin as in the documentation. It takes a sourceUrl param in the configuration, and changes the deserialized request to 'bla'. Useless, but explanatory.
  * @author Ariel Sommeria-klein
  * @package Amfphp_Examples
  */

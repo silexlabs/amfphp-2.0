@@ -23,20 +23,20 @@ class Amfphp_Core_Gateway {
      * filter just after plugin init. Use this to add a service folder for a plugin
      * @param array serviceFolderPaths array of absolute paths
      */
-    const FILTER_SERVICE_FOLDER_PATHS = "FILTER_SERVICE_FOLDER_PATHS";
+    const FILTER_SERVICE_FOLDER_PATHS = 'FILTER_SERVICE_FOLDER_PATHS';
 
     /**
      * filter just after plugin init. Use this to add a service for a plugin when a service folder isn't enough
      * @param array serviceNames2ClassFindInfo array of ClassFindInfo. Key is the service nane
      */
-    const FILTER_SERVICE_NAMES_2_CLASS_FIND_INFO = "FILTER_SERVICE_NAMES_2_CLASS_FIND_INFO";
+    const FILTER_SERVICE_NAMES_2_CLASS_FIND_INFO = 'FILTER_SERVICE_NAMES_2_CLASS_FIND_INFO';
 
     /**
      * filter called when the serialized request comes in.
      * @todo this filter only allows manipulation of raw post data, and is as such a bit misleading. Maybe rename and do filters for GET and POST
      * @param String $rawData the raw http data
      */
-    const FILTER_SERIALIZED_REQUEST = "FILTER_SERIALIZED_REQUEST";
+    const FILTER_SERIALIZED_REQUEST = 'FILTER_SERIALIZED_REQUEST';
 
     /**
      * filter called to allow a plugin to override the default amf deserializer.
@@ -44,13 +44,13 @@ class Amfphp_Core_Gateway {
      * @param Amfphp_Core_Common_IDeserializer $deserializer the deserializer. null at call in gateway.
      * @param String $contentType
      */
-    const FILTER_DESERIALIZER = "FILTER_DESERIALIZER";
+    const FILTER_DESERIALIZER = 'FILTER_DESERIALIZER';
     
     /**
      * filter called after the request is deserialized. The callee can modify the data and return it.
      * @param mixed $deserializedRequest
      */
-    const FILTER_DESERIALIZED_REQUEST = "FILTER_DESERIALIZED_REQUEST";
+    const FILTER_DESERIALIZED_REQUEST = 'FILTER_DESERIALIZED_REQUEST';
 
     /**
      * filter called to allow a plugin to override the default amf deserialized request handler.
@@ -58,13 +58,13 @@ class Amfphp_Core_Gateway {
      * @param Amfphp_Core_Common_IDeserializedRequestHandler $deserializedRequestHandler null at call in gateway.
      * @param String $contentType
      */
-    const FILTER_DESERIALIZED_REQUEST_HANDLER = "FILTER_DESERIALIZED_REQUEST_HANDLER";
+    const FILTER_DESERIALIZED_REQUEST_HANDLER = 'FILTER_DESERIALIZED_REQUEST_HANDLER';
 
     /**
      * filter called when the response is ready but not yet serialized.  The callee can modify the data and return it.
      * @param $deserializedResponse
      */
-    const FILTER_DESERIALIZED_RESPONSE = "FILTER_DESERIALIZED_RESPONSE";
+    const FILTER_DESERIALIZED_RESPONSE = 'FILTER_DESERIALIZED_RESPONSE';
 
     /**
      * filter called to allow a plugin to override the default amf exception handler.
@@ -73,7 +73,7 @@ class Amfphp_Core_Gateway {
      * @param Amfphp_Core_Common_IExceptionHandler $exceptionHandler. null at call in gateway.
      * @param String $contentType
      */
-    const FILTER_EXCEPTION_HANDLER = "FILTER_EXCEPTION_HANDLER";
+    const FILTER_EXCEPTION_HANDLER = 'FILTER_EXCEPTION_HANDLER';
 
     /**
      * filter called to allow a plugin to override the default amf serializer.
@@ -81,20 +81,20 @@ class Amfphp_Core_Gateway {
      * @param String $contentType
      * Plugin sets to a Amfphp_Core_Common_ISerializer if it recognizes the content type
      */
-    const FILTER_SERIALIZER = "FILTER_SERIALIZER";
+    const FILTER_SERIALIZER = 'FILTER_SERIALIZER';
 
     /**
      * filter called when the packet response is ready and serialized.
      * @param String $rawData the raw http data
      */
-    const FILTER_SERIALIZED_RESPONSE = "FILTER_SERIALIZED_RESPONSE";
+    const FILTER_SERIALIZED_RESPONSE = 'FILTER_SERIALIZED_RESPONSE';
 
     /**
      * filter called to get the headers
-     * @param array $headers an associative array of headers. For example array("Content-Type" => "application/x-amf")
+     * @param array $headers an associative array of headers. For example array('Content-Type' => 'application/x-amf')
      * @param String $contentType
      */
-    const FILTER_HEADERS = "FILTER_HEADERS";
+    const FILTER_HEADERS = 'FILTER_HEADERS';
 
 
     /**
@@ -230,11 +230,11 @@ class Amfphp_Core_Gateway {
     public function getResponseHeaders(){
         
         $filterManager = Amfphp_Core_FilterManager::getInstance();
-        $headers = array("Content-Type" => $this->contentType);
+        $headers = array('Content-Type' => $this->contentType);
         $headers = $filterManager->callFilters(self::FILTER_HEADERS, $headers, $this->contentType);
         $ret = array();
         foreach($headers as $key => $value){
-            $ret[] = $key . ": " . $value;
+            $ret[] = $key . ': ' . $value;
         }
         return $ret;
     }

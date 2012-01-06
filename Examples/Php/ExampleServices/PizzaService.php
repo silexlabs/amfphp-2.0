@@ -16,7 +16,7 @@
  */
 class PizzaService {
     public function getPizza(){
-        return "margarita";
+        return 'margarita';
     }
 }
 ?>

@@ -12,7 +12,7 @@
 
 /**
  * Loads plugins for Amfphp. Plugins consist of a folder in the plugins folder. The folder and the class
- * should all have the same name. The file containing the class should be named with the class name with the ".php" suffix added.
+ * should all have the same name. The file containing the class should be named with the class name with the '.php' suffix added.
  * It is the loaded class' responsability to load any  other resources that the plugin needs from the same folder.
  *  A plugin interacts with Amfphp by using the Amfphp_Core_FilterManager to register its functions
  * to be called at specific times with specific parameters during execution.
@@ -65,16 +65,16 @@ class Amfphp_Core_PluginManager {
     public function loadPlugins($pluginFolders, array $pluginsConfig = null, array $sharedConfig = null, array $disabledPlugins = null) {
         foreach ($pluginFolders as $pluginsFolderRootPath) {
             if (!is_dir($pluginsFolderRootPath)) {
-                throw new Amfphp_Core_Exception("invalid path for loading plugins at " . $pluginsFolderRootPath);
+                throw new Amfphp_Core_Exception('invalid path for loading plugins at ' . $pluginsFolderRootPath);
             }
             $folderContent = scandir($pluginsFolderRootPath);
 
             foreach ($folderContent as $pluginName) {
-                if (!is_dir($pluginsFolderRootPath . "/" . $pluginName)) {
+                if (!is_dir($pluginsFolderRootPath . '/' . $pluginName)) {
                     continue;
                 }
                 //avoid system folders
-                if ($pluginName[0] == ".") {
+                if ($pluginName[0] == '.') {
                     continue;
                 }
 
@@ -92,7 +92,7 @@ class Amfphp_Core_PluginManager {
                 }
 
                 if (!class_exists($pluginName)) {
-                    require_once $pluginsFolderRootPath . "/" . $pluginName . "/" . $pluginName . ".php";
+                    require_once $pluginsFolderRootPath . '/' . $pluginName . '/' . $pluginName . '.php';
                 }
 
                 $pluginConfig = array();

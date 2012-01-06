@@ -21,10 +21,10 @@ class TestServicesConfig {
     public $serviceNames2ClassFindInfo;
 
     public function  __construct() {
-        $this->serviceFolderPaths  = array(dirname(__FILE__) . "/Services/");
+        $this->serviceFolderPaths  = array(dirname(__FILE__) . '/Services/');
         $testServicePath = dirname(__FILE__) . '/TestService.php';
-        $classFindInfo = new Amfphp_Core_Common_ClassFindInfo($testServicePath, "TestService");
-        $this->serviceNames2ClassFindInfo = array("TestService" => $classFindInfo);
+        $classFindInfo = new Amfphp_Core_Common_ClassFindInfo($testServicePath, 'TestService');
+        $this->serviceNames2ClassFindInfo = array('TestService' => $classFindInfo);
     }
 
 }

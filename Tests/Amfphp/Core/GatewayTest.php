@@ -13,8 +13,8 @@
 *  includes
 *  */
 require_once dirname(__FILE__) . '/../../../Amfphp/ClassLoader.php';
-require_once dirname(__FILE__) . "/../../TestData/AmfTestData.php";
-require_once dirname(__FILE__) . "/../../TestData/TestServicesConfig.php";
+require_once dirname(__FILE__) . '/../../TestData/AmfTestData.php';
+require_once dirname(__FILE__) . '/../../TestData/TestServicesConfig.php';
 
 /**
  * Test class for Amfphp_Core_Gateway.
@@ -40,7 +40,7 @@ class Amfphp_Core_GatewayTest extends PHPUnit_Framework_TestCase {
         $gateway = new Amfphp_Core_Gateway(array(), array(), array(), null, $config);
         $ret = $gateway->service();
 
-        $this->assertTrue(strpos($ret, "service") != false);
+        $this->assertTrue(strpos($ret, 'service') != false);
         
 
     }

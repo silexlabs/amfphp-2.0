@@ -29,11 +29,11 @@ class AuthenticationService {
      * @param String $password
      */
     public function login($userId, $password){
-        if(($userId == "user") && ($password == "userPassword")){
-            AmfphpAuthentication::addRole("user");
+        if(($userId == 'user') && ($password == 'userPassword')){
+            AmfphpAuthentication::addRole('user');
         }
-        if(($userId == "admin") && ($password == "adminPassword")){
-            AmfphpAuthentication::addRole("admin");
+        if(($userId == 'admin') && ($password == 'adminPassword')){
+            AmfphpAuthentication::addRole('admin');
         }
     }
 
@@ -51,19 +51,19 @@ class AuthenticationService {
      * @return <array>
      */
     public function _getMethodRoles($methodName){
-       if($methodName == "adminMethod"){
-           return array("admin");
+       if($methodName == 'adminMethod'){
+           return array('admin');
        }else{
            return null;
        }
     }
 
     /**
-     * method that is protected by authentication. Only "admin" role is authorized. (see _getMethodRoles)
-     * @return <String> "ok"
+     * method that is protected by authentication. Only 'admin' role is authorized. (see _getMethodRoles)
+     * @return <String> 'ok'
      */
     public function adminMethod(){
-        return "ok";
+        return 'ok';
     }
 
 }

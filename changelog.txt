@@ -4,7 +4,8 @@ Version history
 change everything from private to protected to allow better extensibility
 possibility to add headers and messages in AMF response
 call duration in service browser
-support for receiving ArrayCollections is back
+support for receiving ArrayCollections is back(no sending back to client yet)
+check arguments count option for service router
 --------- 2.0 -------------
 AmfPhpGet plugin, for requests just using GET, and cross domain AJAX calls
 config shared between plugins support added
