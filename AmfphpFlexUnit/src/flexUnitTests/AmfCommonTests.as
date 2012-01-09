@@ -139,19 +139,6 @@ package flexUnitTests
 			assertTrue(event.obj as Number == undefined);
 		}
 		
-				
-		/**
-		 * send something with a reference ([["bla"], ["bla"]], really, but using a reference to a ["bla"] array)
-		 *  @todo not really sure to provoke the writing of an array with references in php.
-		 * */
-		public function testReference():void{
-			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnReference, 1000));
-			var refferedArray:Array = ["bla"];
-			var testVar:Array = [refferedArray, refferedArray];
-			_nc.callWithEvents("TestService/returnOneParam", testVar);	
-			
-		}
-		
 		private function verifyReturnReference(event:ObjEvent):void{
 			assertTrue(event.obj is Array);
 			assertTrue(event.obj[0] == "bla");

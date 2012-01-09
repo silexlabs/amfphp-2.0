@@ -63,9 +63,6 @@ class Amfphp_Core_Amf_Deserializer {
         $this->rawData = $raw;
         $this->currentByte = 0;
         $this->content_length = strlen($this->rawData); // grab the total length of this stream
-        $this->storedStrings = array();
-        $this->storedObjects = array();
-        $this->storedDefinitions = array();
     }
 
     /**
@@ -78,6 +75,14 @@ class Amfphp_Core_Amf_Deserializer {
         $this->readHeaders(); // read the binary headers
         $this->readMessages(); // read the binary Messages
         return $this->deserializedPacket;
+    }
+    
+    protected function resetReferences(){
+        $this->amf0storedObjects = array();
+        $this->storedStrings = array();
+        $this->storedObjects = array();
+        $this->storedDefinitions = array();
+        
     }
 
     /**
@@ -96,6 +101,7 @@ class Amfphp_Core_Amf_Deserializer {
         $this->headersLeftToProcess = $this->readInt(); //  find the total number of header elements
 
         while ($this->headersLeftToProcess--) { // loop over all of the header elements
+            $this->resetReferences();
             $name = $this->readUTF();
             $required = $this->readByte() == 1; // find the must understand flag
             //$length   = $this->readLong(); // grab the length of  the header element
@@ -112,11 +118,7 @@ class Amfphp_Core_Amf_Deserializer {
     protected function readMessages() {
         $this->messagesLeftToProcess = $this->readInt(); // find the total number  of Message elements
         while ($this->messagesLeftToProcess--) { // loop over all of the Message elements
-            $this->amf0storedObjects = array();
-            $this->storedStrings = array();
-            $this->storedObjects = array();
-            $this->storedDefinitions = array();
-
+            $this->resetReferences();
             $target = $this->readUTF();
             $response = $this->readUTF(); //    the response that the client understands
             //$length = $this->readLong(); // grab the length of    the Message element
@@ -509,7 +511,7 @@ class Amfphp_Core_Amf_Deserializer {
         $handle = $handle >> 1;
         if ($inline) {
             $xml = $this->readBuffer($handle);
-            $this->storedObjects[] = $xml;
+            $this->storedObjects[] = & $xml;
         } else {
             $xml = $this->storedObjects[$handle];
         }
@@ -526,7 +528,7 @@ class Amfphp_Core_Amf_Deserializer {
         $handle = $handle >> 1;
         if ($inline) {
             $xml = $this->readBuffer($handle);
-            $this->storedObjects[] = $xml;
+            $this->storedObjects[] = & $xml;
         } else {
             $xml = $this->storedObjects[$handle];
         }
@@ -539,7 +541,7 @@ class Amfphp_Core_Amf_Deserializer {
         $handle = $handle >> 1;
         if ($inline) {
             $ba = new Amfphp_Core_Amf_Types_ByteArray($this->readBuffer($handle));
-            $this->storedObjects[] = $ba;
+            $this->storedObjects[] = & $ba;
         } else {
             $ba = $this->storedObjects[$handle];
         }

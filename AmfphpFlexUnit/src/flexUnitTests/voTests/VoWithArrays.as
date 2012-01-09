@@ -7,7 +7,7 @@ package flexUnitTests.voTests {
 		public var test2_arr:Array = new Array();
 		
 		static public function register():void {
-			registerClassAlias("ItemVO", VoWithArrays);
+			registerClassAlias("VoWithArrays", VoWithArrays);
 		}
 		
 	}
