@@ -218,5 +218,26 @@ package flexUnitTests
 			assertEquals("test exception -1", event.obj.faultString);
 		}		
 		
+		/**
+		 * send a EcmaArray ({testName:"testVal"})
+		 * */
+		public function testManyEcmaArrays():void{
+			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnEcmaArray, 1000));
+			var ret:Array = new Array();
+			for(var i:int = 0; i < 100; i++){
+				var testVar:Object = {testName:"testVal"};
+				ret.push(testVar);
+			}
+			_nc.callWithEvents("TestService/returnOneParam", testVar);	
+			
+		}
+		
+		private function verifyReturnManyEcmaArrays(event:ObjEvent):void{
+			assertTrue(event.obj[50].testName == "testVal");
+		}
+				
+		
+		
+		
 	}
 }

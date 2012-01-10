@@ -44,6 +44,7 @@ package flexUnitTests
 		/**
 		 * send an xml object (the as3 E4X object, or the as2 XML object)
 		 * the as3 netconnection trips up on this when using AMF0...
+		 * flash somehow can't send this. what's wrong here?
 		 * */
 		public function testXmlReference():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnXml, 1000));

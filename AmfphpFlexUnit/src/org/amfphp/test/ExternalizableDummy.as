@@ -7,6 +7,7 @@ package org.amfphp.test
 	
 	/**
 	 * must have an explicit registered type because somehow otherwise netconnection fails to encode it.
+	 * Other than that note the writeExternal method sets 'one' to 1234. This is to make sure the method is called, as the same data is otherwise sent and received. 
 	 * */
 	[RemoteClass(alias="ExternalizableDummy")]
 	public class ExternalizableDummy implements IExternalizable {
@@ -25,6 +26,11 @@ package org.amfphp.test
 		public function readExternal(input:IDataInput):void {
 			one = input.readInt();
 			two = input.readInt();
+			one = 1234;
+		}
+		
+		public function getOne():int{
+			return one;
 		}
 
 	}
