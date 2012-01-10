@@ -16,7 +16,8 @@
 	<div class="info-box-title">Description</div>
 	<div class="nav-bar">
 					<span class="disabled">Description</span> |
-															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+													<a href="#sec-vars">Vars</a>
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
 						
 											<a href="#sec-consts">Constants</a>
 						
@@ -49,7 +50,10 @@
 			<a href="#sec-description">Description</a> |
 															<a href="#sec-consts">Constants</a>
 							
-									<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+															<a href="#sec-vars">Vars</a>
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
@@ -57,7 +61,7 @@
 												<div class="method-definition">
 											<span class="method-result">void</span>
 										<a href="#writeAmf3Array" title="details" class="method-name">writeAmf3Array</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$d</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$arrayCollectionable</span> = <span class="var-default">FALSE</span>])
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$d</span>)
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
@@ -91,12 +95,12 @@
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
-										<a href="#writeAmf3Object" title="details" class="method-name">writeAmf3Object</a>
+										<a href="#writeAmf3String" title="details" class="method-name">writeAmf3String</a>
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$d</span>)
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
-										<a href="#writeAmf3String" title="details" class="method-name">writeAmf3String</a>
+										<a href="#writeAmf3TypedObject" title="details" class="method-name">writeAmf3TypedObject</a>
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$d</span>)
 									</div>
 																<div class="method-definition">
@@ -203,13 +207,55 @@
 		</div>
 	</div>		
 
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-consts">Constants</a>
+							
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+										<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html">Amfphp_Core_Amf_Serializer</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#var$Amf0StoredObjects">Amfphp_Core_Amf_Serializer::$Amf0StoredObjects</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#var$className2TraitsInfo">Amfphp_Core_Amf_Serializer::$className2TraitsInfo</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#var$outBuffer">Amfphp_Core_Amf_Serializer::$outBuffer</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#var$packet">Amfphp_Core_Amf_Serializer::$packet</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#var$storedObjects">Amfphp_Core_Amf_Serializer::$storedObjects</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#var$storedStrings">Amfphp_Core_Amf_Serializer::$storedStrings</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
 	
 	<a name="sec-methods"></a>
 	<div class="info-box">
 		<div class="info-box-title">Methods</div>
 		<div class="nav-bar">
 			<a href="#sec-description">Description</a> |
-																		<a href="#sec-consts">Constants</a>
+															<a href="#sec-vars">Vars</a>
+																			<a href="#sec-consts">Constants</a>
 							
 										<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
 						
@@ -234,16 +280,13 @@
 		<span class="method-name">
 			writeAmf3Array
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$d</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$arrayCollectionable</span> = <span class="var-default">FALSE</span>])
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$d</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
 				<span class="var-type"></span>
 				<span class="var-name">$d</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$arrayCollectionable</span>			</li>
 				</ul>
 		
 			<hr class="separator" />
@@ -448,42 +491,8 @@
 					</dl>
 			
 	</div>
-<a name="methodwriteAmf3Object" id="writeAmf3Object"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<span class="method-title">writeAmf3Object</span> (line <span class="line-number">144</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			writeAmf3Object
-		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$d</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$d</span>			</li>
-				</ul>
-		
-			<hr class="separator" />
-		<div class="notes">Redefinition of:</div>
-		<dl>
-			<dt><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3Object">Amfphp_Core_Amf_Serializer::writeAmf3Object()</a></dt>
-						<dd>writes an object.</dd>
-					</dl>
-			
-	</div>
 <a name="methodwriteAmf3String" id="writeAmf3String"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<span class="method-title">writeAmf3String</span> (line <span class="line-number">117</span>)
@@ -513,6 +522,40 @@
 		<dl>
 			<dt><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3String">Amfphp_Core_Amf_Serializer::writeAmf3String()</a></dt>
 						<dd>Write a string (Amf3). Strings are stored in a cache and in case the same string  is written again, a reference to the string is sent instead of the string itself.</dd>
+					</dl>
+			
+	</div>
+<a name="methodwriteAmf3TypedObject" id="writeAmf3TypedObject"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">writeAmf3TypedObject</span> (line <span class="line-number">144</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			writeAmf3TypedObject
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$d</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$d</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3TypedObject">Amfphp_Core_Amf_Serializer::writeAmf3TypedObject()</a></dt>
+						<dd>writes a typed object. Type is determined by having an &quot;explicit type&quot; field. If this field is  not set, call writeAmf3AnonymousObject  write all properties as sealed members.</dd>
 					</dl>
 			
 	</div>
@@ -1181,18 +1224,20 @@
 													<span class="method-name"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#method__construct">Amfphp_Core_Amf_Serializer::__construct()</a></span><br>
 													<span class="method-name"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodgetAmf3Int">Amfphp_Core_Amf_Serializer::getAmf3Int()</a></span><br>
 													<span class="method-name"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodgetOutput">Amfphp_Core_Amf_Serializer::getOutput()</a></span><br>
+													<span class="method-name"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodhandleReference">Amfphp_Core_Amf_Serializer::handleReference()</a></span><br>
+													<span class="method-name"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodresetReferences">Amfphp_Core_Amf_Serializer::resetReferences()</a></span><br>
 													<span class="method-name"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodserialize">Amfphp_Core_Amf_Serializer::serialize()</a></span><br>
+													<span class="method-name"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3AnonymousObject">Amfphp_Core_Amf_Serializer::writeAmf3AnonymousObject()</a></span><br>
 													<span class="method-name"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3Array">Amfphp_Core_Amf_Serializer::writeAmf3Array()</a></span><br>
 													<span class="method-name"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3Bool">Amfphp_Core_Amf_Serializer::writeAmf3Bool()</a></span><br>
 													<span class="method-name"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3ByteArray">Amfphp_Core_Amf_Serializer::writeAmf3ByteArray()</a></span><br>
-													<span class="method-name"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3ByteArrayMessage">Amfphp_Core_Amf_Serializer::writeAmf3ByteArrayMessage()</a></span><br>
 													<span class="method-name"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3Data">Amfphp_Core_Amf_Serializer::writeAmf3Data()</a></span><br>
 													<span class="method-name"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3Date">Amfphp_Core_Amf_Serializer::writeAmf3Date()</a></span><br>
 													<span class="method-name"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3Int">Amfphp_Core_Amf_Serializer::writeAmf3Int()</a></span><br>
 													<span class="method-name"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3Null">Amfphp_Core_Amf_Serializer::writeAmf3Null()</a></span><br>
 													<span class="method-name"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3Number">Amfphp_Core_Amf_Serializer::writeAmf3Number()</a></span><br>
-													<span class="method-name"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3Object">Amfphp_Core_Amf_Serializer::writeAmf3Object()</a></span><br>
 													<span class="method-name"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3String">Amfphp_Core_Amf_Serializer::writeAmf3String()</a></span><br>
+													<span class="method-name"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3TypedObject">Amfphp_Core_Amf_Serializer::writeAmf3TypedObject()</a></span><br>
 													<span class="method-name"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3Undefined">Amfphp_Core_Amf_Serializer::writeAmf3Undefined()</a></span><br>
 													<span class="method-name"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3Xml">Amfphp_Core_Amf_Serializer::writeAmf3Xml()</a></span><br>
 													<span class="method-name"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3XmlDocument">Amfphp_Core_Amf_Serializer::writeAmf3XmlDocument()</a></span><br>
@@ -1230,7 +1275,8 @@
 										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
 						
 			
-										| 
+												<a href="#sec-vars">Vars</a>
+														| 
 									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
 							
 					</div>
@@ -1249,7 +1295,7 @@
 	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 20 Sep 2011 17:34:28 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 10 Jan 2012 16:01:16 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

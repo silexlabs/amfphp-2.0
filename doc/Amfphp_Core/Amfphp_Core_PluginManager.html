@@ -16,12 +16,13 @@
 	<div class="info-box-title">Description</div>
 	<div class="nav-bar">
 					<span class="disabled">Description</span> |
-															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
 						
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Loads plugins for Amfphp. Plugins consist of a folder in the plugins folder. The folder and the class  should all have the same name. The file containing the class should be named with the class name with the &quot;.php&quot; suffix added.</p>
+<p class="short-description">Loads plugins for Amfphp. Plugins consist of a folder in the plugins folder. The folder and the class  should all have the same name. The file containing the class should be named with the class name with the '.php' suffix added.</p>
 <p class="description"><p>It is the loaded class' responsability to load any  other resources that the plugin needs from the same folder.   A plugin interacts with Amfphp by using the Amfphp_Core_FilterManager to register its functions  to be called at specific times with specific parameters during execution.  It's a singleton, so use getInstance</p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Ariel Sommeria-Klein</li>
@@ -38,23 +39,54 @@
 
 
 
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+												<div class="var-title">
+					static <span class="var-type"><a href="../Amfphp_Core/Amfphp_Core_PluginManager.html">Amfphp_Core_PluginManager</a></span>
+					<a href="#$instance" title="details" class="var-name">$instance</a>
+				</div>
+																																				<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$pluginInstances" title="details" class="var-name">$pluginInstances</a>
+				</div>
+											</div>
+		</div>
+	</div>
 
 	<a name="sec-method-summary"></a>
 	<div class="info-box">
 		<div class="info-box-title">Method Summary</span></div>
 		<div class="nav-bar">
 			<a href="#sec-description">Description</a> |
-												<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-												<div class="method-definition">
+																				<div class="method-definition">
 					static 						<span class="method-result"><a href="../Amfphp_Core/Amfphp_Core_PluginManager.html">Amfphp_Core_PluginManager</a></span>
 										<a href="#getInstance" title="details" class="method-name">getInstance</a>
 										()
 									</div>
 																
-																				<div class="method-definition">
+												<div class="method-definition">
+											<span class="method-result">Amfphp_Core_PluginManager</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+										()
+									</div>
+																								<div class="method-definition">
 											<span class="method-result">void</span>
 										<a href="#loadPlugins" title="details" class="method-name">loadPlugins</a>
 											(<span class="var-type">array</span>&nbsp;<span class="var-name">$pluginFolders</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$pluginsConfig</span> = <span class="var-default">null</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$sharedConfig</span> = <span class="var-default">null</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$disabledPlugins</span> = <span class="var-default">null</span>], <span class="var-type">array</span>&nbsp;<span class="var-name">$sharedConfig.</span>)
@@ -63,19 +95,79 @@
 		</div>
 	</div>		
 
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$instance" id="$instance"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			static <span class="var-type"><a href="../Amfphp_Core/Amfphp_Core_PluginManager.html">Amfphp_Core_PluginManager</a></span>
+			<span class="var-name">$instance</span>
+			 = <span class="var-default"> NULL</span>			(line <span class="line-number">31</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">protected instance of singleton</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$pluginInstances" id="$pluginInstances"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$pluginInstances</span>
+						(line <span class="line-number">37</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
 	
 	<a name="sec-methods"></a>
 	<div class="info-box">
 		<div class="info-box-title">Methods</div>
 		<div class="nav-bar">
 			<a href="#sec-description">Description</a> |
-																<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
 						
 		</div>
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="methodgetInstance" id="getInstance"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<span class="method-title">static method getInstance</span> (line <span class="line-number">50</span>)
@@ -100,6 +192,30 @@
 			
 	</div>
 
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">42</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">constructor</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Amfphp_Core_PluginManager</span>
+		<span class="method-name">
+			__construct
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
 <a name="methodloadPlugins" id="loadPlugins"><!-- --></a>
 <div class="oddrow">
 	
@@ -147,7 +263,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 20 Sep 2011 17:34:31 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 10 Jan 2012 16:01:19 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

@@ -16,7 +16,8 @@
 	<div class="info-box-title">Description</div>
 	<div class="nav-bar">
 					<span class="disabled">Description</span> |
-															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
 						
 											<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
 						
@@ -49,6 +50,9 @@
 		<div class="nav-bar">
 			<a href="#sec-description">Description</a> |
 						<span class="disabled">Constants</span> (<a href="#sec-consts">details</a>)
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
 										| 
 									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
 							
@@ -57,23 +61,60 @@
 			<div class="const-summary">
 								<div class="const-title">
 					<img src="../media/images/Constant.png" alt=" " />
-					<a href="#FILTER_AMF_EXCEPTION_HANDLER" title="details" class="const-name">FILTER_AMF_EXCEPTION_HANDLER</a> = 					<span class="var-type"> &quot;FILTER_AMF_EXCEPTION_HANDLER&quot;</span>
+					<a href="#FILTER_AMF_EXCEPTION_HANDLER" title="details" class="const-name">FILTER_AMF_EXCEPTION_HANDLER</a> = 					<span class="var-type"> 'FILTER_AMF_EXCEPTION_HANDLER'</span>
 
 				</div>
 								<div class="const-title">
 					<img src="../media/images/Constant.png" alt=" " />
-					<a href="#FILTER_AMF_REQUEST_HEADER_HANDLER" title="details" class="const-name">FILTER_AMF_REQUEST_HEADER_HANDLER</a> = 					<span class="var-type"> &quot;FILTER_AMF_REQUEST_HEADER_HANDLER&quot;</span>
+					<a href="#FILTER_AMF_REQUEST_HEADER_HANDLER" title="details" class="const-name">FILTER_AMF_REQUEST_HEADER_HANDLER</a> = 					<span class="var-type"> 'FILTER_AMF_REQUEST_HEADER_HANDLER'</span>
 
 				</div>
 								<div class="const-title">
 					<img src="../media/images/Constant.png" alt=" " />
-					<a href="#FILTER_AMF_REQUEST_MESSAGE_HANDLER" title="details" class="const-name">FILTER_AMF_REQUEST_MESSAGE_HANDLER</a> = 					<span class="var-type"> &quot;FILTER_AMF_REQUEST_MESSAGE_HANDLER&quot;</span>
+					<a href="#FILTER_AMF_REQUEST_MESSAGE_HANDLER" title="details" class="const-name">FILTER_AMF_REQUEST_MESSAGE_HANDLER</a> = 					<span class="var-type"> 'FILTER_AMF_REQUEST_MESSAGE_HANDLER'</span>
 
 				</div>
 							</div>
 		</div>
 	</div>
 
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+												<div class="var-title">
+					static <span class="var-type">type</span>
+					<a href="#$additionnalResponseHeaders" title="details" class="var-name">$additionnalResponseHeaders</a>
+				</div>
+																<div class="var-title">
+					static <span class="var-type">array</span>
+					<a href="#$additionnalResponseMessages" title="details" class="var-name">$additionnalResponseMessages</a>
+				</div>
+																																																												<div class="var-title">
+					<span class="var-type">String</span>
+					<a href="#$lastRequestMessageResponseUri" title="details" class="var-name">$lastRequestMessageResponseUri</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$objectEncoding" title="details" class="var-name">$objectEncoding</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$returnErrorDetails" title="details" class="var-name">$returnErrorDetails</a>
+				</div>
+											</div>
+		</div>
+	</div>
 
 	<a name="sec-method-summary"></a>
 	<div class="info-box">
@@ -82,11 +123,14 @@
 			<a href="#sec-description">Description</a> |
 															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
 							
-									<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																												
+																																																												
 												<div class="method-definition">
 											<span class="method-result">Amfphp_Core_Amf_Handler</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
@@ -96,6 +140,11 @@
 											<span class="method-result">void</span>
 										<a href="#deserialize" title="details" class="method-name">deserialize</a>
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$getData</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$postData</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$rawPostData</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Amfphp_Core_Common/Amfphp_Core_Common_ServiceCallParameters.html">Amfphp_Core_Common_ServiceCallParameters</a></span>
+										<a href="#getServiceCallParameters" title="details" class="method-name">getServiceCallParameters</a>
+											(<span class="var-type"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Message.html">Amfphp_Core_Amf_Message</a></span>&nbsp;<span class="var-name">$Amfphp_Core_Amf_Message</span>)
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
@@ -108,6 +157,11 @@
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$exception</span>)
 									</div>
 																<div class="method-definition">
+											<span class="method-result"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Message.html">Amfphp_Core_Amf_Message</a></span>
+										<a href="#handleRequestMessage" title="details" class="method-name">handleRequestMessage</a>
+											(<span class="var-type"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Message.html">Amfphp_Core_Amf_Message</a></span>&nbsp;<span class="var-name">$requestMessage</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$serviceRouter</span>)
+									</div>
+																<div class="method-definition">
 											<span class="method-result">void</span>
 										<a href="#serialize" title="details" class="method-name">serialize</a>
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$data</span>)
@@ -116,13 +170,143 @@
 		</div>
 	</div>		
 
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$additionnalResponseHeaders" id="$additionnalResponseHeaders"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			static <span class="var-type">type</span>
+			<span class="var-name">$additionnalResponseHeaders</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">60</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">set this if you need additional headers in the response.  They will be added after normal treatment</p>
+	<ul class="tags">
+				<li><span class="field">var:</span> array of Amfphp_Core_Amf_Header</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$additionnalResponseMessages" id="$additionnalResponseMessages"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			static <span class="var-type">array</span>
+			<span class="var-name">$additionnalResponseMessages</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">65</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">set this if you need additional messages in the response. They will be added after normal treatment</p>
+	<ul class="tags">
+				<li><span class="field">var:</span> of Amfphp_Core_Amf_Message</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$lastRequestMessageResponseUri" id="$lastRequestMessageResponseUri"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">String</span>
+			<span class="var-name">$lastRequestMessageResponseUri</span>
+						(line <span class="line-number">51</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Amf specifies that an error message must be aimed at an end point. This stores the last message's response Uri to be able to give this end point</p>
+<p class="description"><p>in case of an exception during the handling of the message. The default is '/1', because a response Uri is not always available</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$objectEncoding" id="$objectEncoding"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$objectEncoding</span>
+			 = <span class="var-default"> Amfphp_Core_Amf_Constants::AMF0_ENCODING</span>			(line <span class="line-number">52</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$returnErrorDetails" id="$returnErrorDetails"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$returnErrorDetails</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number">54</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
 	
 	<a name="sec-methods"></a>
 	<div class="info-box">
 		<div class="info-box-title">Methods</div>
 		<div class="nav-bar">
 			<a href="#sec-description">Description</a> |
-																		<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																			<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
 							
 										<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
 						
@@ -134,7 +318,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">57</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">68</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -162,7 +346,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">deserialize</span> (line <span class="line-number">65</span>)
+		<span class="method-title">deserialize</span> (line <span class="line-number">76</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -193,11 +377,41 @@
 		
 			
 	</div>
-<a name="methodhandleDeserializedRequest" id="handleDeserializedRequest"><!-- --></a>
+<a name="methodgetServiceCallParameters" id="getServiceCallParameters"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">handleDeserializedRequest</span> (line <span class="line-number">119</span>)
+		<span class="method-title">getServiceCallParameters</span> (line <span class="line-number">91</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">creates a ServiceCallParamaeters object from an Amfphp_Core_Amf_Message</p>
+<p class="description"><p>supported separators in the targetUri are '/' and '.'</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Amfphp_Core_Common/Amfphp_Core_Common_ServiceCallParameters.html">Amfphp_Core_Common_ServiceCallParameters</a></span>
+		<span class="method-name">
+			getServiceCallParameters
+		</span>
+					(<span class="var-type"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Message.html">Amfphp_Core_Amf_Message</a></span>&nbsp;<span class="var-name">$Amfphp_Core_Amf_Message</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Message.html">Amfphp_Core_Amf_Message</a></span>
+				<span class="var-name">$Amfphp_Core_Amf_Message</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodhandleDeserializedRequest" id="handleDeserializedRequest"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">handleDeserializedRequest</span> (line <span class="line-number">130</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -226,16 +440,15 @@
 			
 	</div>
 <a name="methodhandleException" id="handleException"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">handleException</span> (line <span class="line-number">148</span>)
+		<span class="method-title">handleException</span> (line <span class="line-number">168</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 	<ul class="tags">
 				<li><span class="field">see:</span> <a href="../Amfphp_Core_Common/Amfphp_Core_Common_IExceptionHandler.html">Amfphp_Core_Common_IExceptionHandler</a></li>
-				<li><span class="field">todo:</span> option for production, don't send exception trace</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -255,11 +468,45 @@
 		
 			
 	</div>
+<a name="methodhandleRequestMessage" id="handleRequestMessage"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">handleRequestMessage</span> (line <span class="line-number">108</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">process a request and generate a response.</p>
+<p class="description"><p>throws an Exception if anything fails, so caller must encapsulate in try/catch</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the response Message for the request</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Message.html">Amfphp_Core_Amf_Message</a></span>
+		<span class="method-name">
+			handleRequestMessage
+		</span>
+					(<span class="var-type"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Message.html">Amfphp_Core_Amf_Message</a></span>&nbsp;<span class="var-name">$requestMessage</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$serviceRouter</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Message.html">Amfphp_Core_Amf_Message</a></span>
+				<span class="var-name">$requestMessage</span>			</li>
+					<li>
+				<span class="var-type"><a href="../Amfphp_Core_Common/Amfphp_Core_Common_ServiceRouter.html">Amfphp_Core_Common_ServiceRouter</a></span>
+				<span class="var-name">$serviceRouter</span>			</li>
+				</ul>
+		
+			
+	</div>
 <a name="methodserialize" id="serialize"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">serialize</span> (line <span class="line-number">181</span>)
+		<span class="method-title">serialize</span> (line <span class="line-number">201</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -296,7 +543,8 @@
 										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
 						
 			
-										| 
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+														| 
 									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
 							
 					</div>
@@ -308,7 +556,7 @@
 		<img src="../media/images/Variable.png" />
 		<span class="const-title">
 			<span class="const-name">FILTER_AMF_EXCEPTION_HANDLER</span>
-			 = <span class="const-default"> &quot;FILTER_AMF_EXCEPTION_HANDLER&quot;</span>
+			 = <span class="const-default"> 'FILTER_AMF_EXCEPTION_HANDLER'</span>
 			(line <span class="line-number">44</span>)
 		</span>
 	</div>
@@ -329,7 +577,7 @@
 		<img src="../media/images/Variable.png" />
 		<span class="const-title">
 			<span class="const-name">FILTER_AMF_REQUEST_HEADER_HANDLER</span>
-			 = <span class="const-default"> &quot;FILTER_AMF_REQUEST_HEADER_HANDLER&quot;</span>
+			 = <span class="const-default"> 'FILTER_AMF_REQUEST_HEADER_HANDLER'</span>
 			(line <span class="line-number">27</span>)
 		</span>
 	</div>
@@ -350,7 +598,7 @@
 		<img src="../media/images/Variable.png" />
 		<span class="const-title">
 			<span class="const-name">FILTER_AMF_REQUEST_MESSAGE_HANDLER</span>
-			 = <span class="const-default"> &quot;FILTER_AMF_REQUEST_MESSAGE_HANDLER&quot;</span>
+			 = <span class="const-default"> 'FILTER_AMF_REQUEST_MESSAGE_HANDLER'</span>
 			(line <span class="line-number">36</span>)
 		</span>
 	</div>
@@ -369,7 +617,7 @@
 	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 20 Sep 2011 17:34:30 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 10 Jan 2012 16:01:19 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

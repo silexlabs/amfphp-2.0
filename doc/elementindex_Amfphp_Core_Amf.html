@@ -26,7 +26,6 @@
 					<li><a href="elementindex_Amfphp_Plugins_Logger.html">Amfphp_Plugins_Logger</a></li>
 					<li><a href="elementindex_AmfphpLogger.html">AmfphpLogger</a></li>
 					<li><a href="elementindex_Amfphp_Plugins_ServiceBrowser.html">Amfphp_Plugins_ServiceBrowser</a></li>
-					<li><a href="elementindex_Sommeria_Search.html">Sommeria_Search</a></li>
 					<li><a href="elementindex_Amfphp_Services.html">Amfphp_Services</a></li>
 					<li><a href="elementindex_Amfphp_Examples_ExampleService.html">Amfphp_Examples_ExampleService</a></li>
 					<li><a href="elementindex_Amfphp_Examples.html">Amfphp_Examples</a></li>
@@ -56,8 +55,10 @@
 	<a class="index-letter" href="elementindex_Amfphp_Core_Amf.html#g">g</a>
 	<a class="index-letter" href="elementindex_Amfphp_Core_Amf.html#h">h</a>
 	<a class="index-letter" href="elementindex_Amfphp_Core_Amf.html#i">i</a>
+	<a class="index-letter" href="elementindex_Amfphp_Core_Amf.html#l">l</a>
 	<a class="index-letter" href="elementindex_Amfphp_Core_Amf.html#m">m</a>
 	<a class="index-letter" href="elementindex_Amfphp_Core_Amf.html#n">n</a>
+	<a class="index-letter" href="elementindex_Amfphp_Core_Amf.html#o">o</a>
 	<a class="index-letter" href="elementindex_Amfphp_Core_Amf.html#p">p</a>
 	<a class="index-letter" href="elementindex_Amfphp_Core_Amf.html#r">r</a>
 	<a class="index-letter" href="elementindex_Amfphp_Core_Amf.html#s">s</a>
@@ -121,6 +122,27 @@
 		<div style="clear: both"></div>
 	</div>
 	<dl>
+			<dt class="field">
+						<span class="var-title">$additionnalResponseHeaders</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Handler.html#var$additionnalResponseHeaders">Amfphp_Core_Amf_Handler::$additionnalResponseHeaders</a> in Handler.php</div>
+							<div class="index-item-description">set this if you need additional headers in the response.  They will be added after normal treatment</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$additionnalResponseMessages</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Handler.html#var$additionnalResponseMessages">Amfphp_Core_Amf_Handler::$additionnalResponseMessages</a> in Handler.php</div>
+							<div class="index-item-description">set this if you need additional messages in the response. They will be added after normal treatment</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$Amf0StoredObjects</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#var$Amf0StoredObjects">Amfphp_Core_Amf_Serializer::$Amf0StoredObjects</a> in Serializer.php</div>
+							<div class="index-item-description">used for Amf0 references</div>
+					</dd>
 			<dt class="field">
 						<span class="var-title">$amf0storedObjects</span>
 					</dt>
@@ -233,6 +255,13 @@
 		<div style="clear: both"></div>
 	</div>
 	<dl>
+			<dt class="field">
+						<span class="var-title">$className2TraitsInfo</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#var$className2TraitsInfo">Amfphp_Core_Amf_Serializer::$className2TraitsInfo</a> in Serializer.php</div>
+							<div class="index-item-description">used for traits references. key: class name. value: array(reference id, array(property names))</div>
+					</dd>
 			<dt class="field">
 						<span class="var-title">$currentByte</span>
 					</dt>
@@ -358,6 +387,13 @@
 							<div class="index-item-description">this is the field where the class name of an object must be set so that it can be sent as a strongly typed object</div>
 					</dd>
 			<dt class="field">
+						FIELD_EXTERNALIZED_DATA
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Constants.html#constFIELD_EXTERNALIZED_DATA">Amfphp_Core_Amf_Constants::FIELD_EXTERNALIZED_DATA</a> in Constants.php</div>
+							<div class="index-item-description">if an object is marked as externalizable(AMF3 and later), this is where the externalized data goes.</div>
+					</dd>
+			<dt class="field">
 						FILTER_AMF_EXCEPTION_HANDLER
 					</dt>
 		<dd class="index-item-body">
@@ -398,6 +434,13 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodgetOutput">Amfphp_Core_Amf_Serializer::getOutput()</a> in Serializer.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">getServiceCallParameters</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Handler.html#methodgetServiceCallParameters">Amfphp_Core_Amf_Handler::getServiceCallParameters()</a> in Handler.php</div>
+							<div class="index-item-description">creates a ServiceCallParamaeters object from an Amfphp_Core_Amf_Message</div>
 					</dd>
 		</dl>
 	<a name="h"></a>
@@ -445,6 +488,20 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Handler.html#methodhandleException">Amfphp_Core_Amf_Handler::handleException()</a> in Handler.php</div>
 					</dd>
+			<dt class="field">
+						<span class="method-title">handleReference</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodhandleReference">Amfphp_Core_Amf_Serializer::handleReference()</a> in Serializer.php</div>
+							<div class="index-item-description">looks if $obj already has a reference. If it does, write it, and return true. If not, add it to the references array.</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">handleRequestMessage</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Handler.html#methodhandleRequestMessage">Amfphp_Core_Amf_Handler::handleRequestMessage()</a> in Handler.php</div>
+							<div class="index-item-description">process a request and generate a response.</div>
+					</dd>
 		</dl>
 	<a name="i"></a>
 	<div class="index-letter-section">
@@ -465,35 +522,50 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Util.html#methodis_byteArray">Amfphp_Core_Amf_Util::is_byteArray()</a> in Util.php</div>
-							<div class="index-item-description">Determines whether an object is the ActionScript type &quot;ByteArray&quot;</div>
+							<div class="index-item-description">Determines whether an object is the ActionScript type 'ByteArray'</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">is_date</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Util.html#methodis_date">Amfphp_Core_Amf_Util::is_date()</a> in Util.php</div>
-							<div class="index-item-description">Determines whether an object is the ActionScript type &quot;Date&quot;</div>
+							<div class="index-item-description">Determines whether an object is the ActionScript type 'Date'</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">is_undefined</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Util.html#methodis_undefined">Amfphp_Core_Amf_Util::is_undefined()</a> in Util.php</div>
-							<div class="index-item-description">Determines whether an object is the ActionScript type &quot;undefined&quot;</div>
+							<div class="index-item-description">Determines whether an object is the ActionScript type 'undefined'</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">is_Xml</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Util.html#methodis_Xml">Amfphp_Core_Amf_Util::is_Xml()</a> in Util.php</div>
-							<div class="index-item-description">Determines whether an object is the ActionScript type &quot;XML&quot;</div>
+							<div class="index-item-description">Determines whether an object is the ActionScript type 'XML'</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">is_XmlDocument</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Util.html#methodis_XmlDocument">Amfphp_Core_Amf_Util::is_XmlDocument()</a> in Util.php</div>
-							<div class="index-item-description">Determines whether an object is the ActionScript type &quot;XmlDoument&quot;</div>
+							<div class="index-item-description">Determines whether an object is the ActionScript type 'XmlDoument'</div>
+					</dd>
+		</dl>
+	<a name="l"></a>
+	<div class="index-letter-section">
+		<div style="float: left" class="index-letter-title">l</div>
+		<div style="float: right"><a href="#top">top</a></div>
+		<div style="clear: both"></div>
+	</div>
+	<dl>
+			<dt class="field">
+						<span class="var-title">$lastRequestMessageResponseUri</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Handler.html#var$lastRequestMessageResponseUri">Amfphp_Core_Amf_Handler::$lastRequestMessageResponseUri</a> in Handler.php</div>
+							<div class="index-item-description">Amf specifies that an error message must be aimed at an end point. This stores the last message's response Uri to be able to give this end point</div>
 					</dd>
 		</dl>
 	<a name="m"></a>
@@ -553,6 +625,26 @@
 							<div class="index-item-description">Name is the string name of the header key</div>
 					</dd>
 		</dl>
+	<a name="o"></a>
+	<div class="index-letter-section">
+		<div style="float: left" class="index-letter-title">o</div>
+		<div style="float: right"><a href="#top">top</a></div>
+		<div style="clear: both"></div>
+	</div>
+	<dl>
+			<dt class="field">
+						<span class="var-title">$objectEncoding</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Handler.html#var$objectEncoding">Amfphp_Core_Amf_Handler::$objectEncoding</a> in Handler.php</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$outBuffer</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#var$outBuffer">Amfphp_Core_Amf_Serializer::$outBuffer</a> in Serializer.php</div>
+					</dd>
+		</dl>
 	<a name="p"></a>
 	<div class="index-letter-section">
 		<div style="float: left" class="index-letter-title">p</div>
@@ -560,6 +652,12 @@
 		<div style="clear: both"></div>
 	</div>
 	<dl>
+			<dt class="field">
+						<span class="var-title">$packet</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#var$packet">Amfphp_Core_Amf_Serializer::$packet</a> in Serializer.php</div>
+					</dd>
 			<dt class="field">
 						<span class="include-title">Packet.php</span>
 					</dt>
@@ -593,6 +691,12 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Message.html#var$responseUri">Amfphp_Core_Amf_Message::$responseUri</a> in Message.php</div>
 							<div class="index-item-description">in the case of a request:  operation name, for example /1</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$returnErrorDetails</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Handler.html#var$returnErrorDetails">Amfphp_Core_Amf_Handler::$returnErrorDetails</a> in Handler.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">readAmf3Array</span>
@@ -776,6 +880,19 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Deserializer.html#methodreadXml">Amfphp_Core_Amf_Deserializer::readXml()</a> in Deserializer.php</div>
 					</dd>
+			<dt class="field">
+						<span class="method-title">resetReferences</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodresetReferences">Amfphp_Core_Amf_Serializer::resetReferences()</a> in Serializer.php</div>
+							<div class="index-item-description">initialize reference arrays and counters. Call before writing a body or a header, as the indices are local to each message body or header</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">resetReferences</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Deserializer.html#methodresetReferences">Amfphp_Core_Amf_Deserializer::resetReferences()</a> in Deserializer.php</div>
+					</dd>
 		</dl>
 	<a name="s"></a>
 	<div class="index-letter-section">
@@ -794,7 +911,21 @@
 						<span class="var-title">$storedObjects</span>
 					</dt>
 		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#var$storedObjects">Amfphp_Core_Amf_Serializer::$storedObjects</a> in Serializer.php</div>
+							<div class="index-item-description">used for Amf3 references</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$storedObjects</span>
+					</dt>
+		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Deserializer.html#var$storedObjects">Amfphp_Core_Amf_Deserializer::$storedObjects</a> in Deserializer.php</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$storedStrings</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#var$storedStrings">Amfphp_Core_Amf_Serializer::$storedStrings</a> in Serializer.php</div>
+							<div class="index-item-description">amf3 references to strings</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$storedStrings</span>
@@ -865,6 +996,13 @@
 	</div>
 	<dl>
 			<dt class="field">
+						<span class="method-title">writeAmf3AnonymousObject</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3AnonymousObject">Amfphp_Core_Amf_Serializer::writeAmf3AnonymousObject()</a> in Serializer.php</div>
+							<div class="index-item-description">handles writing an anoynous object (stdClass)   can also be a reference  Also creates a bogus traits entry, as even an anonymous object has traits. In this way a reference to a class trait will have the right id.</div>
+					</dd>
+			<dt class="field">
 						<span class="method-title">writeAmf3Array</span>
 					</dt>
 		<dd class="index-item-body">
@@ -882,12 +1020,6 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3ByteArray">Amfphp_Core_Amf_Serializer::writeAmf3ByteArray()</a> in Serializer.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">writeAmf3ByteArrayMessage</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3ByteArrayMessage">Amfphp_Core_Amf_Serializer::writeAmf3ByteArrayMessage()</a> in Serializer.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">writeAmf3Data</span>
@@ -922,18 +1054,18 @@
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3Number">Amfphp_Core_Amf_Serializer::writeAmf3Number()</a> in Serializer.php</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">writeAmf3Object</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3Object">Amfphp_Core_Amf_Serializer::writeAmf3Object()</a> in Serializer.php</div>
-							<div class="index-item-description">writes an object.</div>
-					</dd>
-			<dt class="field">
 						<span class="method-title">writeAmf3String</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3String">Amfphp_Core_Amf_Serializer::writeAmf3String()</a> in Serializer.php</div>
 							<div class="index-item-description">Write a string (Amf3). Strings are stored in a cache and in case the same string  is written again, a reference to the string is sent instead of the string itself.</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">writeAmf3TypedObject</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3TypedObject">Amfphp_Core_Amf_Serializer::writeAmf3TypedObject()</a> in Serializer.php</div>
+							<div class="index-item-description">writes a typed object. Type is determined by having an &quot;explicit type&quot; field. If this field is  not set, call writeAmf3AnonymousObject  write all properties as sealed members.</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">writeAmf3Undefined</span>
@@ -959,7 +1091,7 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAnonymousObject">Amfphp_Core_Amf_Serializer::writeAnonymousObject()</a> in Serializer.php</div>
-							<div class="index-item-description">writeObject handles writing a php array with string or mixed keys.  It does  not write the object code as that is handled by the writeArrayOrObject and this method  is shared with the CustomClass writer which doesn't use the object code.</div>
+							<div class="index-item-description">handles writing an anoynous object (stdClass)   can also be a reference</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">writeArrayOrObject</span>
@@ -1131,8 +1263,10 @@
 	<a class="index-letter" href="elementindex_Amfphp_Core_Amf.html#g">g</a>
 	<a class="index-letter" href="elementindex_Amfphp_Core_Amf.html#h">h</a>
 	<a class="index-letter" href="elementindex_Amfphp_Core_Amf.html#i">i</a>
+	<a class="index-letter" href="elementindex_Amfphp_Core_Amf.html#l">l</a>
 	<a class="index-letter" href="elementindex_Amfphp_Core_Amf.html#m">m</a>
 	<a class="index-letter" href="elementindex_Amfphp_Core_Amf.html#n">n</a>
+	<a class="index-letter" href="elementindex_Amfphp_Core_Amf.html#o">o</a>
 	<a class="index-letter" href="elementindex_Amfphp_Core_Amf.html#p">p</a>
 	<a class="index-letter" href="elementindex_Amfphp_Core_Amf.html#r">r</a>
 	<a class="index-letter" href="elementindex_Amfphp_Core_Amf.html#s">s</a>

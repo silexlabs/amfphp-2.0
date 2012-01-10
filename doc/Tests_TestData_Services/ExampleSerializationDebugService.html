@@ -3,13 +3,13 @@
   <html xmlns="http://www.w3.org/1999/xhtml">
 		<head>
 			<!-- template designed by Marco Von Ballmoos -->
-			<title>Docs For Class Amf3SerializationTest</title>
+			<title>Docs For Class ExampleSerializationDebugService</title>
 			<link rel="stylesheet" href="../media/stylesheet.css" />
 			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
 		</head>
 		<body>
 			<div class="page-body">			
-<h2 class="class-name">Class Amf3SerializationTest</h2>
+<h2 class="class-name">Class ExampleSerializationDebugService</h2>
 
 <a name="sec-description"></a>
 <div class="info-box">
@@ -21,18 +21,17 @@
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Unit tests for Amfphp_Core_Amf_Serializer, but using amf3  note: phpunit dataProvider mechanism doesn't work well, so lots of boiler plate code here. Oh well... A.S.</p>
+<p class="short-description">this service illustrates parsing a PHP serialized object to load test data. Use this as an example when  illustrating a possible bug that involves specific data.</p>
+<p class="description"><p>The getSerializedObject method shows how to PHP serialize an object.  The getDataThatCreatesProblems method is the one you need to implement.  MyVO is an example VO object.</p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Ariel Sommeria-klein</li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_Tests---Amfphp---Core---Amf---Amf3SerializationTest.php.html">/Tests/Amfphp/Core/Amf/Amf3SerializationTest.php</a> (line <span class="field">26</span>)
+			Located in <a class="field" href="_Tests---TestData---Services---ExampleSerializationDebugService.php.html">/Tests/TestData/Services/ExampleSerializationDebugService.php</a> (line <span class="field">23</span>)
 		</p>
 		
 				
-		<pre>PHPUnit_Framework_TestCase
-   |
-   --Amf3SerializationTest</pre>
+		<pre></pre>
 	
 			</div>
 </div>
@@ -49,10 +48,15 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-												
+																				
 												<div class="method-definition">
 											<span class="method-result">void</span>
-										<a href="#testBasicMethods" title="details" class="method-name">testBasicMethods</a>
+										<a href="#getDataThatCreatesProblems" title="details" class="method-name">getDataThatCreatesProblems</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#getSerializedObject" title="details" class="method-name">getSerializedObject</a>
 										()
 									</div>
 								</div>
@@ -71,11 +75,11 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 
-<a name="methodtestBasicMethods" id="testBasicMethods"><!-- --></a>
+<a name="methodgetDataThatCreatesProblems" id="getDataThatCreatesProblems"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">testBasicMethods</span> (line <span class="line-number">28</span>)
+		<span class="method-title">getDataThatCreatesProblems</span> (line <span class="line-number">24</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -86,7 +90,30 @@
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
-			testBasicMethods
+			getDataThatCreatesProblems
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetSerializedObject" id="getSerializedObject"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getSerializedObject</span> (line <span class="line-number">28</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getSerializedObject
 		</span>
 				()
 			</div>
@@ -100,7 +127,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 10 Jan 2012 16:01:14 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 10 Jan 2012 16:01:18 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

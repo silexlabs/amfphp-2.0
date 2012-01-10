@@ -17,7 +17,8 @@
 	<div class="nav-bar">
 					<span class="disabled">Description</span> |
 							<a href="#sec-descendents">Descendents</a>
-			|													<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+			|											<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
 						
 											<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
 						
@@ -42,7 +43,8 @@
 		<div class="nav-bar">
 			<a href="#sec-description">Description</a> |
 			<span class="disabled">Descendents</span>
-			|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+			|												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+								|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
 							
 															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
 							
@@ -70,6 +72,9 @@
 			<a href="#sec-description">Description</a> |
 							<a href="#sec-descendents">Descendants</a> |
 						<span class="disabled">Constants</span> (<a href="#sec-consts">details</a>)
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
 										| 
 									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
 							
@@ -85,6 +90,48 @@
 		</div>
 	</div>
 
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																																																<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$Amf0StoredObjects" title="details" class="var-name">$Amf0StoredObjects</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$className2TraitsInfo" title="details" class="var-name">$className2TraitsInfo</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">String</span>
+					<a href="#$outBuffer" title="details" class="var-name">$outBuffer</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Packet.html">Amfphp_Core_Amf_Packet</a></span>
+					<a href="#$packet" title="details" class="var-name">$packet</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$storedObjects" title="details" class="var-name">$storedObjects</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$storedStrings" title="details" class="var-name">$storedStrings</a>
+				</div>
+											</div>
+		</div>
+	</div>
 
 	<a name="sec-method-summary"></a>
 	<div class="info-box">
@@ -94,11 +141,14 @@
 							<a href="#sec-descendents">Descendents</a> |
 															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
 							
-									<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																																																																																																																																																																																																																																																																																																												
+																																																																																																																																																																																																																																																																																																																																												
 												<div class="method-definition">
 											<span class="method-result">Amfphp_Core_Amf_Serializer</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
@@ -116,13 +166,28 @@
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
+										<a href="#handleReference" title="details" class="method-name">handleReference</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">&$obj</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$references</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$obj</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$references</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#resetReferences" title="details" class="method-name">resetReferences</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
 										<a href="#serialize" title="details" class="method-name">serialize</a>
 										()
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
+										<a href="#writeAmf3AnonymousObject" title="details" class="method-name">writeAmf3AnonymousObject</a>
+											(<span class="var-type">stdClass</span>&nbsp;<span class="var-name">$d</span>, [<span class="var-type">doReference</span>&nbsp;<span class="var-name">$doReference</span> = <span class="var-default">true</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
 										<a href="#writeAmf3Array" title="details" class="method-name">writeAmf3Array</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$d</span>, <span class="var-type"><type></span>&nbsp;<span class="var-name">$arrayCollectionable</span>)
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$d</span>)
 									</div>
 																<div class="method-definition">
 											<span class="method-result">nothing</span>
@@ -132,11 +197,6 @@
 																<div class="method-definition">
 											<span class="method-result">void</span>
 										<a href="#writeAmf3ByteArray" title="details" class="method-name">writeAmf3ByteArray</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$d</span>)
-									</div>
-																<div class="method-definition">
-											<span class="method-result">void</span>
-										<a href="#writeAmf3ByteArrayMessage" title="details" class="method-name">writeAmf3ByteArrayMessage</a>
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$d</span>)
 									</div>
 																<div class="method-definition">
@@ -165,14 +225,14 @@
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$d</span>)
 									</div>
 																<div class="method-definition">
-											<span class="method-result">void</span>
-										<a href="#writeAmf3Object" title="details" class="method-name">writeAmf3Object</a>
-											(<span class="var-type">object</span>&nbsp;<span class="var-name">$d</span>)
-									</div>
-																<div class="method-definition">
 											<span class="method-result">The</span>
 										<a href="#writeAmf3String" title="details" class="method-name">writeAmf3String</a>
 											(<span class="var-type">string</span>&nbsp;<span class="var-name">$d</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#writeAmf3TypedObject" title="details" class="method-name">writeAmf3TypedObject</a>
+											(<span class="var-type">object</span>&nbsp;<span class="var-name">$d</span>)
 									</div>
 																<div class="method-definition">
 											<span class="method-result">nothing</span>
@@ -192,7 +252,7 @@
 																<div class="method-definition">
 											<span class="method-result">void</span>
 										<a href="#writeAnonymousObject" title="details" class="method-name">writeAnonymousObject</a>
-											(<span class="var-type">array</span>&nbsp;<span class="var-name">$d</span>)
+											(<span class="var-type">stdClass</span>&nbsp;<span class="var-name">$d</span>)
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
@@ -298,6 +358,156 @@
 		</div>
 	</div>		
 
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$Amf0StoredObjects" id="$Amf0StoredObjects"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$Amf0StoredObjects</span>
+						(line <span class="line-number">44</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">used for Amf0 references</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$className2TraitsInfo" id="$className2TraitsInfo"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$className2TraitsInfo</span>
+						(line <span class="line-number">61</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">used for traits references. key: class name. value: array(reference id, array(property names))</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$outBuffer" id="$outBuffer"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">String</span>
+			<span class="var-name">$outBuffer</span>
+						(line <span class="line-number">28</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> the output stream</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$packet" id="$packet"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Packet.html">Amfphp_Core_Amf_Packet</a></span>
+			<span class="var-name">$packet</span>
+						(line <span class="line-number">33</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$storedObjects" id="$storedObjects"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$storedObjects</span>
+						(line <span class="line-number">50</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">used for Amf3 references</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$storedStrings" id="$storedStrings"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$storedStrings</span>
+						(line <span class="line-number">55</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">amf3 references to strings</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
 	
 	<a name="sec-methods"></a>
 	<div class="info-box">
@@ -305,7 +515,8 @@
 		<div class="nav-bar">
 			<a href="#sec-description">Description</a> |
 							<a href="#sec-descendents">Descendents</a> |
-																		<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																			<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
 							
 										<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
 						
@@ -314,7 +525,7 @@
 			<A NAME='method_detail'></A>
 
 <a name="method__construct" id="__construct"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<span class="method-title">Constructor __construct</span> (line <span class="line-number">67</span>)
@@ -342,10 +553,10 @@
 			
 	</div>
 <a name="methodgetAmf3Int" id="getAmf3Int"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getAmf3Int</span> (line <span class="line-number">682</span>)
+		<span class="method-title">getAmf3Int</span> (line <span class="line-number">714</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -373,7 +584,7 @@
 			
 	</div>
 <a name="methodgetOutput" id="getOutput"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<span class="method-title">getOutput</span> (line <span class="line-number">131</span>)
@@ -395,8 +606,71 @@
 		
 			
 	</div>
-<a name="methodserialize" id="serialize"><!-- --></a>
+<a name="methodhandleReference" id="handleReference"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">handleReference</span> (line <span class="line-number">796</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">looks if $obj already has a reference. If it does, write it, and return true. If not, add it to the references array.</p>
+<p class="description"><p>Depending on whether or not the spl_object_hash function can be used ( available (PHP &gt;= 5.2), and can only be used on an object)  things are handled a bit differently: <ul><li>if possible, objects are hashed and the hash is used as a key to the references array. So the array has the structure hash =&gt; reference</li><li>if not, the object is pushed to the references array, and array_search is used. So the array has the structure reference =&gt; object.</li></ul> maxing out the number of stored references improves performance(tested with an array of 9000 identical objects). This may be because isset's performance  is linked to the size of the array. weird...</p><p>This also means that 2 completely separate instances of a class but with the same values will be written fully twice if we can't use the hash system</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			handleReference
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">&$obj</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$references</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$obj</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$references</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$obj</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$references</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">&$obj</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">&$references</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodresetReferences" id="resetReferences"><!-- --></a>
 <div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">resetReferences</span> (line <span class="line-number">75</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">initialize reference arrays and counters. Call before writing a body or a header, as the indices are local to each message body or header</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			resetReferences
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodserialize" id="serialize"><!-- --></a>
+<div class="evenrow">
 	
 	<div class="method-header">
 		<span class="method-title">serialize</span> (line <span class="line-number">87</span>)
@@ -419,16 +693,47 @@
 		
 			
 	</div>
+<a name="methodwriteAmf3AnonymousObject" id="writeAmf3AnonymousObject"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">writeAmf3AnonymousObject</span> (line <span class="line-number">619</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">handles writing an anoynous object (stdClass)   can also be a reference  Also creates a bogus traits entry, as even an anonymous object has traits. In this way a reference to a class trait will have the right id.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			writeAmf3AnonymousObject
+		</span>
+					(<span class="var-type">stdClass</span>&nbsp;<span class="var-name">$d</span>, [<span class="var-type">doReference</span>&nbsp;<span class="var-name">$doReference</span> = <span class="var-default">true</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">stdClass</span>
+				<span class="var-name">$d</span><span class="var-description">: The php object to write</span>			</li>
+					<li>
+				<span class="var-type">doReference</span>
+				<span class="var-name">$doReference</span><span class="var-description">: Boolean This is used by writeAmf3Array, where the reference has already been taken care of,  so there this method is called with false</span>			</li>
+				</ul>
+		
+			
+	</div>
 <a name="methodwriteAmf3Array" id="writeAmf3Array"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeAmf3Array</span> (line <span class="line-number">608</span>)
+		<span class="method-title">writeAmf3Array</span> (line <span class="line-number">645</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 	<ul class="tags">
-				<li><span class="field">todo:</span> understand this bit about circular references! so can use handleReference like everywhere else</li>
 				<li><span class="field">access:</span> protected</li>
 			</ul>
 	
@@ -437,16 +742,13 @@
 		<span class="method-name">
 			writeAmf3Array
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$d</span>, <span class="var-type"><type></span>&nbsp;<span class="var-name">$arrayCollectionable</span>)
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$d</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
 				<span class="var-type">array</span>
 				<span class="var-name">$d</span>			</li>
-					<li>
-				<span class="var-type"><type></span>
-				<span class="var-name">$arrayCollectionable</span>			</li>
 				</ul>
 		
 			
@@ -462,7 +764,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeAmf3Bool</span> (line <span class="line-number">557</span>)
+		<span class="method-title">writeAmf3Bool</span> (line <span class="line-number">564</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -498,7 +800,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeAmf3ByteArray</span> (line <span class="line-number">741</span>)
+		<span class="method-title">writeAmf3ByteArray</span> (line <span class="line-number">773</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -529,45 +831,17 @@
 							</li>
 				</ul>
 	</div>
-<a name="methodwriteAmf3ByteArrayMessage" id="writeAmf3ByteArrayMessage"><!-- --></a>
+<a name="methodwriteAmf3Data" id="writeAmf3Data"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeAmf3ByteArrayMessage</span> (line <span class="line-number">746</span>)
+		<span class="method-title">writeAmf3Data</span> (line <span class="line-number">490</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			writeAmf3ByteArrayMessage
-		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$d</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$d</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodwriteAmf3Data" id="writeAmf3Data"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<span class="method-title">writeAmf3Data</span> (line <span class="line-number">489</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">todo:</span> no type markers (&quot;\6&quot;, for example) in this method!</li>
-				<li><span class="field">todo:</span> Is the reference still needed? PHP4 needed it for objects, but PHP5 always  passes objects by reference. And PHP5 uses a copy-on-write approach, so that all  values are passed as &quot;reference&quot;, in case no changes take place.</li>
+				<li><span class="field">todo:</span> no type markers (&quot;\6', for example) in this method!</li>
+				<li><span class="field">todo:</span> Is the reference still needed? PHP4 needed it for objects, but PHP5 always  passes objects by reference. And PHP5 uses a copy-on-write approach, so that all  values are passed as 'reference', in case no changes take place.</li>
 				<li><span class="field">access:</span> protected</li>
 			</ul>
 	
@@ -595,10 +869,10 @@
 				</ul>
 	</div>
 <a name="methodwriteAmf3Date" id="writeAmf3Date"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeAmf3Date</span> (line <span class="line-number">734</span>)
+		<span class="method-title">writeAmf3Date</span> (line <span class="line-number">766</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -630,10 +904,10 @@
 				</ul>
 	</div>
 <a name="methodwriteAmf3Int" id="writeAmf3Int"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeAmf3Int</span> (line <span class="line-number">570</span>)
+		<span class="method-title">writeAmf3Int</span> (line <span class="line-number">577</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -660,10 +934,10 @@
 			
 	</div>
 <a name="methodwriteAmf3Null" id="writeAmf3Null"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeAmf3Null</span> (line <span class="line-number">546</span>)
+		<span class="method-title">writeAmf3Null</span> (line <span class="line-number">553</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -691,10 +965,10 @@
 				</ul>
 	</div>
 <a name="methodwriteAmf3Number" id="writeAmf3Number"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeAmf3Number</span> (line <span class="line-number">711</span>)
+		<span class="method-title">writeAmf3Number</span> (line <span class="line-number">743</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -725,47 +999,11 @@
 							</li>
 				</ul>
 	</div>
-<a name="methodwriteAmf3Object" id="writeAmf3Object"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<span class="method-title">writeAmf3Object</span> (line <span class="line-number">813</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">writes an object.</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			writeAmf3Object
-		</span>
-					(<span class="var-type">object</span>&nbsp;<span class="var-name">$d</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">object</span>
-				<span class="var-name">$d</span>			</li>
-				</ul>
-		
-			
-			<hr class="separator" />
-		<div class="notes">Redefined in descendants as:</div>
-		<ul class="redefinitions">
-					<li>
-				<a href="../Tests_Amfphp_Core_Amf/AmfSerializerWrapper.html#methodwriteAmf3Object">AmfSerializerWrapper::writeAmf3Object()</a>
-							</li>
-				</ul>
-	</div>
 <a name="methodwriteAmf3String" id="writeAmf3String"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeAmf3String</span> (line <span class="line-number">588</span>)
+		<span class="method-title">writeAmf3String</span> (line <span class="line-number">595</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -799,11 +1037,47 @@
 							</li>
 				</ul>
 	</div>
-<a name="methodwriteAmf3Undefined" id="writeAmf3Undefined"><!-- --></a>
+<a name="methodwriteAmf3TypedObject" id="writeAmf3TypedObject"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeAmf3Undefined</span> (line <span class="line-number">537</span>)
+		<span class="method-title">writeAmf3TypedObject</span> (line <span class="line-number">842</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">writes a typed object. Type is determined by having an &quot;explicit type&quot; field. If this field is  not set, call writeAmf3AnonymousObject  write all properties as sealed members.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			writeAmf3TypedObject
+		</span>
+					(<span class="var-type">object</span>&nbsp;<span class="var-name">$d</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">object</span>
+				<span class="var-name">$d</span>			</li>
+				</ul>
+		
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../Tests_Amfphp_Core_Amf/AmfSerializerWrapper.html#methodwriteAmf3TypedObject">AmfSerializerWrapper::writeAmf3TypedObject()</a>
+							</li>
+				</ul>
+	</div>
+<a name="methodwriteAmf3Undefined" id="writeAmf3Undefined"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">writeAmf3Undefined</span> (line <span class="line-number">544</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -831,10 +1105,10 @@
 				</ul>
 	</div>
 <a name="methodwriteAmf3Xml" id="writeAmf3Xml"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeAmf3Xml</span> (line <span class="line-number">722</span>)
+		<span class="method-title">writeAmf3Xml</span> (line <span class="line-number">754</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -866,10 +1140,10 @@
 				</ul>
 	</div>
 <a name="methodwriteAmf3XmlDocument" id="writeAmf3XmlDocument"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeAmf3XmlDocument</span> (line <span class="line-number">728</span>)
+		<span class="method-title">writeAmf3XmlDocument</span> (line <span class="line-number">760</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -901,14 +1175,14 @@
 				</ul>
 	</div>
 <a name="methodwriteAnonymousObject" id="writeAnonymousObject"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeAnonymousObject</span> (line <span class="line-number">383</span>)
+		<span class="method-title">writeAnonymousObject</span> (line <span class="line-number">386</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">writeObject handles writing a php array with string or mixed keys.  It does  not write the object code as that is handled by the writeArrayOrObject and this method  is shared with the CustomClass writer which doesn't use the object code.</p>
+<p class="short-description">handles writing an anoynous object (stdClass)   can also be a reference</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> protected</li>
 			</ul>
@@ -918,19 +1192,19 @@
 		<span class="method-name">
 			writeAnonymousObject
 		</span>
-					(<span class="var-type">array</span>&nbsp;<span class="var-name">$d</span>)
+					(<span class="var-type">stdClass</span>&nbsp;<span class="var-name">$d</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$d</span><span class="var-description">: The php array with string keys</span>			</li>
+				<span class="var-type">stdClass</span>
+				<span class="var-name">$d</span><span class="var-description">: The php object to write</span>			</li>
 				</ul>
 		
 			
 	</div>
 <a name="methodwriteArrayOrObject" id="writeArrayOrObject"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<span class="method-title">writeArrayOrObject</span> (line <span class="line-number">298</span>)
@@ -966,7 +1240,7 @@
 				</ul>
 	</div>
 <a name="methodwriteBoolean" id="writeBoolean"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<span class="method-title">writeBoolean</span> (line <span class="line-number">211</span>)
@@ -1002,7 +1276,7 @@
 				</ul>
 	</div>
 <a name="methodwriteByte" id="writeByte"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<span class="method-title">writeByte</span> (line <span class="line-number">141</span>)
@@ -1038,10 +1312,10 @@
 				</ul>
 	</div>
 <a name="methodwriteData" id="writeData"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeData</span> (line <span class="line-number">434</span>)
+		<span class="method-title">writeData</span> (line <span class="line-number">437</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1067,7 +1341,7 @@
 			
 	</div>
 <a name="methodwriteDate" id="writeDate"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<span class="method-title">writeDate</span> (line <span class="line-number">252</span>)
@@ -1103,7 +1377,7 @@
 				</ul>
 	</div>
 <a name="methodwriteDouble" id="writeDouble"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<span class="method-title">writeDouble</span> (line <span class="line-number">172</span>)
@@ -1140,7 +1414,7 @@
 				</ul>
 	</div>
 <a name="methodwriteInt" id="writeInt"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<span class="method-title">writeInt</span> (line <span class="line-number">151</span>)
@@ -1176,7 +1450,7 @@
 				</ul>
 	</div>
 <a name="methodwriteLong" id="writeLong"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<span class="method-title">writeLong</span> (line <span class="line-number">161</span>)
@@ -1212,7 +1486,7 @@
 				</ul>
 	</div>
 <a name="methodwriteLongUtf" id="writeLongUtf"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<span class="method-title">writeLongUtf</span> (line <span class="line-number">201</span>)
@@ -1249,7 +1523,7 @@
 				</ul>
 	</div>
 <a name="methodwriteNull" id="writeNull"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<span class="method-title">writeNull</span> (line <span class="line-number">272</span>)
@@ -1280,7 +1554,7 @@
 				</ul>
 	</div>
 <a name="methodwriteNumber" id="writeNumber"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<span class="method-title">writeNumber</span> (line <span class="line-number">264</span>)
@@ -1316,7 +1590,7 @@
 				</ul>
 	</div>
 <a name="methodwriteObjectEnd" id="writeObjectEnd"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<span class="method-title">writeObjectEnd</span> (line <span class="line-number">286</span>)
@@ -1347,10 +1621,10 @@
 				</ul>
 	</div>
 <a name="methodwriteObjectFromArray" id="writeObjectFromArray"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeObjectFromArray</span> (line <span class="line-number">368</span>)
+		<span class="method-title">writeObjectFromArray</span> (line <span class="line-number">372</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1376,10 +1650,10 @@
 			
 	</div>
 <a name="methodwritePlainArray" id="writePlainArray"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">writePlainArray</span> (line <span class="line-number">350</span>)
+		<span class="method-title">writePlainArray</span> (line <span class="line-number">354</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1405,10 +1679,10 @@
 			
 	</div>
 <a name="methodwriteReference" id="writeReference"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeReference</span> (line <span class="line-number">342</span>)
+		<span class="method-title">writeReference</span> (line <span class="line-number">346</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1440,7 +1714,7 @@
 				</ul>
 	</div>
 <a name="methodwriteString" id="writeString"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<span class="method-title">writeString</span> (line <span class="line-number">224</span>)
@@ -1477,10 +1751,10 @@
 				</ul>
 	</div>
 <a name="methodwriteTypedObject" id="writeTypedObject"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeTypedObject</span> (line <span class="line-number">404</span>)
+		<span class="method-title">writeTypedObject</span> (line <span class="line-number">407</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1514,7 +1788,7 @@
 				</ul>
 	</div>
 <a name="methodwriteUndefined" id="writeUndefined"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<span class="method-title">writeUndefined</span> (line <span class="line-number">279</span>)
@@ -1545,7 +1819,7 @@
 				</ul>
 	</div>
 <a name="methodwriteUtf" id="writeUtf"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<span class="method-title">writeUtf</span> (line <span class="line-number">189</span>)
@@ -1581,7 +1855,7 @@
 				</ul>
 	</div>
 <a name="methodwriteXML" id="writeXML"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<span class="method-title">writeXML</span> (line <span class="line-number">240</span>)
@@ -1630,13 +1904,14 @@
 										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
 						
 			
-										| 
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+														| 
 									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
 							
 					</div>
 		<div class="info-box-body">
 			<a name="constMAX_STORED_OBJECTS" id="MAX_STORED_OBJECTS"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="const-header">
 		<img src="../media/images/Variable.png" />
@@ -1657,7 +1932,7 @@
 	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 20 Sep 2011 17:34:31 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 10 Jan 2012 16:01:19 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

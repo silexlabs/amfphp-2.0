@@ -66,27 +66,27 @@
 				</div>
 								<div class="const-title">
 					<img src="../media/images/Constant.png" alt=" " />
-					<a href="#METHOD_ICONV" title="details" class="const-name">METHOD_ICONV</a> = 					<span class="var-type"> &quot;iconv&quot;</span>
+					<a href="#METHOD_ICONV" title="details" class="const-name">METHOD_ICONV</a> = 					<span class="var-type"> 'iconv'</span>
 
 				</div>
 								<div class="const-title">
 					<img src="../media/images/Constant.png" alt=" " />
-					<a href="#METHOD_MBSTRING" title="details" class="const-name">METHOD_MBSTRING</a> = 					<span class="var-type"> &quot;mbstring&quot;</span>
+					<a href="#METHOD_MBSTRING" title="details" class="const-name">METHOD_MBSTRING</a> = 					<span class="var-type"> 'mbstring'</span>
 
 				</div>
 								<div class="const-title">
 					<img src="../media/images/Constant.png" alt=" " />
-					<a href="#METHOD_NONE" title="details" class="const-name">METHOD_NONE</a> = 					<span class="var-type"> &quot;none&quot;</span>
+					<a href="#METHOD_NONE" title="details" class="const-name">METHOD_NONE</a> = 					<span class="var-type"> 'none'</span>
 
 				</div>
 								<div class="const-title">
 					<img src="../media/images/Constant.png" alt=" " />
-					<a href="#METHOD_RECODE" title="details" class="const-name">METHOD_RECODE</a> = 					<span class="var-type"> &quot;recode&quot;</span>
+					<a href="#METHOD_RECODE" title="details" class="const-name">METHOD_RECODE</a> = 					<span class="var-type"> 'recode'</span>
 
 				</div>
 								<div class="const-title">
 					<img src="../media/images/Constant.png" alt=" " />
-					<a href="#METHOD_UTF8_DECODE" title="details" class="const-name">METHOD_UTF8_DECODE</a> = 					<span class="var-type"> &quot;utf8_decode&quot;</span>
+					<a href="#METHOD_UTF8_DECODE" title="details" class="const-name">METHOD_UTF8_DECODE</a> = 					<span class="var-type"> 'utf8_decode'</span>
 
 				</div>
 							</div>
@@ -137,7 +137,7 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																												
+																																																				
 												<div class="method-definition">
 											<span class="method-result">AmfphpCharsetConverter</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
@@ -162,6 +162,11 @@
 											<span class="method-result">mixed</span>
 										<a href="#filterDeserializedResponse" title="details" class="method-name">filterDeserializedResponse</a>
 											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$deserializedResponse</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">String</span>
+										<a href="#transliterate" title="details" class="method-name">transliterate</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$string</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$direction</span>)
 									</div>
 								</div>
 		</div>
@@ -414,6 +419,38 @@
 		
 			
 	</div>
+<a name="methodtransliterate" id="transliterate"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">transliterate</span> (line <span class="line-number">143</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">convert the string. finds the proper encoding depending on direction</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			transliterate
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$string</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$direction</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$string</span><span class="var-description">: data to convert</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$direction</span><span class="var-description">: one of the DIRECTION_XXX consts described above</span>			</li>
+				</ul>
+		
+			
+	</div>
 						
 		</div>
 	</div>
@@ -433,7 +470,7 @@
 					</div>
 		<div class="info-box-body">
 			<a name="constDIRECTION_CLIENT_TO_PHP" id="DIRECTION_CLIENT_TO_PHP"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="const-header">
 		<img src="../media/images/Variable.png" />
@@ -450,7 +487,7 @@
 	
 </div>
 <a name="constDIRECTION_PHP_TO_CLIENT" id="DIRECTION_PHP_TO_CLIENT"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="const-header">
 		<img src="../media/images/Variable.png" />
@@ -467,13 +504,13 @@
 	
 </div>
 <a name="constMETHOD_ICONV" id="METHOD_ICONV"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="const-header">
 		<img src="../media/images/Variable.png" />
 		<span class="const-title">
 			<span class="const-name">METHOD_ICONV</span>
-			 = <span class="const-default"> &quot;iconv&quot;</span>
+			 = <span class="const-default"> 'iconv'</span>
 			(line <span class="line-number">28</span>)
 		</span>
 	</div>
@@ -484,13 +521,13 @@
 	
 </div>
 <a name="constMETHOD_MBSTRING" id="METHOD_MBSTRING"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="const-header">
 		<img src="../media/images/Variable.png" />
 		<span class="const-title">
 			<span class="const-name">METHOD_MBSTRING</span>
-			 = <span class="const-default"> &quot;mbstring&quot;</span>
+			 = <span class="const-default"> 'mbstring'</span>
 			(line <span class="line-number">33</span>)
 		</span>
 	</div>
@@ -501,13 +538,13 @@
 	
 </div>
 <a name="constMETHOD_NONE" id="METHOD_NONE"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="const-header">
 		<img src="../media/images/Variable.png" />
 		<span class="const-title">
 			<span class="const-name">METHOD_NONE</span>
-			 = <span class="const-default"> &quot;none&quot;</span>
+			 = <span class="const-default"> 'none'</span>
 			(line <span class="line-number">23</span>)
 		</span>
 	</div>
@@ -518,13 +555,13 @@
 	
 </div>
 <a name="constMETHOD_RECODE" id="METHOD_RECODE"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="const-header">
 		<img src="../media/images/Variable.png" />
 		<span class="const-title">
 			<span class="const-name">METHOD_RECODE</span>
-			 = <span class="const-default"> &quot;recode&quot;</span>
+			 = <span class="const-default"> 'recode'</span>
 			(line <span class="line-number">38</span>)
 		</span>
 	</div>
@@ -535,13 +572,13 @@
 	
 </div>
 <a name="constMETHOD_UTF8_DECODE" id="METHOD_UTF8_DECODE"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="const-header">
 		<img src="../media/images/Variable.png" />
 		<span class="const-title">
 			<span class="const-name">METHOD_UTF8_DECODE</span>
-			 = <span class="const-default"> &quot;utf8_decode&quot;</span>
+			 = <span class="const-default"> 'utf8_decode'</span>
 			(line <span class="line-number">43</span>)
 		</span>
 	</div>
@@ -556,7 +593,7 @@
 	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 20 Sep 2011 17:34:26 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 10 Jan 2012 16:01:15 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

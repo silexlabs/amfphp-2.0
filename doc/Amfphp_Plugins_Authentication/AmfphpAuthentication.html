@@ -26,13 +26,13 @@
         		<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Authentication for Amfphp.</p>
 <p class="description"><p>On a service object, the plugin looks for a method called _getMethodRoles. If the method exists, the plugin will look for a role in the session that matches the role.  If the roles don't match, an Exception is thrown.  The _getMethodRoles takes a parameter $methodName, and must return an array of strings containing acceptable roles for the method. If the return value is null,  it is considered that that particular method is not protected.</p><p>For example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-key">public&nbsp;</span><span class="src-key">function&nbsp;</span><span class="src-id">_getMethodRoles</span><span class="src-sym">(</span><span class="src-var">$methodName</span><span class="src-sym">)</span><span class="src-sym">{</span></div></li>
-<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if</span><span class="src-sym">(</span><span class="src-var">$methodName&nbsp;</span>==&nbsp;<span class="src-str">&quot;adminMethod&quot;</span><span class="src-sym">)</span><span class="src-sym">{</span></div></li>
-<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">&quot;admin&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if</span><span class="src-sym">(</span><span class="src-var">$methodName&nbsp;</span>==&nbsp;<span class="src-str">'adminMethod'</span><span class="src-sym">)</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'admin'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span><span class="src-key">else</span><span class="src-sym">{</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-id">null</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-sym">}</span></div></li>
-</ol></div></p><p>To authenticate a user, the plugin looks for a &quot;login&quot; method. This method can either be called  explicitly, or by setting a header with the name &quot;Credentials&quot;, containing {userid: userid, password: password}, as defined by the AS2  NetConnection.setCredentials method. It is considered good practise to have a &quot;logout&quot; method, though this is optional  The login method returns a role in a &quot;string&quot;. It takes 2 parameters, the user id and the password.  The logout method should call AmfphpAuthentication::clearSessionInfo();</p><p>See the AuthenticationService class in the test data for an example of an implementation.</p></p>
+</ol></div></p><p>To authenticate a user, the plugin looks for a 'login' method. This method can either be called  explicitly, or by setting a header with the name 'Credentials', containing {userid: userid, password: password}, as defined by the AS2  NetConnection.setCredentials method. It is considered good practise to have a 'logout' method, though this is optional  The login method returns a role in a 'string'. It takes 2 parameters, the user id and the password.  The logout method should call AmfphpAuthentication::clearSessionInfo();</p><p>See the AuthenticationService class in the test data for an example of an implementation.</p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Ariel Sommeria-klein</li>
 			</ul>
@@ -64,17 +64,17 @@
 			<div class="const-summary">
 								<div class="const-title">
 					<img src="../media/images/Constant.png" alt=" " />
-					<a href="#METHOD_GET_METHOD_ROLES" title="details" class="const-name">METHOD_GET_METHOD_ROLES</a> = 					<span class="var-type"> &quot;_getMethodRoles&quot;</span>
+					<a href="#METHOD_GET_METHOD_ROLES" title="details" class="const-name">METHOD_GET_METHOD_ROLES</a> = 					<span class="var-type"> '_getMethodRoles'</span>
 
 				</div>
 								<div class="const-title">
 					<img src="../media/images/Constant.png" alt=" " />
-					<a href="#METHOD_LOGIN" title="details" class="const-name">METHOD_LOGIN</a> = 					<span class="var-type"> &quot;login&quot;</span>
+					<a href="#METHOD_LOGIN" title="details" class="const-name">METHOD_LOGIN</a> = 					<span class="var-type"> 'login'</span>
 
 				</div>
 								<div class="const-title">
 					<img src="../media/images/Constant.png" alt=" " />
-					<a href="#SESSION_FIELD_ROLES" title="details" class="const-name">SESSION_FIELD_ROLES</a> = 					<span class="var-type"> &quot;amfphp_roles&quot;</span>
+					<a href="#SESSION_FIELD_ROLES" title="details" class="const-name">SESSION_FIELD_ROLES</a> = 					<span class="var-type"> 'amfphp_roles'</span>
 
 				</div>
 							</div>
@@ -95,7 +95,11 @@
 					</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-																								<div class="var-title">
+																																<div class="var-title">
+					<span class="var-type">String</span>
+					<a href="#$headerPassword" title="details" class="var-name">$headerPassword</a>
+				</div>
+																<div class="var-title">
 					<span class="var-type">String</span>
 					<a href="#$headerUserId" title="details" class="var-name">$headerUserId</a>
 				</div>
@@ -127,13 +131,18 @@
 										<a href="#clearSessionInfo" title="details" class="method-name">clearSessionInfo</a>
 										()
 									</div>
-																																
+																																								
 												<div class="method-definition">
 											<span class="method-result">AmfphpAuthentication</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
 											([<span class="var-type"></span>&nbsp;<span class="var-name">$config</span> = <span class="var-default">null</span>])
 									</div>
 																																<div class="method-definition">
+											<span class="method-result"><type></span>
+										<a href="#doRolesMatch" title="details" class="method-name">doRolesMatch</a>
+											(<span class="var-type"><type></span>&nbsp;<span class="var-name">$userRoles</span>, <span class="var-type"><type></span>&nbsp;<span class="var-name">$acceptedRoles</span>)
+									</div>
+																<div class="method-definition">
 											<span class="method-result"><a href="../Amfphp_Plugins_Authentication/AmfphpAuthentication.html">AmfphpAuthentication</a></span>
 										<a href="#filterAmfRequestHeaderHandler" title="details" class="method-name">filterAmfRequestHeaderHandler</a>
 											(<span class="var-type">Object</span>&nbsp;<span class="var-name">$handler</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$header</span>)
@@ -167,8 +176,30 @@
 							
 					</div>
 		<div class="info-box-body">
-			<a name="var$headerUserId" id="$headerUserId"><!-- --></A>
+			<a name="var$headerPassword" id="$headerPassword"><!-- --></A>
 <div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">String</span>
+			<span class="var-name">$headerPassword</span>
+						(line <span class="line-number">68</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">the password passed in the credentials header</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$headerUserId" id="$headerUserId"><!-- --></A>
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -207,7 +238,7 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="methodaddRole" id="addRole"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<span class="method-title">static method addRole</span> (line <span class="line-number">177</span>)
@@ -239,7 +270,7 @@
 			
 	</div>
 <a name="methodclearSessionInfo" id="clearSessionInfo"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<span class="method-title">static method clearSessionInfo</span> (line <span class="line-number">163</span>)
@@ -265,7 +296,7 @@
 	</div>
 
 <a name="method__construct" id="__construct"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<span class="method-title">Constructor __construct</span> (line <span class="line-number">74</span>)
@@ -289,6 +320,38 @@
 					<li>
 				<span class="var-type">array</span>
 				<span class="var-name">$config</span><span class="var-description">: optional key/value pairs in an associative array. Used to override default configuration values.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddoRolesMatch" id="doRolesMatch"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">doRolesMatch</span> (line <span class="line-number">146</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">looks for a match between the user roles and the accepted roles</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><type></span>
+		<span class="method-name">
+			doRolesMatch
+		</span>
+					(<span class="var-type"><type></span>&nbsp;<span class="var-name">$userRoles</span>, <span class="var-type"><type></span>&nbsp;<span class="var-name">$acceptedRoles</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><type></span>
+				<span class="var-name">$userRoles</span>			</li>
+					<li>
+				<span class="var-type"><type></span>
+				<span class="var-name">$acceptedRoles</span>			</li>
 				</ul>
 		
 			
@@ -368,7 +431,7 @@
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">looks for a &quot;Credentials&quot; request header. If there is one, uses it to try to authentify the user.</p>
+<p class="short-description">looks for a 'Credentials' request header. If there is one, uses it to try to authentify the user.</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -414,7 +477,7 @@
 		<img src="../media/images/Variable.png" />
 		<span class="const-title">
 			<span class="const-name">METHOD_GET_METHOD_ROLES</span>
-			 = <span class="const-default"> &quot;_getMethodRoles&quot;</span>
+			 = <span class="const-default"> '_getMethodRoles'</span>
 			(line <span class="line-number">51</span>)
 		</span>
 	</div>
@@ -431,7 +494,7 @@
 		<img src="../media/images/Variable.png" />
 		<span class="const-title">
 			<span class="const-name">METHOD_LOGIN</span>
-			 = <span class="const-default"> &quot;login&quot;</span>
+			 = <span class="const-default"> 'login'</span>
 			(line <span class="line-number">56</span>)
 		</span>
 	</div>
@@ -448,7 +511,7 @@
 		<img src="../media/images/Variable.png" />
 		<span class="const-title">
 			<span class="const-name">SESSION_FIELD_ROLES</span>
-			 = <span class="const-default"> &quot;amfphp_roles&quot;</span>
+			 = <span class="const-default"> 'amfphp_roles'</span>
 			(line <span class="line-number">46</span>)
 		</span>
 	</div>
@@ -463,7 +526,7 @@
 	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 20 Sep 2011 17:34:26 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 10 Jan 2012 16:01:14 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

@@ -52,8 +52,13 @@
 										<a href="#createGateway" title="details" class="method-name">createGateway</a>
 											([<span class="var-type"><a href="../Amfphp_Core/Amfphp_Core_Config.html">Amfphp_Core_Config</a></span>&nbsp;<span class="var-name">$config</span> = <span class="var-default">null</span>])
 									</div>
+																<div class="method-definition">
+					static 						<span class="method-result"><String></span>
+										<a href="#getRawPostData" title="details" class="method-name">getRawPostData</a>
+										()
+									</div>
 								
-												</div>
+																				</div>
 		</div>
 	</div>		
 
@@ -99,6 +104,33 @@
 		
 			
 	</div>
+<a name="methodgetRawPostData" id="getRawPostData"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method getRawPostData</span> (line <span class="line-number">29</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">there seems to be some confusion in the php doc as to where best to get the raw post data from.</p>
+<p class="description"><p>try $GLOBALS['HTTP_RAW_POST_DATA'] and php://input</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> it's a binary stream, but there seems to be no better type than String for this.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result"><String></span>
+		<span class="method-name">
+			getRawPostData
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
 
 						
 		</div>
@@ -106,7 +138,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 20 Sep 2011 17:34:30 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 10 Jan 2012 16:01:19 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

@@ -25,7 +25,7 @@
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">The Service Router class is responsible for executing the remote service method and returning it's value.</p>
-<p class="description"><p>based on the old &quot;Executive&quot; of php 1.9. It looks for a service either explicitely defined in a  ClassFindInfo object, or in a service folder.</p></p>
+<p class="description"><p>based on the old 'Executive' of php 1.9. It looks for a service either explicitely defined in a  ClassFindInfo object, or in a service folder.</p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Ariel Sommeria-klein</li>
 			</ul>
@@ -57,7 +57,7 @@
 			<div class="const-summary">
 								<div class="const-title">
 					<img src="../media/images/Constant.png" alt=" " />
-					<a href="#FILTER_SERVICE_OBJECT" title="details" class="const-name">FILTER_SERVICE_OBJECT</a> = 					<span class="var-type"> &quot;FILTER_SERVICE_OBJECT&quot;</span>
+					<a href="#FILTER_SERVICE_OBJECT" title="details" class="const-name">FILTER_SERVICE_OBJECT</a> = 					<span class="var-type"> 'FILTER_SERVICE_OBJECT'</span>
 
 				</div>
 							</div>
@@ -78,7 +78,11 @@
 					</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-																																<div class="var-title">
+																																								<div class="var-title">
+					<span class="var-type">Boolean</span>
+					<a href="#$checkArgumentCount" title="details" class="var-name">$checkArgumentCount</a>
+				</div>
+																<div class="var-title">
 					<span class="var-type">array</span>
 					<a href="#$serviceFolderPaths" title="details" class="var-name">$serviceFolderPaths</a>
 				</div>
@@ -108,7 +112,7 @@
 												<div class="method-definition">
 											<span class="method-result">Amfphp_Core_Common_ServiceRouter</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
-											(<span class="var-type">array</span>&nbsp;<span class="var-name">$serviceFolderPaths</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$serviceNames2ClassFindInfo</span>)
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$serviceFolderPaths</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$serviceNames2ClassFindInfo</span>, [<span class="var-type">Boolean</span>&nbsp;<span class="var-name">$checkArgumentCount</span> = <span class="var-default">false</span>])
 									</div>
 																<div class="method-definition">
 											<span class="method-result">mixed</span>
@@ -139,7 +143,29 @@
 							
 					</div>
 		<div class="info-box-body">
-			<a name="var$serviceFolderPaths" id="$serviceFolderPaths"><!-- --></A>
+			<a name="var$checkArgumentCount" id="$checkArgumentCount"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">Boolean</span>
+			<span class="var-name">$checkArgumentCount</span>
+						(line <span class="line-number">46</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">check parameters. This is useful for development, but should be disabled for production</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$serviceFolderPaths" id="$serviceFolderPaths"><!-- --></A>
 <div class="oddrow">
 
 	<div class="var-header">
@@ -206,7 +232,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">47</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">54</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -219,7 +245,7 @@
 		<span class="method-name">
 			__construct
 		</span>
-					(<span class="var-type">array</span>&nbsp;<span class="var-name">$serviceFolderPaths</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$serviceNames2ClassFindInfo</span>)
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$serviceFolderPaths</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$serviceNames2ClassFindInfo</span>, [<span class="var-type">Boolean</span>&nbsp;<span class="var-name">$checkArgumentCount</span> = <span class="var-default">false</span>])
 			</div>
 	
 			<ul class="parameters">
@@ -229,6 +255,9 @@
 					<li>
 				<span class="var-type">array</span>
 				<span class="var-name">$serviceNames2ClassFindInfo</span><span class="var-description">: a dictionary of service classes represented in a ClassFindInfo.</span>			</li>
+					<li>
+				<span class="var-type">Boolean</span>
+				<span class="var-name">$checkArgumentCount</span>			</li>
 				</ul>
 		
 			
@@ -237,12 +266,12 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">executeServiceCall</span> (line <span class="line-number">99</span>)
+		<span class="method-title">executeServiceCall</span> (line <span class="line-number">106</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">loads and instanciates a service class matching $serviceName, then calls the function defined by $methodName using $parameters as parameters  throws an exception if service not found.</p>
-<p class="description"><p>if the service exists but not the function, an exception is thrown by call_user_func_array. It is pretty explicit, so no furher code was added</p></p>
+<p class="description"><p>if the service exists but not the function, an exception is thrown by call_user_func_array. It is pretty explicit, so no further code was added</p></p>
 	<ul class="tags">
 				<li><span class="field">return:</span> the result of the function call</li>
 				<li><span class="field">access:</span> public</li>
@@ -274,7 +303,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getServiceObject</span> (line <span class="line-number">59</span>)
+		<span class="method-title">getServiceObject</span> (line <span class="line-number">67</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -326,7 +355,7 @@
 		<img src="../media/images/Variable.png" />
 		<span class="const-title">
 			<span class="const-name">FILTER_SERVICE_OBJECT</span>
-			 = <span class="const-default"> &quot;FILTER_SERVICE_OBJECT&quot;</span>
+			 = <span class="const-default"> 'FILTER_SERVICE_OBJECT'</span>
 			(line <span class="line-number">29</span>)
 		</span>
 	</div>
@@ -341,7 +370,7 @@
 	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 20 Sep 2011 17:34:31 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 10 Jan 2012 16:01:20 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

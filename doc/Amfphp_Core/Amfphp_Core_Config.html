@@ -56,7 +56,7 @@
 			<div class="const-summary">
 								<div class="const-title">
 					<img src="../media/images/Constant.png" alt=" " />
-					<a href="#CONFIG_RETURN_ERROR_DETAILS" title="details" class="const-name">CONFIG_RETURN_ERROR_DETAILS</a> = 					<span class="var-type"> &quot;returnErrorDetails&quot;</span>
+					<a href="#CONFIG_RETURN_ERROR_DETAILS" title="details" class="const-name">CONFIG_RETURN_ERROR_DETAILS</a> = 					<span class="var-type"> 'returnErrorDetails'</span>
 
 				</div>
 							</div>
@@ -77,7 +77,11 @@
 					</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-																																																																<div class="var-title">
+																																																																								<div class="var-title">
+					<span class="var-type">Boolean</span>
+					<a href="#$checkArgumentCount" title="details" class="var-name">$checkArgumentCount</a>
+				</div>
+																<div class="var-title">
 					<span class="var-type">array</span>
 					<a href="#$disabledPlugins" title="details" class="var-name">$disabledPlugins</a>
 				</div>
@@ -144,14 +148,37 @@
 							
 					</div>
 		<div class="info-box-body">
-			<a name="var$disabledPlugins" id="$disabledPlugins"><!-- --></A>
+			<a name="var$checkArgumentCount" id="$checkArgumentCount"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">Boolean</span>
+			<span class="var-name">$checkArgumentCount</span>
+						(line <span class="line-number">41</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">set to true if you want the service router to check if the number of arguments received by amfPHP matches with the method being called.</p>
+<p class="description"><p>This should be set to false in production for performance reasons</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$disabledPlugins" id="$disabledPlugins"><!-- --></A>
 <div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">array</span>
 			<span class="var-name">$disabledPlugins</span>
-						(line <span class="line-number">72</span>)
+						(line <span class="line-number">79</span>)
 		</span>
 	</div>
 
@@ -173,13 +200,13 @@
 		<span class="var-title">
 			<span class="var-type">array</span>
 			<span class="var-name">$pluginsConfig</span>
-						(line <span class="line-number">50</span>)
+						(line <span class="line-number">57</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">array containing untyped plugin configuration data. Add as needed. The advised format is the name of the plugin as key, and then  paramName/paramValue pairs as an array.</p>
-<p class="description"><p>example: array(&quot;plugin&quot; =&gt; array( &quot;paramName&quot; =&gt;&quot;paramValue&quot;))  The array( &quot;paramName&quot; =&gt;&quot;paramValue&quot;) will be passed as is to the plugin at construction time.</p></p>
+<p class="description"><p>example: array('plugin' =&gt; array( 'paramName' =&gt;'paramValue'))  The array( 'paramName' =&gt;'paramValue') will be passed as is to the plugin at construction time.</p></p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -196,12 +223,12 @@
 		<span class="var-title">
 			<span class="var-type">array</span>
 			<span class="var-name">$pluginsFolders</span>
-						(line <span class="line-number">40</span>)
+						(line <span class="line-number">47</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">paths to the folder containing the plugins. defaults to Amfphp_ROOTPATH . &quot;/Plugins/&quot;</p>
+<p class="short-description">paths to the folder containing the plugins. defaults to AMFPHP_ROOTPATH . '/Plugins/'</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -247,7 +274,7 @@
 
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">a dictionary of service classes represented in a ClassFindInfo.</p>
-<p class="description"><p>The key is the name of the service, the value is the class find info.  for example: AmfphpDiscoveryService -&gt; new ClassfindInfo( ... /Plugins/serviceBrowser/AmfphpDiscoveryService.php, AmfphpDiscoveryService)  The forward slash is important, don't use '\'!</p></p>
+<p class="description"><p>The key is the name of the service, the value is the class find info.  for example: AmfphpDiscoveryService -&gt; new ClassfindInfo( ... /Plugins/serviceBrowser/AmfphpDiscoveryService.php, AmfphpDiscoveryService)  The forward slash is important, don't use &quot;\'!</p></p>
 	<ul class="tags">
 				<li><span class="field">var:</span> of ClassFindInfo</li>
 				<li><span class="field">access:</span> public</li>
@@ -265,7 +292,7 @@
 		<span class="var-title">
 			<span class="var-type">array</span>
 			<span class="var-name">$sharedConfig</span>
-						(line <span class="line-number">57</span>)
+						(line <span class="line-number">64</span>)
 		</span>
 	</div>
 
@@ -302,7 +329,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">74</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">81</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -346,8 +373,8 @@
 		<img src="../media/images/Variable.png" />
 		<span class="const-title">
 			<span class="const-name">CONFIG_RETURN_ERROR_DETAILS</span>
-			 = <span class="const-default"> &quot;returnErrorDetails&quot;</span>
-			(line <span class="line-number">65</span>)
+			 = <span class="const-default"> 'returnErrorDetails'</span>
+			(line <span class="line-number">72</span>)
 		</span>
 	</div>
 
@@ -362,7 +389,7 @@
 	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 20 Sep 2011 17:34:29 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 10 Jan 2012 16:01:18 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

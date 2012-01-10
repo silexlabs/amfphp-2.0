@@ -35,6 +35,10 @@ class ExampleSerializationDebugService {
     
 }
 
+/**
+ * 
+ * @package Tests_TestData_Services
+ */
 class MyVO{
     public $var1;
     public $var2;

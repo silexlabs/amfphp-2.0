@@ -27,7 +27,6 @@
 	<li><a href="elementindex_Amfphp_Plugins_Logger.html">Amfphp_Plugins_Logger</a></li>
 	<li><a href="elementindex_AmfphpLogger.html">AmfphpLogger</a></li>
 	<li><a href="elementindex_Amfphp_Plugins_ServiceBrowser.html">Amfphp_Plugins_ServiceBrowser</a></li>
-	<li><a href="elementindex_Sommeria_Search.html">Sommeria_Search</a></li>
 	<li><a href="elementindex_Amfphp_Services.html">Amfphp_Services</a></li>
 	<li><a href="elementindex_Amfphp_Examples_ExampleService.html">Amfphp_Examples_ExampleService</a></li>
 	<li><a href="elementindex_Amfphp_Examples.html">Amfphp_Examples</a></li>
@@ -67,6 +66,7 @@
 	<a class="index-letter" href="elementindex.html#s">s</a>
 	<a class="index-letter" href="elementindex.html#t">t</a>
 	<a class="index-letter" href="elementindex.html#u">u</a>
+	<a class="index-letter" href="elementindex.html#v">v</a>
 	<a class="index-letter" href="elementindex.html#w">w</a>
 	<a class="index-letter" href="elementindex.html#x">x</a>
 	<a class="index-letter" href="elementindex.html#_">_</a>
@@ -87,10 +87,31 @@
 							<div class="index-item-description">the absolute path to the file containing the class definition</div>
 					</dd>
 			<dt class="field">
+						<span class="var-title">$additionnalResponseHeaders</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Handler.html#var$additionnalResponseHeaders">Amfphp_Core_Amf_Handler::$additionnalResponseHeaders</a> in Handler.php</div>
+							<div class="index-item-description">set this if you need additional headers in the response.  They will be added after normal treatment</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$additionnalResponseMessages</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Handler.html#var$additionnalResponseMessages">Amfphp_Core_Amf_Handler::$additionnalResponseMessages</a> in Handler.php</div>
+							<div class="index-item-description">set this if you need additional messages in the response. They will be added after normal treatment</div>
+					</dd>
+			<dt class="field">
 						<span class="var-title">$amf0storedObjects</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Deserializer.html#var$amf0storedObjects">Amfphp_Core_Amf_Deserializer::$amf0storedObjects</a> in Deserializer.php</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$Amf0StoredObjects</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#var$Amf0StoredObjects">Amfphp_Core_Amf_Serializer::$Amf0StoredObjects</a> in Serializer.php</div>
+							<div class="index-item-description">used for Amf0 references</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$amfVersion</span>
@@ -117,7 +138,7 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Tests_TestData_Services/AuthenticationService.html#methodadminMethod">AuthenticationService::adminMethod()</a> in AuthenticationService.php</div>
-							<div class="index-item-description">method that is protected by authentication. Only &quot;admin&quot; role is authorized. (see _getMethodRoles)</div>
+							<div class="index-item-description">method that is protected by authentication. Only 'admin' role is authorized. (see _getMethodRoles)</div>
 					</dd>
 			<dt class="field">
 						AMF0_ENCODING
@@ -396,17 +417,17 @@
 			<div class="index-item-details"><a href="Amfphp_Core_Amf_Types/Amfphp_Core_Amf_Types_ByteArray.html#methodAmfphp_Core_Amf_Types_ByteArray">Amfphp_Core_Amf_Types_ByteArray::Amfphp_Core_Amf_Types_ByteArray()</a> in ByteArray.php</div>
 					</dd>
 			<dt class="field">
+						<span class="method-title">Amfphp_Core_Amf_Types_Date</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf_Types/Amfphp_Core_Amf_Types_Date.html#methodAmfphp_Core_Amf_Types_Date">Amfphp_Core_Amf_Types_Date::Amfphp_Core_Amf_Types_Date()</a> in Date.php</div>
+					</dd>
+			<dt class="field">
 						Amfphp_Core_Amf_Types_Date
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf_Types/Amfphp_Core_Amf_Types_Date.html">Amfphp_Core_Amf_Types_Date</a> in Date.php</div>
 							<div class="index-item-description">Amf dates will be converted to and from this class. The PHP DateTime class is for PHP &gt;= 5.2.0, and setTimestamp for PHP &gt;= 5.3.0, so it can't be used in amfPHP  Of course feel free to use it yourself if your host supports it.</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">Amfphp_Core_Amf_Types_Date</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf_Types/Amfphp_Core_Amf_Types_Date.html#methodAmfphp_Core_Amf_Types_Date">Amfphp_Core_Amf_Types_Date::Amfphp_Core_Amf_Types_Date()</a> in Date.php</div>
 					</dd>
 			<dt class="field">
 						Amfphp_Core_Amf_Types_Undefined
@@ -565,7 +586,7 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_PluginManager.html">Amfphp_Core_PluginManager</a> in PluginManager.php</div>
-							<div class="index-item-description">Loads plugins for Amfphp. Plugins consist of a folder in the plugins folder. The folder and the class  should all have the same name. The file containing the class should be named with the class name with the &quot;.php&quot; suffix added.</div>
+							<div class="index-item-description">Loads plugins for Amfphp. Plugins consist of a folder in the plugins folder. The folder and the class  should all have the same name. The file containing the class should be named with the class name with the '.php' suffix added.</div>
 					</dd>
 			<dt class="field">
 						Amfphp_Core_PluginManagerTest
@@ -575,10 +596,10 @@
 							<div class="index-item-description">Test class for Amfphp_Core_PluginManager.</div>
 					</dd>
 			<dt class="field">
-						<span class="const-title">Amfphp_ROOTPATH</span>
+						<span class="const-title">AMFPHP_ROOTPATH</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core/_Amfphp---ClassLoader.php.html#defineAmfphp_ROOTPATH">Amfphp_ROOTPATH</a> in ClassLoader.php</div>
+			<div class="index-item-details"><a href="Amfphp_Core/_Amfphp---ClassLoader.php.html#defineAMFPHP_ROOTPATH">AMFPHP_ROOTPATH</a> in ClassLoader.php</div>
 							<div class="index-item-description">include this to include amfphp  note: this list could be generated. In the meantime maintain it manually.</div>
 					</dd>
 			<dt class="field">
@@ -593,7 +614,7 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Tests_TestData/AmfTestData.html">AmfTestData</a> in AmfTestData.php</div>
-							<div class="index-item-description">test data for the Amfphp unit tests  data types have the s prefix for &quot;serialized&quot; and &quot;d&quot; prefix for &quot;deserialized&quot;  for Packets there is a flaw in the Amfphp design which means that serializng and deserializing is not symmetrical.</div>
+							<div class="index-item-description">test data for the Amfphp unit tests  data types have the s prefix for 'serialized' and 'd' prefix for 'deserialized'  for Packets there is a flaw in the Amfphp design which means that serializng and deserializing is not symmetrical.</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">applyFunctionToContainedObjects</span>
@@ -991,11 +1012,44 @@
 	</div>
 	<dl>
 			<dt class="field">
+						<span class="var-title">$callDurationMs</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Plugins_ServiceBrowser/AmfphpServiceBrowser.html#var$callDurationMs">AmfphpServiceBrowser::$callDurationMs</a> in AmfphpServiceBrowser.php</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$callStartTimeMs</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Plugins_ServiceBrowser/AmfphpServiceBrowser.html#var$callStartTimeMs">AmfphpServiceBrowser::$callStartTimeMs</a> in AmfphpServiceBrowser.php</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$checkArgumentCount</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Common/Amfphp_Core_Common_ServiceRouter.html#var$checkArgumentCount">Amfphp_Core_Common_ServiceRouter::$checkArgumentCount</a> in ServiceRouter.php</div>
+							<div class="index-item-description">check parameters. This is useful for development, but should be disabled for production</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$checkArgumentCount</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_Config.html#var$checkArgumentCount">Amfphp_Core_Config::$checkArgumentCount</a> in Config.php</div>
+							<div class="index-item-description">set to true if you want the service router to check if the number of arguments received by amfPHP matches with the method being called.</div>
+					</dd>
+			<dt class="field">
 						<span class="var-title">$className</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Common/Amfphp_Core_Common_ClassFindInfo.html#var$className">Amfphp_Core_Common_ClassFindInfo::$className</a> in ClassFindInfo.php</div>
 							<div class="index-item-description">the name of the class.</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$className2TraitsInfo</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#var$className2TraitsInfo">Amfphp_Core_Amf_Serializer::$className2TraitsInfo</a> in Serializer.php</div>
+							<div class="index-item-description">used for traits references. key: class name. value: array(reference id, array(property names))</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$clientCharset</span>
@@ -1011,16 +1065,44 @@
 			<div class="index-item-details"><a href="Amfphp_Plugins_FlexMessaging/AmfphpFlexMessaging_AcknowledgeMessage.html#var$clientId">AmfphpFlexMessaging_AcknowledgeMessage::$clientId</a> in AcknowledgeMessage.php</div>
 					</dd>
 			<dt class="field">
-						<span class="var-title">$correlationId</span>
+						<span class="var-title">$clientUsesFlexMessaging</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Plugins_FlexMessaging/AmfphpFlexMessaging_ErrorMessage.html#var$correlationId">AmfphpFlexMessaging_ErrorMessage::$correlationId</a> in ErrorMessage.php</div>
+			<div class="index-item-details"><a href="Amfphp_Plugins_FlexMessaging/AmfphpFlexMessaging.html#var$clientUsesFlexMessaging">AmfphpFlexMessaging::$clientUsesFlexMessaging</a> in AmfphpFlexMessaging.php</div>
+							<div class="index-item-description">if this is set, special error handling applies</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$config</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_Gateway.html#var$config">Amfphp_Core_Gateway::$config</a> in Gateway.php</div>
+							<div class="index-item-description">config.</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$contentType</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_Gateway.html#var$contentType">Amfphp_Core_Gateway::$contentType</a> in Gateway.php</div>
+							<div class="index-item-description">the content type. For example for amf, application/x-amf</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$correlationId</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Plugins_FlexMessaging/AmfphpFlexMessaging_AcknowledgeMessage.html#var$correlationId">AmfphpFlexMessaging_AcknowledgeMessage::$correlationId</a> in AcknowledgeMessage.php</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$correlationId</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Plugins_FlexMessaging/AmfphpFlexMessaging_ErrorMessage.html#var$correlationId">AmfphpFlexMessaging_ErrorMessage::$correlationId</a> in ErrorMessage.php</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$counter</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/Amfphp_Core_Amf_UtilTest.html#var$counter">Amfphp_Core_Amf_UtilTest::$counter</a> in AmfUtilTest.php</div>
+							<div class="index-item-description">for testApplyFunc</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$currentByte</span>
@@ -1106,15 +1188,15 @@
 						CONTENT_TYPE
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Plugins_ServiceBrowser/AmfphpServiceBrowser.html#constCONTENT_TYPE">AmfphpServiceBrowser::CONTENT_TYPE</a> in AmfphpServiceBrowser.php</div>
-							<div class="index-item-description">if content type is not set or content is set to &quot;application/x-www-form-urlencoded&quot;, this plugin will handle the request</div>
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Constants.html#constCONTENT_TYPE">Amfphp_Core_Amf_Constants::CONTENT_TYPE</a> in Constants.php</div>
+							<div class="index-item-description">The AMf content type, for use in the headers</div>
 					</dd>
 			<dt class="field">
 						CONTENT_TYPE
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Constants.html#constCONTENT_TYPE">Amfphp_Core_Amf_Constants::CONTENT_TYPE</a> in Constants.php</div>
-							<div class="index-item-description">The AMf content type, for use in the headers</div>
+			<div class="index-item-details"><a href="Amfphp_Plugins_ServiceBrowser/AmfphpServiceBrowser.html#constCONTENT_TYPE">AmfphpServiceBrowser::CONTENT_TYPE</a> in AmfphpServiceBrowser.php</div>
+							<div class="index-item-description">if content type is not set or content is set to &quot;application/x-www-form-urlencoded&quot;, this plugin will handle the request</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">convertStringFromClientToPhpCharsets</span>
@@ -1189,13 +1271,14 @@
 						<span class="var-title">$data</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf_Types/Amfphp_Core_Amf_Types_Xml.html#var$data">Amfphp_Core_Amf_Types_Xml::$data</a> in Xml.php</div>
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Message.html#var$data">Amfphp_Core_Amf_Message::$data</a> in Message.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$data</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Message.html#var$data">Amfphp_Core_Amf_Message::$data</a> in Message.php</div>
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Header.html#var$data">Amfphp_Core_Amf_Header::$data</a> in Header.php</div>
+							<div class="index-item-description">data is the actual object data of the header key</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$data</span>
@@ -1213,14 +1296,13 @@
 						<span class="var-title">$data</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Header.html#var$data">Amfphp_Core_Amf_Header::$data</a> in Header.php</div>
-							<div class="index-item-description">data is the actual object data of the header key</div>
+			<div class="index-item-details"><a href="Amfphp_Core_Amf_Types/Amfphp_Core_Amf_Types_ByteArray.html#var$data">Amfphp_Core_Amf_Types_ByteArray::$data</a> in ByteArray.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$data</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf_Types/Amfphp_Core_Amf_Types_ByteArray.html#var$data">Amfphp_Core_Amf_Types_ByteArray::$data</a> in ByteArray.php</div>
+			<div class="index-item-details"><a href="Amfphp_Core_Amf_Types/Amfphp_Core_Amf_Types_Xml.html#var$data">Amfphp_Core_Amf_Types_Xml::$data</a> in Xml.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$dBinary</span>
@@ -1250,13 +1332,13 @@
 						<span class="var-title">$dDate</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_TestData/AmfTestData.html#var$dDate">AmfTestData::$dDate</a> in AmfTestData.php</div>
+			<div class="index-item-details"><a href="Tests_TestData/Amf3TestData.html#var$dDate">Amf3TestData::$dDate</a> in Amf3TestData.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$dDate</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_TestData/Amf3TestData.html#var$dDate">Amf3TestData::$dDate</a> in Amf3TestData.php</div>
+			<div class="index-item-details"><a href="Tests_TestData/AmfTestData.html#var$dDate">AmfTestData::$dDate</a> in AmfTestData.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$dDenseArray</span>
@@ -1396,13 +1478,13 @@
 						<span class="var-title">$dObject</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_TestData/AmfTestData.html#var$dObject">AmfTestData::$dObject</a> in AmfTestData.php</div>
+			<div class="index-item-details"><a href="Tests_TestData/Amf3TestData.html#var$dObject">Amf3TestData::$dObject</a> in Amf3TestData.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$dObject</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_TestData/Amf3TestData.html#var$dObject">Amf3TestData::$dObject</a> in Amf3TestData.php</div>
+			<div class="index-item-details"><a href="Tests_TestData/AmfTestData.html#var$dObject">AmfTestData::$dObject</a> in AmfTestData.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$dObjectEnd</span>
@@ -1549,14 +1631,14 @@
 						<span class="method-title">deserialize</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Plugins_Json/AmfphpJson.html#methoddeserialize">AmfphpJson::deserialize()</a> in AmfphpJson.php</div>
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Deserializer.html#methoddeserialize">Amfphp_Core_Amf_Deserializer::deserialize()</a> in Deserializer.php</div>
+							<div class="index-item-description">deserialize invokes this class to transform the raw data into valid object</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">deserialize</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Deserializer.html#methoddeserialize">Amfphp_Core_Amf_Deserializer::deserialize()</a> in Deserializer.php</div>
-							<div class="index-item-description">deserialize invokes this class to transform the raw data into valid object</div>
+			<div class="index-item-details"><a href="Amfphp_Plugins_Json/AmfphpJson.html#methoddeserialize">AmfphpJson::deserialize()</a> in AmfphpJson.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">deserialize</span>
@@ -1590,6 +1672,13 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Tests_TestData_TestPlugins_DisabledPlugin/DisabledPlugin.html">DisabledPlugin</a> in DisabledPlugin.php</div>
 							<div class="index-item-description">a dummy plugin to test if loading in the plugin manager works properly. It does mothing except increment a static counter to count instanciation</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">doRolesMatch</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Plugins_Authentication/AmfphpAuthentication.html#methoddoRolesMatch">AmfphpAuthentication::doRolesMatch()</a> in AmfphpAuthentication.php</div>
+							<div class="index-item-description">looks for a match between the user roles and the accepted roles</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">double</span>
@@ -1670,6 +1759,13 @@
 			<div class="index-item-details"><a href="Amfphp_Services/_Amfphp---Services---ExampleService.php.html">ExampleService.php</a> in ExampleService.php</div>
 					</dd>
 			<dt class="field">
+						ExampleSerializationDebugService
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Tests_TestData_Services/ExampleSerializationDebugService.html">ExampleSerializationDebugService</a> in ExampleSerializationDebugService.php</div>
+							<div class="index-item-description">this service illustrates parsing a PHP serialized object to load test data. Use this as an example when  illustrating a possible bug that involves specific data.</div>
+					</dd>
+			<dt class="field">
 						ExampleService
 					</dt>
 		<dd class="index-item-body">
@@ -1695,6 +1791,12 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf_Types/Amfphp_Core_Amf_Types_Undefined.html#methodexists">Amfphp_Core_Amf_Types_Undefined::exists()</a> in Undefined.php</div>
+					</dd>
+			<dt class="field">
+						<span class="include-title">ExampleSerializationDebugService.php</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Tests_TestData_Services/_Tests---TestData---Services---ExampleSerializationDebugService.php.html">ExampleSerializationDebugService.php</a> in ExampleSerializationDebugService.php</div>
 					</dd>
 		</dl>
 	<a name="f"></a>
@@ -1723,6 +1825,13 @@
 			<div class="index-item-details"><a href="Amfphp_Plugins_FlexMessaging/AmfphpFlexMessaging_ErrorMessage.html#var$faultString">AmfphpFlexMessaging_ErrorMessage::$faultString</a> in ErrorMessage.php</div>
 					</dd>
 			<dt class="field">
+						<span class="var-title">$filtersArray</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_FilterManager.html#var$filtersArray">Amfphp_Core_FilterManager::$filtersArray</a> in FilterManager.php</div>
+							<div class="index-item-description">registered filters</div>
+					</dd>
+			<dt class="field">
 						<span class="include-title">FilterManager.php</span>
 					</dt>
 		<dd class="index-item-body">
@@ -1734,6 +1843,13 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Constants.html#constFIELD_EXPLICIT_TYPE">Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE</a> in Constants.php</div>
 							<div class="index-item-description">this is the field where the class name of an object must be set so that it can be sent as a strongly typed object</div>
+					</dd>
+			<dt class="field">
+						FIELD_EXTERNALIZED_DATA
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Constants.html#constFIELD_EXTERNALIZED_DATA">Amfphp_Core_Amf_Constants::FIELD_EXTERNALIZED_DATA</a> in Constants.php</div>
+							<div class="index-item-description">if an object is marked as externalizable(AMF3 and later), this is where the externalized data goes.</div>
 					</dd>
 			<dt class="field">
 						FIELD_MESSAGE_ID
@@ -1763,13 +1879,6 @@
 						<span class="method-title">filterDeserializedRequest</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Plugins_CustomClassConverter/AmfphpCustomClassConverter.html#methodfilterDeserializedRequest">AmfphpCustomClassConverter::filterDeserializedRequest()</a> in AmfphpCustomClassConverter.php</div>
-							<div class="index-item-description">converts untyped objects to their typed counterparts. Loads the class if necessary</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">filterDeserializedRequest</span>
-					</dt>
-		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Examples/TestPlugin.html#methodfilterDeserializedRequest">TestPlugin::filterDeserializedRequest()</a> in TestPlugin.php</div>
 							<div class="index-item-description">sets deserialized request to “bla”</div>
 					</dd>
@@ -1788,11 +1897,11 @@
 							<div class="index-item-description">converts untyped objects to their typed counterparts. Loads the class if necessary</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">filterDeserializedResponse</span>
+						<span class="method-title">filterDeserializedRequest</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="AmfphpLogger/AmfphpLogger.html#methodfilterDeserializedResponse">AmfphpLogger::filterDeserializedResponse()</a> in AmfphpLogger.php</div>
-							<div class="index-item-description">logs the deserialized response</div>
+			<div class="index-item-details"><a href="Amfphp_Plugins_CustomClassConverter/AmfphpCustomClassConverter.html#methodfilterDeserializedRequest">AmfphpCustomClassConverter::filterDeserializedRequest()</a> in AmfphpCustomClassConverter.php</div>
+							<div class="index-item-description">converts untyped objects to their typed counterparts. Loads the class if necessary</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">filterDeserializedResponse</span>
@@ -1805,15 +1914,15 @@
 						<span class="method-title">filterDeserializedResponse</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Plugins_CharsetConverter/AmfphpCharsetConverter.html#methodfilterDeserializedResponse">AmfphpCharsetConverter::filterDeserializedResponse()</a> in AmfphpCharsetConverter.php</div>
-							<div class="index-item-description">looks at the response and sets the explicit type field so that the serializer sends it properly</div>
+			<div class="index-item-details"><a href="AmfphpLogger/AmfphpLogger.html#methodfilterDeserializedResponse">AmfphpLogger::filterDeserializedResponse()</a> in AmfphpLogger.php</div>
+							<div class="index-item-description">logs the deserialized response</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">filterHandler</span>
+						<span class="method-title">filterDeserializedResponse</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Plugins_Json/AmfphpJson.html#methodfilterHandler">AmfphpJson::filterHandler()</a> in AmfphpJson.php</div>
-							<div class="index-item-description">If the content type contains the &quot;json&quot; string, returns this plugin</div>
+			<div class="index-item-details"><a href="Amfphp_Plugins_CharsetConverter/AmfphpCharsetConverter.html#methodfilterDeserializedResponse">AmfphpCharsetConverter::filterDeserializedResponse()</a> in AmfphpCharsetConverter.php</div>
+							<div class="index-item-description">looks at the response and sets the explicit type field so that the serializer sends it properly</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">filterHandler</span>
@@ -1827,7 +1936,14 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Plugins_Get/AmfphpGet.html#methodfilterHandler">AmfphpGet::filterHandler()</a> in AmfphpGet.php</div>
-							<div class="index-item-description">If the content type contains the &quot;json&quot; string, returns this plugin</div>
+							<div class="index-item-description">If the content type contains the 'json' string, returns this plugin</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">filterHandler</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Plugins_Json/AmfphpJson.html#methodfilterHandler">AmfphpJson::filterHandler()</a> in AmfphpJson.php</div>
+							<div class="index-item-description">If the content type contains the 'json' string, returns this plugin</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">filterHeaders</span>
@@ -1856,13 +1972,6 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="AmfphpLogger/AmfphpLogger.html#methodfilterSerializedResponse">AmfphpLogger::filterSerializedResponse()</a> in AmfphpLogger.php</div>
 							<div class="index-item-description">logs the deserialized incoming packet</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">filterServiceFolderPaths</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Sommeria_Search/SommeriaSearch.html#methodfilterServiceFolderPaths">SommeriaSearch::filterServiceFolderPaths()</a> in SommeriaSearch.php</div>
-							<div class="index-item-description">filter just after plugin init. Use this to add a service folder for a plugin</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">filterServiceObject</span>
@@ -2015,6 +2124,13 @@
 	</div>
 	<dl>
 			<dt class="field">
+						<span class="var-title">$getData</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_Gateway.html#var$getData">Amfphp_Core_Gateway::$getData</a> in Gateway.php</div>
+							<div class="index-item-description">typically the $_GET array.</div>
+					</dd>
+			<dt class="field">
 						<span class="include-title">Gateway.php</span>
 					</dt>
 		<dd class="index-item-body">
@@ -2041,10 +2157,17 @@
 							<div class="index-item-description">Return the serialisation of the given integer (Amf3).</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">getInstance</span>
+						<span class="method-title">getAvailableServiceNames</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_FilterManager.html#methodgetInstance">Amfphp_Core_FilterManager::getInstance()</a> in FilterManager.php</div>
+			<div class="index-item-details"><a href="Amfphp_Plugins_ServiceBrowser/AmfphpServiceBrowser.html#methodgetAvailableServiceNames">AmfphpServiceBrowser::getAvailableServiceNames()</a> in AmfphpServiceBrowser.php</div>
+							<div class="index-item-description">returns a list of available services</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">getDataThatCreatesProblems</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Tests_TestData_Services/ExampleSerializationDebugService.html#methodgetDataThatCreatesProblems">ExampleSerializationDebugService::getDataThatCreatesProblems()</a> in ExampleSerializationDebugService.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">getInstance</span>
@@ -2052,6 +2175,12 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_PluginManager.html#methodgetInstance">Amfphp_Core_PluginManager::getInstance()</a> in PluginManager.php</div>
 							<div class="index-item-description">gives access to the singleton</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">getInstance</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_FilterManager.html#methodgetInstance">Amfphp_Core_FilterManager::getInstance()</a> in FilterManager.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">getOutput</span>
@@ -2066,11 +2195,31 @@
 			<div class="index-item-details"><a href="Amfphp_Examples_ExampleService/PizzaService.html#methodgetPizza">PizzaService::getPizza()</a> in PizzaService.php</div>
 					</dd>
 			<dt class="field">
+						<span class="method-title">getRawPostData</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_HttpRequestGatewayFactory.html#methodgetRawPostData">Amfphp_Core_HttpRequestGatewayFactory::getRawPostData()</a> in HttpRequestGatewayFactory.php</div>
+							<div class="index-item-description">there seems to be some confusion in the php doc as to where best to get the raw post data from.</div>
+					</dd>
+			<dt class="field">
 						<span class="method-title">getResponseHeaders</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_Gateway.html#methodgetResponseHeaders">Amfphp_Core_Gateway::getResponseHeaders()</a> in Gateway.php</div>
 							<div class="index-item-description">get the response headers. Creates an associative array of headers, then filters them, then returns an array of strings</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">getSerializedObject</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Tests_TestData_Services/ExampleSerializationDebugService.html#methodgetSerializedObject">ExampleSerializationDebugService::getSerializedObject()</a> in ExampleSerializationDebugService.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">getServiceCallParameters</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Handler.html#methodgetServiceCallParameters">Amfphp_Core_Amf_Handler::getServiceCallParameters()</a> in Handler.php</div>
+							<div class="index-item-description">creates a ServiceCallParamaeters object from an Amfphp_Core_Amf_Message</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">getServiceObject</span>
@@ -2094,17 +2243,24 @@
 	</div>
 	<dl>
 			<dt class="field">
-						<span class="var-title">$headers</span>
+						<span class="var-title">$headerPassword</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Packet.html#var$headers">Amfphp_Core_Amf_Packet::$headers</a> in Packet.php</div>
-							<div class="index-item-description">The place to keep the headers data</div>
+			<div class="index-item-details"><a href="Amfphp_Plugins_Authentication/AmfphpAuthentication.html#var$headerPassword">AmfphpAuthentication::$headerPassword</a> in AmfphpAuthentication.php</div>
+							<div class="index-item-description">the password passed in the credentials header</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$headers</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Plugins_FlexMessaging/AmfphpFlexMessaging_AcknowledgeMessage.html#var$headers">AmfphpFlexMessaging_AcknowledgeMessage::$headers</a> in AcknowledgeMessage.php</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$headers</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Packet.html#var$headers">Amfphp_Core_Amf_Packet::$headers</a> in Packet.php</div>
+							<div class="index-item-description">The place to keep the headers data</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$headersLeftToProcess</span>
@@ -2148,8 +2304,8 @@
 						<span class="method-title">handleDeserializedRequest</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Plugins_Json/AmfphpJson.html#methodhandleDeserializedRequest">AmfphpJson::handleDeserializedRequest()</a> in AmfphpJson.php</div>
-							<div class="index-item-description">Retrieve the serviceName, methodName and parameters from the PHP object</div>
+			<div class="index-item-details"><a href="Amfphp_Core_Common/Amfphp_Core_Common_IDeserializedRequestHandler.html#methodhandleDeserializedRequest">Amfphp_Core_Common_IDeserializedRequestHandler::handleDeserializedRequest()</a> in IDeserializedRequestHandler.php</div>
+							<div class="index-item-description">handle the deserialized request, usually by making a series of calls to a service. This should not handle exceptions, as this is done separately</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">handleDeserializedRequest</span>
@@ -2162,8 +2318,8 @@
 						<span class="method-title">handleDeserializedRequest</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Common/Amfphp_Core_Common_IDeserializedRequestHandler.html#methodhandleDeserializedRequest">Amfphp_Core_Common_IDeserializedRequestHandler::handleDeserializedRequest()</a> in IDeserializedRequestHandler.php</div>
-							<div class="index-item-description">handle the deserialized request, usually by making a series of calls to a service. This should not handle exceptions, as this is done separately</div>
+			<div class="index-item-details"><a href="Amfphp_Plugins_Json/AmfphpJson.html#methodhandleDeserializedRequest">AmfphpJson::handleDeserializedRequest()</a> in AmfphpJson.php</div>
+							<div class="index-item-description">Retrieve the serviceName, methodName and parameters from the PHP object</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">handleDeserializedRequest</span>
@@ -2188,7 +2344,7 @@
 						<span class="method-title">handleException</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Handler.html#methodhandleException">Amfphp_Core_Amf_Handler::handleException()</a> in Handler.php</div>
+			<div class="index-item-details"><a href="Amfphp_Plugins_Json/AmfphpJson.html#methodhandleException">AmfphpJson::handleException()</a> in AmfphpJson.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">handleException</span>
@@ -2200,14 +2356,21 @@
 						<span class="method-title">handleException</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Plugins_Json/AmfphpJson.html#methodhandleException">AmfphpJson::handleException()</a> in AmfphpJson.php</div>
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Handler.html#methodhandleException">Amfphp_Core_Amf_Handler::handleException()</a> in Handler.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">handleReference</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodhandleReference">Amfphp_Core_Amf_Serializer::handleReference()</a> in Serializer.php</div>
+							<div class="index-item-description">looks if $obj already has a reference. If it does, write it, and return true. If not, add it to the references array.</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">handleRequestHeader</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Plugins_Authentication/AmfphpAuthentication.html#methodhandleRequestHeader">AmfphpAuthentication::handleRequestHeader()</a> in AmfphpAuthentication.php</div>
-							<div class="index-item-description">looks for a &quot;Credentials&quot; request header. If there is one, uses it to try to authentify the user.</div>
+							<div class="index-item-description">looks for a 'Credentials' request header. If there is one, uses it to try to authentify the user.</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">handleRequestMessage</span>
@@ -2215,6 +2378,13 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Plugins_FlexMessaging/AmfphpFlexMessaging.html#methodhandleRequestMessage">AmfphpFlexMessaging::handleRequestMessage()</a> in AmfphpFlexMessaging.php</div>
 							<div class="index-item-description">handle the request message instead of letting the Amf Handler do it.</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">handleRequestMessage</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Handler.html#methodhandleRequestMessage">Amfphp_Core_Amf_Handler::handleRequestMessage()</a> in Handler.php</div>
+							<div class="index-item-description">process a request and generate a response.</div>
 					</dd>
 		</dl>
 	<a name="i"></a>
@@ -2224,6 +2394,20 @@
 		<div style="clear: both"></div>
 	</div>
 	<dl>
+			<dt class="field">
+						<span class="var-title">$instance</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_PluginManager.html#var$instance">Amfphp_Core_PluginManager::$instance</a> in PluginManager.php</div>
+							<div class="index-item-description">protected instance of singleton</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$instance</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_FilterManager.html#var$instance">Amfphp_Core_FilterManager::$instance</a> in FilterManager.php</div>
+							<div class="index-item-description">protected instance of singleton</div>
+					</dd>
 			<dt class="field">
 						<span class="var-title">$instanciationCounter</span>
 					</dt>
@@ -2284,35 +2468,35 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Util.html#methodis_byteArray">Amfphp_Core_Amf_Util::is_byteArray()</a> in Util.php</div>
-							<div class="index-item-description">Determines whether an object is the ActionScript type &quot;ByteArray&quot;</div>
+							<div class="index-item-description">Determines whether an object is the ActionScript type 'ByteArray'</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">is_date</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Util.html#methodis_date">Amfphp_Core_Amf_Util::is_date()</a> in Util.php</div>
-							<div class="index-item-description">Determines whether an object is the ActionScript type &quot;Date&quot;</div>
+							<div class="index-item-description">Determines whether an object is the ActionScript type 'Date'</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">is_undefined</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Util.html#methodis_undefined">Amfphp_Core_Amf_Util::is_undefined()</a> in Util.php</div>
-							<div class="index-item-description">Determines whether an object is the ActionScript type &quot;undefined&quot;</div>
+							<div class="index-item-description">Determines whether an object is the ActionScript type 'undefined'</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">is_Xml</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Util.html#methodis_Xml">Amfphp_Core_Amf_Util::is_Xml()</a> in Util.php</div>
-							<div class="index-item-description">Determines whether an object is the ActionScript type &quot;XML&quot;</div>
+							<div class="index-item-description">Determines whether an object is the ActionScript type 'XML'</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">is_XmlDocument</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Util.html#methodis_XmlDocument">Amfphp_Core_Amf_Util::is_XmlDocument()</a> in Util.php</div>
-							<div class="index-item-description">Determines whether an object is the ActionScript type &quot;XmlDoument&quot;</div>
+							<div class="index-item-description">Determines whether an object is the ActionScript type 'XmlDoument'</div>
 					</dd>
 			<dt class="field">
 						<span class="include-title">index.php</span>
@@ -2343,6 +2527,27 @@
 		<div style="clear: both"></div>
 	</div>
 	<dl>
+			<dt class="field">
+						<span class="var-title">$lastFlexMessageId</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Plugins_FlexMessaging/AmfphpFlexMessaging.html#var$lastFlexMessageId">AmfphpFlexMessaging::$lastFlexMessageId</a> in AmfphpFlexMessaging.php</div>
+							<div class="index-item-description">the messageId of the last flex message. Used for error generation</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$lastFlexMessageResponseUri</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Plugins_FlexMessaging/AmfphpFlexMessaging.html#var$lastFlexMessageResponseUri">AmfphpFlexMessaging::$lastFlexMessageResponseUri</a> in AmfphpFlexMessaging.php</div>
+							<div class="index-item-description">the response uri of the last flex message. Used for error generation</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$lastRequestMessageResponseUri</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Handler.html#var$lastRequestMessageResponseUri">Amfphp_Core_Amf_Handler::$lastRequestMessageResponseUri</a> in Handler.php</div>
+							<div class="index-item-description">Amf specifies that an error message must be aimed at an end point. This stores the last message's response Uri to be able to give this end point</div>
+					</dd>
 			<dt class="field">
 						<span class="method-title">loadPlugins</span>
 					</dt>
@@ -2417,6 +2622,12 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Plugins_CharsetConverter/AmfphpCharsetConverter.html#var$method">AmfphpCharsetConverter::$method</a> in AmfphpCharsetConverter.php</div>
 							<div class="index-item-description">the reencoding method. One of the METHOD_XXX consts defined above.</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$methodName</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Plugins_ServiceBrowser/AmfphpServiceBrowser.html#var$methodName">AmfphpServiceBrowser::$methodName</a> in AmfphpServiceBrowser.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$methodName</span>
@@ -2501,6 +2712,12 @@
 			<div class="index-item-details"><a href="Amfphp_Plugins_CharsetConverter/AmfphpCharsetConverter.html#constMETHOD_UTF8_DECODE">AmfphpCharsetConverter::METHOD_UTF8_DECODE</a> in AmfphpCharsetConverter.php</div>
 							<div class="index-item-description">uses the XML function utf8_decode and encode for reencoding - ISO-8859-1 only</div>
 					</dd>
+			<dt class="field">
+						MyVO
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Tests_TestData_Services/MyVO.html">MyVO</a> in ExampleSerializationDebugService.php</div>
+					</dd>
 		</dl>
 	<a name="n"></a>
 	<div class="index-letter-section">
@@ -2528,7 +2745,7 @@
 						<span class="var-title">$object</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/Amfphp_Core_Amf_UtilTest.html#var$object">Amfphp_Core_Amf_UtilTest::$object</a> in AmfUtilTest.php</div>
+			<div class="index-item-details"><a href="Tests_Amfphp_Plugins_Authentication/AmfphpAuthenticationTest.html#var$object">AmfphpAuthenticationTest::$object</a> in AmfphpAuthenticationTest.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$object</span>
@@ -2540,13 +2757,19 @@
 						<span class="var-title">$object</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Plugins_Authentication/AmfphpAuthenticationTest.html#var$object">AmfphpAuthenticationTest::$object</a> in AmfphpAuthenticationTest.php</div>
+			<div class="index-item-details"><a href="Tests_Amfphp_Plugins_FlexMessaging/AmfphpFlexMessagingTest.html#var$object">AmfphpFlexMessagingTest::$object</a> in AmfphpFlexMessagingTest.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$object</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Plugins_FlexMessaging/AmfphpFlexMessagingTest.html#var$object">AmfphpFlexMessagingTest::$object</a> in AmfphpFlexMessagingTest.php</div>
+			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/Amfphp_Core_Amf_UtilTest.html#var$object">Amfphp_Core_Amf_UtilTest::$object</a> in AmfUtilTest.php</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$object</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Tests_Amfphp_Plugins_CharsetConverter/AmfphpCharsetConverterTest.html#var$object">AmfphpCharsetConverterTest::$object</a> in AmfphpCharsetConverterTest.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$object</span>
@@ -2555,10 +2778,16 @@
 			<div class="index-item-details"><a href="Tests_Amfphp_Plugins_CustomClassConverter/AmfphpCustomClassConverterTest.html#var$object">AmfphpCustomClassConverterTest::$object</a> in AmfphpCustomClassConverterTest.php</div>
 					</dd>
 			<dt class="field">
-						<span class="var-title">$object</span>
+						<span class="var-title">$objectEncoding</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Plugins_CharsetConverter/AmfphpCharsetConverterTest.html#var$object">AmfphpCharsetConverterTest::$object</a> in AmfphpCharsetConverterTest.php</div>
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Handler.html#var$objectEncoding">Amfphp_Core_Amf_Handler::$objectEncoding</a> in Handler.php</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$outBuffer</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#var$outBuffer">Amfphp_Core_Amf_Serializer::$outBuffer</a> in Serializer.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">output</span>
@@ -2576,11 +2805,43 @@
 	</div>
 	<dl>
 			<dt class="field">
+						<span class="var-title">$packet</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#var$packet">Amfphp_Core_Amf_Serializer::$packet</a> in Serializer.php</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$parameters</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Plugins_ServiceBrowser/AmfphpServiceBrowser.html#var$parameters">AmfphpServiceBrowser::$parameters</a> in AmfphpServiceBrowser.php</div>
+							<div class="index-item-description">used for service call</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$parametersAssoc</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Plugins_ServiceBrowser/AmfphpServiceBrowser.html#var$parametersAssoc">AmfphpServiceBrowser::$parametersAssoc</a> in AmfphpServiceBrowser.php</div>
+							<div class="index-item-description">associative array of parameters. Used to set the parameters input fields to the same values again after a call.</div>
+					</dd>
+			<dt class="field">
 						<span class="var-title">$phpCharset</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Plugins_CharsetConverter/AmfphpCharsetConverter.html#var$phpCharset">AmfphpCharsetConverter::$phpCharset</a> in AmfphpCharsetConverter.php</div>
 							<div class="index-item-description">the Charset that is used in php default utf-8.</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$pluginInstances</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_PluginManager.html#var$pluginInstances">Amfphp_Core_PluginManager::$pluginInstances</a> in PluginManager.php</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$pluginManager</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Tests_Amfphp_Core/Amfphp_Core_PluginManagerTest.html#var$pluginManager">Amfphp_Core_PluginManagerTest::$pluginManager</a> in PluginManagerTest.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$pluginsConfig</span>
@@ -2594,7 +2855,14 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_Config.html#var$pluginsFolders">Amfphp_Core_Config::$pluginsFolders</a> in Config.php</div>
-							<div class="index-item-description">paths to the folder containing the plugins. defaults to Amfphp_ROOTPATH . &quot;/Plugins/&quot;</div>
+							<div class="index-item-description">paths to the folder containing the plugins. defaults to AMFPHP_ROOTPATH . '/Plugins/'</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$postData</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_Gateway.html#var$postData">Amfphp_Core_Gateway::$postData</a> in Gateway.php</div>
+							<div class="index-item-description">typically the $_POST array.</div>
 					</dd>
 			<dt class="field">
 						<span class="include-title">Packet.php</span>
@@ -2642,6 +2910,20 @@
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Deserializer.html#var$rawData">Amfphp_Core_Amf_Deserializer::$rawData</a> in Deserializer.php</div>
 					</dd>
 			<dt class="field">
+						<span class="var-title">$rawInputData</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_Gateway.html#var$rawInputData">Amfphp_Core_Gateway::$rawInputData</a> in Gateway.php</div>
+							<div class="index-item-description">the serialized request</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$rawOutputData</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_Gateway.html#var$rawOutputData">Amfphp_Core_Gateway::$rawOutputData</a> in Gateway.php</div>
+							<div class="index-item-description">the serialized response</div>
+					</dd>
+			<dt class="field">
 						<span class="var-title">$required</span>
 					</dt>
 		<dd class="index-item-body">
@@ -2654,6 +2936,36 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Message.html#var$responseUri">Amfphp_Core_Amf_Message::$responseUri</a> in Message.php</div>
 							<div class="index-item-description">in the case of a request:  operation name, for example /1</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$returnErrorDetails</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Plugins_Get/AmfphpGet.html#var$returnErrorDetails">AmfphpGet::$returnErrorDetails</a> in AmfphpGet.php</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$returnErrorDetails</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Plugins_Json/AmfphpJson.html#var$returnErrorDetails">AmfphpJson::$returnErrorDetails</a> in AmfphpJson.php</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$returnErrorDetails</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Plugins_ServiceBrowser/AmfphpServiceBrowser.html#var$returnErrorDetails">AmfphpServiceBrowser::$returnErrorDetails</a> in AmfphpServiceBrowser.php</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$returnErrorDetails</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Plugins_FlexMessaging/AmfphpFlexMessaging.html#var$returnErrorDetails">AmfphpFlexMessaging::$returnErrorDetails</a> in AmfphpFlexMessaging.php</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$returnErrorDetails</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Handler.html#var$returnErrorDetails">Amfphp_Core_Amf_Handler::$returnErrorDetails</a> in Handler.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$rootCause</span>
@@ -2677,13 +2989,19 @@
 						<span class="method-title">readAmf3ByteArray</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/AmfDeserializerWrapper.html#methodreadAmf3ByteArray">AmfDeserializerWrapper::readAmf3ByteArray()</a> in AmfDeserializerWrapper.php</div>
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Deserializer.html#methodreadAmf3ByteArray">Amfphp_Core_Amf_Deserializer::readAmf3ByteArray()</a> in Deserializer.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">readAmf3ByteArray</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Deserializer.html#methodreadAmf3ByteArray">Amfphp_Core_Amf_Deserializer::readAmf3ByteArray()</a> in Deserializer.php</div>
+			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/AmfDeserializerWrapper.html#methodreadAmf3ByteArray">AmfDeserializerWrapper::readAmf3ByteArray()</a> in AmfDeserializerWrapper.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">readAmf3Data</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/AmfDeserializerWrapper.html#methodreadAmf3Data">AmfDeserializerWrapper::readAmf3Data()</a> in AmfDeserializerWrapper.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">readAmf3Data</span>
@@ -2691,12 +3009,6 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Deserializer.html#methodreadAmf3Data">Amfphp_Core_Amf_Deserializer::readAmf3Data()</a> in Deserializer.php</div>
 							<div class="index-item-description">read the type byte, then call the corresponding amf3 data reading function</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">readAmf3Data</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/AmfDeserializerWrapper.html#methodreadAmf3Data">AmfDeserializerWrapper::readAmf3Data()</a> in AmfDeserializerWrapper.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">readAmf3Date</span>
@@ -2753,14 +3065,14 @@
 						<span class="method-title">readArray</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/AmfDeserializerWrapper.html#methodreadArray">AmfDeserializerWrapper::readArray()</a> in AmfDeserializerWrapper.php</div>
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Deserializer.html#methodreadArray">Amfphp_Core_Amf_Deserializer::readArray()</a> in Deserializer.php</div>
+							<div class="index-item-description">readArray turns an all numeric keyed actionscript array into a php array.</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">readArray</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Deserializer.html#methodreadArray">Amfphp_Core_Amf_Deserializer::readArray()</a> in Deserializer.php</div>
-							<div class="index-item-description">readArray turns an all numeric keyed actionscript array into a php array.</div>
+			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/AmfDeserializerWrapper.html#methodreadArray">AmfDeserializerWrapper::readArray()</a> in AmfDeserializerWrapper.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">readBuffer</span>
@@ -2773,14 +3085,14 @@
 						<span class="method-title">readByte</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Deserializer.html#methodreadByte">Amfphp_Core_Amf_Deserializer::readByte()</a> in Deserializer.php</div>
-							<div class="index-item-description">readByte grabs the next byte from the data stream and returns it.</div>
+			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/AmfDeserializerWrapper.html#methodreadByte">AmfDeserializerWrapper::readByte()</a> in AmfDeserializerWrapper.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">readByte</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/AmfDeserializerWrapper.html#methodreadByte">AmfDeserializerWrapper::readByte()</a> in AmfDeserializerWrapper.php</div>
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Deserializer.html#methodreadByte">Amfphp_Core_Amf_Deserializer::readByte()</a> in Deserializer.php</div>
+							<div class="index-item-description">readByte grabs the next byte from the data stream and returns it.</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">readCustomClass</span>
@@ -2800,20 +3112,14 @@
 						<span class="method-title">readDate</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/AmfDeserializerWrapper.html#methodreadDate">AmfDeserializerWrapper::readDate()</a> in AmfDeserializerWrapper.php</div>
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Deserializer.html#methodreadDate">Amfphp_Core_Amf_Deserializer::readDate()</a> in Deserializer.php</div>
+							<div class="index-item-description">readDate reads a date from the amf Packet and returns the time in ms.</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">readDate</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Deserializer.html#methodreadDate">Amfphp_Core_Amf_Deserializer::readDate()</a> in Deserializer.php</div>
-							<div class="index-item-description">readDate reads a date from the amf Packet and returns the time in ms.</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">readDouble</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/AmfDeserializerWrapper.html#methodreadDouble">AmfDeserializerWrapper::readDouble()</a> in AmfDeserializerWrapper.php</div>
+			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/AmfDeserializerWrapper.html#methodreadDate">AmfDeserializerWrapper::readDate()</a> in AmfDeserializerWrapper.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">readDouble</span>
@@ -2821,6 +3127,12 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Deserializer.html#methodreadDouble">Amfphp_Core_Amf_Deserializer::readDouble()</a> in Deserializer.php</div>
 							<div class="index-item-description">readDouble reads the floating point value from the bytes stream and properly orders  the bytes depending on the system architecture.</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">readDouble</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/AmfDeserializerWrapper.html#methodreadDouble">AmfDeserializerWrapper::readDouble()</a> in AmfDeserializerWrapper.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">readHeaders</span>
@@ -2846,14 +3158,14 @@
 						<span class="method-title">readLong</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/AmfDeserializerWrapper.html#methodreadLong">AmfDeserializerWrapper::readLong()</a> in AmfDeserializerWrapper.php</div>
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Deserializer.html#methodreadLong">Amfphp_Core_Amf_Deserializer::readLong()</a> in Deserializer.php</div>
+							<div class="index-item-description">readLong grabs the next 4 bytes shifts and combines them to produce an integer</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">readLong</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Deserializer.html#methodreadLong">Amfphp_Core_Amf_Deserializer::readLong()</a> in Deserializer.php</div>
-							<div class="index-item-description">readLong grabs the next 4 bytes shifts and combines them to produce an integer</div>
+			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/AmfDeserializerWrapper.html#methodreadLong">AmfDeserializerWrapper::readLong()</a> in AmfDeserializerWrapper.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">readLongUTF</span>
@@ -2898,14 +3210,14 @@
 						<span class="method-title">readObject</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/AmfDeserializerWrapper.html#methodreadObject">AmfDeserializerWrapper::readObject()</a> in AmfDeserializerWrapper.php</div>
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Deserializer.html#methodreadObject">Amfphp_Core_Amf_Deserializer::readObject()</a> in Deserializer.php</div>
+							<div class="index-item-description">readObject reads the name/value properties of the amf Packet and converts them into  their equivilent php representation</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">readObject</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Deserializer.html#methodreadObject">Amfphp_Core_Amf_Deserializer::readObject()</a> in Deserializer.php</div>
-							<div class="index-item-description">readObject reads the name/value properties of the amf Packet and converts them into  their equivilent php representation</div>
+			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/AmfDeserializerWrapper.html#methodreadObject">AmfDeserializerWrapper::readObject()</a> in AmfDeserializerWrapper.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">readReference</span>
@@ -2940,6 +3252,25 @@
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Deserializer.html#methodreadXml">Amfphp_Core_Amf_Deserializer::readXml()</a> in Deserializer.php</div>
 					</dd>
 			<dt class="field">
+						<span class="method-title">resetReferences</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Deserializer.html#methodresetReferences">Amfphp_Core_Amf_Deserializer::resetReferences()</a> in Deserializer.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">resetReferences</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodresetReferences">Amfphp_Core_Amf_Serializer::resetReferences()</a> in Serializer.php</div>
+							<div class="index-item-description">initialize reference arrays and counters. Call before writing a body or a header, as the indices are local to each message body or header</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">returnAfterOneSecond</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Services/TestService.html#methodreturnAfterOneSecond">TestService::returnAfterOneSecond()</a> in TestService.php</div>
+					</dd>
+			<dt class="field">
 						<span class="method-title">returnBla</span>
 					</dt>
 		<dd class="index-item-body">
@@ -2955,13 +3286,13 @@
 						<span class="method-title">returnNull</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_TestData_CustomClasses/DummyService.html#methodreturnNull">DummyService::returnNull()</a> in DummyService.php</div>
+			<div class="index-item-details"><a href="Amfphp_Services/TestService.html#methodreturnNull">TestService::returnNull()</a> in TestService.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">returnNull</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Services/TestService.html#methodreturnNull">TestService::returnNull()</a> in TestService.php</div>
+			<div class="index-item-details"><a href="Tests_TestData_CustomClasses/DummyService.html#methodreturnNull">DummyService::returnNull()</a> in DummyService.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">returnOneParam</span>
@@ -3023,13 +3354,13 @@
 						<span class="var-title">$sDate</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_TestData/AmfTestData.html#var$sDate">AmfTestData::$sDate</a> in AmfTestData.php</div>
+			<div class="index-item-details"><a href="Tests_TestData/Amf3TestData.html#var$sDate">Amf3TestData::$sDate</a> in Amf3TestData.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$sDate</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_TestData/Amf3TestData.html#var$sDate">Amf3TestData::$sDate</a> in Amf3TestData.php</div>
+			<div class="index-item-details"><a href="Tests_TestData/AmfTestData.html#var$sDate">AmfTestData::$sDate</a> in AmfTestData.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$sDenseArray</span>
@@ -3041,13 +3372,13 @@
 						<span class="var-title">$sDouble</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_TestData/Amf3TestData.html#var$sDouble">Amf3TestData::$sDouble</a> in Amf3TestData.php</div>
+			<div class="index-item-details"><a href="Tests_TestData/AmfTestData.html#var$sDouble">AmfTestData::$sDouble</a> in AmfTestData.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$sDouble</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_TestData/AmfTestData.html#var$sDouble">AmfTestData::$sDouble</a> in AmfTestData.php</div>
+			<div class="index-item-details"><a href="Tests_TestData/Amf3TestData.html#var$sDouble">Amf3TestData::$sDouble</a> in Amf3TestData.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$sEcmaArray</span>
@@ -3084,14 +3415,20 @@
 						<span class="var-title">$serviceFolderPaths</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_TestData/TestServicesConfig.html#var$serviceFolderPaths">TestServicesConfig::$serviceFolderPaths</a> in TestServicesConfig.php</div>
+			<div class="index-item-details"><a href="Amfphp_Core_Common/Amfphp_Core_Common_ServiceRouter.html#var$serviceFolderPaths">Amfphp_Core_Common_ServiceRouter::$serviceFolderPaths</a> in ServiceRouter.php</div>
+							<div class="index-item-description">paths to folders containing services(relative or absolute)</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$serviceFolderPaths</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Common/Amfphp_Core_Common_ServiceRouter.html#var$serviceFolderPaths">Amfphp_Core_Common_ServiceRouter::$serviceFolderPaths</a> in ServiceRouter.php</div>
-							<div class="index-item-description">paths to folders containing services(relative or absolute)</div>
+			<div class="index-item-details"><a href="Tests_TestData/TestServicesConfig.html#var$serviceFolderPaths">TestServicesConfig::$serviceFolderPaths</a> in TestServicesConfig.php</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$serviceName</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Plugins_ServiceBrowser/AmfphpServiceBrowser.html#var$serviceName">AmfphpServiceBrowser::$serviceName</a> in AmfphpServiceBrowser.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$serviceName</span>
@@ -3099,6 +3436,13 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Common/Amfphp_Core_Common_ServiceCallParameters.html#var$serviceName">Amfphp_Core_Common_ServiceCallParameters::$serviceName</a> in ServiceCallParameters.php</div>
 							<div class="index-item-description">the name of the service.</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$serviceNames2ClassFindInfo</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_Config.html#var$serviceNames2ClassFindInfo">Amfphp_Core_Config::$serviceNames2ClassFindInfo</a> in Config.php</div>
+							<div class="index-item-description">a dictionary of service classes represented in a ClassFindInfo.</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$serviceNames2ClassFindInfo</span>
@@ -3113,17 +3457,16 @@
 			<div class="index-item-details"><a href="Amfphp_Core_Common/Amfphp_Core_Common_ServiceRouter.html#var$serviceNames2ClassFindInfo">Amfphp_Core_Common_ServiceRouter::$serviceNames2ClassFindInfo</a> in ServiceRouter.php</div>
 					</dd>
 			<dt class="field">
-						<span class="var-title">$serviceNames2ClassFindInfo</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_Config.html#var$serviceNames2ClassFindInfo">Amfphp_Core_Config::$serviceNames2ClassFindInfo</a> in Config.php</div>
-							<div class="index-item-description">a dictionary of service classes represented in a ClassFindInfo.</div>
-					</dd>
-			<dt class="field">
 						<span class="var-title">$serviceObj</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Tests_Amfphp_Plugins_Authentication/AmfphpAuthenticationTest.html#var$serviceObj">AmfphpAuthenticationTest::$serviceObj</a> in AmfphpAuthenticationTest.php</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$serviceRouter</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Plugins_ServiceBrowser/AmfphpServiceBrowser.html#var$serviceRouter">AmfphpServiceBrowser::$serviceRouter</a> in AmfphpServiceBrowser.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$serviceRouter</span>
@@ -3143,6 +3486,12 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_Config.html#var$sharedConfig">Amfphp_Core_Config::$sharedConfig</a> in Config.php</div>
 							<div class="index-item-description">array containing configuration data that is shared between the plugins. The format is paramName/paramValue pairs as an array.</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$showResult</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Plugins_ServiceBrowser/AmfphpServiceBrowser.html#var$showResult">AmfphpServiceBrowser::$showResult</a> in AmfphpServiceBrowser.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$sInt</span>
@@ -3263,13 +3612,13 @@
 						<span class="var-title">$sString</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_TestData/Amf3TestData.html#var$sString">Amf3TestData::$sString</a> in Amf3TestData.php</div>
+			<div class="index-item-details"><a href="Tests_TestData/AmfTestData.html#var$sString">AmfTestData::$sString</a> in AmfTestData.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$sString</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_TestData/AmfTestData.html#var$sString">AmfTestData::$sString</a> in AmfTestData.php</div>
+			<div class="index-item-details"><a href="Tests_TestData/Amf3TestData.html#var$sString">Amf3TestData::$sString</a> in Amf3TestData.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$sStringHeaderPacket</span>
@@ -3299,7 +3648,21 @@
 						<span class="var-title">$storedObjects</span>
 					</dt>
 		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#var$storedObjects">Amfphp_Core_Amf_Serializer::$storedObjects</a> in Serializer.php</div>
+							<div class="index-item-description">used for Amf3 references</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$storedObjects</span>
+					</dt>
+		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Deserializer.html#var$storedObjects">Amfphp_Core_Amf_Deserializer::$storedObjects</a> in Deserializer.php</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$storedStrings</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#var$storedStrings">Amfphp_Core_Amf_Serializer::$storedStrings</a> in Serializer.php</div>
+							<div class="index-item-description">amf3 references to strings</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$storedStrings</span>
@@ -3323,13 +3686,13 @@
 						<span class="var-title">$sUndefined</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_TestData/AmfTestData.html#var$sUndefined">AmfTestData::$sUndefined</a> in AmfTestData.php</div>
+			<div class="index-item-details"><a href="Tests_TestData/Amf3TestData.html#var$sUndefined">Amf3TestData::$sUndefined</a> in Amf3TestData.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$sUndefined</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_TestData/Amf3TestData.html#var$sUndefined">Amf3TestData::$sUndefined</a> in Amf3TestData.php</div>
+			<div class="index-item-details"><a href="Tests_TestData/AmfTestData.html#var$sUndefined">AmfTestData::$sUndefined</a> in AmfTestData.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$sUnsupported</span>
@@ -3347,13 +3710,13 @@
 						<span class="var-title">$sXml</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_TestData/Amf3TestData.html#var$sXml">Amf3TestData::$sXml</a> in Amf3TestData.php</div>
+			<div class="index-item-details"><a href="Tests_TestData/AmfTestData.html#var$sXml">AmfTestData::$sXml</a> in AmfTestData.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$sXml</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_TestData/AmfTestData.html#var$sXml">AmfTestData::$sXml</a> in AmfTestData.php</div>
+			<div class="index-item-details"><a href="Tests_TestData/Amf3TestData.html#var$sXml">Amf3TestData::$sXml</a> in Amf3TestData.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$sXmlDocument</span>
@@ -3380,22 +3743,11 @@
 			<div class="index-item-details"><a href="Amfphp_Core_Common/_Amfphp---Core---Common---ServiceRouter.php.html">ServiceRouter.php</a> in ServiceRouter.php</div>
 					</dd>
 			<dt class="field">
-						<span class="include-title">SommeriaSearchService.php</span>
+						<span class="method-title">searchFolderForServices</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Sommeria_Search/_Amfphp---Plugins2---SommeriaSearch---Services---SommeriaSearchService.php.html">SommeriaSearchService.php</a> in SommeriaSearchService.php</div>
-					</dd>
-			<dt class="field">
-						<span class="include-title">SommeriaSearch.php</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Sommeria_Search/_Amfphp---Plugins2---SommeriaSearch---SommeriaSearch.php.html">SommeriaSearch.php</a> in SommeriaSearch.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">searchTwitter</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Sommeria_Search/SommeriaSearchService.html#methodsearchTwitter">SommeriaSearchService::searchTwitter()</a> in SommeriaSearchService.php</div>
+			<div class="index-item-details"><a href="Amfphp_Plugins_ServiceBrowser/AmfphpServiceBrowser.html#methodsearchFolderForServices">AmfphpServiceBrowser::searchFolderForServices()</a> in AmfphpServiceBrowser.php</div>
+							<div class="index-item-description">finds classes in folder. If in subfolders add the relative path to the name.</div>
 					</dd>
 			<dt class="field">
 						SerializationTest
@@ -3408,8 +3760,8 @@
 						<span class="method-title">serialize</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Plugins_Json/AmfphpJson.html#methodserialize">AmfphpJson::serialize()</a> in AmfphpJson.php</div>
-							<div class="index-item-description">Encode the PHP object returned from the service call into a JSON string</div>
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodserialize">Amfphp_Core_Amf_Serializer::serialize()</a> in Serializer.php</div>
+							<div class="index-item-description">serializes the Packet passed in the constructor  TODO clean up the mess with the temp buffers. A.S.</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">serialize</span>
@@ -3422,8 +3774,8 @@
 						<span class="method-title">serialize</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodserialize">Amfphp_Core_Amf_Serializer::serialize()</a> in Serializer.php</div>
-							<div class="index-item-description">serializes the Packet passed in the constructor  TODO clean up the mess with the temp buffers. A.S.</div>
+			<div class="index-item-details"><a href="Amfphp_Core_Common/Amfphp_Core_Common_ISerializer.html#methodserialize">Amfphp_Core_Common_ISerializer::serialize()</a> in ISerializer.php</div>
+							<div class="index-item-description">Calling this executes the serialization. The return type is noted as a String, but is a binary stream. echo it to the output buffer</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">serialize</span>
@@ -3435,14 +3787,14 @@
 						<span class="method-title">serialize</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Common/Amfphp_Core_Common_ISerializer.html#methodserialize">Amfphp_Core_Common_ISerializer::serialize()</a> in ISerializer.php</div>
-							<div class="index-item-description">Calling this executes the serialization. The return type is noted as a String, but is a binary stream. echo it to the output buffer</div>
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Handler.html#methodserialize">Amfphp_Core_Amf_Handler::serialize()</a> in Handler.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">serialize</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Handler.html#methodserialize">Amfphp_Core_Amf_Handler::serialize()</a> in Handler.php</div>
+			<div class="index-item-details"><a href="Amfphp_Plugins_Json/AmfphpJson.html#methodserialize">AmfphpJson::serialize()</a> in AmfphpJson.php</div>
+							<div class="index-item-description">Encode the PHP object returned from the service call into a JSON string</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">service</span>
@@ -3462,13 +3814,6 @@
 						<span class="method-title">setUp</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Plugins_FlexMessaging/AmfphpFlexMessagingTest.html#methodsetUp">AmfphpFlexMessagingTest::setUp()</a> in AmfphpFlexMessagingTest.php</div>
-							<div class="index-item-description">Sets up the fixture, for example, opens a network connection.</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">setUp</span>
-					</dt>
-		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Tests_Amfphp_Core_Common/Amfphp_Core_Common_ServiceRouterTest.html#methodsetUp">Amfphp_Core_Common_ServiceRouterTest::setUp()</a> in ServiceRouterTest.php</div>
 							<div class="index-item-description">Sets up the fixture, for example, opens a network connection.</div>
 					</dd>
@@ -3476,7 +3821,7 @@
 						<span class="method-title">setUp</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Core/Amfphp_Core_PluginManagerTest.html#methodsetUp">Amfphp_Core_PluginManagerTest::setUp()</a> in PluginManagerTest.php</div>
+			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/Amfphp_Core_Amf_UtilTest.html#methodsetUp">Amfphp_Core_Amf_UtilTest::setUp()</a> in AmfUtilTest.php</div>
 							<div class="index-item-description">Sets up the fixture, for example, opens a network connection.</div>
 					</dd>
 			<dt class="field">
@@ -3490,7 +3835,7 @@
 						<span class="method-title">setUp</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/Amfphp_Core_Amf_UtilTest.html#methodsetUp">Amfphp_Core_Amf_UtilTest::setUp()</a> in AmfUtilTest.php</div>
+			<div class="index-item-details"><a href="Tests_Amfphp_Plugins_FlexMessaging/AmfphpFlexMessagingTest.html#methodsetUp">AmfphpFlexMessagingTest::setUp()</a> in AmfphpFlexMessagingTest.php</div>
 							<div class="index-item-description">Sets up the fixture, for example, opens a network connection.</div>
 					</dd>
 			<dt class="field">
@@ -3508,18 +3853,11 @@
 							<div class="index-item-description">Sets up the fixture, for example, opens a network connection.</div>
 					</dd>
 			<dt class="field">
-						SommeriaSearch
+						<span class="method-title">setUp</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Sommeria_Search/SommeriaSearch.html">SommeriaSearch</a> in SommeriaSearch.php</div>
-							<div class="index-item-description">adds the services folder to the avaliable services</div>
-					</dd>
-			<dt class="field">
-						SommeriaSearchService
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Sommeria_Search/SommeriaSearchService.html">SommeriaSearchService</a> in SommeriaSearchService.php</div>
-							<div class="index-item-description">adds the services folder to the avaliable services</div>
+			<div class="index-item-details"><a href="Tests_Amfphp_Core/Amfphp_Core_PluginManagerTest.html#methodsetUp">Amfphp_Core_PluginManagerTest::setUp()</a> in PluginManagerTest.php</div>
+							<div class="index-item-description">Sets up the fixture, for example, opens a network connection.</div>
 					</dd>
 			<dt class="field">
 						<span class="include-title">SerializationTest.php</span>
@@ -3561,6 +3899,18 @@
 			<div class="index-item-details"><a href="Tests_TestData/AmfTestData.html#var$testServiceResponsePacket">AmfTestData::$testServiceResponsePacket</a> in AmfTestData.php</div>
 					</dd>
 			<dt class="field">
+						<span class="var-title">$textInClientCharset</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Tests_Amfphp_Plugins_CharsetConverter/AmfphpCharsetConverterTest.html#var$textInClientCharset">AmfphpCharsetConverterTest::$textInClientCharset</a> in AmfphpCharsetConverterTest.php</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$textInPhpCharset</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Tests_Amfphp_Plugins_CharsetConverter/AmfphpCharsetConverterTest.html#var$textInPhpCharset">AmfphpCharsetConverterTest::$textInPhpCharset</a> in AmfphpCharsetConverterTest.php</div>
+					</dd>
+			<dt class="field">
 						<span class="var-title">$timestamp</span>
 					</dt>
 		<dd class="index-item-body">
@@ -3595,14 +3945,14 @@
 						<span class="method-title">tearDown</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Plugins_CharsetConverter/AmfphpCharsetConverterTest.html#methodtearDown">AmfphpCharsetConverterTest::tearDown()</a> in AmfphpCharsetConverterTest.php</div>
+			<div class="index-item-details"><a href="Tests_Amfphp_Plugins_CustomClassConverter/AmfphpCustomClassConverterTest.html#methodtearDown">AmfphpCustomClassConverterTest::tearDown()</a> in AmfphpCustomClassConverterTest.php</div>
 							<div class="index-item-description">Tears down the fixture, for example, closes a network connection.</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">tearDown</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Plugins_FlexMessaging/AmfphpFlexMessagingTest.html#methodtearDown">AmfphpFlexMessagingTest::tearDown()</a> in AmfphpFlexMessagingTest.php</div>
+			<div class="index-item-details"><a href="Tests_Amfphp_Plugins_CharsetConverter/AmfphpCharsetConverterTest.html#methodtearDown">AmfphpCharsetConverterTest::tearDown()</a> in AmfphpCharsetConverterTest.php</div>
 							<div class="index-item-description">Tears down the fixture, for example, closes a network connection.</div>
 					</dd>
 			<dt class="field">
@@ -3616,7 +3966,7 @@
 						<span class="method-title">tearDown</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Plugins_CustomClassConverter/AmfphpCustomClassConverterTest.html#methodtearDown">AmfphpCustomClassConverterTest::tearDown()</a> in AmfphpCustomClassConverterTest.php</div>
+			<div class="index-item-details"><a href="Tests_Amfphp_Plugins_FlexMessaging/AmfphpFlexMessagingTest.html#methodtearDown">AmfphpFlexMessagingTest::tearDown()</a> in AmfphpFlexMessagingTest.php</div>
 							<div class="index-item-description">Tears down the fixture, for example, closes a network connection.</div>
 					</dd>
 			<dt class="field">
@@ -3666,25 +4016,25 @@
 						<span class="method-title">testBasicMethods</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/Amf3SerializationTest.html#methodtestBasicMethods">Amf3SerializationTest::testBasicMethods()</a> in Amf3SerializationTest.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">testBasicMethods</span>
-					</dt>
-		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/DeserializationTest.html#methodtestBasicMethods">DeserializationTest::testBasicMethods()</a> in DeserializationTest.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">testBasicMethods</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/Amf3DeserializationTest.html#methodtestBasicMethods">Amf3DeserializationTest::testBasicMethods()</a> in Amf3DeserializationTest.php</div>
+			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/SerializationTest.html#methodtestBasicMethods">SerializationTest::testBasicMethods()</a> in SerializationTest.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">testBasicMethods</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/SerializationTest.html#methodtestBasicMethods">SerializationTest::testBasicMethods()</a> in SerializationTest.php</div>
+			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/Amf3SerializationTest.html#methodtestBasicMethods">Amf3SerializationTest::testBasicMethods()</a> in Amf3SerializationTest.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">testBasicMethods</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/Amf3DeserializationTest.html#methodtestBasicMethods">Amf3DeserializationTest::testBasicMethods()</a> in Amf3DeserializationTest.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">testClearSessionInfo</span>
@@ -3820,7 +4170,7 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Examples/TestPlugin.html">TestPlugin</a> in TestPlugin.php</div>
-							<div class="index-item-description">an example plugin as in the documentation. It takes a sourceUrl param in the configuration, and changes the deserialized request to &quot;bla&quot;. Useless, but explanatory.</div>
+							<div class="index-item-description">an example plugin as in the documentation. It takes a sourceUrl param in the configuration, and changes the deserialized request to 'bla'. Useless, but explanatory.</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">testRemotingMessage</span>
@@ -3883,17 +4233,17 @@
 			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/SerializationTest.html#methodtestSerializingPackets">SerializationTest::testSerializingPackets()</a> in SerializationTest.php</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">testService</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Core/Amfphp_Core_GatewayTest.html#methodtestService">Amfphp_Core_GatewayTest::testService()</a> in GatewayTest.php</div>
-					</dd>
-			<dt class="field">
 						TestService
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Services/TestService.html">TestService</a> in TestService.php</div>
 							<div class="index-item-description">This is a test/example service.</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">testService</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Tests_Amfphp_Core/Amfphp_Core_GatewayTest.html#methodtestService">Amfphp_Core_GatewayTest::testService()</a> in GatewayTest.php</div>
 					</dd>
 			<dt class="field">
 						TestServicesConfig
@@ -3906,14 +4256,14 @@
 						<span class="method-title">testSimple</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Core/Amfphp_Core_PluginManagerTest.html#methodtestSimple">Amfphp_Core_PluginManagerTest::testSimple()</a> in PluginManagerTest.php</div>
-							<div class="index-item-description">the TestPlugins folder must be scanned and in it found the class DummyPlugin, which contains an instanication counter.</div>
+			<div class="index-item-details"><a href="Tests_Amfphp_Plugins_Logger/AmfphpLoggerTest.html#methodtestSimple">AmfphpLoggerTest::testSimple()</a> in AmfphpLoggerTest.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">testSimple</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Plugins_Logger/AmfphpLoggerTest.html#methodtestSimple">AmfphpLoggerTest::testSimple()</a> in AmfphpLoggerTest.php</div>
+			<div class="index-item-details"><a href="Tests_Amfphp_Core/Amfphp_Core_PluginManagerTest.html#methodtestSimple">Amfphp_Core_PluginManagerTest::testSimple()</a> in PluginManagerTest.php</div>
+							<div class="index-item-description">the TestPlugins folder must be scanned and in it found the class DummyPlugin, which contains an instanication counter.</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">testWithFiltersBlockAccess</span>
@@ -3932,6 +4282,13 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Services/TestService.html#methodthrowException">TestService::throwException()</a> in TestService.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">transliterate</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Plugins_CharsetConverter/AmfphpCharsetConverter.html#methodtransliterate">AmfphpCharsetConverter::transliterate()</a> in AmfphpCharsetConverter.php</div>
+							<div class="index-item-description">convert the string. finds the proper encoding depending on direction</div>
 					</dd>
 		</dl>
 	<a name="u"></a>
@@ -3961,6 +4318,26 @@
 							<div class="index-item-description">uncompresses a bytearray, writes the uncompressed data to a file, received.jpg</div>
 					</dd>
 		</dl>
+	<a name="v"></a>
+	<div class="index-letter-section">
+		<div style="float: left" class="index-letter-title">v</div>
+		<div style="float: right"><a href="#top">top</a></div>
+		<div style="clear: both"></div>
+	</div>
+	<dl>
+			<dt class="field">
+						<span class="var-title">$var1</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Tests_TestData_Services/MyVO.html#var$var1">MyVO::$var1</a> in ExampleSerializationDebugService.php</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$var2</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Tests_TestData_Services/MyVO.html#var$var2">MyVO::$var2</a> in ExampleSerializationDebugService.php</div>
+					</dd>
+		</dl>
 	<a name="w"></a>
 	<div class="index-letter-section">
 		<div style="float: left" class="index-letter-title">w</div>
@@ -3969,16 +4346,23 @@
 	</div>
 	<dl>
 			<dt class="field">
-						<span class="method-title">writeAmf3Array</span>
+						<span class="method-title">writeAmf3AnonymousObject</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/AmfSerializerWrapper.html#methodwriteAmf3Array">AmfSerializerWrapper::writeAmf3Array()</a> in AmfSerializerWrapper.php</div>
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3AnonymousObject">Amfphp_Core_Amf_Serializer::writeAmf3AnonymousObject()</a> in Serializer.php</div>
+							<div class="index-item-description">handles writing an anoynous object (stdClass)   can also be a reference  Also creates a bogus traits entry, as even an anonymous object has traits. In this way a reference to a class trait will have the right id.</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">writeAmf3Array</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3Array">Amfphp_Core_Amf_Serializer::writeAmf3Array()</a> in Serializer.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">writeAmf3Array</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/AmfSerializerWrapper.html#methodwriteAmf3Array">AmfSerializerWrapper::writeAmf3Array()</a> in AmfSerializerWrapper.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">writeAmf3Bool</span>
@@ -3997,19 +4381,13 @@
 						<span class="method-title">writeAmf3ByteArray</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3ByteArray">Amfphp_Core_Amf_Serializer::writeAmf3ByteArray()</a> in Serializer.php</div>
+			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/AmfSerializerWrapper.html#methodwriteAmf3ByteArray">AmfSerializerWrapper::writeAmf3ByteArray()</a> in AmfSerializerWrapper.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">writeAmf3ByteArray</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/AmfSerializerWrapper.html#methodwriteAmf3ByteArray">AmfSerializerWrapper::writeAmf3ByteArray()</a> in AmfSerializerWrapper.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">writeAmf3ByteArrayMessage</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3ByteArrayMessage">Amfphp_Core_Amf_Serializer::writeAmf3ByteArrayMessage()</a> in Serializer.php</div>
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3ByteArray">Amfphp_Core_Amf_Serializer::writeAmf3ByteArray()</a> in Serializer.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">writeAmf3Data</span>
@@ -4068,19 +4446,6 @@
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3Number">Amfphp_Core_Amf_Serializer::writeAmf3Number()</a> in Serializer.php</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">writeAmf3Object</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/AmfSerializerWrapper.html#methodwriteAmf3Object">AmfSerializerWrapper::writeAmf3Object()</a> in AmfSerializerWrapper.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">writeAmf3Object</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3Object">Amfphp_Core_Amf_Serializer::writeAmf3Object()</a> in Serializer.php</div>
-							<div class="index-item-description">writes an object.</div>
-					</dd>
-			<dt class="field">
 						<span class="method-title">writeAmf3String</span>
 					</dt>
 		<dd class="index-item-body">
@@ -4092,6 +4457,19 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3String">Amfphp_Core_Amf_Serializer::writeAmf3String()</a> in Serializer.php</div>
 							<div class="index-item-description">Write a string (Amf3). Strings are stored in a cache and in case the same string  is written again, a reference to the string is sent instead of the string itself.</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">writeAmf3TypedObject</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/AmfSerializerWrapper.html#methodwriteAmf3TypedObject">AmfSerializerWrapper::writeAmf3TypedObject()</a> in AmfSerializerWrapper.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">writeAmf3TypedObject</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3TypedObject">Amfphp_Core_Amf_Serializer::writeAmf3TypedObject()</a> in Serializer.php</div>
+							<div class="index-item-description">writes a typed object. Type is determined by having an &quot;explicit type&quot; field. If this field is  not set, call writeAmf3AnonymousObject  write all properties as sealed members.</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">writeAmf3Undefined</span>
@@ -4122,20 +4500,20 @@
 						<span class="method-title">writeAmf3XmlDocument</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3XmlDocument">Amfphp_Core_Amf_Serializer::writeAmf3XmlDocument()</a> in Serializer.php</div>
+			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/AmfSerializerWrapper.html#methodwriteAmf3XmlDocument">AmfSerializerWrapper::writeAmf3XmlDocument()</a> in AmfSerializerWrapper.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">writeAmf3XmlDocument</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/AmfSerializerWrapper.html#methodwriteAmf3XmlDocument">AmfSerializerWrapper::writeAmf3XmlDocument()</a> in AmfSerializerWrapper.php</div>
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAmf3XmlDocument">Amfphp_Core_Amf_Serializer::writeAmf3XmlDocument()</a> in Serializer.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">writeAnonymousObject</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteAnonymousObject">Amfphp_Core_Amf_Serializer::writeAnonymousObject()</a> in Serializer.php</div>
-							<div class="index-item-description">writeObject handles writing a php array with string or mixed keys.  It does  not write the object code as that is handled by the writeArrayOrObject and this method  is shared with the CustomClass writer which doesn't use the object code.</div>
+							<div class="index-item-description">handles writing an anoynous object (stdClass)   can also be a reference</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">writeArrayOrObject</span>
@@ -4167,14 +4545,14 @@
 						<span class="method-title">writeByte</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteByte">Amfphp_Core_Amf_Serializer::writeByte()</a> in Serializer.php</div>
-							<div class="index-item-description">writeByte writes a singe byte to the output stream  0-255 range</div>
+			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/AmfSerializerWrapper.html#methodwriteByte">AmfSerializerWrapper::writeByte()</a> in AmfSerializerWrapper.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">writeByte</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/AmfSerializerWrapper.html#methodwriteByte">AmfSerializerWrapper::writeByte()</a> in AmfSerializerWrapper.php</div>
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteByte">Amfphp_Core_Amf_Serializer::writeByte()</a> in Serializer.php</div>
+							<div class="index-item-description">writeByte writes a singe byte to the output stream  0-255 range</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">writeData</span>
@@ -4305,13 +4683,13 @@
 						<span class="method-title">writeReference</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/AmfSerializerWrapper.html#methodwriteReference">AmfSerializerWrapper::writeReference()</a> in AmfSerializerWrapper.php</div>
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteReference">Amfphp_Core_Amf_Serializer::writeReference()</a> in Serializer.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">writeReference</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteReference">Amfphp_Core_Amf_Serializer::writeReference()</a> in Serializer.php</div>
+			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/AmfSerializerWrapper.html#methodwriteReference">AmfSerializerWrapper::writeReference()</a> in AmfSerializerWrapper.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">writeString</span>
@@ -4330,14 +4708,14 @@
 						<span class="method-title">writeTypedObject</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteTypedObject">Amfphp_Core_Amf_Serializer::writeTypedObject()</a> in Serializer.php</div>
-							<div class="index-item-description">writeTypedObject takes an instance of a class and writes the variables defined  in it to the output stream.</div>
+			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/AmfSerializerWrapper.html#methodwriteTypedObject">AmfSerializerWrapper::writeTypedObject()</a> in AmfSerializerWrapper.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">writeTypedObject</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Tests_Amfphp_Core_Amf/AmfSerializerWrapper.html#methodwriteTypedObject">AmfSerializerWrapper::writeTypedObject()</a> in AmfSerializerWrapper.php</div>
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#methodwriteTypedObject">Amfphp_Core_Amf_Serializer::writeTypedObject()</a> in Serializer.php</div>
+							<div class="index-item-description">writeTypedObject takes an instance of a class and writes the variables defined  in it to the output stream.</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">writeUndefined</span>
@@ -4429,13 +4807,14 @@
 						<span class="method-title">__construct</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Handler.html#method__construct">Amfphp_Core_Amf_Handler::__construct()</a> in Handler.php</div>
+			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_Gateway.html#method__construct">Amfphp_Core_Gateway::__construct()</a> in Gateway.php</div>
+							<div class="index-item-description">constructor</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">__construct</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_Gateway.html#method__construct">Amfphp_Core_Gateway::__construct()</a> in Gateway.php</div>
+			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_FilterManager.html#method__construct">Amfphp_Core_FilterManager::__construct()</a> in FilterManager.php</div>
 							<div class="index-item-description">constructor</div>
 					</dd>
 			<dt class="field">
@@ -4454,6 +4833,12 @@
 						<span class="method-title">__construct</span>
 					</dt>
 		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Handler.html#method__construct">Amfphp_Core_Amf_Handler::__construct()</a> in Handler.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">__construct</span>
+					</dt>
+		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Header.html#method__construct">Amfphp_Core_Amf_Header::__construct()</a> in Header.php</div>
 							<div class="index-item-description">Amfphp_Core_Amf_Header is the Constructor function for the Amfphp_Core_Amf_Header data type.</div>
 					</dd>
@@ -4461,7 +4846,7 @@
 						<span class="method-title">__construct</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Message.html#method__construct">Amfphp_Core_Amf_Message::__construct()</a> in Message.php</div>
+			<div class="index-item-details"><a href="Amfphp_Core_Common/Amfphp_Core_Common_ServiceRouter.html#method__construct">Amfphp_Core_Common_ServiceRouter::__construct()</a> in ServiceRouter.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">__construct</span>
@@ -4480,14 +4865,20 @@
 						<span class="method-title">__construct</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Sommeria_Search/SommeriaSearch.html#method__construct">SommeriaSearch::__construct()</a> in SommeriaSearch.php</div>
-							<div class="index-item-description">constructor.</div>
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#method__construct">Amfphp_Core_Amf_Serializer::__construct()</a> in Serializer.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">__construct</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Common/Amfphp_Core_Common_ServiceRouter.html#method__construct">Amfphp_Core_Common_ServiceRouter::__construct()</a> in ServiceRouter.php</div>
+			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_PluginManager.html#method__construct">Amfphp_Core_PluginManager::__construct()</a> in PluginManager.php</div>
+							<div class="index-item-description">constructor</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">__construct</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Message.html#method__construct">Amfphp_Core_Amf_Message::__construct()</a> in Message.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">__construct</span>
@@ -4500,19 +4891,13 @@
 						<span class="method-title">__construct</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Serializer.html#method__construct">Amfphp_Core_Amf_Serializer::__construct()</a> in Serializer.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">__construct</span>
-					</dt>
-		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Tests_TestData_TestPlugins_DisabledPlugin/DisabledPlugin.html#method__construct">DisabledPlugin::__construct()</a> in DisabledPlugin.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">__construct</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_Config.html#method__construct">Amfphp_Core_Config::__construct()</a> in Config.php</div>
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Deserializer.html#method__construct">Amfphp_Core_Amf_Deserializer::__construct()</a> in Deserializer.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">__construct</span>
@@ -4558,7 +4943,7 @@
 						<span class="method-title">__construct</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Deserializer.html#method__construct">Amfphp_Core_Amf_Deserializer::__construct()</a> in Deserializer.php</div>
+			<div class="index-item-details"><a href="Amfphp_Core/Amfphp_Core_Config.html#method__construct">Amfphp_Core_Config::__construct()</a> in Config.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">__construct</span>
@@ -4635,6 +5020,7 @@
 	<a class="index-letter" href="elementindex.html#s">s</a>
 	<a class="index-letter" href="elementindex.html#t">t</a>
 	<a class="index-letter" href="elementindex.html#u">u</a>
+	<a class="index-letter" href="elementindex.html#v">v</a>
 	<a class="index-letter" href="elementindex.html#w">w</a>
 	<a class="index-letter" href="elementindex.html#x">x</a>
 	<a class="index-letter" href="elementindex.html#_">_</a>

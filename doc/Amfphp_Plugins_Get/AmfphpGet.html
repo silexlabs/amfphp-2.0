@@ -16,7 +16,8 @@
 	<div class="info-box-title">Description</div>
 	<div class="nav-bar">
 					<span class="disabled">Description</span> |
-															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
 						
 											<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
 						
@@ -29,7 +30,7 @@
         </p>
         		<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">This is useful for simple test calls and for cross domain ajax calls.</p>
-<p class="description"><p>Cross Domain Ajax calls are normally not possible for security reasons, but by using a hack you can get around it.  This however must be done with GET. So this plugin is specifically for requesting json data from amfPHP using HTTP GET.  This comes with some limitations: GET is limited in size, and you can't send complex objects.  If you're on the same domain, you're probably better off using the AmfphpJson plugin as these limitations don't apply.</p><p>You must add the content type, or set it in the headers so that it is recognized as a call to be handled by this plugin.  follow this format to make your call(here the content type is passed as a parameter):  http://youserver/?contentType=text/amfphpget&amp;serviceName=YourService&amp;methodName=yourMethod&amp;p01=value1&amp;p2=value2 etc.</p><p>If you are using this for crossdomain ajax with JSONP, the expected format of the request is to add the extra &quot;callback&quot; parameter.  If no callback id is found, the answer simply contains the json encoded return data.  If the callback is found, the answer is wrapped so that it can be used for JSONP.</p><p>Thanks to nViso.ch who needed the cross domain ajax functionality.</p><p>Requires at least PHP 5.2.</p></p>
+<p class="description"><p>Cross Domain Ajax calls are normally not possible for security reasons, but by using a hack you can get around it.  This however must be done with GET. So this plugin is specifically for requesting json data from amfPHP using HTTP GET.  This comes with some limitations: GET is limited in size, and you can't send complex objects.  If you're on the same domain, you're probably better off using the AmfphpJson plugin as these limitations don't apply.</p><p>You must add the content type, or set it in the headers so that it is recognized as a call to be handled by this plugin.  follow this format to make your call(here the content type is passed as a parameter):  http://youserver/?contentType=text/amfphpget&amp;serviceName=YourService&amp;methodName=yourMethod&amp;p01=value1&amp;p2=value2 etc.</p><p>If you are using this for crossdomain ajax with JSONP, the expected format of the request is to add the extra 'callback' parameter.  If no callback id is found, the answer simply contains the json encoded return data.  If the callback is found, the answer is wrapped so that it can be used for JSONP.</p><p>Thanks to nViso.ch who needed the cross domain ajax functionality.</p><p>Requires at least PHP 5.2.</p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Ariel Sommeria-Klein.</li>
 				<li><span class="field">see:</span> <a href="http://usejquery.com/posts/9/the-jquery-cross-domain-ajax-guide">http://usejquery.com/posts/9/the-jquery-cross-domain-ajax-guide</a></li>
@@ -52,6 +53,9 @@
 		<div class="nav-bar">
 			<a href="#sec-description">Description</a> |
 						<span class="disabled">Constants</span> (<a href="#sec-consts">details</a>)
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
 										| 
 									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
 							
@@ -60,13 +64,34 @@
 			<div class="const-summary">
 								<div class="const-title">
 					<img src="../media/images/Constant.png" alt=" " />
-					<a href="#CONTENT_TYPE" title="details" class="const-name">CONTENT_TYPE</a> = 					<span class="var-type"> &quot;text/amfphpget&quot;</span>
+					<a href="#CONTENT_TYPE" title="details" class="const-name">CONTENT_TYPE</a> = 					<span class="var-type"> 'text/amfphpget'</span>
 
 				</div>
 							</div>
 		</div>
 	</div>
 
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$returnErrorDetails" title="details" class="var-name">$returnErrorDetails</a>
+				</div>
+											</div>
+		</div>
+	</div>
 
 	<a name="sec-method-summary"></a>
 	<div class="info-box">
@@ -75,7 +100,10 @@
 			<a href="#sec-description">Description</a> |
 															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
 							
-									<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
@@ -119,13 +147,53 @@
 		</div>
 	</div>		
 
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$returnErrorDetails" id="$returnErrorDetails"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$returnErrorDetails</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number">43</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
 	
 	<a name="sec-methods"></a>
 	<div class="info-box">
 		<div class="info-box-title">Methods</div>
 		<div class="nav-bar">
 			<a href="#sec-description">Description</a> |
-																		<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																			<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
 							
 										<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
 						
@@ -205,7 +273,7 @@
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">If the content type contains the &quot;json&quot; string, returns this plugin</p>
+<p class="short-description">If the content type contains the 'json' string, returns this plugin</p>
 	<ul class="tags">
 				<li><span class="field">return:</span> or null</li>
 				<li><span class="field">access:</span> public</li>
@@ -369,7 +437,8 @@
 										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
 						
 			
-										| 
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+														| 
 									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
 							
 					</div>
@@ -381,7 +450,7 @@
 		<img src="../media/images/Variable.png" />
 		<span class="const-title">
 			<span class="const-name">CONTENT_TYPE</span>
-			 = <span class="const-default"> &quot;text/amfphpget&quot;</span>
+			 = <span class="const-default"> 'text/amfphpget'</span>
 			(line <span class="line-number">41</span>)
 		</span>
 	</div>
@@ -396,7 +465,7 @@
 	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 20 Sep 2011 17:34:27 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 10 Jan 2012 16:01:16 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
