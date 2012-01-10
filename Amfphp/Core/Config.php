@@ -84,7 +84,7 @@ class Amfphp_Core_Config {
         $this->serviceNames2ClassFindInfo = array();
         $this->pluginsFolders = array(AMFPHP_ROOTPATH . 'Plugins/');
         $this->pluginsConfig = array();
-        //set to false for production
+        //useful when developping. set to false for production
         $this->checkArgumentCount = true;
         
         $this->sharedConfig = array();

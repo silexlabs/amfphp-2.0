@@ -216,7 +216,7 @@ class Amfphp_Core_Amf_Deserializer {
             case 0x10: // Custom Class
                 return $this->readCustomClass();
             default: // unknown case
-                throw new Amfphp_Core_Exception('Found unhandled type with code: $type');
+                throw new Amfphp_Core_Exception("Found unhandled type with code: $type");
                 exit();
                 break;
         }

@@ -87,7 +87,7 @@ class Amfphp_Core_Common_ServiceRouter {
         }
 
         if (!$serviceObject) {
-            throw new Amfphp_Core_Exception('$serviceName service not found ');
+            throw new Amfphp_Core_Exception("$serviceName service not found ");
         }
         return $serviceObject;
     }
@@ -108,7 +108,7 @@ class Amfphp_Core_Common_ServiceRouter {
         $serviceObject = Amfphp_Core_FilterManager::getInstance()->callFilters(self::FILTER_SERVICE_OBJECT, $serviceObject, $serviceName, $methodName, $parameters);
 
         if (!method_exists($serviceObject, $methodName)) {
-            throw new Amfphp_Core_Exception('method $methodName not found on $serviceName object ');
+            throw new Amfphp_Core_Exception("method $methodName not found on $serviceName object ");
         }
         
         if($this->checkArgumentCount){
