@@ -70,9 +70,6 @@ class AmfphpFlexMessaging{
      * @return array
      */
     public function filterAmfRequestMessageHandler($handler, Amfphp_Core_Amf_Message $requestMessage){
-
-        //for test purposes
-        //throw new Amfphp_Core_Exception(print_r($requestMessage->data[0], true));
         if($requestMessage->data == null){
             //all flex messages have data
             return;
