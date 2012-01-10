@@ -152,7 +152,7 @@ class Amf3SerializationTest extends PHPUnit_Framework_TestCase {
 
         //object
         $serializer = new AmfSerializerWrapper($emptyPacket);
-        $serializer->writeAmf3Object($testData->dObject);
+        $serializer->writeAmf3TypedObject($testData->dObject);
         $serialized = $serializer->getOutput();
         $expectedSerialized = $testData->sObject;
         $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));

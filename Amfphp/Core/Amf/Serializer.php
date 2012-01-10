@@ -300,7 +300,7 @@ class Amfphp_Core_Amf_Serializer {
         //Because if the array contains only primitive values,
         //Then === will say that the two arrays are strictly equal
         //if they contain the same values, even if they are really distinct
-        if (count($this->Amf0StoredObjects) < self::MAX_STORED_OBJECTS) {
+        if (count($this->Amf0StoredObjects) <= self::MAX_STORED_OBJECTS) {
             $this->Amf0StoredObjects[] = & $d;
         }
 
@@ -378,11 +378,10 @@ class Amfphp_Core_Amf_Serializer {
     }
 
     /**
-     * writeObject handles writing a php array with string or mixed keys.  It does
-     * not write the object code as that is handled by the writeArrayOrObject and this method
-     * is shared with the CustomClass writer which doesn't use the object code.
+     *  handles writing an anoynous object (stdClass)
+     *  can also be a reference
      *
-     * @param array $d The php array with string keys
+     * @param stdClass $d The php object to write
      */
     protected function writeAnonymousObject($d) {
         if (!$this->handleReference($d, $this->Amf0StoredObjects)) {
@@ -466,8 +465,7 @@ class Amfphp_Core_Amf_Serializer {
             return;
         } elseif (is_object($d)) {
             $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
-            $hasExplicitType = isset($d->$explicitTypeField);
-            if ($hasExplicitType) {
+            if (isset($d->$explicitTypeField)) {
                 $this->writeTypedObject($d);
                 return;
             }else{
@@ -526,8 +524,14 @@ class Amfphp_Core_Amf_Serializer {
             $this->writeAmf3XmlDocument($d);
             return;
         } elseif (is_object($d)) {
-            $this->writeAmf3Object($d);
-            return;
+            $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
+            if (isset($d->$explicitTypeField)) {
+                $this->writeAmf3TypedObject($d);
+                return;
+            }else{
+                $this->writeAmf3AnonymousObject($d);
+                return;
+            }
         }
         throw new Amfphp_Core_Exception("couldn't write object " . print_r($d, false));
     }
@@ -602,9 +606,40 @@ class Amfphp_Core_Amf_Serializer {
         }
 
     }
-
+    
     /**
-     *@todo understand this bit about circular references! so can use handleReference like everywhere else
+     *  handles writing an anoynous object (stdClass)
+     *  can also be a reference
+     * Also creates a bogus traits entry, as even an anonymous object has traits. In this way a reference to a class trait will have the right id.
+     *
+     * @param stdClass $d The php object to write
+     * @param doReference Boolean This is used by writeAmf3Array, where the reference has already been taken care of, 
+     * so there this method is called with false
+     */
+    protected function writeAmf3AnonymousObject($d, $doReference = true){
+
+            //Write the object tag
+            $this->outBuffer .= "\12";
+            if ($doReference && $this->handleReference($d, $this->storedObjects)) {
+                return;
+            }            
+            //U29O-traits : 1011.
+            $this->writeAmf3Int(0xB);
+            //bogus class traits entry
+            $this->className2TraitsInfo[] = array();
+            
+            //write empty string as class name for anonymous object
+            $this->writeAmf3String('');
+
+            foreach($d as $key => $data){
+                    $this->writeAmf3String($key);
+                    $this->writeAmf3Data($data);
+            }
+            //empty string, marks end of dynamic members
+            $this->outBuffer .= "\1";                     
+            
+    }
+    /**
      * @param array $d
      */
     protected function writeAmf3Array(array $d) {
@@ -612,10 +647,10 @@ class Amfphp_Core_Amf_Serializer {
         //Because if the array contains only primitive values,
         //Then === will say that the two arrays are strictly equal
         //if they contain the same values, even if they are really distinct
-        if (count($this->storedObjects) < self::MAX_STORED_OBJECTS) {
+        if (count($this->storedObjects) <= self::MAX_STORED_OBJECTS) {
             $this->storedObjects[] = & $d;
         }
-
+        
         $numeric = array(); // holder to store the numeric keys >= 0
         $string = array(); // holder to store the string keys; actually, non-integer or integer < 0 are stored
         $len = count($d); // get the total number of entries for the array
@@ -635,19 +670,16 @@ class Amfphp_Core_Amf_Serializer {
         if (
                 ($str_count > 0 && $num_count == 0) || // Only strings or negative integer keys are present.
                 ($num_count > 0 && $largestKey != $num_count - 1) // Non-negative integer keys are present, but the array is not 'dense' (it has gaps).
-        ) { // this is a mixed array. Convert it to an anonymous object(to get get an Object type on the client)
-            $anonymousObject = new stdClass();
-            foreach($numeric as $key => $data){
-                $anonymousObject->$key = $numeric[$key];
-            }
-            foreach($string as $key => $data){
-                $anonymousObject->$key = $string[$key];
-            }
-            $this->writeAmf3Object($anonymousObject);
+        ) { 
+           //// this is a mixed array. write it as an anonymous/dynamic object  with no sealed members
+            $this->writeAmf3AnonymousObject($numeric + $string, false);
+  
+            
         } else { // this is just an array
-            $num_count = count($numeric);
+            
 
             $this->outBuffer .= "\11";
+            $num_count = count($numeric);
             $handle = $num_count * 2 + 1;
             $this->writeAmf3Int($handle);
 
@@ -740,10 +772,6 @@ class Amfphp_Core_Amf_Serializer {
 
     protected function writeAmf3ByteArray($d) {
         $this->writeByte(0x0C);
-        $this->writeAmf3ByteArrayMessage($d);
-    }
-
-    protected function writeAmf3ByteArrayMessage($d) {
         if (!$this->handleReference($d, $this->storedObjects)) {
             $obj_length = strlen($d);
             $this->writeAmf3Int($obj_length << 1 | 0x01);
@@ -772,7 +800,8 @@ class Amfphp_Core_Amf_Serializer {
             if(isset($references[$hash])){
                 $key = $references[$hash];
             }else{
-                if(count($references) >= self::MAX_STORED_OBJECTS){
+                if(count($references) <= self::MAX_STORED_OBJECTS){
+                    //there is some space left, store object for reference
                     $references[$hash] = count($references);
                 }
             }
@@ -780,15 +809,12 @@ class Amfphp_Core_Amf_Serializer {
             //no hash available, use array with simple numeric keys
             $key = array_search($obj, $references, TRUE);
             
-            //only store the object for future reference if it isn't already stored, and if there is space left
-            $doStore = true;
-            if($key !== false){
-                $doStore = false;
-            }else if(count($references) >= self::MAX_STORED_OBJECTS){
-                $doStore = false;
-            }
-            if($doStore){
+            if(($key === false) && (count($references) <= self::MAX_STORED_OBJECTS)){
+                // $key === false means the object isn't already stored
+                // count... means there is still space
+                //so only store if these 2 conditions are met
                 $references[] = &$obj;
+                
             }
         }
         
@@ -805,12 +831,15 @@ class Amfphp_Core_Amf_Serializer {
             return false;
         }
     }
+    
 
     /**
-     * writes an object. 
+     * writes a typed object. Type is determined by having an "explicit type" field. If this field is 
+     * not set, call writeAmf3AnonymousObject
+     * write all properties as sealed members.
      * @param object $d
      */
-    protected function writeAmf3Object($d) {
+    protected function writeAmf3TypedObject($d) {
         //Write the object tag
         $this->outBuffer .= "\12";
         if ($this->handleReference($d, $this->storedObjects)) {
@@ -818,64 +847,46 @@ class Amfphp_Core_Amf_Serializer {
         }
        
         $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
+        
+        $className = $d->$explicitTypeField;
+        $propertyNames = null;
 
-        if(isset ($d->$explicitTypeField)){
-            //class name is set. send all properties as sealed members.
-            $className = $d->$explicitTypeField;
-            $propertyNames = null;
-
-            if(isset ($this->className2TraitsInfo[$className])){
-                //we have traits information and a reference for it, so use a traits reference
-                $traitsInfo = $this->className2TraitsInfo[$className];
-                $propertyNames = $traitsInfo['propertyNames'];
-                $referenceId = $traitsInfo['referenceId'];
-                $traitsReference = $referenceId << 2 | 1;
-                $this->writeAmf3Int($traitsReference);
-            }else{
-                //no available traits information. Write the full object
-                $propertyNames = array();
-                foreach ($d as $key => $value) {
-                    if ($key[0] != "\0" && $key != $explicitTypeField) { //Don't show protected members or explicit type
-                        $propertyNames[] = $key;
-                    }
-                }
-
-                //U29O-traits:  0011 in LSBs, and number of properties
-                $numProperties = count($propertyNames);
-                $traits = $numProperties << 4 | 3;
-                $this->writeAmf3Int($traits);
-                //class name
-                $this->writeAmf3String($className);
-                //list of property names
-                foreach ($propertyNames as $propertyName){
-                    $this->writeAmf3String($propertyName);
-                }
-                
-                //save for reference
-                $traitsInfo = array('referenceId' => count($this->className2TraitsInfo), 'propertyNames' => $propertyNames);
-                $this->className2TraitsInfo[$className] = $traitsInfo;
-            }
-            //list of values
-            foreach ($propertyNames as $propertyName){
-                $this->writeAmf3Data($d->$propertyName);
-            }
-
+        if(isset ($this->className2TraitsInfo[$className])){
+            //we have traits information and a reference for it, so use a traits reference
+            $traitsInfo = $this->className2TraitsInfo[$className];
+            $propertyNames = $traitsInfo['propertyNames'];
+            $referenceId = $traitsInfo['referenceId'];
+            $traitsReference = $referenceId << 2 | 1;
+            $this->writeAmf3Int($traitsReference);
         }else{
-            //anonymous object. So type this as a dynamic object with no sealed members.
-            //U29O-traits : 1011.
-            $this->writeAmf3Int(0xB);
-            //no class name. empty string for anonymous object
-            $this->writeAmf3String('');
-            //name/value pairs for dynamic properties
+            //no available traits information. Write the traits
+            $propertyNames = array();
             foreach ($d as $key => $value) {
-                if ($key[0] != "\0" && $key != $explicitTypeField) { //Don't show protected members or explicit type
-                    $this->writeAmf3String($key);
-                    $this->writeAmf3Data($value);
+                if ($key[0] != "\0" && $key != $explicitTypeField) { //Don't write protected properties or explicit type
+                    $propertyNames[] = $key;
                 }
             }
-            //empty string, marks end of dynamic members
-            $this->outBuffer .= "\1";
+
+            //U29O-traits:  0011 in LSBs, and number of properties
+            $numProperties = count($propertyNames);
+            $traits = $numProperties << 4 | 3;
+            $this->writeAmf3Int($traits);
+            //class name
+            $this->writeAmf3String($className);
+            //list of property names
+            foreach ($propertyNames as $propertyName){
+                $this->writeAmf3String($propertyName);
+            }
+
+            //save for reference
+            $traitsInfo = array('referenceId' => count($this->className2TraitsInfo), 'propertyNames' => $propertyNames);
+            $this->className2TraitsInfo[$className] = $traitsInfo;
         }
+        //list of values
+        foreach ($propertyNames as $propertyName){
+            $this->writeAmf3Data($d->$propertyName);
+        }
+
 
     }
 
