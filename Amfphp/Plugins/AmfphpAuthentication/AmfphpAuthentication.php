@@ -10,7 +10,9 @@
  */
 
 /** 
- * Authentication for Amfphp.
+ * Authentication for Amfphp. 
+ * This plugin can be deactivated if the project doesn't need to protect access to its services.
+ * 
  * On a service object, the plugin looks for a method called _getMethodRoles. If the method exists, the plugin will look for a role in the session that matches the role.
  * If the roles don't match, an Exception is thrown.
  * The _getMethodRoles takes a parameter $methodName, and must return an array of strings containing acceptable roles for the method. If the return value is null,
@@ -35,7 +37,8 @@
  * The logout method should call AmfphpAuthentication::clearSessionInfo();
  * 
  * See the AuthenticationService class in the test data for an example of an implementation.
- *
+ * 
+ * @link https://github.com/silexlabs/amfphp-2.0/blob/master/Tests/TestData/Services/AuthenticationService.php
  * @package Amfphp_Plugins_Authentication
  * @author Ariel Sommeria-klein
  */

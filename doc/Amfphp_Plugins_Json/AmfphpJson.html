@@ -29,13 +29,16 @@
                 <li><a href="../Amfphp_Core_Common/Amfphp_Core_Common_IDeserializer.html">Amfphp_Core_Common_IDeserializer</a></li><li><a href="../Amfphp_Core_Common/Amfphp_Core_Common_IDeserializedRequestHandler.html">Amfphp_Core_Common_IDeserializedRequestHandler</a></li><li><a href="../Amfphp_Core_Common/Amfphp_Core_Common_IExceptionHandler.html">Amfphp_Core_Common_IExceptionHandler</a></li><li><a href="../Amfphp_Core_Common/Amfphp_Core_Common_ISerializer.html">Amfphp_Core_Common_ISerializer</a></li>            </ul>
         </p>
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">plugin allowing service calls coming from JavaScript encoded as JSON  strings and returned as JSON strings using POST parameters.</p>
-<p class="description"><p>Requires at least PHP 5.2.</p></p>
+<p class="short-description">Enables amfPHP to receive and reply with JSON  This plugin can be deactivated if the project doesn't need to support JSON  strings and returned as JSON strings using POST parameters.</p>
+<p class="description"><p>You must add the 'application/json' content type, or set it in the headers so that it is recognized as a call to be handled by this plugin.  for example:  http://yourserver.com/Amfphp/?contentType=application/json</p><p>Here is some sample code using Javascript with JQuery:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-key">var&nbsp;</span><span class="src-id">callDataObj&nbsp;</span>=&nbsp;<span class="src-sym">{</span><span class="src-str">&quot;serviceName&quot;</span>:<span class="src-str">&quot;PizzaService&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-str">&quot;methodName&quot;</span>:<span class="src-str">&quot;getPizza&quot;</span><span class="src-sym">,</span><span class="src-str">&quot;parameters&quot;</span>:<span class="src-sym">[</span><span class="src-sym">]</span><span class="src-sym">}</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-key">var&nbsp;</span><span class="src-id">callData&nbsp;</span>=&nbsp;<span class="src-id">JSON</span>.<span class="src-id">stringify</span><span class="src-sym">(</span><span class="src-id">callDataObj</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;$.<span class="src-id">post</span><span class="src-sym">(</span><span class="src-str">&quot;http://yourserver.com/Amfphp/?contentType=application/json&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-id">callData</span><span class="src-sym">,&nbsp;</span><span class="src-id">onSuccess</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></div></p><p>Requires at least PHP 5.2.</p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Yannick DOMINGUEZ</li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_Amfphp---Plugins---AmfphpJson---AmfphpJson.php.html">/Amfphp/Plugins/AmfphpJson/AmfphpJson.php</a> (line <span class="field">20</span>)
+			Located in <a class="field" href="_Amfphp---Plugins---AmfphpJson---AmfphpJson.php.html">/Amfphp/Plugins/AmfphpJson/AmfphpJson.php</a> (line <span class="field">33</span>)
 		</p>
 		
 				
@@ -162,7 +165,7 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$returnErrorDetails</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">27</span>)
+			 = <span class="var-default"> false</span>			(line <span class="line-number">40</span>)
 		</span>
 	</div>
 
@@ -198,7 +201,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">33</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">46</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -227,7 +230,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">deserialize</span> (line <span class="line-number">55</span>)
+		<span class="method-title">deserialize</span> (line <span class="line-number">68</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -261,7 +264,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">filterHandler</span> (line <span class="line-number">49</span>)
+		<span class="method-title">filterHandler</span> (line <span class="line-number">62</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -294,7 +297,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">handleDeserializedRequest</span> (line <span class="line-number">70</span>)
+		<span class="method-title">handleDeserializedRequest</span> (line <span class="line-number">83</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -329,7 +332,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">handleException</span> (line <span class="line-number">93</span>)
+		<span class="method-title">handleException</span> (line <span class="line-number">106</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -358,7 +361,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">serialize</span> (line <span class="line-number">111</span>)
+		<span class="method-title">serialize</span> (line <span class="line-number">124</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -411,7 +414,7 @@
 		<span class="const-title">
 			<span class="const-name">JSON_CONTENT_TYPE</span>
 			 = <span class="const-default"> 'application/json'</span>
-			(line <span class="line-number">25</span>)
+			(line <span class="line-number">38</span>)
 		</span>
 	</div>
 
@@ -425,7 +428,7 @@
 	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 10 Jan 2012 16:01:16 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Mon, 23 Jan 2012 17:09:40 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

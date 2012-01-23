@@ -24,12 +24,13 @@
 			</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Converts strings to the right encoding in incoming and outgoing packets  This works for nested objects.</p>
+<p class="short-description">Converts strings to the right encoding in incoming and outgoing packets.</p>
+<p class="description"><p>This plugin can be deactivated if all three tiers (DB, PHP, client) use the same charset, usually utf8.  This works for nested objects.</p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Ariel Sommeria-Klein</li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_Amfphp---Plugins---AmfphpCharsetConverter---AmfphpCharsetConverter.php.html">/Amfphp/Plugins/AmfphpCharsetConverter/AmfphpCharsetConverter.php</a> (line <span class="field">19</span>)
+			Located in <a class="field" href="_Amfphp---Plugins---AmfphpCharsetConverter---AmfphpCharsetConverter.php.html">/Amfphp/Plugins/AmfphpCharsetConverter/AmfphpCharsetConverter.php</a> (line <span class="field">20</span>)
 		</p>
 		
 				
@@ -194,7 +195,7 @@
 		<span class="var-title">
 			<span class="var-type">String</span>
 			<span class="var-name">$clientCharset</span>
-						(line <span class="line-number">78</span>)
+						(line <span class="line-number">79</span>)
 		</span>
 	</div>
 
@@ -216,7 +217,7 @@
 		<span class="var-title">
 			<span class="var-type">String</span>
 			<span class="var-name">$method</span>
-						(line <span class="line-number">49</span>)
+						(line <span class="line-number">50</span>)
 		</span>
 	</div>
 
@@ -238,7 +239,7 @@
 		<span class="var-title">
 			<span class="var-type">String</span>
 			<span class="var-name">$phpCharset</span>
-						(line <span class="line-number">68</span>)
+						(line <span class="line-number">69</span>)
 		</span>
 	</div>
 
@@ -276,7 +277,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">84</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">85</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -305,7 +306,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">convertStringFromClientToPhpCharsets</span> (line <span class="line-number">183</span>)
+		<span class="method-title">convertStringFromClientToPhpCharsets</span> (line <span class="line-number">184</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -335,7 +336,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">convertStringFromPhpToClientCharsets</span> (line <span class="line-number">199</span>)
+		<span class="method-title">convertStringFromPhpToClientCharsets</span> (line <span class="line-number">200</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -365,7 +366,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">filterDeserializedRequest</span> (line <span class="line-number">119</span>)
+		<span class="method-title">filterDeserializedRequest</span> (line <span class="line-number">120</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -394,7 +395,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">filterDeserializedResponse</span> (line <span class="line-number">130</span>)
+		<span class="method-title">filterDeserializedResponse</span> (line <span class="line-number">131</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -423,7 +424,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">transliterate</span> (line <span class="line-number">143</span>)
+		<span class="method-title">transliterate</span> (line <span class="line-number">144</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -477,7 +478,7 @@
 		<span class="const-title">
 			<span class="const-name">DIRECTION_CLIENT_TO_PHP</span>
 			 = <span class="const-default"> 1</span>
-			(line <span class="line-number">59</span>)
+			(line <span class="line-number">60</span>)
 		</span>
 	</div>
 
@@ -494,7 +495,7 @@
 		<span class="const-title">
 			<span class="const-name">DIRECTION_PHP_TO_CLIENT</span>
 			 = <span class="const-default"> 0</span>
-			(line <span class="line-number">54</span>)
+			(line <span class="line-number">55</span>)
 		</span>
 	</div>
 
@@ -511,7 +512,7 @@
 		<span class="const-title">
 			<span class="const-name">METHOD_ICONV</span>
 			 = <span class="const-default"> 'iconv'</span>
-			(line <span class="line-number">28</span>)
+			(line <span class="line-number">29</span>)
 		</span>
 	</div>
 
@@ -528,7 +529,7 @@
 		<span class="const-title">
 			<span class="const-name">METHOD_MBSTRING</span>
 			 = <span class="const-default"> 'mbstring'</span>
-			(line <span class="line-number">33</span>)
+			(line <span class="line-number">34</span>)
 		</span>
 	</div>
 
@@ -545,7 +546,7 @@
 		<span class="const-title">
 			<span class="const-name">METHOD_NONE</span>
 			 = <span class="const-default"> 'none'</span>
-			(line <span class="line-number">23</span>)
+			(line <span class="line-number">24</span>)
 		</span>
 	</div>
 
@@ -562,7 +563,7 @@
 		<span class="const-title">
 			<span class="const-name">METHOD_RECODE</span>
 			 = <span class="const-default"> 'recode'</span>
-			(line <span class="line-number">38</span>)
+			(line <span class="line-number">39</span>)
 		</span>
 	</div>
 
@@ -579,7 +580,7 @@
 		<span class="const-title">
 			<span class="const-name">METHOD_UTF8_DECODE</span>
 			 = <span class="const-default"> 'utf8_decode'</span>
-			(line <span class="line-number">43</span>)
+			(line <span class="line-number">44</span>)
 		</span>
 	</div>
 
@@ -593,7 +594,7 @@
 	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 10 Jan 2012 16:01:15 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Mon, 23 Jan 2012 17:09:39 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

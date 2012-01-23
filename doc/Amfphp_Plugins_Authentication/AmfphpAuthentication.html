@@ -25,7 +25,7 @@
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Authentication for Amfphp.</p>
-<p class="description"><p>On a service object, the plugin looks for a method called _getMethodRoles. If the method exists, the plugin will look for a role in the session that matches the role.  If the roles don't match, an Exception is thrown.  The _getMethodRoles takes a parameter $methodName, and must return an array of strings containing acceptable roles for the method. If the return value is null,  it is considered that that particular method is not protected.</p><p>For example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-key">public&nbsp;</span><span class="src-key">function&nbsp;</span><span class="src-id">_getMethodRoles</span><span class="src-sym">(</span><span class="src-var">$methodName</span><span class="src-sym">)</span><span class="src-sym">{</span></div></li>
+<p class="description"><p>This plugin can be deactivated if the project doesn't need to protect access to its services.</p><p>On a service object, the plugin looks for a method called _getMethodRoles. If the method exists, the plugin will look for a role in the session that matches the role.  If the roles don't match, an Exception is thrown.  The _getMethodRoles takes a parameter $methodName, and must return an array of strings containing acceptable roles for the method. If the return value is null,  it is considered that that particular method is not protected.</p><p>For example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-key">public&nbsp;</span><span class="src-key">function&nbsp;</span><span class="src-id">_getMethodRoles</span><span class="src-sym">(</span><span class="src-var">$methodName</span><span class="src-sym">)</span><span class="src-sym">{</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if</span><span class="src-sym">(</span><span class="src-var">$methodName&nbsp;</span>==&nbsp;<span class="src-str">'adminMethod'</span><span class="src-sym">)</span><span class="src-sym">{</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'admin'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span><span class="src-key">else</span><span class="src-sym">{</span></div></li>
@@ -35,9 +35,10 @@
 </ol></div></p><p>To authenticate a user, the plugin looks for a 'login' method. This method can either be called  explicitly, or by setting a header with the name 'Credentials', containing {userid: userid, password: password}, as defined by the AS2  NetConnection.setCredentials method. It is considered good practise to have a 'logout' method, though this is optional  The login method returns a role in a 'string'. It takes 2 parameters, the user id and the password.  The logout method should call AmfphpAuthentication::clearSessionInfo();</p><p>See the AuthenticationService class in the test data for an example of an implementation.</p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Ariel Sommeria-klein</li>
+				<li><span class="field">link:</span> <a href="https://github.com/silexlabs/amfphp-2.0/blob/master/Tests/TestData/Services/AuthenticationService.php">https://github.com/silexlabs/amfphp-2.0/blob/master/Tests/TestData/Services/AuthenticationService.php</a></li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_Amfphp---Plugins---AmfphpAuthentication---AmfphpAuthentication.php.html">/Amfphp/Plugins/AmfphpAuthentication/AmfphpAuthentication.php</a> (line <span class="field">42</span>)
+			Located in <a class="field" href="_Amfphp---Plugins---AmfphpAuthentication---AmfphpAuthentication.php.html">/Amfphp/Plugins/AmfphpAuthentication/AmfphpAuthentication.php</a> (line <span class="field">45</span>)
 		</p>
 		
 				
@@ -183,7 +184,7 @@
 		<span class="var-title">
 			<span class="var-type">String</span>
 			<span class="var-name">$headerPassword</span>
-						(line <span class="line-number">68</span>)
+						(line <span class="line-number">71</span>)
 		</span>
 	</div>
 
@@ -205,7 +206,7 @@
 		<span class="var-title">
 			<span class="var-type">String</span>
 			<span class="var-name">$headerUserId</span>
-						(line <span class="line-number">62</span>)
+						(line <span class="line-number">65</span>)
 		</span>
 	</div>
 
@@ -241,7 +242,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method addRole</span> (line <span class="line-number">177</span>)
+		<span class="method-title">static method addRole</span> (line <span class="line-number">180</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -273,7 +274,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method clearSessionInfo</span> (line <span class="line-number">163</span>)
+		<span class="method-title">static method clearSessionInfo</span> (line <span class="line-number">166</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -299,7 +300,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">74</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">77</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -328,7 +329,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">doRolesMatch</span> (line <span class="line-number">146</span>)
+		<span class="method-title">doRolesMatch</span> (line <span class="line-number">149</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -360,7 +361,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">filterAmfRequestHeaderHandler</span> (line <span class="line-number">87</span>)
+		<span class="method-title">filterAmfRequestHeaderHandler</span> (line <span class="line-number">90</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -391,7 +392,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">filterServiceObject</span> (line <span class="line-number">105</span>)
+		<span class="method-title">filterServiceObject</span> (line <span class="line-number">108</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -427,7 +428,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">handleRequestHeader</span> (line <span class="line-number">202</span>)
+		<span class="method-title">handleRequestHeader</span> (line <span class="line-number">205</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -478,7 +479,7 @@
 		<span class="const-title">
 			<span class="const-name">METHOD_GET_METHOD_ROLES</span>
 			 = <span class="const-default"> '_getMethodRoles'</span>
-			(line <span class="line-number">51</span>)
+			(line <span class="line-number">54</span>)
 		</span>
 	</div>
 
@@ -495,7 +496,7 @@
 		<span class="const-title">
 			<span class="const-name">METHOD_LOGIN</span>
 			 = <span class="const-default"> 'login'</span>
-			(line <span class="line-number">56</span>)
+			(line <span class="line-number">59</span>)
 		</span>
 	</div>
 
@@ -512,7 +513,7 @@
 		<span class="const-title">
 			<span class="const-name">SESSION_FIELD_ROLES</span>
 			 = <span class="const-default"> 'amfphp_roles'</span>
-			(line <span class="line-number">46</span>)
+			(line <span class="line-number">49</span>)
 		</span>
 	</div>
 
@@ -526,7 +527,7 @@
 	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 10 Jan 2012 16:01:14 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Mon, 23 Jan 2012 17:09:38 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

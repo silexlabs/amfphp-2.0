@@ -10,7 +10,8 @@
  */
 
 /**
- * Converts strings to the right encoding in incoming and outgoing packets
+ * Converts strings to the right encoding in incoming and outgoing packets.
+ * This plugin can be deactivated if all three tiers (DB, PHP, client) use the same charset, usually utf8.
  * This works for nested objects.
  *
  * @package Amfphp_Plugins_CharsetConverter

@@ -12,7 +12,7 @@
 
 /**
  * A simple service browser with html only. Sometimes you don't need the full thing with AMF etc., so use this
- * This plugin should not be deployed on a production server.
+ * This plugin should be deactivated on a production server.
  * 
  * call the gateway with the following GET parameters:
  * serviceName: the service name

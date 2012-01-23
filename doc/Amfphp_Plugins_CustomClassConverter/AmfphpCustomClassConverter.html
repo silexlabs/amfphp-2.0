@@ -22,13 +22,19 @@
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Converts data from incoming packets with explicit types to custom classes.</p>
-<p class="description"><p>If the vclass is not found, the object is unmodified.  Sets the explicit type marker in the data of the outgoing packets.  If the explicit type marker is already set in an outgoing object, the value is left as is.  This works for nested objects.  This is to support services and plugins setting the explicit type themselves.</p></p>
+<p class="short-description">Converts data from incoming packets with explicit types to custom classes, and vice versa for the outgoing packets.</p>
+<p class="description"><p>This plugin can be deactivated if the project doesn't use custom classes.</p><p>The AMF deserializer reads a typed AMF object as a stdObj class, and sets the AMF type to a reserved &quot;explicit type&quot; field.  This plugin will look at deserialized data and try to convert any such objects to a real custom class.</p><p>It works in the opposite way on the way out: The AMF serializer needs a stdObj class with the explicit type marker set  to write a typed AMF object. This plugin will convert any typed PHP objects to a stdObj with the explicit type marker set.</p><p>The explicit type marker is defined in Amfphp_Core_Amf_Constants</p><p>If after deserialization the custom class is not found, the object is unmodified and the explicit type marker is left set.  If the explicit type marker is already set in an outgoing object, the value is left as is.</p><p>This works for nested objects.</p><p>If you don't need strong typing in PHP but would like the objects in your client to be strongly typed, you can:  For example a stdObj like this will be returned in AMF as MyVO  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-var">$returnObj&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">stdObj</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$explicitTypeField&nbsp;</span>=&nbsp;<span class="src-id"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Constants.html">Amfphp_Core_Amf_Constants</a></span><span class="src-sym">::</span><span class="src-id">FIELD_EXPLICIT_TYPE</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$returnObj</span><span class="src-sym">-&gt;</span><span class="src-var">$explicitTypeField&nbsp;</span>=&nbsp;<span class="src-str">&quot;MyVO&quot;</span><span class="src-sym">;</span></div></li>
+</ol></div></p><p>If you are using Flash, remember that you need to register the class alias so that Flash converts the MyVO AMF object to a Flash MyVO object.  If you are using Flex you can do this with the RemoteClass metadata tag.</p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Ariel Sommeria-Klein</li>
+				<li><span class="field">see:</span> <a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Constants.html#constFIELD_EXPLICIT_TYPE">Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE</a></li>
+				<li><span class="field">link:</span> <a href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/net/package.html#registerClassAlias%28%29">http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/net/package.html#registerClassAlias%28%29</a></li>
+				<li><span class="field">link:</span> <a href="http://livedocs.adobe.com/flex/3/html/metadata_3.html#198729">http://livedocs.adobe.com/flex/3/html/metadata_3.html#198729</a></li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_Amfphp---Plugins---AmfphpCustomClassConverter---AmfphpCustomClassConverter.php.html">/Amfphp/Plugins/AmfphpCustomClassConverter/AmfphpCustomClassConverter.php</a> (line <span class="field">23</span>)
+			Located in <a class="field" href="_Amfphp---Plugins---AmfphpCustomClassConverter---AmfphpCustomClassConverter.php.html">/Amfphp/Plugins/AmfphpCustomClassConverter/AmfphpCustomClassConverter.php</a> (line <span class="field">50</span>)
 		</p>
 		
 				
@@ -121,7 +127,7 @@
 		<span class="var-title">
 			<span class="var-type">array</span>
 			<span class="var-name">$customClassFolderPaths</span>
-						(line <span class="line-number">29</span>)
+						(line <span class="line-number">56</span>)
 		</span>
 	</div>
 
@@ -157,7 +163,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">35</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">62</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -186,7 +192,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">convertToTyped</span> (line <span class="line-number">81</span>)
+		<span class="method-title">convertToTyped</span> (line <span class="line-number">105</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -216,7 +222,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">filterDeserializedRequest</span> (line <span class="line-number">54</span>)
+		<span class="method-title">filterDeserializedRequest</span> (line <span class="line-number">80</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -245,7 +251,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">filterDeserializedResponse</span> (line <span class="line-number">65</span>)
+		<span class="method-title">filterDeserializedResponse</span> (line <span class="line-number">90</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -274,7 +280,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">markExplicitType</span> (line <span class="line-number">124</span>)
+		<span class="method-title">markExplicitType</span> (line <span class="line-number">145</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -306,7 +312,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 10 Jan 2012 16:01:15 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Mon, 23 Jan 2012 17:09:39 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

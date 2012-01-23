@@ -10,8 +10,21 @@
  */
 
 /**
- * plugin allowing service calls coming from JavaScript encoded as JSON 
+ * Enables amfPHP to receive and reply with JSON
+ * This plugin can be deactivated if the project doesn't need to support JSON 
  * strings and returned as JSON strings using POST parameters. 
+ * 
+ * You must add the 'application/json' content type, or set it in the headers so that it is recognized as a call to be handled by this plugin.
+ * for example:
+ * http://yourserver.com/Amfphp/?contentType=application/json
+ * 
+ * Here is some sample code using Javascript with JQuery:
+ * <code>
+ * var callDataObj = {"serviceName":"PizzaService", "methodName":"getPizza","parameters":[]};
+ * var callData = JSON.stringify(callDataObj);
+ * $.post("http://yourserver.com/Amfphp/?contentType=application/json", callData, onSuccess);
+ * </code>
+ * 
  * Requires at least PHP 5.2.
  *
  * @package Amfphp_Plugins_Json

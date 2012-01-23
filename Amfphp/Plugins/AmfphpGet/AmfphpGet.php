@@ -10,15 +10,17 @@
  */
 
 /**
- * This is useful for simple test calls and for cross domain ajax calls.
+ * Adds support for HTTP GET requests to services, useful for simple test calls and for cross domain ajax calls.
+ * This plugin can be deactivated if the project doesn't use GET requests.
+ *  
  * Cross Domain Ajax calls are normally not possible for security reasons, but by using a hack you can get around it.
- * This however must be done with GET. So this plugin is specifically for requesting json data from amfPHP using HTTP GET. 
+ * This however must be done with HTTP GET. So this plugin is specifically for requesting json data from amfPHP using HTTP GET. 
  * This comes with some limitations: GET is limited in size, and you can't send complex objects.
  * If you're on the same domain, you're probably better off using the AmfphpJson plugin as these limitations don't apply.
  * 
- * You must add the content type, or set it in the headers so that it is recognized as a call to be handled by this plugin.
- * follow this format to make your call(here the content type is passed as a parameter):
- * http://youserver/?contentType=text/amfphpget&serviceName=YourService&methodName=yourMethod&p01=value1&p2=value2 etc.
+ * You must add the 'text/amfphpget' content type, or set it in the headers so that it is recognized as a call to be handled by this plugin.
+ * for example:
+ * http://yourserver.com/?contentType=text/amfphpget&serviceName=YourService&methodName=yourMethod&p01=value1&p2=value2 etc.
  * 
  * If you are using this for crossdomain ajax with JSONP, the expected format of the request is to add the extra 'callback' parameter.
  * If no callback id is found, the answer simply contains the json encoded return data.

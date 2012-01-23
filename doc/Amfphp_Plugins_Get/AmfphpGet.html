@@ -29,15 +29,15 @@
                 <li><a href="../Amfphp_Core_Common/Amfphp_Core_Common_IDeserializer.html">Amfphp_Core_Common_IDeserializer</a></li><li><a href="../Amfphp_Core_Common/Amfphp_Core_Common_IDeserializedRequestHandler.html">Amfphp_Core_Common_IDeserializedRequestHandler</a></li><li><a href="../Amfphp_Core_Common/Amfphp_Core_Common_IExceptionHandler.html">Amfphp_Core_Common_IExceptionHandler</a></li><li><a href="../Amfphp_Core_Common/Amfphp_Core_Common_ISerializer.html">Amfphp_Core_Common_ISerializer</a></li>            </ul>
         </p>
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">This is useful for simple test calls and for cross domain ajax calls.</p>
-<p class="description"><p>Cross Domain Ajax calls are normally not possible for security reasons, but by using a hack you can get around it.  This however must be done with GET. So this plugin is specifically for requesting json data from amfPHP using HTTP GET.  This comes with some limitations: GET is limited in size, and you can't send complex objects.  If you're on the same domain, you're probably better off using the AmfphpJson plugin as these limitations don't apply.</p><p>You must add the content type, or set it in the headers so that it is recognized as a call to be handled by this plugin.  follow this format to make your call(here the content type is passed as a parameter):  http://youserver/?contentType=text/amfphpget&amp;serviceName=YourService&amp;methodName=yourMethod&amp;p01=value1&amp;p2=value2 etc.</p><p>If you are using this for crossdomain ajax with JSONP, the expected format of the request is to add the extra 'callback' parameter.  If no callback id is found, the answer simply contains the json encoded return data.  If the callback is found, the answer is wrapped so that it can be used for JSONP.</p><p>Thanks to nViso.ch who needed the cross domain ajax functionality.</p><p>Requires at least PHP 5.2.</p></p>
+<p class="short-description">Adds support for HTTP GET requests to services, useful for simple test calls and for cross domain ajax calls.</p>
+<p class="description"><p>This plugin can be deactivated if the project doesn't use GET requests.</p><p>Cross Domain Ajax calls are normally not possible for security reasons, but by using a hack you can get around it.  This however must be done with HTTP GET. So this plugin is specifically for requesting json data from amfPHP using HTTP GET.  This comes with some limitations: GET is limited in size, and you can't send complex objects.  If you're on the same domain, you're probably better off using the AmfphpJson plugin as these limitations don't apply.</p><p>You must add the 'text/amfphpget' content type, or set it in the headers so that it is recognized as a call to be handled by this plugin.  for example:  http://yourserver.com/?contentType=text/amfphpget&amp;serviceName=YourService&amp;methodName=yourMethod&amp;p01=value1&amp;p2=value2 etc.</p><p>If you are using this for crossdomain ajax with JSONP, the expected format of the request is to add the extra 'callback' parameter.  If no callback id is found, the answer simply contains the json encoded return data.  If the callback is found, the answer is wrapped so that it can be used for JSONP.</p><p>Thanks to nViso.ch who needed the cross domain ajax functionality.</p><p>Requires at least PHP 5.2.</p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Ariel Sommeria-Klein.</li>
 				<li><span class="field">see:</span> <a href="http://usejquery.com/posts/9/the-jquery-cross-domain-ajax-guide">http://usejquery.com/posts/9/the-jquery-cross-domain-ajax-guide</a></li>
 				<li><span class="field">see:</span> <a href="http://remysharp.com/2007/10/08/what-is-jsonp/">http://remysharp.com/2007/10/08/what-is-jsonp/</a></li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_Amfphp---Plugins---AmfphpGet---AmfphpGet.php.html">/Amfphp/Plugins/AmfphpGet/AmfphpGet.php</a> (line <span class="field">36</span>)
+			Located in <a class="field" href="_Amfphp---Plugins---AmfphpGet---AmfphpGet.php.html">/Amfphp/Plugins/AmfphpGet/AmfphpGet.php</a> (line <span class="field">38</span>)
 		</p>
 		
 				
@@ -169,7 +169,7 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$returnErrorDetails</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">43</span>)
+			 = <span class="var-default"> false</span>			(line <span class="line-number">45</span>)
 		</span>
 	</div>
 
@@ -205,7 +205,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">49</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">51</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -234,7 +234,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">deserialize</span> (line <span class="line-number">75</span>)
+		<span class="method-title">deserialize</span> (line <span class="line-number">77</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -269,7 +269,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">filterHandler</span> (line <span class="line-number">66</span>)
+		<span class="method-title">filterHandler</span> (line <span class="line-number">68</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -302,7 +302,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">filterHeaders</span> (line <span class="line-number">143</span>)
+		<span class="method-title">filterHeaders</span> (line <span class="line-number">145</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -334,7 +334,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">handleDeserializedRequest</span> (line <span class="line-number">85</span>)
+		<span class="method-title">handleDeserializedRequest</span> (line <span class="line-number">87</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -369,7 +369,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">handleException</span> (line <span class="line-number">110</span>)
+		<span class="method-title">handleException</span> (line <span class="line-number">112</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -398,7 +398,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">serialize</span> (line <span class="line-number">128</span>)
+		<span class="method-title">serialize</span> (line <span class="line-number">130</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -451,7 +451,7 @@
 		<span class="const-title">
 			<span class="const-name">CONTENT_TYPE</span>
 			 = <span class="const-default"> 'text/amfphpget'</span>
-			(line <span class="line-number">41</span>)
+			(line <span class="line-number">43</span>)
 		</span>
 	</div>
 
@@ -465,7 +465,7 @@
 	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 10 Jan 2012 16:01:16 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Mon, 23 Jan 2012 17:09:39 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

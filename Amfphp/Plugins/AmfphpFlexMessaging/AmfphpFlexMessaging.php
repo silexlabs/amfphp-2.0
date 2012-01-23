@@ -16,10 +16,16 @@ require_once dirname(__FILE__) . '/AcknowledgeMessage.php';
 require_once dirname(__FILE__) . '/ErrorMessage.php';
 /**
  * Support for flex messaging.
+ * 
+ * This plugin can be deactivated if the project doesn't need flex messaging, usually a RemoteObject in Flex.
+ * 
  * Flex doesn't use the basic packet system. When using a remote objct, first a CommandMessage is sent, expecting an AcknowledgeMessage in return.
  * Then a RemotingMessage is sent, expecting an AcknowledgeMessage in return.
+ * This plugin adds support for this message flow.
+ * 
  * In case of an error, an ErrorMessage is expected
- *
+ * 
+ * @link http://livedocs.adobe.com/flex/3/html/help.html?content=data_access_4.html
  * @package Amfphp_Plugins_FlexMessaging
  * @author Ariel Sommeria-Klein
  */

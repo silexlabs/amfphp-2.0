@@ -91,9 +91,8 @@ class Amfphp_Core_Config {
         $this->sharedConfig[self::CONFIG_RETURN_ERROR_DETAILS] = true;
         
         $this->disabledPlugins = array();
-        //disable logging by default
+        //disable logging and error handler by default
         $this->disabledPlugins[] = 'AmfphpLogger';
-        //this is a bit experimental and only really useful when getting badly formed responses through errors. so disabled by default
         $this->disabledPlugins[] = 'AmfphpErrorHandler';
         
     }
