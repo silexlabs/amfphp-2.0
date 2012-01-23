@@ -34,7 +34,7 @@ echo file_get_contents(dirname(__FILE__) . '/style.css');
     <div id="header">
                 <a href="?"><b>AmfPHP Service Browser</b></a>
  		<ul>
-        <li><a href="http://sourceforge.net/projects/amfphp/forums">Forums</a></li>
+        <li><a href="http://www.silexlabs.org/groups/amfphp/amfphp-users/">Forum</a></li>
         <li><a href="http://www.silexlabs.org/amfphp/documentation/">Documentation</a></li>
         <li><a href="http://community.silexlabs.org/amfphp/reference/">Class Reference</a></li>
         <li><a href="https://github.com/silexlabs/amfphp-2.0">Source Code</a></li>
