@@ -42,6 +42,13 @@ class TestService {
         sleep(1);
         return 'slept for 1 second';
     }
+    
+    /**
+     * shouldn't appear in the service browser or be available as a service
+     */
+    public function _reservedMethod(){
+        
+    }
 
 
 }

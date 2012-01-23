@@ -218,6 +218,10 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
                 $message .= "\n<ul>";
                 foreach ($availablePublicMethods as $methodDescriptor) {
                     $availableMethodName = $methodDescriptor->name;
+                    if(substr($availableMethodName, 0, 1) == '_'){
+                        //methods starting with a '_' as they are reserved, so filter them out 
+                        continue;
+                    }
                     $message .= "\n <li><a href='?serviceName=$availableServiceName&amp;methodName=$availableMethodName'>$availableMethodName</a></li>";
                 }
                 $message .= "\n</ul>";

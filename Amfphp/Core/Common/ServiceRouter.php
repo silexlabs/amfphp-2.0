@@ -111,6 +111,9 @@ class Amfphp_Core_Common_ServiceRouter {
             throw new Amfphp_Core_Exception("method $methodName not found on $serviceName object ");
         }
         
+        if(substr($methodName, 0, 1) == '_'){
+            throw new Exception("The method $methodName starts with a '_', and is therefore not accessible");
+        }
         if($this->checkArgumentCount){
             $this->checkNumberOfArguments($serviceObject, $serviceName, $methodName, $parameters);            
         }

@@ -72,6 +72,15 @@ class Amfphp_Core_Common_ServiceRouterTest extends PHPUnit_Framework_TestCase {
         $ret = $this->object->executeServiceCall('DummyService', 'noFunction', array());
         $this->assertEquals($ret, null);
     }
+    
+
+     /**
+     * @expectedException Amfphp_Core_Exception
+     */
+    public function testReservedMethodException()
+    {
+        $ret = $this->object->executeServiceCall('DummyService', '_reserved', array());
+    }    
 }
 
 ?>
