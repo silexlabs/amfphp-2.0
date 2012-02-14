@@ -119,7 +119,7 @@ class AmfphpServiceBrowser implements Amfphp_Core_Common_IDeserializer, Amfphp_C
     protected function getAvailableServiceNames(array $serviceFolderPaths, array $serviceNames2ClassFindInfo) {
         $ret = array();
         foreach ($serviceFolderPaths as $serviceFolderPath) {
-            $ret += $this->searchFolderForServices($serviceFolderPath, '');
+            $ret = array_merge($ret, $this->searchFolderForServices($serviceFolderPath, ''));
         }
 
         foreach ($serviceNames2ClassFindInfo as $key => $value) {
