@@ -15,10 +15,7 @@
  */
 require_once dirname(__FILE__) . '/../../Amfphp/ClassLoader.php';
 require_once dirname(__FILE__) . '/TestServicesConfig.php';
-$config = new Amfphp_Core_Config();
-$testServiceConfig = new TestServicesConfig();
-$config->serviceFolderPaths = $testServiceConfig->serviceFolderPaths;
-$config->serviceNames2ClassFindInfo = $testServiceConfig->serviceNames2ClassFindInfo;
+$config = new TestServicesConfig();
 $gateway = Amfphp_Core_HttpRequestGatewayFactory::createGateway($config);
 $gateway->service();
 $gateway->output();
