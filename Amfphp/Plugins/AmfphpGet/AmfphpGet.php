@@ -98,8 +98,8 @@ class AmfphpGet implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_
         }
         $parameters = array();
         $paramCounter = 1;
-        while(isset ($deserializedRequest['p$paramCounter'])){
-            $parameters[] = $deserializedRequest['p$paramCounter'];
+        while(isset ($deserializedRequest["p$paramCounter"])){
+            $parameters[] = $deserializedRequest["p$paramCounter"];
             $paramCounter++;
         }
         return $serviceRouter->executeServiceCall($serviceName, $methodName, $parameters);
