@@ -1,5 +1,6 @@
 Version history
-
+--------- 2.1 -----------
+add priorities for filters
 --------- 2.0.1 -----------
 change everything from private to protected to allow better extensibility
 possibility to add headers and messages in AMF response

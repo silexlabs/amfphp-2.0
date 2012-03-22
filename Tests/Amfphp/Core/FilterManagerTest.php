@@ -20,6 +20,8 @@ require_once dirname(__FILE__) . '/../../../Amfphp/ClassLoader.php';
  * @author Ariel Sommeria-klein
  */
 class Amfphp_Core_FilterManagerTest extends PHPUnit_Framework_TestCase {
+    
+    
     public function testFilter() {
         $filterManager = Amfphp_Core_FilterManager::getInstance();
         //add the same filter twice to test filtering
@@ -31,14 +33,60 @@ class Amfphp_Core_FilterManagerTest extends PHPUnit_Framework_TestCase {
 
 
     }
+    /**
+     *  at the end of the test $testArray should contain 3, 1, 1, 2
+     */
+    public function testPriorities(){
+        $testArray = array();
+        $filterManager = Amfphp_Core_FilterManager::getInstance();
+        $filterManager->addFilter('TESTPRIORITIES', $this, 'push1');
+        $filterManager->addFilter('TESTPRIORITIES', $this, 'push2', 20);
+        $filterManager->addFilter('TESTPRIORITIES', $this, 'push3', 1);
+        //same priority, should be called after
+        $filterManager->addFilter('TESTPRIORITIES', $this, 'push1', 1);
+        
+        $ret = $filterManager->callFilters('TESTPRIORITIES', $testArray);
+        $this->assertEquals(3, $ret[0]);
+        $this->assertEquals(1, $ret[1]);
+        $this->assertEquals(1, $ret[2]);
+        $this->assertEquals(2, $ret[3]);
+        
+    }
 
     /**
      * note: this function must be public to be called. This is called by filter
-     * @param <type> $valueToDouble
-     * @return <type>
+     * @param number $valueToDouble
+     * @return number
      */
     public function double($valueToDouble){
         return $valueToDouble * 2;
+    }
+    
+    /**
+     * note: this function must be public to be called. This is called by filter
+     *
+     */    
+    public function push1(array $testArray){
+        $testArray[] = 1;
+        return $testArray;
+    }
+        
+    /**
+     * note: this function must be public to be called. This is called by filter
+     *
+     */    
+    public function push2(array $testArray){
+        $testArray[] = 2;
+        return $testArray;
+    }
+        
+    /**
+     * note: this function must be public to be called. This is called by filter
+     *
+     */    
+    public function push3(array $testArray){
+        $testArray[] = 3;
+        return $testArray;
     }
 
 }
