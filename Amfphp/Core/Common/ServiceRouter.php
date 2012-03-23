@@ -61,13 +61,17 @@ class Amfphp_Core_Common_ServiceRouter {
      * get a service object by its name. Looks for a match in serviceNames2ClassFindInfo, then in the defined service folders.
      * If none found, an exception is thrown
      * @todo maybe option for a fully qualified class name. 
-     * @param String $serviceName
-     * @return serviceName
+     * this method is static so that it can be used also by the discovery service
+     * 
+     * @param type $serviceName
+     * @param array $serviceFolderPaths
+     * @param array $serviceNames2ClassFindInfo
+     * @return Object service object
      */
-    public function getServiceObject($serviceName) {
+    public static function getServiceObjectStatically($serviceName, array $serviceFolderPaths, array $serviceNames2ClassFindInfo){
         $serviceObject = null;
-        if (isset($this->serviceNames2ClassFindInfo[$serviceName])) {
-            $classFindInfo = $this->serviceNames2ClassFindInfo[$serviceName];
+        if (isset($serviceNames2ClassFindInfo[$serviceName])) {
+            $classFindInfo = $serviceNames2ClassFindInfo[$serviceName];
             require_once $classFindInfo->absolutePath;
             $serviceObject = new $classFindInfo->className();
         } else {
@@ -76,7 +80,7 @@ class Amfphp_Core_Common_ServiceRouter {
             $exploded = explode('/', $serviceNameWithSlashes);
             $className = $exploded[count($exploded) - 1];
             //no class find info. try to look in the folders
-            foreach ($this->serviceFolderPaths as $folderPath) {
+            foreach ($serviceFolderPaths as $folderPath) {
                 $servicePath = $folderPath . $serviceIncludePath;
                 if (file_exists($servicePath)) {
                     require_once $servicePath;
@@ -90,6 +94,16 @@ class Amfphp_Core_Common_ServiceRouter {
             throw new Amfphp_Core_Exception("$serviceName service not found ");
         }
         return $serviceObject;
+        
+    }
+    
+    /**
+     * 
+     * @param String $serviceName
+     * @return Object service object
+     */
+    public function getServiceObject($serviceName) {
+        return self::getServiceObjectStatically($serviceName, $this->serviceFolderPaths, $this->serviceNames2ClassFindInfo);
     }
 
     /**
