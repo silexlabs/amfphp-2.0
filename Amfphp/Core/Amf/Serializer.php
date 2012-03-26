@@ -487,7 +487,7 @@ class Amfphp_Core_Amf_Serializer {
      *
      * @todo no type markers ("\6', for example) in this method!
      */
-    protected function writeAmf3Data(& $d) {
+    protected function writeAmf3Data($d) {
         if (is_int($d)) { //int
             $this->writeAmf3Number($d);
             return;
