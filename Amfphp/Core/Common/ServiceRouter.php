@@ -76,6 +76,7 @@ class Amfphp_Core_Common_ServiceRouter {
             $serviceObject = new $classFindInfo->className();
         } else {
             $serviceNameWithSlashes = str_replace('.', '/', $serviceName);
+            $serviceNameWithSlashes = str_replace('_', '/', $serviceNameWithSlashes);
             $serviceIncludePath = $serviceNameWithSlashes . '.php';
             $exploded = explode('/', $serviceNameWithSlashes);
             $className = $exploded[count($exploded) - 1];
