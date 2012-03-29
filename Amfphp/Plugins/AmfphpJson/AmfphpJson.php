@@ -68,6 +68,9 @@ class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common
     public function deserialize(array $getData, array $postData, $rawPostData){
         if($rawPostData != ''){
             return json_decode($rawPostData);
+        }else if(isset($postData['json'])){
+            throw new Exception("debug exception " . print_r(($postData['json']), true));
+            return json_decode($postData['json']);
         }else{
             throw new Exception('json call data not found. It must be sent in the post data');
         }
