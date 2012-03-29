@@ -27,7 +27,7 @@ class Amfphp_Core_Config {
     /**
      * a dictionary of service classes represented in a ClassFindInfo.
      * The key is the name of the service, the value is the class find info.
-     * for example: AmfphpDiscoveryService -> new ClassfindInfo( ... /Plugins/serviceBrowser/AmfphpDiscoveryService.php, AmfphpDiscoveryService)
+     * for example: $serviceNames2ClassFindInfo["AmfphpDiscoveryService"] = new Amfphp_Core_Common_ClassFindInfo( dirname(__FILE__) . '/AmfphpDiscoveryService.php', 'AmfphpDiscoveryService');
      * The forward slash is important, don't use "\'!     
      * @var <array> of ClassFindInfo
      */
