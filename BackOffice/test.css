@@ -1,0 +1,28 @@
+.tabs {
+    border: 10px solid #ccc;
+    padding: 20px;
+    margin: 0 0 20px 0;
+}
+
+.tab_links {
+    padding: 0 0 0 10px;
+}
+
+body {
+    font-family: arial;
+    font-size: 11px;
+}
+
+h3 {
+    border-bottom: 1px solid #ccc;
+}
+
+a:link, a:visited, a:active {
+    color: #E01B4C;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
