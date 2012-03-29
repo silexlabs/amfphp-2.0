@@ -15,7 +15,7 @@
  * @author Ariel Sommeria-klein
  * @package Amfphp_CodeGen
  */
-class AmfphpDiscovery_MethodInfo {
+class AmfphpDiscovery_MethodDescriptor {
     public $name;
     /**
      * 

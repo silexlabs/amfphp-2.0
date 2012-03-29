@@ -12,11 +12,12 @@
 
 
 /**
- * analyses existing services
+ * analyses existing services. Warning: if 2 or more services have the same name, t-only one will appear in the returned data, 
+ * as it is an associative array using the service name as key. 
  * @package Amfphp_Plugins_Discovery
  * @author Ariel Sommeria-Klein
  */
-class DiscoveryService {
+class AmfphpDiscoveryService {
 
     
     /**
@@ -71,7 +72,7 @@ class DiscoveryService {
         foreach ($serviceNames2ClassFindInfo as $key => $value) {
             $ret[] = $key;
         }
-
+        
         return $ret;
     }
     
@@ -79,7 +80,7 @@ class DiscoveryService {
      * does the actual collection of data about available services
      * @return array of AmfphpDiscovery_ServiceInfo
      */
-    public function collect(){
+    public function discover(){
         $availableServiceNames = $this->getAvailableServiceNames(self::$serviceFolderPaths, self::$serviceNames2ClassFindInfo);
         $ret = array();
         foreach ($availableServiceNames as $availableServiceName) {
@@ -106,14 +107,14 @@ class DiscoveryService {
                     if($parameterDescriptor->getClass()){
                         $type = $parameterDescriptor->getClass()->name;
                     }
-                    $parameterInfo = new AmfphpDiscovery_ParameterInfo($availableParameterName, $type);
+                    $parameterInfo = new AmfphpDiscovery_ParameterDescriptor($availableParameterName, $type);
                     $parameters[] = $parameterInfo;
                 }
-                $methodInfo = new AmfphpDiscovery_MethodInfo($availableMethodName, $parameters);
-                $methods[] = $methodInfo;
+                $methodInfo = new AmfphpDiscovery_MethodDescriptor($availableMethodName, $parameters);
+                $methods[$availableMethodName] = $methodInfo;
             }
-            $serviceInfo = new AmfphpDiscovery_ServiceInfo($availableServiceName, $methods);
-            $ret[] = $serviceInfo;
+            $serviceInfo = new AmfphpDiscovery_ServiceDescriptor($availableServiceName, $methods);
+            $ret[$availableServiceName] = $serviceInfo;
         }  
         return $ret;
     }

@@ -15,7 +15,7 @@
  * @author Ariel Sommeria-klein
  * @package Amfphp_CodeGen
  */
-class AmfphpDiscovery_ServiceInfo {
+class AmfphpDiscovery_ServiceDescriptor {
      public $name;
     /**
      * 

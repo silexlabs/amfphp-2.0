@@ -15,7 +15,7 @@
  * @author Ariel Sommeria-klein
  * @package Amfphp_CodeGen
  */
-class AmfphpDiscovery_ParameterInfo {
+class AmfphpDiscovery_ParameterDescriptor {
     public $name;
     /**
      *This can be gathered in 2 manners: commentary tag analysis and type hinting analysis. For starters only the second method is used
