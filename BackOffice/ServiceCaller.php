@@ -48,7 +48,7 @@ class Amfphp_BackOffice_ServiceCaller {
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HEADER, false);
         $response = curl_exec($curl);
-        echo $response;
+        //echo $response;
         return json_decode($response);
     }
 

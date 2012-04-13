@@ -1,6 +1,6 @@
 
 <?php
 
-require_once(dirname(__FILE__) . '/Top.html');
+require_once(dirname(__FILE__) . '/Top.php');
 ?>
 

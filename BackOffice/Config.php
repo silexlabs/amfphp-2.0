@@ -20,9 +20,10 @@
 class Amfphp_BackOffice_Config {
     /**
      * path to amfPHP. relative or absolute. If relative, be careful, it's relative to the script, not this file.
+     * 'http://arielsommeria.com/Tests/TestData/';
      * @var String 
      */
-    public $amfphpEntryPointUrl = 'http://arielsommeria.com/Tests/TestData/';//http://localhost:8888/workspaceNetbeans/amfphp-2.0/Tests/TestData/';
+    public $amfphpEntryPointUrl = 'http://localhost:8888/workspaceNetbeans/amfphp-2.0/Tests/TestData/';
     
     public function resolveAmfphpEntryPointUrl(){
 //determine url to amfphp. If in config it contains 'http', we consider it's absolute. Otherwise it's relative, and we build it.

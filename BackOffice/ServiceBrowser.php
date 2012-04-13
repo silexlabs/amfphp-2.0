@@ -11,7 +11,8 @@
  */
 
 require_once(dirname(__FILE__) . '/ClassLoader.php');
-require_once(dirname(__FILE__) . '/Top.html');
+$addToTitle = ' - Service Browser';
+require_once(dirname(__FILE__) . '/Top.php');
 
 $config = new Amfphp_BackOffice_Config();
 $serviceCaller = new Amfphp_BackOffice_ServiceCaller($config->resolveAmfphpEntryPointUrl());
@@ -42,6 +43,7 @@ if((count($_POST) > 0) || isset($_GET['callWithoutParams'])){
 }
 
 //generate service/method menu
+
 echo "\n<ul id='menu'>";
 foreach ($services as $service) {
     echo "\n <li><b>$service->name</b>";
@@ -56,7 +58,8 @@ foreach ($services as $service) {
     echo "\n</ul>";
     echo "</li>";
 }
-echo "\n</ul><div id='content'>";
+echo "\n</ul>\n";
+echo "\n<div id='content'>";
 
 //generate method calling interface
 if ($callServiceName && $callMethodName) {
