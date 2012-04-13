@@ -42,7 +42,7 @@ class Amfphp_BackOffice_ClientGenerator_GeneratorManager {
                 }
 
                 $generatorInstance = new $generatorName();
-                $ret[] = $generatorInstance;
+                $ret[$generatorName] = $generatorInstance;
             }
         }
         return $ret;

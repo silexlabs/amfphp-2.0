@@ -16,8 +16,7 @@
  * Each directive starts with '/**ACG' and must end with * / 
  * note that services in subfolders should get a special treatment, and ideally code would be generated in them 
  * with additionnal sub-packages. This is technically too messy, so the '/' is simply replaced
- * by an '_'.  This will be replaced by a '/' in Amfphp. This unfortunately means that '_' is now no longer
- * an acceptable character in a service name.
+ * by '__'.  This will be replaced by a '/' in Amfphp. 
  *
  * @author Ariel Sommeria-klein
  * @package Amfphp_Backoffice_Generators
@@ -29,6 +28,11 @@ class Amfphp_BackOffice_ClientGenerator_ClientGeneratorBase {
     protected $services;
     protected $serviceBeingProcessed;
     protected $methodBeingProcessed;
+    /**
+     * file being processed, useful for error messages
+     * @var SplFileInfo 
+     */
+    protected $fileBeingProcessed;
     protected $amfphpEntryPointUrl;
 
     //terms to replace
@@ -45,30 +49,50 @@ class Amfphp_BackOffice_ClientGenerator_ClientGeneratorBase {
      *
      * @param array $codeFileExtensions
      * @param type $templateFolderUrl
-     * @param type $services . note: here '/' in each service name is replaced by '_', to avoid dealing with packages
-     * @param type $amfphpEntryPointUrl 
      */
-    public function __construct(array $codeFileExtensions, $templateFolderUrl, $services, $amfphpEntryPointUrl) {
+    public function __construct(array $codeFileExtensions, $templateFolderUrl) {
         $this->codeFileExtensions = $codeFileExtensions;
         $this->templateFolderUrl = $templateFolderUrl;
-        $this->services = $services;
-        $this->amfphpEntryPointUrl = $amfphpEntryPointUrl;
-        
-        foreach ($this->services as $service) {
-            $service->name = str_replace('/', '_', $service->name);
-        }
+
         
     }
-
-    public function generate() {
+    
+    /**
+     * override to provide a custom text in the Client Generator UI button for this generator.
+     * @return String 
+     */
+    public function getUiCallText(){
+        return get_class($this);
+    }
+    /**
+     * override to provide a custom url for a page containing info for this generator.
+     * @return String 
+     */
+    public function getInfoUrl(){
+        return "http://www.silexlabs.org/amfphp/documentation/client-generators/";
+    }
+    
+    
+    /**
+     *
+     * @param array $services . note: here '/' in each service name must be replaced by '__', to avoid dealing with packages
+     * @param string $amfphpEntryPointUrl 
+     * @return string folder where the data was written
+     */
+    public function generate($services, $amfphpEntryPointUrl) {
+        $this->services = $services;
+        $this->amfphpEntryPointUrl = $amfphpEntryPointUrl;
         $dstFolder = Amfphp_BackOffice_ClientGenerator_Util::getGeneratedProjectDestinationFolder('AmfphpFlash');
         Amfphp_BackOffice_ClientGenerator_Util::recurseCopy($this->templateFolderUrl, $dstFolder);
         $it = new RecursiveDirectoryIterator($dstFolder);
         foreach (new RecursiveIteratorIterator($it) as $file) {
             if (In_Array(SubStr($file, StrrPos($file, '.') + 1), $this->codeFileExtensions) == true) {
+                $this->fileBeingProcessed = $file;
                 $this->processSourceFile($file);
+                
             }
         }
+        return $dstFolder;
     }
 
     /**
@@ -100,6 +124,9 @@ class Amfphp_BackOffice_ClientGenerator_ClientGeneratorBase {
             //startPos: before start Marker, stopPos: after stop Marker
 
             $stopPos = strpos($code, $marker, $startPos + 1) + $markerLength;
+            if($stopPos < $startPos){
+                throw new Exception("missing stop marker $marker. in file $this->fileBeingProcessed");
+            }
             //blockText: text within the Markers, excluding the Markers
             $blockText = substr($code, $startPos + $markerLength, $stopPos - $startPos - 2 * $markerLength);
             //$processedText = $this->processServiceListBlock($blockText);
