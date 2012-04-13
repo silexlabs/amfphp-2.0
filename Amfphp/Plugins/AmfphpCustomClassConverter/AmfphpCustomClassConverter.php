@@ -51,6 +51,7 @@ class AmfphpCustomClassConverter {
 
     /**
      * paths to folders containing custom classes(relative or absolute)
+     * default is /Services/Vo/
      * @var array of paths
      */
     public $customClassFolderPaths;
