@@ -16,6 +16,7 @@
 require_once dirname(__FILE__) . '/../../Amfphp/ClassLoader.php';
 $config = new Amfphp_Core_Config();
 $config->serviceFolderPaths = array(dirname(__FILE__) . '/ExampleServices/');
+$config->pluginsConfig['AmfphpCustomClassConverter'] = array('customClassFolderPaths' => array(dirname(__FILE__) . '/ExampleServices/Vo'));
 $gateway = Amfphp_Core_HttpRequestGatewayFactory::createGateway($config);
 $gateway->service();
 $gateway->output();

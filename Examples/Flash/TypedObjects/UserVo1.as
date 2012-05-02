@@ -1,0 +1,1 @@
+﻿package  {		public class UserVo1 {		public var name:String = 'Ariel';		public var age:int = 33;		public var status:String = 'nothing yet';				public function UserVoNoPhpClass() {			// constructor code		}	}	}
