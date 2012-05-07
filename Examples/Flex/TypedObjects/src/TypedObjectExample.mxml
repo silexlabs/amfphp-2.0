@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   backgroundColor="#001116"
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" applicationComplete="application1_applicationCompleteHandler(event)">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<mx:VBox y="320" x="0" horizontalAlign="center" width="100%">
+		<mx:Text text="amfPHP Typed Object Example" color="white" fontSize="30"/>
+		<mx:Text text="This example shows the two ways amfPHP can handle typed objects."  color="white" />
+		<mx:Text text="UserVo1 has a matching PHP type, UserVo2 doesn't."  color="white" />
+		<mx:Text text="See the VoService Methods for details."  color="white" />
+		<s:Button label="Send and receive a UserVo1 Typed Object" click="sendUserVo1Btn_clickHandler(event)" id="sendUserVo1Btn"/>
+		<s:Button label="Send and receive a UserVo2 Typed Object" click="sendUserVo2Btn_clickHandler(event)" id="sendUserVo2Btn"/>
+	</mx:VBox>
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			import mx.rpc.events.ResultEvent;
+			import mx.rpc.remoting.RemoteObject;
+			
+			
+			private var _myConnection:RemoteObject;		
+			
+			
+			protected function application1_applicationCompleteHandler(event:FlexEvent):void
+			{
+				_myConnection = new RemoteObject;	
+				_myConnection.destination = "amfphpExamplesGateway"; 
+				_myConnection.endpoint = "../../../Php/";
+				_myConnection.source = "VoService";						
+				_myConnection.addEventListener(ResultEvent.RESULT, handleResult);
+			}
+			
+			private function handleResult(event:ResultEvent):void{
+				Alert.show("user vo status : " + event.result.status);
+			}
+			
+			private function checkUrl():Boolean{
+				if(loaderInfo.url.indexOf("file://") == 0){
+					Alert.show("Please access this example through a server, and not through the file system, as the gateway is set as a relative url. Alternatively you can change the url in the service-config.xml file and clean the project(Project->Clean");
+					return false;
+				}				
+				return true;
+			}
+			
+			protected function sendUserVo1Btn_clickHandler(event:MouseEvent):void
+			{
+				if(checkUrl()){
+					_myConnection.receiveAndReturnUserVo1(new UserVo1());
+				}
+			}
+			
+			protected function sendUserVo2Btn_clickHandler(event:MouseEvent):void
+			{
+				if(checkUrl()){
+					_myConnection.receiveAndReturnUserVo2(new UserVo2());
+				}
+			}
+			
+		]]>
+	</fx:Script>
+</s:Application>

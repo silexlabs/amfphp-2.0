@@ -10,20 +10,20 @@
  */
 
 /**
- * an example service for the pizza examples
+ * an example service for typed objects
  * @package Amfphp_Examples_ExampleService
  * @author Ariel Sommeria-klein
  */
 class VoService {
     
     /**
-     * This method expects a UserVo object. So amfPHP must receive a typed UserVo object, and the CustomClassConverter plugin
-     * must find the UserVo class in its value object folders
-     * @param UserVo $user
-     * @return UserVo 
+     * This method expects a UserVo1 object. So amfPHP must receive a typed UserVo1 object, and the CustomClassConverter plugin
+     * must find the UserVo1 class in its value object folders
+     * @param UserVo1 $user
+     * @return UserVo1
      */
-    public function receiveAndReturnUserVo1(UserVo $user){
-        $user->status = 'this is typed';
+    public function receiveAndReturnUserVo1(UserVo1 $user){
+        $user->status = 'the received object is strongly typed';
         return $user; 
     }
     
@@ -38,7 +38,7 @@ class VoService {
      * @return type 
      */
     public function receiveAndReturnUserVo2($user){
-        $user->status = 'this is untyped';
+        $user->status = 'the received object is not strongly typed';
         return $user; 
     }
 }

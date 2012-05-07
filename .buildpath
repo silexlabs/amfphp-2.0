@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry kind="src" path="Amfphp"/>
+	<buildpathentry kind="src" path="BackOffice"/>
+	<buildpathentry kind="src" path="Examples/Php"/>
+	<buildpathentry kind="src" path="Tests"/>
+	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
+</buildpath>
