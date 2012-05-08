@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<LINK href="style.css" rel="stylesheet" type="text/css">
+<title>amfPHP JSON Pizza Example</title>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="json2.js"></script>
+
+<script language="javascript">
+function send(method, paramExplicitType)
+{
+
+	var obj = {"_explicitType":paramExplicitType, "name":"ariel", "status":"bla"}; 
+   var callData = JSON.stringify({"serviceName":"VoService", "methodName":method,"parameters":[obj]});
+    $.post("../../Php/?contentType=application/json", callData, onSuccess);
+   
+} 
+
+function onSuccess(data)
+{
+	alert("returned object status : "  + data.status);
+}
+</script>
+
+</head>
+
+<body>
+    <h2>amfPHP Typed Object Example</h2>
+    JSON doesn't support strong typing. But if you set _explicitType on the objects you send, amfPHP will read that as a type.
+    <br/>
+    <br/>
+    In this example, you can send an object with _explicitType set to "UserVo1" or "UserVo2". The server only has a PHP class for UserVo1, but can handle both.
+        <br/>
+    <br/>  
+<input type="button" value="send UserVo1" id="bimButton" onClick="send('receiveAndReturnUserVo1', 'UserVo1')" width="200" height="100" />
+<input type="button" value="send UserVo2" id="bimButton" onClick="send('receiveAndReturnUserVo2', 'UserVo2')" width="200" height="100" />
+<div id="response" />
+</body>
+</html>
