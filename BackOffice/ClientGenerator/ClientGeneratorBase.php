@@ -82,7 +82,7 @@ class Amfphp_BackOffice_ClientGenerator_ClientGeneratorBase {
     public function generate($services, $amfphpEntryPointUrl) {
         $this->services = $services;
         $this->amfphpEntryPointUrl = $amfphpEntryPointUrl;
-        $dstFolder = Amfphp_BackOffice_ClientGenerator_Util::getGeneratedProjectDestinationFolder('AmfphpFlash');
+        $dstFolder = Amfphp_BackOffice_ClientGenerator_Util::getGeneratedProjectDestinationFolder(get_class($this));
         Amfphp_BackOffice_ClientGenerator_Util::recurseCopy($this->templateFolderUrl, $dstFolder);
         $it = new RecursiveDirectoryIterator($dstFolder);
         foreach (new RecursiveIteratorIterator($it) as $file) {
@@ -104,42 +104,48 @@ class Amfphp_BackOffice_ClientGenerator_ClientGeneratorBase {
      * @return mixed. if there was a change, returns the modified code, else returns false
      */
     protected function searchForBlocksAndApplyProcessing($code, $directive, $functionName) {
-        $marker = '/*ACG_' . $directive . '*/';
-        $markerLength = strlen($marker);
-        $codeLength = strlen($code);
-        $callBack = array($this, $functionName);
-
-
-        $startPos = 0;
-        $stopPos = 0;
-        $seekStartPos = 0;
+        $markers = array('<!--ACG_' . $directive . '-->', '/*ACG_' . $directive . '*/');
+        
         $hasChanged = false;
+	        
+        foreach($markers as $marker){
+          	$markerLength = strlen($marker);
+	        $codeLength = strlen($code);
+	        $callBack = array($this, $functionName);
+	
+	
+	        $startPos = 0;
+	        $stopPos = 0;
+	        $seekStartPos = 0;
+		
 
-        while (1) {
-            $startPos = strpos($code, $marker, $seekStartPos);
-            if ($startPos === false) {
-                break;
-            }
-            //echo $startPos . '<br/><br/>';
-            //startPos: before start Marker, stopPos: after stop Marker
-
-            $stopPos = strpos($code, $marker, $startPos + 1) + $markerLength;
-            if($stopPos < $startPos){
-                throw new Exception("missing stop marker $marker. in file $this->fileBeingProcessed");
-            }
-            //blockText: text within the Markers, excluding the Markers
-            $blockText = substr($code, $startPos + $markerLength, $stopPos - $startPos - 2 * $markerLength);
-            //$processedText = $this->processServiceListBlock($blockText);
-            $processedText = call_user_func($callBack, $blockText);
-            //up to, but exculding Marker
-            $beforeBlock = substr($code, 0, $startPos);
-            //after Marker
-            $afterBlock = substr($code, $stopPos);
-            $code = $beforeBlock . $processedText . $afterBlock;
-            $hasChanged = true;
-            $seekStartPos = strlen($beforeBlock . $processedText);
+	        while (1) {
+	            $startPos = strpos($code, $marker, $seekStartPos);
+	            if ($startPos === false) {
+	                break;
+	            }
+	            //echo $startPos . '<br/><br/>';
+	            //startPos: before start Marker, stopPos: after stop Marker
+	
+	            $stopPos = strpos($code, $marker, $startPos + 1) + $markerLength;
+	            if($stopPos < $startPos){
+	                throw new Exception("missing stop marker $marker. in file $this->fileBeingProcessed");
+	            }
+	            //blockText: text within the Markers, excluding the Markers
+	            $blockText = substr($code, $startPos + $markerLength, $stopPos - $startPos - 2 * $markerLength);
+	            //$processedText = $this->processServiceListBlock($blockText);
+	            $processedText = call_user_func($callBack, $blockText);
+	            //up to, but exculding Marker
+	            $beforeBlock = substr($code, 0, $startPos);
+	            //after Marker
+	            $afterBlock = substr($code, $stopPos);
+	            $code = $beforeBlock . $processedText . $afterBlock;
+	            $hasChanged = true;
+	            $seekStartPos = strlen($beforeBlock . $processedText);
+	        }
+	        
         }
-        if ($hasChanged) {
+    	if ($hasChanged) {
             return $code;
         } else {
             return false;
@@ -211,9 +217,16 @@ class Amfphp_BackOffice_ClientGenerator_ClientGeneratorBase {
      */
     protected function processServiceListBlock($code) {
         $ret = '';
-        $this->searchForBlocksAndApplyProcessing($code, self::METHOD, 'processMethodListBlock');
         foreach ($this->services as $service) {
+            $this->serviceBeingProcessed = $service;
             $blockForService = str_replace(self::_SERVICE_, $service->name, $code);
+            
+        
+        	$processed = $this->searchForBlocksAndApplyProcessing($blockForService, self::METHOD, 'processMethodListBlock');
+        	if ($processed) {
+                $blockForService = $processed;
+            }
+
             $ret .= $blockForService;
         }
         return $ret;
