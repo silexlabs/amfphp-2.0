@@ -27,6 +27,13 @@ class AmfphpHtmlClientGenerator extends Amfphp_BackOffice_ClientGenerator_Client
     public function getInfoUrl(){
         return "http://www.silexlabs.org/amfphp/documentation/client-generators/html/";
     }
+    /**
+     * (non-PHPdoc)
+     * @see ClientGenerator/Amfphp_BackOffice_ClientGenerator_ClientGeneratorBase::getTestUrlSuffix()
+     */
+    public function getTestUrlSuffix(){
+    	return '';
+    }
 }
 
 ?>

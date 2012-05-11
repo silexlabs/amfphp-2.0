@@ -72,6 +72,15 @@ class Amfphp_BackOffice_ClientGenerator_ClientGeneratorBase {
         return "http://www.silexlabs.org/amfphp/documentation/client-generators/";
     }
     
+    /**
+     * added to the url of the generated code to go to its test page directly fro, the client generator ui
+     * for example: 'testhtml'/index.html'
+     * return false if none, for exqmple if the generated client must be compiled first
+     * 
+     */
+    public function getTestUrlSuffix(){
+    	return false;
+    }
     
     /**
      *
@@ -82,8 +91,9 @@ class Amfphp_BackOffice_ClientGenerator_ClientGeneratorBase {
     public function generate($services, $amfphpEntryPointUrl) {
         $this->services = $services;
         $this->amfphpEntryPointUrl = $amfphpEntryPointUrl;
-        $dstFolder = Amfphp_BackOffice_ClientGenerator_Util::getGeneratedProjectDestinationFolder(get_class($this));
-        Amfphp_BackOffice_ClientGenerator_Util::recurseCopy($this->templateFolderUrl, $dstFolder);
+        $dstFolder = 'ClientGenerator/Generated/' . date("Ymd-his-") . get_class($this);
+        
+        Amfphp_BackOffice_ClientGenerator_Util::recurseCopy($this->templateFolderUrl, AMFPHP_BACKOFFICE_ROOTPATH . $dstFolder);
         $it = new RecursiveDirectoryIterator($dstFolder);
         foreach (new RecursiveIteratorIterator($it) as $file) {
             if (In_Array(SubStr($file, StrrPos($file, '.') + 1), $this->codeFileExtensions) == true) {

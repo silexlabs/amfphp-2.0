@@ -1,6 +1,8 @@
 <?php 
  require_once 'top.php';
 ?>
+<ul id='menu'>
+<h1>_SERVICE_ Service UI</h1>
 <script type="text/javascript">
 <!--
 /*ACG_METHOD*/
@@ -18,12 +20,18 @@ function onError(){
 //-->
 </script>
 <!--ACG_METHOD-->
+ <li><b>_METHOD_
 <!--ACG_PARAMETER-->
 		<input type="text" id="_METHOD__PARAMETER_"/>
 <!--ACG_PARAMETER-->
 		<input type="submit" value="call _METHOD_" onclick="_METHOD_ServiceCall()"/>
-		<br/>
+</b></li>		
 <!--ACG_METHOD-->
-<div id="resultOutput"></div>
+</ul>
+<br/>
+<div id="content">
+	<div id="resultOutput">
+	</div>
+</div>
     </body>	
 </html>
