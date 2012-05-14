@@ -44,7 +44,7 @@ echo '<tr><td>IOS</td><td><a href="http://www.silexlabs.org/amfphp/documentation
 echo '<tr><td>Flex</td><td><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/flex/">Info/Vote Up</a></td>        <td>Not Available Yet</td></tr>';
 echo '<tr><td>Haxe</td><td><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/haxe/">Info/Vote Up</a></td>        <td>Not Available Yet</td>    </tr>';
 echo '<tr><td>Android</td><td><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/android/">Info/Vote Up</a></td>        <td>Not Available Yet </td></tr>';
-echo '<tr><td>Something Missing?</td><td><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/missing/">Info</a></td>        <td></td></tr>';
+echo '<tr><td>Write your Own?</td><td><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/missing/">Info</a></td>        <td></td></tr>';
 
 //echo "\n <input type='submit' value='HTML5 - coming soon'/><br/>";
 echo "\n</table>";
