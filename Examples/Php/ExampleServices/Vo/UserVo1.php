@@ -15,7 +15,7 @@
  * @package Amfphp_Examples_ExampleService
  * @author Ariel Sommeria-klein
  */
-class UserVo {
+class UserVo1 {
     public $name;
     public $age;
     public $status;
