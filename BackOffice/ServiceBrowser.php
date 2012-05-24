@@ -7,9 +7,12 @@
  *
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
- * @package Amfphp_BackOffice_ServiceBrowser
+ * @package Amfphp_BackOffice
  */
 
+/**
+ * includes
+ */
 require_once(dirname(__FILE__) . '/ClassLoader.php');
 $addToTitle = ' - Service Browser';
 require_once(dirname(__FILE__) . '/Top.php');

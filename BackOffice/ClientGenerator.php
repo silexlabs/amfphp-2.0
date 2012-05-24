@@ -8,6 +8,10 @@
  * with this package in the file license.txt.
  * @package Amfphp_BackOffice_ClientGenerator
  */
+
+/**
+ * includes
+ */
 require_once(dirname(__FILE__) . '/ClassLoader.php');
 require_once(dirname(__FILE__) . '/ClientGenerator/Generators/AmfphpFlashClientGenerator/AmfphpFlashClientGenerator.php');
 $addToTitle = ' - Client Generator';

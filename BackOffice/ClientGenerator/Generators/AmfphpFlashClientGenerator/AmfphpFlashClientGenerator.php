@@ -7,6 +7,7 @@
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
  * @package Amfphp_Backoffice_Generators
+ */
 
  /**
  * generates a Flash project for consumption of amfPHP services

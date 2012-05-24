@@ -6,7 +6,7 @@
  *
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
- * @package Amfphp_Core
+ * @package Amfphp_BackOffice
  */
 
 /**
@@ -18,8 +18,10 @@
  *
  */
 
+/**
+ * includes
+ */
 define( 'AMFPHP_BACKOFFICE_ROOTPATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
-
 require_once AMFPHP_BACKOFFICE_ROOTPATH . 'ServiceCaller.php';
 require_once AMFPHP_BACKOFFICE_ROOTPATH . 'Config.php';
 require_once AMFPHP_BACKOFFICE_ROOTPATH . 'ClientGenerator/ClientGeneratorBase.php';
