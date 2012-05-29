@@ -129,20 +129,6 @@
 	</div>
 	<dl>
 			<dt class="field">
-						<span class="var-title">$additionnalResponseHeaders</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Handler.html#var$additionnalResponseHeaders">Amfphp_Core_Amf_Handler::$additionnalResponseHeaders</a> in Handler.php</div>
-							<div class="index-item-description">set this if you need additional headers in the response.  They will be added after normal treatment</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$additionnalResponseMessages</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Handler.html#var$additionnalResponseMessages">Amfphp_Core_Amf_Handler::$additionnalResponseMessages</a> in Handler.php</div>
-							<div class="index-item-description">set this if you need additional messages in the response. They will be added after normal treatment</div>
-					</dd>
-			<dt class="field">
 						<span class="var-title">$Amf0StoredObjects</span>
 					</dt>
 		<dd class="index-item-body">
@@ -385,6 +371,13 @@
 		<div style="clear: both"></div>
 	</div>
 	<dl>
+			<dt class="field">
+						<span class="var-title">$forceAmf3</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Handler.html#var$forceAmf3">Amfphp_Core_Amf_Handler::$forceAmf3</a> in Handler.php</div>
+							<div class="index-item-description">see Amfphp_Core_Config::CONFIG_FORCE_AMF3</div>
+					</dd>
 			<dt class="field">
 						FIELD_EXPLICIT_TYPE
 					</dt>
@@ -639,12 +632,6 @@
 	</div>
 	<dl>
 			<dt class="field">
-						<span class="var-title">$objectEncoding</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Handler.html#var$objectEncoding">Amfphp_Core_Amf_Handler::$objectEncoding</a> in Handler.php</div>
-					</dd>
-			<dt class="field">
 						<span class="var-title">$outBuffer</span>
 					</dt>
 		<dd class="index-item-body">
@@ -685,11 +672,25 @@
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Deserializer.html#var$rawData">Amfphp_Core_Amf_Deserializer::$rawData</a> in Deserializer.php</div>
 					</dd>
 			<dt class="field">
+						<span class="var-title">$requestPacket</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Handler.html#var$requestPacket">Amfphp_Core_Amf_Handler::$requestPacket</a> in Handler.php</div>
+							<div class="index-item-description">use this to manipulate the packet directly from your services. This is an advanced option, and should be used with caution!</div>
+					</dd>
+			<dt class="field">
 						<span class="var-title">$required</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Header.html#var$required">Amfphp_Core_Amf_Header::$required</a> in Header.php</div>
 							<div class="index-item-description">Required is a boolean determining whether the remote system  must understand this header in order to operate.  If the system  does not understand the header then it should not execute the  method call.</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$responsePacket</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Amfphp_Core_Amf/Amfphp_Core_Amf_Handler.html#var$responsePacket">Amfphp_Core_Amf_Handler::$responsePacket</a> in Handler.php</div>
+							<div class="index-item-description">use this to manipulate the packet directly from your services. This is an advanced option, and should be used with caution!</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$responseUri</span>

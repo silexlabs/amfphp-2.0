@@ -26,8 +26,7 @@ class AmfphpDiscovery_MethodDescriptor {
     public $parameters; 
     
     /**
-     * return type. This would have to be done with commentary tag analysis, doesn't work for now.
-     * @todo.
+     * @todo return type. This would have to be done with commentary tag analysis, doesn't work for now.
      * @var String 
      */
     //public $returns;
