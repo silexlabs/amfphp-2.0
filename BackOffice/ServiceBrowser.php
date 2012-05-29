@@ -45,9 +45,18 @@ if((count($_POST) > 0) || isset($_GET['callWithoutParams'])){
     $makeServiceCall = true;
 }
 
-//generate service/method menu
-
 echo "\n<ul id='menu'>";
+if($services == null){
+    ?>
+    No services available. Please check : <br/>
+    <ul>
+        <li>That your service classes don't contain syntax errors</li>
+        <li>BackOffice Configuration in BackOffice/Config.php, specifically $amfphpEntryPointUrl</li>
+    </ul>
+    <?php
+    return;
+}
+//generate service/method menu
 foreach ($services as $service) {
     echo "\n <li><b>$service->name</b>";
     echo "\n<ul>";
