@@ -50,8 +50,13 @@ class Amfphp_BackOffice_ServiceCaller {
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HEADER, false);
         $response = curl_exec($curl);
-        //echo $response;
-        return json_decode($response);
+        $decoded = json_decode($response);
+        echo $response;
+        if(!$decoded){
+            throw new Exception("service called failed. server response: \n $response \nrequest: \n \n$requestString" );
+        }
+        return $decoded;
+        
     }
 
 }
