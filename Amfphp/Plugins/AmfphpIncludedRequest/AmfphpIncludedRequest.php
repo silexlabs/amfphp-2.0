@@ -14,10 +14,6 @@
  * allows inclusion of an amfPHP entry point script. This is so that a script running on the same server can 
  * include the entry point script and execute a request.
  * 
- * The main use is for the service browser. 
- * This allows the service browser page to be generated each time, to display php erros at the top, and retrieve any return data as an object 
- * rather than as text that would need to be parsed.
- * 
  * It works by setting the required globals describing the request, including the entry point script, and retrieving the response data.
  * 
  * globals are:
@@ -48,6 +44,11 @@ class AmfphpIncludedRequest implements Amfphp_Core_Common_IDeserializer, Amfphp_
 * @param array $config optional key/value pairs in an associative array. Used to override default configuration values.
 */
     public function __construct(array    $config = null) {
+		
+	    global $amfphpIncludedRequestServiceName;
+        if (!isset($amfphpIncludedRequestServiceName)){
+			return;
+		}
         $filterManager = Amfphp_Core_FilterManager::getInstance();
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZER, $this, "filterHandler");
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_REQUEST_HANDLER, $this, "filterHandler");

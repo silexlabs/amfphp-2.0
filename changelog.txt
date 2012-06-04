@@ -2,7 +2,7 @@ Version history
 --------- 2.1 -----------
 client generators
 service browser moved to backoffice
-dummy and included request plugins
+dummy, discovery service,  and included request plugins
 add priorities for filters
 option to force amf3
 access to AMF request and response packets

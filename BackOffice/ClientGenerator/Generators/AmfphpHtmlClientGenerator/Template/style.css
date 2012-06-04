@@ -16,7 +16,7 @@ a {
 }
 
 input {
-	background: none;
+        color:black;
 	padding: 5px;
 	border: 1px solid #525252;
 	-moz-border-radius: 8px;
