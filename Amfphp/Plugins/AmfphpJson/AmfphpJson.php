@@ -104,18 +104,12 @@ class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common
     }
 
     /**
+     * don't format; just throw! In this way ajax libs will have their error functions triggered
      * @see Amfphp_Core_Common_IExceptionHandler
      */
-    public function handleException(Exception $exception){        
-        $error = new stdClass();
-        $error->message = $exception->getMessage();
-        $error->code = $exception->getCode();
-        if($this->returnErrorDetails){
-            $error->file = $exception->getFile();
-            $error->line = $exception->getLine();
-            $error->stack = $exception->getTraceAsString();
-        }        
-        return (object)array('error' => $error);
+    public function handleException(Exception $exception){      
+        
+        throw $exception;
         
     }
     

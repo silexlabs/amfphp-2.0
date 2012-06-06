@@ -27,6 +27,14 @@ require_once dirname(__FILE__) . '/ServiceDescriptor.php';
  */
 class AmfphpDiscovery {
     /**
+    * array of files and folders to ignore during introspection of the services dir
+    * e.g. ignore dBug.php, an entire directory called 'classes' and also a subdirectory of one of the service directories (Vo/)
+    * $this->pluginsConfig = array('AmfphpDiscovery' 	=> array('excludePaths' => array('dBug', 'classes', 'Vo/')));
+     * default is for ignoring Vo/ folder
+    */
+    protected $excludePaths = array('Vo/'); 
+    
+    /**
      * constructor.
      * adds filters to grab config about services and add discovery service. Low priority so that other plugins can add their services first
      * @param array $config optional key/value pairs in an associative array. Used to override default configuration values.
@@ -35,6 +43,11 @@ class AmfphpDiscovery {
         $filterManager = Amfphp_Core_FilterManager::getInstance();
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_SERVICE_NAMES_2_CLASS_FIND_INFO, $this, 'filterServiceNames2ClassFindInfo', 99);
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_SERVICE_FOLDER_PATHS, $this, 'filterServiceFolderPaths', 99);
+        
+        if(isset($config['excludePaths'])){
+            $this->excludePaths = $config['excludePaths'];    
+        }
+        AmfphpDiscoveryService::$excludePaths = $this->excludePaths;
     }
     
      /**

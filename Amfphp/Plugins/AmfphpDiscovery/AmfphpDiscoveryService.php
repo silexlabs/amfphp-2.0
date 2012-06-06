@@ -18,7 +18,11 @@
  * @author Ariel Sommeria-Klein
  */
 class AmfphpDiscoveryService {
-
+    /**
+     * @see AmfphpDiscovery
+     * @var array of strings(patterns)
+     */
+    public static $excludePaths;
     
     /**
      * paths to folders containing services(relative or absolute). set by plugin.
@@ -48,9 +52,9 @@ class AmfphpDiscoveryService {
             foreach ($folderContent as $fileName) {
                 //add all .php file names, but removing the .php suffix
                 if (strpos($fileName, ".php")) {
-                    $serviceName = substr($fileName, 0, strlen($fileName) - 4);
-                    $ret[] = $subFolder . $serviceName;
-                }else if((substr ($fileName, 0, 1) != '.') && is_dir($rootPath . $subFolder . $fileName)){
+                    $fullServiceName = $subFolder . substr($fileName, 0, strlen($fileName) - 4);
+                    $ret[] = $fullServiceName;
+             }else if((substr ($fileName, 0, 1) != '.') && is_dir($rootPath . $subFolder . $fileName)){
                     $ret = array_merge($ret, $this->searchFolderForServices($rootPath, $subFolder . $fileName . '/'));
                 }
             }
@@ -116,6 +120,15 @@ class AmfphpDiscoveryService {
             $serviceInfo = new AmfphpDiscovery_ServiceDescriptor($availableServiceName, $methods);
             $ret[$availableServiceName] = $serviceInfo;
         }  
+        //note : filtering must be done at the end, as for example excluding a Vo class needed by another creates issues
+        foreach($ret as $serviceName => $serviceObj){
+            foreach (self::$excludePaths as $excludePath){
+                if (strpos($serviceName, $excludePath) !== false){
+                    unset($ret[$serviceName]);
+                    break;
+                }
+            }
+        }
         return $ret;
     }
 }

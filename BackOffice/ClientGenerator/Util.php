@@ -8,6 +8,8 @@
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
  * @package Amfphp__BackOffice_ClientGenerator
+ * 
+ */
 
   /**
  * common utilities for generators

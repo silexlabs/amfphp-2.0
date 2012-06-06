@@ -43,6 +43,11 @@ class TestService {
         return 'slept for 1 second';
     }
     
+    public function returnTestHeader(){
+        $header = Amfphp_Core_Amf_Handler::$requestPacket->headers[0];
+        return $header->data;
+    }
+    
     /**
      * shouldn't appear in the service browser or be available as a service
      */

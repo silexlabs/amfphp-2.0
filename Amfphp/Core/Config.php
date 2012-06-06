@@ -36,9 +36,10 @@ class Amfphp_Core_Config {
     /**
      * set to true if you want the service router to check if the number of arguments received by amfPHP matches with the method being called.
      * This should be set to false in production for performance reasons
+     * default is true
      * @var Boolean
      */
-    public $checkArgumentCount;
+    public $checkArgumentCount = true;
 
     /**
      * paths to the folder containing the plugins. defaults to AMFPHP_ROOTPATH . '/Plugins/'
@@ -66,10 +67,24 @@ class Amfphp_Core_Config {
     /**
      * if true, there will be detailed information in the error messages, including confidential information like paths.
      * So it is advised to set to true for development purposes and to false in production.
+     * default is true.
      * Set in the shared config.
+     * for example
+     * $this->sharedConfig[self::CONFIG_RETURN_ERROR_DETAILS] = true;
      * @var Boolean
      */
     const CONFIG_RETURN_ERROR_DETAILS = 'returnErrorDetails';
+    
+    /**
+     * historically, amf0 is default, and amf3 is only used if amf3 is detected in the request.
+     * Set this to true to override this behavior anf always use amf3. 
+     * the default is false, as this can create some serious problems with 
+     * amf clients that expect amf0 but receive amf3, even if they support it.
+     * This is the case for Flash's netconnection.
+     * To use amf0 this must be set to false. for example
+     * $this->sharedConfig[self::CONFIG_FORCE_AMF3] = false;
+     */
+    const CONFIG_FORCE_AMF3 = 'forceAmf3';
     
 
     /**
@@ -84,16 +99,12 @@ class Amfphp_Core_Config {
         $this->serviceNames2ClassFindInfo = array();
         $this->pluginsFolders = array(AMFPHP_ROOTPATH . 'Plugins/');
         $this->pluginsConfig = array();
-        //useful when developping. set to false for production
-        $this->checkArgumentCount = true;
-        
         $this->sharedConfig = array();
-        $this->sharedConfig[self::CONFIG_RETURN_ERROR_DETAILS] = true;
-        
         $this->disabledPlugins = array();
         //disable logging and error handler by default
         $this->disabledPlugins[] = 'AmfphpLogger';
         $this->disabledPlugins[] = 'AmfphpErrorHandler';
+        
         
     }
 }

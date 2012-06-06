@@ -1,7 +1,12 @@
 Version history
 --------- 2.1 -----------
-dummy and included request plugins
+client generators
+service browser moved to backoffice
+dummy, discovery service,  and included request plugins
 add priorities for filters
+option to force amf3
+access to AMF request and response packets
+Typed Objects example
 --------- 2.0.1 -----------
 change everything from private to protected to allow better extensibility
 possibility to add headers and messages in AMF response

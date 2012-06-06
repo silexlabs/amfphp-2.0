@@ -92,24 +92,24 @@
 					</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-												<div class="var-title">
-					static <span class="var-type">type</span>
-					<a href="#$additionnalResponseHeaders" title="details" class="var-name">$additionnalResponseHeaders</a>
+																												<div class="var-title">
+					static <span class="var-type"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Packet.html">Amfphp_Core_Amf_Packet</a></span>
+					<a href="#$requestPacket" title="details" class="var-name">$requestPacket</a>
 				</div>
 																<div class="var-title">
-					static <span class="var-type">array</span>
-					<a href="#$additionnalResponseMessages" title="details" class="var-name">$additionnalResponseMessages</a>
+					static <span class="var-type"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Packet.html">Amfphp_Core_Amf_Packet</a></span>
+					<a href="#$responsePacket" title="details" class="var-name">$responsePacket</a>
 				</div>
-																																																												<div class="var-title">
+																												<div class="var-title">
+					<span class="var-type">boolean</span>
+					<a href="#$forceAmf3" title="details" class="var-name">$forceAmf3</a>
+				</div>
+																<div class="var-title">
 					<span class="var-type">String</span>
 					<a href="#$lastRequestMessageResponseUri" title="details" class="var-name">$lastRequestMessageResponseUri</a>
 				</div>
-																<div class="var-title">
-					<span class="var-type">mixed</span>
-					<a href="#$objectEncoding" title="details" class="var-name">$objectEncoding</a>
-				</div>
-																<div class="var-title">
-					<span class="var-type">mixed</span>
+																																<div class="var-title">
+					<span class="var-type">boolean</span>
 					<a href="#$returnErrorDetails" title="details" class="var-name">$returnErrorDetails</a>
 				</div>
 											</div>
@@ -185,21 +185,20 @@
 							
 					</div>
 		<div class="info-box-body">
-			<a name="var$additionnalResponseHeaders" id="$additionnalResponseHeaders"><!-- --></A>
+			<a name="var$requestPacket" id="$requestPacket"><!-- --></A>
 <div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
-			static <span class="var-type">type</span>
-			<span class="var-name">$additionnalResponseHeaders</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">60</span>)
+			static <span class="var-type"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Packet.html">Amfphp_Core_Amf_Packet</a></span>
+			<span class="var-name">$requestPacket</span>
+						(line <span class="line-number">68</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">set this if you need additional headers in the response.  They will be added after normal treatment</p>
+<p class="short-description">use this to manipulate the packet directly from your services. This is an advanced option, and should be used with caution!</p>
 	<ul class="tags">
-				<li><span class="field">var:</span> array of Amfphp_Core_Amf_Header</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -208,22 +207,43 @@
 		
 
 </div>
-<a name="var$additionnalResponseMessages" id="$additionnalResponseMessages"><!-- --></A>
+<a name="var$responsePacket" id="$responsePacket"><!-- --></A>
 <div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
-			static <span class="var-type">array</span>
-			<span class="var-name">$additionnalResponseMessages</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">65</span>)
+			static <span class="var-type"><a href="../Amfphp_Core_Amf/Amfphp_Core_Amf_Packet.html">Amfphp_Core_Amf_Packet</a></span>
+			<span class="var-name">$responsePacket</span>
+						(line <span class="line-number">73</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">set this if you need additional messages in the response. They will be added after normal treatment</p>
+<p class="short-description">use this to manipulate the packet directly from your services. This is an advanced option, and should be used with caution!</p>
 	<ul class="tags">
-				<li><span class="field">var:</span> of Amfphp_Core_Amf_Message</li>
 				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$forceAmf3" id="$forceAmf3"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">boolean</span>
+			<span class="var-name">$forceAmf3</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number">63</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">see Amfphp_Core_Config::CONFIG_FORCE_AMF3</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
 			</ul>
 	
 	
@@ -232,7 +252,7 @@
 
 </div>
 <a name="var$lastRequestMessageResponseUri" id="$lastRequestMessageResponseUri"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -254,40 +274,20 @@
 		
 
 </div>
-<a name="var$objectEncoding" id="$objectEncoding"><!-- --></A>
-<div class="evenrow">
-
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$objectEncoding</span>
-			 = <span class="var-default"> Amfphp_Core_Amf_Constants::AMF0_ENCODING</span>			(line <span class="line-number">52</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	
-		
-		
-
-</div>
 <a name="var$returnErrorDetails" id="$returnErrorDetails"><!-- --></A>
 <div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
-			<span class="var-type">mixed</span>
+			<span class="var-type">boolean</span>
 			<span class="var-name">$returnErrorDetails</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">54</span>)
+			 = <span class="var-default"> true</span>			(line <span class="line-number">57</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
 	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../Amfphp_Core/Amfphp_Core_Config.html#constCONFIG_RETURN_ERROR_DETAILS">Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS</a></li>
 				<li><span class="field">access:</span> protected</li>
 			</ul>
 	
@@ -318,7 +318,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">68</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">76</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -346,7 +346,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">deserialize</span> (line <span class="line-number">76</span>)
+		<span class="method-title">deserialize</span> (line <span class="line-number">90</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -381,7 +381,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getServiceCallParameters</span> (line <span class="line-number">91</span>)
+		<span class="method-title">getServiceCallParameters</span> (line <span class="line-number">105</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -411,7 +411,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">handleDeserializedRequest</span> (line <span class="line-number">130</span>)
+		<span class="method-title">handleDeserializedRequest</span> (line <span class="line-number">144</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -443,7 +443,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">handleException</span> (line <span class="line-number">168</span>)
+		<span class="method-title">handleException</span> (line <span class="line-number">181</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -472,7 +472,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">handleRequestMessage</span> (line <span class="line-number">108</span>)
+		<span class="method-title">handleRequestMessage</span> (line <span class="line-number">122</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -506,7 +506,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">serialize</span> (line <span class="line-number">201</span>)
+		<span class="method-title">serialize</span> (line <span class="line-number">214</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -617,7 +617,7 @@
 	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Mon, 23 Jan 2012 17:22:06 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 29 May 2012 23:42:04 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

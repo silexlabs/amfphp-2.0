@@ -23,11 +23,11 @@ class Amfphp_BackOffice_Config {
      * 'http://silexlabs.org/Tests/TestData/';
      * some entry points that pertain to the code:
      * '../Amfphp/'
-     * '../Tests/TestData/'
      * '../Examples/Php/'
+     * '../Tests/TestData/'
      * @var String 
      */
-    public $amfphpEntryPointUrl = '../Examples/Php/';
+    public $amfphpEntryPointUrl = '../Amfphp/';
     
     public function resolveAmfphpEntryPointUrl(){
 //determine url to amfphp. If in config it contains 'http', we consider it's absolute. Otherwise it's relative, and we build it.

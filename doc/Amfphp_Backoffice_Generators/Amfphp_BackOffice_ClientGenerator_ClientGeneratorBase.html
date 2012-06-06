@@ -1,0 +1,1005 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class Amfphp_BackOffice_ClientGenerator_ClientGeneratorBase</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class Amfphp_BackOffice_ClientGenerator_ClientGeneratorBase</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+							<a href="#sec-descendents">Descendents</a>
+			|											<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+											<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+						
+			</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Handles typical client generation, override various methods for customisation <ol><li>copies the template.</li></ol></p>
+<p class="description"><p>2. looks for template directives in the code. Usually these directives indicate a block of code that must be replicated.  Each directive starts with '/**ACG' and must end with * /  note that services in subfolders should get a special treatment, and ideally code would be generated in them  with additionnal sub-packages. This is technically too messy, so the '/' is simply replaced  by '__'.  This will be replaced by a '/' in Amfphp.</p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Ariel Sommeria-klein</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_BackOffice---ClientGenerator---ClientGeneratorBase.php.html">/BackOffice/ClientGenerator/ClientGeneratorBase.php</a> (line <span class="field">26</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+	<a name="sec-descendents"></a>
+	<div class="info-box">
+		<div class="info-box-title">Direct descendents</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+			<span class="disabled">Descendents</span>
+			|												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+								|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<table cellpadding="2" cellspacing="0" class="class-table">
+				<tr>
+					<th class="class-table-header">Class</th>
+					<th class="class-table-header">Description</th>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../Amfphp_Backoffice_Generators/AmfphpFlashClientGenerator.html">AmfphpFlashClientGenerator</a></td>
+					<td>
+											generates a Flash project for consumption of amfPHP services
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../Amfphp_Backoffice_Generators/AmfphpHtmlClientGenerator.html">AmfphpHtmlClientGenerator</a></td>
+					<td>
+											generates a Flash project for consumption of amfPHP services
+										</td>
+				</tr>
+							</table>
+		</div>
+	</div>
+
+	<a name="sec-const-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constant Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendants</a> |
+						<span class="disabled">Constants</span> (<a href="#sec-consts">details</a>)
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="const-summary">
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#METHOD" title="details" class="const-name">METHOD</a> = 					<span class="var-type"> 'METHOD'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#PARAMETER" title="details" class="const-name">PARAMETER</a> = 					<span class="var-type"> 'PARAMETER'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#PARAMETER_COMMA" title="details" class="const-name">PARAMETER_COMMA</a> = 					<span class="var-type"> 'PARAMETER_COMMA'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#SERVICE" title="details" class="const-name">SERVICE</a> = 					<span class="var-type"> 'SERVICE'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#_METHOD_" title="details" class="const-name">_METHOD_</a> = 					<span class="var-type"> '_METHOD_'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#_PARAMETER_" title="details" class="const-name">_PARAMETER_</a> = 					<span class="var-type"> '_PARAMETER_'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#_SERVICE_" title="details" class="const-name">_SERVICE_</a> = 					<span class="var-type"> '_SERVICE_'</span>
+
+				</div>
+							</div>
+		</div>
+	</div>
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																																																								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$amfphpEntryPointUrl" title="details" class="var-name">$amfphpEntryPointUrl</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$codeFileExtensions" title="details" class="var-name">$codeFileExtensions</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">SplFileInfo</span>
+					<a href="#$fileBeingProcessed" title="details" class="var-name">$fileBeingProcessed</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$methodBeingProcessed" title="details" class="var-name">$methodBeingProcessed</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$serviceBeingProcessed" title="details" class="var-name">$serviceBeingProcessed</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$services" title="details" class="var-name">$services</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$templateFolderUrl" title="details" class="var-name">$templateFolderUrl</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																												
+												<div class="method-definition">
+											<span class="method-result">Amfphp_BackOffice_ClientGenerator_ClientGeneratorBase</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$codeFileExtensions</span>, <span class="var-type">type</span>&nbsp;<span class="var-name">$templateFolderUrl</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#generate" title="details" class="method-name">generate</a>
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$services</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$amfphpEntryPointUrl</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">String</span>
+										<a href="#generateOneServiceFileCode" title="details" class="method-name">generateOneServiceFileCode</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$code</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#generateServiceFiles" title="details" class="method-name">generateServiceFiles</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$code</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$file</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">String</span>
+										<a href="#getInfoUrl" title="details" class="method-name">getInfoUrl</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#getTestUrlSuffix" title="details" class="method-name">getTestUrlSuffix</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">String</span>
+										<a href="#getUiCallText" title="details" class="method-name">getUiCallText</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#processMethodListBlock" title="details" class="method-name">processMethodListBlock</a>
+											(<span class="var-type">type</span>&nbsp;<span class="var-name">$code</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#processParameterCommaListBlock" title="details" class="method-name">processParameterCommaListBlock</a>
+											(<span class="var-type">type</span>&nbsp;<span class="var-name">$code</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#processParameterListBlock" title="details" class="method-name">processParameterListBlock</a>
+											(<span class="var-type">type</span>&nbsp;<span class="var-name">$code</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#processServiceListBlock" title="details" class="method-name">processServiceListBlock</a>
+											(<span class="var-type">type</span>&nbsp;<span class="var-name">$code</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#processSourceFile" title="details" class="method-name">processSourceFile</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$file</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">mixed.</span>
+										<a href="#searchForBlocksAndApplyProcessing" title="details" class="method-name">searchForBlocksAndApplyProcessing</a>
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$code</span>, <span class="var-type">String</span>&nbsp;<span class="var-name">$directive</span>, <span class="var-type">String</span>&nbsp;<span class="var-name">$functionName</span>)
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$amfphpEntryPointUrl" id="$amfphpEntryPointUrl"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$amfphpEntryPointUrl</span>
+						(line <span class="line-number">38</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$codeFileExtensions" id="$codeFileExtensions"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$codeFileExtensions</span>
+						(line <span class="line-number">28</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$fileBeingProcessed" id="$fileBeingProcessed"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">SplFileInfo</span>
+			<span class="var-name">$fileBeingProcessed</span>
+						(line <span class="line-number">37</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">file being processed, useful for error messages</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$methodBeingProcessed" id="$methodBeingProcessed"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$methodBeingProcessed</span>
+						(line <span class="line-number">32</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$serviceBeingProcessed" id="$serviceBeingProcessed"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$serviceBeingProcessed</span>
+						(line <span class="line-number">31</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$services" id="$services"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$services</span>
+						(line <span class="line-number">30</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$templateFolderUrl" id="$templateFolderUrl"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$templateFolderUrl</span>
+						(line <span class="line-number">29</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																			<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+										<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">55</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Amfphp_BackOffice_ClientGenerator_ClientGeneratorBase</span>
+		<span class="method-name">
+			__construct
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$codeFileExtensions</span>, <span class="var-type">type</span>&nbsp;<span class="var-name">$templateFolderUrl</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$codeFileExtensions</span>			</li>
+					<li>
+				<span class="var-type">type</span>
+				<span class="var-name">$templateFolderUrl</span>			</li>
+				</ul>
+		
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../Amfphp_Backoffice_Generators/AmfphpFlashClientGenerator.html#method__construct">AmfphpFlashClientGenerator::__construct()</a>
+							</li>
+					<li>
+				<a href="../Amfphp_Backoffice_Generators/AmfphpHtmlClientGenerator.html#method__construct">AmfphpHtmlClientGenerator::__construct()</a>
+							</li>
+				</ul>
+	</div>
+<a name="methodgenerate" id="generate"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">generate</span> (line <span class="line-number">93</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> folder where the data was written</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			generate
+		</span>
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$services</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$amfphpEntryPointUrl</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$services</span><span class="var-description">: . note: here '/' in each service name must be replaced by '__', to avoid dealing with packages</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$amfphpEntryPointUrl</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgenerateOneServiceFileCode" id="generateOneServiceFileCode"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateOneServiceFileCode</span> (line <span class="line-number">214</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">generates code for one Service File.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			generateOneServiceFileCode
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$code</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$code</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgenerateServiceFiles" id="generateServiceFiles"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateServiceFiles</span> (line <span class="line-number">198</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">generate as many copies as there are services and  treat it as a service block.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			generateServiceFiles
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$code</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$file</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$code</span>			</li>
+					<li>
+				<span class="var-type">SplFileInfo</span>
+				<span class="var-name">$file</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetInfoUrl" id="getInfoUrl"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getInfoUrl</span> (line <span class="line-number">73</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">override to provide a custom url for a page containing info for this generator.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			getInfoUrl
+		</span>
+				()
+			</div>
+	
+		
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../Amfphp_Backoffice_Generators/AmfphpFlashClientGenerator.html#methodgetInfoUrl">AmfphpFlashClientGenerator::getInfoUrl()</a>
+							</li>
+					<li>
+				<a href="../Amfphp_Backoffice_Generators/AmfphpHtmlClientGenerator.html#methodgetInfoUrl">AmfphpHtmlClientGenerator::getInfoUrl()</a>
+							</li>
+				</ul>
+	</div>
+<a name="methodgetTestUrlSuffix" id="getTestUrlSuffix"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getTestUrlSuffix</span> (line <span class="line-number">83</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">added to the url of the generated code to go to its test page directly fro, the client generator ui</p>
+<p class="description"><p>for example: 'testhtml'/index.html'  return false if none, for exqmple if the generated client must be compiled first</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getTestUrlSuffix
+		</span>
+				()
+			</div>
+	
+		
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../Amfphp_Backoffice_Generators/AmfphpHtmlClientGenerator.html#methodgetTestUrlSuffix">AmfphpHtmlClientGenerator::getTestUrlSuffix()</a>
+								: (non-PHPdoc)
+							</li>
+				</ul>
+	</div>
+<a name="methodgetUiCallText" id="getUiCallText"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getUiCallText</span> (line <span class="line-number">66</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">override to provide a custom text in the Client Generator UI button for this generator.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			getUiCallText
+		</span>
+				()
+			</div>
+	
+		
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../Amfphp_Backoffice_Generators/AmfphpFlashClientGenerator.html#methodgetUiCallText">AmfphpFlashClientGenerator::getUiCallText()</a>
+							</li>
+					<li>
+				<a href="../Amfphp_Backoffice_Generators/AmfphpHtmlClientGenerator.html#methodgetUiCallText">AmfphpHtmlClientGenerator::getUiCallText()</a>
+							</li>
+				</ul>
+	</div>
+<a name="methodprocessMethodListBlock" id="processMethodListBlock"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">processMethodListBlock</span> (line <span class="line-number">253</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">finds parameter blocks.</p>
+<p class="description"><p>applies processParameterListBlock to each of them  then multiplies and adapts the resulting code for each method</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			processMethodListBlock
+		</span>
+					(<span class="var-type">type</span>&nbsp;<span class="var-name">$code</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">type</span>
+				<span class="var-name">$code</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodprocessParameterCommaListBlock" id="processParameterCommaListBlock"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">processParameterCommaListBlock</span> (line <span class="line-number">289</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">multiplies and adapts the code for each parameter, but adds a comma between each</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			processParameterCommaListBlock
+		</span>
+					(<span class="var-type">type</span>&nbsp;<span class="var-name">$code</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">type</span>
+				<span class="var-name">$code</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodprocessParameterListBlock" id="processParameterListBlock"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">processParameterListBlock</span> (line <span class="line-number">276</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">multiplies and adapts the code for each parameter</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			processParameterListBlock
+		</span>
+					(<span class="var-type">type</span>&nbsp;<span class="var-name">$code</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">type</span>
+				<span class="var-name">$code</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodprocessServiceListBlock" id="processServiceListBlock"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">processServiceListBlock</span> (line <span class="line-number">230</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">finds method blocks.</p>
+<p class="description"><p>applies processMethodListBlock to each of them  then multiplies and adapts the resulting code for each service</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			processServiceListBlock
+		</span>
+					(<span class="var-type">type</span>&nbsp;<span class="var-name">$code</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">type</span>
+				<span class="var-name">$code</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodprocessSourceFile" id="processSourceFile"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">processSourceFile</span> (line <span class="line-number">174</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">load the code, and look if either file is a service block, or il it contains service blocks.</p>
+<p class="description"><p>If the file is a service block(detected by having '_SERVICE_' in the file name), call generateServiceFiles  If not, look for block delimited by the 'SERVICE' directive and call processServiceListBlock on them  Also sets the amfphp entry point url</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			processSourceFile
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$file</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">SplFileInfo</span>
+				<span class="var-name">$file</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsearchForBlocksAndApplyProcessing" id="searchForBlocksAndApplyProcessing"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">searchForBlocksAndApplyProcessing</span> (line <span class="line-number">118</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">looks for blocks delimited by the start and stop markers matching the directive, and applies a processing function to each  found block.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> if there was a change, returns the modified code, else returns false</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed.</span>
+		<span class="method-name">
+			searchForBlocksAndApplyProcessing
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$code</span>, <span class="var-type">String</span>&nbsp;<span class="var-name">$directive</span>, <span class="var-type">String</span>&nbsp;<span class="var-name">$functionName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$code</span><span class="var-description">: the template code. Is modified continually</span>			</li>
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$directive</span><span class="var-description">: for example 'SERVICE'</span>			</li>
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$functionName</span><span class="var-description">: functionName</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+	<a name="sec-consts"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constants</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendants</a> |
+										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+														| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="constMETHOD" id="METHOD"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">METHOD</span>
+			 = <span class="const-default"> 'METHOD'</span>
+			(line <span class="line-number">46</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constPARAMETER" id="PARAMETER"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">PARAMETER</span>
+			 = <span class="const-default"> 'PARAMETER'</span>
+			(line <span class="line-number">47</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constPARAMETER_COMMA" id="PARAMETER_COMMA"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">PARAMETER_COMMA</span>
+			 = <span class="const-default"> 'PARAMETER_COMMA'</span>
+			(line <span class="line-number">48</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constSERVICE" id="SERVICE"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">SERVICE</span>
+			 = <span class="const-default"> 'SERVICE'</span>
+			(line <span class="line-number">45</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="const_METHOD_" id="_METHOD_"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">_METHOD_</span>
+			 = <span class="const-default"> '_METHOD_'</span>
+			(line <span class="line-number">42</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="const_PARAMETER_" id="_PARAMETER_"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">_PARAMETER_</span>
+			 = <span class="const-default"> '_PARAMETER_'</span>
+			(line <span class="line-number">43</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="const_SERVICE_" id="_SERVICE_"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">_SERVICE_</span>
+			 = <span class="const-default"> '_SERVICE_'</span>
+			(line <span class="line-number">41</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+						
+		</div>
+	</div>
+
+	<p class="notes" id="credit">
+		Documentation generated on Tue, 29 May 2012 23:42:02 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

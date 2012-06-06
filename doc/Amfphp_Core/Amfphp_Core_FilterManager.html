@@ -22,13 +22,13 @@
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">This class is a kind of event dispatcher <br /></p>
-<p class="description"><p>Filters are provided by Amfphp to allow your contexts to 'filter into' the rest of Amfphp, i.e. to call functions in your context at specific times<br />  This is a singleton, so use getInstance</p></p>
+<p class="short-description">Filters are provided by Amfphp to allow your contexts to 'filter into' the rest of Amfphp, i.e. to call functions in your context at specific times<br />  Call addFilter to register a filter, with a default priority of 10, and call callFilter to actually execute the filter</p>
+<p class="description"><p>The data structure is as follows:  all registered filters : associative array ( filter name =&gt; name filters)  name filters : associative array containing filters for one filter name (priority =&gt; priority filters)  priority filters: numbered array containing filters for one filter name and one priority [callback1, callback2, etc.]</p><p>So for example if you were to call:  addFilter(&quot;FILTER_1&quot;, $obj, &quot;method1&quot;);  addFilter(&quot;FILTER_1&quot;, $obj, &quot;method2&quot;);  addFilter(&quot;FILTER_1&quot;, $obj, &quot;method3&quot;, 15);  addFilter(&quot;FILTER_2&quot;, $obj, &quot;method4&quot;);</p><p>the structure would be  &quot;FILTER_1&quot; =&gt; array(                       10 =&gt; [callback for method1, callback for method2]                       15 =&gt; [callback for method3]  &quot;FILTER_2&quot; =&gt; array(                       10 =&gt; [callback for method4]</p><p>This is a singleton, so use getInstance</p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Ariel Sommeria-klein</li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_Amfphp---Core---FilterManager.php.html">/Amfphp/Core/FilterManager.php</a> (line <span class="field">19</span>)
+			Located in <a class="field" href="_Amfphp---Core---FilterManager.php.html">/Amfphp/Core/FilterManager.php</a> (line <span class="field">38</span>)
 		</p>
 		
 				
@@ -57,7 +57,7 @@
 				</div>
 																				<div class="var-title">
 					<span class="var-type">mixed</span>
-					<a href="#$filtersArray" title="details" class="var-name">$filtersArray</a>
+					<a href="#$allFilters" title="details" class="var-name">$allFilters</a>
 				</div>
 																			</div>
 		</div>
@@ -89,7 +89,7 @@
 																<div class="method-definition">
 											<span class="method-result">void</span>
 										<a href="#addFilter" title="details" class="method-name">addFilter</a>
-											(<span class="var-type">String</span>&nbsp;<span class="var-name">$filterName</span>, <span class="var-type">Object</span>&nbsp;<span class="var-name">$object</span>, <span class="var-type">String</span>&nbsp;<span class="var-name">$methodName</span>)
+											(<span class="var-type">String</span>&nbsp;<span class="var-name">$filterName</span>, <span class="var-type">Object</span>&nbsp;<span class="var-name">$object</span>, <span class="var-type">String</span>&nbsp;<span class="var-name">$methodName</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$priority</span> = <span class="var-default">10</span>])
 									</div>
 																<div class="method-definition">
 											<span class="method-result">mixed</span>
@@ -114,13 +114,13 @@
 					</div>
 		<div class="info-box-body">
 			<a name="var$instance" id="$instance"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			static <span class="var-type">mixed</span>
 			<span class="var-name">$instance</span>
-			 = <span class="var-default"> NULL</span>			(line <span class="line-number">28</span>)
+			 = <span class="var-default"> NULL</span>			(line <span class="line-number">47</span>)
 		</span>
 	</div>
 
@@ -135,19 +135,19 @@
 		
 
 </div>
-<a name="var$filtersArray" id="$filtersArray"><!-- --></A>
-<div class="oddrow">
+<a name="var$allFilters" id="$allFilters"><!-- --></A>
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
-			<span class="var-name">$filtersArray</span>
-			 = <span class="var-default"> NULL</span>			(line <span class="line-number">23</span>)
+			<span class="var-name">$allFilters</span>
+			 = <span class="var-default"> NULL</span>			(line <span class="line-number">42</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">registered filters</p>
+<p class="short-description">all registered filters</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> protected</li>
 			</ul>
@@ -173,10 +173,10 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="methodgetInstance" id="getInstance"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method getInstance</span> (line <span class="line-number">40</span>)
+		<span class="method-title">static method getInstance</span> (line <span class="line-number">59</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -198,10 +198,10 @@
 	</div>
 
 <a name="method__construct" id="__construct"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">32</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">51</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -222,10 +222,10 @@
 			
 	</div>
 <a name="methodaddFilter" id="addFilter"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">addFilter</span> (line <span class="line-number">89</span>)
+		<span class="method-title">addFilter</span> (line <span class="line-number">115</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -242,7 +242,7 @@
 		<span class="method-name">
 			addFilter
 		</span>
-					(<span class="var-type">String</span>&nbsp;<span class="var-name">$filterName</span>, <span class="var-type">Object</span>&nbsp;<span class="var-name">$object</span>, <span class="var-type">String</span>&nbsp;<span class="var-name">$methodName</span>)
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$filterName</span>, <span class="var-type">Object</span>&nbsp;<span class="var-name">$object</span>, <span class="var-type">String</span>&nbsp;<span class="var-name">$methodName</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$priority</span> = <span class="var-default">10</span>])
 			</div>
 	
 			<ul class="parameters">
@@ -255,15 +255,18 @@
 					<li>
 				<span class="var-type">String</span>
 				<span class="var-name">$methodName</span><span class="var-description">: the name of the method to call on the object</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$priority</span>			</li>
 				</ul>
 		
 			
 	</div>
 <a name="methodcallFilters" id="callFilters"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">callFilters</span> (line <span class="line-number">56</span>)
+		<span class="method-title">callFilters</span> (line <span class="line-number">75</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -299,7 +302,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Mon, 23 Jan 2012 17:22:05 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 29 May 2012 23:42:03 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

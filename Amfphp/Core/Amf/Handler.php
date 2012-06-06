@@ -49,25 +49,39 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      * @var String
      */
     protected $lastRequestMessageResponseUri;
-    protected $objectEncoding = Amfphp_Core_Amf_Constants::AMF0_ENCODING;
-    
-    protected $returnErrorDetails = false;
     
     /**
-     * set this if you need additional headers in the response.  They will be added after normal treatment
-     * @var type array of Amfphp_Core_Amf_Header
+     * @see Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS
+     * @var boolean 
      */
-    public static $additionnalResponseHeaders = null;
+    protected $returnErrorDetails = true;
+    
     /**
-     * set this if you need additional messages in the response. They will be added after normal treatment
-     * @var array of Amfphp_Core_Amf_Message 
+     * see Amfphp_Core_Config::CONFIG_FORCE_AMF3
+     * @var boolean 
      */
-    public static $additionnalResponseMessages = null;
+    protected $forceAmf3 = false;
+    /**
+     * use this to manipulate the packet directly from your services. This is an advanced option, and should be used with caution!
+     * @var Amfphp_Core_Amf_Packet
+     */
+    public static $requestPacket;
+    /**
+     * use this to manipulate the packet directly from your services. This is an advanced option, and should be used with caution!
+     * @var Amfphp_Core_Amf_Packet
+     */
+    public static $responsePacket;
     
 
     public function __construct($sharedConfig) {
         $this->lastRequestMessageResponseUri = '/1';
-        $this->returnErrorDetails = (isset ($sharedConfig[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]) && $sharedConfig[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]);
+        if(isset ($sharedConfig[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS])) {
+            $this->returnErrorDetails = $sharedConfig[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS];
+        }
+        if(isset ($sharedConfig[Amfphp_Core_Config::CONFIG_FORCE_AMF3])) {
+            $this->forceAmf3 = $sharedConfig[Amfphp_Core_Config::CONFIG_FORCE_AMF3];
+        }
+        
     }
 
     /**
@@ -128,9 +142,11 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      * @see Amfphp_Core_Common_IDeserializedRequestHandler
      */
     public function handleDeserializedRequest($deserializedRequest, Amfphp_Core_Common_ServiceRouter $serviceRouter) {
-        $numHeaders = count($deserializedRequest->headers);
+        self::$requestPacket = $deserializedRequest;
+        self::$responsePacket = new Amfphp_Core_Amf_Packet();
+        $numHeaders = count(self::$requestPacket->headers);
         for ($i = 0; $i < $numHeaders; $i++) {
-            $requestHeader = $deserializedRequest->headers[$i];
+            $requestHeader = self::$requestPacket->headers[$i];
             //handle a header. This is a job for plugins, unless comes a header that is so fundamental that it needs to be handled by the core
             $fromFilters = Amfphp_Core_FilterManager::getInstance()->callFilters(self::FILTER_AMF_REQUEST_HEADER_HANDLER, null, $requestHeader);
             if ($fromFilters) {         
@@ -139,27 +155,24 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
             }
         }
 
-        $numMessages = count($deserializedRequest->messages);
+        $numMessages = count(self::$requestPacket->messages);
         $rawOutputData = '';
-        $responsePacket = new Amfphp_Core_Amf_Packet();
-        //set amf version to the one detected in request
-        $responsePacket->amfVersion = $deserializedRequest->amfVersion;
-        //handle each message
-        for ($i = 0; $i < $numMessages; $i++) {
-            $requestMessage = $deserializedRequest->messages[$i];
-            $this->lastRequestMessageResponseUri = $requestMessage->responseUri;
-            $responseMessage = $this->handleRequestMessage($requestMessage, $serviceRouter);
-            $responsePacket->messages[] = $responseMessage;
+        
+        //set amf version to the one detected in request, unless we force amf3
+        self::$responsePacket->amfVersion = self::$requestPacket->amfVersion;
+        if($this->forceAmf3){
+            self::$responsePacket->amfVersion = Amfphp_Core_Amf_Constants::AMF3_ENCODING;
         }
         
-        //add any eventual additionnal headers or messages
-        if(self::$additionnalResponseHeaders){
-            $responsePacket->headers += self::$additionnalResponseHeaders;    
+        //handle each message
+        for ($i = 0; $i < $numMessages; $i++) {
+            $requestMessage = self::$requestPacket->messages[$i];
+            $this->lastRequestMessageResponseUri = $requestMessage->responseUri;
+            $responseMessage = $this->handleRequestMessage($requestMessage, $serviceRouter);
+            self::$responsePacket->messages[] = $responseMessage;
         }
-        if(self::$additionnalResponseMessages){
-            $responsePacket->messages += self::$additionnalResponseMessages;    
-        }
-        return $responsePacket;
+        
+        return self::$responsePacket;
     }
 
     /**
@@ -199,7 +212,6 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      * @see Amfphp_Core_Common_ISerializer
      */
     public function serialize($data) {
-        $data->amfVersion = $this->objectEncoding;
 
         $serializer = new Amfphp_Core_Amf_Serializer($data);
         return $serializer->serialize();

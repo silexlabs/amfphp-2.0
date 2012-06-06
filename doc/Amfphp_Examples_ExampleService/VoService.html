@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class VoService</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class VoService</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">an example service for typed objects</p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Ariel Sommeria-klein</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_Examples---Php---ExampleServices---VoService.php.html">/Examples/Php/ExampleServices/VoService.php</a> (line <span class="field">17</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+												<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																				
+												<div class="method-definition">
+											<span class="method-result"><a href="../Amfphp_Examples_ExampleService/UserVo1.html">UserVo1</a></span>
+										<a href="#receiveAndReturnUserVo1" title="details" class="method-name">receiveAndReturnUserVo1</a>
+											(<span class="var-type"><a href="../Amfphp_Examples_ExampleService/UserVo1.html">UserVo1</a></span>&nbsp;<span class="var-name">$user</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">type</span>
+										<a href="#receiveAndReturnUserVo2" title="details" class="method-name">receiveAndReturnUserVo2</a>
+											(<span class="var-type">type</span>&nbsp;<span class="var-name">$user</span>)
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="methodreceiveAndReturnUserVo1" id="receiveAndReturnUserVo1"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">receiveAndReturnUserVo1</span> (line <span class="line-number">25</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This method expects a UserVo1 object. So amfPHP must receive a typed UserVo1 object, and the CustomClassConverter plugin</p>
+<p class="description"><p>must find the UserVo1 class in its value object folders</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Amfphp_Examples_ExampleService/UserVo1.html">UserVo1</a></span>
+		<span class="method-name">
+			receiveAndReturnUserVo1
+		</span>
+					(<span class="var-type"><a href="../Amfphp_Examples_ExampleService/UserVo1.html">UserVo1</a></span>&nbsp;<span class="var-name">$user</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../Amfphp_Examples_ExampleService/UserVo1.html">UserVo1</a></span>
+				<span class="var-name">$user</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodreceiveAndReturnUserVo2" id="receiveAndReturnUserVo2"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">receiveAndReturnUserVo2</span> (line <span class="line-number">40</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This method accepts any object. The idea here is that you send an object that is typed(see client example prjects)  and it will be returned. This allows you to use typing on the client side without needing to create  corresponding PHP VO classes. If you do this exclusively, you can disable the CustomClassConverter plugin,  which will increase performance.</p>
+<p class="description"><p>amfPHP does this by using the reserved '_explicitType' marker on anonymous PHP objects.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">type</span>
+		<span class="method-name">
+			receiveAndReturnUserVo2
+		</span>
+					(<span class="var-type">type</span>&nbsp;<span class="var-name">$user</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">type</span>
+				<span class="var-name">$user</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Tue, 29 May 2012 23:42:06 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

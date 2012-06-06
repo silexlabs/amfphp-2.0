@@ -7,7 +7,9 @@
  *
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
- * @package Amfphp_Backoffice_Generators
+ * @package Amfphp_Backoffice
+ * 
+ */
 
   /**
  * Makes a call to the amfphp entry point and returns the data
@@ -48,8 +50,13 @@ class Amfphp_BackOffice_ServiceCaller {
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HEADER, false);
         $response = curl_exec($curl);
+        $decoded = json_decode($response);
         //echo $response;
-        return json_decode($response);
+        if(!$decoded){
+            throw new Exception("service called failed. server response: \n $response \nrequest: \n \n$requestString" );
+        }
+        return $decoded;
+        
     }
 
 }
