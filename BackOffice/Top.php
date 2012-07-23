@@ -14,7 +14,14 @@
     <head>
         <title>AmfPHP Back Office</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <LINK rel=stylesheet type="text/css" href="style.css">    
+
+        <link rel="stylesheet" type="text/css" href="style.css" />
+
+        <script type="text/javascript" src="lib/jquery.js"></script>
+        <script type="text/javascript" src="lib/jquery.cookie.js"></script>
+        <script type="text/javascript" src="lib/jquery.hotkeys.js"></script>
+        <script type="text/javascript" src="lib/jquery.jstree.js"></script>
+
     </head>
     <body>
         <div id="header">

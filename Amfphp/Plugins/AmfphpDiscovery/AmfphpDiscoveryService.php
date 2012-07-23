@@ -105,12 +105,14 @@ class AmfphpDiscoveryService {
                 $paramRs = $methodR->getParameters();
                 
                 foreach ($paramRs as $paramR) {
+                    
                     $parameterName = $paramR->name;
                     $type = '';
                     if($paramR->getClass()){
                         $type = $paramR->getClass()->name;
                     }
                     $parameterInfo = new AmfphpDiscovery_ParameterDescriptor($parameterName, $type);
+                    
                     $parameters[] = $parameterInfo;
                 }
                 $methodInfo = new AmfphpDiscovery_MethodDescriptor($methodName, $parameters);

@@ -54,6 +54,10 @@ class TestService {
     public function _reservedMethod(){
         
     }
+    
+    public function returnArray(){
+        return array(0, 1 =>2, 3=> 4, 5 => array(6 => 7));
+    }
 
 
 }
