@@ -67,7 +67,7 @@ class AmfphpDiscoveryService {
 * returns a list of available services
 * @return array of service names
 */
-    protected function getAvailableServiceNames(array $serviceFolderPaths, array $serviceNames2ClassFindInfo) {
+    protected function getServiceNames(array $serviceFolderPaths, array $serviceNames2ClassFindInfo) {
         $ret = array();
         foreach ($serviceFolderPaths as $serviceFolderPath) {
             $ret = array_merge($ret, $this->searchFolderForServices($serviceFolderPath, ''));
@@ -85,40 +85,39 @@ class AmfphpDiscoveryService {
      * @return array of AmfphpDiscovery_ServiceInfo
      */
     public function discover(){
-        $availableServiceNames = $this->getAvailableServiceNames(self::$serviceFolderPaths, self::$serviceNames2ClassFindInfo);
+        $serviceNames = $this->getServiceNames(self::$serviceFolderPaths, self::$serviceNames2ClassFindInfo);
         $ret = array();
-        foreach ($availableServiceNames as $availableServiceName) {
-            $serviceObject = Amfphp_Core_Common_ServiceRouter::getServiceObjectStatically($availableServiceName, self::$serviceFolderPaths, self::$serviceNames2ClassFindInfo);
-            $reflectionObj = new ReflectionObject($serviceObject);
+        foreach ($serviceNames as $serviceName) {
+            $serviceObject = Amfphp_Core_Common_ServiceRouter::getServiceObjectStatically($serviceName, self::$serviceFolderPaths, self::$serviceNames2ClassFindInfo);
+            $objR = new ReflectionObject($serviceObject);
             
-            $availablePublicMethods = $reflectionObj->getMethods(ReflectionMethod::IS_PUBLIC);
+            $methodRs = $objR->getMethods(ReflectionMethod::IS_PUBLIC);
             $methods = array();
-            foreach ($availablePublicMethods as $methodDescriptor) {
-                $availableMethodName = $methodDescriptor->name;
+            foreach ($methodRs as $methodR) {
+                $methodName = $methodR->name;
                 
-                if(substr($availableMethodName, 0, 1) == '_'){
+                if(substr($methodName, 0, 1) == '_'){
                     //methods starting with a '_' as they are reserved, so filter them out 
                     continue;
                 }
                 
                 $parameters = array();
-                $method = $reflectionObj->getMethod($availableMethodName);
-                $parameterDescriptors = $method->getParameters();
+                $paramRs = $methodR->getParameters();
                 
-                foreach ($parameterDescriptors as $parameterDescriptor) {
-                    $availableParameterName = $parameterDescriptor->name;
+                foreach ($paramRs as $paramR) {
+                    $parameterName = $paramR->name;
                     $type = '';
-                    if($parameterDescriptor->getClass()){
-                        $type = $parameterDescriptor->getClass()->name;
+                    if($paramR->getClass()){
+                        $type = $paramR->getClass()->name;
                     }
-                    $parameterInfo = new AmfphpDiscovery_ParameterDescriptor($availableParameterName, $type);
+                    $parameterInfo = new AmfphpDiscovery_ParameterDescriptor($parameterName, $type);
                     $parameters[] = $parameterInfo;
                 }
-                $methodInfo = new AmfphpDiscovery_MethodDescriptor($availableMethodName, $parameters);
-                $methods[$availableMethodName] = $methodInfo;
+                $methodInfo = new AmfphpDiscovery_MethodDescriptor($methodName, $parameters);
+                $methods[$methodName] = $methodInfo;
             }
-            $serviceInfo = new AmfphpDiscovery_ServiceDescriptor($availableServiceName, $methods);
-            $ret[$availableServiceName] = $serviceInfo;
+            $serviceInfo = new AmfphpDiscovery_ServiceDescriptor($serviceName, $methods);
+            $ret[$serviceName] = $serviceInfo;
         }  
         //note : filtering must be done at the end, as for example excluding a Vo class needed by another creates issues
         foreach($ret as $serviceName => $serviceObj){

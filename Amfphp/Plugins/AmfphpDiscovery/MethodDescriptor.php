@@ -31,6 +31,17 @@ class AmfphpDiscovery_MethodDescriptor {
      */
     //public $returns;
     
+    /**
+     *
+     * @var string method level comment
+     */
+    public $comment;
+    
+    /**
+     *
+     * @var array of strings, tags taken from method level comment
+     */
+    public $tags;    
     
     /**
      *

@@ -27,6 +27,17 @@ class AmfphpDiscovery_ServiceDescriptor {
     
     /**
      *
+     * @var string class level comment
+     */
+    public $comment;
+    
+    /**
+     *
+     * @var array of strings, tags taken from class level comment
+     */
+    public $tags;
+    /**
+     *
      * @param String $name
      * @param array of MethodInfo $methods 
      */
