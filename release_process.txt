@@ -1,0 +1,10 @@
+run unit tests, php and flash builder
+deploy to a unix server(case sensitive)
+test service browser
+test generators
+test examples
+tag repository(github)
+create release zip
+upload to distribution platform(sourceforge)
+blog post on silexlabs. publishes automatically to twitter and facebook. publish on google plus.
+send link to amfph-general@lists.sourceforge.net
