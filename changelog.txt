@@ -1,4 +1,6 @@
 Version history
+--------- 2.2 -----------
+tree in service browser
 --------- 2.1 -----------
 client generators
 service browser moved to backoffice
