@@ -30,20 +30,18 @@ class AmfphpDiscovery_ServiceDescriptor {
      * @var string class level comment
      */
     public $comment;
-    
+
     /**
      *
-     * @var array of strings, tags taken from class level comment
+     * @param string $name
+     * @param array $methods
+     * @param string $comment
+     * @param array $tags 
      */
-    public $tags;
-    /**
-     *
-     * @param String $name
-     * @param array of MethodInfo $methods 
-     */
-    public function __construct($name, array $methods) {
+    public function __construct($name, array $methods, $comment) {
         $this->name = $name;
         $this->methods = $methods;
+        $this->comment = $comment;
     }
 }
 

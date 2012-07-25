@@ -39,20 +39,23 @@ class AmfphpDiscovery_MethodDescriptor {
     
     /**
      *
-     * @var array of strings, tags taken from method level comment
+     * @var string 
      */
-    public $tags;    
+    public $returnType;
     
-    /**
+     /**
      *
-     * @param String $name
-     * @param array of ParameterInfo $parameters
+     * @param string $name
+     * @param array $parameters
+     * @param string $comment
+     * @param array $tags 
      */
-    public function __construct($name, array $parameters) {
+    public function __construct($name, array $parameters, $comment, $returnType) {
         $this->name = $name;
         $this->parameters = $parameters;
+        $this->comment = $comment;
+        $this->returnType = $returnType;
     }
-    
 }
 
 ?>

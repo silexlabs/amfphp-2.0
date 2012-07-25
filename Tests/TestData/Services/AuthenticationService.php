@@ -25,16 +25,20 @@ class AuthenticationService {
     /**
      * test login function
      * 
-     * @param String $userid
+     * @param String $userId
      * @param String $password
+     * @return String
      */
     public function login($userId, $password){
         if(($userId == 'user') && ($password == 'userPassword')){
             AmfphpAuthentication::addRole('user');
+            return 'user';
         }
         if(($userId == 'admin') && ($password == 'adminPassword')){
             AmfphpAuthentication::addRole('admin');
+            return 'admin';
         }
+        throw new Exception("bad credentials");
     }
 
     /**
@@ -47,8 +51,8 @@ class AuthenticationService {
     /**
      * function the authentication plugin uses to get accepted roles for each function
      * Here login and logout are not protected, however
-     * @param <String> $methodName
-     * @return <array>
+     * @param String $methodName
+     * @return array
      */
     public function _getMethodRoles($methodName){
        if($methodName == 'adminMethod'){

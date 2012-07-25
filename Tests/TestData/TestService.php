@@ -17,19 +17,38 @@
  * @author Ariel Sommeria-klein
  */
 class TestService {
-
+    
+    /**
+     *
+     * @param mixed $param
+     * @return mixed 
+     */
     public function returnOneParam($param){
         return $param;
     }
-
+    
+    /**
+     *
+     * @param int $number1
+     * @param int $number2
+     * @return int 
+     */
     public function returnSum($number1, $number2){
         return $number1 + $number2;
     }
-
+    
+    /**
+     *
+     * @return null 
+     */
     public function returnNull(){
         return null;
     }
-
+    
+    /**
+     *
+     * @return String 
+     */
     public function returnBla(){
         return 'bla';
     }
@@ -38,6 +57,10 @@ class TestService {
         throw new Exception("test exception $arg1", 123);
     }
     
+    /**
+     *
+     * @return String 
+     */
     public function returnAfterOneSecond(){
         sleep(1);
         return 'slept for 1 second';
@@ -55,6 +78,10 @@ class TestService {
         
     }
     
+    /**
+     *
+     * @return array 
+     */
     public function returnArray(){
         return array(0, 1 =>2, 3=> 4, 5 => array(6 => 7));
     }
