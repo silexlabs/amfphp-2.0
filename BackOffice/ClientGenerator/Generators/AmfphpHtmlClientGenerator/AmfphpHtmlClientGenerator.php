@@ -18,7 +18,7 @@
  */
 class AmfphpHtmlClientGenerator extends Amfphp_BackOffice_ClientGenerator_ClientGeneratorBase {
     public function __construct() {
-        parent::__construct(array('php', 'js'), dirname(__FILE__) . '/Template');
+        parent::__construct(array('html', 'js'), dirname(__FILE__) . '/Template');
     }
     
     public function getUiCallText() {

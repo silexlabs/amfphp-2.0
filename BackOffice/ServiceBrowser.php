@@ -124,6 +124,7 @@ function formatNode($objName, $obj) {
             }
             $ret['data'] = "$objName ( $type )";
             $ret['children'] = $children;
+            $ret['state'] = 'open';
             return $ret;
         } else {
             return $children;
@@ -155,7 +156,7 @@ if ($makeServiceCall) {
 
 
     <script>
-            
+                
         $(function () {	        
 
             $("#tree").jstree({ 
@@ -169,8 +170,9 @@ if ($makeServiceCall) {
                 "themes" : {
                     "theme" : "apple"
                 }
-                    
+                        
             });
+            
             $("#print_r").hide();
         });
 

@@ -45,5 +45,6 @@ if (isset($addToTitle)) {
         <ul id="menu">
             <li><a href="ServiceBrowser.php"><b>Service Browser</b></a></li>
             <li><a href="ClientGenerator.php"><b>Client Generator</b></a></li>
+            <li><a href="AppSlapper.php"><b>App Slapper</b></a></li>
         </ul>
 

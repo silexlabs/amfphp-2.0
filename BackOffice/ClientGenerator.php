@@ -20,7 +20,7 @@ require_once(dirname(__FILE__) . '/Top.php');
 
 <div id='menu'>
     Use one of the following generators to generate a client Stub project. <br/>
-    These include :<br/><br/>
+    The project includes :<br/><br/>
     <ul>
         <li>code to make calling your services easy</li>
         <li>a starting point for a user interface you can customize</li>
