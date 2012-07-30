@@ -36,6 +36,13 @@ class Amfphp_BackOffice_ClientGenerator_ClientGeneratorBase {
      */
     protected $fileBeingProcessed;
     protected $amfphpEntryPointUrl;
+    
+    /**
+     * absolute!
+     * @var string
+     */
+
+    public $targetFolder = 'ClientGenerator/Generated/';
 
     //terms to replace
     const _SERVICE_ = '_SERVICE_';
@@ -77,26 +84,29 @@ class Amfphp_BackOffice_ClientGenerator_ClientGeneratorBase {
     /**
      * added to the url of the generated code to go to its test page directly fro, the client generator ui
      * for example: 'testhtml'/index.html'
-     * return false if none, for exqmple if the generated client must be compiled first
+     * return false if none, for example if the generated client must be compiled first
      * 
      */
     public function getTestUrlSuffix(){
     	return false;
     }
     
+    
     /**
      *
-     * @param array $services . note: here '/' in each service name must be replaced by '__', to avoid dealing with packages
+     * @param array $services . note: here '/' in each service name is replaced by '__', to avoid dealing with packages
      * @param string $amfphpEntryPointUrl 
-     * @return string folder where the data was written
+     * @param String absolute url to folder where to put the generated code
+     * @return null
      */
-    public function generate($services, $amfphpEntryPointUrl) {
+    public function generate($services, $amfphpEntryPointUrl, $targetFolder ) {
+        foreach ($services as $service) {
+            $service->name = str_replace('/', '__', $service->name);
+        }        
         $this->services = $services;
         $this->amfphpEntryPointUrl = $amfphpEntryPointUrl;
-        $dstFolder = 'ClientGenerator/Generated/' . date("Ymd-his-") . get_class($this);
-        
-        Amfphp_BackOffice_ClientGenerator_Util::recurseCopy($this->templateFolderUrl, AMFPHP_BACKOFFICE_ROOTPATH . $dstFolder);
-        $it = new RecursiveDirectoryIterator($dstFolder);
+        Amfphp_BackOffice_ClientGenerator_Util::recurseCopy($this->templateFolderUrl, $targetFolder);
+        $it = new RecursiveDirectoryIterator($targetFolder);
         foreach (new RecursiveIteratorIterator($it) as $file) {
             if (In_Array(SubStr($file, StrrPos($file, '.') + 1), $this->codeFileExtensions) == true) {
                 $this->fileBeingProcessed = $file;
@@ -104,7 +114,6 @@ class Amfphp_BackOffice_ClientGenerator_ClientGeneratorBase {
                 
             }
         }
-        return $dstFolder;
     }
 
     /**

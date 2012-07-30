@@ -76,23 +76,25 @@ if (isset($_GET['generate'])) {
       $services = json_decode('{"TestService":{"name":"TestService","methods":{"returnOneParam":{"name":"returnOneParam","parameters":[{"name":"param","type":"","_explicitType":"AmfphpDiscovery_ParameterDescriptor"}],"_explicitType":"AmfphpDiscovery_MethodDescriptor"},"returnSum":{"name":"returnSum","parameters":[{"name":"number1","type":"","_explicitType":"AmfphpDiscovery_ParameterDescriptor"},{"name":"number2","type":"","_explicitType":"AmfphpDiscovery_ParameterDescriptor"}],"_explicitType":"AmfphpDiscovery_MethodDescriptor"},"returnNull":{"name":"returnNull","parameters":[],"_explicitType":"AmfphpDiscovery_MethodDescriptor"},"returnBla":{"name":"returnBla","parameters":[],"_explicitType":"AmfphpDiscovery_MethodDescriptor"},"throwException":{"name":"throwException","parameters":[{"name":"arg1","type":"","_explicitType":"AmfphpDiscovery_ParameterDescriptor"}],"_explicitType":"AmfphpDiscovery_MethodDescriptor"},"returnAfterOneSecond":{"name":"returnAfterOneSecond","parameters":[],"_explicitType":"AmfphpDiscovery_MethodDescriptor"}},"_explicitType":"AmfphpDiscovery_ServiceDescriptor"}} ');
      */
 
-    //here '/' in each service name is replaced by '__', to avoid dealing with packages        
-    foreach ($services as $service) {
-        $service->name = str_replace('/', '__', $service->name);
-    }
 
     $generatorClass = $_GET['generate'];
     $generator = $generators[$generatorClass];
-    $ret = $generator->generate($services, $amfphpUrl);
+    $newFolderName = date("Ymd-his-") . $generatorClass;    
+    $genRootRelativeUrl = 'ClientGenerator/Generated/';
+    $genRootFolder = AMFPHP_BACKOFFICE_ROOTPATH. $genRootRelativeUrl;
+    $targetFolder = $genRootFolder . $newFolderName;
+    $generator->generate($services, $amfphpUrl, $targetFolder);
     $urlSuffix = $generator->getTestUrlSuffix();
-    if($ret){
-        echo '<div id="content">client project written to ' . AMFPHP_BACKOFFICE_ROOTPATH . $ret ;
-        
+    echo '<div id="content">client project written to ' . $targetFolder ;
+   
+    if($urlSuffix !== false){
+    	echo '<br/><br/><a href="'. $genRootRelativeUrl . $newFolderName . '/' . $urlSuffix . '"> try it here</a>';
     }
     
-    if($urlSuffix !== false){
-    	echo '<a href="'. $ret . $urlSuffix . '"> try it here</a>';
-    }
+    $zipFileName = "$newFolderName.zip";
+    $zipFilePath = $genRootFolder . $zipFileName;
+    Amfphp_BackOffice_ClientGenerator_Util::zipFolder($targetFolder, $zipFilePath, $genRootFolder);
+    echo '<br/><br/><a href="'. $genRootRelativeUrl . $zipFileName . '"> get zip here</a>';
     
     echo '</div>';
 }

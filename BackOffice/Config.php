@@ -27,7 +27,9 @@ class Amfphp_BackOffice_Config {
      * '../Tests/TestData/'
      * @var String 
      */
-    public $amfphpEntryPointUrl = '../Amfphp/';
+    public $amfphpEntryPointUrl = '../Tests/TestData/';
+    //public $amfphpEntryPointUrl = 'http://arielsommeria.com/amfphp-2.1/Amfphp/';
+
     
     public function resolveAmfphpEntryPointUrl(){
 //determine url to amfphp. If in config it contains 'http', we consider it's absolute. Otherwise it's relative, and we build it.

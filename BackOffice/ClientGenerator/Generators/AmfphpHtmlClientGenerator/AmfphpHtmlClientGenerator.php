@@ -34,7 +34,7 @@ class AmfphpHtmlClientGenerator extends Amfphp_BackOffice_ClientGenerator_Client
      * @see ClientGenerator/Amfphp_BackOffice_ClientGenerator_ClientGeneratorBase::getTestUrlSuffix()
      */
     public function getTestUrlSuffix(){
-    	return '';
+    	return 'index.html';
     }
 }
 
