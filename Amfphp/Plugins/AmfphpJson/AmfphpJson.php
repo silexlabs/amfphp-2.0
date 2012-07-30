@@ -66,14 +66,24 @@ class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common
     }
 
     public function deserialize(array $getData, array $postData, $rawPostData){
+        $jsonString = '';
         if($rawPostData != ''){
-            return json_decode($rawPostData);
+            $jsonString = $rawPostData;
         }else if(isset($postData['json'])){
-            throw new Exception("debug exception " . print_r(($postData['json']), true));
-            return json_decode($postData['json']);
+            $jsonString = $postData['json'];
         }else{
             throw new Exception('json call data not found. It must be sent in the post data');
         }
+        
+        $deserializedRequest = json_decode($rawPostData);
+        if(!isset ($deserializedRequest->serviceName)){
+            throw new Exception("<pre>Service name field missing in JSON. \njsonString:\n $jsonString \ndecoded: \n" . print_r($deserializedRequest, true) . '</pre>');
+        }
+        if(!isset ($deserializedRequest->methodName)){
+            throw new Exception("<pre>MethodName field missing in JSON. \njsonString:\n $jsonString \ndecoded: \n" . print_r($deserializedRequest, true) . '</pre>');
+        }
+        return $deserializedRequest;
+        
     }
 
 
@@ -84,17 +94,9 @@ class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common
      * @return the service call response
      */
     public function handleDeserializedRequest($deserializedRequest, Amfphp_Core_Common_ServiceRouter $serviceRouter){
-		
-		if(isset ($deserializedRequest->serviceName)){
-            $serviceName = $deserializedRequest->serviceName;
-        }else{
-            throw new Exception('Service name field missing in POST parameters \n' . print_r($deserializedRequest, true));
-        }
-        if(isset ($deserializedRequest->methodName)){
-            $methodName = $deserializedRequest->methodName;
-        }else{
-            throw new Exception('MethodName field missing in POST parameters \n' . print_r($deserializedRequest, true));
-        }
+        $serviceName = $deserializedRequest->serviceName;
+        $methodName = $deserializedRequest->methodName;
+
         $parameters = array();
         if(isset ($deserializedRequest->parameters)){
             $parameters = $deserializedRequest->parameters;
