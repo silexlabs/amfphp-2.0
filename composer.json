@@ -8,8 +8,6 @@
         }
     ],
     "autoload": {
-        "psr-0": {
-            "Amfphp": "./"
-        }
-    }
+        "files": ["Amfphp/ClassLoader.php"]
+    },
 }
