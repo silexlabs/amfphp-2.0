@@ -39,13 +39,12 @@ $serviceCaller = new Amfphp_BackOffice_ServiceCaller($amfphpUrl);
 $services = $serviceCaller->makeAmfphpJsonServiceCall("AmfphpDiscoveryService", "discover");
 //remove discovery service from list
 unset ($services->AmfphpDiscoveryService);
-//list services 
+//list services
 echo '<ul>';
 foreach ($services as $service) {
     echo "<li>$service->name</li>";
 }
 echo '</ul>';
-        
 
 //links for each generator
 echo "\n<table>";
@@ -65,7 +64,6 @@ echo '<tr><td>Haxe</td><td><a href="http://www.silexlabs.org/amfphp/documentatio
 echo '<tr><td>Android</td><td><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/android/">Info/Vote Up</a></td>        <td>Not Available Yet </td></tr>';
 echo '<tr><td>Write your Own?</td><td><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/missing/">Info</a></td>        <td></td></tr>';
 
-
 echo "\n</table>";
 echo "\n</div>";
 //
@@ -76,25 +74,24 @@ if (isset($_GET['generate'])) {
       $services = json_decode('{"TestService":{"name":"TestService","methods":{"returnOneParam":{"name":"returnOneParam","parameters":[{"name":"param","type":"","_explicitType":"AmfphpDiscovery_ParameterDescriptor"}],"_explicitType":"AmfphpDiscovery_MethodDescriptor"},"returnSum":{"name":"returnSum","parameters":[{"name":"number1","type":"","_explicitType":"AmfphpDiscovery_ParameterDescriptor"},{"name":"number2","type":"","_explicitType":"AmfphpDiscovery_ParameterDescriptor"}],"_explicitType":"AmfphpDiscovery_MethodDescriptor"},"returnNull":{"name":"returnNull","parameters":[],"_explicitType":"AmfphpDiscovery_MethodDescriptor"},"returnBla":{"name":"returnBla","parameters":[],"_explicitType":"AmfphpDiscovery_MethodDescriptor"},"throwException":{"name":"throwException","parameters":[{"name":"arg1","type":"","_explicitType":"AmfphpDiscovery_ParameterDescriptor"}],"_explicitType":"AmfphpDiscovery_MethodDescriptor"},"returnAfterOneSecond":{"name":"returnAfterOneSecond","parameters":[],"_explicitType":"AmfphpDiscovery_MethodDescriptor"}},"_explicitType":"AmfphpDiscovery_ServiceDescriptor"}} ');
      */
 
-
     $generatorClass = $_GET['generate'];
     $generator = $generators[$generatorClass];
-    $newFolderName = date("Ymd-his-") . $generatorClass;    
+    $newFolderName = date("Ymd-his-") . $generatorClass;
     $genRootRelativeUrl = 'ClientGenerator/Generated/';
     $genRootFolder = AMFPHP_BACKOFFICE_ROOTPATH. $genRootRelativeUrl;
     $targetFolder = $genRootFolder . $newFolderName;
     $generator->generate($services, $amfphpUrl, $targetFolder);
     $urlSuffix = $generator->getTestUrlSuffix();
     echo '<div id="content">client project written to ' . $targetFolder ;
-   
-    if($urlSuffix !== false){
-    	echo '<br/><br/><a href="'. $genRootRelativeUrl . $newFolderName . '/' . $urlSuffix . '"> try it here</a>';
+
+    if ($urlSuffix !== false) {
+        echo '<br/><br/><a href="'. $genRootRelativeUrl . $newFolderName . '/' . $urlSuffix . '"> try it here</a>';
     }
-    
+
     $zipFileName = "$newFolderName.zip";
     $zipFilePath = $genRootFolder . $zipFileName;
     Amfphp_BackOffice_ClientGenerator_Util::zipFolder($targetFolder, $zipFilePath, $genRootFolder);
     echo '<br/><br/><a href="'. $genRootRelativeUrl . $zipFileName . '"> get zip here</a>';
-    
+
     echo '</div>';
 }

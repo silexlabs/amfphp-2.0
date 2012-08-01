@@ -10,7 +10,7 @@
  */
 
 /**
- * AS3 XMLDocument type. 
+ * AS3 XMLDocument type.
  * @see Amfphp_Core_Amf_Types_Xml
  *
  * @package Amfphp_Core_Amf_Types
@@ -19,11 +19,10 @@
 
 class Amfphp_Core_Amf_Types_XmlDocument
 {
-	public $data;
+    public $data;
 
-	public function Amfphp_Core_Amf_Types_XmlDocument($data)
-	{
-		$this->data = $data;
-	}
+    public function Amfphp_Core_Amf_Types_XmlDocument($data)
+    {
+        $this->data = $data;
+    }
 }
-?>

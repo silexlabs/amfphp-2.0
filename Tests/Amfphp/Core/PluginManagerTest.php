@@ -20,20 +20,20 @@ require_once dirname(__FILE__) . '/../../TestData/TestPlugins/DisabledPlugin/Dis
  * @package Tests_Amfphp_Core
  * @author Ariel Sommeria-klein
  */
-class Amfphp_Core_PluginManagerTest extends PHPUnit_Framework_TestCase {
-    
+class Amfphp_Core_PluginManagerTest extends PHPUnit_Framework_TestCase
+{
     /**
      *
      * @var Amfphp_Core_PluginManager
      */
     protected $pluginManager;
 
-
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->pluginManager = Amfphp_Core_PluginManager::getInstance();
     }
 
@@ -41,36 +41,35 @@ class Amfphp_Core_PluginManagerTest extends PHPUnit_Framework_TestCase {
      * the TestPlugins folder must be scanned and in it found the class DummyPlugin, which contains an instanication counter.
      * It is included and instanciated by the plugin manager, and the test looks at the instanciation counter to check that an instance was created
      */
-    public function testSimple(){
-        
+    public function testSimple()
+    {
         $this->pluginManager->loadPlugins(array(dirname(__FILE__) . '/../../TestData/TestPlugins/'));
         $this->assertEquals(1, DummyPlugin::$instanciationCounter);
     }
 
-    public function testDisabled(){
+    public function testDisabled()
+    {
         $disabledPluginLoadCount = DisabledPlugin::$instanciationCounter;
         $this->pluginManager->loadPlugins(array(dirname(__FILE__) . '/../../TestData/TestPlugins/'), null, null, array('DisabledPlugin'));
         $this->assertEquals($disabledPluginLoadCount, DisabledPlugin::$instanciationCounter);
 
     }
 
-    public function testConfig(){
+    public function testConfig()
+    {
         $pluginsConfig = array('DummyPlugin' => array('dummyConfVar' => 'custom'));
         $this->pluginManager->loadPlugins(array(dirname(__FILE__) . '/../../TestData/TestPlugins/'), $pluginsConfig);
         $this->assertEquals('custom', DummyPlugin::$dummyConfVar);
 
-
     }
-
 
     /**
      * @expectedException Amfphp_Core_Exception
      */
-    public function testBadFolder(){
+    public function testBadFolder()
+    {
         $this->pluginManager->loadPlugins(array('bla'));
 
     }
 
 }
-
-?>

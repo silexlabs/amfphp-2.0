@@ -16,14 +16,13 @@
  */
 class Amfphp_Core_Amf_Types_Undefined
 {
-	public function exists()
-	{
-		return false;
-	}
+    public function exists()
+    {
+        return false;
+    }
 
-	public function __toString()
-	{
-		return 'undefined';
-	}
+    public function __toString()
+    {
+        return 'undefined';
+    }
 }
-?>

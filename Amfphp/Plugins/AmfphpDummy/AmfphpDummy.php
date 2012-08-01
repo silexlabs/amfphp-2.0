@@ -14,9 +14,10 @@
  * This catches browser requests to the gateway, to show something more helpful than an error message.
  *
  * @package Amfphp_Plugins_Dummy
- * @author Ariel Sommeria-Klein, Daniel Hoffmann (intermedi8.de) 
+ * @author Ariel Sommeria-Klein, Daniel Hoffmann (intermedi8.de)
  */
-class AmfphpDummy implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_IDeserializedRequestHandler, Amfphp_Core_Common_IExceptionHandler, Amfphp_Core_Common_ISerializer {
+class AmfphpDummy implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_IDeserializedRequestHandler, Amfphp_Core_Common_IExceptionHandler, Amfphp_Core_Common_ISerializer
+{
     /**
 * if content type is not set or content is set to "application/x-www-form-urlencoded", this plugin will handle the request
 */
@@ -47,7 +48,8 @@ class AmfphpDummy implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Commo
 * constructor.
 * @param array $config optional key/value pairs in an associative array. Used to override default configuration values.
 */
-    public function __construct(array $config = null) {
+    public function __construct(array $config = null)
+    {
         $filterManager = Amfphp_Core_FilterManager::getInstance();
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZER, $this, "filterHandler");
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_REQUEST_HANDLER, $this, "filterHandler");
@@ -63,7 +65,8 @@ class AmfphpDummy implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Commo
 * @param String $contentType
 * @return this or null
 */
-    public function filterHandler($handler, $contentType) {
+    public function filterHandler($handler, $contentType)
+    {
         if (!$contentType || $contentType == self::CONTENT_TYPE) {
             return $this;
         }
@@ -72,31 +75,33 @@ class AmfphpDummy implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Commo
     /**
 * @see Amfphp_Core_Common_IDeserializer
 */
-    public function deserialize(array $getData, array $postData, $rawPostData) {
+    public function deserialize(array $getData, array $postData, $rawPostData)
+    {
         $ret = new stdClass();
+
         return $ret;
     }
 
     /**
 * @see Amfphp_Core_Common_IDeserializedRequestHandler
 */
-    public function handleDeserializedRequest($deserializedRequest, Amfphp_Core_Common_ServiceRouter $serviceRouter) {
-        
+    public function handleDeserializedRequest($deserializedRequest, Amfphp_Core_Common_ServiceRouter $serviceRouter)
+    {
     }
 
     /**
 * @todo show stack trace
 * @see Amfphp_Core_Common_IExceptionHandler
 */
-    public function handleException(Exception $exception) {
-        
+    public function handleException(Exception $exception)
+    {
     }
 
     /**
 * @see Amfphp_Core_Common_ISerializer
 */
-    public function serialize($data) {
-
+    public function serialize($data)
+    {
         include(dirname(__FILE__) . "/index.html");
     }
 
@@ -105,14 +110,11 @@ class AmfphpDummy implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Commo
 * @param array $headers
 * @return array
 */
-    public function filterHeaders($headers, $contentType) {
+    public function filterHeaders($headers, $contentType)
+    {
         if (!$contentType || $contentType == self::CONTENT_TYPE) {
             return array();
         }
     }
 
 }
-
-
-
-?>

@@ -11,7 +11,7 @@
 
 /**
  * include this to include amfphp
- * note: this list could be generated. In the meantime maintain it manually. 
+ * note: this list could be generated. In the meantime maintain it manually.
  * It would be nice to do this alphabetically, It seems however that an interface must be loaded before a class, so do as possible
  *
  * @author Ariel Sommeria-klein
@@ -53,7 +53,3 @@ require_once AMFPHP_ROOTPATH . 'Core/Gateway.php';
 require_once AMFPHP_ROOTPATH . 'Core/FilterManager.php';
 require_once AMFPHP_ROOTPATH . 'Core/HttpRequestGatewayFactory.php';
 require_once AMFPHP_ROOTPATH . 'Core/PluginManager.php';
-
-
-
-?>

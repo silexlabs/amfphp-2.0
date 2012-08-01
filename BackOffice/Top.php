@@ -7,7 +7,7 @@
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
  * @package Amfphp_Backoffice
- * 
+ *
  */
 ?><!DOCTYPE html>
 <html>
@@ -47,4 +47,3 @@ if (isset($addToTitle)) {
             <li><a href="ClientGenerator.php"><b>Client Generator</b></a></li>
             <li><a href="AppSlapper.php"><b>App Slapper</b></a></li>
         </ul>
-

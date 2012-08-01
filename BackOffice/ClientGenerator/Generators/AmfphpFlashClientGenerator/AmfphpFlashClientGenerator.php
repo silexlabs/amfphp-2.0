@@ -15,19 +15,21 @@
  * @author Ariel Sommeria-klein
  * @package Amfphp_Backoffice_Generators
  */
-class AmfphpFlashClientGenerator extends Amfphp_BackOffice_ClientGenerator_ClientGeneratorBase {
-    public function __construct() {
+class AmfphpFlashClientGenerator extends Amfphp_BackOffice_ClientGenerator_ClientGeneratorBase
+{
+    public function __construct()
+    {
         parent::__construct(array('as'), dirname(__FILE__) . '/Template');
     }
-    
-    public function getUiCallText() {
+
+    public function getUiCallText()
+    {
         return "Flash Creative Suite";
-        
+
     }
-    
-    public function getInfoUrl(){
+
+    public function getInfoUrl()
+    {
         return "http://www.silexlabs.org/amfphp/documentation/client-generators/flash-creative-suite/";
     }
 }
-
-?>

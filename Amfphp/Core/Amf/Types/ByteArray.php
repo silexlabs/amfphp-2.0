@@ -18,11 +18,10 @@
 
 class Amfphp_Core_Amf_Types_ByteArray
 {
-	public $data;
+    public $data;
 
-	public function Amfphp_Core_Amf_Types_ByteArray($data)
-	{
-		$this->data = $data;
-	}
+    public function Amfphp_Core_Amf_Types_ByteArray($data)
+    {
+        $this->data = $data;
+    }
 }
-?>

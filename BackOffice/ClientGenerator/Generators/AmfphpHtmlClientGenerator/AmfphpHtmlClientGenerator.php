@@ -7,7 +7,7 @@
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
  * @package Amfphp_Backoffice_Generators
- * 
+ *
  */
 
  /**
@@ -16,26 +16,29 @@
  * @author Ariel Sommeria-klein
  * @package Amfphp_Backoffice_Generators
  */
-class AmfphpHtmlClientGenerator extends Amfphp_BackOffice_ClientGenerator_ClientGeneratorBase {
-    public function __construct() {
+class AmfphpHtmlClientGenerator extends Amfphp_BackOffice_ClientGenerator_ClientGeneratorBase
+{
+    public function __construct()
+    {
         parent::__construct(array('html', 'js'), dirname(__FILE__) . '/Template');
     }
-    
-    public function getUiCallText() {
+
+    public function getUiCallText()
+    {
         return "HTML";
-        
+
     }
-    
-    public function getInfoUrl(){
+
+    public function getInfoUrl()
+    {
         return "http://www.silexlabs.org/amfphp/documentation/client-generators/html/";
     }
     /**
      * (non-PHPdoc)
      * @see ClientGenerator/Amfphp_BackOffice_ClientGenerator_ClientGeneratorBase::getTestUrlSuffix()
      */
-    public function getTestUrlSuffix(){
-    	return 'index.html';
+    public function getTestUrlSuffix()
+    {
+        return 'index.html';
     }
 }
-
-?>

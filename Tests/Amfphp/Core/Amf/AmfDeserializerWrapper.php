@@ -9,7 +9,6 @@
  * @package Tests_Amfphp_Core_Amf
  */
 
-
 /**
  * This class exports some internal (public) methods. This way, those methods
  * can be tested separately.
@@ -19,54 +18,67 @@
 
 class AmfDeserializerWrapper extends Amfphp_Core_Amf_Deserializer
 {
-    public function readByte(){
+    public function readByte()
+    {
         return parent::readByte();
     }
 
-    public function readInt() {
+    public function readInt()
+    {
         return parent::readInt();
     }
 
-    public function readLong() {
+    public function readLong()
+    {
         return parent::readLong();
     }
 
-    public function readUtf() {
+    public function readUtf()
+    {
         return parent::readUtf();
     }
-    public function readDouble() {
+    public function readDouble()
+    {
         return parent::readDouble();
     }
 
-    public function readLongUtf() {
+    public function readLongUtf()
+    {
         return parent::readLongUtf();
     }
 
-    public function readDate() {
+    public function readDate()
+    {
         return parent::readDate();
     }
 
-    public function readArray() {
+    public function readArray()
+    {
         return parent::readArray();
     }
 
-    public function  readObject() {
+    public function  readObject()
+    {
         return parent::readObject();
     }
 
-    public function   readMixedArray() {
+    public function   readMixedArray()
+    {
         return parent::readMixedArray();
     }
 
-    public function readReference() {
+    public function readReference()
+    {
         return parent::readReference();
     }
 
-    public function readAmf3Data(){
+    public function readAmf3Data()
+    {
         return parent::readAmf3Data();
     }
 
-    public function readAmf3String()    {
+    public function readAmf3String()
+    {
         return parent::readAmf3String();
     }
 
@@ -85,6 +97,4 @@ class AmfDeserializerWrapper extends Amfphp_Core_Amf_Deserializer
         return parent::readAmf3ByteArray();
     }
 
-
 }
-?>

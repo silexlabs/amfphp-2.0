@@ -22,8 +22,8 @@ require_once dirname(__FILE__) . '/../../../TestData/CustomClasses/TestCustomCla
  * @package Tests_Amfphp_Plugins_CustomClassConverter
  * @author Ariel Sommeria-klein
  */
-class AmfphpCustomClassConverterTest extends PHPUnit_Framework_TestCase {
-
+class AmfphpCustomClassConverterTest extends PHPUnit_Framework_TestCase
+{
     /**
      * @var CustomClassConverter
      */
@@ -33,7 +33,8 @@ class AmfphpCustomClassConverterTest extends PHPUnit_Framework_TestCase {
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         $pluginConfig = array('customClassFolderPaths' => array(dirname(__FILE__) . '/../../../TestData/CustomClasses'));
         $this->object = new AmfphpCustomClassConverter($pluginConfig);
     }
@@ -42,12 +43,12 @@ class AmfphpCustomClassConverterTest extends PHPUnit_Framework_TestCase {
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() {
-
+    protected function tearDown()
+    {
     }
 
-    public function testfilterDeserializedRequest() {
-        
+    public function testfilterDeserializedRequest()
+    {
         $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
         //3 level object: TestCustomClass1, untyped, TestCustomClass2 with some data around
         $testObj1 = new stdClass();
@@ -96,10 +97,10 @@ class AmfphpCustomClassConverterTest extends PHPUnit_Framework_TestCase {
         $modifiedObj = $modifiedPacket->messages[0]->data[0];
         $this->assertEquals('flex.messaging.Bla', $modifiedObj->$explicitTypeField);
 
-
     }
 
-    public function testfilterDeserializedResponse() {
+    public function testfilterDeserializedResponse()
+    {
         $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
         //3 level object: TestCustomClass1, untyped, TestCustomClass2 with some data around
         $testObj1 = new TestCustomClass1();
@@ -137,5 +138,3 @@ class AmfphpCustomClassConverterTest extends PHPUnit_Framework_TestCase {
     }
 
 }
-
-?>

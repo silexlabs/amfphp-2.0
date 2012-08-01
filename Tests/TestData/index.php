@@ -9,8 +9,8 @@
  * @package Tests_TestData
  */
 
-/** 
- * a gateway php script like the normal gateway except that it uses test services 
+/**
+ * a gateway php script like the normal gateway except that it uses test services
  * @author Ariel Sommeria-klein
  */
 require_once dirname(__FILE__) . '/../../Amfphp/ClassLoader.php';
@@ -19,6 +19,3 @@ $config = new TestServicesConfig();
 $gateway = Amfphp_Core_HttpRequestGatewayFactory::createGateway($config);
 $gateway->service();
 $gateway->output();
-
-
-?>

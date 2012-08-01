@@ -43,7 +43,7 @@ $services = $discoveryServiceCaller->makeAmfphpJsonServiceCall("AmfphpDiscoveryS
 
 //remove discovery service from list
 unset($services->AmfphpDiscoveryService);
-//list services 
+//list services
 echo '<ul>';
 foreach ($services as $service) {
     echo "<li>$service->name</li>";
@@ -51,16 +51,15 @@ foreach ($services as $service) {
 echo '</ul>';
 echo "\n        <td><a href=\"?generate\">Generate!</a></td>";
 
-
 //
 if (isset($_GET['generate'])) {
 
     $appSlapperServiceCaller = new Amfphp_BackOffice_ServiceCaller(APP_SLAPPER_BASE . 'amfphp.php');
     $parameters = array('AppSlapperMobileWebApp', $amfphpUrl, $services);
     $ret = $appSlapperServiceCaller->makeAmfphpJsonServiceCall("ClientGeneratorService", "generate", $parameters);
-    
+
     echo "<br/><br/>Generated! Project zip available here: <a href='$ret->zipUrl'>$ret->zipUrl</a>";
-    if($ret->testUrlSuffix){
+    if ($ret->testUrlSuffix) {
         //download zip
         $genRootRelativeUrl = 'ClientGenerator/Generated/';
         $genRootFolder = AMFPHP_BACKOFFICE_ROOTPATH. $genRootRelativeUrl;
@@ -71,13 +70,13 @@ if (isset($_GET['generate'])) {
         $ch = curl_init($ret->zipUrl);
         curl_setopt($ch, CURLOPT_FILE, $fp);
 
-        if(!curl_exec($ch)){
+        if (!curl_exec($ch)) {
 
            throw new Exception("download zip failed at $ret->zipUrl . error : " . curl_error($ch));
         }
 
         curl_close($ch);
-        fclose($fp);       
+        fclose($fp);
 
         //unzip generated client
         $zip = new ZipArchive;
@@ -88,6 +87,5 @@ if (isset($_GET['generate'])) {
         $zip->close();
         echo "<br/><br/>Downloaded and unpacked for your convenience. <a href='$genRootRelativeUrl$ret->testUrlSuffix'>Try it here</a><br/>";
     }
-    
-    
+
 }

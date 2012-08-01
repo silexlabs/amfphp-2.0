@@ -15,7 +15,7 @@
  * @package Tests_TestData_CustomClasses
  * @author Ariel Sommeria-klein
  */
-class TestCustomClass1 {
+class TestCustomClass1
+{
     //put your code here
 }
-?>

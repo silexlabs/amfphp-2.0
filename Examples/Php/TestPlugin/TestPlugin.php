@@ -15,8 +15,8 @@
  * @author Ariel Sommeria-klein
  * @package Amfphp_Examples
  */
-class TestPlugin {
-
+class TestPlugin
+{
     /**
      * dummy parameter
      * @var String
@@ -27,7 +27,8 @@ class TestPlugin {
      * constructor.
      * @param array $config optional key/value pairs in an associative array. Used to override default configuration values.
      */
-    public function __construct(array $config = null) {
+    public function __construct(array $config = null)
+    {
         //default
         $this->sourceUrl = '';
         if ($config) {
@@ -42,14 +43,12 @@ class TestPlugin {
 
     /**
      * sets deserialized request to “bla”
-     * @param mixed $deserializedRequest
+     * @param  mixed $deserializedRequest
      * @return mixed
      */
-    public function filterDeserializedRequest($deserializedRequest) {
-
+    public function filterDeserializedRequest($deserializedRequest)
+    {
         return 'bla';
     }
 
 }
-
-?>

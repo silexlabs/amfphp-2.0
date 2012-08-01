@@ -14,9 +14,10 @@
  * @package Amfphp_Examples_ExampleService
  * @author Ariel Sommeria-klein
  */
-class PizzaService {
-    public function getPizza(){
+class PizzaService
+{
+    public function getPizza()
+    {
         return 'margarita';
     }
 }
-?>

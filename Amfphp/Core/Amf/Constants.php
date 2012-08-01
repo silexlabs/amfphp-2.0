@@ -15,7 +15,8 @@
  * @package Amfphp_Core_Amf
  * @author Ariel Sommeria-klein
  */
-class Amfphp_Core_Amf_Constants {
+class Amfphp_Core_Amf_Constants
+{
     /**
      * The success method name
      */
@@ -34,8 +35,8 @@ class Amfphp_Core_Amf_Constants {
      */
     const CONTENT_TYPE = 'application/x-amf';
     /**
-     * this is the field where the class name of an object must be set so that it can be sent as a strongly typed object. 
-     * 
+     * this is the field where the class name of an object must be set so that it can be sent as a strongly typed object.
+     *
      * try to use this where possible, but it can't be everywhere because we would need to use ReflectionClass::hasProperty, and that is only with PHP 5.1
      */
     const FIELD_EXPLICIT_TYPE = '_explicitType';
@@ -69,6 +70,4 @@ class Amfphp_Core_Amf_Constants {
      */
     const AMF3_ENCODING = 3;
 
-
 }
-?>

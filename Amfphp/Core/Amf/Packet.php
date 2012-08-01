@@ -15,7 +15,8 @@
  * @package Amfphp_Core_Amf
  * @author Ariel Sommeria-klein
  */
-class Amfphp_Core_Amf_Packet {
+class Amfphp_Core_Amf_Packet
+{
     /**
      * The place to keep the headers data
      *
@@ -36,20 +37,17 @@ class Amfphp_Core_Amf_Packet {
      */
     public $amfVersion;
 
-
     /**
      * The constructor function for a new Amf object.
      *
      * All the constructor does is initialize the headers and Messages containers
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->headers = array();
         $this->messages = array();
         $this->headerTable = array();
         $this->amfVersion = Amfphp_Core_Amf_Constants::AMF0_ENCODING;
     }
 
-    
-
 }
-?>

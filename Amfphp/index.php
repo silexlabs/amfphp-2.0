@@ -14,9 +14,9 @@
 *  */
 require_once dirname(__FILE__) . '/ClassLoader.php';
 
-/* 
+/*
  * main entry point (gateway) for service calls. instanciates the gateway class and uses it to handle the call.
- * 
+ *
  * @package Amfphp
  * @author Ariel Sommeria-klein
  */
@@ -28,6 +28,3 @@ $gateway = Amfphp_Core_HttpRequestGatewayFactory::createGateway();
 
 $gateway->service();
 $gateway->output();
-
-
-?>

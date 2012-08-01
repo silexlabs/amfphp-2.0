@@ -8,7 +8,7 @@
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
  * @package Amfphp__BackOffice_ClientGenerator
- * 
+ *
  */
 
  /**
@@ -17,12 +17,14 @@
  * @author Ariel Sommeria-klein
  * @package Amfphp__BackOffice_ClientGenerator
  */
-class Amfphp_BackOffice_ClientGenerator_GeneratorManager {
+class Amfphp_BackOffice_ClientGenerator_GeneratorManager
+{
     /**
      *
-     * @param array of strings $generatorFolders 
+     * @param array of strings $generatorFolders
      */
-    public function loadGenerators($generatorFolders) {
+    public function loadGenerators($generatorFolders)
+    {
         $ret = array();
         foreach ($generatorFolders as $generatorFolderRootPath) {
             if (!is_dir($generatorFolderRootPath)) {
@@ -47,8 +49,7 @@ class Amfphp_BackOffice_ClientGenerator_GeneratorManager {
                 $ret[$generatorName] = $generatorInstance;
             }
         }
+
         return $ret;
     }
 }
-
-?>

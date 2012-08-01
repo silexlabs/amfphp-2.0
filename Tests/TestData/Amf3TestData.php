@@ -9,14 +9,14 @@
  * @package Tests_TestData
  */
 
-
 /**
  * See AmfTestData for details, this is the extension for Amf3
  *
  * @package Tests_TestData
  * @author Ariel Sommeria-klein, based on work by ci-dev
  */
-class Amf3TestData {
+class Amf3TestData
+{
     public $sUndefined;
     public $dUndefined;
     public $sNull;
@@ -51,8 +51,9 @@ class Amf3TestData {
     public $sObject;
     public $dByteArray;
     public $sByteArray;
-    
-    public function  __construct() {
+
+    public function  __construct()
+    {
         $this->buildBasics();
         $this->buildInt();
         $this->buildDouble();
@@ -67,7 +68,8 @@ class Amf3TestData {
     /**
      * simple...
      */
-    public function buildBasics(){
+    public function buildBasics()
+    {
         $this->dUndefined = new Amfphp_Core_Amf_Types_Undefined();
         $this->sUndefined = pack('C', 0);
         $this->sNull = pack('C', 1);
@@ -76,7 +78,8 @@ class Amf3TestData {
 
     }
 
-    public function buildInt(){
+    public function buildInt()
+    {
 //pack('C', 4) : the data type first. Then the data...
 // A negative integer is always serialised as U29-4.
 // This method is not supposed to output the value type.
@@ -86,7 +89,6 @@ class Amf3TestData {
 
         $this->dInt1 = -1;
         $this->sInt1 = pack('C', 4) . pack('C4', 255, 255, 255, 255);
-        
 
 // An 8 bit non-negative integer is serialised as U29-2.
 // The higher 7 bits are in the first byte, the remaining 7 bits in the second byte (0-based).
@@ -104,10 +106,11 @@ class Amf3TestData {
      * double: 0x05 as type marker, then 8 bytes. Careful of little/big endian so that test runs with both systems
      *
      */
-    public function buildDouble(){
+    public function buildDouble()
+    {
         $this->dDouble = 0.42;
         $packedData = pack('d', 0.42);
-        if(Amfphp_Core_Amf_Util::isSystemBigEndian()){
+        if (Amfphp_Core_Amf_Util::isSystemBigEndian()) {
             $packedData = strrev($packedData);
         }
         $this->sDouble = pack('C', 5) . $packedData;
@@ -118,7 +121,8 @@ class Amf3TestData {
      * @todo methods with a type marker included
      *
      */
-    public function buildString(){
+    public function buildString()
+    {
         $this->dEmptyString = '';
         $this->sEmptyString = pack('C', '1');
 
@@ -141,10 +145,11 @@ class Amf3TestData {
 
 
     //@TODO mbstrings with that php overload. (ssee sourceforge bugs)
-        
+
     }
 
-    public function buildXml(){
+    public function buildXml()
+    {
         $this->dXmlDocument = new Amfphp_Core_Amf_Types_XmlDocument('<?xml version=\'1.0\'?><testRoot><testChild1>testChild1Value</testChild1></testRoot>');
         //2nd is u29s-value : length << 1 | 1.
         $this->sXmlDocument = pack('C', 7) . pack('C2', 0x81, 0x25) . $this->dXmlDocument->data;
@@ -155,7 +160,8 @@ class Amf3TestData {
 
     }
 
-    public function buildDate(){
+    public function buildDate()
+    {
         $this->dDate = new Amfphp_Core_Amf_Types_Date(1306926779576); //1st June 2011
         //type: 0x08
         $this->sDate = pack('C', 0x08);
@@ -163,21 +169,20 @@ class Amf3TestData {
         $this->sDate .= pack('C', 0x01);
         //date is a double, see writeDouble for little/big endian
         $dateData = pack('d', 1306926779576);
-        if(Amfphp_Core_Amf_Util::isSystemBigEndian()){
+        if (Amfphp_Core_Amf_Util::isSystemBigEndian()) {
             $dateData = strrev($dateData);
         }
         $this->sDate .= $dateData;
-        
+
     }
 
-    public function buildArray(){
+    public function buildArray()
+    {
         $this->dEmptyArray = array();
 // 'array_marker' (0x09)
 // 'U29A-value' with size of 'dense portion' (0 << 1 | 1 = 0x01)
 // 'UTF-8-empty' flagging end of 'associative portion' (0x01)
         $this->sEmptyArray = pack('C3', 9, 1, 1);
-
-
 
 // Serialise an array with 0-based integer keys (Adobe calls it 'dense array').
         $this->dDenseArray = array(0 => 'zero', 1 => 'one');
@@ -191,7 +196,6 @@ class Amf3TestData {
 // 'U29S-value' with string length (3 << 1 | 1 = 0x07)
 // 'one'
         $this->sDenseArray = pack('C5', 9, 5, 1, 6, 9) . 'zero' . pack('CC', 6, 7) . 'one';
-
 
 // Serialise an array with 0-based integer keys ('dense portion') plus
 // non-integer keys ('associative portion').
@@ -225,7 +229,8 @@ class Amf3TestData {
         $this->sMixedArray = pack('C3', 9, 5, 3) . 's' . pack('CC', 6, 5) . 'sv' . pack('C', 7) . 'xyz' . pack('CC', 6, 11) . 'tvxyz' . pack('C3', 1, 6, 9) . 'zero' . pack('CC', 6, 7) . 'one';
     }
 
-    public function buildObject(){
+    public function buildObject()
+    {
         $this->dObject = new stdClass();
         $this->dObject->data= 'test';
         $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
@@ -234,7 +239,7 @@ class Amf3TestData {
         $this->sObject = pack('C', 0x0A);
         //traits.
         $this->sObject .= pack('C', 0x13);
-        //class name length, on a U29-1 : 11 << 1 | 1 = 23 
+        //class name length, on a U29-1 : 11 << 1 | 1 = 23
         $this->sObject .= pack('C', 0x17);
         //class name
         $this->sObject .= 'DummyClass2';
@@ -248,10 +253,11 @@ class Amf3TestData {
         $this->sObject .= pack('C', 0x9);
         //member value
         $this->sObject .= 'test';
-        
+
     }
 
-    public function buildByteArray(){
+    public function buildByteArray()
+    {
         $this->dByteArray = new Amfphp_Core_Amf_Types_ByteArray('test');
         //Byte Array Marker
         $this->sByteArray = pack('C', 0x0C);
@@ -261,9 +267,5 @@ class Amf3TestData {
         //data bytes
         $this->sByteArray .= 'test';
 
-        
     }
 }
-
-
-?>

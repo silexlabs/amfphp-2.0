@@ -15,11 +15,12 @@
  * @package Tests_TestData_TestPlugins_DisabledPlugin
  * @author Ariel Sommeria-klein
  */
-class DisabledPlugin {
+class DisabledPlugin
+{
     public static $instanciationCounter = 0;
 
-    public function  __construct() {
+    public function  __construct()
+    {
         self::$instanciationCounter++;
     }
 }
-?>

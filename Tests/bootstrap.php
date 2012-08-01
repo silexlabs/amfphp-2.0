@@ -16,4 +16,3 @@
  */
 
 session_start();
-?>

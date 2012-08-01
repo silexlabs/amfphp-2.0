@@ -17,21 +17,19 @@
  * @author Ariel Sommeria-Klein
  */
 
-
-
 class AmfphpFlexMessaging_ErrorMessage
 {
-	public $_explicitType;
-	public $correlationId;
-	public $faultCode;
-	public $faultDetail;
-	public $faultString;
+    public $_explicitType;
+    public $correlationId;
+    public $faultCode;
+    public $faultDetail;
+    public $faultString;
         public $rootCause;
 
-        public function  __construct($correlationId) {
+        public function  __construct($correlationId)
+        {
             $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
             $this->$explicitTypeField = AmfphpFlexMessaging::FLEX_TYPE_ERROR_MESSAGE;
-	    $this->correlationId = $correlationId;
+        $this->correlationId = $correlationId;
         }
 }
-?>

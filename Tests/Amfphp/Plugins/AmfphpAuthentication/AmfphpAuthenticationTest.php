@@ -67,13 +67,14 @@ class AmfphpAuthenticationTest extends PHPUnit_Framework_TestCase
         $this->assertFalse(isset ($_SESSION[AmfphpAuthentication::SESSION_FIELD_ROLES]));
     }
 
-
-    public function testLoginAndAccess(){
+    public function testLoginAndAccess()
+    {
         $this->serviceObj->login('admin', 'adminPassword');
         $this->object->filterServiceObject($this->serviceObj, 'AnyService', 'adminMethod');
     }
 
-    public function testNormalAccessToUnprotectedMethods(){
+    public function testNormalAccessToUnprotectedMethods()
+    {
         $this->object->filterServiceObject($this->serviceObj, 'AnyService', 'logout');
 
     }
@@ -81,7 +82,8 @@ class AmfphpAuthenticationTest extends PHPUnit_Framework_TestCase
     /**
      * @expectedException Amfphp_Core_Exception
      */
-    public function testLogout(){
+    public function testLogout()
+    {
         $this->serviceObj->login('admin', 'adminPassword');
         $this->object->filterServiceObject($this->serviceObj, 'AnyService', 'adminMethod');
         $this->serviceObj->logout();
@@ -98,12 +100,13 @@ class AmfphpAuthenticationTest extends PHPUnit_Framework_TestCase
     /**
      * @expectedException Amfphp_Core_Exception
      */
-    public function testBadRole(){
+    public function testBadRole()
+    {
         $this->serviceObj->login('user', 'userPassword');
         $this->object->filterServiceObject($this->serviceObj, 'AnyService', 'adminMethod');
 
     }
-    
+
     public function testGetAmfRequestHeaderHandlerFilter()
     {
         $credentialsAssoc = new stdClass();
@@ -114,7 +117,7 @@ class AmfphpAuthenticationTest extends PHPUnit_Framework_TestCase
         $credentialsHeader = new Amfphp_Core_Amf_Header(Amfphp_Core_Amf_Constants::CREDENTIALS_HEADER_NAME, true, $credentialsAssoc);
         $ret = $this->object->filterAmfRequestHeaderHandler(null, $credentialsHeader);
         $this->assertEquals($this->object, $ret);
-        
+
         $otherHeader = new Amfphp_Core_Amf_Header('bla');
         $ret = $this->object->filterAmfRequestHeaderHandler(null, $otherHeader);
         $this->assertEquals(null, $ret);
@@ -123,11 +126,13 @@ class AmfphpAuthenticationTest extends PHPUnit_Framework_TestCase
     /**
      * @expectedException Amfphp_Core_Exception
      */
-    public function testWithFiltersBlockAccess(){
+    public function testWithFiltersBlockAccess()
+    {
         Amfphp_Core_FilterManager::getInstance()->callFilters(Amfphp_Core_Common_ServiceRouter::FILTER_SERVICE_OBJECT, $this->serviceObj, 'TestService', 'adminMethod');
     }
 
-    public function testWithFiltersGrantAccess(){
+    public function testWithFiltersGrantAccess()
+    {
         $credentialsAssoc = new stdClass();
         $userIdField = Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_USERID;
         $passwordField = Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_PASSWORD;
@@ -140,6 +145,4 @@ class AmfphpAuthenticationTest extends PHPUnit_Framework_TestCase
         $ret->filterServiceObject($this->serviceObj, 'AnyService', 'adminMethod');
     }
 
-
 }
-?>

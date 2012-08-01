@@ -9,19 +9,17 @@
  * @package Amfphp_Services
  */
 
-
 /**
  * simple service for testing service subfolder support
  *
  * @package Amfphp_Services
  * @author Ariel Sommeria-klein
  */
-class BlaService {
-
-    public function returnDouble($param){
+class BlaService
+{
+    public function returnDouble($param)
+    {
         return $param * 2;
     }
 
-
 }
-?>

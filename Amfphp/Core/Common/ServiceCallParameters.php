@@ -16,11 +16,10 @@
  * @package Amfphp_Core_Common
  * @author Ariel Sommeria-klein
  */
-class Amfphp_Core_Common_ServiceCallParameters {
-
-
+class Amfphp_Core_Common_ServiceCallParameters
+{
     /**
-     * the name of the service. 
+     * the name of the service.
      * The service name can either be just the name of the class (TestService) or include a path(package/TestService)
      * separator for path can only be '/'
      *
@@ -41,4 +40,3 @@ class Amfphp_Core_Common_ServiceCallParameters {
     public $methodParameters;
 
 }
-?>

@@ -16,9 +16,10 @@
  * @author Ariel Sommeria-klein
  */
 
-class DummyService {
-    function returnNull(){
+class DummyService
+{
+    public function returnNull()
+    {
         return null;
     }
 }
-?>

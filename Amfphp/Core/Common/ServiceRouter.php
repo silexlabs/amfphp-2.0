@@ -18,13 +18,14 @@
  * @package Amfphp_Core_Common
  * @author Ariel Sommeria-klein
  */
-class Amfphp_Core_Common_ServiceRouter {
+class Amfphp_Core_Common_ServiceRouter
+{
     /**
      * filter called when the service object is created. Useful for authentication
-     * @param Object $serviceObject 
+     * @param Object $serviceObject
      * @param string $serviceName
      * @param string $methodName
-     * @param array $parameters
+     * @param array  $parameters
      */
     const FILTER_SERVICE_OBJECT = 'FILTER_SERVICE_OBJECT';
     /**
@@ -38,7 +39,7 @@ class Amfphp_Core_Common_ServiceRouter {
      * @var array of ClassFindInfo
      */
     public $serviceNames2ClassFindInfo;
-    
+
     /**
      * check parameters. This is useful for development, but should be disabled for production
      * @var Boolean
@@ -47,11 +48,12 @@ class Amfphp_Core_Common_ServiceRouter {
 
     /**
      *
-     * @param array $serviceFolderPaths folders containing service classes
-     * @param array $serviceNames2ClassFindInfo a dictionary of service classes represented in a ClassFindInfo.
+     * @param array   $serviceFolderPaths         folders containing service classes
+     * @param array   $serviceNames2ClassFindInfo a dictionary of service classes represented in a ClassFindInfo.
      * @param Boolean $checkArgumentCount
      */
-    public function __construct($serviceFolderPaths, $serviceNames2ClassFindInfo, $checkArgumentCount = false) {
+    public function __construct($serviceFolderPaths, $serviceNames2ClassFindInfo, $checkArgumentCount = false)
+    {
         $this->serviceFolderPaths = $serviceFolderPaths;
         $this->serviceNames2ClassFindInfo = $serviceNames2ClassFindInfo;
         $this->checkArgumentCount = $checkArgumentCount;
@@ -60,15 +62,16 @@ class Amfphp_Core_Common_ServiceRouter {
     /**
      * get a service object by its name. Looks for a match in serviceNames2ClassFindInfo, then in the defined service folders.
      * If none found, an exception is thrown
-     * @todo maybe option for a fully qualified class name. 
+     * @todo maybe option for a fully qualified class name.
      * this method is static so that it can be used also by the discovery service
-     * 
-     * @param type $serviceName
-     * @param array $serviceFolderPaths
-     * @param array $serviceNames2ClassFindInfo
+     *
+     * @param  type   $serviceName
+     * @param  array  $serviceFolderPaths
+     * @param  array  $serviceNames2ClassFindInfo
      * @return Object service object
      */
-    public static function getServiceObjectStatically($serviceName, array $serviceFolderPaths, array $serviceNames2ClassFindInfo){
+    public static function getServiceObjectStatically($serviceName, array $serviceFolderPaths, array $serviceNames2ClassFindInfo)
+    {
         $serviceObject = null;
         if (isset($serviceNames2ClassFindInfo[$serviceName])) {
             $classFindInfo = $serviceNames2ClassFindInfo[$serviceName];
@@ -94,16 +97,18 @@ class Amfphp_Core_Common_ServiceRouter {
         if (!$serviceObject) {
             throw new Amfphp_Core_Exception("$serviceName service not found ");
         }
+
         return $serviceObject;
-        
+
     }
-    
+
     /**
-     * 
-     * @param String $serviceName
+     *
+     * @param  String $serviceName
      * @return Object service object
      */
-    public function getServiceObject($serviceName) {
+    public function getServiceObject($serviceName)
+    {
         return self::getServiceObjectStatically($serviceName, $this->serviceFolderPaths, $this->serviceNames2ClassFindInfo);
     }
 
@@ -112,37 +117,40 @@ class Amfphp_Core_Common_ServiceRouter {
      * throws an exception if service not found.
      * if the service exists but not the function, an exception is thrown by call_user_func_array. It is pretty explicit, so no further code was added
      *
-     * @param string $serviceName
-     * @param string $methodName
-     * @param array $parameters
-     * @return mixed the result of the function call
+     * @param  string $serviceName
+     * @param  string $methodName
+     * @param  array  $parameters
+     * @return mixed  the result of the function call
      *
      */
-    public function executeServiceCall($serviceName, $methodName, array $parameters) {
+    public function executeServiceCall($serviceName, $methodName, array $parameters)
+    {
         $serviceObject = $this->getServiceObject($serviceName);
         $serviceObject = Amfphp_Core_FilterManager::getInstance()->callFilters(self::FILTER_SERVICE_OBJECT, $serviceObject, $serviceName, $methodName, $parameters);
 
         if (!method_exists($serviceObject, $methodName)) {
             throw new Amfphp_Core_Exception("method $methodName not found on $serviceName object ");
         }
-        
-        if(substr($methodName, 0, 1) == '_'){
+
+        if (substr($methodName, 0, 1) == '_') {
             throw new Exception("The method $methodName starts with a '_', and is therefore not accessible");
         }
-        if($this->checkArgumentCount){
-            $this->checkNumberOfArguments($serviceObject, $serviceName, $methodName, $parameters);            
+        if ($this->checkArgumentCount) {
+            $this->checkNumberOfArguments($serviceObject, $serviceName, $methodName, $parameters);
         }
+
         return call_user_func_array(array($serviceObject, $methodName), $parameters);
     }
 
     /**
-     * checks if the argument count received by amfPHP matches the argument count of the called method. 
-     * @param type $serviceObject
-     * @param type $serviceName
-     * @param type $methodName
-     * @param array $parameters 
+     * checks if the argument count received by amfPHP matches the argument count of the called method.
+     * @param type  $serviceObject
+     * @param type  $serviceName
+     * @param type  $methodName
+     * @param array $parameters
      */
-    private function checkNumberOfArguments($serviceObject, $serviceName, $methodName, array $parameters) {
+    private function checkNumberOfArguments($serviceObject, $serviceName, $methodName, array $parameters)
+    {
         $method = new ReflectionMethod($serviceObject, $methodName);
         $numberOfRequiredParameters = $method->getNumberOfRequiredParameters();
         $numberOfParameters = $method->getNumberOfParameters();
@@ -153,5 +161,3 @@ class Amfphp_Core_Common_ServiceRouter {
     }
 
 }
-
-?>

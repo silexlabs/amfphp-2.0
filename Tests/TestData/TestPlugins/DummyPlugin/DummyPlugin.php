@@ -15,18 +15,19 @@
  * @package Tests_TestData_TestPlugins_DummyPlugin
  * @author Ariel Sommeria-klein
  */
-class DummyPlugin {
+class DummyPlugin
+{
     public static $instanciationCounter = 0;
 
     public static $dummyConfVar = 'default';
-    
-    public function  __construct(array $pluginConfig = null) {
+
+    public function  __construct(array $pluginConfig = null)
+    {
         self::$instanciationCounter++;
-        if($pluginConfig){
-            if(isset($pluginConfig['dummyConfVar'])){
+        if ($pluginConfig) {
+            if (isset($pluginConfig['dummyConfVar'])) {
                 self::$dummyConfVar = $pluginConfig['dummyConfVar'];
             }
         }
     }
 }
-?>

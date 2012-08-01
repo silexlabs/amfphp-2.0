@@ -9,7 +9,6 @@
  * @package Tests_Amfphp_Core_Amf
  */
 
-
 /**
  * This class exports some internal (public) methods. This way, those methods
  * can be tested separately.
@@ -19,70 +18,87 @@
 
 class AmfSerializerWrapper extends Amfphp_Core_Amf_Serializer
 {
-    public function writeByte($b){
+    public function writeByte($b)
+    {
         parent::writeByte($b);
     }
 
-    public function writeInt($n) {
+    public function writeInt($n)
+    {
         parent::writeInt($n);
     }
 
-    public function writeLong($l) {
+    public function writeLong($l)
+    {
         parent::writeLong($l);
     }
 
-    public function writeUtf($s) {
+    public function writeUtf($s)
+    {
         parent::writeUtf($s);
     }
-    public function writeDouble($s) {
+    public function writeDouble($s)
+    {
         parent::writeDouble($s);
     }
 
-    public function writeLongUtf($s) {
+    public function writeLongUtf($s)
+    {
         parent::writeLongUtf($s);
     }
 
-    public function writeNumber($d) {
+    public function writeNumber($d)
+    {
         parent::writeNumber($d);
     }
 
-    public function writeBoolean($d) {
+    public function writeBoolean($d)
+    {
         parent::writeBoolean($d);
     }
 
-    public function writeString($d) {
+    public function writeString($d)
+    {
         parent::writeString($d);
     }
 
-    public function writeXML($d) {
+    public function writeXML($d)
+    {
         parent::writeXML($d);
     }
 
-    public function writeDate($d) {
+    public function writeDate($d)
+    {
         parent::writeDate($d);
     }
 
-    public function writeNull() {
+    public function writeNull()
+    {
         parent::writeNull();
     }
 
-    public function writeUndefined() {
+    public function writeUndefined()
+    {
         parent::writeUndefined();
     }
 
-    public function writeObjectEnd() {
+    public function writeObjectEnd()
+    {
         parent::writeObjectEnd();
     }
 
-    public function writeArrayOrObject($d) {
+    public function writeArrayOrObject($d)
+    {
         parent::writeArrayOrObject($d);
     }
 
-    public function writeReference($d) {
+    public function writeReference($d)
+    {
         parent::writeReference($d);
     }
 
-    public function writeTypedObject($d) {
+    public function writeTypedObject($d)
+    {
         parent::writeTypedObject($d);
     }
 
@@ -101,24 +117,20 @@ class AmfSerializerWrapper extends Amfphp_Core_Amf_Serializer
         return parent::writeAmf3Undefined();
     }
 
-
     public function writeAmf3Bool($d)
     {
         return parent::writeAmf3Bool($d);
     }
-
 
     public function writeAmf3Number($d)
     {
         return parent::writeAmf3Number($d);
     }
 
-
     public function writeAmf3String($d)
     {
         parent::writeAmf3String($d);
     }
-
 
     public function writeAmf3Xml($d)
     {
@@ -135,7 +147,6 @@ class AmfSerializerWrapper extends Amfphp_Core_Amf_Serializer
         return parent::writeAmf3Date($d);
     }
 
-
     public function writeAmf3Array(/* array */ $d)
     {
         return parent::writeAmf3Array($d);
@@ -151,6 +162,4 @@ class AmfSerializerWrapper extends Amfphp_Core_Amf_Serializer
         return parent::writeAmf3ByteArray($d);
     }
 
-
 }
-?>

@@ -15,7 +15,6 @@
  * @package Amfphp_Core
  * @author Ariel Sommeria-klein
  */
-class Amfphp_Core_Exception extends Exception {
-	
+class Amfphp_Core_Exception extends Exception
+{
 }
-?>
