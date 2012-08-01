@@ -1,0 +1,15 @@
+{
+    "name": "silexlabs/amfphp",
+    "description": "Simple Remoting for Web Applications",
+    "authors": [
+        {
+            "name": "Ariel Sommeria",
+            "email": ""
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "Amfphp": "./"
+        }
+    }
+}
