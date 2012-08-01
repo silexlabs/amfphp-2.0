@@ -21,8 +21,8 @@ require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
  * @author Ariel Sommeria-klein
  *
  */
-class AmfphpCharsetConverterTest extends PHPUnit_Framework_TestCase {
-
+class AmfphpCharsetConverterTest extends PHPUnit_Framework_TestCase
+{
     /**
      * @var CharsetConverter
      */
@@ -36,7 +36,8 @@ class AmfphpCharsetConverterTest extends PHPUnit_Framework_TestCase {
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         $pluginConfig = array('clientCharset' => 'UTF-8', 'phpCharset' => 'ISO-8859-1', 'method' =>AmfphpCharsetConverter::METHOD_ICONV);
         $this->object = new AmfphpCharsetConverter($pluginConfig);
         $this->textInClientCharset = 'éèê'; //utf-8
@@ -48,11 +49,12 @@ class AmfphpCharsetConverterTest extends PHPUnit_Framework_TestCase {
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() {
-
+    protected function tearDown()
+    {
     }
-    
-    public function testRequestDeserializedFilter() {
+
+    public function testRequestDeserializedFilter()
+    {
         $testPacket = new Amfphp_Core_Amf_Packet();
         $testPacket->messages[] = new Amfphp_Core_Amf_Message(null, null, $this->textInClientCharset);
         $ret = $this->object->filterDeserializedRequest($testPacket);
@@ -60,7 +62,8 @@ class AmfphpCharsetConverterTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($this->textInPhpCharset, $modifiedPacket->messages[0]->data);
     }
 
-    public function testResponseDeserializedFilter() {
+    public function testResponseDeserializedFilter()
+    {
         $testPacket = new Amfphp_Core_Amf_Packet();
         $testPacket->messages[] = new Amfphp_Core_Amf_Message(null, null, $this->textInPhpCharset);
         $ret = $this->object->filterDeserializedResponse($testPacket);
@@ -69,5 +72,3 @@ class AmfphpCharsetConverterTest extends PHPUnit_Framework_TestCase {
     }
 
 }
-
-?>

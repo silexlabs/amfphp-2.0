@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  *  This file is part of amfPHP
  *
@@ -13,11 +12,12 @@
 
 /**
  * config for the backoffice
- * 
+ *
  * @package Amfphp_BackOffice
  * @author Ariel Sommeria-Klein
  */
-class Amfphp_BackOffice_Config {
+class Amfphp_BackOffice_Config
+{
     /**
      * path to amfPHP. relative or absolute. If relative, be careful, it's relative to the script, not this file.
      * 'http://silexlabs.org/Tests/TestData/';
@@ -25,24 +25,24 @@ class Amfphp_BackOffice_Config {
      * '../Amfphp/'
      * '../Examples/Php/'
      * '../Tests/TestData/'
-     * @var String 
+     * @var String
      */
     public $amfphpEntryPointUrl = '../Tests/TestData/';
     //public $amfphpEntryPointUrl = 'http://arielsommeria.com/amfphp-2.1/Amfphp/';
 
-    
-    public function resolveAmfphpEntryPointUrl(){
+
+    public function resolveAmfphpEntryPointUrl()
+    {
 //determine url to amfphp. If in config it contains 'http', we consider it's absolute. Otherwise it's relative, and we build it.
         $httpMarkerPos = strpos($this->amfphpEntryPointUrl, 'http');
         if ($httpMarkerPos === false) {
             $scriptUrl = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'];
             //remove everything after last '/'
             $scriptUrlPath = substr($scriptUrl, 0, strrpos($scriptUrl, '/'));
+
             return $scriptUrlPath . '/' . $this->amfphpEntryPointUrl;
-        }else{
+        } else {
             return $this->amfphpEntryPointUrl;
         }
     }
 }
-
-?>

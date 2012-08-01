@@ -11,13 +11,13 @@
  */
 
 /**
- * analyses existing services. Warning: if 2 or more services have the same name, t-only one will appear in the returned data, 
- * as it is an associative array using the service name as key. 
+ * analyses existing services. Warning: if 2 or more services have the same name, t-only one will appear in the returned data,
+ * as it is an associative array using the service name as key.
  * @package Amfphp_Plugins_Discovery
  * @author Ariel Sommeria-Klein
  */
-class AmfphpDiscoveryService {
-
+class AmfphpDiscoveryService
+{
     /**
      * @see AmfphpDiscovery
      * @var array of strings(patterns)
@@ -39,11 +39,12 @@ class AmfphpDiscoveryService {
     /**
      * finds classes in folder. If in subfolders add the relative path to the name.
      * recursive, so use with care.
-     * @param string $rootPath
-     * @param string $subFolder
+     * @param  string $rootPath
+     * @param  string $subFolder
      * @return array
      */
-    protected function searchFolderForServices($rootPath, $subFolder) {
+    protected function searchFolderForServices($rootPath, $subFolder)
+    {
         $ret = array();
         $folderContent = scandir($rootPath . $subFolder);
 
@@ -53,11 +54,12 @@ class AmfphpDiscoveryService {
                 if (strpos($fileName, ".php")) {
                     $fullServiceName = $subFolder . substr($fileName, 0, strlen($fileName) - 4);
                     $ret[] = $fullServiceName;
-                } else if ((substr($fileName, 0, 1) != '.') && is_dir($rootPath . $subFolder . $fileName)) {
+                } elseif ((substr($fileName, 0, 1) != '.') && is_dir($rootPath . $subFolder . $fileName)) {
                     $ret = array_merge($ret, $this->searchFolderForServices($rootPath, $subFolder . $fileName . '/'));
                 }
             }
         }
+
         return $ret;
     }
 
@@ -65,7 +67,8 @@ class AmfphpDiscoveryService {
      * returns a list of available services
      * @return array of service names
      */
-    protected function getServiceNames(array $serviceFolderPaths, array $serviceNames2ClassFindInfo) {
+    protected function getServiceNames(array $serviceFolderPaths, array $serviceNames2ClassFindInfo)
+    {
         $ret = array();
         foreach ($serviceFolderPaths as $serviceFolderPath) {
             $ret = array_merge($ret, $this->searchFolderForServices($serviceFolderPath, ''));
@@ -79,14 +82,15 @@ class AmfphpDiscoveryService {
     }
 
     /**
-     * extracts 
+     * extracts
      * - types from param tags. type is first word after tag name, name of the variable is second word ($ is removed)
      * - return tag
-     * 
-     * @param string $methodComment 
+     *
+     * @param  string          $methodComment
      * @return array{'returns' => type, 'params' => array{var name => type}}
      */
-    protected function parseMethodComment($comment) {
+    protected function parseMethodComment($comment)
+    {
         //get rid of phpdoc formatting
         $comment = str_replace('/**', '', $comment);
         $comment = str_replace('*', '', $comment);
@@ -100,17 +104,18 @@ class AmfphpDiscoveryService {
                 $type = trim($words[1]);
                 $varName = trim(str_replace('$', '',$words[2]));
                 $params[$varName] = $type;
-            }else if (strtolower(substr($value, 0, 6)) == 'return') {
-                
+            } elseif (strtolower(substr($value, 0, 6)) == 'return') {
+
                 $words = explode(' ', $value);
                 $type = trim($words[1]);
                 $ret['return'] = $type;
             }
         }
         $ret['param'] = $params;
-        if(!isset($ret['return'])){
+        if (!isset($ret['return'])) {
             $ret['return'] = '';
         }
+
         return $ret;
     }
 
@@ -118,7 +123,8 @@ class AmfphpDiscoveryService {
      * does the actual collection of data about available services
      * @return array of AmfphpDiscovery_ServiceInfo
      */
-    public function discover() {
+    public function discover()
+    {
         $serviceNames = $this->getServiceNames(self::$serviceFolderPaths, self::$serviceNames2ClassFindInfo);
         $ret = array();
         foreach ($serviceNames as $serviceName) {
@@ -131,7 +137,7 @@ class AmfphpDiscoveryService {
                 $methodName = $methodR->name;
 
                 if (substr($methodName, 0, 1) == '_') {
-                    //methods starting with a '_' as they are reserved, so filter them out 
+                    //methods starting with a '_' as they are reserved, so filter them out
                     continue;
                 }
 
@@ -146,12 +152,12 @@ class AmfphpDiscoveryService {
                     $type = '';
                     if ($paramR->getClass()) {
                         $type = $paramR->getClass()->name;
-                        
-                    }else if(isset($parsedMethodComment['param'][$parameterName])){
+
+                    } elseif (isset($parsedMethodComment['param'][$parameterName])) {
                         $type = $parsedMethodComment['param'][$parameterName];
                     }
                     $parameterInfo = new AmfphpDiscovery_ParameterDescriptor($parameterName, $type);
-                    
+
                     $parameters[] = $parameterInfo;
                 }
                 $methods[$methodName] = new AmfphpDiscovery_MethodDescriptor($methodName, $parameters, $methodComment, $parsedMethodComment['return']);
@@ -169,9 +175,8 @@ class AmfphpDiscoveryService {
                 }
             }
         }
+
         return $ret;
     }
 
 }
-
-?>

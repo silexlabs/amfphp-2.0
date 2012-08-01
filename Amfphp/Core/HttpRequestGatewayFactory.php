@@ -16,20 +16,19 @@
  * @package Amfphp_Core
  * @author Ariel Sommeria-Klein
  */
-class Amfphp_Core_HttpRequestGatewayFactory {
-
-
-
+class Amfphp_Core_HttpRequestGatewayFactory
+{
     /**
      * there seems to be some confusion in the php doc as to where best to get the raw post data from.
      * try $GLOBALS['HTTP_RAW_POST_DATA'] and php://input
      *
      * @return <String> it's a binary stream, but there seems to be no better type than String for this.
      */
-    static protected function getRawPostData(){
+    protected static function getRawPostData()
+    {
         if (isset($GLOBALS['HTTP_RAW_POST_DATA'])) {
             return $GLOBALS['HTTP_RAW_POST_DATA'];
-        }else{
+        } else {
             return file_get_contents('php://input');
         }
 
@@ -38,19 +37,20 @@ class Amfphp_Core_HttpRequestGatewayFactory {
     /**
      * create the gateway.
      * content type is recovered by looking at the GET parameter contentType. If it isn't set, it looks in the content headers.
-     * @param Amfphp_Core_Config $config optional. If null, the gateway will use the default
+     * @param  Amfphp_Core_Config  $config optional. If null, the gateway will use the default
      * @return Amfphp_Core_Gateway
      */
-    static public function createGateway(Amfphp_Core_Config $config = null){
+    public static function createGateway(Amfphp_Core_Config $config = null)
+    {
         $contentType = null;
-        if(isset ($_GET['contentType'])){
+        if (isset ($_GET['contentType'])) {
             $contentType = $_GET['contentType'];
-        }else if(isset ($_SERVER['CONTENT_TYPE'])){
+        } elseif (isset ($_SERVER['CONTENT_TYPE'])) {
 
             $contentType = $_SERVER['CONTENT_TYPE'];
         }
         $rawInputData = self::getRawPostData();
+
         return new Amfphp_Core_Gateway($_GET, $_POST, $rawInputData, $contentType, $config);
     }
 }
-?>

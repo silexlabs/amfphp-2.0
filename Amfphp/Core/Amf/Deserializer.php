@@ -16,8 +16,8 @@
  *
  * @package Amfphp_Core_Amf
  */
-class Amfphp_Core_Amf_Deserializer {
-
+class Amfphp_Core_Amf_Deserializer
+{
     protected $rawData;
 
     /**
@@ -59,7 +59,8 @@ class Amfphp_Core_Amf_Deserializer {
     protected $storedDefinitions;
     protected $amf0storedObjects;
 
-    public function __construct($raw) {
+    public function __construct($raw)
+    {
         $this->rawData = $raw;
         $this->currentByte = 0;
         $this->content_length = strlen($this->rawData); // grab the total length of this stream
@@ -70,32 +71,35 @@ class Amfphp_Core_Amf_Deserializer {
      *
      * @param object $amfdata The object to put the deserialized data in
      */
-    public function deserialize() {
+    public function deserialize()
+    {
         $this->deserializedPacket = new Amfphp_Core_Amf_Packet();
         $this->readHeaders(); // read the binary headers
         $this->readMessages(); // read the binary Messages
+
         return $this->deserializedPacket;
     }
-    
-    protected function resetReferences(){
+
+    protected function resetReferences()
+    {
         $this->amf0storedObjects = array();
         $this->storedStrings = array();
         $this->storedObjects = array();
         $this->storedDefinitions = array();
-        
+
     }
 
     /**
      * readHeaders converts that header section of the amf Packet into php obects.
      * Header information typically contains meta data about the Packet.
      */
-    protected function readHeaders() {
-
+    protected function readHeaders()
+    {
         $topByte = $this->readByte(); // ignore the first two bytes --  version or something
         $secondByte = $this->readByte(); //0 for Flash,
         //If firstByte != 0, then the Amf data is corrupted, for example the transmission
         //
-			if (!($topByte == 0 || $topByte == 3)) {
+            if (!($topByte == 0 || $topByte == 3)) {
             throw new Amfphp_Core_Exception('Malformed Amf Packet, connection may have dropped');
         }
         $this->headersLeftToProcess = $this->readInt(); //  find the total number of header elements
@@ -115,7 +119,8 @@ class Amfphp_Core_Amf_Deserializer {
         }
     }
 
-    protected function readMessages() {
+    protected function readMessages()
+    {
         $this->messagesLeftToProcess = $this->readInt(); // find the total number  of Message elements
         while ($this->messagesLeftToProcess--) { // loop over all of the Message elements
             $this->resetReferences();
@@ -137,7 +142,8 @@ class Amfphp_Core_Amf_Deserializer {
      *
      * @return int The resulting integer from the next 2 bytes
      */
-    protected function readInt() {
+    protected function readInt()
+    {
         return ((ord($this->rawData[$this->currentByte++]) << 8) |
                 ord($this->rawData[$this->currentByte++])); // read the next 2 bytes, shift and add
     }
@@ -148,7 +154,8 @@ class Amfphp_Core_Amf_Deserializer {
      *
      * @return string The utf8 decoded string
      */
-    protected function readUTF() {
+    protected function readUTF()
+    {
         $length = $this->readInt(); // get the length of the string (1st 2 bytes)
         //BUg fix:: if string is empty skip ahead
         if ($length == 0) {
@@ -166,7 +173,8 @@ class Amfphp_Core_Amf_Deserializer {
      *
      * @return int The next byte converted into an integer
      */
-    protected function readByte() {
+    protected function readByte()
+    {
         return ord($this->rawData[$this->currentByte++]); // return the next byte
     }
 
@@ -174,52 +182,70 @@ class Amfphp_Core_Amf_Deserializer {
      * readData is the main switch for mapping a type code to an actual
      * implementation for deciphering it.
      *
-     * @param mixed $type The $type integer
+     * @param  mixed $type The $type integer
      * @return mixed The php version of the data in the Packet block
      */
-    public function readData($type) {
+    public function readData($type)
+    {
         switch ($type) {
             //amf3 is now most common, so start with that
             case 0x11: //Amf3-specific
+
                 return $this->readAmf3Data();
                 break;
             case 0: // number
+
                 return $this->readDouble();
             case 1: // boolean
+
                 return $this->readByte() == 1;
             case 2: // string
+
                 return $this->readUTF();
             case 3: // object Object
+
                 return $this->readObject();
             //ignore movie clip
             case 5: // null
+
                 return null;
             case 6: // undefined
+
                 return new Amfphp_Core_Amf_Types_Undefined();
             case 7: // Circular references are returned here
+
                 return $this->readReference();
             case 8: // mixed array with numeric and string keys
+
                 return $this->readMixedArray();
             case 9: //object end. not worth , TODO maybe some integrity checking
+
                 return null;
             case 0X0A: // array
+
                 return $this->readArray();
             case 0X0B: // date
+
                 return $this->readDate();
             case 0X0C: // string, strlen(string) > 2^16
+
                 return $this->readLongUTF();
             case 0X0D: // mainly internal AS objects
+
                 return null;
             //ignore recordset
             case 0X0F: // XML
+
                 return $this->readXml();
             case 0x10: // Custom Class
+
                 return $this->readCustomClass();
             default: // unknown case
                 throw new Amfphp_Core_Exception("Found unhandled type with code: $type");
                 exit();
                 break;
         }
+
         return $data;
     }
 
@@ -229,13 +255,15 @@ class Amfphp_Core_Amf_Deserializer {
      *
      * @return float The floating point value of the next 8 bytes
      */
-    protected function readDouble() {
+    protected function readDouble()
+    {
         $bytes = substr($this->rawData, $this->currentByte, 8);
         $this->currentByte += 8;
         if (Amfphp_Core_Amf_Util::isSystemBigEndian()) {
             $bytes = strrev($bytes);
         }
         $zz = unpack('dflt', $bytes); // unpack the bytes
+
         return $zz['flt']; // return the number from the associative array
     }
 
@@ -245,7 +273,8 @@ class Amfphp_Core_Amf_Deserializer {
      *
      * @return Object The php object filled with the data
      */
-    protected function readObject() {
+    protected function readObject()
+    {
         $ret = new stdClass();
         $this->amf0storedObjects[] = & $ret;
         $key = $this->readUTF();
@@ -254,6 +283,7 @@ class Amfphp_Core_Amf_Deserializer {
             $ret->$key = $val; // save the name/value pair in the object
             $key = $this->readUTF(); // get the next name
         }
+
         return $ret;
     }
 
@@ -265,8 +295,10 @@ class Amfphp_Core_Amf_Deserializer {
      *
      * @return String
      */
-    protected function readReference() {
+    protected function readReference()
+    {
         $reference = $this->readInt();
+
         return $this->amf0storedObjects[$reference];
     }
 
@@ -275,9 +307,11 @@ class Amfphp_Core_Amf_Deserializer {
      *
      * @return array The php array with mixed indexes
      */
-    protected function readMixedArray() {
+    protected function readMixedArray()
+    {
         //$length   = $this->readLong(); // get the length  property set by flash
         $this->currentByte += 4;
+
         return $this->readMixedObject(); // return the Message of mixed array
     }
 
@@ -287,7 +321,8 @@ class Amfphp_Core_Amf_Deserializer {
      *
      * @return array The php array with the object data
      */
-    protected function readMixedObject() {
+    protected function readMixedObject()
+    {
         $ret = array(); // init the array
         $this->amf0storedObjects[] = & $ret;
         $key = $this->readUTF(); // grab the key
@@ -299,6 +334,7 @@ class Amfphp_Core_Amf_Deserializer {
             $ret[$key] = $val; // save the name/value pair in the array
             $key = $this->readUTF(); // get the next name
         }
+
         return $ret; // return the array
     }
 
@@ -307,7 +343,8 @@ class Amfphp_Core_Amf_Deserializer {
      *
      * @return array The php array
      */
-    protected function readArray() {
+    protected function readArray()
+    {
         $ret = array(); // init the array object
         $this->amf0storedObjects[] = & $ret;
         $length = $this->readLong(); // get the length  of the array
@@ -315,6 +352,7 @@ class Amfphp_Core_Amf_Deserializer {
             $type = $this->readByte(); // grab the type for each element
             $ret[] = $this->readData($type); // grab each element
         }
+
         return $ret; // return the data
     }
 
@@ -324,19 +362,23 @@ class Amfphp_Core_Amf_Deserializer {
      *
      * @return long The date in ms.
      */
-    protected function readDate() {
+    protected function readDate()
+    {
         $ms = $this->readDouble(); // date in milliseconds from 01/01/1970
         $int = $this->readInt(); // unsupported timezone
         $date = new Amfphp_Core_Amf_Types_Date($ms);
+
         return $date;
     }
 
     /**
      *
-     * @return Amfphp_Core_Amf_Types_Xml 
+     * @return Amfphp_Core_Amf_Types_Xml
      */
-    protected function readXml() {
+    protected function readXml()
+    {
         $str = $this->readLongUTF();
+
         return new Amfphp_Core_Amf_Types_Xml($str);
     }
 
@@ -346,7 +388,8 @@ class Amfphp_Core_Amf_Deserializer {
      *
      * @return string The utf8 decoded string
      */
-    protected function readLongUTF() {
+    protected function readLongUTF()
+    {
         $length = $this->readLong(); // get the length of the string (1st 4 bytes)
         $val = substr($this->rawData, $this->currentByte, $length); // grab the string
         $this->currentByte += $length; // move the seek head to the end of the string
@@ -361,7 +404,8 @@ class Amfphp_Core_Amf_Deserializer {
      *
      * @return object The php representation of the object
      */
-    protected function readCustomClass() {
+    protected function readCustomClass()
+    {
         $typeIdentifier = str_replace('..', '', $this->readUTF());
         $obj = new stdClass();
         $this->amf0storedObjects[] = & $obj;
@@ -373,14 +417,16 @@ class Amfphp_Core_Amf_Deserializer {
         }
         $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
         $obj->$explicitTypeField = $typeIdentifier;
+
         return $obj; // return the array
     }
 
     /**
-     * read the type byte, then call the corresponding amf3 data reading function 
+     * read the type byte, then call the corresponding amf3 data reading function
      * @return mixed
      */
-    public function readAmf3Data() {
+    public function readAmf3Data()
+    {
         //AMF3 data found, so mark it in the deserialized packet. This is useful to know what kind of AMF to send back
         $this->deserializedPacket->amfVersion = Amfphp_Core_Amf_Constants::AMF3_ENCODING;
         $type = $this->readByte();
@@ -423,7 +469,8 @@ class Amfphp_Core_Amf_Deserializer {
      *
      * @return read integer value
      */
-    protected function readAmf3Int() {
+    protected function readAmf3Int()
+    {
         $int = $this->readByte();
         if ($int < 128)
             return $int;
@@ -450,27 +497,31 @@ class Amfphp_Core_Amf_Deserializer {
                     if (($int & 0x10000000) !== 0) {
                         $int |= ~0x1fffffff; // extend the sign bit regardless of integer (bit) size
                     }
+
                     return $int;
                 }
             }
         }
     }
 
-    protected function readAmf3Date() {
+    protected function readAmf3Date()
+    {
         $firstInt = $this->readAmf3Int();
         if (($firstInt & 0x01) == 0) {
             $firstInt = $firstInt >> 1;
             if ($firstInt >= count($this->storedObjects)) {
                 throw new Amfphp_Core_Exception('Undefined date reference: ' . $firstInt);
+
                 return false;
             }
+
             return $this->storedObjects[$firstInt];
         }
-
 
         $ms = $this->readDouble();
         $date = new Amfphp_Core_Amf_Types_Date($ms);
         $this->storedObjects[] = & $date;
+
         return $date;
     }
 
@@ -479,16 +530,18 @@ class Amfphp_Core_Amf_Deserializer {
      *
      * @return string
      */
-    protected function readAmf3String() {
-
+    protected function readAmf3String()
+    {
         $strref = $this->readAmf3Int();
 
         if (($strref & 0x01) == 0) {
             $strref = $strref >> 1;
             if ($strref >= count($this->storedStrings)) {
                 throw new Amfphp_Core_Exception('Undefined string reference: ' . $strref, E_USER_ERROR);
+
                 return false;
             }
+
             return $this->storedStrings[$strref];
         } else {
             $strlen = $strref >> 1;
@@ -497,6 +550,7 @@ class Amfphp_Core_Amf_Deserializer {
                 $str = $this->readBuffer($strlen);
                 $this->storedStrings[] = $str;
             }
+
             return $str;
         }
     }
@@ -505,7 +559,8 @@ class Amfphp_Core_Amf_Deserializer {
      *
      * @return Amfphp_Core_Amf_Types_Xml
      */
-    protected function readAmf3Xml() {
+    protected function readAmf3Xml()
+    {
         $handle = $this->readAmf3Int();
         $inline = (($handle & 1) != 0);
         $handle = $handle >> 1;
@@ -515,6 +570,7 @@ class Amfphp_Core_Amf_Deserializer {
         } else {
             $xml = $this->storedObjects[$handle];
         }
+
         return new Amfphp_Core_Amf_Types_Xml($xml);
     }
 
@@ -522,7 +578,8 @@ class Amfphp_Core_Amf_Deserializer {
      *
      * @return Amfphp_Core_Amf_Types_Xml
      */
-    protected function readAmf3XmlDocument() {
+    protected function readAmf3XmlDocument()
+    {
         $handle = $this->readAmf3Int();
         $inline = (($handle & 1) != 0);
         $handle = $handle >> 1;
@@ -532,10 +589,12 @@ class Amfphp_Core_Amf_Deserializer {
         } else {
             $xml = $this->storedObjects[$handle];
         }
+
         return new Amfphp_Core_Amf_Types_XmlDocument($xml);
     }
 
-    protected function readAmf3ByteArray() {
+    protected function readAmf3ByteArray()
+    {
         $handle = $this->readAmf3Int();
         $inline = (($handle & 1) != 0);
         $handle = $handle >> 1;
@@ -545,10 +604,12 @@ class Amfphp_Core_Amf_Deserializer {
         } else {
             $ba = $this->storedObjects[$handle];
         }
+
         return $ba;
     }
 
-    protected function readAmf3Array() {
+    protected function readAmf3Array()
+    {
         $handle = $this->readAmf3Int();
         $inline = (($handle & 1) != 0);
         $handle = $handle >> 1;
@@ -567,6 +628,7 @@ class Amfphp_Core_Amf_Deserializer {
                 $value = $this->readAmf3Data();
                 $hashtable[$i] = $value;
             }
+
             return $hashtable;
         } else {
             return $this->storedObjects[$handle];
@@ -577,7 +639,8 @@ class Amfphp_Core_Amf_Deserializer {
      * this probably needs some refactoring. Leave as is for now... A.S.
      * @return Object
      */
-    protected function readAmf3Object() {
+    protected function readAmf3Object()
+    {
         $handle = $this->readAmf3Int();
         $inline = (($handle & 1) != 0);
         $handle = $handle >> 1;
@@ -614,17 +677,16 @@ class Amfphp_Core_Amf_Deserializer {
             return $this->storedObjects[$handle];
         }
 
-
         $type = $classDefinition['type'];
         $obj = new stdClass();
 
         //Add to references as circular references may search for this object
         $this->storedObjects[] = & $obj;
-            
-        if($classDefinition['externalizable']){
+
+        if ($classDefinition['externalizable']) {
             $externalizedDataField = Amfphp_Core_Amf_Constants::FIELD_EXTERNALIZED_DATA;
             $obj->$externalizedDataField = $this->readAmf3Data();
-        }else{
+        } else {
             $members = $classDefinition['members'];
             $memberCount = count($members);
             for ($i = 0; $i < $memberCount; $i++) {
@@ -656,7 +718,8 @@ class Amfphp_Core_Amf_Deserializer {
      *
      * @return int The resulting integer from the next 4 bytes
      */
-    protected function readLong() {
+    protected function readLong()
+    {
         return ((ord($this->rawData[$this->currentByte++]) << 24) |
                 (ord($this->rawData[$this->currentByte++]) << 16) |
                 (ord($this->rawData[$this->currentByte++]) << 8) |
@@ -666,16 +729,16 @@ class Amfphp_Core_Amf_Deserializer {
     /**
      * Taken from SabreAmf
      */
-    protected function readBuffer($len) {
+    protected function readBuffer($len)
+    {
         $data = '';
         for ($i = 0; $i < $len; $i++) {
             $data .= $this->rawData
                     {$i + $this->currentByte};
         }
         $this->currentByte += $len;
+
         return $data;
     }
 
 }
-
-?>

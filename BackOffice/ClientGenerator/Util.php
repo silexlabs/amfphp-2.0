@@ -8,7 +8,7 @@
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
  * @package Amfphp__BackOffice_ClientGenerator
- * 
+ *
  */
 
 /**
@@ -17,14 +17,15 @@
  * @author Ariel Sommeria-klein
  * @package Amfphp__BackOffice_ClientGenerator
  */
-class Amfphp_BackOffice_ClientGenerator_Util {
-
+class Amfphp_BackOffice_ClientGenerator_Util
+{
     /**
      * recursively copies one folder to another.
      * @param string $src
      * @param string $dst must not exist yet
      */
-    public static function recurseCopy($src, $dst) {
+    public static function recurseCopy($src, $dst)
+    {
         $dir = opendir($src);
         mkdir($dst);
         while (false !== ( $file = readdir($dir))) {
@@ -43,9 +44,10 @@ class Amfphp_BackOffice_ClientGenerator_Util {
      *
      * @param type $sourcefolder
      * @param type $zipfilename
-     * @param type $removeFromLocalName use to reduce paths inside zip 
+     * @param type $removeFromLocalName use to reduce paths inside zip
      */
-    public function zipFolder($sourcefolder, $zipfilename, $removeFromLocalName) {
+    public function zipFolder($sourcefolder, $zipfilename, $removeFromLocalName)
+    {
 // instantate an iterator (before creating the zip archive, just
 // in case the zip file is created inside the source folder)
 // and traverse the directory to get the file list.
@@ -55,7 +57,7 @@ class Amfphp_BackOffice_ClientGenerator_Util {
 // instantate object
         $zip = new ZipArchive();
 
-// create and open the archive 
+// create and open the archive
         if ($zip->open("$zipfilename", ZipArchive::CREATE) !== TRUE) {
             throw new Exception("Could not open archive");
         }
@@ -63,7 +65,7 @@ class Amfphp_BackOffice_ClientGenerator_Util {
 // add each file in the file list to the archive
         foreach ($filelist as $value) {
             $localName = str_replace($removeFromLocalName, '', $value);
-            if(!$zip->addFile(realpath($value), $localName)){
+            if (!$zip->addFile(realpath($value), $localName)) {
                 throw new Exception("ERROR: Could not add file: $key");
             }
         }
@@ -83,7 +85,8 @@ class Amfphp_BackOffice_ClientGenerator_Util {
     // to use this function to empty a directory, write:
     // recursive_remove_directory('path/to/full_directory',TRUE);
 
-    public static function recursive_remove_directory($directory, $empty=FALSE) {
+    public static function recursive_remove_directory($directory, $empty=FALSE)
+    {
         // if the path has a slash at the end we remove it here
         if (substr($directory, -1) == '/') {
             $directory = substr($directory, 0, -1);
@@ -142,5 +145,3 @@ class Amfphp_BackOffice_ClientGenerator_Util {
     }
 
 }
-
-?>

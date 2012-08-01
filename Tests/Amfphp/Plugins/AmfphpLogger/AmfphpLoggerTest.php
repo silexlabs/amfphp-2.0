@@ -20,22 +20,21 @@ require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
  * @package Tests_Amfphp_Plugins_Logger
  * @author Ariel Sommeria-klein
  */
-class AmfphpLoggerTest extends PHPUnit_Framework_TestCase {
-
-    public function testSimple(){
+class AmfphpLoggerTest extends PHPUnit_Framework_TestCase
+{
+    public function testSimple()
+    {
         $logger = new AmfphpLogger();
         //delete the log file if it exists to make sure it's empty when we write to it
-        try{
+        try {
             unlink(AmfphpLogger::LOG_FILE_PATH);
-        }catch(Exception $e){}
+        } catch (Exception $e) {}
         $logger->filterSerializedRequest('bla');
         $logFileContent = file_get_contents(AmfphpLogger::LOG_FILE_PATH);
         //clean up
         unlink(AmfphpLogger::LOG_FILE_PATH);
-        
+
         $this->assertEquals("serialized request : \nbla\n", $logFileContent);
     }
 
 }
-
-?>

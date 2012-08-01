@@ -18,13 +18,14 @@ require_once dirname(__FILE__) . '/AmfDeserializerWrapper.php';
 /**
  * Unit tests for Amfphp_Core_Amf_Serializer, but using amf3
  * note: phpunit dataProvider mechanism doesn't work well, so lots of boiler plate code here. Oh well... A.S.
- * 
+ *
  * @package Tests_Amfphp_Core_Amf
  * @author Ariel Sommeria-klein
  */
-class Amf3DeserializationTest extends PHPUnit_Framework_TestCase {
-
-    public function testBasicMethods(){
+class Amf3DeserializationTest extends PHPUnit_Framework_TestCase
+{
+    public function testBasicMethods()
+    {
         $testData = new Amf3TestData();
 
         //template
@@ -41,7 +42,7 @@ class Amf3DeserializationTest extends PHPUnit_Framework_TestCase {
         $deserialized = $deserializer->readAmf3Data();
         $expectedDeserialized = $testData->dUndefined;
         $this->assertEquals($expectedDeserialized, $deserialized);
-        
+
         //null
         $deserializer = new AmfDeserializerWrapper($testData->sNull);
         $deserialized = $deserializer->readAmf3Data();
@@ -138,4 +139,3 @@ class Amf3DeserializationTest extends PHPUnit_Framework_TestCase {
     }
 
 }
-?>

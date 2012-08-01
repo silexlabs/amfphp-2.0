@@ -9,15 +9,14 @@
  * @package Amfphp_Core
  */
 
-
 /**
  * responsable for loading and maintaining Amfphp configuration
  *
  * @package Amfphp_Core
  * @author Ariel Sommeria-klein
  */
-class Amfphp_Core_Config {
-
+class Amfphp_Core_Config
+{
     /**
      * paths to folders containing services(relative or absolute)
      * @var <array> of paths
@@ -28,11 +27,11 @@ class Amfphp_Core_Config {
      * a dictionary of service classes represented in a ClassFindInfo.
      * The key is the name of the service, the value is the class find info.
      * for example: $serviceNames2ClassFindInfo["AmfphpDiscoveryService"] = new Amfphp_Core_Common_ClassFindInfo( dirname(__FILE__) . '/AmfphpDiscoveryService.php', 'AmfphpDiscoveryService');
-     * The forward slash is important, don't use "\'!     
+     * The forward slash is important, don't use "\'!
      * @var <array> of ClassFindInfo
      */
     public $serviceNames2ClassFindInfo;
-    
+
     /**
      * set to true if you want the service router to check if the number of arguments received by amfPHP matches with the method being called.
      * This should be set to false in production for performance reasons
@@ -52,18 +51,18 @@ class Amfphp_Core_Config {
      * paramName/paramValue pairs as an array.
      * example: array('plugin' => array( 'paramName' =>'paramValue'))
      * The array( 'paramName' =>'paramValue') will be passed as is to the plugin at construction time.
-     * 
+     *
      * @var array
      */
     public $pluginsConfig;
-    
+
     /**
      * array containing configuration data that is shared between the plugins. The format is paramName/paramValue pairs as an array.
-     * 
+     *
      * @var array
      */
     public $sharedConfig;
-    
+
     /**
      * if true, there will be detailed information in the error messages, including confidential information like paths.
      * So it is advised to set to true for development purposes and to false in production.
@@ -74,18 +73,17 @@ class Amfphp_Core_Config {
      * @var Boolean
      */
     const CONFIG_RETURN_ERROR_DETAILS = 'returnErrorDetails';
-    
+
     /**
      * historically, amf0 is default, and amf3 is only used if amf3 is detected in the request.
-     * Set this to true to override this behavior anf always use amf3. 
-     * the default is false, as this can create some serious problems with 
+     * Set this to true to override this behavior anf always use amf3.
+     * the default is false, as this can create some serious problems with
      * amf clients that expect amf0 but receive amf3, even if they support it.
      * This is the case for Flash's netconnection.
      * To use amf0 this must be set to false. for example
      * $this->sharedConfig[self::CONFIG_FORCE_AMF3] = false;
      */
     const CONFIG_FORCE_AMF3 = 'forceAmf3';
-    
 
     /**
      * array of plugins that are available but should be disabled
@@ -93,7 +91,8 @@ class Amfphp_Core_Config {
      */
     public $disabledPlugins;
 
-    public function  __construct() {
+    public function  __construct()
+    {
         $this->serviceFolderPaths = array();
         $this->serviceFolderPaths [] = dirname(__FILE__) . '/../Services/';
         $this->serviceNames2ClassFindInfo = array();
@@ -104,8 +103,6 @@ class Amfphp_Core_Config {
         //disable logging and error handler by default
         $this->disabledPlugins[] = 'AmfphpLogger';
         $this->disabledPlugins[] = 'AmfphpErrorHandler';
-        
-        
+
     }
 }
-?>

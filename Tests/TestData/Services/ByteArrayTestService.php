@@ -16,14 +16,15 @@
  * @author Ariel Sommeria-klein
  */
 
-class ByteArrayTestService {
-
+class ByteArrayTestService
+{
     /**
      * uncompresses a bytearray, writes the uncompressed data to a file, received.jpg
-     * @param Amfphp_Core_Amf_Types_ByteArray $ba a comporessed bytearray
-     * @return true 
+     * @param  Amfphp_Core_Amf_Types_ByteArray $ba a comporessed bytearray
+     * @return true
      */
-    public function uploadCompressedByteArray(Amfphp_Core_Amf_Types_ByteArray $ba){
+    public function uploadCompressedByteArray(Amfphp_Core_Amf_Types_ByteArray $ba)
+    {
         $uncompressed = gzuncompress($ba->data);
         //uncomment to save file to jpeg
         //file_put_contents('received.jpg', $uncompressed);
@@ -31,4 +32,3 @@ class ByteArrayTestService {
 
     }
 }
-?>

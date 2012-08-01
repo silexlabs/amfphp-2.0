@@ -21,8 +21,8 @@
  * @package Amfphp_Core
  * @author Ariel Sommeria-Klein
  */
-class Amfphp_Core_PluginManager {
-
+class Amfphp_Core_PluginManager
+{
     /**
      * protected instance of singleton
      * @var Amfphp_Core_PluginManager
@@ -39,7 +39,8 @@ class Amfphp_Core_PluginManager {
     /**
      * constructor
      */
-    protected function __construct() {
+    protected function __construct()
+    {
         $this->pluginInstances = array();
     }
 
@@ -47,10 +48,12 @@ class Amfphp_Core_PluginManager {
      * gives access to the singleton
      * @return Amfphp_Core_PluginManager
      */
-    public static function getInstance() {
+    public static function getInstance()
+    {
         if (self::$instance == NULL) {
             self::$instance = new Amfphp_Core_PluginManager();
         }
+
         return self::$instance;
     }
 
@@ -58,11 +61,12 @@ class Amfphp_Core_PluginManager {
      * load the plugins
      * @param array $pluginFolders where to load the plugins from. Absolute paths. For example Amfphp/Plugins/
      * @param array $pluginsConfig . optional. an array containing the plugin configuration, using the plugin name as key.
-     * @param array $sharedConfig. optional. if both a specific config and a shared config are available, concatenate them to create the plugin config. 
+     * @param array $sharedConfig. optional. if both a specific config and a shared config are available, concatenate them to create the plugin config.
      * Otherwise use whatever is not null
      * @param array $disabledPlugins . optional.  an array of names of plugins to disable
      */
-    public function loadPlugins($pluginFolders, array $pluginsConfig = null, array $sharedConfig = null, array $disabledPlugins = null) {
+    public function loadPlugins($pluginFolders, array $pluginsConfig = null, array $sharedConfig = null, array $disabledPlugins = null)
+    {
         foreach ($pluginFolders as $pluginsFolderRootPath) {
             if (!is_dir($pluginsFolderRootPath)) {
                 throw new Amfphp_Core_Exception('invalid path for loading plugins at ' . $pluginsFolderRootPath);
@@ -103,7 +107,6 @@ class Amfphp_Core_PluginManager {
                     $pluginConfig += $sharedConfig;
                 }
 
-
                 $pluginInstance = new $pluginName($pluginConfig);
                 $this->pluginInstances[] = $pluginInstance;
             }
@@ -111,5 +114,3 @@ class Amfphp_Core_PluginManager {
     }
 
 }
-
-?>

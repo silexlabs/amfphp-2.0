@@ -9,16 +9,16 @@
  * @package Tests_TestData
  */
 
-
 /**
  * testing requires some services. They are described here.
  *
  * @package Tests_TestData
  * @author Ariel Sommeria-klein
  */
-class TestServicesConfig extends Amfphp_Core_Config {
-
-    public function  __construct() {
+class TestServicesConfig extends Amfphp_Core_Config
+{
+    public function  __construct()
+    {
         parent::__construct();
         $this->serviceFolderPaths  = array(dirname(__FILE__) . '/Services/');
         $testServicePath = dirname(__FILE__) . '/TestService.php';
@@ -27,4 +27,3 @@ class TestServicesConfig extends Amfphp_Core_Config {
     }
 
 }
-?>

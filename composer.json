@@ -1,0 +1,13 @@
+{
+    "name": "silexlabs/amfphp",
+    "description": "Simple Remoting for Web Applications",
+    "authors": [
+        {
+            "name": "Ariel Sommeria",
+            "email": ""
+        }
+    ],
+    "autoload": {
+        "files": ["Amfphp/ClassLoader.php"]
+    }
+}

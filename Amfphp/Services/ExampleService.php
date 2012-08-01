@@ -9,19 +9,17 @@
  * @package Amfphp_Services
  */
 
-
 /**
  * This is a test/example service. Remove it for production use
  *
  * @package Amfphp_Services
  * @author Ariel Sommeria-klein
  */
-class ExampleService {
-
-    public function returnOneParam($param){
+class ExampleService
+{
+    public function returnOneParam($param)
+    {
         return $param;
     }
 
-
 }
-?>

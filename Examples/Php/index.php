@@ -20,6 +20,3 @@ $config->pluginsConfig['AmfphpCustomClassConverter'] = array('customClassFolderP
 $gateway = Amfphp_Core_HttpRequestGatewayFactory::createGateway($config);
 $gateway->service();
 $gateway->output();
-
-
-?>

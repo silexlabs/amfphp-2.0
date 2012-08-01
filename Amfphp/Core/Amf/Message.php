@@ -9,14 +9,14 @@
  * @package Amfphp_Core_Amf
  */
 
-
 /**
  * Amfphp_Core_Amf_Message is a data type that encapsulates all of the various properties a Message object can have.
  *
  * @package Amfphp_Core_Amf
  * @author Ariel Sommeria-klein
  */
-class Amfphp_Core_Amf_Message {
+class Amfphp_Core_Amf_Message
+{
     /**
      * inthe case of a request:
      * parsed to a service name and a function name. supported separators for the targetUri are '.' and '/'
@@ -37,7 +37,7 @@ class Amfphp_Core_Amf_Message {
      *
      * in the case of a response:
      * undefined
-     * 
+     *
      * @var String
      */
     public $responseUri = '';
@@ -48,19 +48,17 @@ class Amfphp_Core_Amf_Message {
      */
     public $data;
 
-
     /**
      *
      * @param String $targetUri
      * @param String $responseUri
-     * @param mixed $data
+     * @param mixed  $data
      */
-    public function  __construct($targetUri = '', $responseUri = '', $data = null) {
+    public function  __construct($targetUri = '', $responseUri = '', $data = null)
+    {
         $this->targetUri = $targetUri;
         $this->responseUri = $responseUri;
         $this->data = $data;
     }
-    
-    
+
 }
-?>

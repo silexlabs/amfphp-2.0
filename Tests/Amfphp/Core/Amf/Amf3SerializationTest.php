@@ -23,9 +23,10 @@ require_once dirname(__FILE__) . '/AmfSerializerWrapper.php';
  * @package Tests_Amfphp_Core_Amf
  * @author Ariel Sommeria-klein
  */
-class Amf3SerializationTest extends PHPUnit_Framework_TestCase {
-
-    public function testBasicMethods(){
+class Amf3SerializationTest extends PHPUnit_Framework_TestCase
+{
+    public function testBasicMethods()
+    {
         $testData = new Amf3TestData();
 
         $emptyPacket = new Amfphp_Core_Amf_Packet();
@@ -41,7 +42,7 @@ class Amf3SerializationTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));
 
          */
- 
+
         //undefined
         $serializer = new AmfSerializerWrapper($emptyPacket);
         $serializer->writeAmf3Undefined();
@@ -164,8 +165,6 @@ class Amf3SerializationTest extends PHPUnit_Framework_TestCase {
         $expectedSerialized = $testData->sByteArray;
         $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));
 
-
     }
 
 }
-?>

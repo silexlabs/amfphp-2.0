@@ -21,8 +21,8 @@ require_once dirname(__FILE__) . '/../../../TestData/TestServicesConfig.php';
  * @package Tests_Amfphp_Plugins_FlexMessaging
  * @author Ariel Sommeria-klein
  */
-class AmfphpFlexMessagingTest extends PHPUnit_Framework_TestCase {
-
+class AmfphpFlexMessagingTest extends PHPUnit_Framework_TestCase
+{
     /**
      * @var FlexMessaging
      */
@@ -38,7 +38,8 @@ class AmfphpFlexMessagingTest extends PHPUnit_Framework_TestCase {
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->object = new AmfphpFlexMessaging();
         $testServiceConfig = new TestServicesConfig();
         $this->serviceRouter = new Amfphp_Core_Common_ServiceRouter($testServiceConfig->serviceFolderPaths, $testServiceConfig->serviceNames2ClassFindInfo);
@@ -48,11 +49,12 @@ class AmfphpFlexMessagingTest extends PHPUnit_Framework_TestCase {
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() {
-
+    protected function tearDown()
+    {
     }
 
-    public function testGetAmfRequestMessageHandlerFilter(){
+    public function testGetAmfRequestMessageHandlerFilter()
+    {
         $requestMessage = new Amfphp_Core_Amf_Message(null, '/1', null);
         $requestMessage->data = array();
         $command = new stdClass();
@@ -62,12 +64,13 @@ class AmfphpFlexMessagingTest extends PHPUnit_Framework_TestCase {
         $ret = $this->object->filterAmfRequestMessageHandler(null, $requestMessage);
         $this->assertEquals($this->object, $ret);
     }
-    
-    public function testCommandMessage() {
+
+    public function testCommandMessage()
+    {
         $requestMessage = new Amfphp_Core_Amf_Message(null, '/1', null);
         $requestMessage->data = array();
         $expectedResponseMessage = new Amfphp_Core_Amf_Message('/1/onResult', null, null);
-        
+
         $command = new stdClass();
         $command->_explicitType = AmfphpFlexMessaging::FLEX_TYPE_COMMAND_MESSAGE;
         $command->messageId = '690D76D5-13C0-DFBD-7F2F-9E3786B59EB5';
@@ -81,7 +84,8 @@ class AmfphpFlexMessagingTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals(print_r($expectedResponseMessage, true), print_r($responseMessage, true));
     }
 
-    public function testRemotingMessage(){
+    public function testRemotingMessage()
+    {
         $requestMessage = new Amfphp_Core_Amf_Message(null, '/1', null);
         $requestMessage->data = array();
         $expectedResponseMessage = new Amfphp_Core_Amf_Message('/1/onResult', null, null);
@@ -108,10 +112,6 @@ class AmfphpFlexMessagingTest extends PHPUnit_Framework_TestCase {
         $expectedResponseMessage->data = $expectedError;
         $this->assertEquals('AmfphpFlexMessaging_ErrorMessage', get_class($responsePacket->messages[0]->data));
 
-
     }
 
-
 }
-
-?>

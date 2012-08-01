@@ -11,7 +11,7 @@
  */
 
 /**
- * entry point for back office 
+ * entry point for back office
  * @author Ariel Sommeria-klein
  *
  */
@@ -21,4 +21,3 @@
  */
 require_once(dirname(__FILE__) . '/Top.php');
 ?>
-

@@ -9,7 +9,6 @@
  * @package Tests_Amfphp_Core_Amf
  */
 
-
 /**
 *  includes
 *  */
@@ -21,8 +20,8 @@ require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
  * @package Tests_Amfphp_Core_Amf
  * @author Ariel Sommeria-klein
  */
-class Amfphp_Core_Amf_UtilTest extends PHPUnit_Framework_TestCase {
-
+class Amfphp_Core_Amf_UtilTest extends PHPUnit_Framework_TestCase
+{
     /**
      * @var Amfphp_Core_Amf_Util
      */
@@ -37,7 +36,8 @@ class Amfphp_Core_Amf_UtilTest extends PHPUnit_Framework_TestCase {
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->object = new Amfphp_Core_Amf_Util;
     }
 
@@ -45,21 +45,25 @@ class Amfphp_Core_Amf_UtilTest extends PHPUnit_Framework_TestCase {
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() {
-
+    protected function tearDown()
+    {
     }
 
-    public function testIsSystemBigEndian() {
+    public function testIsSystemBigEndian()
+    {
         $isBigEndian = Amfphp_Core_Amf_Util::isSystemBigEndian();
         $this->assertTrue(($isBigEndian == false) || ($isBigEndian == true));
     }
 
-    public function testApplyFunc($obj = null){
+    public function testApplyFunc($obj = null)
+    {
         $this->counter++;
+
         return $obj;
     }
 
-    public function testApplyFunctionToContainedObjects() {
+    public function testApplyFunctionToContainedObjects()
+    {
         //non object
         $this->counter = 0;
         Amfphp_Core_Amf_Util::applyFunctionToContainedObjects('bla', array($this, 'testApplyFunc'));
@@ -84,5 +88,3 @@ class Amfphp_Core_Amf_UtilTest extends PHPUnit_Framework_TestCase {
     }
 
 }
-
-?>

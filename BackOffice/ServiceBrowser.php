@@ -20,7 +20,7 @@ $serviceCaller = new Amfphp_BackOffice_ServiceCaller($config->resolveAmfphpEntry
 //load service descriptors
 $services = $serviceCaller->makeAmfphpJsonServiceCall("AmfphpDiscoveryService", "discover");
 
-//what are we calling? 
+//what are we calling?
 $callMethodName = null;
 if (isset($_GET['methodName'])) {
     $callMethodName = $_GET['methodName'];
@@ -32,11 +32,11 @@ if (isset($_GET['serviceName'])) {
 
 $callParameters = $_POST;
 /**
- * 3 cases: 
+ * 3 cases:
  * - POST has some content, this means there is at least one parameter and the call must be made. set to true.
  * - GET callWithoutParams is set, this means it's a call to a method without parameters. set to true.
  * - lastly, it can be just a call to select a service method, but without a call. set to false.
- *  
+ *
  */
 $makeServiceCall = false;
 if ((count($_POST) > 0) || isset($_GET['callWithoutParams'])) {
@@ -52,6 +52,7 @@ if ($services == null) {
         <li>BackOffice Configuration in BackOffice/Config.php, specifically $amfphpEntryPointUrl</li>
     </ul>
     <?php
+
     return;
 }
 //generate service/method menu
@@ -60,7 +61,7 @@ foreach ($services as $service) {
     echo "\n<ul>";
     foreach ($service->methods as $method) {
         if (substr($method->name, 0, 1) == '_') {
-            //methods starting with a '_' as they are reserved, so filter them out 
+            //methods starting with a '_' as they are reserved, so filter them out
             continue;
         }
         echo "\n <li><a href='?serviceName=" . $service->name . "&methodName=" . $method->name . "'>" . $method->name . "</a></li>";
@@ -97,10 +98,10 @@ if ($callServiceName && $callMethodName) {
     }
 }
 
-function formatNode($objName, $obj) {
+function formatNode($objName, $obj)
+{
     if (is_array($obj) || is_object($obj)) {
         $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
-
 
         $children = array();
         foreach ($obj as $key => $subObj) {
@@ -125,6 +126,7 @@ function formatNode($objName, $obj) {
             $ret['data'] = "$objName ( $type )";
             $ret['children'] = $children;
             $ret['state'] = 'open';
+
             return $ret;
         } else {
             return $children;
@@ -134,7 +136,7 @@ function formatNode($objName, $obj) {
     }
 }
 
-//make service call and show results 
+//make service call and show results
 if ($makeServiceCall) {
     $callStartTimeMs = microtime(true);
     //$_POST is associative. Transform it into an array, as it's the format AmfphpJson expects.
@@ -153,13 +155,11 @@ if ($makeServiceCall) {
     <div id='tree'></div>
     </div>
 
-
-
     <script>
-                
-        $(function () {	        
 
-            $("#tree").jstree({ 
+        $(function () {
+
+            $("#tree").jstree({
                 "json_data" : {
                     "data" : <?php echo json_encode($treeData); ?>
                     ,
@@ -170,15 +170,11 @@ if ($makeServiceCall) {
                 "themes" : {
                     "theme" : "apple"
                 }
-                        
+
             });
-            
+
             $("#print_r").hide();
         });
-
-
-
-
 
     </script>
     <div id="print_r">
@@ -187,6 +183,3 @@ if ($makeServiceCall) {
 
     <?php
 }
-?>
-
-

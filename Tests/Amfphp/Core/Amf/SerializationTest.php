@@ -9,7 +9,6 @@
  * @package Tests_Amfphp_Core_Amf
  */
 
-
 /**
 *  includes
 *  */
@@ -24,10 +23,10 @@ require_once dirname(__FILE__) . '/AmfSerializerWrapper.php';
  * @package Tests_Amfphp_Core_Amf
  * @author Ariel Sommeria-klein
  */
-class SerializationTest extends PHPUnit_Framework_TestCase{
-
-
-    public function testBasicMethods(){
+class SerializationTest extends PHPUnit_Framework_TestCase
+{
+    public function testBasicMethods()
+    {
         $testData = new AmfTestData();
         $emptyPacket = new Amfphp_Core_Amf_Packet();
 
@@ -185,7 +184,8 @@ class SerializationTest extends PHPUnit_Framework_TestCase{
 
     }
 
-    public function testSerializingPackets(){
+    public function testSerializingPackets()
+    {
         $testData = new AmfTestData();
         /*
         template
@@ -228,10 +228,6 @@ class SerializationTest extends PHPUnit_Framework_TestCase{
         $expectedSerialized = $testData->s2Headers2MessagesPacket;
         $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));
 
-
     }
-    
-
 
 }
-?>

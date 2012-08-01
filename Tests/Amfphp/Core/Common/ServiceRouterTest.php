@@ -9,7 +9,6 @@
  * @package Tests_Amfphp_Core_Common
  */
 
-
 /**
 *  includes
 *  */
@@ -23,8 +22,8 @@ require_once dirname(__FILE__) . '/../../../TestData/TestServicesConfig.php';
  * @package Tests_Amfphp_Core_Common
  * @author Ariel Sommeria-klein
  */
-class Amfphp_Core_Common_ServiceRouterTest extends PHPUnit_Framework_TestCase {
-
+class Amfphp_Core_Common_ServiceRouterTest extends PHPUnit_Framework_TestCase
+{
     /**
      * @var Amfphp_Core_Common_ServiceRouter
      */
@@ -34,12 +33,14 @@ class Amfphp_Core_Common_ServiceRouterTest extends PHPUnit_Framework_TestCase {
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         $testServiceConfig = new TestServicesConfig();
         $this->object = new Amfphp_Core_Common_ServiceRouter($testServiceConfig->serviceFolderPaths, $testServiceConfig->serviceNames2ClassFindInfo);
     }
 
-    public function testExecuteTestServiceCall(){
+    public function testExecuteTestServiceCall()
+    {
         //return one param
         $testParamsArray = array('a');
         $mirrored = $this->object->executeServiceCall('TestService', 'returnOneParam', $testParamsArray);
@@ -51,7 +52,8 @@ class Amfphp_Core_Common_ServiceRouterTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($mirrored, 3);
     }
 
-    public function testFindDummyServiceInFolder(){
+    public function testFindDummyServiceInFolder()
+    {
         $ret = $this->object->executeServiceCall('DummyService', 'returnNull', array());
         $this->assertEquals($ret, null);
     }
@@ -72,7 +74,6 @@ class Amfphp_Core_Common_ServiceRouterTest extends PHPUnit_Framework_TestCase {
         $ret = $this->object->executeServiceCall('DummyService', 'noFunction', array());
         $this->assertEquals($ret, null);
     }
-    
 
      /**
      * @expectedException Amfphp_Core_Exception
@@ -80,7 +81,5 @@ class Amfphp_Core_Common_ServiceRouterTest extends PHPUnit_Framework_TestCase {
     public function testReservedMethodException()
     {
         $ret = $this->object->executeServiceCall('DummyService', '_reserved', array());
-    }    
+    }
 }
-
-?>

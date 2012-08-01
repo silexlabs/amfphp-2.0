@@ -9,14 +9,12 @@
  * @package Tests_Amfphp_Core_Amf
  */
 
-
 /**
 *  includes
 *  */
 require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
 require_once dirname(__FILE__) . '/../../../TestData/AmfTestData.php';
 require_once dirname(__FILE__) . '/AmfDeserializerWrapper.php';
-
 
 /**
  * Unit tests for Amfphp_Core_Amf_Serializer
@@ -25,10 +23,10 @@ require_once dirname(__FILE__) . '/AmfDeserializerWrapper.php';
  * @package Tests_Amfphp_Core_Amf
  * @author Ariel Sommeria-klein
  */
-class DeserializationTest extends PHPUnit_Framework_TestCase{
-
-
-    public function testBasicMethods(){
+class DeserializationTest extends PHPUnit_Framework_TestCase
+{
+    public function testBasicMethods()
+    {
         $testData = new AmfTestData();
 
         //readByte
@@ -74,7 +72,7 @@ class DeserializationTest extends PHPUnit_Framework_TestCase{
         $expectedDeserialized = $testData->dNumber;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
-        //read Boolean  
+        //read Boolean
         $deserializer = new AmfDeserializerWrapper($testData->sBoolean);
         $type = $deserializer->readByte();
         $deserialized = $deserializer->readData($type);
@@ -161,11 +159,10 @@ class DeserializationTest extends PHPUnit_Framework_TestCase{
         $expectedDeserialized = $testData->dTypedObject;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
-        
-
     }
 
-    public function testSerializingPackets(){
+    public function testSerializingPackets()
+    {
         $testData = new AmfTestData();
         /*
         template
@@ -179,7 +176,6 @@ class DeserializationTest extends PHPUnit_Framework_TestCase{
         $deserialized = $deserializer->deserialize();
         $expectedDeserialized = $testData->dNullHeaderPacket;
         $this->assertEquals($expectedDeserialized, $deserialized);
-
 
         //Packet with string header
         $deserializer = new AmfDeserializerWrapper($testData->sStringHeaderPacket);
@@ -206,8 +202,5 @@ class DeserializationTest extends PHPUnit_Framework_TestCase{
         $this->assertEquals($expectedDeserialized, $deserialized);
 
     }
-    
-
 
 }
-?>

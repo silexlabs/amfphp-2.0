@@ -8,7 +8,7 @@
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
  * @package Amfphp_Plugins_Discovery
- * 
+ *
  */
 
   /**
@@ -17,31 +17,30 @@
  * @author Ariel Sommeria-klein
  * @package Amfphp_Plugins_Discovery
  */
-class AmfphpDiscovery_ParameterDescriptor {
+class AmfphpDiscovery_ParameterDescriptor
+{
     public $name;
     /**
      *This can be gathered in 2 manners: commentary tag analysis and type hinting analysis. For starters only the second method is used
      * @var String
      */
     public $type;
-    
+
     /**
-     *@todo 
+     *@todo
      * @var Boolean
      */
     //public $isOptional;
-    
-    
+
     /**
      *
      * @param String $name
      * @param String $type
      */
-    public function __construct($name, $type) {
+    public function __construct($name, $type)
+    {
         $this->name = $name;
         $this->type = $type;
-    }    
-    
-}
+    }
 
-?>
+}
