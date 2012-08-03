@@ -85,6 +85,25 @@ class TestService {
     public function returnArray(){
         return array(0, 1 =>2, 3=> 4, 5 => array(6 => 7));
     }
+    
+    /**
+     *
+     * @param boolean $value
+     * @return boolean 
+     */
+    public function returnOpposite($value){
+        return !$value;
+    }
+    
+    /**
+     *
+     * @param boolean $value1
+     * @param boolean $value2
+     * @return boolean 
+     */
+    public function returnBitwiseAnd($value1, $value2){
+        return ($value1 && $value2);
+    }
 
 
 }
