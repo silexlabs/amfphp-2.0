@@ -36,6 +36,9 @@ class Amfphp_BackOffice_ServiceCaller {
      * @return mixed array or object, json decoded
      */
     function makeAmfphpJsonServiceCall($serviceName, $methodName, $parameters = array()) {
+        if  (!in_array  ('curl', get_loaded_extensions())) {
+            throw new Exception('curl php extension unavailable. Can not make call. This does not mean yœu can not use amfPHP, however it does mean that most of the functionality in the Back Office will not work. This must be changed by your Hosting provider.');
+	}
         $jsonEncodedParams = json_encode($parameters);
         $requestString = "{\"serviceName\":\"$serviceName\", \"methodName\":\"$methodName\", \"parameters\":$jsonEncodedParams}";
         //echo $requestString;
