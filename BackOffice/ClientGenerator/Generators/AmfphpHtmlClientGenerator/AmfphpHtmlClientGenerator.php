@@ -16,7 +16,7 @@
  * @author Ariel Sommeria-klein
  * @package Amfphp_Backoffice_Generators
  */
-class AmfphpHtmlClientGenerator extends Amfphp_BackOffice_ClientGenerator_ClientGeneratorBase {
+class AmfphpHtmlClientGenerator extends Amfphp_BackOffice_ClientGenerator_LocalClientGenerator {
     public function __construct() {
         parent::__construct(array('html', 'js'), dirname(__FILE__) . '/Template');
     }
@@ -31,7 +31,7 @@ class AmfphpHtmlClientGenerator extends Amfphp_BackOffice_ClientGenerator_Client
     }
     /**
      * (non-PHPdoc)
-     * @see ClientGenerator/Amfphp_BackOffice_ClientGenerator_ClientGeneratorBase::getTestUrlSuffix()
+     * @see ClientGenerator/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::getTestUrlSuffix()
      */
     public function getTestUrlSuffix(){
     	return 'index.html';

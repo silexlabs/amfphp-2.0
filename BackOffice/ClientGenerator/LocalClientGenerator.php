@@ -23,7 +23,7 @@
  * @author Ariel Sommeria-klein
  * @package Amfphp_Backoffice_Generators
  */
-class Amfphp_BackOffice_ClientGenerator_ClientGeneratorBase {
+class Amfphp_BackOffice_ClientGenerator_LocalClientGenerator {
 
     protected $codeFileExtensions;
     protected $templateFolderUrl;

@@ -17,14 +17,22 @@ $addToTitle = ' - App Slapper';
 require_once(dirname(__FILE__) . '/Top.php');
 echo '<div id="menu"/>';
 $config = new Amfphp_BackOffice_Config();
+$amfphpUrl = $config->resolveAmfphpEntryPointUrl();
+$discoveryServiceCaller = new Amfphp_BackOffice_ServiceCaller($amfphpUrl);
+//load service descriptors
+$services = $discoveryServiceCaller->makeAmfphpJsonServiceCall("AmfphpDiscoveryService", "discover");
 
 define('APP_SLAPPER_BASE', 'http://localhost:8888/workspaceNetbeans/AppSlapper/');
-
-$ch = curl_init(APP_SLAPPER_BASE . 'description.php');
-$content = curl_exec($ch);
-$err = curl_errno($ch);
-$errmsg = curl_error($ch);
-$header = curl_getinfo($ch);
+//load interface
+$ch = curl_init(APP_SLAPPER_BASE . 'interface.php');
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($services));
+if(!curl_exec($ch)){
+    $err = curl_errno($ch);
+    $errmsg = curl_error($ch);
+    $header = curl_getinfo($ch);
+    throw new Exception("failed calling App Slapper service. $err, $errmsg, $header");
+}
 curl_close($ch);
 ?>
 
@@ -35,11 +43,6 @@ Code will be generated for the following services:
 $generatorManager = new Amfphp_BackOffice_ClientGenerator_GeneratorManager();
 $generators = $generatorManager->loadGenerators(array('ClientGenerator/Generators'));
 
-$config = new Amfphp_BackOffice_Config();
-$amfphpUrl = $config->resolveAmfphpEntryPointUrl();
-$discoveryServiceCaller = new Amfphp_BackOffice_ServiceCaller($amfphpUrl);
-//load service descriptors
-$services = $discoveryServiceCaller->makeAmfphpJsonServiceCall("AmfphpDiscoveryService", "discover");
 
 //remove discovery service from list
 unset($services->AmfphpDiscoveryService);

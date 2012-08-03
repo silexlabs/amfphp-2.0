@@ -15,7 +15,7 @@
  * @author Ariel Sommeria-klein
  * @package Amfphp_Backoffice_Generators
  */
-class AmfphpFlashClientGenerator extends Amfphp_BackOffice_ClientGenerator_ClientGeneratorBase {
+class AmfphpFlashClientGenerator extends Amfphp_BackOffice_ClientGenerator_LocalClientGenerator {
     public function __construct() {
         parent::__construct(array('as'), dirname(__FILE__) . '/Template');
     }

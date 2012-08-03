@@ -21,6 +21,8 @@
         <script type="text/javascript" src="lib/jquery.cookie.js"></script>
         <script type="text/javascript" src="lib/jquery.hotkeys.js"></script>
         <script type="text/javascript" src="lib/jquery.jstree.js"></script>
+        <script type="text/javascript" src="lib/jquery.ba-postmessage.js"></script>
+        <script type="text/javascript" src="lib/porthole/porthole.js"></script>
 
     </head>
     <body>
@@ -42,6 +44,12 @@ if (isset($addToTitle)) {
 
             </ul>
         </div>
+        <?php 
+            $referer = $_SERVER['HTTP_REFERER'];
+            if((strpos($referer, 'https://') !== 0) && (strpos($referer, 'http://localhost') !== 0) && (strpos($referer, 'http://127.0.0.1') !== 0)){
+                echo "<span class='warning'>WARNING: It looks like you are connecting to the amfPHP Backoffice on a production server. It should only be used on development servers. referer: $referer</span>";
+            }
+        ?>
         <ul id="menu">
             <li><a href="ServiceBrowser.php"><b>Service Browser</b></a></li>
             <li><a href="ClientGenerator.php"><b>Client Generator</b></a></li>
