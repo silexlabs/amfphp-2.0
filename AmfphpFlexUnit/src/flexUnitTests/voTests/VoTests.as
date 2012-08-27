@@ -30,7 +30,7 @@ package flexUnitTests.voTests
 		
 		
 		public function testSendingVoWithArrays():void{
-			_nc.callWithEvents("TestService/returnOneParam", new VoWithArrays());
+			_nc.callWithEvents("TestService.returnOneParam", new VoWithArrays());
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(sendingVoWithArraysResultHandler, 1000));
 			
 		}

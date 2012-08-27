@@ -20,6 +20,9 @@ package flexUnitTests
 		{
 			super.setUp();
 			_nc.objectEncoding = ObjectEncoding.AMF3;
+			//this second connect call is important because of a flash bug: 
+			//As the setting to AMF3 is done after the connect in super.setup, the actual data sent is in amf3 without this workaround
+			_nc.connect(TestConfig.NC_GATEWAY_URL);
 			
 		}
 		
@@ -31,7 +34,7 @@ package flexUnitTests
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnByteArray, 1000));
 			var testByteArray:ByteArray = new ByteArray();
 			testByteArray.writeBoolean(false);
-			_nc.callWithEvents("TestService/returnOneParam", new Array[testByteArray, testByteArray]);	
+			_nc.callWithEvents("TestService.returnOneParam", new Array[testByteArray, testByteArray]);	
 			
 		}
 		
@@ -49,7 +52,7 @@ package flexUnitTests
 		public function testXmlReference():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnXml, 1000));
 			var testVar:XML = new XML("<root>bla</root>");
-			_nc.callWithEvents("TestService/returnOneParam", new Array[testVar, testVar]);	
+			_nc.callWithEvents("TestService.returnOneParam", new Array[testVar, testVar]);	
 			
 		}
 		

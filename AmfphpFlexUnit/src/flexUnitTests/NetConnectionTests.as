@@ -36,7 +36,7 @@ package flexUnitTests
 		}
 		public function testReturnOneParam():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnTestString, 1000));
-			_nc.callWithEvents("TestService/returnOneParam", "testString");	
+			_nc.callWithEvents("TestService.returnOneParam", "testString");	
 		}
 		private function verifyReturnTestString(event:ObjEvent):void{
 			assertTrue(event.obj is String);
@@ -63,7 +63,7 @@ package flexUnitTests
 		public function testSendingExternalizableObject():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnExternalizableDummy, 1000));
 			var ext:ExternalizableDummy = new ExternalizableDummy();
-			_nc.callWithEvents("TestService/returnOneParam", ext);	
+			_nc.callWithEvents("TestService.returnOneParam", ext);	
 		}			
 		
 		private function verifyReturnExternalizableDummy(event:ObjEvent):void{
@@ -72,8 +72,8 @@ package flexUnitTests
 		
 		public function testDoubleCall():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyDoubleCall, 1000));
-			_nc.callWithEvents("TestService/returnOneParam", "testString");	
-			_nc.callWithEvents("TestService/returnOneParam", "testString");	
+			_nc.callWithEvents("TestService.returnOneParam", "testString");	
+			_nc.callWithEvents("TestService.returnOneParam", "testString");	
 		}
 		private function verifyDoubleCall(event:ObjEvent):void{
 			assertTrue(event.obj is String);

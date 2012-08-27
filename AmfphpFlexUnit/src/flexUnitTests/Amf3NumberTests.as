@@ -26,7 +26,7 @@ package flexUnitTests
 		public function testMinusOne():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnMinusOne, 1000));
 			var testVar:int = -1;
-			_nc.callWithEvents("TestService/returnOneParam", testVar);	
+			_nc.callWithEvents("TestService.returnOneParam", testVar);	
 			
 		}
 		
@@ -38,7 +38,7 @@ package flexUnitTests
 		public function test2Power30():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturn2Power30, 1000));
 			var testVar:Number = 2^30;
-			_nc.callWithEvents("TestService/returnOneParam", testVar);	
+			_nc.callWithEvents("TestService.returnOneParam", testVar);	
 			
 		}
 		

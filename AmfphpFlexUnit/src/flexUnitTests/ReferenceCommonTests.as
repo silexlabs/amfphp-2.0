@@ -52,7 +52,7 @@ package flexUnitTests
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyArrayReturnReference, 1000));
 			var refferedArray:Array = ["bla"];
 			var testVar:Array = [refferedArray, refferedArray];
-			_nc.callWithEvents("TestService/returnOneParam", testVar);	
+			_nc.callWithEvents("TestService.returnOneParam", testVar);	
 			
 		}
 		
@@ -69,7 +69,7 @@ package flexUnitTests
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyObjectReturnReference, 1000));
 			var reffered:* = {bla:"bla"};
 			var testVar:Array = [reffered, reffered];
-			_nc.callWithEvents("TestService/returnOneParam", testVar);	
+			_nc.callWithEvents("TestService.returnOneParam", testVar);	
 			
 		}
 		
@@ -88,7 +88,7 @@ package flexUnitTests
 			VoWithArrays.register();
 			var reffered:* = new VoWithArrays();
 			var testVar:Array = [reffered, reffered];
-			_nc.callWithEvents("TestService/returnOneParam", testVar);	
+			_nc.callWithEvents("TestService.returnOneParam", testVar);	
 			
 		}
 		
@@ -113,7 +113,7 @@ package flexUnitTests
 				testVar.push(reffered);					
 				testVar.push(reffered);					
 			}
-			_nc.callWithEvents("TestService/returnOneParam", testVar);	
+			_nc.callWithEvents("TestService.returnOneParam", testVar);	
 			
 		}
 		

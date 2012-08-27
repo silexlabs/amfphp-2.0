@@ -25,7 +25,7 @@ package flexUnitTests
 		public function testServiceReadsHeader():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyTestServiceReadsHeader, 1000));
 			_nc.addHeader("test", false, "testdata");
-			_nc.callWithEvents("TestService/returnTestHeader");	
+			_nc.callWithEvents("TestService.returnTestHeader");	
 			
 		}
 		

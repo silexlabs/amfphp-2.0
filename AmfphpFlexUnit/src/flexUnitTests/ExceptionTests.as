@@ -18,28 +18,28 @@ package flexUnitTests
 		{
 			
 			_nc = new EnhancedNetConnection();
-			_nc.objectEncoding = ObjectEncoding.AMF0;
+			_nc.objectEncoding = ObjectEncoding.AMF3;
 			_nc.connect(TestConfig.NC_GATEWAY_URL);
 			
 		}
 		
 		public function testException():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONSTATUS, addAsync(verifyTestExceptionStatus, 1000));
-			var testVar:int = -1;
-			_nc.callWithEvents("TestService/throwException", testVar);	
+			var testVar:int = 1;
+			_nc.callWithEvents("TestService.throwException", testVar);	
 			
 		}
 		
 		private function verifyTestExceptionStatus(event:ObjEvent):void{
 			assertEquals(123,event.obj.faultCode);
-			assertEquals("test exception -1", event.obj.faultString);
+			assertEquals("test exception 1", event.obj.faultString);
 		}
 		
 		
 		public function testWrongNumberOfArguments():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONSTATUS, addAsync(verifyWrongNumberOfArgumentsStatus, 1000));
 			var testVar:int = -1;
-			_nc.callWithEvents("TestService/returnSum", testVar);	
+			_nc.callWithEvents("TestService.returnSum", testVar);	
 			
 		}
 		

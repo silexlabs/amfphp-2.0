@@ -29,7 +29,7 @@ package flexUnitTests
 			_myConnection = new RemoteObject;	
 			
 			_myConnection.destination = "bla"; 
-			_myConnection.endpoint = "http://localhost:8888/workspaceNetbeans/amfphp-2.0/Tests/TestData/";
+			_myConnection.endpoint = TestConfig.NC_GATEWAY_URL;
 			_myConnection.source = "ByteArrayTestService";
 			_urlLoader = new URLLoader();
 			_urlLoader.dataFormat = URLLoaderDataFormat.BINARY;

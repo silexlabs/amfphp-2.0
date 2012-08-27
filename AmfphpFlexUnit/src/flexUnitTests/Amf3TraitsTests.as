@@ -32,7 +32,7 @@ package flexUnitTests
 		 *  
 		 * */
 		public function testSendingAndReceivingAnIExternalizable():void{
-			_nc.callWithEvents("TestService/returnOneParam",new ExternalizableDummy());
+			_nc.callWithEvents("TestService.returnOneParam",new ExternalizableDummy());
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(sendingAndReceivingAnIExternalizableResultHandler, 3000));
 			
 		}
@@ -55,7 +55,7 @@ package flexUnitTests
 			vo1.test1_arr = new Array("bla");
 			var anon:Object = new Object();
 			anon.data = [vo1, new VoWithArrays()];
-			_nc.callWithEvents("TestService/returnOneParam", anon);
+			_nc.callWithEvents("TestService.returnOneParam", anon);
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(sendingMixOfAnonymousAndTypedObjectsResultHandler, 3000));
 			
 		}
