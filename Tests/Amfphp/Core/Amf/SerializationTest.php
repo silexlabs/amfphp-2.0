@@ -200,31 +200,31 @@ class SerializationTest extends PHPUnit_Framework_TestCase{
 
         //Packet with null header
         $serializer = new AmfSerializerWrapper($testData->dNullHeaderPacket);
-        $serialized = $serializer->serialize();
+        $serialized = $serializer->serialize($testData->dNullHeaderPacket);
         $expectedSerialized = $testData->sNullHeaderPacket;
         $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));
 
         //Packet with string header
         $serializer = new AmfSerializerWrapper($testData->dStringHeaderPacket);
-        $serialized = $serializer->serialize();
+        $serialized = $serializer->serialize($testData->dStringHeaderPacket);
         $expectedSerialized = $testData->sStringHeaderPacket;
         $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));
 
         //Packet with null Message
         $serializer = new AmfSerializerWrapper($testData->dNullMessagePacket);
-        $serialized = $serializer->serialize();
+        $serialized = $serializer->serialize($testData->dNullMessagePacket);
         $expectedSerialized = $testData->sNullMessagePacket;
         $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));
 
         //Packet with string Message
         $serializer = new AmfSerializerWrapper($testData->dStringMessagePacket);
-        $serialized = $serializer->serialize();
+        $serialized = $serializer->serialize($testData->dStringMessagePacket);
         $expectedSerialized = $testData->sStringMessagePacket;
         $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));
 
         //Packet with 2 headers and 2 Messages
         $serializer = new AmfSerializerWrapper($testData->d2Headers2MessagesPacket);
-        $serialized = $serializer->serialize();
+        $serialized = $serializer->serialize($testData->d2Headers2MessagesPacket);
         $expectedSerialized = $testData->s2Headers2MessagesPacket;
         $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));
 

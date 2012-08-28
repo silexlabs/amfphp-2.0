@@ -19,6 +19,10 @@
 
 class AmfDeserializerWrapper extends Amfphp_Core_Amf_Deserializer
 {
+    public function __construct($raw) {
+        parent::__construct();
+        $this->rawData = $raw;
+    }
     public function readByte(){
         return parent::readByte();
     }

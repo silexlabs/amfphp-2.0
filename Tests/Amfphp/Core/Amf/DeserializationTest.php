@@ -165,7 +165,7 @@ class DeserializationTest extends PHPUnit_Framework_TestCase{
 
     }
 
-    public function testSerializingPackets(){
+    public function testDeserializingPackets(){
         $testData = new AmfTestData();
         /*
         template
@@ -176,32 +176,32 @@ class DeserializationTest extends PHPUnit_Framework_TestCase{
 
         //Packet with null header
         $deserializer = new Amfphp_Core_Amf_Deserializer($testData->sNullHeaderPacket);
-        $deserialized = $deserializer->deserialize();
+        $deserialized = $deserializer->deserialize(array(), array(), $testData->sNullHeaderPacket);
         $expectedDeserialized = $testData->dNullHeaderPacket;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
 
         //Packet with string header
         $deserializer = new AmfDeserializerWrapper($testData->sStringHeaderPacket);
-        $deserialized = $deserializer->deserialize();
+        $deserialized = $deserializer->deserialize(array(), array(), $testData->sStringHeaderPacket);
         $expectedDeserialized = $testData->dStringHeaderPacket;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
         //Packet with null Message
         $deserializer = new AmfDeserializerWrapper($testData->sNullMessagePacket);
-        $deserialized = $deserializer->deserialize();
+        $deserialized = $deserializer->deserialize(array(), array(), $testData->sNullMessagePacket);
         $expectedDeserialized = $testData->dNullMessagePacket;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
         //Packet with string Message
         $deserializer = new AmfDeserializerWrapper($testData->sStringMessagePacket);
-        $deserialized = $deserializer->deserialize();
+        $deserialized = $deserializer->deserialize(array(), array(), $testData->sStringMessagePacket);
         $expectedDeserialized = $testData->dStringMessagePacket;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
         //Packet with 2 headers and 2 Messages
         $deserializer = new AmfDeserializerWrapper($testData->s2Headers2MessagesPacket);
-        $deserialized = $deserializer->deserialize();
+        $deserialized = $deserializer->deserialize(array(), array(), $testData->s2Headers2MessagesPacket);
         $expectedDeserialized = $testData->d2Headers2MessagesPacket;
         $this->assertEquals($expectedDeserialized, $deserialized);
 

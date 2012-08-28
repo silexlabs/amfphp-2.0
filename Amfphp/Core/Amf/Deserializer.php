@@ -16,7 +16,7 @@
  *
  * @package Amfphp_Core_Amf
  */
-class Amfphp_Core_Amf_Deserializer {
+class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
 
     protected $rawData;
 
@@ -53,24 +53,22 @@ class Amfphp_Core_Amf_Deserializer {
     /**
      * metaInfo
      */
-    protected $meta;
     protected $storedStrings;
     protected $storedObjects;
     protected $storedDefinitions;
     protected $amf0storedObjects;
 
-    public function __construct($raw) {
-        $this->rawData = $raw;
-        $this->currentByte = 0;
-        $this->content_length = strlen($this->rawData); // grab the total length of this stream
+    public function __construct() {
     }
 
     /**
-     * deserialize invokes this class to transform the raw data into valid object
-     *
-     * @param object $amfdata The object to put the deserialized data in
+     * convert from text/binary to php object
+     * 
+     * 
      */
-    public function deserialize() {
+    public function deserialize(array $getData, array $postData, $rawPostData) {
+        $this->rawData = $rawPostData;
+        $this->currentByte = 0;
         $this->deserializedPacket = new Amfphp_Core_Amf_Packet();
         $this->readHeaders(); // read the binary headers
         $this->readMessages(); // read the binary Messages
@@ -98,6 +96,10 @@ class Amfphp_Core_Amf_Deserializer {
 			if (!($topByte == 0 || $topByte == 3)) {
             throw new Amfphp_Core_Exception('Malformed Amf Packet, connection may have dropped');
         }
+        if($secondByte == 3){
+            $this->deserializedPacket->amfVersion = Amfphp_Core_Amf_Constants::AMF3_ENCODING;
+        }
+        
         $this->headersLeftToProcess = $this->readInt(); //  find the total number of header elements
 
         while ($this->headersLeftToProcess--) { // loop over all of the header elements
@@ -107,6 +109,7 @@ class Amfphp_Core_Amf_Deserializer {
             //$length   = $this->readLong(); // grab the length of  the header element
             $this->currentByte += 4; // grab the length of the header element
 
+            
             $type = $this->readByte();  // grab the type of the element
             $content = $this->readData($type); // turn the element into real data
 
@@ -123,13 +126,13 @@ class Amfphp_Core_Amf_Deserializer {
             $response = $this->readUTF(); //    the response that the client understands
             //$length = $this->readLong(); // grab the length of    the Message element
             $this->currentByte += 4;
-
             $type = $this->readByte(); // grab the type of the element
             $data = $this->readData($type); // turn the element into real data
             $message = new Amfphp_Core_Amf_Message($target, $response, $data);
             $this->deserializedPacket->messages[] = $message;
         }
     }
+    
 
     /**
      * readInt grabs the next 2 bytes and returns the next two bytes, shifted and combined

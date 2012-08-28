@@ -19,7 +19,7 @@
  *
  * @package Amfphp_Core_Amf
  */
-class Amfphp_Core_Amf_Serializer {
+class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
 
     /**
      *
@@ -59,32 +59,15 @@ class Amfphp_Core_Amf_Serializer {
      * @var array
      */
     protected $className2TraitsInfo;
-
-    /**
-     *
-     * @param <Amfphp_Core_Amf_Packet> $packet
-     */
-    public function __construct(Amfphp_Core_Amf_Packet $packet) {
-        $this->packet = $packet;
-        $this->resetReferences();
-    }
     
     /**
-     * initialize reference arrays and counters. Call before writing a body or a header, as the indices are local to each message body or header
+     * converts from php object to binary
+     * @param Amfphp_Core_Amf_Packet $data
      */
-    protected function resetReferences(){
-        $this->Amf0StoredObjects = array();
-        $this->storedStrings = array();
-        $this->storedObjects = array();
-        $this->className2TraitsInfo = array();
-
-    }
-
-    /**
-     * serializes the Packet passed in the constructor
-     * TODO clean up the mess with the temp buffers. A.S.
-     */
-    public function serialize() {
+     public function serialize($data) {
+        $this->packet = $data;
+        $this->resetReferences();
+        
         $this->writeInt(0); //  write the version (always 0)
         $count = count($this->packet->headers);
         $this->writeInt($count); // write header count
@@ -100,6 +83,7 @@ class Amfphp_Core_Amf_Serializer {
             }
             $tempBuf = $this->outBuffer;
             $this->outBuffer = '';
+            
             $this->writeData($header->data);
             $serializedHeader = $this->outBuffer;
             $this->outBuffer = $tempBuf;
@@ -126,6 +110,17 @@ class Amfphp_Core_Amf_Serializer {
         }
 
         return $this->outBuffer;
+    }
+
+        /**
+     * initialize reference arrays and counters. Call before writing a body or a header, as the indices are local to each message body or header
+     */
+    protected function resetReferences(){
+        $this->Amf0StoredObjects = array();
+        $this->storedStrings = array();
+        $this->storedObjects = array();
+        $this->className2TraitsInfo = array();
+
     }
 
     public function getOutput() {

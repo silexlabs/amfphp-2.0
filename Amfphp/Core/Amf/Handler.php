@@ -12,6 +12,8 @@
 
 /**
  * This is the default handler for the gateway. It's job is to handle everything that is specific to Amf for the gateway.
+ * 
+ * @todo determine if indirection for serializer/deserializer necessary. Makes gateway code lighter, but is cumbersome 
  * @package Amfphp_Core_Amf
  * @author Ariel Sommeria-Klein
  */
@@ -25,7 +27,7 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      * @todo consider an interface for $handler. Maybe overkill here
      */
     const FILTER_AMF_REQUEST_HEADER_HANDLER = 'FILTER_AMF_REQUEST_HEADER_HANDLER';
-
+    
     /**
      * filter called for each amf request message, to give a plugin the chance to handle it.
      * This is for the Flex Messaging plugin to be able to intercept the message and say it wants to handle it
@@ -88,11 +90,8 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      * @see Amfphp_Core_Common_IDeserializer
      */
     public function deserialize(array $getData, array $postData, $rawPostData) {
-        $deserializer = new Amfphp_Core_Amf_Deserializer($rawPostData);
-        $requestPacket = $deserializer->deserialize();
-
-        $this->objectEncoding = $requestPacket->amfVersion;
-
+        $deserializer = new Amfphp_Core_Amf_Deserializer();
+        $requestPacket = $deserializer->deserialize($getData, $postData, $rawPostData);
         return $requestPacket;
     }
 
@@ -213,8 +212,8 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      */
     public function serialize($data) {
 
-        $serializer = new Amfphp_Core_Amf_Serializer($data);
-        return $serializer->serialize();
+        $serializer = new Amfphp_Core_Amf_Serializer();
+        return $serializer->serialize($data);
     }
 
 }

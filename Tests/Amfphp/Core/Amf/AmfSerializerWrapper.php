@@ -19,6 +19,10 @@
 
 class AmfSerializerWrapper extends Amfphp_Core_Amf_Serializer
 {
+    public function __construct($packet) {
+        $this->packet = $packet;
+        $this->resetReferences();
+    }
     public function writeByte($b){
         parent::writeByte($b);
     }
