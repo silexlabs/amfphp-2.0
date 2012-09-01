@@ -57,12 +57,6 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      * @var boolean 
      */
     protected $returnErrorDetails = true;
-    
-    /**
-     * see Amfphp_Core_Config::CONFIG_FORCE_AMF3
-     * @var boolean 
-     */
-    protected $forceAmf3 = false;
     /**
      * use this to manipulate the packet directly from your services. This is an advanced option, and should be used with caution!
      * @var Amfphp_Core_Amf_Packet
@@ -80,10 +74,6 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
         if(isset ($sharedConfig[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS])) {
             $this->returnErrorDetails = $sharedConfig[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS];
         }
-        if(isset ($sharedConfig[Amfphp_Core_Config::CONFIG_FORCE_AMF3])) {
-            $this->forceAmf3 = $sharedConfig[Amfphp_Core_Config::CONFIG_FORCE_AMF3];
-        }
-        
     }
 
     /**
@@ -157,11 +147,8 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
         $numMessages = count(self::$requestPacket->messages);
         $rawOutputData = '';
         
-        //set amf version to the one detected in request, unless we force amf3
+        //set amf version to the one detected in request
         self::$responsePacket->amfVersion = self::$requestPacket->amfVersion;
-        if($this->forceAmf3){
-            self::$responsePacket->amfVersion = Amfphp_Core_Amf_Constants::AMF3_ENCODING;
-        }
         
         //handle each message
         for ($i = 0; $i < $numMessages; $i++) {

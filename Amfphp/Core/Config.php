@@ -76,18 +76,6 @@ class Amfphp_Core_Config {
     const CONFIG_RETURN_ERROR_DETAILS = 'returnErrorDetails';
     
     /**
-     * historically, amf0 is default, and amf3 is only used if amf3 is detected in the request.
-     * Set this to true to override this behavior anf always use amf3. 
-     * the default is false, as this can create some serious problems with 
-     * amf clients that expect amf0 but receive amf3, even if they support it.
-     * This is the case for Flash's netconnection.
-     * To use amf0 this must be set to false. for example
-     * $this->sharedConfig[self::CONFIG_FORCE_AMF3] = false;
-     */
-    const CONFIG_FORCE_AMF3 = 'forceAmf3';
-    
-
-    /**
      * array of plugins that are available but should be disabled
      * @var array
      */
