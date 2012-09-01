@@ -31,7 +31,7 @@ package org.amfphp.test
 		}
 		
 		private function onNetStatus(event:NetStatusEvent):void{
-			trace(event.toString() + "\r" + event.info.code + "\r" + event.info.description + "\r" + event.info.details + "\r" +  event.info.level );
+			trace(event.toString() + "\r info code : " + event.info.code + "\r info description : " + event.info.description + "\r info details : " + event.info.details + "\r info level :" +  event.info.level );
 			
 		}
 		
@@ -54,6 +54,7 @@ package org.amfphp.test
 		}
 		
 		private function onStatus(statusObj:Object):void{
+			trace("onStatus. faultcode :" + statusObj.faultCode + "\r faultDetail : " + statusObj.faultDetail + "\r faultString : " + statusObj.faultString);
 			dispatchEvent(new ObjEvent(EVENT_ONSTATUS, statusObj)); 
 		}
 		
