@@ -50,6 +50,11 @@ input {
 	margin-top: 7px;
 }
 
+#content a{
+	padding-right: 8px;
+    
+}
+
 #header ul li {
 	float: left;
 	margin-left: 20px;

@@ -15,6 +15,55 @@ require_once(dirname(__FILE__) . '/ClassLoader.php');
 require_once(dirname(__FILE__) . '/../Amfphp/ClassLoader.php');
 $addToTitle = ' - Service Browser';
 require_once(dirname(__FILE__) . '/Top.php');
+
+function getServiceMenuData($services) {
+    
+}
+
+/**
+ * create tree data string for the representation of a result object. A bit like a var dump but for displaying with jstree
+ * recursive.
+ * @todo reunderstand and comment this objname thing...
+ * @param mixed $obj
+ * @param string $objName
+ * @return mixed
+ */
+function objToTreeData($obj, $objName) {
+    if (is_array($obj) || is_object($obj)) {
+
+        $children = array();
+        foreach ($obj as $key => $subObj) {
+            $children[] = objToTreeData($subObj, $key);
+        }
+        if ($objName !== null) {
+            $ret = array();
+            $type = '';
+            if (is_array($obj)) {
+                $type = 'array';
+            } else {
+                $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
+                if (isset($obj->$explicitTypeField)) {
+                    $type = $obj->$explicitTypeField;
+                } else {
+                    $type = get_class($obj);
+                    if ($type == 'stdClass') {
+                        //easier to read
+                        $type = 'anonymous object';
+                    }
+                }
+            }
+            $ret['data'] = "$objName ( $type )";
+            $ret['children'] = $children;
+            $ret['state'] = 'open';
+            return $ret;
+        } else {
+            return $children;
+        }
+    } else {
+        return "$objName => $obj";
+    }
+}
+
 $config = new Amfphp_BackOffice_Config();
 $serviceCaller = new Amfphp_BackOffice_ServiceCaller($config->resolveAmfphpEntryPointUrl());
 //load service descriptors
@@ -69,6 +118,31 @@ foreach ($services as $service) {
     echo "</li>";
 }
 echo "\n</ul>\n";
+
+//generate service/method menu
+
+//keep this for later, maybe have a tree for service/method selection, but not right now
+/*
+$serviceTreeData = array();
+foreach ($services as $service) {
+    $serviceNode = array();
+    $serviceNode['data'] = $service->name;
+    $methodNodes = array();
+    foreach ($service->methods as $method) {
+        if (substr($method->name, 0, 1) == '_') {
+            //methods starting with a '_' as they are reserved, so filter them out
+            continue;
+        }
+        $methodNodes[] = $method->name;
+    }
+    $serviceNode['children'] = $methodNodes;
+//    $serviceNode['state'] = 'open';
+    $serviceTreeData[] = $serviceNode;
+}
+ * */
+
+echo "\n</div>\n";
+echo "\n</div>\n";
 echo "\n<div id='content'>";
 
 //generate method calling interface
@@ -97,44 +171,8 @@ if ($callServiceName && $callMethodName) {
     }
 }
 
-function formatNode($objName, $obj) {
-    if (is_array($obj) || is_object($obj)) {
-        $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
-
-
-        $children = array();
-        foreach ($obj as $key => $subObj) {
-            $children[] = formatNode($key, $subObj);
-        }
-        if ($objName !== null) {
-            $ret = array();
-            $type = '';
-            if (is_array($obj)) {
-                $type = 'array';
-            } else {
-                if (isset($obj->$explicitTypeField)) {
-                    $type = $obj->$explicitTypeField;
-                } else {
-                    $type = get_class($obj);
-                    if ($type == 'stdClass') {
-                        //easier to read
-                        $type = 'anonymous object';
-                    }
-                }
-            }
-            $ret['data'] = "$objName ( $type )";
-            $ret['children'] = $children;
-            $ret['state'] = 'open';
-            return $ret;
-        } else {
-            return $children;
-        }
-    } else {
-        return "$objName => $obj";
-    }
-}
-
 //make service call and show results 
+$resultTreeData = null;
 if ($makeServiceCall) {
     $callStartTimeMs = microtime(true);
     //$_POST is associative. Transform it into an array, as it's the format AmfphpJson expects.
@@ -146,47 +184,77 @@ if ($makeServiceCall) {
     $callDurationMs = round((microtime(true) - $callStartTimeMs) * 1000);
 
 
-    $treeData = formatNode(null, $result);
-    //$treeData = array('1 => 2', '3 => 4', array('data' => '5', 'children' => array('6 => 7')));
+    $resultTreeData = objToTreeData($result, null);
     ?>
-    <h3>Result ( call took <?php echo $callDurationMs; ?> " ms )</h3>
+    <h3>Result ( call took <?php echo $callDurationMs; ?> " ms )     <a id="showTree">Tree</a><a id="showPrintR">print_r</a><a id="showJson">JSON</a></h3>
     <div id='tree'></div>
-    </div>
-
-
-
-    <script>
-                
-        $(function () {	        
-
-            $("#tree").jstree({ 
-                "json_data" : {
-                    "data" : <?php echo json_encode($treeData); ?>
-                    ,
-                    "progressive_render" : true
-
-                },
-                "plugins" : [ "themes", "json_data", "ui", "hotkeys"],
-                "themes" : {
-                    "theme" : "apple"
-                }
-                        
-            });
-            
-            $("#print_r").hide();
-        });
-
-
-
-
-
-    </script>
     <div id="print_r">
-        <pre><?php echo print_r($treeData, true); ?></pre>
+        <pre><?php echo print_r($result, true); ?></pre>
+    </div>
+    <div id="json">
+        <pre><?php echo json_encode($result); ?></pre>
+    </div>
     </div>
 
     <?php
 }
 ?>
+
+<script>
+        
+    function setTreeData(data, targetDivSelector){
+            console.log(data);
+        $(targetDivSelector).jstree({ 
+            "json_data" : {
+                "data" : data
+                ,
+                "progressive_render" : true
+
+            },
+            "plugins" : [ "themes", "json_data", "ui", "hotkeys"],
+            "themes" : {
+                "theme" : "apple"
+            }
+                        
+        });
+            
+    }
+    
+    /**
+     * hide all result divs, and show one
+     */
+    function showResultDiv(divSelector){
+        $('#tree').hide();
+        $('#print_r').hide();
+        $('#json').hide();
+        $(divSelector).show();
+    }
+    
+    $(function () {	        
+        <?php if($resultTreeData){
+        ?>
+            setTreeData(<?php echo json_encode($resultTreeData);?>, "#tree");  
+            $('#showTree').click(function(){
+                showResultDiv('#tree');
+            });
+            $('#showPrintR').click(function(){
+                showResultDiv('#print_r');
+            });
+            $('#showJson').click(function(){
+                showResultDiv('#json');
+            });
+            showResultDiv("#tree");
+            
+        <?
+        }
+        ?>
+    });
+
+
+
+
+
+</script>
+
 
 
