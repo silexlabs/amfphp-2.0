@@ -208,22 +208,10 @@ class AmfphpAuthentication {
         }
         $userIdField = Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_USERID;
         $passwordField = Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_PASSWORD;
-        //if using amfext, untyped amf objects are converted to arrays. in amfphp 2, they are converted to anonymous objects
-        //so for this plugin to work both with and without amfext, it must support $header->data being an array  or an object
-        //this should be fixed in amfext or its successor, but in the meantime use this fix
-        
-        $userId = null;
-        $password  = null;
-        if(is_array($header->data)){
-            //amfext case
-            $userId = $header->data[$userIdField];
-            $password = $header->data[$passwordField];
-        }else{
-            //non amfext case
-            $userId = $header->data->$userIdField;
-            $password = $header->data->$passwordField;
-            
-        }
+
+        $userId = $header->data->$userIdField;
+        $password = $header->data->$passwordField;
+
         if(session_id () == ''){
             session_start();
         }
