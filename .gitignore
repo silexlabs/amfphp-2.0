@@ -8,7 +8,14 @@ AmfphpFlexUnit/bin-debug/
 AmfphpFlexUnit/src/FlexUnitApplication.mxml
 AmfphpFlexUnit/.FlexUnitSettings/
 
+#Example compiled files
+###################
+Examples/Flex/Pizza/bin-debug
+Examples/Flex/TypedObjects/bin-debug
 
+#generated clients
+###################
+Backoffice/ClientGenerator/Generated
 
 # Compiled source #
 ###################
