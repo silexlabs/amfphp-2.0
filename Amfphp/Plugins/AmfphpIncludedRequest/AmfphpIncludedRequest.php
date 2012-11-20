@@ -24,8 +24,8 @@
  * 
  * declare and them before including your entry point script. For example:
  * 
- * $amfphpIncludedRequestServiceName = "DiscoveryService";
- * $amfphpIncludedRequestMethodName = "collect";
+ * $amfphpIncludedRequestServiceName = "AmfphpDiscoveryService";
+ * $amfphpIncludedRequestMethodName = "discover";
  * $amfphpIncludedRequestParameters = array();
  * $amfphpIncludedRequestReturnValue = null;
  * require(dirname(__FILE__) . '/../../Amfphp/index.php');
@@ -38,17 +38,16 @@
  */
 class AmfphpIncludedRequest implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_IDeserializedRequestHandler, Amfphp_Core_Common_IExceptionHandler, Amfphp_Core_Common_ISerializer {
 
+    /**
+     * constructor.
+     * @param array $config optional key/value pairs in an associative array. Used to override default configuration values.
+     */
+    public function __construct(array $config = null) {
 
-/**
-* constructor.
-* @param array $config optional key/value pairs in an associative array. Used to override default configuration values.
-*/
-    public function __construct(array    $config = null) {
-		
-	    global $amfphpIncludedRequestServiceName;
-        if (!isset($amfphpIncludedRequestServiceName)){
-			return;
-		}
+        global $amfphpIncludedRequestServiceName;
+        if (!isset($amfphpIncludedRequestServiceName)) {
+            return;
+        }
         $filterManager = Amfphp_Core_FilterManager::getInstance();
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZER, $this, "filterHandler");
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_REQUEST_HANDLER, $this, "filterHandler");
@@ -58,26 +57,26 @@ class AmfphpIncludedRequest implements Amfphp_Core_Common_IDeserializer, Amfphp_
     }
 
     /**
-* if no content type, then returns this.
-* @param mixed null at call in gateway.
-* @param String $contentType
-* @return this or null
-*/
+     * if no content type, then returns this.
+     * @param mixed null at call in gateway.
+     * @param String $contentType
+     * @return this or null
+     */
     public function filterHandler($handler, $contentType) {
         global $amfphpIncludedRequestServiceName;
-        if (isset($amfphpIncludedRequestServiceName)){
+        if (isset($amfphpIncludedRequestServiceName)) {
             return $this;
         }
     }
 
     /**
-* @see Amfphp_Core_Common_IDeserializer
-*/
+     * @see Amfphp_Core_Common_IDeserializer
+     */
     public function deserialize(array $getData, array $postData, $rawPostData) {
         global $amfphpIncludedRequestServiceName;
         global $amfphpIncludedRequestMethodName;
         global $amfphpIncludedRequestParameters;
-        
+
         $parsedParameters = array();
         //try to json decode each parameter, then push it to $parsedParameters
         $numParams = count($amfphpIncludedRequestParameters);
@@ -89,49 +88,47 @@ class AmfphpIncludedRequest implements Amfphp_Core_Common_IDeserializer, Amfphp_
             }
             $parsedParameters[] = $valueToUse;
         }
-         
-       
-        return (object)array("serviceName" => $amfphpIncludedRequestServiceName, "methodName" => $amfphpIncludedRequestMethodName, "parameters" => $parsedParameters);
-    }
-    
-    /**
-* @see Amfphp_Core_Common_IDeserializedRequestHandler
-*/
-    public function handleDeserializedRequest($deserializedRequest, Amfphp_Core_Common_ServiceRouter $serviceRouter) {
-        return $serviceRouter->executeServiceCall($deserializedRequest->serviceName, $deserializedRequest->methodName, $deserializedRequest->parameters);
-        
+
+
+        return (object) array("serviceName" => $amfphpIncludedRequestServiceName, "methodName" => $amfphpIncludedRequestMethodName, "parameters" => $parsedParameters);
     }
 
-/**
-* @see Amfphp_Core_Common_IExceptionHandler
-*/
+    /**
+     * @see Amfphp_Core_Common_IDeserializedRequestHandler
+     */
+    public function handleDeserializedRequest($deserializedRequest, Amfphp_Core_Common_ServiceRouter $serviceRouter) {
+        return $serviceRouter->executeServiceCall($deserializedRequest->serviceName, $deserializedRequest->methodName, $deserializedRequest->parameters);
+    }
+
+    /**
+     * @see Amfphp_Core_Common_IExceptionHandler
+     */
     public function handleException(Exception $exception) {
         return $exception;
     }
 
     /**
-* @see Amfphp_Core_Common_ISerializer
-*/
+     * @see Amfphp_Core_Common_ISerializer
+     */
     public function serialize($data) {
         global $amfphpIncludedRequestReturnValue;
-        
+
         $amfphpIncludedRequestReturnValue = $data;
-        return $data;
+        //typically an entry point includes a $gateway->output(); call. return null so that nothing ends up on the output
+        return null;
     }
 
     /**
-* filter the headers to make sure the content type is set to text/html if the request was handled by the service browser
-* @param array $headers
-* @return array
-*/
+     * filter the headers to make sure the content type is set to text/html if the request was handled by the service browser
+     * @param array $headers
+     * @return array
+     */
     public function filterHeaders($headers, $contentType) {
-        if (isset($amfphpIncludedRequestServiceName)){
+        if (isset($amfphpIncludedRequestServiceName)) {
             return array();
         }
     }
 
 }
-
-
 
 ?>
