@@ -16,10 +16,6 @@ require_once(dirname(__FILE__) . '/../Amfphp/ClassLoader.php');
 $addToTitle = ' - Service Browser';
 require_once(dirname(__FILE__) . '/Top.php');
 
-function getServiceMenuData($services) {
-    
-}
-
 /**
  * create tree data string for the representation of a result object. A bit like a var dump but for displaying with jstree
  * recursive.
@@ -54,7 +50,7 @@ function objToTreeData($obj, $objName) {
             }
             $ret['data'] = "$objName ( $type )";
             $ret['children'] = $children;
-            $ret['state'] = 'open';
+            //$ret['state'] = 'open';
             return $ret;
         } else {
             return $children;
@@ -65,9 +61,9 @@ function objToTreeData($obj, $objName) {
 }
 
 $config = new Amfphp_BackOffice_Config();
-$serviceCaller = new Amfphp_BackOffice_ServiceCaller($config->resolveAmfphpEntryPointUrl());
+$serviceCaller = new Amfphp_BackOffice_IncludeServiceCaller($config->amfphpEntryPointUrl);
 //load service descriptors
-$services = $serviceCaller->makeAmfphpJsonServiceCall("AmfphpDiscoveryService", "discover");
+$services = $serviceCaller->call("AmfphpDiscoveryService", "discover");
 
 //what are we calling? 
 $callMethodName = null;
@@ -92,7 +88,8 @@ if ((count($_POST) > 0) || isset($_GET['callWithoutParams'])) {
     $makeServiceCall = true;
 }
 
-echo "\n<ul id='menu'>";
+
+echo "\n<ul class='menu' id='serviceMethods'>";
 if ($services == null) {
     ?>
     No services available. Please check : <br/>
@@ -119,36 +116,13 @@ foreach ($services as $service) {
 }
 echo "\n</ul>\n";
 
-//generate service/method menu
 
-//keep this for later, maybe have a tree for service/method selection, but not right now
-/*
-$serviceTreeData = array();
-foreach ($services as $service) {
-    $serviceNode = array();
-    $serviceNode['data'] = $service->name;
-    $methodNodes = array();
-    foreach ($service->methods as $method) {
-        if (substr($method->name, 0, 1) == '_') {
-            //methods starting with a '_' as they are reserved, so filter them out
-            continue;
-        }
-        $methodNodes[] = $method->name;
-    }
-    $serviceNode['children'] = $methodNodes;
-//    $serviceNode['state'] = 'open';
-    $serviceTreeData[] = $serviceNode;
-}
- * */
 
-echo "\n</div>\n";
-echo "\n</div>\n";
 echo "\n<div id='content'>";
-
 //generate method calling interface
 if ($callServiceName && $callMethodName) {
-    $serviceDescriptor = $services->$callServiceName;
-    $methodDescriptor = $serviceDescriptor->methods->$callMethodName;
+    $serviceDescriptor = $services[$callServiceName];
+    $methodDescriptor = $serviceDescriptor->methods[$callMethodName];
     $parameterDescriptors = $methodDescriptor->parameters;
     echo "<h3>$callMethodName method on $callServiceName service</h3>";
     if (count($parameterDescriptors) > 0) {
@@ -175,79 +149,106 @@ if ($callServiceName && $callMethodName) {
 $resultTreeData = null;
 if ($makeServiceCall) {
     $callStartTimeMs = microtime(true);
-    //$_POST is associative. Transform it into an array, as it's the format AmfphpJson expects.
-    $paramArray = array();
+    $parsedCallParameters = array();
+
     foreach ($callParameters as $value) {
-        $paramArray[] = $value;
+        //try to get json decoded value
+        $decoded = json_decode($value);
+        if ($decoded !== null) {
+            $parsedCallParameters[] = $decoded;
+        } else {
+            $parsedCallParameters[] = $value;
+        }
     }
-    $result = $serviceCaller->makeAmfphpJsonServiceCall($callServiceName, $callMethodName, $paramArray);
+    $result = $serviceCaller->call($callServiceName, $callMethodName, $parsedCallParameters);
     $callDurationMs = round((microtime(true) - $callStartTimeMs) * 1000);
 
 
     $resultTreeData = objToTreeData($result, null);
     ?>
-    <h3>Result ( call took <?php echo $callDurationMs; ?> " ms )     <a id="showTree">Tree</a><a id="showPrintR">print_r</a><a id="showJson">JSON</a></h3>
-    <div id='tree'></div>
-    <div id="print_r">
-        <pre><?php echo print_r($result, true); ?></pre>
-    </div>
-    <div id="json">
-        <pre><?php echo json_encode($result); ?></pre>
-    </div>
-    </div>
+    <h3>Result ( call took <?php echo $callDurationMs; ?> " ms )  
+
+        <span class="showResultView">
+            <a id="tree">Tree</a>
+            <a id="print_r">print_r</a>
+            <a id="json">JSON</a>
+            <a id="php">PHP Serialized</a>
+            <a id="raw">Raw</a>
+        </span>
+    </h3>
+    <pre>
+        <div id='tree' class='resultView'></div>
+        <div id="print_r" class='resultView'><?php echo print_r($result, true); ?></div>
+        <div id="json" class='resultView'><?php echo json_encode($result); ?></div>
+        <div id="php" class='resultView'><?php echo serialize($result); ?></div>
+        <div id="raw" class='resultView'><?php echo $result; ?></div>
+    </pre>
 
     <?php
 }
+echo "\n</div>\n";
+echo "\n</div>\n";
 ?>
 
 <script>
         
     function setTreeData(data, targetDivSelector){
-            console.log(data);
-        $(targetDivSelector).jstree({ 
+        console.log(data);
+        $(targetDivSelector).bind("loaded.jstree", function (event, data) {
+            resetWidth();
+        }).bind("after_open.jstree", function (node) {
+            resetWidth();
+        }).jstree({ 
+
             "json_data" : {
                 "data" : data
                 ,
                 "progressive_render" : true
 
             },
+            "core" : {
+                "animation" : 0
+            },
             "plugins" : [ "themes", "json_data", "ui", "hotkeys"],
             "themes" : {
                 "theme" : "apple"
             }
-                        
+
         });
-            
+
     }
     
     /**
-     * hide all result divs, and show one
+     * sets the main div width to avoid wrapping
+     * */
+    function resetWidth(){
+        //adjust size of main div so that the content doesn't wrap
+        var totalWidth = $('.menu#backOffice').width() + $('.menu#serviceMethods').width() + $('#content').width();
+        $('#main').width(totalWidth + 200);
+        
+    }
+    /**
+     * underline active result view link only
+     * show right result view
      */
-    function showResultDiv(divSelector){
-        $('#tree').hide();
-        $('#print_r').hide();
-        $('#json').hide();
-        $(divSelector).show();
+    function showResultView(viewId){
+        $('.showResultView a').removeClass('underline');
+        $('.showResultView a#' + viewId).addClass('underline');
+        $('.resultView').hide();
+        $('.resultView#' + viewId).show();
     }
     
     $(function () {	        
-        <?php if($resultTreeData){
-        ?>
-            setTreeData(<?php echo json_encode($resultTreeData);?>, "#tree");  
-            $('#showTree').click(function(){
-                showResultDiv('#tree');
-            });
-            $('#showPrintR').click(function(){
-                showResultDiv('#print_r');
-            });
-            $('#showJson').click(function(){
-                showResultDiv('#json');
-            });
-            showResultDiv("#tree");
-            
-        <?
-        }
-        ?>
+        console.log($('.showResultView a'));
+        setTreeData(<?php echo json_encode($resultTreeData); ?>, ".resultView#tree");  
+        $('.showResultView a').click(function(eventObject){
+            showResultView(eventObject.currentTarget.id);
+            resetWidth();
+        });
+        //default
+        showResultView('tree');
+        resetWidth();
+                
     });
 
 

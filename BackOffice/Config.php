@@ -22,13 +22,14 @@ class Amfphp_BackOffice_Config {
      * path to amfPHP. relative or absolute. If relative, be careful, it's relative to the script, not this file.
      * 'http://silexlabs.org/Tests/TestData/';
      * some entry points that pertain to the code:
-     * '../Amfphp/'
-     * '../Examples/Php/'
-     * '../Tests/TestData/'
+     * '../Amfphp/index.php'
+     * '../Examples/Php/index.php'
+     * '../Tests/TestData/index.php'
      * @var String 
      */
-    public $amfphpEntryPointUrl = '../Tests/TestData/';
+    public $amfphpEntryPointUrl = '../Tests/TestData/index.php';
     //public $amfphpEntryPointUrl = 'http://arielsommeria.com/amfphp-2.1/Amfphp/';
+    public $activated = true;
 
     
     public function resolveAmfphpEntryPointUrl(){

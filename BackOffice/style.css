@@ -13,6 +13,7 @@ html, body {
 a {
 	color: #C4D6DC;
 	text-decoration: none;
+        cursor:pointer;
 }
 
 .warning{
@@ -51,7 +52,7 @@ input {
 }
 
 #content a{
-	padding-right: 8px;
+	padding-right: 20px;
     
 }
 
@@ -60,7 +61,7 @@ input {
 	margin-left: 20px;
 }
 
-#menu {
+.menu {
 	margin: 20px;
 	padding: 11px;
 	background: #525252;
@@ -71,20 +72,20 @@ input {
 	padding-bottom: 0px;
 }
 
-#menu li {
+.menu li {
 	margin-left: 15px;
 	margin-bottom: 10px;
 }
 
-#menu li b {
+.menu li b {
 	font-size: 14px;
 }
 
-#menu li ul {
+.menu li ul {
 	padding-left: 15px;
 }
 
-#menu li ul li {
+.menu li ul li {
 	margin-left: 0px;
 	margin-bottom: 2px;
 }
@@ -92,6 +93,9 @@ input {
 #content {
 	float: left;
 	margin-top: 20px;
+}
+
+#main{
 }
 
 #content h3 {
@@ -106,4 +110,9 @@ input {
 
 #content form {
 	margin-bottom: 20px;
+}
+
+
+.underline {
+   text-decoration: underline;
 }

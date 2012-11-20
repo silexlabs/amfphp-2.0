@@ -60,7 +60,7 @@ require_once(dirname(__FILE__) . '/Top.php');
         } else {
             echo "\n        <td>$generatorName(Remote)</td>";
             echo "\n        <td><a href=\"$infoUrl\">Info</a></td>";
-            echo "\n        <td><a id='$generatorClass'>Open!</a></td>";
+            echo "\n        <td><a id='$generatorClass'>Generate!</a></td>";
         }
         echo "\n    </tr>";
     }
@@ -109,14 +109,16 @@ require_once(dirname(__FILE__) . '/Top.php');
             <input type="hidden" value="<?php echo $amfphpUrl ?>" name="amfphpUrl"/>
             <input type="hidden" value="<?php echo urlencode(json_encode($services)) ?>" name="services"/>
         </form>
-        <iframe name="generatorUi" width="1000" frameborder="0"></iframe>
+        <iframe name="generatorUi" width="1000" frameborder="2"></iframe>
+        <br/>Downloaded and unzipped for your convenience. <a href="http://localhost:8888/workspaceNetbeans/amfphp-2.0/BackOffice/ClientGenerator/Generated/20120808-023622-BaguetteSystemsPhoneGapClientGenerator/">Test Here</a>
+                                                         
     </div>
 </div>
 <script type="text/javascript">
     var guestDomain = '127.0.0.1';
 			
     function onMessage1(messageEvent) {  
-        alert('ert' + messageEvent.data);
+        //alert('ert' + messageEvent.data);
     }
     
     var windowProxy;
