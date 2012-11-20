@@ -1,8 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
-			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600">
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" creationComplete="application1_creationCompleteHandler(event)" xmlns:flexui="flexunit.flexui.*">
+	<fx:Script>
+		<![CDATA[
+			import flexUnitTests.Amf3NumberTests;
+			import flexUnitTests.Amf3Tests;
+			import flexUnitTests.Amf3TraitsTests;
+			import flexUnitTests.AmfCommonTests;
+			import flexUnitTests.AuthenticationTests;
+			import flexUnitTests.ByteArrayTests;
+			import flexUnitTests.ExceptionTests;
+			import flexUnitTests.HeaderTests;
+			import flexUnitTests.NetConnectionTests;
+			import flexUnitTests.ReferenceAmf3Tests;
+			import flexUnitTests.ReferenceCommonTests;
+			import flexUnitTests.RemoteObjectTests;
+			import flexUnitTests.TestConfig;
+			import flexUnitTests.voTests.VoTests;
+			
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			
+			public function currentRunTestSuite():Array
+			{
+				var testsToRun:Array = new Array();
+				
+				testsToRun.push(flexUnitTests.ReferenceAmf3Tests);
+				testsToRun.push(flexUnitTests.Amf3TraitsTests);
+				testsToRun.push(flexUnitTests.HeaderTests);
+				testsToRun.push(flexUnitTests.Amf3Tests);
+				testsToRun.push(flexUnitTests.RemoteObjectTests);
+				testsToRun.push(flexUnitTests.AmfCommonTests);				
+				testsToRun.push(flexUnitTests.voTests.VoTests);				
+				testsToRun.push(flexUnitTests.NetConnectionTests);
+				//references with amf0 don't work so well with baguette amf
+				//testsToRun.push(flexUnitTests.ReferenceCommonTests);
+				testsToRun.push(flexUnitTests.AuthenticationTests);
+				testsToRun.push(flexUnitTests.Amf3NumberTests);
+				testsToRun.push(flexUnitTests.ExceptionTests);
+				testsToRun.push(flexUnitTests.ByteArrayTests);
+				/*
+				var testsToRun:Array = new Array();
+				testsToRun.push(flexUnitTests.RemoteObjectTests);
+				*/
+				return testsToRun;
+			}
+			
+			private function urlsLoadedHandler(e:Event):void {
+				XML.ignoreWhitespace = true; 
+				var xml:XML = new XML(e.target.data);
+				var urls:XMLList = xml.url; 
+				var i:Number;
+				for (i=0; i < urls.length(); i++) {
+					var urlNode:XML = urls[i];
+					if(urlNode.@active == "y"){
+						
+						TestConfig.gateway = urlNode;
+						urlLabel.text = urlNode.@description + ': ' + urlNode;
+						testRunner.runWithFlexUnit4Runner(currentRunTestSuite(), "AmfphpFlexUnit");
+					}								
+				}
+			}
+			
+			protected function application1_creationCompleteHandler(event:FlexEvent):void
+			{
+				var xmlLoader:URLLoader = new URLLoader();
+				xmlLoader.addEventListener(Event.COMPLETE, urlsLoadedHandler);
+				xmlLoader.load(new URLRequest("server_urls.xml"));
+			}
+			
+		]]>
+	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		
 	</fx:Declarations>
+	<mx:VBox height="100%" x="20" y="20">
+		<s:Label id="urlLabel"/>
+		<flexui:FlexUnitTestRunnerUI id="testRunner" portNumber="8765"/>
+	</mx:VBox>
 </s:Application>

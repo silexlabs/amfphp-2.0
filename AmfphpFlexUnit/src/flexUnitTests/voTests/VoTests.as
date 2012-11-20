@@ -8,7 +8,6 @@ package flexUnitTests.voTests
 	
 	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
-	import mx.rpc.remoting.RemoteObject;
 	
 	import org.amfphp.test.EnhancedNetConnection;
 	import org.amfphp.test.ExternalizableDummy;
@@ -22,7 +21,7 @@ package flexUnitTests.voTests
 		override public function setUp():void
 		{
 			_nc = new EnhancedNetConnection();
-			_nc.connect(TestConfig.NC_GATEWAY_URL);
+			_nc.connect(TestConfig.gateway);
 			//_nc.objectEncoding = ObjectEncoding.AMF0;
 			
 			VoWithArrays.register();

@@ -29,7 +29,7 @@ package flexUnitTests
 			_myConnection = new RemoteObject;	
 			
 			_myConnection.destination = "bla"; 
-			_myConnection.endpoint = TestConfig.NC_GATEWAY_URL;
+			_myConnection.endpoint = TestConfig.gateway;
 			_myConnection.source = "ByteArrayTestService";
 			_urlLoader = new URLLoader();
 			_urlLoader.dataFormat = URLLoaderDataFormat.BINARY;

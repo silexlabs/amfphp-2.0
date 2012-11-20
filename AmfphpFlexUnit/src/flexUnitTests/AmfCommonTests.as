@@ -24,7 +24,7 @@ package flexUnitTests
 			
 			_nc = new EnhancedNetConnection();
 			_nc.objectEncoding = ObjectEncoding.AMF0;
-			_nc.connect(TestConfig.NC_GATEWAY_URL);
+			_nc.connect(TestConfig.gateway);
 			
 		}
 		

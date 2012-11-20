@@ -26,7 +26,7 @@ package flexUnitTests
 		{
 			
 			_nc = new EnhancedNetConnection();
-			_nc.connect(TestConfig.NC_GATEWAY_URL);
+			_nc.connect(TestConfig.gateway);
 			
 		}
 		

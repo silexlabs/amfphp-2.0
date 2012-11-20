@@ -26,7 +26,7 @@ package flexUnitTests
 		{
 			
 			_nc = new EnhancedNetConnection();
-			_nc.connect(TestConfig.NC_GATEWAY_URL);
+			_nc.connect(TestConfig.gateway);
 			
 		}
 		
@@ -60,7 +60,7 @@ package flexUnitTests
 		
 		
 		//test can't be run, the netconnection doesn't accept the call
-		public function testSendingExternalizableObject():void{
+		public function fix_testSendingExternalizableObject():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnExternalizableDummy, 1000));
 			var ext:ExternalizableDummy = new ExternalizableDummy();
 			_nc.callWithEvents("TestService.returnOneParam", ext);	
