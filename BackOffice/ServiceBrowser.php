@@ -226,6 +226,9 @@ echo "\n</div>\n";
         $('#main').width(totalWidth + 200);
         
     }
+    
+    //current result view id
+    var resultViewId;
     /**
      * underline active result view link only
      * show right result view
@@ -235,6 +238,7 @@ echo "\n</div>\n";
         $('.showResultView a#' + viewId).addClass('underline');
         $('.resultView').hide();
         $('.resultView#' + viewId).show();
+        resultViewId = viewId;
     }
     
     $(function () {	        
@@ -244,8 +248,13 @@ echo "\n</div>\n";
             resetWidth();
             
         });
-        //default
-        showResultView('tree');
+        //default result view is tree
+        var startResultViewId = $.cookie('resultViewId');
+        if(startResultViewId == null){
+            startResultViewId = 'tree';
+        };
+        
+        showResultView(startResultViewId);
         resetWidth();
         
         //reset scroll position to one from last time. position content div so that it's just below the top of the view port
@@ -254,9 +263,10 @@ echo "\n</div>\n";
         var contentY = Math.max(oldScrollPos + 20, $('#content').offset().top);
         $('#content').offset({ top: contentY});
         
-        //save scroll position on leaving page
+        //save state on leaving page
         $(window).bind('beforeunload', function(e) {   
             $.cookie('scrollPos', $(window).scrollTop());
+            $.cookie('resultViewId', resultViewId);
             
         });
                 
