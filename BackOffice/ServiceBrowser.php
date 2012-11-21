@@ -193,7 +193,6 @@ echo "\n</div>\n";
 <script>
         
     function setTreeData(data, targetDivSelector){
-        console.log(data);
         $(targetDivSelector).bind("loaded.jstree", function (event, data) {
             resetWidth();
         }).bind("after_open.jstree", function (node) {
@@ -239,15 +238,27 @@ echo "\n</div>\n";
     }
     
     $(function () {	        
-        console.log($('.showResultView a'));
         setTreeData(<?php echo json_encode($resultTreeData); ?>, ".resultView#tree");  
         $('.showResultView a').click(function(eventObject){
             showResultView(eventObject.currentTarget.id);
             resetWidth();
+            
         });
         //default
         showResultView('tree');
         resetWidth();
+        
+        //reset scroll position to one from last time. position content div so that it's just below the top of the view port
+        var oldScrollPos = parseFloat($.cookie('scrollPos'));
+        window.scrollTo(0, oldScrollPos);
+        var contentY = Math.max(oldScrollPos + 20, $('#content').offset().top);
+        $('#content').offset({ top: contentY});
+        
+        //save scroll position on leaving page
+        $(window).bind('beforeunload', function(e) {   
+            $.cookie('scrollPos', $(window).scrollTop());
+            
+        });
                 
     });
 
