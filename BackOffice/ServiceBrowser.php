@@ -61,7 +61,7 @@ function objToTreeData($obj, $objName) {
 }
 
 $config = new Amfphp_BackOffice_Config();
-$serviceCaller = new Amfphp_BackOffice_IncludeServiceCaller($config->amfphpEntryPointUrl);
+$serviceCaller = new Amfphp_BackOffice_IncludeServiceCaller($config->amfphpEntryPointPath);
 //load service descriptors
 $services = $serviceCaller->call("AmfphpDiscoveryService", "discover");
 

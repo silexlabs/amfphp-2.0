@@ -17,7 +17,7 @@ $addToTitle = ' - Client Generator';
 require_once(dirname(__FILE__) . '/Top.php');
 ?>
 
-<div id='menu'>
+<div  class='menu' id='serviceMethods'>
     Use one of the following generators to generate a client Stub project. <br/>
     The project includes :<br/><br/>
     <ul>
@@ -32,10 +32,10 @@ require_once(dirname(__FILE__) . '/Top.php');
     $generators = $generatorManager->loadGenerators(array('ClientGenerator/Generators'));
 
     $config = new Amfphp_BackOffice_Config();
+    $serviceCaller = new Amfphp_BackOffice_IncludeServiceCaller($config->amfphpEntryPointPath);
     $amfphpUrl = $config->resolveAmfphpEntryPointUrl();
-    $serviceCaller = new Amfphp_BackOffice_ServiceCaller($amfphpUrl);
 //load service descriptors
-    $services = $serviceCaller->makeAmfphpJsonServiceCall("AmfphpDiscoveryService", "discover");
+    $services = $serviceCaller->call("AmfphpDiscoveryService", "discover");
 //remove discovery service from list
     unset($services->AmfphpDiscoveryService);
 //list services 

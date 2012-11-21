@@ -45,7 +45,7 @@ class Amfphp_BackOffice_ClientGenerator_Util {
      * @param type $zipfilename
      * @param type $removeFromLocalName use to reduce paths inside zip 
      */
-    public function zipFolder($sourcefolder, $zipfilename, $removeFromLocalName) {
+    public static function zipFolder($sourcefolder, $zipfilename, $removeFromLocalName) {
 // instantate an iterator (before creating the zip archive, just
 // in case the zip file is created inside the source folder)
 // and traverse the directory to get the file list.

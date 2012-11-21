@@ -27,21 +27,21 @@ class Amfphp_BackOffice_Config {
      * '../Tests/TestData/index.php'
      * @var String 
      */
-    public $amfphpEntryPointUrl = '../Tests/TestData/index.php';
+    public $amfphpEntryPointPath = '../Tests/TestData/index.php';
     //public $amfphpEntryPointUrl = 'http://arielsommeria.com/amfphp-2.1/Amfphp/';
     public $activated = true;
 
     
     public function resolveAmfphpEntryPointUrl(){
 //determine url to amfphp. If in config it contains 'http', we consider it's absolute. Otherwise it's relative, and we build it.
-        $httpMarkerPos = strpos($this->amfphpEntryPointUrl, 'http');
+        $httpMarkerPos = strpos($this->amfphpEntryPointPath, 'http');
         if ($httpMarkerPos === false) {
             $scriptUrl = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'];
             //remove everything after last '/'
             $scriptUrlPath = substr($scriptUrl, 0, strrpos($scriptUrl, '/'));
-            return $scriptUrlPath . '/' . $this->amfphpEntryPointUrl;
+            return $scriptUrlPath . '/' . $this->amfphpEntryPointPath;
         }else{
-            return $this->amfphpEntryPointUrl;
+            return $this->amfphpEntryPointPath;
         }
     }
 }
