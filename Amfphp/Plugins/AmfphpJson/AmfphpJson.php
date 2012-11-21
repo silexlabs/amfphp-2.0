@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of amfPHP
  *
@@ -31,26 +32,24 @@
  * @author Yannick DOMINGUEZ
  */
 class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_IDeserializedRequestHandler, Amfphp_Core_Common_IExceptionHandler, Amfphp_Core_Common_ISerializer {
-
     /**
-    * the content-type string indicating a JSON content
-    */
+     * the content-type string indicating a JSON content
+     */
     const JSON_CONTENT_TYPE = 'application/json';
-    
+
     protected $returnErrorDetails = false;
-	
+
     /**
      * constructor. Add filters on the HookManager.
      * @param array $config optional key/value pairs in an associative array. Used to override default configuration values.
      */
-    public function  __construct(array $config = null) {
+    public function __construct(array $config = null) {
         $filterManager = Amfphp_Core_FilterManager::getInstance();
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZER, $this, 'filterHandler');
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_REQUEST_HANDLER, $this, 'filterHandler');
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_EXCEPTION_HANDLER, $this, 'filterHandler');
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_SERIALIZER, $this, 'filterHandler');
-        $this->returnErrorDetails = (isset ($config[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]) && $config[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]);
-        
+        $this->returnErrorDetails = (isset($config[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]) && $config[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]);
     }
 
     /**
@@ -59,33 +58,58 @@ class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common
      * @param String $contentType
      * @return this or null
      */
-    public function filterHandler($handler, $contentType){
-        if(strpos($contentType, self::JSON_CONTENT_TYPE) !== false){
+    public function filterHandler($handler, $contentType) {
+        if (strpos($contentType, self::JSON_CONTENT_TYPE) !== false) {
             return $this;
         }
     }
 
-    public function deserialize(array $getData, array $postData, $rawPostData){
+    public function deserialize(array $getData, array $postData, $rawPostData) {
         $jsonString = '';
-        if($rawPostData != ''){
+        if ($rawPostData != '') {
             $jsonString = $rawPostData;
-        }else if(isset($postData['json'])){
+        } else if (isset($postData['json'])) {
             $jsonString = $postData['json'];
-        }else{
+        } else {
             throw new Exception('json call data not found. It must be sent in the post data');
         }
-        
+
         $deserializedRequest = json_decode($rawPostData);
-        if(!isset ($deserializedRequest->serviceName)){
+        if ($deserializedRequest === null) {
+            $error = '';
+            switch (json_last_error()) {
+                case JSON_ERROR_NONE:
+                    $error = 'No errors';
+                    break;
+                case JSON_ERROR_DEPTH:
+                    $error = 'Maximum stack depth exceeded';
+                    break;
+                case JSON_ERROR_STATE_MISMATCH:
+                    $error = 'Underflow or the modes mismatch';
+                    break;
+                case JSON_ERROR_CTRL_CHAR:
+                    $error = 'Unexpected control character found';
+                    break;
+                case JSON_ERROR_SYNTAX:
+                    $error = 'Syntax error, malformed JSON';
+                    break;
+                case JSON_ERROR_UTF8:
+                    $error = 'Malformed UTF-8 characters, possibly incorrectly encoded';
+                    break;
+                default:
+                    $error = 'Unknown error';
+                    break;
+            }
+            throw new Exception("<pre>Error decoding JSON. $error \njsonString:\n $jsonString </pre>");
+        }
+        if (!isset($deserializedRequest->serviceName)) {
             throw new Exception("<pre>Service name field missing in JSON. \njsonString:\n $jsonString \ndecoded: \n" . print_r($deserializedRequest, true) . '</pre>');
         }
-        if(!isset ($deserializedRequest->methodName)){
+        if (!isset($deserializedRequest->methodName)) {
             throw new Exception("<pre>MethodName field missing in JSON. \njsonString:\n $jsonString \ndecoded: \n" . print_r($deserializedRequest, true) . '</pre>');
         }
         return $deserializedRequest;
-        
     }
-
 
     /**
      * Retrieve the serviceName, methodName and parameters from the PHP object
@@ -93,38 +117,35 @@ class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common
      * @see Amfphp_Core_Common_IDeserializedRequestHandler
      * @return the service call response
      */
-    public function handleDeserializedRequest($deserializedRequest, Amfphp_Core_Common_ServiceRouter $serviceRouter){
+    public function handleDeserializedRequest($deserializedRequest, Amfphp_Core_Common_ServiceRouter $serviceRouter) {
         $serviceName = $deserializedRequest->serviceName;
         $methodName = $deserializedRequest->methodName;
 
         $parameters = array();
-        if(isset ($deserializedRequest->parameters)){
+        if (isset($deserializedRequest->parameters)) {
             $parameters = $deserializedRequest->parameters;
         }
         return $serviceRouter->executeServiceCall($serviceName, $methodName, $parameters);
-        
     }
 
     /**
      * don't format; just throw! In this way ajax libs will have their error functions triggered
      * @see Amfphp_Core_Common_IExceptionHandler
      */
-    public function handleException(Exception $exception){      
-        
+    public function handleException(Exception $exception) {
+
         throw $exception;
-        
     }
-    
+
     /**
      * Encode the PHP object returned from the service call into a JSON string
      * @see Amfphp_Core_Common_ISerializer
      * @return the encoded JSON string sent to JavaScript
      */
-    public function serialize($data){
+    public function serialize($data) {
         return json_encode($data);
-
     }
 
-
 }
+
 ?>
