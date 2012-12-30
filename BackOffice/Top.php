@@ -21,8 +21,10 @@
         <script type="text/javascript" src="lib/jquery.cookie.js"></script>
         <script type="text/javascript" src="lib/jquery.hotkeys.js"></script>
         <script type="text/javascript" src="lib/jquery.jstree.js"></script>
+        <!--
         <script type="text/javascript" src="lib/jquery.ba-postmessage.js"></script>
         <script type="text/javascript" src="lib/porthole/porthole.js"></script>
+        -->
 
     </head>
     <body>

@@ -122,36 +122,32 @@ class Amfphp_Core_Common_ServiceRouter {
         $serviceObject = $this->getServiceObject($serviceName);
         $serviceObject = Amfphp_Core_FilterManager::getInstance()->callFilters(self::FILTER_SERVICE_OBJECT, $serviceObject, $serviceName, $methodName, $parameters);
 
-        if (!method_exists($serviceObject, $methodName)) {
+        try {
+            $method = new ReflectionMethod($serviceObject, $methodName);
+        }
+        catch(ReflectionException $err) {
             throw new Amfphp_Core_Exception("method $methodName not found on $serviceName object ");
         }
         
-        if(substr($methodName, 0, 1) == '_'){
-            throw new Exception("The method $methodName starts with a '_', and is therefore not accessible");
+        if ($method->isPrivate()) {
+            throw new Exception("The method $methodName is private and is therefore not accessible");
         }
-        if($this->checkArgumentCount){
-            $this->checkNumberOfArguments($serviceObject, $serviceName, $methodName, $parameters);            
-        }
-        return call_user_func_array(array($serviceObject, $methodName), $parameters);
-    }
 
-    /**
-     * checks if the argument count received by amfPHP matches the argument count of the called method. 
-     * @param type $serviceObject
-     * @param type $serviceName
-     * @param type $methodName
-     * @param array $parameters 
-     */
-    private function checkNumberOfArguments($serviceObject, $serviceName, $methodName, array $parameters) {
-        $method = new ReflectionMethod($serviceObject, $methodName);
+        if($this->checkArgumentCount){
         $numberOfRequiredParameters = $method->getNumberOfRequiredParameters();
         $numberOfParameters = $method->getNumberOfParameters();
         $numberOfProvidedParameters = count($parameters);
+
         if ($numberOfProvidedParameters < $numberOfRequiredParameters || $numberOfProvidedParameters > $numberOfParameters) {
             throw new Amfphp_Core_Exception("Invalid number of parameters for method $methodName in service $serviceName : $numberOfRequiredParameters  required, $numberOfParameters total, $numberOfProvidedParameters provided");
         }
     }
 
+        if ($method->isStatic())
+            return call_user_func_array(array(get_class($serviceObject), $methodName), $parameters);
+        else
+            return call_user_func_array(array($serviceObject, $methodName), $parameters);
+    }
 }
 
 ?>

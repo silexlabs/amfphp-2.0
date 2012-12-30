@@ -91,7 +91,7 @@ class Amfphp_Core_PluginManager {
                     continue;
                 }
 
-                if (!class_exists($pluginName)) {
+                if (!class_exists($pluginName, false)) {
                     require_once $pluginsFolderRootPath . '/' . $pluginName . '/' . $pluginName . '.php';
                 }
 

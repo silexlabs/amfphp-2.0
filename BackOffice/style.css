@@ -102,3 +102,7 @@ input {
 #content form {
 	margin-bottom: 20px;
 }
+
+#cbService {
+    background: #525252;
+}
