@@ -43,7 +43,8 @@ if ((count($_POST) > 0) || isset($_GET['callWithoutParams'])) {
     $makeServiceCall = true;
 }
 
-echo "\n<ul id='menu'>";
+echo "\n<div id='menu'>";
+echo "<h3>Select service from list</h3>";
 if ($services == null) {
     ?>
     No services available. Please check : <br/>
@@ -52,25 +53,39 @@ if ($services == null) {
         <li>BackOffice Configuration in BackOffice/Config.php, specifically $amfphpEntryPointUrl</li>
     </ul>
     <?php
-    return;
-}
-//generate service/method menu
-foreach ($services as $service) {
-    echo "\n <li><b>$service->name</b>";
-    echo "\n<ul>";
-    foreach ($service->methods as $method) {
-        if (substr($method->name, 0, 1) == '_') {
-            //methods starting with a '_' as they are reserved, so filter them out 
-            continue;
-        }
-        echo "\n <li><a href='?serviceName=" . $service->name . "&methodName=" . $method->name . "'>" . $method->name . "</a></li>";
-    }
-    echo "\n</ul>";
-    echo "</li>";
-}
-echo "\n</ul>\n";
-echo "\n<div id='content'>";
+} else {
+    echo "\n<select id='cbService' name='cbService'><option value=''>* Select Service *</option>";
+    //generate service/method menu
+    foreach ($services as $service) {
+        echo "\n <optgroup label='" . $service->name . "'>";
+        foreach ($service->methods as $method) {
+            $selected = '';
+            if ($callServiceName == $service->name && $callMethodName == $method->name) {
+                $selected = ' selected';
+            }
 
+            if (substr($method->name, 0, 1) == '_') {
+                //methods starting with a '_' as they are reserved, so filter them out
+                continue;
+            }
+            echo "\n <option value='?serviceName=" . $service->name . "&methodName=" . $method->name . "'$selected>" . $method->name . "</option>";
+        }
+    }
+    echo "\n</select>";
+}
+?>
+    <br clear="all"/><br/></div>
+    <script>
+                
+        $(function () {
+            $("#cbService").change(function (){
+                window.location = $(this).val();
+            });
+        });
+
+    </script>
+    <div id='content'>
+<?php
 //generate method calling interface
 if ($callServiceName && $callMethodName) {
     $serviceDescriptor = $services->$callServiceName;
@@ -149,6 +164,8 @@ if ($makeServiceCall) {
     $treeData = formatNode(null, $result);
     //$treeData = array('1 => 2', '3 => 4', array('data' => '5', 'children' => array('6 => 7')));
     ?>
+    </div>
+    <div id='content' style='display: block;'>
     <h3>Result ( call took <?php echo $callDurationMs; ?> " ms )</h3>
     <div id='tree'></div>
     </div>
