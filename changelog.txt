@@ -1,6 +1,10 @@
 Version history
---------- 2.2 -----------
+--------- 2.1.1 -----------
 tree in service browser
+improved use of scroll position in service browser
+fix passing JSON objects in service browser
+AMF version detection
+Flex Client Generator
 --------- 2.1 -----------
 client generators
 service browser moved to backoffice
