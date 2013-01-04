@@ -76,21 +76,7 @@ class AmfphpIncludedRequest implements Amfphp_Core_Common_IDeserializer, Amfphp_
         global $amfphpIncludedRequestServiceName;
         global $amfphpIncludedRequestMethodName;
         global $amfphpIncludedRequestParameters;
-
-        $parsedParameters = array();
-        //try to json decode each parameter, then push it to $parsedParameters
-        $numParams = count($amfphpIncludedRequestParameters);
-        foreach ($amfphpIncludedRequestParameters as $key => $value) {
-            $decodedValue = json_decode($value);
-            $valueToUse = $value;
-            if ($decodedValue) {
-                $valueToUse = $decodedValue;
-            }
-            $parsedParameters[] = $valueToUse;
-        }
-
-
-        return (object) array("serviceName" => $amfphpIncludedRequestServiceName, "methodName" => $amfphpIncludedRequestMethodName, "parameters" => $parsedParameters);
+        return (object) array("serviceName" => $amfphpIncludedRequestServiceName, "methodName" => $amfphpIncludedRequestMethodName, "parameters" => $amfphpIncludedRequestParameters);
     }
 
     /**

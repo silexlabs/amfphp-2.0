@@ -181,7 +181,7 @@ if ($makeServiceCall) {
         <div id="print_r" class='resultView'><?php echo print_r($result, true); ?></div>
         <div id="json" class='resultView'><?php echo json_encode($result); ?></div>
         <div id="php" class='resultView'><?php echo serialize($result); ?></div>
-        <div id="raw" class='resultView'><?php echo $result; ?></div>
+        <div id="raw" class='resultView'><?php try{echo $result;}catch(Exception $e){} ?></div>
     </pre>
 
     <?php
