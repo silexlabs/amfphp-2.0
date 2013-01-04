@@ -27,7 +27,7 @@ class Amfphp_BackOffice_AccessManager {
      */
     public function isBackOfficeActivated(){
         $config = new Amfphp_BackOffice_Config();
-        return $config->activated;
+        return $config->activated;  
     }
     /**
      * checks if logged
