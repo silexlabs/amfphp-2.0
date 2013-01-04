@@ -4,7 +4,7 @@
     "authors": [
         {
             "name": "Ariel Sommeria",
-            "email": "ariel@silexlabs.org"
+            "email": "ariel@silexlabs.org" 
         }
     ],
     "autoload": {
