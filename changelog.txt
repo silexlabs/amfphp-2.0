@@ -1,8 +1,12 @@
 Version history
 --------- 2.1.1 -----------
-tree in service browser
-improved use of scroll position in service browser
-fix passing JSON objects in service browser
+in service browser:
+various ways to view result data including tree
+improved use of scroll position
+fix passing JSON objects
+fix step by step debugging by removing dependency on curl and using included request plugin instead
+
+enable error handler plugin by default
 AMF version detection
 Flex Client Generator
 --------- 2.1 -----------
