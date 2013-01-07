@@ -20,7 +20,7 @@ class TestServicesConfig extends Amfphp_Core_Config {
 
     public function  __construct() {
         parent::__construct();
-        $this->serviceFolderPaths  = array(dirname(__FILE__) . '/Services/');
+        $this->serviceFolderPaths  = array(dirname(__FILE__) . '/Services/' ,dirname(__FILE__) . '/MoreServices/');
         $testServicePath = dirname(__FILE__) . '/TestService.php';
         $classFindInfo = new Amfphp_Core_Common_ClassFindInfo($testServicePath, 'TestService');
         $this->serviceNames2ClassFindInfo = array('TestService' => $classFindInfo);

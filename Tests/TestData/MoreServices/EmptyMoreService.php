@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of amfPHP
  *
@@ -10,15 +11,15 @@
  */
 
 /**
- * a dummy service to test locating services in folders
+ * empty service, just to test support for multiple service folders
  *
  * @package Tests_TestData_Services
  * @author Ariel Sommeria-klein
  */
-
-class DummyService {
-    function returnNull(){
-        return null;
+class EmptyMoreService {
+    
+    public function bla(){
     }
 }
+
 ?>
