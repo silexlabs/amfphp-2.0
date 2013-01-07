@@ -31,6 +31,11 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
      * @var Amfphp_Core_Amf_Packet
      */
     protected $packet;
+    /**
+     *
+     * @var Amfphp_Core_Amf_Message
+     */
+    protected $currentMessage;
 
     /**
      * the maximum amount of objects stored for reference
@@ -618,20 +623,24 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
             if ($doReference && $this->handleReference($d, $this->storedObjects)) {
                 return;
             }            
+
+            if(!isset($this->className2TraitsInfo[''])){
+                $traitsInfo = array("referenceId" => count($this->className2TraitsInfo), "propertyNames" => array());
+                $this->className2TraitsInfo[''] = $traitsInfo;
+            }
+            //anonymous object. So type this as a dynamic object with no sealed members.
             //U29O-traits : 1011.
             $this->writeAmf3Int(0xB);
-            //bogus class traits entry
-            $this->className2TraitsInfo[] = array();
-            
-            //write empty string as class name for anonymous object
-            $this->writeAmf3String('');
-
-            foreach($d as $key => $data){
+            //no class name. empty string for anonymous object
+            $this->writeAmf3String("");
+            //name/value pairs for dynamic properties
+            foreach ($d as $key => $value) {
                     $this->writeAmf3String($key);
-                    $this->writeAmf3Data($data);
+                    $this->writeAmf3Data($value);
             }
             //empty string, marks end of dynamic members
-            $this->outBuffer .= "\1";                     
+            $this->outBuffer .= "\1";
+                            
             
     }
     /**
