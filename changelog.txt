@@ -7,7 +7,7 @@ fix passing JSON objects
 fix step by step debugging by removing dependency on curl and using included request plugin instead
 
 enable error handler plugin by default
-AMF version detection
+improved AMF version detection
 Flex Client Generator
 --------- 2.1 -----------
 client generators

@@ -13,8 +13,21 @@
  */
 require_once(dirname(__FILE__) . '/ClassLoader.php');
 require_once(dirname(__FILE__) . '/../Amfphp/ClassLoader.php');
-$addToTitle = ' - Service Browser';
-require_once(dirname(__FILE__) . '/Top.php');
+?>
+
+<html>
+    <?php require_once(dirname(__FILE__) . '/htmlHeader.php');    ?>
+    <body>
+        <?php 
+            $addToTitle = ' - Service Browser';
+            require_once(dirname(__FILE__) . '/linkBar.php');    
+        ?>
+        
+        <div id='main'>
+            <?php require_once(dirname(__FILE__) . '/partLinks.php');    ?>
+        
+
+<?php
 
 /**
  * create tree data string for the representation of a result object. A bit like a var dump but for displaying with jstree
@@ -277,6 +290,10 @@ echo "\n</div>\n";
 
 
 </script>
+
+        </div>
+    </body>    
+</html>
 
 
 

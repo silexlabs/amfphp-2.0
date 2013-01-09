@@ -29,9 +29,23 @@ class Amfphp_BackOffice_Config {
      */
     public $amfphpEntryPointPath = '../Tests/TestData/index.php';
     //public $amfphpEntryPointUrl = 'http://arielsommeria.com/amfphp-2.1/Amfphp/';
-    public $activated = true;
-
     
+    /**
+     * set credentials for back office here.
+     * expected format: username => password
+     * See constructor for example code.
+     * 
+     * @var array 
+     */
+    public $backOfficeCredentials;
+
+    public function __construct() {
+        $this->backOfficeCredentials = array();
+        //example code for username + password:
+        //$this->backOfficeCredentials['yourUserName'] = 'yourPassWord';
+        $this->backOfficeCredentials['a'] = 'a';
+        
+    }
     public function resolveAmfphpEntryPointUrl(){
 //determine url to amfphp. If in config it contains 'http', we consider it's absolute. Otherwise it's relative, and we build it.
         $httpMarkerPos = strpos($this->amfphpEntryPointPath, 'http');

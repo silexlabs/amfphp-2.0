@@ -62,9 +62,7 @@ class Amfphp_Core_Common_ServiceRouter {
      * If none found, an exception is thrown
      * @todo maybe option for a fully qualified class name. 
      * this method is static so that it can be used also by the discovery service
-     * '.' and '__' are replaced by '/'. 
-     * '.' is to support some old code, 
-     * '__' is to help the client generator support packages without messing with folders and the like
+     *  '__' are replaced by '/' to help the client generator support packages without messing with folders and the like
      * 
      * @param type $serviceName
      * @param array $serviceFolderPaths

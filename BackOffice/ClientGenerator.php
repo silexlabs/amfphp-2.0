@@ -12,10 +12,18 @@
  * includes
  */
 require_once(dirname(__FILE__) . '/ClassLoader.php');
-require_once(dirname(__FILE__) . '/ClientGenerator/Generators/AmfphpFlashClientGenerator/AmfphpFlashClientGenerator.php');
-$addToTitle = ' - Client Generator';
-require_once(dirname(__FILE__) . '/Top.php');
 ?>
+
+<html>
+    <?php require_once(dirname(__FILE__) . '/htmlHeader.php');    ?>
+    <body>
+        <?php 
+            $addToTitle = ' - Client Generator';
+            require_once(dirname(__FILE__) . '/linkBar.php');    
+        ?>
+        
+        <div id='main'>
+            <?php require_once(dirname(__FILE__) . '/partLinks.php');  ?>
 
 <div  class='menu' id='serviceMethods'>
     Use one of the following generators to generate a client Stub project. <br/>
@@ -66,7 +74,6 @@ require_once(dirname(__FILE__) . '/Top.php');
     }
     ?>
     <tr><td>IOS</td><td><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/ios/">Info/Vote Up</a></td>        <td>Not Available Yet</td>    </tr>
-    <tr><td>Flex</td><td><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/flex/">Info/Vote Up</a></td>        <td>Not Available Yet</td></tr>
     <tr><td>Haxe</td><td><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/haxe/">Info/Vote Up</a></td>        <td>Not Available Yet</td>    </tr>
     <tr><td>Android</td><td><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/android/">Info/Vote Up</a></td>        <td>Not Available Yet </td></tr>
     <tr><td>Write your Own?</td><td><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/missing/">Info</a></td>        <td></td></tr>

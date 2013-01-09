@@ -19,6 +19,19 @@
 /**
  * includes
  */
-require_once(dirname(__FILE__) . '/Top.php');
+require_once(dirname(__FILE__) . '/ClassLoader.php');
+require_once(dirname(__FILE__) . '/../Amfphp/ClassLoader.php');
+
 ?>
+<html>
+    <?php require_once(dirname(__FILE__) . '/htmlHeader.php');    ?>
+    <body>
+        <?php require_once(dirname(__FILE__) . '/linkBar.php');    ?>
+        
+        <div id='main'>
+            <?php require_once(dirname(__FILE__) . '/partLinks.php');    ?>
+        
+        </div>
+    </body>    
+</html>
 
