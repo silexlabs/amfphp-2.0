@@ -12,7 +12,7 @@
  */
 
   /**
- * Makes a call to the amfphp entry point and returns the data
+ * Makes a call to the amfphp entry point and returns the data. unused at the moment, but useful later hopefully
  * 
  *
  * @author Ariel Sommeria-klein

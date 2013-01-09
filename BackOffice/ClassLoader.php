@@ -22,7 +22,6 @@
  * includes
  */
 define( 'AMFPHP_BACKOFFICE_ROOTPATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
-require_once AMFPHP_BACKOFFICE_ROOTPATH . 'JsonServiceCaller.php';
 require_once AMFPHP_BACKOFFICE_ROOTPATH . 'IncludeServiceCaller.php';
 require_once AMFPHP_BACKOFFICE_ROOTPATH . 'Config.php'; 
 require_once AMFPHP_BACKOFFICE_ROOTPATH .  'AccessManager.php';
