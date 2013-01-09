@@ -11,6 +11,7 @@
 /**
  * includes
  */
+require_once(dirname(__FILE__) . '/../Amfphp/ClassLoader.php');
 require_once(dirname(__FILE__) . '/ClassLoader.php');
 ?>
 
@@ -23,7 +24,18 @@ require_once(dirname(__FILE__) . '/ClassLoader.php');
         ?>
         
         <div id='main'>
-            <?php require_once(dirname(__FILE__) . '/partLinks.php');  ?>
+            <?php 
+                        $accessManager = new Amfphp_BackOffice_AccessManager();
+            try {
+                $accessManager->testAccessAllowed();
+                
+            }  catch (Exception $e){
+                require_once(dirname(__FILE__) . '/signIn.php');    
+                echo $e->getMessage();
+                return;
+            }
+            require_once(dirname(__FILE__) . '/partLinks.php');    
+            ?>
 
 <div  class='menu' id='serviceMethods'>
     Use one of the following generators to generate a client Stub project. <br/>

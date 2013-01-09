@@ -10,7 +10,7 @@
  * 
  */
 ?>
-        <div id="linkBar">
+        <div class='static'>
             <a href="?" id="titleLink"><b>AmfPHP Back Office<?php
 if (isset($addToTitle)) {
     echo $addToTitle;

@@ -29,8 +29,21 @@ require_once(dirname(__FILE__) . '/../Amfphp/ClassLoader.php');
         <?php require_once(dirname(__FILE__) . '/linkBar.php');    ?>
         
         <div id='main'>
-            <?php require_once(dirname(__FILE__) . '/partLinks.php');    ?>
-        
+            <?php 
+            $accessManager = new Amfphp_BackOffice_AccessManager();
+            try {
+                $accessManager->testAccessAllowed();
+                
+            }  catch (Exception $e){
+                require_once(dirname(__FILE__) . '/signIn.php');    
+                echo $e->getMessage();
+                return;
+ 
+            }
+            require_once(dirname(__FILE__) . '/partLinks.php');    
+            ?>
+            
+            
         </div>
     </body>    
 </html>

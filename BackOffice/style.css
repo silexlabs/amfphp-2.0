@@ -31,7 +31,7 @@ input {
 	margin: 5px;
 }
 
-#linkBar {
+.static {
 	background: #000000;
 	height: 20px;
 	padding: 20px;
@@ -40,27 +40,31 @@ input {
 	font-size: 24px;
 } 
 
-#linkBar b {
+.static b {
 	font-size: 24px;
 	color: #C4D6DC;
 } 
 
-#linkBar ul {
+.static ul {
 	float: right;
 	list-style-type: none;
 	margin-top: 7px;
 }
 
-#linkBar a{
+.static a{
 	padding-right: 20px;
     
 }
 
-#linkBar ul li {
+.static ul li {
 	float: left;
 	margin-left: 20px;
 }
 
+#signin {
+	float: left;
+	margin-left: 20px;
+}
 .menu {
 	margin: 20px;
 	padding: 11px;
@@ -90,15 +94,13 @@ input {
 	margin-bottom: 2px;
 }
 
-#content {
+.userInput {
 	float: left;
 	margin-top: 20px;
 }
 
-#main{
-}
 
-#content h3 {
+.userInput h3 {
 	background: #525252;
 	padding: 10px;
 	-moz-border-radius: 8px;
@@ -108,7 +110,7 @@ input {
 	margin-bottom: 10px;
 }
 
-#content form {
+.userInput form {
 	margin-bottom: 20px;
 }
 
