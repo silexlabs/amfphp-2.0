@@ -62,6 +62,9 @@ class Amfphp_Core_Common_ServiceRouter {
      * If none found, an exception is thrown
      * @todo maybe option for a fully qualified class name. 
      * this method is static so that it can be used also by the discovery service
+     * '.' and '__' are replaced by '/'. 
+     * '.' is to support some old code, 
+     * '__' is to help the client generator support packages without messing with folders and the like
      * 
      * @param type $serviceName
      * @param array $serviceFolderPaths
@@ -75,8 +78,8 @@ class Amfphp_Core_Common_ServiceRouter {
             require_once $classFindInfo->absolutePath;
             $serviceObject = new $classFindInfo->className();
         } else {
-            $serviceNameWithSlashes = str_replace('.', '/', $serviceName);
-            $serviceNameWithSlashes = str_replace('__', '/', $serviceNameWithSlashes);
+            $temp = str_replace('.', '/', $serviceName);
+            $serviceNameWithSlashes = str_replace('__', '/', $temp);
             $serviceIncludePath = $serviceNameWithSlashes . '.php';
             $exploded = explode('/', $serviceNameWithSlashes);
             $className = $exploded[count($exploded) - 1];
@@ -119,8 +122,8 @@ class Amfphp_Core_Common_ServiceRouter {
      *
      */
     public function executeServiceCall($serviceName, $methodName, array $parameters) {
-        $serviceObject = $this->getServiceObject($serviceName);
-        $serviceObject = Amfphp_Core_FilterManager::getInstance()->callFilters(self::FILTER_SERVICE_OBJECT, $serviceObject, $serviceName, $methodName, $parameters);
+        $unfilteredServiceObject = $this->getServiceObject($serviceName);
+        $serviceObject = Amfphp_Core_FilterManager::getInstance()->callFilters(self::FILTER_SERVICE_OBJECT, $unfilteredServiceObject, $serviceName, $methodName, $parameters);
 
         if (!method_exists($serviceObject, $methodName)) {
             throw new Amfphp_Core_Exception("method $methodName not found on $serviceName object ");
@@ -129,28 +132,19 @@ class Amfphp_Core_Common_ServiceRouter {
         if(substr($methodName, 0, 1) == '_'){
             throw new Exception("The method $methodName starts with a '_', and is therefore not accessible");
         }
+        
         if($this->checkArgumentCount){
-            $this->checkNumberOfArguments($serviceObject, $serviceName, $methodName, $parameters);            
+            $method = new ReflectionMethod($serviceObject, $methodName);
+            $numberOfRequiredParameters = $method->getNumberOfRequiredParameters();
+            $numberOfParameters = $method->getNumberOfParameters();
+            $numberOfProvidedParameters = count($parameters);
+            if ($numberOfProvidedParameters < $numberOfRequiredParameters || $numberOfProvidedParameters > $numberOfParameters) {
+                throw new Amfphp_Core_Exception("Invalid number of parameters for method $methodName in service $serviceName : $numberOfRequiredParameters  required, $numberOfParameters total, $numberOfProvidedParameters provided");
+            }      
         }
         return call_user_func_array(array($serviceObject, $methodName), $parameters);
     }
 
-    /**
-     * checks if the argument count received by amfPHP matches the argument count of the called method. 
-     * @param type $serviceObject
-     * @param type $serviceName
-     * @param type $methodName
-     * @param array $parameters 
-     */
-    private function checkNumberOfArguments($serviceObject, $serviceName, $methodName, array $parameters) {
-        $method = new ReflectionMethod($serviceObject, $methodName);
-        $numberOfRequiredParameters = $method->getNumberOfRequiredParameters();
-        $numberOfParameters = $method->getNumberOfParameters();
-        $numberOfProvidedParameters = count($parameters);
-        if ($numberOfProvidedParameters < $numberOfRequiredParameters || $numberOfProvidedParameters > $numberOfParameters) {
-            throw new Amfphp_Core_Exception("Invalid number of parameters for method $methodName in service $serviceName : $numberOfRequiredParameters  required, $numberOfParameters total, $numberOfProvidedParameters provided");
-        }
-    }
 
 }
 
