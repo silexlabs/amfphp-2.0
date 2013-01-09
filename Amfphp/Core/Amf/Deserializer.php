@@ -384,8 +384,6 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
      * @return mixed
      */
     public function readAmf3Data() {
-        //AMF3 data found, so mark it in the deserialized packet. This is useful to know what kind of AMF to send back
-        $this->deserializedPacket->amfVersion = Amfphp_Core_Amf_Constants::AMF3_ENCODING;
         $type = $this->readByte();
         switch ($type) {
             case 0x00 :
