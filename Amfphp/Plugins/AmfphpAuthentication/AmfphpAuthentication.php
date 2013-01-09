@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of amfPHP
  *
@@ -9,7 +10,7 @@
  * @package Amfphp_Plugins_Authentication
  */
 
-/** 
+/**
  * Authentication for Amfphp. 
  * This plugin can be deactivated if the project doesn't need to protect access to its services.
  * 
@@ -46,6 +47,7 @@ class AmfphpAuthentication {
     /**
      * the field in the session where the roles array is stored
      */
+
     const SESSION_FIELD_ROLES = 'amfphp_roles';
 
     /**
@@ -74,7 +76,7 @@ class AmfphpAuthentication {
      * constructor.
      * @param array $config optional key/value pairs in an associative array. Used to override default configuration values.
      */
-    public function  __construct(array $config = null) {
+    public function __construct(array $config = null) {
         $filterManager = Amfphp_Core_FilterManager::getInstance();
         $filterManager->addFilter(Amfphp_Core_Common_ServiceRouter::FILTER_SERVICE_OBJECT, $this, 'filterServiceObject');
         $filterManager->addFilter(Amfphp_Core_Amf_Handler::FILTER_AMF_REQUEST_HEADER_HANDLER, $this, 'filterAmfRequestHeaderHandler');
@@ -87,13 +89,11 @@ class AmfphpAuthentication {
      * @param Amfphp_Core_Amf_Header $header the request header
      * @return AmfphpAuthentication 
      */
-    public function filterAmfRequestHeaderHandler($handler, Amfphp_Core_Amf_Header $header){
-        if($header->name == Amfphp_Core_Amf_Constants::CREDENTIALS_HEADER_NAME){
+    public function filterAmfRequestHeaderHandler($handler, Amfphp_Core_Amf_Header $header) {
+        if ($header->name == Amfphp_Core_Amf_Constants::CREDENTIALS_HEADER_NAME) {
             return $this;
         }
-
     }
-
 
     /**
      * called when the service object is created, just before the method call.
@@ -105,71 +105,66 @@ class AmfphpAuthentication {
      * @param <String> $methodName
      * @return <array>
      */
-    public function filterServiceObject($serviceObject, $serviceName, $methodName){
-        if(!method_exists($serviceObject, self::METHOD_GET_METHOD_ROLES)){
+    public function filterServiceObject($serviceObject, $serviceName, $methodName) {
+        if (!method_exists($serviceObject, self::METHOD_GET_METHOD_ROLES)) {
             return;
         }
-        
-        if($methodName == self::METHOD_GET_METHOD_ROLES){
+
+        if ($methodName == self::METHOD_GET_METHOD_ROLES) {
             throw new Exception('_getMethodRoles method access forbidden');
         }
 
         //the service object has a '_getMethodRoles' method. role checking is necessary if the returned value is not null
         $methodRoles = call_user_func(array($serviceObject, self::METHOD_GET_METHOD_ROLES), $methodName);
-        if(!$methodRoles){
+        if (!$methodRoles) {
             return;
         }
 
         //try to authenticate using header info if available
-        if($this->headerUserId && $this->headerPassword){
+        if ($this->headerUserId && $this->headerPassword) {
             call_user_func(array($serviceObject, self::METHOD_LOGIN), $this->headerUserId, $this->headerPassword);
         }
 
-        if(session_id () == ''){
+        if (session_id() == '') {
             session_start();
-
         }
-        
-        self::testRoles($methodRoles);
 
+        self::testRoles($methodRoles);
     }
-    
+
     /**
      * looks for a match between the user roles and the accepted roles.
      * throws an exception if the roles don't match.
      * @param <type> $methodRoles
      */
-    public static function testRoles($methodRoles){
-        
-        if(!isset ($_SESSION[self::SESSION_FIELD_ROLES])){
+    public static function testRoles($methodRoles) {
+
+        if (!isset($_SESSION[self::SESSION_FIELD_ROLES])) {
             throw new Amfphp_Core_Exception('User not authenticated');
         }
 
         $userRoles = $_SESSION[self::SESSION_FIELD_ROLES];
 
-        foreach($userRoles as $userRole){
-                foreach($methodRoles as $methodRole){
-                    if($userRole == $methodRole){
-                        //a match is found
-                        return;
-
-                    }
+        foreach ($userRoles as $userRole) {
+            foreach ($methodRoles as $methodRole) {
+                if ($userRole == $methodRole) {
+                    //a match is found
+                    return;
                 }
             }
-            throw new Amfphp_Core_Exception('User roles do not match method roles');
+        }
+        throw new Amfphp_Core_Exception('User roles do not match method roles');
     }
-
 
     /**
      * clears the session info set by the plugin. Use to logout
      */
-    public static function clearSessionInfo(){
-        if(session_id () == ''){
+    public static function clearSessionInfo() {
+        if (session_id() == '') {
             session_start();
-
         }
-        if(isset ($_SESSION[self::SESSION_FIELD_ROLES])){
-            unset ($_SESSION[self::SESSION_FIELD_ROLES]);
+        if (isset($_SESSION[self::SESSION_FIELD_ROLES])) {
+            unset($_SESSION[self::SESSION_FIELD_ROLES]);
         }
     }
 
@@ -177,17 +172,17 @@ class AmfphpAuthentication {
      *
      * @param String $role
      */
-    public static function addRole($roleToAdd){
-        if(session_id () == ''){
+    public static function addRole($roleToAdd) {
+        if (session_id() == '') {
             session_start();
         }
-        if(!isset($_SESSION[self::SESSION_FIELD_ROLES])){
+        if (!isset($_SESSION[self::SESSION_FIELD_ROLES])) {
             $_SESSION[self::SESSION_FIELD_ROLES] = array();
         }
 
         //check role isn't already available
-        foreach($_SESSION[self::SESSION_FIELD_ROLES] as $userRole){
-            if($userRole == $roleToAdd){
+        foreach ($_SESSION[self::SESSION_FIELD_ROLES] as $userRole) {
+            if ($userRole == $roleToAdd) {
                 return;
             }
         }
@@ -195,15 +190,13 @@ class AmfphpAuthentication {
         $_SESSION[self::SESSION_FIELD_ROLES][] = $roleToAdd;
     }
 
-
-
     /**
      * looks for a 'Credentials' request header. If there is one, uses it to try to authentify the user.
      * @param Amfphp_Core_Amf_Header $header the request header
      * @return void
      */
-    public function handleRequestHeader(Amfphp_Core_Amf_Header $header){
-        if($header->name != Amfphp_Core_Amf_Constants::CREDENTIALS_HEADER_NAME){
+    public function handleRequestHeader(Amfphp_Core_Amf_Header $header) {
+        if ($header->name != Amfphp_Core_Amf_Constants::CREDENTIALS_HEADER_NAME) {
             throw new Amfphp_Core_Exception('not an authentication amf header. type: ' . $header->name);
         }
         $userIdField = Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_USERID;
@@ -212,12 +205,13 @@ class AmfphpAuthentication {
         $userId = $header->data->$userIdField;
         $password = $header->data->$passwordField;
 
-        if(session_id () == ''){
+        if (session_id() == '') {
             session_start();
         }
         $this->headerUserId = $userId;
         $this->headerPassword = $password;
-
     }
+
 }
+
 ?>
