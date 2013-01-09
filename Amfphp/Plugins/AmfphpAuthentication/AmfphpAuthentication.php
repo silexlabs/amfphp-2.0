@@ -115,8 +115,8 @@ class AmfphpAuthentication {
         }
 
         //the service object has a '_getMethodRoles' method. role checking is necessary if the returned value is not null
-        $acceptedRoles = call_user_func(array($serviceObject, self::METHOD_GET_METHOD_ROLES), $methodName);
-        if(!$acceptedRoles){
+        $methodRoles = call_user_func(array($serviceObject, self::METHOD_GET_METHOD_ROLES), $methodName);
+        if(!$methodRoles){
             return;
         }
 
@@ -129,34 +129,34 @@ class AmfphpAuthentication {
             session_start();
 
         }
+        
+        self::testRoles($methodRoles);
 
+    }
+    
+    /**
+     * looks for a match between the user roles and the accepted roles.
+     * throws an exception if the roles don't match.
+     * @param <type> $methodRoles
+     */
+    public static function testRoles($methodRoles){
+        
         if(!isset ($_SESSION[self::SESSION_FIELD_ROLES])){
             throw new Amfphp_Core_Exception('User not authenticated');
         }
 
         $userRoles = $_SESSION[self::SESSION_FIELD_ROLES];
-        if(!$this->doRolesMatch($userRoles, $acceptedRoles)){
-            throw new Amfphp_Core_Exception("roles don't match");
-        }
-    }
-    
-    /**
-     * looks for a match between the user roles and the accepted roles
-     * @param <type> $userRoles
-     * @param <type> $acceptedRoles
-     * @return <type>
-     */
-    protected function doRolesMatch($userRoles, $acceptedRoles){
-            foreach($userRoles as $userRole){
-                foreach($acceptedRoles as $acceptedRole){
-                    if($userRole == $acceptedRole){
+
+        foreach($userRoles as $userRole){
+                foreach($methodRoles as $methodRole){
+                    if($userRole == $methodRole){
                         //a match is found
-                        return true;
+                        return;
 
                     }
                 }
             }
-            return false;
+            throw new Amfphp_Core_Exception('User roles do not match method roles');
     }
 
 
