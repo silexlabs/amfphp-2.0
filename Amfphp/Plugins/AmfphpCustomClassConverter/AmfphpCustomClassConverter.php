@@ -110,7 +110,7 @@ class AmfphpCustomClassConverter {
         $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
         if (isset($obj->$explicitTypeField)) {
             $customClassName = $obj->$explicitTypeField;
-            if (!class_exists($customClassName)) {
+            if (!class_exists($customClassName, false)) {
                 foreach ($this->customClassFolderPaths as $folderPath) {
                     $customClassPath = $folderPath . '/' . $customClassName . '.php';
                     if (file_exists($customClassPath)) {
@@ -119,7 +119,7 @@ class AmfphpCustomClassConverter {
                     }
                 }
             }
-            if (class_exists($customClassName)) {
+            if (class_exists($customClassName, false)) {
                 //class is available. Use it!
                 $typedObj = new $customClassName();
                 foreach ($obj as $key => $data) { // loop over each element to copy it into typed object

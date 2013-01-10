@@ -39,7 +39,7 @@ class Amfphp_BackOffice_ClientGenerator_GeneratorManager {
                     continue;
                 }
 
-                if (!class_exists($generatorName)) {
+                if (!class_exists($generatorName, false)) {
                     require_once $generatorFolderRootPath . '/' . $generatorName . '/' . $generatorName . '.php';
                 }
 
