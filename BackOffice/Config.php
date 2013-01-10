@@ -38,6 +38,13 @@ class Amfphp_BackOffice_Config {
      * @var array 
      */
     public $backOfficeCredentials;
+    
+    /**
+     * set to false for private server. Set to true for public server.
+     * true by default
+     * @var boolean
+     */
+    public $requireSignIn = true;
 
     public function __construct() {
         $this->backOfficeCredentials = array();

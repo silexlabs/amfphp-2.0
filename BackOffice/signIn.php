@@ -35,7 +35,6 @@ try {
         //user is logging in.
         $username = $_POST['username'];
         $password = $_POST['password'];
-        $staySignedIn = isset($_POST['staySignedIn']);
 
 
         if (isset($config->backOfficeCredentials[$username]) && ($config->backOfficeCredentials[$username] === $password)) {
@@ -49,6 +48,7 @@ try {
             $_SESSION[Amfphp_BackOffice_AccessManager::SESSION_FIELD_ROLES][Amfphp_BackOffice_AccessManager::AMFPHP_ADMIN_ROLE] = true;
         
             $redirectToHome = true;
+            
         } else {
             throw new Amfphp_Core_Exception('Invalid username/password');
         }
@@ -79,18 +79,12 @@ try {
                     <div class="errorMessage">
                         <?php echo $errorMessage ?>
                     </div>
-                    <div id = "username">
-                        User Name<br/>
-                        <input name = "username"/>
-                    </div>
-                    <div id = "password">
-                        Password<br/>
-                        <input name = "password" type = "password"/>
-                    </div>
-                    <div id = "staySignedIn">
-                        <input type = "Submit" value = "Sign In"/>
-                        <input name = "staySignedIn" type = "checkbox"/>Stay Signed In
-                    </div>
+                    User Name<br/>
+                    <input name = "username"/><br/>
+                    Password<br/>
+                    <input name = "password" type = "password"/><br/>
+                    <input type = "Submit" value = "Sign In"/>
+
                 </form>
             </div>
 

@@ -121,3 +121,12 @@ input {
 .underline {
    text-decoration: underline;
 }
+
+#signin input{
+    margin-left: 0;
+    margin-right: 0;
+}
+#signin input[type="submit"] {
+    font-weight: bold;
+    float: right;
+}

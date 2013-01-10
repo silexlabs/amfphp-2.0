@@ -28,7 +28,7 @@ require_once(dirname(__FILE__) . '/../Amfphp/ClassLoader.php');
         <div id='main'>
         <?php
         $accessManager = new Amfphp_BackOffice_AccessManager();
-        if (!$accessManager->isSignedIn()) {
+        if (!$accessManager->isAccessGranted()) {
             ?>
                 <script>
                     window.location = './signIn.php';

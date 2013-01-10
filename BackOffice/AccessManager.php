@@ -12,7 +12,7 @@
  */
 
 /**
- * Makes a call to the amfphp entry point and returns the data
+ *controls access to back office, along with signIn, signOut scripts
  * 
  *
  * @author Ariel Sommeria-klein
@@ -27,12 +27,14 @@ class Amfphp_BackOffice_AccessManager {
     const AMFPHP_ADMIN_ROLE = 'amfphp_admin';
 
     /**
-     * checks if logged. If not checks POST data for login credentials.
-     * throws Exception containing user feedback
-     * @todo fix session roles to use a dictionary approach, here and in AmfphpAuthentication plugin.
-     * Wait for bigger version to break compatibility
+     * checks if access should be granted, either because no sign in is required, or because the user is actually signed in.
      */
-    public function isSignedIn() {
+    public function isAccessGranted() {
+        
+        $config = new Amfphp_BackOffice_Config();
+        if(!$config->requireSignIn){
+            return true;
+        }
         if (session_id() == '') {
             session_start();
         }
