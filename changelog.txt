@@ -1,14 +1,16 @@
 Version history
 --------- 2.1.1 -----------
+Flex Client Generator
+change AmfphpAuthentication session storage structure. might break some code in some projects, check on it
+enable error handler plugin by default
+improved AMF version detection
+
 in service browser:
 various ways to view result data including tree
 improved use of scroll position
 fix passing JSON objects
 fix step by step debugging by removing dependency on curl and using included request plugin instead
 
-enable error handler plugin by default
-improved AMF version detection
-Flex Client Generator
 --------- 2.1 -----------
 client generators
 service browser moved to backoffice
