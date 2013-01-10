@@ -3,6 +3,7 @@ Version history
 Flex Client Generator
 change AmfphpAuthentication session storage structure. might break some code in some projects, check on it
 improved AMF version detection
+support for static service methods
 
 in service browser:
 various ways to view result data including tree
