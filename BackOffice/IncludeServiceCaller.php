@@ -42,12 +42,8 @@ class Amfphp_BackOffice_IncludeServiceCaller {
         $amfphpIncludedRequestParameters = $parameters;
         global $amfphpIncludedRequestReturnValue;
         require($this->amfphpEntryPointPath);
-        $ret = $amfphpIncludedRequestReturnValue;
-        if($ret instanceof Exception){
-            throw $ret;
-        }else{
-            return $ret;
-        }
+        return $amfphpIncludedRequestReturnValue;
+
     }
 
 }
