@@ -57,7 +57,7 @@ class AmfphpAuthenticationTest extends PHPUnit_Framework_TestCase
     {
         AmfphpAuthentication::addRole('admin');
         $roles = $_SESSION[AmfphpAuthentication::SESSION_FIELD_ROLES];
-        $this->assertEquals(array('admin'), $roles);
+        $this->assertEquals(array('admin' => true), $roles);
     }
 
     public function testClearSessionInfo()

@@ -51,6 +51,9 @@ input {
 	margin-top: 7px;
 }
 
+.errorMessage{
+    color:red;
+}
 .static a{
 	padding-right: 20px;
     

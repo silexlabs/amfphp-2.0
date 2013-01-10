@@ -1,6 +1,4 @@
 <?php
-
-
 /**
  *  This file is part of amfPHP
  *
@@ -11,31 +9,88 @@
  * @package Amfphp_Backoffice
  * 
  */
-?>
-<div  class="userInput" id="signin">
-    <form method="POST">
-        <h3>Sign In</h3>
-        <?php 
-            $config = new Amfphp_BackOffice_Config();
-            if(count($config->backOfficeCredentials) == 0){
-                ?>
-                Sign In is not possible because no credentials were set. <a href="http://www.silexlabs.org/amfphp/documentation/using-the-back-office/">Help</a><br/>  <br/>
-                <?php
-                
-                
+/**
+ * Sign in dialog If not checks POST data for login credentials.
+ * throws Exception containing user feedback
+ * @author Ariel Sommeria-klein
+ *
+ */
+/**
+ * includes
+ */
+require_once(dirname(__FILE__) . '/ClassLoader.php');
+require_once(dirname(__FILE__) . '/../Amfphp/ClassLoader.php');
+
+
+
+$errorMessage = '';
+$redirectToHome = false;
+try {
+    $config = new Amfphp_BackOffice_Config();
+    if (count($config->backOfficeCredentials) == 0) {
+        throw new Exception('Sign In is not possible because no credentials were set. <a href="http://www.silexlabs.org/amfphp/documentation/using-the-back-office/">Help</a>');
+    }
+
+    if (isset($_POST['username'])) {
+        //user is logging in.
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $staySignedIn = isset($_POST['staySignedIn']);
+
+
+        if (isset($config->backOfficeCredentials[$username]) && ($config->backOfficeCredentials[$username] === $password)) {
+            if (session_id() == '') {
+                session_start();
             }
+            if (!isset($_SESSION[Amfphp_BackOffice_AccessManager::SESSION_FIELD_ROLES])) {
+                $_SESSION[Amfphp_BackOffice_AccessManager::SESSION_FIELD_ROLES] = array();
+            }
+
+            $_SESSION[Amfphp_BackOffice_AccessManager::SESSION_FIELD_ROLES][Amfphp_BackOffice_AccessManager::AMFPHP_ADMIN_ROLE] = true;
+        
+            $redirectToHome = true;
+        } else {
+            throw new Amfphp_Core_Exception('Invalid username/password');
+        }
+    }
+} catch (Exception $e) {
+    $errorMessage = $e->getMessage();
+}
+?>
+<html>
+    <?php require_once(dirname(__FILE__) . '/htmlHeader.php'); ?>
+    <body>
+        <?php if ($redirectToHome) {
+            ?>
+            <script>
+                window.location = './index.php';
+            </script>
+            <?php
+            return;
+        }
         ?>
-        <div id="username">
-            User Name<br/>
-            <input name="username"/>
-        </div>
-        <div id="password">
-            Password<br/>
-            <input name="password" type="password"/>
-        </div>
-        <div id="staySignedIn">
-            <input type="Submit" value="Sign In"/>
-            <input name="staySignedIn" type="checkbox"/>Stay Signed In
-        </div>
-    </form>
-</div>
+        <?php require_once(dirname(__FILE__) . '/linkBar.php'); ?>
+
+        <div id='main'>
+
+            <div class = "userInput" id = "signin">
+                <form method = "POST">
+                    <h3>Sign In</h3>
+                    <div class="errorMessage">
+                        <?php echo $errorMessage ?>
+                    </div>
+                    <div id = "username">
+                        User Name<br/>
+                        <input name = "username"/>
+                    </div>
+                    <div id = "password">
+                        Password<br/>
+                        <input name = "password" type = "password"/>
+                    </div>
+                    <div id = "staySignedIn">
+                        <input type = "Submit" value = "Sign In"/>
+                        <input name = "staySignedIn" type = "checkbox"/>Stay Signed In
+                    </div>
+                </form>
+            </div>
+

@@ -24,15 +24,15 @@ require_once(dirname(__FILE__) . '/../Amfphp/ClassLoader.php');
         ?>
 
         <div id='main'>
-                        <?php
+            <?php
             $accessManager = new Amfphp_BackOffice_AccessManager();
-            try {
-                $accessManager->testAccessAllowed();
-            } catch (Exception $e) {
-                require_once(dirname(__FILE__) . '/signIn.php');
-                echo $e->getMessage();              
+            if (!$accessManager->isSignedIn()) {
+                ?>
+                <script>
+                    window.location = './signIn.php';
+                </script>
+                <?php
                 return;
- 
             }
             require_once(dirname(__FILE__) . '/mainMenu.php');
 
@@ -197,11 +197,11 @@ require_once(dirname(__FILE__) . '/../Amfphp/ClassLoader.php');
                     </span>
                 </h3>
                 <pre>
-                <div id='tree' class='resultView'></div>
-                <div id="print_r" class='resultView'><?php echo print_r($result, true); ?></div>
-                <div id="json" class='resultView'><?php echo json_encode($result); ?></div>
-                <div id="php" class='resultView'><?php echo serialize($result); ?></div>
-                <div id="raw" class='resultView'><?php
+                    <div id='tree' class='resultView'></div>
+                    <div id="print_r" class='resultView'><?php echo print_r($result, true); ?></div>
+                    <div id="json" class='resultView'><?php echo json_encode($result); ?></div>
+                    <div id="php" class='resultView'><?php echo serialize($result); ?></div>
+                    <div id="raw" class='resultView'><?php
                 try {
                     echo $result;
                 } catch (Exception $e) {
