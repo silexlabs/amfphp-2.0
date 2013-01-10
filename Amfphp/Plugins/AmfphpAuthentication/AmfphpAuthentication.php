@@ -39,6 +39,8 @@
  * 
  * See the AuthenticationService class in the test data for an example of an implementation.
  * 
+ * Roles are stored in an associative array in $_SESSION[self::SESSION_FIELD_ROLES], using the role as key for easy access
+ * 
  * @link https://github.com/silexlabs/amfphp-2.0/blob/master/Tests/TestData/Services/AuthenticationService.php
  * @package Amfphp_Plugins_Authentication
  * @author Ariel Sommeria-klein
@@ -129,31 +131,20 @@ class AmfphpAuthentication {
             session_start();
         }
 
-        self::testRoles($methodRoles);
-    }
-
-    /**
-     * looks for a match between the user roles and the accepted roles.
-     * throws an exception if the roles don't match.
-     * @param <type> $methodRoles
-     */
-    public static function testRoles($methodRoles) {
-
         if (!isset($_SESSION[self::SESSION_FIELD_ROLES])) {
             throw new Amfphp_Core_Exception('User not authenticated');
         }
 
         $userRoles = $_SESSION[self::SESSION_FIELD_ROLES];
 
-        foreach ($userRoles as $userRole) {
-            foreach ($methodRoles as $methodRole) {
-                if ($userRole == $methodRole) {
-                    //a match is found
-                    return;
-                }
+        foreach ($methodRoles as $methodRole) {
+            if (isset($userRoles[$methodRole])) {
+                //a match is found
+                return;
             }
         }
-        throw new Amfphp_Core_Exception('User roles do not match method roles');
+        throw new Amfphp_Core_Exception('no method roles match, access denied.');
+
     }
 
     /**
@@ -180,14 +171,8 @@ class AmfphpAuthentication {
             $_SESSION[self::SESSION_FIELD_ROLES] = array();
         }
 
-        //check role isn't already available
-        foreach ($_SESSION[self::SESSION_FIELD_ROLES] as $userRole) {
-            if ($userRole == $roleToAdd) {
-                return;
-            }
-        }
         //role isn't already available. Add it.
-        $_SESSION[self::SESSION_FIELD_ROLES][] = $roleToAdd;
+        $_SESSION[self::SESSION_FIELD_ROLES][$roleToAdd] = true;
     }
 
     /**
