@@ -34,7 +34,7 @@ require_once(dirname(__FILE__) . '/../Amfphp/ClassLoader.php');
                 return;
  
             }
-            require_once(dirname(__FILE__) . '/partLinks.php');
+            require_once(dirname(__FILE__) . '/mainMenu.php');
 
             /**
              * create tree data string for the representation of a result object. A bit like a var dump but for displaying with jstree

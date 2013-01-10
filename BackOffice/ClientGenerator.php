@@ -34,7 +34,7 @@ require_once(dirname(__FILE__) . '/ClassLoader.php');
                 echo $e->getMessage();
                 return;
             }
-            require_once(dirname(__FILE__) . '/partLinks.php');    
+            require_once(dirname(__FILE__) . '/mainMenu.php');    
             ?>
 
 <div  class='menu' id='serviceMethods'>
