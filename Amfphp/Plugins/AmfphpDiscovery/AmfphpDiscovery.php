@@ -21,7 +21,8 @@ require_once dirname(__FILE__) . '/ServiceDescriptor.php';
 
 /**
  * adds the discovery service, a service that returns information about available services. 
- * Don't use on a production server unless you know what you're doing!
+ * Access is restricted by default(see restrictAccess below)
+ * 
  * @package Amfphp_Plugins_Discovery
  * @author Ariel Sommeria-Klein
  */
