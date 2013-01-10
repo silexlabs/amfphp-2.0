@@ -35,6 +35,12 @@ class AmfphpDiscovery {
     protected $excludePaths = array('Vo/'); 
     
     /**
+     * restrict access to amfphp_admin. default is true. Set to false if this is a private server. 
+     * @var boolean
+     */
+    protected $restrictAccess = true;
+    
+    /**
      * constructor.
      * adds filters to grab config about services and add discovery service. Low priority so that other plugins can add their services first
      * @param array $config optional key/value pairs in an associative array. Used to override default configuration values.
@@ -47,7 +53,11 @@ class AmfphpDiscovery {
         if(isset($config['excludePaths'])){
             $this->excludePaths = $config['excludePaths'];    
         }
-        AmfphpDiscoveryService::$excludePaths = $this->excludePaths;
+        AmfphpDiscoveryService::$excludePaths = $this->excludePaths;        
+        if(isset($config['restrictAccess'])){
+            $this->restrictAccess = $config['restrictAccess'];    
+        }
+        AmfphpDiscoveryService::$restrictAccess = $this->restrictAccess;
     }
     
      /**

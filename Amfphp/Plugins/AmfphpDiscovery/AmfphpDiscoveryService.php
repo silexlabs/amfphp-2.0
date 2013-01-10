@@ -35,6 +35,18 @@ class AmfphpDiscoveryService {
      * @var array of ClassFindInfo. set by plugin.
      */
     public static $serviceNames2ClassFindInfo;
+    
+    /**
+     * restrict access to amfphp_admin. 
+     * @var boolean
+     */
+    public static $restrictAccess;
+    
+    public function _getMethodRoles($methodName){
+        if(self::$restrictAccess){
+            return array('amfphp_admin');
+        }
+    }
 
     /**
      * finds classes in folder. If in subfolders add the relative path to the name.

@@ -91,6 +91,9 @@ class Amfphp_Core_Config {
         $this->disabledPlugins = array();
         //disable logging by default
         $this->disabledPlugins[] = 'AmfphpLogger';
+        $this->disabledPlugins[] = 'AmfphpErrorHandler';
+        //example of setting config switch in a plugin:
+        //$this->pluginsConfig['AmfphpDiscovery']['restrictAccess'] = false;
         
         
     }
