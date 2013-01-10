@@ -44,6 +44,12 @@ class Amfphp_Core_Common_ServiceRouterTest extends PHPUnit_Framework_TestCase {
         $testParamsArray = array('a');
         $mirrored = $this->object->executeServiceCall('TestService', 'returnOneParam', $testParamsArray);
         $this->assertEquals($mirrored, 'a');
+        
+        
+        //return one param, static
+        $testParamsArray = array('a');
+        $mirrored = $this->object->executeServiceCall('TestService', 'staticReturnOneParam', $testParamsArray);
+        $this->assertEquals($mirrored, 'a');
 
         // return sum
         $testParamsArray = array(1, 2);

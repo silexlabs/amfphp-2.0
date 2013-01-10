@@ -104,6 +104,10 @@ class TestService {
     public function returnBitwiseAnd($value1, $value2){
         return ($value1 && $value2);
     }
+    
+    public static function staticReturnOneParam($param){
+        return $param;
+    }
 
 
 }
