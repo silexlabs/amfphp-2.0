@@ -31,7 +31,7 @@ class Amfphp_BackOffice_IncludeServiceCaller {
      * @param string $serviceName
      * @param string $methodName
      * @param string $parameters
-     * @return mixed whtever the service method returns
+     * @return mixed whtever the service method returns. If it's an exception it's thrown again.
      */
     function call($serviceName, $methodName, $parameters = array()) {
         global $amfphpIncludedRequestServiceName;
@@ -42,7 +42,12 @@ class Amfphp_BackOffice_IncludeServiceCaller {
         $amfphpIncludedRequestParameters = $parameters;
         global $amfphpIncludedRequestReturnValue;
         require($this->amfphpEntryPointPath);
-        return $amfphpIncludedRequestReturnValue;
+        $ret = $amfphpIncludedRequestReturnValue;
+        if($ret instanceof Exception){
+            throw $ret;
+        }else{
+            return $ret;
+        }
     }
 
 }
