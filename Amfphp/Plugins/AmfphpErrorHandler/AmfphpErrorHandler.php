@@ -10,10 +10,9 @@
  */
 
 /**
- * sets a custom error handler to catch notices and such and transform them to exceptions.
+ * sets a custom error handler to catch notices and such and transform them to exceptions. 
  * 
- * This is a bit experimental and only really useful when getting badly formed responses through errors. so disabled by default
- *  
+ *   
  * @todo this could be enhanced to use filters so that at the end of the gateway execution the error handling is set back to normal. This could be useful especially for integration with frameworks.
  * @package Amfphp_Plugins_ErrorHandler
  * @author Ariel Sommeria-Klein

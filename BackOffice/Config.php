@@ -27,7 +27,7 @@ class Amfphp_BackOffice_Config {
      * '../Tests/TestData/index.php'
      * @var String 
      */
-    public $amfphpEntryPointPath = '../Tests/TestData/index.php';
+    public $amfphpEntryPointPath = '../Amfphp/index.php';
     //public $amfphpEntryPointUrl = 'http://arielsommeria.com/amfphp-2.1/Amfphp/';
     
     /**
@@ -50,7 +50,6 @@ class Amfphp_BackOffice_Config {
         $this->backOfficeCredentials = array();
         //example code for username + password:
         //$this->backOfficeCredentials['yourUserName'] = 'yourPassWord';
-        $this->backOfficeCredentials['a'] = 'a';
         
     }
     public function resolveAmfphpEntryPointUrl(){

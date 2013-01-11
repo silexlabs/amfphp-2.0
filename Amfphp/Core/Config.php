@@ -89,7 +89,7 @@ class Amfphp_Core_Config {
         $this->pluginsConfig = array();
         $this->sharedConfig = array();
         $this->disabledPlugins = array();
-        //disable logging by default
+        //disable logging and error handler by default
         $this->disabledPlugins[] = 'AmfphpLogger';
         $this->disabledPlugins[] = 'AmfphpErrorHandler';
         //example of setting config switch in a plugin:
