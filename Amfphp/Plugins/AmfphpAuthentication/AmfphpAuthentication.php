@@ -143,7 +143,7 @@ class AmfphpAuthentication {
                 return;
             }
         }
-        throw new Amfphp_Core_Exception('no method roles match, access denied.');
+        throw new Amfphp_Core_Exception('Access denied.');
 
     }
 
