@@ -56,6 +56,23 @@ require_once(dirname(__FILE__) . '/ClassLoader.php');
                 $amfphpUrl = $config->resolveAmfphpEntryPointUrl();
 //load service descriptors
                 $services = $serviceCaller->call("AmfphpDiscoveryService", "discover");
+                if($services instanceof Exception){
+                    throw $services;
+                }
+                if (!is_array($services)) {
+                ?>
+                No services available. Please check : <br/>
+                <ul>
+                    <li>That your service classes don't contain syntax errors</li>
+                    <li>BackOffice Configuration in BackOffice/Config.php, specifically $amfphpEntryPointUrl</li>
+                    
+                </ul>
+                Service Object as returned by AmfphpDiscoveryService:
+                <br/> <br/>
+                <pre><?php            var_dump($services)?></pre>
+                <?php
+                return;
+            }
 //remove discovery service from list
                 unset($services->AmfphpDiscoveryService);
 //list services 

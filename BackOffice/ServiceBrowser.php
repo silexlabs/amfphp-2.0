@@ -110,13 +110,20 @@ require_once(dirname(__FILE__) . '/../Amfphp/ClassLoader.php');
 
 
             echo "\n<ul class='menu' id='serviceMethods'>";
-            if ($services == null) {
+            if($services instanceof Exception){
+                throw $services;
+            }
+            if (!is_array($services)) {
                 ?>
                 No services available. Please check : <br/>
                 <ul>
                     <li>That your service classes don't contain syntax errors</li>
                     <li>BackOffice Configuration in BackOffice/Config.php, specifically $amfphpEntryPointUrl</li>
+                    
                 </ul>
+                Service Object as returned by AmfphpDiscoveryService:
+                <br/> <br/>
+                <pre><?php            var_dump($services)?></pre>
                 <?php
                 return;
             }
@@ -202,12 +209,12 @@ require_once(dirname(__FILE__) . '/../Amfphp/ClassLoader.php');
                     <div id="json" class='resultView'><?php echo json_encode($result); ?></div>
                     <div id="php" class='resultView'><?php echo serialize($result); ?></div>
                     <div id="raw" class='resultView'><?php
-                try {
-                    echo $result;
-                } catch (Exception $e) {
-                    
-                }
-                ?></div>
+                    if(method_exists($result, '__toString')){
+                        echo $result;
+                    }else{
+                        echo "cannot display raw";
+                    }
+                     ?></div>
                 </pre>
 
                 <?php
