@@ -82,6 +82,26 @@ package flexUnitTests
 			assertEquals("bla", event.obj[1].bla);
 		}
 		
+		public function testSecondObjectReference():void{
+			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifySecondObjectReturnReference, 1000));
+			var reffered:* = {bla:"bla"};
+			var reffered2:* = {bla2:"bla2"};
+			var testVar:Array = [reffered, reffered, {}, ["qwe"], reffered2, reffered2];
+			_nc.callWithEvents("TestService.returnOneParam", testVar);	
+			
+		}
+		
+		/**
+		 * this only checks that the data is valid.
+		 * */
+		private function verifySecondObjectReturnReference(event:ObjEvent):void{
+			assertTrue(event.obj is Array);
+			assertEquals("bla", event.obj[0].bla);
+			assertEquals("bla", event.obj[1].bla);
+			assertEquals("bla2", event.obj[4].bla2);
+			assertEquals("bla2", event.obj[5].bla2);
+		}
+		
 		
 		public function testTypedObjectReference():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyTypedObjectReturnReference, 1000));
@@ -102,7 +122,7 @@ package flexUnitTests
 		}	
 		
 		/**
-		 * test xhat happens beyond MAX_STORE_SIZE(1024)
+		 * test what happens beyond MAX_STORE_SIZE(1024)
 		 * */
 		public function testManyObjectsReference():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyManyObjectsReturnReference, 5000));
