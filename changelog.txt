@@ -5,6 +5,7 @@ change AmfphpAuthentication session storage structure. might break some code in 
 improved AMF version detection
 support for static service methods
 example services for Authentication and User management with a Database(PHP Only)
+add composer.json for use with http://getcomposer.org
 
 in service browser:
 various ways to view result data including tree
