@@ -1,10 +1,12 @@
 Version history
 --------- 2.1.1 -----------
 Flex Client Generator
+example services for Authentication and User management with a Database(PHP Only)
+authenticated back office
+
 change AmfphpAuthentication session storage structure. might break some code in some projects, check on it
 improved AMF version detection
 support for static service methods
-example services for Authentication and User management with a Database(PHP Only)
 add composer.json for use with http://getcomposer.org
 
 in service browser:

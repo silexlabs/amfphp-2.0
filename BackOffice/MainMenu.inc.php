@@ -13,7 +13,7 @@
 ?>
 
         <ul class="menu" id='backOffice'>
-            <a href="signOut.php"><b>Sign Out</b></a>
+            <a href="SignOut.php"><b>Sign Out</b></a>
             <br/><br/>
             <li><a href="ServiceBrowser.php"><b>Service Browser</b></a></li>
             <li><a href="ClientGenerator.php"><b>Client Generator</b></a></li>

@@ -21,9 +21,9 @@ require_once(dirname(__FILE__) . '/ClassLoader.php');
 require_once(dirname(__FILE__) . '/../Amfphp/ClassLoader.php');
 ?>
 <html>
-<?php require_once(dirname(__FILE__) . '/htmlHeader.php'); ?>
+<?php require_once(dirname(__FILE__) . '/HtmlHeader.inc.php'); ?>
     <body>
-    <?php require_once(dirname(__FILE__) . '/linkBar.php'); ?>
+    <?php require_once(dirname(__FILE__) . '/LinkBar.inc.php'); ?>
 
         <div id='main'>
         <?php
@@ -31,12 +31,12 @@ require_once(dirname(__FILE__) . '/../Amfphp/ClassLoader.php');
         if (!$accessManager->isAccessGranted()) {
             ?>
                 <script>
-                    window.location = './signIn.php';
+                    window.location = './SignIn.php';
                 </script>
             <?php
             return;
         }
-        require_once(dirname(__FILE__) . '/mainMenu.php');
+        require_once(dirname(__FILE__) . '/MainMenu.inc.php');
 ?>
 
 

@@ -12,7 +12,7 @@
  */
 
 /**
- *controls access to back office, along with signIn, signOut scripts
+ *controls access to back office, along with SignIn, SignOut scripts
  * 
  *
  * @author Ariel Sommeria-klein

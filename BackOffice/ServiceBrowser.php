@@ -16,11 +16,11 @@ require_once(dirname(__FILE__) . '/../Amfphp/ClassLoader.php');
 ?>
 
 <html>
-    <?php require_once(dirname(__FILE__) . '/htmlHeader.php'); ?>
+    <?php require_once(dirname(__FILE__) . '/HtmlHeader.inc.php'); ?>
     <body>
         <?php
         $addToTitle = ' - Service Browser';
-        require_once(dirname(__FILE__) . '/linkBar.php');
+        require_once(dirname(__FILE__) . '/LinkBar.inc.php');
         ?>
 
         <div id='main'>
@@ -29,12 +29,12 @@ require_once(dirname(__FILE__) . '/../Amfphp/ClassLoader.php');
             if (!$accessManager->isAccessGranted()) {
                 ?>
                 <script>
-                    window.location = './signIn.php';
+                    window.location = './SignIn.php';
                 </script>
                 <?php
                 return;
             }
-            require_once(dirname(__FILE__) . '/mainMenu.php');
+            require_once(dirname(__FILE__) . '/MainMenu.inc.php');
 
             /**
              * create tree data string for the representation of a result object. A bit like a var dump but for displaying with jstree

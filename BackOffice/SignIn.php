@@ -58,7 +58,7 @@ try {
 }
 ?>
 <html>
-    <?php require_once(dirname(__FILE__) . '/htmlHeader.php'); ?>
+    <?php require_once(dirname(__FILE__) . '/HtmlHeader.inc.php'); ?>
     <body>
         <?php if ($redirectToHome) {
             ?>
@@ -69,7 +69,7 @@ try {
             return;
         }
         ?>
-        <?php require_once(dirname(__FILE__) . '/linkBar.php'); ?>
+        <?php require_once(dirname(__FILE__) . '/LinkBar.inc.php'); ?>
 
         <div id='main'>
 
