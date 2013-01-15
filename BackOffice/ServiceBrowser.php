@@ -13,6 +13,8 @@
  */
 require_once(dirname(__FILE__) . '/ClassLoader.php');
 require_once(dirname(__FILE__) . '/../Amfphp/ClassLoader.php');
+$accessManager = new Amfphp_BackOffice_AccessManager();
+$isAccessGranted = $accessManager->isAccessGranted();
 ?>
 
 <html>
@@ -25,8 +27,7 @@ require_once(dirname(__FILE__) . '/../Amfphp/ClassLoader.php');
 
         <div id='main'>
             <?php
-            $accessManager = new Amfphp_BackOffice_AccessManager();
-            if (!$accessManager->isAccessGranted()) {
+            if (!$isAccessGranted) {
                 ?>
                 <script>
                     window.location = './SignIn.php';

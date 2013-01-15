@@ -28,6 +28,7 @@ class Amfphp_BackOffice_AccessManager {
 
     /**
      * checks if access should be granted, either because no sign in is required, or because the user is actually signed in.
+     * note: must be called before output starts, as starting a session can change headers on some configs.
      */
     public function isAccessGranted() {
         

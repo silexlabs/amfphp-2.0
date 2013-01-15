@@ -1,4 +1,3 @@
-
 <?php
 /**
  *  This file is part of amfPHP
@@ -19,6 +18,8 @@
  */
 require_once(dirname(__FILE__) . '/ClassLoader.php');
 require_once(dirname(__FILE__) . '/../Amfphp/ClassLoader.php');
+$accessManager = new Amfphp_BackOffice_AccessManager();
+$isAccessGranted = $accessManager->isAccessGranted();
 ?>
 <html>
 <?php require_once(dirname(__FILE__) . '/HtmlHeader.inc.php'); ?>
@@ -28,7 +29,7 @@ require_once(dirname(__FILE__) . '/../Amfphp/ClassLoader.php');
         <div id='main'>
         <?php
         $accessManager = new Amfphp_BackOffice_AccessManager();
-        if (!$accessManager->isAccessGranted()) {
+        if (!$isAccessGranted) {
             ?>
                 <script>
                     window.location = './SignIn.php';
