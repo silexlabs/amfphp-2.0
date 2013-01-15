@@ -34,7 +34,7 @@
 				testsToRun.push(flexUnitTests.AmfCommonTests);				
 				testsToRun.push(flexUnitTests.voTests.VoTests);				
 				testsToRun.push(flexUnitTests.NetConnectionTests);
-				//references with amf0 don't work so well with baguette amf
+				//references with amf0 don't work somehow, could a bug in recent version of Flash as they used to work. TODO: check
 				//testsToRun.push(flexUnitTests.ReferenceCommonTests);
 				testsToRun.push(flexUnitTests.AuthenticationTests);
 				testsToRun.push(flexUnitTests.Amf3NumberTests);
