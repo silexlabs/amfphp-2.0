@@ -300,8 +300,9 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
         //Because if the array contains only primitive values,
         //Then === will say that the two arrays are strictly equal
         //if they contain the same values, even if they are really distinct
-        if (count($this->Amf0StoredObjects) <= self::MAX_STORED_OBJECTS) {
-            $this->Amf0StoredObjects[] = & $d;
+        $count = count($this->Amf0StoredObjects);
+        if ($count <= self::MAX_STORED_OBJECTS) {
+            $this->Amf0StoredObjects[$count] = & $d;
         }
 
         $numeric = array(); // holder to store the numeric keys
@@ -349,20 +350,6 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
     }
 
     /**
-     * Write a plain numeric array without anything fancy
-     */
-    protected function writePlainArray($d) {
-        if (!$this->writeReferenceIfExists($d)) {
-            $num_count = count($d);
-            $this->writeByte(10); // write  the mixed array code
-            $this->writeLong($num_count); // write  the count of items in the array
-            for ($i = 0; $i < $num_count; $i++) { // write all of the array elements
-                $this->writeData($d[$i]);
-            }
-        }
-    }
-
-    /**
      * writeObjectFromArray handles writing a php array with string or mixed keys.  It does
      * not write the object code as that is handled by the writeArrayOrObject and this method
      * is shared with the CustomClass writer which doesn't use the object code.
@@ -386,7 +373,6 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
     protected function writeAnonymousObject($d) {
         if (!$this->handleReference($d, $this->Amf0StoredObjects)) {
             $this->writeByte(3);
-            $objVars = (array) $d;
             foreach ($d as $key => $data) { // loop over each element
                 if ($key[0] != "\0") {
                     $this->writeUTF($key);  // write the name of the object
@@ -651,8 +637,9 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
         //Because if the array contains only primitive values,
         //Then === will say that the two arrays are strictly equal
         //if they contain the same values, even if they are really distinct
-        if (count($this->storedObjects) <= self::MAX_STORED_OBJECTS) {
-            $this->storedObjects[] = & $d;
+        $count = count($this->storedObjects);
+        if ($count <= self::MAX_STORED_OBJECTS) {
+            $this->storedObjects[$count] = & $d;
         }
         
         $numeric = array(); // holder to store the numeric keys >= 0
@@ -791,6 +778,10 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
      * - if not, the object is pushed to the references array, and array_search is used. So the array has the structure reference => object.
      * maxing out the number of stored references improves performance(tested with an array of 9000 identical objects). This may be because isset's performance
      * is linked to the size of the array. weird...
+     * note on using $references[$count] = &$obj; rather than 
+     * $references[] = &$obj;
+     * the first one is right, the second is not, as with the second one we could end up with the following:
+     * some object hash => 0, 0 => array. (it should be 1 => array)
      * 
      * This also means that 2 completely separate instances of a class but with the same values will be written fully twice if we can't use the hash system
      * 
@@ -799,25 +790,26 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer{
      */
     protected function handleReference(&$obj, array &$references){
         $key = false;
+        $count = count($references);
         if(is_object($obj) && function_exists('spl_object_hash')){
             $hash = spl_object_hash($obj);
             if(isset($references[$hash])){
                 $key = $references[$hash];
             }else{
-                if(count($references) <= self::MAX_STORED_OBJECTS){
+                if($count <= self::MAX_STORED_OBJECTS){
                     //there is some space left, store object for reference
-                    $references[$hash] = count($references);
+                    $references[$hash] = $count;
                 }
             }
         }else{
             //no hash available, use array with simple numeric keys
             $key = array_search($obj, $references, TRUE);
             
-            if(($key === false) && (count($references) <= self::MAX_STORED_OBJECTS)){
+            if(($key === false) && ($count <= self::MAX_STORED_OBJECTS)){
                 // $key === false means the object isn't already stored
                 // count... means there is still space
                 //so only store if these 2 conditions are met
-                $references[] = &$obj;
+                $references[$count] = &$obj;
                 
             }
         }
