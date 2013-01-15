@@ -26,25 +26,24 @@
 			{
 				var testsToRun:Array = new Array();
 				
-				//testsToRun.push(flexUnitTests.AuthenticationTests);
-				//testsToRun.push(flexUnitTests.ReferenceAmf3Tests);
-				//testsToRun.push(flexUnitTests.Amf3TraitsTests);
-				//testsToRun.push(flexUnitTests.HeaderTests);
-				//testsToRun.push(flexUnitTests.Amf3Tests);
-				//testsToRun.push(flexUnitTests.RemoteObjectTests);
-				//testsToRun.push(flexUnitTests.AmfCommonTests);				
-				//testsToRun.push(flexUnitTests.voTests.VoTests);				
-				//testsToRun.push(flexUnitTests.NetConnectionTests);
-				testsToRun.push(flexUnitTests.ReferenceCommonTests);
-				//testsToRun.push(flexUnitTests.Amf3NumberTests);
-				//testsToRun.push(flexUnitTests.ExceptionTests);
-				//testsToRun.push(flexUnitTests.ByteArrayTests);
-				
+				testsToRun.push(flexUnitTests.ReferenceAmf3Tests);
+				testsToRun.push(flexUnitTests.Amf3TraitsTests);
+				testsToRun.push(flexUnitTests.HeaderTests);
+				testsToRun.push(flexUnitTests.Amf3Tests);
+				testsToRun.push(flexUnitTests.RemoteObjectTests);
+				testsToRun.push(flexUnitTests.AmfCommonTests);				
+				testsToRun.push(flexUnitTests.voTests.VoTests);				
+				testsToRun.push(flexUnitTests.NetConnectionTests);
+				//references with amf0 don't work so well with baguette amf
+				//testsToRun.push(flexUnitTests.ReferenceCommonTests);
+				testsToRun.push(flexUnitTests.AuthenticationTests);
+				testsToRun.push(flexUnitTests.Amf3NumberTests);
+				testsToRun.push(flexUnitTests.ExceptionTests);
+				testsToRun.push(flexUnitTests.ByteArrayTests);
 				/*
 				var testsToRun:Array = new Array();
-				testsToRun.push(flexUnitTests.AuthenticationTests);
+				testsToRun.push(flexUnitTests.RemoteObjectTests);
 				*/
-				
 				return testsToRun;
 			}
 			

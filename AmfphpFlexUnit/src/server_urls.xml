@@ -1,11 +1,11 @@
 <server_urls>
-	<url description="trunk" active="y">http://localhost/GitHub/amfphp-2.0/Tests/TestData/</url>
-	<url description="online" active="n">http://arielsommeria.com/amfphp-2.1.1/Tests/TestData/</url>
+	<url description="trunk" active="n">http://localhost/workspaceNetbeans/amfphp-2.0/Tests/TestData/</url>
+	<url description="online" active="n">http://arielsommeria.com/amfphp-2.1/Tests/TestData/</url>
 	<url description="old amfphp" active="n">http://localhost:8888/workspaceNetbeans/amfphp%201.9/gateway.php</url>
 	<url description="xp 32 php 5.3 nts" active="n">http://192.168.1.36/amfphp_master/Tests/TestData/</url>
 	<url description="xp 32 php 5.3 ts" active="n">http://192.168.1.36:8888/amfphp_master/Tests/TestData/</url>
 	<url description="win7 64, php 32 php 5.3 nts" active="n">http://192.168.1.42/amfphp_master/Tests/TestData/</url>
-	<url description="win7 64, php 32 5.3 ts" active="n">http://192.168.1.42:8888/amfphp_master/Tests/TestData/</url>
+	<url description="win7 64, php 32 5.3 ts" active="y">http://192.168.1.42:8888/amfphp_master/Tests/TestData/</url>
 	<url description="debian 32 php 5.2" active="n">http://192.168.1.37:5213/amfphp_master/Tests/TestData/</url>
 	<url description="debian 32 php 5.3" active="n">http://192.168.1.37:5302/amfphp_master/Tests/TestData/</url>
 	<url description="debian 64 php 5.2" active="n">http://192.168.1.40:5213/amfphp_master/Tests/TestData/</url>

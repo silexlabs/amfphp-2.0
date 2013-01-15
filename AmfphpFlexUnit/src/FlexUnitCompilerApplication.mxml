@@ -8,45 +8,45 @@ Please click on the "Refresh" icon in "FlexUnit Results" view to regenerate this
 			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600">
 	<fx:Script>
 		<![CDATA[
+			import flexUnitTests.Amf3TraitsTests;
+			import flexUnitTests.ReferenceAmf3Tests;
+			import flexUnitTests.Amf3NumberTests;
+			import flexUnitTests.RemoteObjectTests;
+			import flexUnitTests.Amf3Tests;
+			import flexUnitTests.ReferenceCommonTests;
+			import flexUnitTests.HeaderTests;
+			import flexUnitTests.AuthenticationTests;
 			import flexUnitTests.ExceptionTests;
 			import flexUnitTests.NetConnectionTests;
-			import flexUnitTests.RemoteObjectTests;
-			import flexUnitTests.Amf3TraitsTests;
-			import flexUnitTests.Amf3Tests;
-			import flexUnitTests.AuthenticationTests;
-			import flexUnitTests.Amf3NumberTests;
-			import flexUnitTests.HeaderTests;
-			import flexUnitTests.AmfCommonTests;
-			import flexUnitTests.ReferenceAmf3Tests;
-			import flexUnitTests.ReferenceCommonTests;
-			import flexUnitTests.voTests.VoTests;
 			import flexUnitTests.ByteArrayTests;
-			
-			private var flexUnitTests_ByteArrayTests_obj:flexUnitTests.ByteArrayTests;
-			
-			private var flexUnitTests_voTests_VoTests_obj:flexUnitTests.voTests.VoTests;
-			
-			private var flexUnitTests_ReferenceCommonTests_obj:flexUnitTests.ReferenceCommonTests;
-			
-			private var flexUnitTests_ReferenceAmf3Tests_obj:flexUnitTests.ReferenceAmf3Tests;
+			import flexUnitTests.voTests.VoTests;
+			import flexUnitTests.AmfCommonTests;
 			
 			private var flexUnitTests_AmfCommonTests_obj:flexUnitTests.AmfCommonTests;
 			
-			private var flexUnitTests_HeaderTests_obj:flexUnitTests.HeaderTests;
+			private var flexUnitTests_voTests_VoTests_obj:flexUnitTests.voTests.VoTests;
 			
-			private var flexUnitTests_Amf3NumberTests_obj:flexUnitTests.Amf3NumberTests;
-			
-			private var flexUnitTests_AuthenticationTests_obj:flexUnitTests.AuthenticationTests;
-			
-			private var flexUnitTests_Amf3Tests_obj:flexUnitTests.Amf3Tests;
-			
-			private var flexUnitTests_Amf3TraitsTests_obj:flexUnitTests.Amf3TraitsTests;
-			
-			private var flexUnitTests_RemoteObjectTests_obj:flexUnitTests.RemoteObjectTests;
+			private var flexUnitTests_ByteArrayTests_obj:flexUnitTests.ByteArrayTests;
 			
 			private var flexUnitTests_NetConnectionTests_obj:flexUnitTests.NetConnectionTests;
 			
 			private var flexUnitTests_ExceptionTests_obj:flexUnitTests.ExceptionTests;
+			
+			private var flexUnitTests_AuthenticationTests_obj:flexUnitTests.AuthenticationTests;
+			
+			private var flexUnitTests_HeaderTests_obj:flexUnitTests.HeaderTests;
+			
+			private var flexUnitTests_ReferenceCommonTests_obj:flexUnitTests.ReferenceCommonTests;
+			
+			private var flexUnitTests_Amf3Tests_obj:flexUnitTests.Amf3Tests;
+			
+			private var flexUnitTests_RemoteObjectTests_obj:flexUnitTests.RemoteObjectTests;
+			
+			private var flexUnitTests_Amf3NumberTests_obj:flexUnitTests.Amf3NumberTests;
+			
+			private var flexUnitTests_ReferenceAmf3Tests_obj:flexUnitTests.ReferenceAmf3Tests;
+			
+			private var flexUnitTests_Amf3TraitsTests_obj:flexUnitTests.Amf3TraitsTests;
 		]]>
 	</fx:Script>
 	<fx:Declarations>

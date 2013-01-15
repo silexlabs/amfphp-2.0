@@ -5,7 +5,7 @@ package flexUnitTests
 	 * */
 	public class TestConfig
 	{
-		public static var gateway:String = "http://localhost/GitHub/amfphp-2.0/Tests/TestData/";
+		public static var gateway:String = "http://localhost/workspaceNetbeans/amfphp-2.0/Tests/TestData/";
 		//online http://arielsommeria.com/amfphp-2.1/Tests/TestData/
 		//virtual machine http://192.168.1.36/amfphp-2.1/Tests/TestData/
 		//old amfphp
