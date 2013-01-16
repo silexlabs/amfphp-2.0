@@ -34,7 +34,9 @@
 				testsToRun.push(flexUnitTests.AmfCommonTests);				
 				testsToRun.push(flexUnitTests.voTests.VoTests);				
 				testsToRun.push(flexUnitTests.NetConnectionTests);
-				//references with amf0 don't work somehow, could a bug in recent version of Flash as they used to work. TODO: check
+				//references with amf0 don't work somehow. This wasn't apparent before 2.1.1 because there was a bug in the tests
+                                //which made that amf3 was being sent instead of amf0
+                                //as nobody compains about amf0 and the bug seems to be in the flash player, let it be.
 				//testsToRun.push(flexUnitTests.ReferenceCommonTests);
 				testsToRun.push(flexUnitTests.AuthenticationTests);
 				testsToRun.push(flexUnitTests.Amf3NumberTests);
