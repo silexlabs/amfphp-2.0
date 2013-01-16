@@ -24,9 +24,10 @@
 			import mx.events.FlexEvent;
 			import mx.rpc.AsyncToken;
 			import mx.rpc.Responder;
+			import mx.rpc.events.FaultEvent;
 			import mx.rpc.events.ResultEvent;
 			import mx.utils.ObjectUtil;
-                        
+			
 			import org.silexlabs.amfphp.clientgenerator.generated.service._SERVICE_Client;
 			
 			private var _service:_SERVICE_Client;
