@@ -49,8 +49,8 @@
 			}
 			/*ACG_METHOD*/
 			
-			private function faultHandler(obj:Object):void{
-				resultDisplay.text = "error :  \n" +  ObjectUtil.toString(obj) + "\n";
+			private function faultHandler(event:FaultEvent):void{
+				resultDisplay.text = "error :  \n" +  ObjectUtil.toString(event.fault) + "\n";
 			}	
 			
 		]]>
