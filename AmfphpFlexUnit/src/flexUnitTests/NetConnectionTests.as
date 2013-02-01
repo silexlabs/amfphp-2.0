@@ -80,6 +80,14 @@ package flexUnitTests
 			assertEquals("testString", event.obj);
 		}
 		
+		public function testDiscoveryService():void{
+			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyDiscoveryService, 1000));
+			_nc.callWithEvents("AmfphpDiscoveryService.discover");	
+		}
+		private function verifyDiscoveryService(event:ObjEvent):void{
+			assertTrue(event.obj is String);
+		}
+		
 
 		
 		
