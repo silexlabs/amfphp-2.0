@@ -167,7 +167,6 @@ class AmfphpDiscoveryService {
                     $parameters[] = $parameterInfo;
                 }
                 $methods[$methodName] = new AmfphpDiscovery_MethodDescriptor($methodName, $parameters, $methodComment, $parsedMethodComment['return']);
-                $methods[$methodName]->bla = $parsedMethodComment;
             }
 
             $ret[$serviceName] = new AmfphpDiscovery_ServiceDescriptor($serviceName, $methods, $objComment);
