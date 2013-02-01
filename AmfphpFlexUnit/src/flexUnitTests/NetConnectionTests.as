@@ -85,7 +85,7 @@ package flexUnitTests
 			_nc.callWithEvents("AmfphpDiscoveryService.discover");	
 		}
 		private function verifyDiscoveryService(event:ObjEvent):void{
-			assertTrue(event.obj is String);
+			assertTrue(event.obj.AmfphpDiscoveryService.methods.discover.parameters.length == 0);
 		}
 		
 
