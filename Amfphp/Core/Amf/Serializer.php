@@ -601,6 +601,8 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer {
      *  handles writing an anoynous object (stdClass)
      *  can also be a reference
      * Also creates a bogus traits entry, as even an anonymous object has traits. In this way a reference to a class trait will have the right id.
+     * @todo it would seem that to create only one traits entry for an anonymous object would be the way to go. this 
+     * however messes things up in both Flash and Charles Proxy. For testing call discovery service using AMF.
      *
      * @param stdClass $d The php object to write
      * @param doReference Boolean This is used by writeAmf3Array, where the reference has already been taken care of, 
@@ -614,10 +616,9 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer {
             return;
         }
 
-        if (!isset($this->className2TraitsInfo[''])) {
-            $traitsInfo = array("referenceId" => count($this->className2TraitsInfo), "propertyNames" => array());
-            $this->className2TraitsInfo[''] = $traitsInfo;
-        }
+        //bogus class traits entry
+        $this->className2TraitsInfo[] = array();
+        
         //anonymous object. So type this as a dynamic object with no sealed members.
         //U29O-traits : 1011.
         $this->writeAmf3Int(0xB);
