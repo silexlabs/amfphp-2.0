@@ -4,7 +4,10 @@ test service browser
 test generators
 test examples
 tag repository(github)
+regenerate doc, and update online version
 create release zip
 upload to distribution platform(sourceforge)
 blog post on silexlabs. publishes automatically to twitter and facebook. publish on google plus.
+update download link on silex labs page
+update version info on wikipedia page
 send link to amfphp-general@lists.sourceforge.net
