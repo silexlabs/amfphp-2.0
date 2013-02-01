@@ -49,7 +49,7 @@ class Amfphp_BackOffice_Config {
     public function __construct() {
         $this->backOfficeCredentials = array();
         //example code for username + password:
-        //$this->backOfficeCredentials['yourUserName'] = 'yourPassWord';
+        $this->backOfficeCredentials['a'] = 'a';
         
     }
     public function resolveAmfphpEntryPointUrl(){

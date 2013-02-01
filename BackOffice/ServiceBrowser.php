@@ -26,6 +26,7 @@ $isAccessGranted = $accessManager->isAccessGranted();
         ?>
 
         <div id='main'>
+            <div class="left">
             <?php
             if (!$isAccessGranted) {
                 ?>
@@ -144,7 +145,7 @@ $isAccessGranted = $accessManager->isAccessGranted();
             }
             echo "\n</ul>\n";
 
-
+            echo "</div>";
 
             echo "\n<div class='userInput' id='callDialog'>";
 //generate method calling interface
@@ -169,7 +170,7 @@ $isAccessGranted = $accessManager->isAccessGranted();
                 } else {
                     echo "This method has no parameters.";
                     echo "\n<form action='?serviceName=$callServiceName&amp;methodName=$callMethodName&amp;callWithoutParams' method='POST'>\n";
-                    echo "\n<input type='submit' value='Call method'></form>";
+                    echo "\n<input type='submit' value='Call method &raquo;'></form>";
                 }
             }
 

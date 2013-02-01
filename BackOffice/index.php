@@ -22,24 +22,25 @@ $accessManager = new Amfphp_BackOffice_AccessManager();
 $isAccessGranted = $accessManager->isAccessGranted();
 ?>
 <html>
-<?php require_once(dirname(__FILE__) . '/HtmlHeader.inc.php'); ?>
+    <?php require_once(dirname(__FILE__) . '/HtmlHeader.inc.php'); ?>
     <body>
-    <?php require_once(dirname(__FILE__) . '/LinkBar.inc.php'); ?>
+        <?php require_once(dirname(__FILE__) . '/LinkBar.inc.php'); ?>
 
         <div id='main'>
-        <?php
-        $accessManager = new Amfphp_BackOffice_AccessManager();
-        if (!$isAccessGranted) {
-            ?>
-                <script>
-                    window.location = './SignIn.php';
-                </script>
-            <?php
-            return;
-        }
-        require_once(dirname(__FILE__) . '/MainMenu.inc.php');
-?>
-
+            <div class="left">
+                <?php
+                $accessManager = new Amfphp_BackOffice_AccessManager();
+                if (!$isAccessGranted) {
+                    ?>
+                    <script>
+                        window.location = './SignIn.php';
+                    </script>
+                    <?php
+                    return;
+                }
+                require_once(dirname(__FILE__) . '/MainMenu.inc.php');
+                ?>
+            </div>
 
         </div>
     </body>    

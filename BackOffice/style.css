@@ -69,16 +69,18 @@ input {
 	margin-left: 20px;
 }
 .menu {
-	margin: 20px;
 	padding: 11px;
 	background: #525252;
-	float: left;
 	-moz-border-radius: 8px;
 	-webkit-border-radius: 8px;
 	border-radius: 8px;
-	padding-bottom: 0px;
+	padding-bottom: 2px;
 }
 
+.left{
+    float: left;
+    margin: 20px;
+}
 .menu li {
 	margin-left: 15px;
 	margin-bottom: 10px;
@@ -129,4 +131,8 @@ input {
 #signin input[type="submit"] {
     font-weight: bold;
     float: right;
+}
+
+#serviceMethods{
+    margin-top: 20px;
 }
