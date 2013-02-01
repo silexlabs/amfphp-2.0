@@ -18,37 +18,37 @@
  * @package Amfphp_Plugins_Discovery
  */
 class AmfphpDiscovery_MethodDescriptor {
+
+    /**
+     * name
+     * @var string 
+     */
     public $name;
+
     /**
      * 
      * @var array of ParameterInfo
      */
-    public $parameters; 
-    
-    /**
-     * @todo return type. This would have to be done with commentary tag analysis, doesn't work for now.
-     * @var String 
-     */
-    //public $returns;
-    
+    public $parameters;
+
     /**
      *
      * @var string method level comment
      */
     public $comment;
-    
+
     /**
-     *
+     * return type
      * @var string 
      */
     public $returnType;
-    
-     /**
-     *
+
+    /**
+     * constructor
      * @param string $name
      * @param array $parameters
      * @param string $comment
-     * @param array $tags 
+     * @param string $returnType 
      */
     public function __construct($name, array $parameters, $comment, $returnType) {
         $this->name = $name;
@@ -56,6 +56,7 @@ class AmfphpDiscovery_MethodDescriptor {
         $this->comment = $comment;
         $this->returnType = $returnType;
     }
+
 }
 
 ?>

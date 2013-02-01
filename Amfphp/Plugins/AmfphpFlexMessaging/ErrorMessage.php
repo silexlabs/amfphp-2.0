@@ -21,7 +21,6 @@
 
 class AmfphpFlexMessaging_ErrorMessage
 {
-	public $_explicitType;
 	public $correlationId;
 	public $faultCode;
 	public $faultDetail;

@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of amfPHP
  *
@@ -8,7 +9,6 @@
  * with this package in the file license.txt.
  * @package Amfphp_Core
  */
-
 
 /**
  * responsable for loading and maintaining Amfphp configuration
@@ -32,7 +32,7 @@ class Amfphp_Core_Config {
      * @var <array> of ClassFindInfo
      */
     public $serviceNames2ClassFindInfo;
-    
+
     /**
      * set to true if you want the service router to check if the number of arguments received by amfPHP matches with the method being called.
      * This should be set to false in production for performance reasons
@@ -56,14 +56,14 @@ class Amfphp_Core_Config {
      * @var array
      */
     public $pluginsConfig;
-    
+
     /**
      * array containing configuration data that is shared between the plugins. The format is paramName/paramValue pairs as an array.
      * 
      * @var array
      */
     public $sharedConfig;
-    
+
     /**
      * if true, there will be detailed information in the error messages, including confidential information like paths.
      * So it is advised to set to true for development purposes and to false in production.
@@ -73,15 +73,19 @@ class Amfphp_Core_Config {
      * $this->sharedConfig[self::CONFIG_RETURN_ERROR_DETAILS] = true;
      * @var Boolean
      */
+
     const CONFIG_RETURN_ERROR_DETAILS = 'returnErrorDetails';
-    
+
     /**
      * array of plugins that are available but should be disabled
      * @var array
      */
     public $disabledPlugins;
 
-    public function  __construct() {
+    /**
+     * constructor
+     */
+    public function __construct() {
         $this->serviceFolderPaths = array();
         $this->serviceFolderPaths [] = dirname(__FILE__) . '/../Services/';
         $this->serviceNames2ClassFindInfo = array();
@@ -94,8 +98,8 @@ class Amfphp_Core_Config {
         $this->disabledPlugins[] = 'AmfphpErrorHandler';
         //example of setting config switch in a plugin:
         //$this->pluginsConfig['AmfphpDiscovery']['restrictAccess'] = false;
-        
-        
     }
+
 }
+
 ?>

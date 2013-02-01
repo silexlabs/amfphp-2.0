@@ -28,6 +28,15 @@ class AmfphpErrorHandler {
     }
 }
 
+/**
+ * throw an exceptino containing error info
+ * @param int $errno
+ * @param string $errstr
+ * @param string $errfile
+ * @param int $errline
+ * @param mixed $errcontext
+ * @throws Exception
+ */
 function custom_warning_handler($errno, $errstr, $errfile, $errline, $errcontext) {
     throw new Exception("$errstr . \n<br>file:  $errfile \n<br>line: $errline \n<br>context: " . print_r($errcontext, true), $errno);
 }

@@ -17,7 +17,10 @@
  * @package Amfphp_Core_Amf
  */
 class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
-
+    /**
+     * data to deserialize
+     * @var string 
+     */
     protected $rawData;
 
     /**
@@ -51,20 +54,35 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
     protected $deserializedPacket;
 
     /**
-     * metaInfo
+     *  strings stored for tracking references(amf3)
+     * @var array
      */
     protected $storedStrings;
+     
+    /**
+     *  objects stored for tracking references(amf3)
+     * @var array
+     */
     protected $storedObjects;
+    
+    /**
+     *  class definitions(traits) stored for tracking references(amf3)
+     * @var array
+     */    
     protected $storedDefinitions;
+     
+    /**
+     *  objects stored for tracking references(amf0)
+     * @var array
+     */    
     protected $amf0storedObjects;
-
-    public function __construct() {
-    }
 
     /**
      * convert from text/binary to php object
-     * 
-     * 
+     * @param array $getData
+     * @param array $postData
+     * @param string $rawPostData
+     * @return Amfphp_Core_Amf_Packet
      */
     public function deserialize(array $getData, array $postData, $rawPostData) {
         $this->rawData = $rawPostData;
@@ -75,6 +93,9 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
         return $this->deserializedPacket;
     }
     
+    /**
+     * reset reference stores
+     */
     protected function resetReferences(){
         $this->amf0storedObjects = array();
         $this->storedStrings = array();
@@ -118,6 +139,9 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
         }
     }
 
+    /**
+     * read messages in AMF packet
+     */
     protected function readMessages() {
         $this->messagesLeftToProcess = $this->readInt(); // find the total number  of Message elements
         while ($this->messagesLeftToProcess--) { // loop over all of the Message elements
@@ -335,7 +359,7 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
     }
 
     /**
-     *
+     * read xml
      * @return Amfphp_Core_Amf_Types_Xml 
      */
     protected function readXml() {
@@ -456,7 +480,12 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
             }
         }
     }
-
+    
+    /**
+     * read amf 3 date
+     * @return boolean|\Amfphp_Core_Amf_Types_Date
+     * @throws Amfphp_Core_Exception
+     */
     protected function readAmf3Date() {
         $firstInt = $this->readAmf3Int();
         if (($firstInt & 0x01) == 0) {
@@ -503,7 +532,7 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
     }
 
     /**
-     *
+     * read amf 3 xml
      * @return Amfphp_Core_Amf_Types_Xml
      */
     protected function readAmf3Xml() {
@@ -520,7 +549,7 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
     }
 
     /**
-     *
+     * read amf 3 xml doc
      * @return Amfphp_Core_Amf_Types_Xml
      */
     protected function readAmf3XmlDocument() {
@@ -536,6 +565,10 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
         return new Amfphp_Core_Amf_Types_XmlDocument($xml);
     }
 
+    /**
+     * read Amf 3 byte array
+     * @return Amfphp_Core_Amf_Types_ByteArray
+     */
     protected function readAmf3ByteArray() {
         $handle = $this->readAmf3Int();
         $inline = (($handle & 1) != 0);
@@ -549,6 +582,10 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
         return $ba;
     }
 
+    /**
+     * read amf 3 array
+     * @return array
+     */
     protected function readAmf3Array() {
         $handle = $this->readAmf3Int();
         $inline = (($handle & 1) != 0);
@@ -575,8 +612,8 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
     }
 
     /**
-     * this probably needs some refactoring. Leave as is for now... A.S.
-     * @return Object
+     * read amf 3 object
+     * @return stdClass
      */
     protected function readAmf3Object() {
         $handle = $this->readAmf3Int();
@@ -665,7 +702,9 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
     }
 
     /**
-     * Taken from SabreAmf
+     * read some data and move pointer
+     * @param type $len
+     * @return mixed
      */
     protected function readBuffer($len) {
         $data = '';

@@ -14,16 +14,8 @@
  * @package Amfphp_Core_Amf_Types
  * @author Ariel Sommeria-klein
  */
-class Amfphp_Core_Amf_Types_Undefined
-{
-	public function exists()
-	{
-		return false;
-	}
+class Amfphp_Core_Amf_Types_Undefined{
 
-	public function __toString()
-	{
-		return 'undefined';
-	}
+
 }
 ?>

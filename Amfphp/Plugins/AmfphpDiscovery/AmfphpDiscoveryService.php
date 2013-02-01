@@ -35,15 +35,20 @@ class AmfphpDiscoveryService {
      * @var array of ClassFindInfo. set by plugin.
      */
     public static $serviceNames2ClassFindInfo;
-    
+
     /**
      * restrict access to amfphp_admin. 
      * @var boolean
      */
     public static $restrictAccess;
-    
-    public function _getMethodRoles($methodName){
-        if(self::$restrictAccess){
+
+    /**
+     * get method roles
+     * @param string $methodName
+     * @return array
+     */
+    public function _getMethodRoles($methodName) {
+        if (self::$restrictAccess) {
             return array('amfphp_admin');
         }
     }
@@ -75,6 +80,8 @@ class AmfphpDiscoveryService {
 
     /**
      * returns a list of available services
+     * @param array $serviceFolderPaths
+     * @param array $serviceNames2ClassFindInfo
      * @return array of service names
      */
     protected function getServiceNames(array $serviceFolderPaths, array $serviceNames2ClassFindInfo) {
@@ -95,7 +102,7 @@ class AmfphpDiscoveryService {
      * - types from param tags. type is first word after tag name, name of the variable is second word ($ is removed)
      * - return tag
      * 
-     * @param string $methodComment 
+     * @param string $comment 
      * @return array{'returns' => type, 'params' => array{var name => type}}
      */
     protected function parseMethodComment($comment) {
@@ -110,17 +117,17 @@ class AmfphpDiscoveryService {
             if (strtolower(substr($value, 0, 5)) == 'param') {
                 $words = explode(' ', $value);
                 $type = trim($words[1]);
-                $varName = trim(str_replace('$', '',$words[2]));
+                $varName = trim(str_replace('$', '', $words[2]));
                 $params[$varName] = $type;
-            }else if (strtolower(substr($value, 0, 6)) == 'return') {
-                
+            } else if (strtolower(substr($value, 0, 6)) == 'return') {
+
                 $words = explode(' ', $value);
                 $type = trim($words[1]);
                 $ret['return'] = $type;
             }
         }
         $ret['param'] = $params;
-        if(!isset($ret['return'])){
+        if (!isset($ret['return'])) {
             $ret['return'] = '';
         }
         return $ret;
@@ -158,12 +165,11 @@ class AmfphpDiscoveryService {
                     $type = '';
                     if ($paramR->getClass()) {
                         $type = $paramR->getClass()->name;
-                        
-                    }else if(isset($parsedMethodComment['param'][$parameterName])){
+                    } else if (isset($parsedMethodComment['param'][$parameterName])) {
                         $type = $parsedMethodComment['param'][$parameterName];
                     }
                     $parameterInfo = new AmfphpDiscovery_ParameterDescriptor($parameterName, $type);
-                    
+
                     $parameters[] = $parameterInfo;
                 }
                 $methods[$methodName] = new AmfphpDiscovery_MethodDescriptor($methodName, $parameters, $methodComment, $parsedMethodComment['return']);

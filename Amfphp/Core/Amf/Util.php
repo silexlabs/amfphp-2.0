@@ -33,7 +33,7 @@ class Amfphp_Core_Amf_Util {
      * @param mixed $obj the object/array that will be iterated on
      * @param array $callBack the function to apply to obj and subobjs. must take 1 parameter, and return the modified object
      * @param int $recursionDepth current recursion depth. The first call should be made with this set 0. default is 0
-     * @param int $maxRecursionDepth. default is 30
+     * @param int $maxRecursionDepth default is 30
      * @param bool $ignoreAmfTypes ignore objects with type in Amfphp_Core_Amf_Types package. could maybe be replaced by a regexp, but this is better for performance
      * @return mixed array or object, depending on type of $obj
      */
@@ -42,13 +42,13 @@ class Amfphp_Core_Amf_Util {
             throw new Amfphp_Core_Exception("couldn't recurse deeper on object. Probably a looped reference");
         }
         //don't apply to Amfphp types such as byte array
-        if($ignoreAmfTypes && is_object($obj) && substr(get_class($obj),0, 21) == 'Amfphp_Core_Amf_Types' ){
+        if ($ignoreAmfTypes && is_object($obj) && substr(get_class($obj), 0, 21) == 'Amfphp_Core_Amf_Types') {
             return $obj;
         }
 
         //apply callBack to obj itself
         $obj = call_user_func($callBack, $obj);
-        
+
         //if $obj isn't a complex type don't go any further
         if (!is_array($obj) && !is_object($obj)) {
             return $obj;
@@ -117,7 +117,8 @@ class Amfphp_Core_Amf_Util {
     static public function is_Xml($obj) {
         return is_object($obj) ? get_class($obj) == 'Amfphp_Core_Amf_Types_Xml' : false;
     }
-        /**
+
+    /**
      * Determines whether an object is the ActionScript type 'XmlDoument'
      *
      * @static
@@ -127,7 +128,6 @@ class Amfphp_Core_Amf_Util {
     static public function is_XmlDocument($obj) {
         return is_object($obj) ? get_class($obj) == 'Amfphp_Core_Amf_Types_XmlDocument' : false;
     }
-
 
 }
 

@@ -31,9 +31,9 @@ class Amfphp_Core_Common_ClassFindInfo {
     public $className;
 
     /**
-     *
-     * @param <String> $absolutePath
-     * @param <String> $className
+     * constructor
+     * @param String $absolutePath
+     * @param String $className
      */
     public function  __construct($absolutePath, $className) {
         $this->absolutePath = $absolutePath;

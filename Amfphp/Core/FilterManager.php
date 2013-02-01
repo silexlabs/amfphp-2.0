@@ -53,7 +53,7 @@ class Amfphp_Core_FilterManager{
     }
 
     /**
-     *
+     * get instance
      * @return Amfphp_Core_FilterManager
      */
     public static function getInstance() {
@@ -68,8 +68,8 @@ class Amfphp_Core_FilterManager{
      * one can be changed and and returned by the callees.
      * The other parameters must be considered as context, and should not be modified by the callees, and will not be returned to the caller.
      * 
-     * @param String $filterName the name of the filter which was used in addFilter( a string)
-     * @param parameters for the function call. As many as necessary can be passed, but only the first will be filtered
+     * param 1: String $filterName the name of the filter which was used in addFilter( a string)
+     * following params: parameters for the function call. As many as necessary can be passed, but only the first will be filtered
      * @return mixed the first call parameter, as filtered by the callees.
      */
     public function callFilters(){
@@ -111,6 +111,7 @@ class Amfphp_Core_FilterManager{
      * @param String $filterName  the name of the filter
      * @param Object $object the object on which to call the method
      * @param String $methodName the name of the method to call on the object
+     * @param int $priority
      */
     public function addFilter($filterName, $object, $methodName, $priority = 10){
         // init the filter placeholder

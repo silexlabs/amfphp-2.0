@@ -26,8 +26,9 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      * @param Amfphp_Core_Amf_Header $header the request header
      * @todo consider an interface for $handler. Maybe overkill here
      */
+
     const FILTER_AMF_REQUEST_HEADER_HANDLER = 'FILTER_AMF_REQUEST_HEADER_HANDLER';
-    
+
     /**
      * filter called for each amf request message, to give a plugin the chance to handle it.
      * This is for the Flex Messaging plugin to be able to intercept the message and say it wants to handle it
@@ -51,33 +52,44 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      * @var String
      */
     protected $lastRequestMessageResponseUri;
-    
+
     /**
+     * return error details
      * @see Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS
      * @var boolean 
      */
     protected $returnErrorDetails = true;
+
     /**
      * use this to manipulate the packet directly from your services. This is an advanced option, and should be used with caution!
      * @var Amfphp_Core_Amf_Packet
      */
     public static $requestPacket;
+
     /**
      * use this to manipulate the packet directly from your services. This is an advanced option, and should be used with caution!
      * @var Amfphp_Core_Amf_Packet
      */
     public static $responsePacket;
-    
 
+    /**
+     * constructor
+     * @param array $sharedConfig
+     */
     public function __construct($sharedConfig) {
         $this->lastRequestMessageResponseUri = '/1';
-        if(isset ($sharedConfig[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS])) {
+        if (isset($sharedConfig[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS])) {
             $this->returnErrorDetails = $sharedConfig[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS];
         }
     }
 
     /**
+     * deserialize
      * @see Amfphp_Core_Common_IDeserializer
+     * @param array $getData
+     * @param array $postData
+     * @param string $rawPostData
+     * @return string
      */
     public function deserialize(array $getData, array $postData, $rawPostData) {
         $deserializer = new Amfphp_Core_Amf_Deserializer();
@@ -86,7 +98,7 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
     }
 
     /**
-     * creates a ServiceCallParamaeters object from an Amfphp_Core_Amf_Message
+     * creates a ServiceCallParameters object from an Amfphp_Core_Amf_Message
      * supported separators in the targetUri are '/' and '.'
      * @param Amfphp_Core_Amf_Message $Amfphp_Core_Amf_Message
      * @return Amfphp_Core_Common_ServiceCallParameters
@@ -106,6 +118,7 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      * throws an Exception if anything fails, so caller must encapsulate in try/catch
      *
      * @param Amfphp_Core_Amf_Message $requestMessage
+     * @param Amfphp_Core_Common_ServiceRouter $serviceRouter
      * @return Amfphp_Core_Amf_Message the response Message for the request
      */
     protected function handleRequestMessage(Amfphp_Core_Amf_Message $requestMessage, Amfphp_Core_Common_ServiceRouter $serviceRouter) {
@@ -128,7 +141,11 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
     }
 
     /**
+     * handle deserialized request
      * @see Amfphp_Core_Common_IDeserializedRequestHandler
+     * @param mixed $deserializedRequest
+     * @param Amfphp_Core_Common_ServiceRouter $serviceRouter
+     * @return mixed
      */
     public function handleDeserializedRequest($deserializedRequest, Amfphp_Core_Common_ServiceRouter $serviceRouter) {
         self::$requestPacket = $deserializedRequest;
@@ -138,18 +155,17 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
             $requestHeader = self::$requestPacket->headers[$i];
             //handle a header. This is a job for plugins, unless comes a header that is so fundamental that it needs to be handled by the core
             $fromFilters = Amfphp_Core_FilterManager::getInstance()->callFilters(self::FILTER_AMF_REQUEST_HEADER_HANDLER, null, $requestHeader);
-            if ($fromFilters) {         
+            if ($fromFilters) {
                 $handler = $fromFilters;
                 $handler->handleRequestHeader($requestHeader);
             }
         }
 
         $numMessages = count(self::$requestPacket->messages);
-        $rawOutputData = '';
-        
+
         //set amf version to the one detected in request
         self::$responsePacket->amfVersion = self::$requestPacket->amfVersion;
-        
+
         //handle each message
         for ($i = 0; $i < $numMessages; $i++) {
             $requestMessage = self::$requestPacket->messages[$i];
@@ -157,12 +173,15 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
             $responseMessage = $this->handleRequestMessage($requestMessage, $serviceRouter);
             self::$responsePacket->messages[] = $responseMessage;
         }
-        
+
         return self::$responsePacket;
     }
 
     /**
+     * handle exception
      * @see Amfphp_Core_Common_IExceptionHandler
+     * @param Exception $exception
+     * @return Amfphp_Core_Amf_Packet
      */
     public function handleException(Exception $exception) {
         $errorPacket = new Amfphp_Core_Amf_Packet();
@@ -182,10 +201,10 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
         $data = new stdClass();
         $data->faultCode = $exception->getCode();
         $data->faultString = $exception->getMessage();
-        if($this->returnErrorDetails){
+        if ($this->returnErrorDetails) {
             $data->faultDetail = $exception->getTraceAsString();
             $data->rootCause = $exception;
-        }else{
+        } else {
             $data->faultDetail = '';
         }
         $errorResponseMessage->data = $data;
@@ -195,7 +214,10 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
     }
 
     /**
+     * serialize
      * @see Amfphp_Core_Common_ISerializer
+     * @param mixed $data
+     * @return mixed
      */
     public function serialize($data) {
 

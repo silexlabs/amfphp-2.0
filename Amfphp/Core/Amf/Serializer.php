@@ -15,7 +15,6 @@
  * the actionscript equivalent via Amf.  The main method of the serializer
  * is the serialize method which takes and AmfObject as it's argument
  * and builds the resulting Amf Message.
- * TODO spit into 2 classes, one for Amf0 , one for Amf3 or maybe more.
  *
  * @package Amfphp_Core_Amf
  */
@@ -28,16 +27,10 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer {
     protected $outBuffer;
 
     /**
-     *
+     * packet
      * @var Amfphp_Core_Amf_Packet
      */
     protected $packet;
-
-    /**
-     *
-     * @var Amfphp_Core_Amf_Message
-     */
-    protected $currentMessage;
 
     /**
      * the maximum amount of objects stored for reference
@@ -107,7 +100,6 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer {
             $this->resetReferences();
             //write body.
             $message = $this->packet->messages[$i];
-            $this->currentMessage = & $message;
             $this->writeUTF($message->targetUri);
             $this->writeUTF($message->responseUri);
             //save the current buffer, and flush it to write the Message
@@ -133,6 +125,10 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer {
         $this->className2TraitsInfo = array();
     }
 
+    /**
+     * get serialized data output
+     * @return string
+     */
     public function getOutput() {
         return $this->outBuffer;
     }
@@ -240,7 +236,7 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer {
     /**
      * writeXML writes the xml code (0x0F) and the XML string to the output stream
      * Note: strips whitespace
-     * @param string $d The XML string
+     * @param Amfphp_Core_Amf_Types_Xml $d
      */
     protected function writeXML(Amfphp_Core_Amf_Types_Xml $d) {
         if (!$this->handleReference($d->data, $this->Amf0StoredObjects)) {
@@ -349,6 +345,10 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer {
         }
     }
 
+    /**
+     * write reference
+     * @param int $num
+     */
     protected function writeReference($num) {
         $this->writeByte(0x07);
         $this->writeInt($num);
@@ -472,11 +472,9 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer {
      * ***************************************************************************** */
 
     /**
-     * @todo Is the reference still needed? PHP4 needed it for objects, but PHP5 always
-     * passes objects by reference. And PHP5 uses a copy-on-write approach, so that all
-     * values are passed as 'reference', in case no changes take place.
-     *
+     * write amf 3 data
      * @todo no type markers ("\6', for example) in this method!
+     * @param mixed $d
      */
     protected function writeAmf3Data($d) {
         if (is_int($d)) { //int
@@ -506,7 +504,7 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer {
             $this->writeAmf3Array($d);
             return;
         } elseif (Amfphp_Core_Amf_Util::is_byteArray($d)) { //byte array
-            $this->writeAmf3ByteArray($d->data);
+            $this->writeAmf3ByteArray($d);
             return;
         } elseif (Amfphp_Core_Amf_Util::is_Xml($d)) { // Xml
             $this->writeAmf3Xml($d);
@@ -618,7 +616,7 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer {
 
         //bogus class traits entry
         $this->className2TraitsInfo[] = array();
-        
+
         //anonymous object. So type this as a dynamic object with no sealed members.
         //U29O-traits : 1011.
         $this->writeAmf3Int(0xB);
@@ -634,6 +632,7 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer {
     }
 
     /**
+     * write amf3 array
      * @param array $d
      */
     protected function writeAmf3Array(array $d) {
@@ -730,6 +729,10 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer {
         }
     }
 
+    /**
+     * write Amf3 Number
+     * @param number $d
+     */
     protected function writeAmf3Number($d) {
         if (is_int($d) && $d >= -268435456 && $d <= 268435455) {//check valid range for 29bits
             $this->outBuffer .= "\4";
@@ -741,30 +744,47 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer {
         }
     }
 
+    /**
+     * write Amfphp_Core_Amf_Types_Xml in amf3
+     * @param Amfphp_Core_Amf_Types_Xml $d
+     */
     protected function writeAmf3Xml(Amfphp_Core_Amf_Types_Xml $d) {
         $d = preg_replace('/\>(\n|\r|\r\n| |\t)*\</', '><', trim($d->data));
         $this->writeByte(0x0B);
         $this->writeAmf3String($d);
     }
 
+    /**
+     * write Amfphp_Core_Amf_Types_Xml in amf3
+     * @param Amfphp_Core_Amf_Types_XmlDocument $d
+     */
     protected function writeAmf3XmlDocument(Amfphp_Core_Amf_Types_XmlDocument $d) {
         $d = preg_replace('/\>(\n|\r|\r\n| |\t)*\</', '><', trim($d->data));
         $this->writeByte(0x07);
         $this->writeAmf3String($d);
     }
 
+    /**
+     * write Amfphp_Core_Amf_Types_Date in amf 3
+     * @param Amfphp_Core_Amf_Types_Date $d
+     */
     protected function writeAmf3Date(Amfphp_Core_Amf_Types_Date $d) {
         $this->writeByte(0x08);
         $this->writeAmf3Int(1);
         $this->writeDouble($d->timeStamp);
     }
 
-    protected function writeAmf3ByteArray($d) {
+    /**
+     * write Amfphp_Core_Amf_Types_ByteArray in amf3
+     * @param Amfphp_Core_Amf_Types_ByteArray $d
+     */
+    protected function writeAmf3ByteArray(Amfphp_Core_Amf_Types_ByteArray $d) {
         $this->writeByte(0x0C);
-        if (!$this->handleReference($d, $this->storedObjects)) {
-            $obj_length = strlen($d);
+        $data = $d->data;
+        if (!$this->handleReference($data, $this->storedObjects)) {
+            $obj_length = strlen($data);
             $this->writeAmf3Int($obj_length << 1 | 0x01);
-            $this->outBuffer .= $d;
+            $this->outBuffer .= $data;
         }
     }
 

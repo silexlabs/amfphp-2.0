@@ -23,8 +23,12 @@ class Amfphp_Core_Amf_Types_Date
          * @var integer
          */
     	public $timeStamp;
-
-	public function Amfphp_Core_Amf_Types_Date($timeStamp)
+        
+        /**
+         * time stamp
+         * @param integer $timeStamp
+         */
+	public function __construct($timeStamp)
 	{
 		$this->timeStamp = $timeStamp;
 

@@ -11,37 +11,42 @@
  * 
  */
 
-  /**
+/**
  * Contains all collected information about a service method parameter
  *
  * @author Ariel Sommeria-klein
  * @package Amfphp_Plugins_Discovery
  */
 class AmfphpDiscovery_ParameterDescriptor {
-    public $name;
+
     /**
-     *This can be gathered in 2 manners: commentary tag analysis and type hinting analysis. For starters only the second method is used
+     * name
+     * @var string
+     */
+    public $name;
+
+    /**
+     * This can be gathered in 2 manners: commentary tag analysis and type hinting analysis. For starters only the second method is used
      * @var String
      */
     public $type;
-    
+
     /**
-     *@todo 
+     * @todo 
      * @var Boolean
      */
     //public $isOptional;
-    
-    
+
     /**
-     *
+     * constructor
      * @param String $name
      * @param String $type
      */
     public function __construct($name, $type) {
         $this->name = $name;
         $this->type = $type;
-    }    
-    
+    }
+
 }
 
 ?>

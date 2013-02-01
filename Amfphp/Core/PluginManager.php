@@ -31,7 +31,7 @@ class Amfphp_Core_PluginManager {
     protected static $instance = NULL;
 
     /**
-     *
+     * plugin instances
      * @var array
      */
     protected $pluginInstances;
@@ -57,10 +57,10 @@ class Amfphp_Core_PluginManager {
     /**
      * load the plugins
      * @param array $pluginFolders where to load the plugins from. Absolute paths. For example Amfphp/Plugins/
-     * @param array $pluginsConfig . optional. an array containing the plugin configuration, using the plugin name as key.
-     * @param array $sharedConfig. optional. if both a specific config and a shared config are available, concatenate them to create the plugin config. 
+     * @param array $pluginsConfig  optional. an array containing the plugin configuration, using the plugin name as key.
+     * @param array $sharedConfig optional. if both a specific config and a shared config are available, concatenate them to create the plugin config. 
      * Otherwise use whatever is not null
-     * @param array $disabledPlugins . optional.  an array of names of plugins to disable
+     * @param array $disabledPlugins  optional.  an array of names of plugins to disable
      */
     public function loadPlugins($pluginFolders, array $pluginsConfig = null, array $sharedConfig = null, array $disabledPlugins = null) {
         foreach ($pluginFolders as $pluginsFolderRootPath) {

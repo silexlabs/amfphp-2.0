@@ -18,25 +18,28 @@
  * @package Amfphp_Plugins_Discovery
  */
 class AmfphpDiscovery_ServiceDescriptor {
+    /**
+     *name
+     * @var string
+     */
      public $name;
     /**
-     * 
+     *  methods
      * @var array of MethodInfo
      */
     public $methods; 
     
     /**
-     *
-     * @var string class level comment
+     * class level comment
+     * @var string 
      */
     public $comment;
 
     /**
-     *
+     * constructor
      * @param string $name
      * @param array $methods
      * @param string $comment
-     * @param array $tags 
      */
     public function __construct($name, array $methods, $comment) {
         $this->name = $name;

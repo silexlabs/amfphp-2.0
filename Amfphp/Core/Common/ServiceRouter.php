@@ -46,7 +46,7 @@ class Amfphp_Core_Common_ServiceRouter {
     public $checkArgumentCount;
 
     /**
-     *
+     * constructor
      * @param array $serviceFolderPaths folders containing service classes
      * @param array $serviceNames2ClassFindInfo a dictionary of service classes represented in a ClassFindInfo.
      * @param Boolean $checkArgumentCount
@@ -100,7 +100,7 @@ class Amfphp_Core_Common_ServiceRouter {
     }
     
     /**
-     * 
+     * get service object
      * @param String $serviceName
      * @return Object service object
      */

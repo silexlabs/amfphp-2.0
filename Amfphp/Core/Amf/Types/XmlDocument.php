@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of amfPHP
  *
@@ -16,14 +17,22 @@
  * @package Amfphp_Core_Amf_Types
  * @author Ariel Sommeria-klein
  */
+class Amfphp_Core_Amf_Types_XmlDocument {
 
-class Amfphp_Core_Amf_Types_XmlDocument
-{
-	public $data;
+    /**
+     * data
+     * @var string 
+     */
+    public $data;
 
-	public function Amfphp_Core_Amf_Types_XmlDocument($data)
-	{
-		$this->data = $data;
-	}
+    /**
+     * constructor
+     * @param string $data
+     */
+    public function __construct($data) {
+        $this->data = $data;
+    }
+
 }
+
 ?>

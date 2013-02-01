@@ -87,6 +87,7 @@ class AmfphpAuthentication {
     }
 
     /**
+     * filter amf request header handler
      * @param Object $handler
      * @param Amfphp_Core_Amf_Header $header the request header
      * @return AmfphpAuthentication 
@@ -144,7 +145,6 @@ class AmfphpAuthentication {
             }
         }
         throw new Amfphp_Core_Exception('Access denied.');
-
     }
 
     /**
@@ -160,8 +160,8 @@ class AmfphpAuthentication {
     }
 
     /**
-     *
-     * @param String $role
+     * add role
+     * @param String $roleToAdd
      */
     public static function addRole($roleToAdd) {
         if (session_id() == '') {
