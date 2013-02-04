@@ -1,7 +1,24 @@
 <?php
+/**
+ *  This file is part of amfPHP
+ *
+ * LICENSE
+ *
+ * This source file is subject to the license that is bundled
+ * with this package in the file license.txt.
+ * @package Amfphp_Examples_Authentication
+ */
 
+/**
+ * MySql Util
+ * @package Amfphp_Examples_Authentication
+ * @author Sven Dens
+ */
 class MySQLUtil {
-
+    /**
+     * get connection
+     * @return PDO
+     */
     public static function getConnection() {
 
         return new PDO('mysql:host=' . MYSQL_HOST . ';dbname=' . MYSQL_DB,
@@ -11,6 +28,10 @@ class MySQLUtil {
         );
     }
 
+    /**
+     * transactions available
+     * @return boolean
+     */
     public static function transactionsAvailable() {
         $pdo = MySQLUtil::getConnection();
         $tsql = "SELECT ENGINE";
@@ -34,9 +55,16 @@ class MySQLUtil {
     }
 
 }
-
+/**
+ * Db Util
+ * @package Amfphp_Examples_Authentication
+ * @author Sven Dens
+ */
 class DBUtils {
-
+    /**
+     * pdo available?
+     * @return boolean
+     */
     public static function pdoAvailable() {
         $answer = true;
         if (!defined('PDO::ATTR_DRIVER_NAME')) {
@@ -44,7 +72,11 @@ class DBUtils {
         }
         return $answer;
     }
-
+    /**
+     *  quick hash, with a simple method to work without a salt. A salt is preferred of course, but this keeps things simple
+     * @param string $password
+     * @return string
+     */
     public static function hashPassword($password) {
         $salt = sha1(md5($password));
         $password = md5($password . $salt);

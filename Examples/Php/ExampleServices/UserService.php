@@ -1,19 +1,44 @@
 <?php
 
 /**
- * Authentication and user administration service
+ *  This file is part of amfPHP
  *
- * @author Sven Dens
+ * LICENSE
+ *
+ * This source file is subject to the license that is bundled
+ * with this package in the file license.txt.
+ * @package Amfphp_Examples_Authentication
  */
-
+/**
+ * includes
+ */
 require_once dirname(__FILE__) . '/../Includes/constants.php';
 require_once dirname(__FILE__) . '/../Includes/MySQLUtil.php';
 
+/**
+ * Authentication and user administration service
+ *
+ * @package Amfphp_Examples_Authentication
+ * @author Sven Dens
+ */
 class UserService {
 
+    /**
+     * admin only methods
+     * @var array 
+     */
     public static $adminOnlyMethods = array("createUser", "deleteUser");
+
+    /**
+     * protected methods
+     * @var array 
+     */
     public static $protectedMethods = array("updateUser", "getUsers");
 
+    /**
+     * constructor
+     * @throws Exception
+     */
     function __construct() {
         if (!defined('PDO::ATTR_DRIVER_NAME')) {
             throw new Exception('PDO unavailable');
@@ -37,9 +62,15 @@ class UserService {
     }
 
     /**
+     * 
      * function to create a new user to authenticate with AMFPHP
-     *
-     * @param UserDTO $user
+     * @param string $firstName
+     * @param string $lastName
+     * @param string $userName
+     * @param string $password
+     * @param int $userRoleId
+     * @return stdClass
+     * @throws Exception
      */
     public function createUser($firstName, $lastName, $userName, $password, $userRoleId) {
         try {
@@ -66,8 +97,14 @@ class UserService {
 
     /**
      * function to update an existing AMFPHP authentication user
-     *
-     * @param UserDTO $user
+     * @param string $firstName
+     * @param string $lastName
+     * @param string $userName
+     * @param string $password
+     * @param int $userRoleId
+     * @param int $id
+     * @return type
+     * @throws Exception
      */
     public function updateUser($firstName, $lastName, $userName, $password, $userRoleId, $id) {
         try {
@@ -95,7 +132,7 @@ class UserService {
     /**
      * function to delete an AMFPHP authentication user
      *
-     * @param UserDTO $user
+     * @param int $id
      */
     public function deleteUser($id) {
         try {
@@ -112,26 +149,14 @@ class UserService {
         }
     }
 
-    public function getUserRoles() {
-        $pdo = MySQLUtil::getConnection();
-
-        $tsql = "SELECT * FROM user_roles";
-
-        $stmt = $pdo->prepare($tsql);
-        $stmt->execute();
-        $results = array();
-
-
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $results;
-
-        return $results;
-    }
-
+    /**
+     * get users
+     * @return array
+     */
     public function getUsers() {
         $pdo = MySQLUtil::getConnection();
 
-        $tsql = "SELECT * FROM users";
+        $tsql = "SELECT id, user_role_id, username, first_name, last_name FROM users";
 
         $stmt = $pdo->prepare($tsql);
         $stmt->execute();

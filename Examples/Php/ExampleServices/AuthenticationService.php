@@ -1,26 +1,49 @@
 <?php
+/**
+ *  This file is part of amfPHP
+ *
+ * LICENSE
+ *
+ * This source file is subject to the license that is bundled
+ * with this package in the file license.txt.
+ * @package Amfphp_Examples_Authentication
+ */
 
 /**
- * Authentication and user administration service
- *
- * @author Sven Dens
+ * includes
  */
 require_once dirname(__FILE__) . '/../Includes/constants.php';
 require_once dirname(__FILE__) . '/../Includes/MySQLUtil.php';
 
-
+/**
+ * Authentication and user administration service
+ *
+ * @package Amfphp_Examples_Authentication
+ * @author Sven Dens
+ */
 class AuthenticationService {
 
+    /**
+     * protected methods
+     * @var array 
+     */
     public static $protectedMethods = array();
+    
+    /**
+     * constructor
+     * @throws Exception
+     */
     function __construct() {
         if (!defined('PDO::ATTR_DRIVER_NAME')) {
             throw new Exception('PDO unavailable');
         }
     }
+
     /**
-     * login function
-     * 
-     * @param UserDTO $user
+     * sign in
+     * @param string $username
+     * @param string $password
+     * @return boolean
      */
     public function signIn($username, $password) {
             $pdo = MySQLUtil::getConnection();
@@ -50,7 +73,7 @@ class AuthenticationService {
     }
 
     /**
-     * logoff function
+     * sign out function
      */
     public function signOut() {
         AmfphpAuthentication::clearSessionInfo();
@@ -59,8 +82,8 @@ class AuthenticationService {
     /**
      * function the authentication plugin uses to get accepted roles for each function
      * Here login and logout are not protected, however
-     * @param <String> $methodName
-     * @return <array>
+     * @param String $methodName
+     * @return array
      */
     public function _getMethodRoles($methodName) {
         if (in_array($methodName, self::$protectedMethods)) {

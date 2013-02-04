@@ -40,7 +40,7 @@ class Amfphp_BackOffice_ClientGenerator_Util {
     }
 
     /**
-     *
+     * zip folder
      * @param type $sourcefolder
      * @param type $zipfilename
      * @param type $removeFromLocalName use to reduce paths inside zip 
@@ -82,7 +82,12 @@ class Amfphp_BackOffice_ClientGenerator_Util {
     // recursive_remove_directory('path/to/directory/to/delete');
     // to use this function to empty a directory, write:
     // recursive_remove_directory('path/to/full_directory',TRUE);
-
+    /**
+     * unused for now. 
+     * @param string $directory
+     * @param boolean $empty
+     * @return boolean
+     */
     public static function recursive_remove_directory($directory, $empty=FALSE) {
         // if the path has a slash at the end we remove it here
         if (substr($directory, -1) == '/') {

@@ -11,7 +11,7 @@
  * 
  */
 
-  /**
+/**
  * Makes a call to the amfphp entry point and returns the data. unused at the moment, but useful later hopefully
  * 
  *
@@ -20,12 +20,18 @@
  */
 class Amfphp_BackOffice_JsonServiceCaller {
 
+    /**
+     * path to amfphp entry point
+     * @var string
+     */
     protected $amfphpEntryPointUrl;
 
+    /**
+     * constructor
+     * @param string $amfphpEntryPointUrl
+     */
     public function __construct($amfphpEntryPointUrl) {
         $this->amfphpEntryPointUrl = $amfphpEntryPointUrl;
-        
-        
     }
 
     /**
@@ -36,11 +42,11 @@ class Amfphp_BackOffice_JsonServiceCaller {
      * @return mixed array or object, json decoded
      */
     function call($serviceName, $methodName, $parameters = array()) {
-        if  (!in_array  ('curl', get_loaded_extensions())) {
+        if (!in_array('curl', get_loaded_extensions())) {
             $error = 'curl php extension unavailable. Can not make call. This does not mean yœu can not use amfPHP, however it does mean that most of the functionality in the Back Office will not work. This must be changed by your Hosting provider.';
             echo $error;
             throw new Exception($error);
-	}
+        }
         $jsonEncodedParams = json_encode($parameters);
         $requestString = "{\"serviceName\":\"$serviceName\", \"methodName\":\"$methodName\", \"parameters\":$jsonEncodedParams}";
         //echo $requestString;
@@ -55,16 +61,15 @@ class Amfphp_BackOffice_JsonServiceCaller {
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HEADER, false);
         $response = curl_exec($curl);
-        if($response == 'null'){
+        if ($response == 'null') {
             return null;
         }
         $decoded = json_decode($response);
-        if($decoded == null){
+        if ($decoded == null) {
             throw new Exception("could not decode response : $response");
         }
 
         return $decoded;
-        
     }
 
 }

@@ -20,8 +20,16 @@
  */
 class Amfphp_BackOffice_IncludeServiceCaller {
 
+    /**
+     * path to amfphp entry point
+     * @var string
+     */
     protected $amfphpEntryPointPath;
 
+    /**
+     * constructor
+     * @param string $amfphpEntryPointPath
+     */
     public function __construct($amfphpEntryPointPath) {
         $this->amfphpEntryPointPath = $amfphpEntryPointPath;
     }

@@ -349,7 +349,7 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
      * readDate reads a date from the amf Packet and returns the time in ms.
      * This method is still under development.
      *
-     * @return long The date in ms.
+     * @return Amfphp_Core_Amf_Types_Date a container with the date in ms.
      */
     protected function readDate() {
         $ms = $this->readDouble(); // date in milliseconds from 01/01/1970

@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of amfPHP
  *
@@ -8,10 +9,9 @@
  * with this package in the file license.txt.
  * @package Tests_Amfphp_Core
  */
-
 /**
-*  includes
-*  */
+ *  includes
+ *  */
 require_once dirname(__FILE__) . '/../../../Amfphp/ClassLoader.php';
 require_once dirname(__FILE__) . '/../../TestData/AmfTestData.php';
 require_once dirname(__FILE__) . '/../../TestData/TestServicesConfig.php';
@@ -22,8 +22,9 @@ require_once dirname(__FILE__) . '/../../TestData/TestServicesConfig.php';
  * @author Ariel Sommeria-klein
  */
 class Amfphp_Core_GatewayTest extends PHPUnit_Framework_TestCase {
-
-
+    /**
+     * test service
+     */
     public function testService() {
         $amfTestData = new AmfTestData();
         $config = new Amfphp_Core_Config();
@@ -34,17 +35,16 @@ class Amfphp_Core_GatewayTest extends PHPUnit_Framework_TestCase {
         $ret = $gateway->service();
         $this->assertEquals(bin2hex($amfTestData->testServiceResponsePacket), bin2hex($ret));
     }
-
-    public function testEmptyMessage(){
+    /**
+     * test empty message
+     */
+    public function testEmptyMessage() {
         $config = new Amfphp_Core_Config();
         $gateway = new Amfphp_Core_Gateway(array(), array(), array(), Amfphp_Core_Amf_Constants::CONTENT_TYPE, $config);
         $ret = $gateway->service();
 
         $this->assertTrue(strpos($ret, 'service') != false);
-        
-
     }
-
 
 }
 

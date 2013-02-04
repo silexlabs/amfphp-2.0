@@ -15,6 +15,10 @@
  * @author Ariel Sommeria-klein
  */
 class PizzaService {
+    /**
+     * get a pizza!
+     * @return string
+     */
     public function getPizza(){
         return 'margarita';
     }

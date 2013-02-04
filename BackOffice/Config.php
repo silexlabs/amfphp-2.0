@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  *  This file is part of amfPHP
  *
@@ -18,6 +17,7 @@
  * @author Ariel Sommeria-Klein
  */
 class Amfphp_BackOffice_Config {
+
     /**
      * path to amfPHP. relative or absolute. If relative, be careful, it's relative to the script, not this file.
      * 'http://silexlabs.org/Tests/TestData/';
@@ -27,9 +27,8 @@ class Amfphp_BackOffice_Config {
      * '../Tests/TestData/index.php'
      * @var String 
      */
-    public $amfphpEntryPointPath = '../Amfphp/index.php';
-    //public $amfphpEntryPointUrl = 'http://arielsommeria.com/amfphp-2.1/Amfphp/';
-    
+    public $amfphpEntryPointPath = '../Examples/Php/index.php';
+
     /**
      * set credentials for back office here.
      * expected format: username => password
@@ -38,7 +37,7 @@ class Amfphp_BackOffice_Config {
      * @var array 
      */
     public $backOfficeCredentials;
-    
+
     /**
      * set to false for private server. Set to true for public server.
      * true by default
@@ -46,24 +45,31 @@ class Amfphp_BackOffice_Config {
      */
     public $requireSignIn = true;
 
+    /**
+     * constructor
+     */
     public function __construct() {
         $this->backOfficeCredentials = array();
         //example code for username + password:
         $this->backOfficeCredentials['a'] = 'a';
-        
     }
-    public function resolveAmfphpEntryPointUrl(){
-//determine url to amfphp. If in config it contains 'http', we consider it's absolute. Otherwise it's relative, and we build it.
+
+    /**
+     * determine url to amfphp. If in config it contains 'http', we consider it's absolute. Otherwise it's relative, and we build it.
+     * @return string
+     */
+    public function resolveAmfphpEntryPointUrl() {
         $httpMarkerPos = strpos($this->amfphpEntryPointPath, 'http');
         if ($httpMarkerPos === false) {
             $scriptUrl = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'];
             //remove everything after last '/'
             $scriptUrlPath = substr($scriptUrl, 0, strrpos($scriptUrl, '/'));
             return $scriptUrlPath . '/' . $this->amfphpEntryPointPath;
-        }else{
+        } else {
             return $this->amfphpEntryPointPath;
         }
     }
+
 }
 
 ?>

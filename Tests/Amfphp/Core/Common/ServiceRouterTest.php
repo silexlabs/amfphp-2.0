@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of amfPHP
  *
@@ -8,11 +9,9 @@
  * with this package in the file license.txt.
  * @package Tests_Amfphp_Core_Common
  */
-
-
 /**
-*  includes
-*  */
+ *  includes
+ *  */
 require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
 require_once dirname(__FILE__) . '/../../../TestData/AmfTestData.php';
 require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
@@ -26,6 +25,7 @@ require_once dirname(__FILE__) . '/../../../TestData/TestServicesConfig.php';
 class Amfphp_Core_Common_ServiceRouterTest extends PHPUnit_Framework_TestCase {
 
     /**
+     * object
      * @var Amfphp_Core_Common_ServiceRouter
      */
     protected $object;
@@ -39,13 +39,16 @@ class Amfphp_Core_Common_ServiceRouterTest extends PHPUnit_Framework_TestCase {
         $this->object = new Amfphp_Core_Common_ServiceRouter($testServiceConfig->serviceFolderPaths, $testServiceConfig->serviceNames2ClassFindInfo);
     }
 
-    public function testExecuteTestServiceCall(){
+    /**
+     * test exceute service call
+     */
+    public function testExecuteTestServiceCall() {
         //return one param
         $testParamsArray = array('a');
         $mirrored = $this->object->executeServiceCall('TestService', 'returnOneParam', $testParamsArray);
         $this->assertEquals($mirrored, 'a');
-        
-        
+
+
         //return one param, static
         $testParamsArray = array('a');
         $mirrored = $this->object->executeServiceCall('TestService', 'staticReturnOneParam', $testParamsArray);
@@ -57,36 +60,39 @@ class Amfphp_Core_Common_ServiceRouterTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($mirrored, 3);
     }
 
-    public function testFindDummyServiceInFolder(){
+    /**
+     * test find fuééy service in folder
+     */
+    public function testFindDummyServiceInFolder() {
         $ret = $this->object->executeServiceCall('DummyService', 'returnNull', array());
         $this->assertEquals($ret, null);
     }
 
-     /**
+    /**
+     * test no service exception
      * @expectedException Amfphp_Core_Exception
      */
-    public function testNoServiceException()
-    {
+    public function testNoServiceException() {
         $ret = $this->object->executeServiceCall('NoService', 'noFunction', array());
     }
 
-     /**
+    /**
+     * test no function exception
      * @expectedException Amfphp_Core_Exception
      */
-    public function testNoFunctionException()
-    {
+    public function testNoFunctionException() {
         $ret = $this->object->executeServiceCall('DummyService', 'noFunction', array());
         $this->assertEquals($ret, null);
     }
-    
 
-     /**
+    /**
+     * test reserved method exception
      * @expectedException Amfphp_Core_Exception
      */
-    public function testReservedMethodException()
-    {
+    public function testReservedMethodException() {
         $ret = $this->object->executeServiceCall('DummyService', '_reserved', array());
-    }    
+    }
+
 }
 
 ?>

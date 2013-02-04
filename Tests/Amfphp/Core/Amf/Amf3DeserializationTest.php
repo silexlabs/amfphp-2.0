@@ -23,7 +23,9 @@ require_once dirname(__FILE__) . '/AmfDeserializerWrapper.php';
  * @author Ariel Sommeria-klein
  */
 class Amf3DeserializationTest extends PHPUnit_Framework_TestCase {
-
+    /**
+     * test basic methods
+     */
     public function testBasicMethods(){
         $testData = new Amf3TestData();
 

@@ -16,8 +16,22 @@
  * @author Ariel Sommeria-klein
  */
 class UserVo1 {
+    /**
+     *name
+     * @var string 
+     */
     public $name;
+    
+    /**
+     *age
+     * @var int 
+     */
     public $age;
+    
+    /**
+     * status
+     * @var string 
+     */
     public $status;
 }
 

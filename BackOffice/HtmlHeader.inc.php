@@ -7,9 +7,17 @@
  *
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
+ * 
+ * common header
+ * 
  * @package Amfphp_Backoffice
  * 
  */
+
+/**
+ * dummy to get rid of phpdocumentor error...
+ */
+$temp = 0;
 ?>
 
     <head>

@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of amfPHP
  *
@@ -8,11 +9,9 @@
  * with this package in the file license.txt.
  * @package Tests_Amfphp_Core_Amf
  */
-
-
 /**
-*  includes
-*  */
+ *  includes
+ *  */
 require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
 require_once dirname(__FILE__) . '/../../../TestData/AmfTestData.php';
 require_once dirname(__FILE__) . '/AmfSerializerWrapper.php';
@@ -24,22 +23,24 @@ require_once dirname(__FILE__) . '/AmfSerializerWrapper.php';
  * @package Tests_Amfphp_Core_Amf
  * @author Ariel Sommeria-klein
  */
-class SerializationTest extends PHPUnit_Framework_TestCase{
+class SerializationTest extends PHPUnit_Framework_TestCase {
 
-
-    public function testBasicMethods(){
+    /**
+     * test basic methods
+     */
+    public function testBasicMethods() {
         $testData = new AmfTestData();
         $emptyPacket = new Amfphp_Core_Amf_Packet();
 
         /*
-         template
+          template
 
-        //write
-        $serializer = new AmfSerializerWrapper($emptyPacket);
-        $serializer->write($testData->d);
-        $serialized = $serializer->getOutput();
-        $expectedSerialized = $testData->s;
-        $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));
+          //write
+          $serializer = new AmfSerializerWrapper($emptyPacket);
+          $serializer->write($testData->d);
+          $serialized = $serializer->getOutput();
+          $expectedSerialized = $testData->s;
+          $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));
 
          */
 
@@ -182,19 +183,21 @@ class SerializationTest extends PHPUnit_Framework_TestCase{
         $serialized = $serializer->getOutput();
         $expectedSerialized = $testData->sTypedObject;
         $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));
-
     }
 
-    public function testSerializingPackets(){
+    /**
+     * test serializing packets
+     */
+    public function testSerializingPackets() {
         $testData = new AmfTestData();
         /*
-        template
+          template
 
-        //Packet with
-        $serializer = new AmfSerializerWrapper($testData->d);
-        $serialized = $serializer->serialize();
-        $expectedSerialized = $testData->s;
-        $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));
+          //Packet with
+          $serializer = new AmfSerializerWrapper($testData->d);
+          $serialized = $serializer->serialize();
+          $expectedSerialized = $testData->s;
+          $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));
 
          */
 
@@ -227,11 +230,8 @@ class SerializationTest extends PHPUnit_Framework_TestCase{
         $serialized = $serializer->serialize($testData->d2Headers2MessagesPacket);
         $expectedSerialized = $testData->s2Headers2MessagesPacket;
         $this->assertEquals(bin2hex($expectedSerialized), bin2hex($serialized));
-
-
     }
-    
-
 
 }
+
 ?>

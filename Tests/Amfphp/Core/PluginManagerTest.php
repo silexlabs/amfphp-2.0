@@ -23,7 +23,7 @@ require_once dirname(__FILE__) . '/../../TestData/TestPlugins/DisabledPlugin/Dis
 class Amfphp_Core_PluginManagerTest extends PHPUnit_Framework_TestCase {
     
     /**
-     *
+     * plugin manager
      * @var Amfphp_Core_PluginManager
      */
     protected $pluginManager;
@@ -47,6 +47,9 @@ class Amfphp_Core_PluginManagerTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals(1, DummyPlugin::$instanciationCounter);
     }
 
+    /**
+     * test disabled
+     */
     public function testDisabled(){
         $disabledPluginLoadCount = DisabledPlugin::$instanciationCounter;
         $this->pluginManager->loadPlugins(array(dirname(__FILE__) . '/../../TestData/TestPlugins/'), null, null, array('DisabledPlugin'));
@@ -54,6 +57,9 @@ class Amfphp_Core_PluginManagerTest extends PHPUnit_Framework_TestCase {
 
     }
 
+    /**
+     * test config
+     */
     public function testConfig(){
         $pluginsConfig = array('DummyPlugin' => array('dummyConfVar' => 'custom'));
         $this->pluginManager->loadPlugins(array(dirname(__FILE__) . '/../../TestData/TestPlugins/'), $pluginsConfig);
@@ -64,6 +70,7 @@ class Amfphp_Core_PluginManagerTest extends PHPUnit_Framework_TestCase {
 
 
     /**
+     * test bad folder
      * @expectedException Amfphp_Core_Exception
      */
     public function testBadFolder(){

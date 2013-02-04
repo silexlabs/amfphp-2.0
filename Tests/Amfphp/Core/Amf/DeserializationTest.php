@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of amfPHP
  *
@@ -8,15 +9,12 @@
  * with this package in the file license.txt.
  * @package Tests_Amfphp_Core_Amf
  */
-
-
 /**
-*  includes
-*  */
+ *  includes
+ *  */
 require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
 require_once dirname(__FILE__) . '/../../../TestData/AmfTestData.php';
 require_once dirname(__FILE__) . '/AmfDeserializerWrapper.php';
-
 
 /**
  * Unit tests for Amfphp_Core_Amf_Serializer
@@ -25,10 +23,12 @@ require_once dirname(__FILE__) . '/AmfDeserializerWrapper.php';
  * @package Tests_Amfphp_Core_Amf
  * @author Ariel Sommeria-klein
  */
-class DeserializationTest extends PHPUnit_Framework_TestCase{
+class DeserializationTest extends PHPUnit_Framework_TestCase {
 
-
-    public function testBasicMethods(){
+    /**
+     * test basic methods
+     */
+    public function testBasicMethods() {
         $testData = new AmfTestData();
 
         //readByte
@@ -115,7 +115,6 @@ class DeserializationTest extends PHPUnit_Framework_TestCase{
         $expectedDeserialized = $testData->dReference;
         //TODO better tests for references
         //$this->assertEquals($expectedDeserialized, $deserialized);
-
         //readArray (EcmaArray)
         $deserializer = new AmfDeserializerWrapper($testData->sEcmaArray);
         $type = $deserializer->readByte();
@@ -160,17 +159,17 @@ class DeserializationTest extends PHPUnit_Framework_TestCase{
         $deserialized = $deserializer->readData($type);
         $expectedDeserialized = $testData->dTypedObject;
         $this->assertEquals($expectedDeserialized, $deserialized);
-
-        
-
     }
 
-    public function testDeserializingPackets(){
+    /**
+     * test deserializing packets
+     */
+    public function testDeserializingPackets() {
         $testData = new AmfTestData();
         /*
-        template
+          template
 
-        //Packet with
+          //Packet with
 
          */
 
@@ -204,10 +203,8 @@ class DeserializationTest extends PHPUnit_Framework_TestCase{
         $deserialized = $deserializer->deserialize(array(), array(), $testData->s2Headers2MessagesPacket);
         $expectedDeserialized = $testData->d2Headers2MessagesPacket;
         $this->assertEquals($expectedDeserialized, $deserialized);
-
     }
-    
-
 
 }
+
 ?>

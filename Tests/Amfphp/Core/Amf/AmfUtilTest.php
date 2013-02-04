@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of amfPHP
  *
@@ -8,11 +9,9 @@
  * with this package in the file license.txt.
  * @package Tests_Amfphp_Core_Amf
  */
-
-
 /**
-*  includes
-*  */
+ *  includes
+ *  */
 require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
 
 /**
@@ -24,9 +23,11 @@ require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
 class Amfphp_Core_Amf_UtilTest extends PHPUnit_Framework_TestCase {
 
     /**
+     * object
      * @var Amfphp_Core_Amf_Util
      */
     protected $object;
+
     /**
      * for testApplyFunc
      * @var int
@@ -46,19 +47,30 @@ class Amfphp_Core_Amf_UtilTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-
+        
     }
 
+    /**
+     * test system is big endian
+     */
     public function testIsSystemBigEndian() {
         $isBigEndian = Amfphp_Core_Amf_Util::isSystemBigEndian();
         $this->assertTrue(($isBigEndian == false) || ($isBigEndian == true));
     }
 
-    public function testApplyFunc($obj = null){
+    /**
+     * test apply func. used by testApplyFunctionToContainedObjects
+     * @param mixed $obj
+     * @return mixed
+     */
+    public function testApplyFunc($obj = null) {
         $this->counter++;
         return $obj;
     }
 
+    /**
+     * test apply function to contained objects
+     */
     public function testApplyFunctionToContainedObjects() {
         //non object
         $this->counter = 0;
@@ -80,7 +92,6 @@ class Amfphp_Core_Amf_UtilTest extends PHPUnit_Framework_TestCase {
         $this->counter = 0;
         Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($testObj2, array($this, 'testApplyFunc'));
         $this->assertEquals(10, $this->counter);
-
     }
 
 }

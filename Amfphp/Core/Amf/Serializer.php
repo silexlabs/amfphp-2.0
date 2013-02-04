@@ -246,7 +246,7 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer {
     }
 
     /**
-     * writeData writes the date code (0x0B) and the date value (milliseconds from 1 January 1970) to the output stream, along with an empty unsupported timezone
+     * writeDate writes the date code (0x0B) and the date value (milliseconds from 1 January 1970) to the output stream, along with an empty unsupported timezone
      *
      * @param Amfphp_Core_Amf_Types_Date $d The date value
      */
@@ -755,7 +755,7 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer {
     }
 
     /**
-     * write Amfphp_Core_Amf_Types_Xml in amf3
+     * write Amfphp_Core_Amf_Types_XmlDocument in amf3
      * @param Amfphp_Core_Amf_Types_XmlDocument $d
      */
     protected function writeAmf3XmlDocument(Amfphp_Core_Amf_Types_XmlDocument $d) {
