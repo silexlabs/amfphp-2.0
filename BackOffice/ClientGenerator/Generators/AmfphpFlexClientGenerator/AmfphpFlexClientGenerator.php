@@ -16,15 +16,27 @@
  * @package Amfphp_Backoffice_Generators
  */
 class AmfphpFlexClientGenerator extends Amfphp_BackOffice_ClientGenerator_LocalClientGenerator {
+    
+    /**
+     * constructor
+     */
     public function __construct() {
         parent::__construct(array('as', 'mxml', 'xml'), dirname(__FILE__) . '/Template');
     }
-    
+        
+    /**
+     * get ui call text
+     * @return string
+     */
     public function getUiCallText() {
         return "Flex";
         
     }
     
+    /**
+     * info url
+     * @return string
+     */
     public function getInfoUrl(){
         return "http://www.silexlabs.org/amfphp/documentation/client-generators/flex/";
     }

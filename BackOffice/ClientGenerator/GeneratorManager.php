@@ -19,7 +19,7 @@
  */
 class Amfphp_BackOffice_ClientGenerator_GeneratorManager {
     /**
-     *
+     * load generators
      * @param array of strings $generatorFolders 
      */
     public function loadGenerators($generatorFolders) {

@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of amfPHP
  *
@@ -9,25 +10,37 @@
  * @package Amfphp_Backoffice_Generators
  */
 
- /**
+/**
  * generates a Flash project for consumption of amfPHP services
  *
  * @author Ariel Sommeria-klein
  * @package Amfphp_Backoffice_Generators
  */
 class AmfphpFlashClientGenerator extends Amfphp_BackOffice_ClientGenerator_LocalClientGenerator {
+
+    /**
+     * constructor
+     */
     public function __construct() {
         parent::__construct(array('as'), dirname(__FILE__) . '/Template');
     }
-    
+
+    /**
+     * get ui call text
+     * @return string
+     */
     public function getUiCallText() {
         return "Flash Creative Suite";
-        
     }
-    
-    public function getInfoUrl(){
+
+    /**
+     * info url
+     * @return string
+     */
+    public function getInfoUrl() {
         return "http://www.silexlabs.org/amfphp/documentation/client-generators/flash-creative-suite/";
     }
+
 }
 
 ?>
