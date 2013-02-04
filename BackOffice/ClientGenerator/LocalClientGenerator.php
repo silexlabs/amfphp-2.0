@@ -11,7 +11,7 @@
  * 
  */
 
-  /**
+/**
  * Handles typical client generation, override various methods for customisation
  * 1. copies the template.
  * 2. looks for template directives in the code. Usually these directives indicate a block of code that must be replicated.
@@ -25,26 +25,61 @@
  */
 class Amfphp_BackOffice_ClientGenerator_LocalClientGenerator {
 
+    /**
+     * code file extensions to parse.
+     * for example array('as')
+     * @var array 
+     */
     protected $codeFileExtensions;
+
+    /**
+     * absolute path to folder where template is
+     * @var string 
+     */
     protected $templateFolderUrl;
+
+    /**
+     * services
+     * @var array 
+     */
     protected $services;
+
+    /**
+     * service being processed. 
+     * untyped
+     * @see AmfphpDiscovery_ServiceDescriptor
+     * @var stdClass 
+     */
     protected $serviceBeingProcessed;
+
+    /**
+     * method being processed. 
+     * untyped
+     * @see AmfphpDiscovery_MethodDescriptor
+     * @var stdClass 
+     */
     protected $methodBeingProcessed;
+
     /**
      * file being processed, useful for error messages
      * @var SplFileInfo 
      */
     protected $fileBeingProcessed;
+
+    /**
+     * url
+     * @var string 
+     */
     protected $amfphpEntryPointUrl;
-    
+
     /**
      * absolute!
      * @var string
      */
-
     public $targetFolder = 'ClientGenerator/Generated/';
 
     //terms to replace
+
     const _SERVICE_ = '_SERVICE_';
     const _METHOD_ = '_METHOD_';
     const _PARAMETER_ = '_PARAMETER_';
@@ -55,54 +90,52 @@ class Amfphp_BackOffice_ClientGenerator_LocalClientGenerator {
     const PARAMETER_COMMA = 'PARAMETER_COMMA';
 
     /**
-     *
+     * constructor
      * @param array $codeFileExtensions
      * @param type $templateFolderUrl
      */
     public function __construct(array $codeFileExtensions, $templateFolderUrl) {
         $this->codeFileExtensions = $codeFileExtensions;
         $this->templateFolderUrl = $templateFolderUrl;
-
-        
     }
-    
+
     /**
      * override to provide a custom text in the Client Generator UI button for this generator.
      * @return String 
      */
-    public function getUiCallText(){
+    public function getUiCallText() {
         return get_class($this);
     }
+
     /**
      * override to provide a custom url for a page containing info for this generator.
      * @return String 
      */
-    public function getInfoUrl(){
+    public function getInfoUrl() {
         return "http://www.silexlabs.org/amfphp/documentation/client-generators/";
     }
-    
+
     /**
      * added to the url of the generated code to go to its test page directly fro, the client generator ui
      * for example: 'testhtml'/index.html'
      * return false if none, for example if the generated client must be compiled first
      * 
      */
-    public function getTestUrlSuffix(){
-    	return false;
+    public function getTestUrlSuffix() {
+        return false;
     }
-    
-    
+
     /**
-     *
+     * generate project based on template
      * @param array $services . note: here '/' in each service name is replaced by '__', to avoid dealing with packages
      * @param string $amfphpEntryPointUrl 
      * @param String absolute url to folder where to put the generated code
      * @return null
      */
-    public function generate($services, $amfphpEntryPointUrl, $targetFolder ) {
+    public function generate($services, $amfphpEntryPointUrl, $targetFolder) {
         foreach ($services as $service) {
             $service->name = str_replace('/', '__', $service->name);
-        }        
+        }
         $this->services = $services;
         $this->amfphpEntryPointUrl = $amfphpEntryPointUrl;
         Amfphp_BackOffice_ClientGenerator_Util::recurseCopy($this->templateFolderUrl, $targetFolder);
@@ -111,7 +144,6 @@ class Amfphp_BackOffice_ClientGenerator_LocalClientGenerator {
             if (In_Array(SubStr($file, StrrPos($file, '.') + 1), $this->codeFileExtensions) == true) {
                 $this->fileBeingProcessed = $file;
                 $this->processSourceFile($file);
-                
             }
         }
     }
@@ -126,53 +158,52 @@ class Amfphp_BackOffice_ClientGenerator_LocalClientGenerator {
      */
     protected function searchForBlocksAndApplyProcessing($code, $directive, $functionName) {
         $markers = array('<!--ACG_' . $directive . '-->', '/*ACG_' . $directive . '*/');
-        
-        $hasChanged = false;
-	        
-        foreach($markers as $marker){
-          	$markerLength = strlen($marker);
-	        $codeLength = strlen($code);
-	        $callBack = array($this, $functionName);
-	
-	
-	        $startPos = 0;
-	        $stopPos = 0;
-	        $seekStartPos = 0;
-		
 
-	        while (1) {
-	            $startPos = strpos($code, $marker, $seekStartPos);
-	            if ($startPos === false) {
-	                break;
-	            }
-	            //echo $startPos . '<br/><br/>';
-	            //startPos: before start Marker, stopPos: after stop Marker
-	
-	            $stopPos = strpos($code, $marker, $startPos + 1) + $markerLength;
-	            if($stopPos < $startPos){
-	                throw new Exception("missing stop marker $marker. in file $this->fileBeingProcessed");
-	            }
-	            //blockText: text within the Markers, excluding the Markers
-	            $blockText = substr($code, $startPos + $markerLength, $stopPos - $startPos - 2 * $markerLength);
-	            //$processedText = $this->processServiceListBlock($blockText);
-	            $processedText = call_user_func($callBack, $blockText);
-	            //up to, but exculding Marker
-	            $beforeBlock = substr($code, 0, $startPos);
-	            //after Marker
-	            $afterBlock = substr($code, $stopPos);
-	            $code = $beforeBlock . $processedText . $afterBlock;
-	            $hasChanged = true;
-	            $seekStartPos = strlen($beforeBlock . $processedText);
-	        }
-	        
+        $hasChanged = false;
+
+        foreach ($markers as $marker) {
+            $markerLength = strlen($marker);
+            $codeLength = strlen($code);
+            $callBack = array($this, $functionName);
+
+
+            $startPos = 0;
+            $stopPos = 0;
+            $seekStartPos = 0;
+
+
+            while (1) {
+                $startPos = strpos($code, $marker, $seekStartPos);
+                if ($startPos === false) {
+                    break;
+                }
+                //echo $startPos . '<br/><br/>';
+                //startPos: before start Marker, stopPos: after stop Marker
+
+                $stopPos = strpos($code, $marker, $startPos + 1) + $markerLength;
+                if ($stopPos < $startPos) {
+                    throw new Exception("missing stop marker $marker. in file $this->fileBeingProcessed");
+                }
+                //blockText: text within the Markers, excluding the Markers
+                $blockText = substr($code, $startPos + $markerLength, $stopPos - $startPos - 2 * $markerLength);
+                //$processedText = $this->processServiceListBlock($blockText);
+                $processedText = call_user_func($callBack, $blockText);
+                //up to, but exculding Marker
+                $beforeBlock = substr($code, 0, $startPos);
+                //after Marker
+                $afterBlock = substr($code, $stopPos);
+                $code = $beforeBlock . $processedText . $afterBlock;
+                $hasChanged = true;
+                $seekStartPos = strlen($beforeBlock . $processedText);
+            }
         }
-    	if ($hasChanged) {
+        if ($hasChanged) {
             return $code;
         } else {
             return false;
         }
     }
-    
+
     /**
      * load the code, and look if either file is a service block, or il it contains service blocks.
      * If the file is a service block(detected by having '_SERVICE_' in the file name), call generateServiceFiles
@@ -214,20 +245,19 @@ class Amfphp_BackOffice_ClientGenerator_LocalClientGenerator {
         }
         unlink($file);
     }
-    
+
     /**
      * generates code for one Service File. 
      * @param String $code
      * @return String 
      */
-    protected function generateOneServiceFileCode($code){
-            $codeMatchingService = str_replace(self::_SERVICE_, $this->serviceBeingProcessed->name, $code);
-            $processed = $this->searchForBlocksAndApplyProcessing($codeMatchingService, self::METHOD, 'processMethodListBlock');
-            if ($processed) {
-                $codeMatchingService = $processed;
-            }
-            return $codeMatchingService;
-        
+    protected function generateOneServiceFileCode($code) {
+        $codeMatchingService = str_replace(self::_SERVICE_, $this->serviceBeingProcessed->name, $code);
+        $processed = $this->searchForBlocksAndApplyProcessing($codeMatchingService, self::METHOD, 'processMethodListBlock');
+        if ($processed) {
+            $codeMatchingService = $processed;
+        }
+        return $codeMatchingService;
     }
 
     /**
@@ -241,10 +271,10 @@ class Amfphp_BackOffice_ClientGenerator_LocalClientGenerator {
         foreach ($this->services as $service) {
             $this->serviceBeingProcessed = $service;
             $blockForService = str_replace(self::_SERVICE_, $service->name, $code);
-            
-        
-        	$processed = $this->searchForBlocksAndApplyProcessing($blockForService, self::METHOD, 'processMethodListBlock');
-        	if ($processed) {
+
+
+            $processed = $this->searchForBlocksAndApplyProcessing($blockForService, self::METHOD, 'processMethodListBlock');
+            if ($processed) {
                 $blockForService = $processed;
             }
 

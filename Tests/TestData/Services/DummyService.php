@@ -17,6 +17,10 @@
  */
 
 class DummyService {
+    /**
+     * return null
+     * @return null
+     */
     function returnNull(){
         return null;
     }

@@ -22,6 +22,9 @@ require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
  */
 class AmfphpLoggerTest extends PHPUnit_Framework_TestCase {
 
+    /**
+     * test simple
+     */
     public function testSimple(){
         $logger = new AmfphpLogger();
         //delete the log file if it exists to make sure it's empty when we write to it

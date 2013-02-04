@@ -18,6 +18,11 @@
  */
 class BlaService {
 
+    /**
+     * retur double
+     * @param float $param
+     * @return float
+     */
     public function returnDouble($param){
         return $param * 2;
     }

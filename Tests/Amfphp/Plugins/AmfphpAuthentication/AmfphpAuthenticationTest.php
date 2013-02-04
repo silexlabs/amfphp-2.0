@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of amfPHP
  *
@@ -8,11 +9,10 @@
  * with this package in the file license.txt.
  * @package Tests_Amfphp_Plugins_Authentication
  */
-
 /**
-*  includes
-*  */
-require_once dirname(__FILE__).'/../../../../Amfphp/Plugins/AmfphpAuthentication/AmfphpAuthentication.php';
+ *  includes
+ *  */
+require_once dirname(__FILE__) . '/../../../../Amfphp/Plugins/AmfphpAuthentication/AmfphpAuthentication.php';
 require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
 require_once dirname(__FILE__) . '/../../../TestData/Services/AuthenticationService.php';
 
@@ -21,16 +21,17 @@ require_once dirname(__FILE__) . '/../../../TestData/Services/AuthenticationServ
  * @package Tests_Amfphp_Plugins_Authentication
  * @author Ariel Sommeria-klein
  */
-class AmfphpAuthenticationTest extends PHPUnit_Framework_TestCase
-{
+class AmfphpAuthenticationTest extends PHPUnit_Framework_TestCase {
+
     /**
+     * object
      * @var AmfphpAuthentication
      */
     protected $object;
 
     /**
-     *
-     * @var <AuthenticationService>
+     * service obj
+     * @var AuthenticationService
      */
     protected $serviceObj;
 
@@ -38,8 +39,7 @@ class AmfphpAuthenticationTest extends PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
-    {
+    protected function setUp() {
         $this->object = new AmfphpAuthentication;
         $this->serviceObj = new AuthenticationService();
     }
@@ -48,90 +48,105 @@ class AmfphpAuthenticationTest extends PHPUnit_Framework_TestCase
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown()
-    {
+    protected function tearDown() {
         session_unset();
     }
 
-    public function testAddRole()
-    {
+    /**
+     * test add role
+     */
+    public function testAddRole() {
         AmfphpAuthentication::addRole('admin');
         $roles = $_SESSION[AmfphpAuthentication::SESSION_FIELD_ROLES];
         $this->assertEquals(array('admin' => true), $roles);
     }
 
-    public function testClearSessionInfo()
-    {
+    /**
+     * test clear session info
+     */
+    public function testClearSessionInfo() {
         AmfphpAuthentication::addRole('bla');
         AmfphpAuthentication::clearSessionInfo();
-        $this->assertFalse(isset ($_SESSION[AmfphpAuthentication::SESSION_FIELD_ROLES]));
+        $this->assertFalse(isset($_SESSION[AmfphpAuthentication::SESSION_FIELD_ROLES]));
     }
 
-
-    public function testLoginAndAccess(){
+    /**
+     * test login and access
+     */
+    public function testLoginAndAccess() {
         $this->serviceObj->login('admin', 'adminPassword');
         $this->object->filterServiceObject($this->serviceObj, 'AnyService', 'adminMethod');
     }
 
-    public function testNormalAccessToUnprotectedMethods(){
+    /**
+     * test normal access to unprotected methods
+     */
+    public function testNormalAccessToUnprotectedMethods() {
         $this->object->filterServiceObject($this->serviceObj, 'AnyService', 'logout');
-
     }
 
     /**
+     * test logout
      * @expectedException Amfphp_Core_Exception
      */
-    public function testLogout(){
+    public function testLogout() {
         $this->serviceObj->login('admin', 'adminPassword');
         $this->object->filterServiceObject($this->serviceObj, 'AnyService', 'adminMethod');
         $this->serviceObj->logout();
         $this->object->filterServiceObject($this->serviceObj, 'AnyService', 'adminMethod');
     }
+
     /**
+     * test access without authentication
      * @expectedException Amfphp_Core_Exception
      */
-    public function testAccessWithoutAuthentication()
-    {
+    public function testAccessWithoutAuthentication() {
         $this->object->filterServiceObject($this->serviceObj, 'AnyService', 'adminMethod');
     }
 
     /**
+     * test bad role
      * @expectedException Amfphp_Core_Exception
      */
-    public function testBadRole(){
+    public function testBadRole() {
         $this->serviceObj->login('user', 'userPassword');
         $this->object->filterServiceObject($this->serviceObj, 'AnyService', 'adminMethod');
-
     }
-    
-    public function testGetAmfRequestHeaderHandlerFilter()
-    {
+
+    /**
+     * test get amf request header handler filter
+     */
+    public function testGetAmfRequestHeaderHandlerFilter() {
         $credentialsAssoc = new stdClass();
         $userIdField = Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_USERID;
         $passwordField = Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_PASSWORD;
-        $credentialsAssoc->$userIdField =  'admin';
+        $credentialsAssoc->$userIdField = 'admin';
         $credentialsAssoc->$passwordField = 'adminPassword';
         $credentialsHeader = new Amfphp_Core_Amf_Header(Amfphp_Core_Amf_Constants::CREDENTIALS_HEADER_NAME, true, $credentialsAssoc);
         $ret = $this->object->filterAmfRequestHeaderHandler(null, $credentialsHeader);
         $this->assertEquals($this->object, $ret);
-        
+
         $otherHeader = new Amfphp_Core_Amf_Header('bla');
         $ret = $this->object->filterAmfRequestHeaderHandler(null, $otherHeader);
         $this->assertEquals(null, $ret);
     }
 
     /**
+     * test with filters block access
      * @expectedException Amfphp_Core_Exception
      */
-    public function testWithFiltersBlockAccess(){
+    public function testWithFiltersBlockAccess() {
         Amfphp_Core_FilterManager::getInstance()->callFilters(Amfphp_Core_Common_ServiceRouter::FILTER_SERVICE_OBJECT, $this->serviceObj, 'TestService', 'adminMethod');
     }
 
-    public function testWithFiltersGrantAccess(){
+    /**
+     * test with filters grant access
+     */
+    public function testWithFiltersGrantAccess() {
         $credentialsAssoc = new stdClass();
         $userIdField = Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_USERID;
         $passwordField = Amfphp_Core_Amf_Constants::CREDENTIALS_FIELD_PASSWORD;
-        $credentialsAssoc->$userIdField =  'admin';
+        $credentialsAssoc->$userIdField = 'admin';
         $credentialsAssoc->$passwordField = 'adminPassword';
         $credentialsHeader = new Amfphp_Core_Amf_Header(Amfphp_Core_Amf_Constants::CREDENTIALS_HEADER_NAME, true, $credentialsAssoc);
         $filterManager = Amfphp_Core_FilterManager::getInstance();
@@ -140,6 +155,6 @@ class AmfphpAuthenticationTest extends PHPUnit_Framework_TestCase
         $ret->filterServiceObject($this->serviceObj, 'AnyService', 'adminMethod');
     }
 
-
 }
+
 ?>

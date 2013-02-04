@@ -16,6 +16,9 @@
  * @author Ariel Sommeria-klein
  */
 class BadSyntaxService {
+    /**
+     * contains bad syntax
+     */
     public function arghBad(){
         wergwerg;
     }

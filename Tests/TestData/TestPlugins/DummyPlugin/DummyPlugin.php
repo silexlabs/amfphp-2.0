@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of amfPHP
  *
@@ -16,17 +17,32 @@
  * @author Ariel Sommeria-klein
  */
 class DummyPlugin {
+
+    /**
+     * instanciation counter
+     * @var int
+     */
     public static $instanciationCounter = 0;
 
+    /**
+     * dummy conf variable
+     * @var string
+     */
     public static $dummyConfVar = 'default';
-    
-    public function  __construct(array $pluginConfig = null) {
+
+    /**
+     * constructor
+     * @param array $pluginConfig
+     */
+    public function __construct(array $pluginConfig = null) {
         self::$instanciationCounter++;
-        if($pluginConfig){
-            if(isset($pluginConfig['dummyConfVar'])){
+        if ($pluginConfig) {
+            if (isset($pluginConfig['dummyConfVar'])) {
                 self::$dummyConfVar = $pluginConfig['dummyConfVar'];
             }
         }
     }
+
 }
+
 ?>

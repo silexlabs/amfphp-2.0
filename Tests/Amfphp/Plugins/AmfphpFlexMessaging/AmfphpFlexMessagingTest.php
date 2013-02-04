@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of amfPHP
  *
@@ -8,10 +9,9 @@
  * with this package in the file license.txt.
  * @package Tests_Amfphp_Plugins_FlexMessaging
  */
-
 /**
-*  includes
-*  */
+ *  includes
+ *  */
 require_once dirname(__FILE__) . '/../../../../Amfphp/Plugins/AmfphpFlexMessaging/AmfphpFlexMessaging.php';
 require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
 require_once dirname(__FILE__) . '/../../../TestData/TestServicesConfig.php';
@@ -24,12 +24,13 @@ require_once dirname(__FILE__) . '/../../../TestData/TestServicesConfig.php';
 class AmfphpFlexMessagingTest extends PHPUnit_Framework_TestCase {
 
     /**
+     * object
      * @var FlexMessaging
      */
     protected $object;
 
     /**
-     *
+     * service router
      * @var Amfphp_Core_Common_ServiceRouter
      */
     protected $serviceRouter;
@@ -49,10 +50,13 @@ class AmfphpFlexMessagingTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-
+        
     }
 
-    public function testGetAmfRequestMessageHandlerFilter(){
+    /**
+     * test get amf request message handler filter
+     */
+    public function testGetAmfRequestMessageHandlerFilter() {
         $requestMessage = new Amfphp_Core_Amf_Message(null, '/1', null);
         $requestMessage->data = array();
         $command = new stdClass();
@@ -62,12 +66,15 @@ class AmfphpFlexMessagingTest extends PHPUnit_Framework_TestCase {
         $ret = $this->object->filterAmfRequestMessageHandler(null, $requestMessage);
         $this->assertEquals($this->object, $ret);
     }
-    
+
+    /**
+     * test command message
+     */
     public function testCommandMessage() {
         $requestMessage = new Amfphp_Core_Amf_Message(null, '/1', null);
         $requestMessage->data = array();
         $expectedResponseMessage = new Amfphp_Core_Amf_Message('/1/onResult', null, null);
-        
+
         $command = new stdClass();
         $command->_explicitType = AmfphpFlexMessaging::FLEX_TYPE_COMMAND_MESSAGE;
         $command->messageId = '690D76D5-13C0-DFBD-7F2F-9E3786B59EB5';
@@ -81,7 +88,10 @@ class AmfphpFlexMessagingTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals(print_r($expectedResponseMessage, true), print_r($responseMessage, true));
     }
 
-    public function testRemotingMessage(){
+    /**
+     * test remoting message
+     */
+    public function testRemotingMessage() {
         $requestMessage = new Amfphp_Core_Amf_Message(null, '/1', null);
         $requestMessage->data = array();
         $expectedResponseMessage = new Amfphp_Core_Amf_Message('/1/onResult', null, null);
@@ -107,10 +117,7 @@ class AmfphpFlexMessagingTest extends PHPUnit_Framework_TestCase {
         $expectedError = new AmfphpFlexMessaging_ErrorMessage('690D76D5-13C0-DFBD-7F2F-9E3786B59EB5');
         $expectedResponseMessage->data = $expectedError;
         $this->assertEquals('AmfphpFlexMessaging_ErrorMessage', get_class($responsePacket->messages[0]->data));
-
-
     }
-
 
 }
 

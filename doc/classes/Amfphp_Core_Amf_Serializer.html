@@ -21,7 +21,6 @@
                                     API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a>Packages</a></li>
 <li><a href="../packages/Amfphp.html"><i class="icon-folder-open"></i> Amfphp</a></li>
-<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
 <li><a href="../packages/Tests.html"><i class="icon-folder-open"></i> Tests</a></li>
 </ul>
 </li>
@@ -33,7 +32,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">300</span></a></li>
+                <span class="label label-info">0</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">13</span>
@@ -86,7 +85,7 @@ Also creates a bogus traits entry, as even an anonymous object has traits.</span
 <li class="method protected "><a href="#method_writeAmf3TypedObject" title="writeAmf3TypedObject :: writes a typed object."><span class="description">writes a typed object.</span><pre>writeAmf3TypedObject()</pre></a></li>
 <li class="method protected "><a href="#method_writeAmf3Undefined" title="writeAmf3Undefined :: Write undefined (Amf3)."><span class="description">Write undefined (Amf3).</span><pre>writeAmf3Undefined()</pre></a></li>
 <li class="method protected "><a href="#method_writeAmf3Xml" title="writeAmf3Xml :: write Amfphp_Core_Amf_Types_Xml in amf3"><span class="description">write Amfphp_Core_Amf_Types_Xml in amf3</span><pre>writeAmf3Xml()</pre></a></li>
-<li class="method protected "><a href="#method_writeAmf3XmlDocument" title="writeAmf3XmlDocument :: write Amfphp_Core_Amf_Types_Xml in amf3"><span class="description">write Amfphp_Core_Amf_Types_Xml in amf3</span><pre>writeAmf3XmlDocument()</pre></a></li>
+<li class="method protected "><a href="#method_writeAmf3XmlDocument" title="writeAmf3XmlDocument :: write Amfphp_Core_Amf_Types_XmlDocument in amf3"><span class="description">write Amfphp_Core_Amf_Types_XmlDocument in amf3</span><pre>writeAmf3XmlDocument()</pre></a></li>
 <li class="method protected "><a href="#method_writeAnonymousObject" title="writeAnonymousObject :: handles writing an anoynous object (stdClass)
  can also be a reference"><span class="description">handles writing an anoynous object (stdClass)
  can also be a reference</span><pre>writeAnonymousObject()</pre></a></li>
@@ -102,7 +101,7 @@ auto negotiates the type or relies on the user defined type to
 serialize the data into Amf"><span class="description">writeData checks to see if the type was declared and then either
 auto negotiates the type or relies on the user defined type to
 serialize the data into Amf</span><pre>writeData()</pre></a></li>
-<li class="method protected "><a href="#method_writeDate" title="writeDate :: writeData writes the date code (0x0B) and the date value (milliseconds from 1 January 1970) to the output stream, along with an empty unsupported timezone"><span class="description">writeData writes the date code (0x0B) and the date value (milliseconds from 1 January 1970) to the output stream, along with an empty unsupported timezone</span><pre>writeDate()</pre></a></li>
+<li class="method protected "><a href="#method_writeDate" title="writeDate :: writeDate writes the date code (0x0B) and the date value (milliseconds from 1 January 1970) to the output stream, along with an empty unsupported timezone"><span class="description">writeDate writes the date code (0x0B) and the date value (milliseconds from 1 January 1970) to the output stream, along with an empty unsupported timezone</span><pre>writeDate()</pre></a></li>
 <li class="method protected "><a href="#method_writeDouble" title="writeDouble :: writeDouble takes a float as the input and writes it to the output stream."><span class="description">writeDouble takes a float as the input and writes it to the output stream.</span><pre>writeDouble()</pre></a></li>
 <li class="method protected "><a href="#method_writeInt" title="writeInt :: writeInt takes an int and writes it as 2 bytes to the output stream
 0-65535 range"><span class="description">writeInt takes an int and writes it as 2 bytes to the output stream
@@ -453,7 +452,7 @@ write all properties as sealed members.</p></div>
 </div></div>
 </div>
 <a id="method_writeAmf3XmlDocument"></a><div class="element clickable method protected method_writeAmf3XmlDocument" data-toggle="collapse" data-target=".method_writeAmf3XmlDocument .collapse">
-<h2>write Amfphp_Core_Amf_Types_Xml in amf3</h2>
+<h2>write Amfphp_Core_Amf_Types_XmlDocument in amf3</h2>
 <pre>writeAmf3XmlDocument(\Amfphp_Core_Amf_Types_XmlDocument $d) </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
@@ -532,7 +531,7 @@ serialize the data into Amf</h2>
 </div></div>
 </div>
 <a id="method_writeDate"></a><div class="element clickable method protected method_writeDate" data-toggle="collapse" data-target=".method_writeDate .collapse">
-<h2>writeData writes the date code (0x0B) and the date value (milliseconds from 1 January 1970) to the output stream, along with an empty unsupported timezone</h2>
+<h2>writeDate writes the date code (0x0B) and the date value (milliseconds from 1 January 1970) to the output stream, along with an empty unsupported timezone</h2>
 <pre>writeDate(\Amfphp_Core_Amf_Types_Date $d) </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
@@ -760,7 +759,7 @@ Note: strips whitespace</h2>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-02-04T08:51:24+01:00.<br></footer></div>
+            generated on 2013-02-04T14:01:09+01:00.<br></footer></div>
 </div>
 </body>
 </html>

@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of amfPHP
  *
@@ -9,7 +10,7 @@
  * @package Tests_TestData
  */
 
-    /**
+/**
  * test data for the Amfphp unit tests
  * data types have the s prefix for 'serialized' and 'd' prefix for 'deserialized'
  * for Packets there is a flaw in the Amfphp design which means that serializng and deserializing is not symmetrical.
@@ -20,72 +21,351 @@
  */
 class AmfTestData {
     //fundamental (stream) types
+
+    /**
+     * byte
+     * @var string 
+     */
     public $sByte;
+
+    /**
+     * byte
+     * @var int
+     */
     public $dByte;
+
+    /**
+     * int
+     * @var string 
+     */
     public $sInt;
+
+    /**
+     * int
+     * @var int
+     */
     public $dInt;
+
+    /**
+     * long
+     * @var string 
+     */
     public $sLong;
+
+    /**
+     * long
+     * @var int
+     */
     public $dLong;
+
+    /**
+     * double
+     * @var string 
+     */
     public $sDouble;
+
+    /**
+     * double
+     * @var float 
+     */
     public $dDouble;
+
+    /**
+     * utf string
+     * @var string 
+     */
     public $sUtf;
+
+    /**
+     * string
+     * @var 
+     */
     public $dUtf;
+
+    /**
+     * long utf
+     * @var string 
+     */
     public $sLongUtf;
+
+    /**
+     * long utf
+     * @var string
+     */
     public $dLongUtf;
-    public $sBinary;
-    public $dBinary;
 
     //Amf data types
+
+    /**
+     * number
+     * @var string 
+     */
     public $sNumber;
+
+    /**
+     * number 
+     * @var float 
+     */
     public $dNumber;
+
+    /**
+     * boolean
+     * @var string 
+     */
     public $sBoolean;
+
+    /**
+     * boolean
+     * @var boolean
+     */
     public $dBoolean;
+
+    /**
+     * string
+     * @var string 
+     */
     public $sString;
+
+    /**
+     * string
+     * @var string
+     */
     public $dString;
+
+    /**
+     * object
+     * @var string 
+     */
     public $sObject;
+
+    /**
+     * object
+     * @var stdClass
+     */
     public $dObject;
+
+    /**
+     * null
+     * @var string 
+     */
     public $sNull;
+
+    /**
+     * null
+     * @var null 
+     */
     public $dNull;
+
+    /**
+     * undefined
+     * @var string 
+     */
     public $sUndefined;
+
+    /**
+     * undefined
+     * @var Amfphp_Core_Amf_Types_Undefined 
+     */
     public $dUndefined;
+
+    /**
+     * string
+     * @var string 
+     */
     public $sReference;
+
+    /**
+     * reference
+     * @var stdClass
+     */
     public $dReference;
+
+    /**
+     * ecma array
+     * @var string 
+     */
     public $sEcmaArray;
+
+    /**
+     * ecma array
+     * @var array
+     */
     public $dEcmaArray;
+
+    /**
+     * object end
+     * @var string 
+     */
     public $sObjectEnd;
+
+    /**
+     * object end
+     * @var null
+     */
     public $dObjectEnd;
+
+    /**
+     * strict array
+     * @var string 
+     */
     public $sStrictArray;
+
+    /**
+     * strict array
+     * @var array
+     */
     public $dStrictArray;
+
+    /**
+     * date
+     * @var string 
+     */
     public $sDate;
+
+    /**
+     * date
+     * @var Amfphp_Core_Amf_Types_Date
+     */
     public $dDate;
+
+    /**
+     * long string
+     * @var string 
+     */
     public $sLongString;
+
+    /**
+     * long string
+     * @var string
+     */
     public $dLongString;
+
+    /**
+     * unsupported
+     * @var string 
+     */
     public $sUnsupported;
+
+    /**
+     * unsupported
+     * @var string
+     */
     public $dUnsupported;
+
+    /**
+     * xml
+     * @var string 
+     */
     public $sXml;
+
+    /**
+     * xml
+     * @var Amfphp_Core_Amf_Types_Xml
+     */
     public $dXml;
+
+    /**
+     * typed object
+     * @var string 
+     */
     public $sTypedObject;
+
+    /**
+     * typed object
+     * @var DummyClass
+     */
     public $dTypedObject;
-    public $dTypedObjectAsArray;
 
     //Amf Packet objects
+
+    /**
+     * empty packet
+     * @var string 
+     */
     public $sEmptyPacket;
+
+    /**
+     * empty packet
+     * @var Amfphp_Core_Amf_Packet
+     */
     public $dEmptyPacket;
+
+    /**
+     * null header packet
+     * @var string 
+     */
     public $sNullHeaderPacket;
+
+    /**
+     * null header packet
+     * @var Amfphp_Core_Amf_Packet
+     */
     public $dNullHeaderPacket;
+
+    /**
+     * string header packet
+     * @var string 
+     */
     public $sStringHeaderPacket;
+
+    /**
+     * string header packet
+     * @var Amfphp_Core_Amf_Packet
+     */
     public $dStringHeaderPacket;
+
+    /**
+     * null message packet
+     * @var string Amfphp_Core_Amf_Packet
+     */
     public $sNullMessagePacket;
+
+    /**
+     * null message packet
+     * @var Amfphp_Core_Amf_Packet
+     */
     public $dNullMessagePacket;
+
+    /**
+     * string message packet
+     * @var string 
+     */
     public $sStringMessagePacket;
+
+    /**
+     * string message packet
+     * @var Amfphp_Core_Amf_Packet
+     */
     public $dStringMessagePacket;
+
+    /**
+     * 2 headers, 2 messages packet
+     * @var string 
+     */
     public $s2Headers2MessagesPacket;
+
+    /**
+     * 2 headers, 2 messages packet
+     * @var Amfphp_Core_Amf_Packet
+     */
     public $d2Headers2MessagesPacket;
 
+    /**
+     * test service request packet
+     * @var Amfphp_Core_Amf_Packet
+     */
     public $testServiceRequestPacket;
+
+    /**
+     * test service request packet
+     * @var Amfphp_Core_Amf_Packet
+     */
     public $testServiceResponsePacket;
-    
-    public function  __construct() {
+
+    /**
+     * constructor
+     */
+    public function __construct() {
         $this->buildByte();
         $this->buildInt();
         $this->buildLong();
@@ -115,14 +395,12 @@ class AmfTestData {
         $this->build2HeadersAndTwoMessagesPacket();
         $this->buildSimpleTestServiceRequestAndResponse();
         //$this->build;
-
     }
-
 
     /**
      * byte
      */
-    public function buildByte(){
+    public function buildByte() {
         $this->dByte = 42;
         $this->sByte = pack('C', 42);
     }
@@ -131,7 +409,7 @@ class AmfTestData {
      * int: 2 bytes
      *
      */
-    public function buildInt(){
+    public function buildInt() {
         $this->dInt = 42;
         $this->sInt = pack('n', 42);
     }
@@ -139,7 +417,7 @@ class AmfTestData {
     /**
      * long: 4 bytes
      */
-    public function buildLong(){
+    public function buildLong() {
         $this->dLong = 42;
         $this->sLong = pack('N', 42);
     }
@@ -148,59 +426,58 @@ class AmfTestData {
      * double: 8 bytes. Careful of little/big endian so that test runs with both systems
      *
      */
-    public function buildDouble(){
+    public function buildDouble() {
         $this->dDouble = 42;
         $this->sDouble = pack('d', 42);
-        if(Amfphp_Core_Amf_Util::isSystemBigEndian()){
+        if (Amfphp_Core_Amf_Util::isSystemBigEndian()) {
             $this->sDouble = strrev($this->sDouble);
         }
     }
 
-
     /**
      * utf: the length of the data on 2 bytes and then the char data
      */
-    public function buildUtf(){
+    public function buildUtf() {
         $testString = 'test string';
         $this->dUtf = $testString;
         $this->sUtf = pack('n', strLen($testString));
         $this->sUtf .= $testString;
     }
 
-
     /**
      * long utf: the length of the data on 4 bytes and then the char data. The char data is more than 65xxx long
      */
-    public function buildLongUtf(){
+    public function buildLongUtf() {
         $testString = str_repeat('a', 70000);
         $this->dLongUtf = $testString;
         $this->sLongUtf = pack('N', strLen($testString));
         $this->sLongUtf .= $testString;
     }
 
-
-     /**
+    /**
      * actual data types from the spec.
      */
 
-     /**
-      * number: type is0, then value in (double)8 bytes. See buildDouble for little/big endian
-      */
-    public function buildNumber(){
+    /**
+     * number: type is0, then value in (double)8 bytes. See buildDouble for little/big endian
+     */
+    public function buildNumber() {
         $this->dNumber = 42;
         //type: 0
         $this->sNumber = pack('C', 0);
         //number
         $numberData = pack('d', 42);
-        if(Amfphp_Core_Amf_Util::isSystemBigEndian()){
+        if (Amfphp_Core_Amf_Util::isSystemBigEndian()) {
             $numberData = strrev($numberData);
         }
 
         $this->sNumber .= $numberData;
     }
 
-
-    public function buildBoolean(){
+    /**
+     * build boolean
+     */
+    public function buildBoolean() {
         $this->dBoolean = FALSE;
         //type: 1
         $this->sBoolean = pack('C', 1);
@@ -208,8 +485,11 @@ class AmfTestData {
         $this->sBoolean .= pack('C', FALSE);
     }
 
-
-    public function buildString(){
+    /**
+     * build string
+     * 
+     */
+    public function buildString() {
         $this->dString = 'test string';
         //type : 2
         $this->sString = pack('C', 2);
@@ -219,8 +499,11 @@ class AmfTestData {
         $this->sString .= 'test string';
     }
 
-
-    public function buildObject(){
+    /**
+     * build object
+     * 
+     */
+    public function buildObject() {
         $this->dObject = new stdClass();
         $this->dObject->firstKey = 'firstValue';
         $this->dObject->secondKey = 'secondValue';
@@ -230,7 +513,6 @@ class AmfTestData {
         /**
          * first entry in object
          */
-
         //key length on an int
         $this->sObject .= pack('n', strLen('firstKey'));
         //data
@@ -245,7 +527,6 @@ class AmfTestData {
         /**
          * second entry in object
          */
-
         //key length on an int
         $this->sObject .= pack('n', strLen('secondKey'));
         //data
@@ -261,24 +542,28 @@ class AmfTestData {
         $this->sObject .= pack('Cn', 0, 9);
     }
 
-
-    public function buildNull(){
+    /**
+     * build null
+     */
+    public function buildNull() {
         $this->dNull = NULL;
         //type: 5
         $this->sNull = pack('C', 5);
     }
 
-    public function buildUndefined(){
+    /**
+     * build undefined
+     */
+    public function buildUndefined() {
         $this->dUndefined = new Amfphp_Core_Amf_Types_Undefined();
         //type: 6
         $this->sUndefined = pack('C', 6);
-
     }
 
     /**
      * TODO test with a real reference?
      */
-    public function buildReference(){
+    public function buildReference() {
         $this->dReference = 12345;
         //type: 7
         $this->sReference = pack('C', 7);
@@ -290,8 +575,8 @@ class AmfTestData {
      * the writeArray method looks at the keys. If there are both numeric and string keys, the data is treated as an Ecma Array
      * it also sorts the data and writes the data with numerical keys first, then the data with string keys
      */
-    public function buildEcmaArray(){
-        $this->dEcmaArray = Array('firstKey' => 'firstValue', 0 =>'secondValue');
+    public function buildEcmaArray() {
+        $this->dEcmaArray = Array('firstKey' => 'firstValue', 0 => 'secondValue');
         //type : 8
         $this->sEcmaArray = pack('C', 8);
         //number of sub objects on a long
@@ -316,7 +601,6 @@ class AmfTestData {
         /**
          * second entry in object
          */
-
         //key length on an int
         $this->sEcmaArray .= pack('n', strLen('firstKey'));
         //data
@@ -330,18 +614,21 @@ class AmfTestData {
 
 
         $this->sEcmaArray .= pack('Cn', 0, 9);
-
     }
-    
-    public function buildObjectEnd(){
+
+    /**
+     * build object end
+     */
+    public function buildObjectEnd() {
         $this->dObjectEnd = NULL;
         //type: 9
         $this->sObjectEnd = pack('ccc', 0, 0, 9);
-
     }
 
-
-    public function buildStrictArray(){
+    /**
+     * build strict array
+     */
+    public function buildStrictArray() {
         $this->dStrictArray = Array('firstValue', 'secondValue');
         //type : 0x0A
         $this->sStrictArray = pack('C', 0x0A);
@@ -362,7 +649,6 @@ class AmfTestData {
         /**
          * second entry in object
          */
-
         //data type is string, so use string(2)
         $this->sStrictArray .= pack('C', 2);
         //data length
@@ -374,26 +660,29 @@ class AmfTestData {
         /**
          * note : no end object marker!
          */
-
     }
 
-    public function buildDate(){
+    /**
+     * build date
+     */
+    public function buildDate() {
         $this->dDate = new Amfphp_Core_Amf_Types_Date(1306926779576); //1st June 2011
         //type: 0x0B
         $this->sDate = pack('C', 0x0B);
         //date is a double, see writeDouble for little/big endian
         $dateData = pack('d', 1306926779576);
-        if(Amfphp_Core_Amf_Util::isSystemBigEndian()){
+        if (Amfphp_Core_Amf_Util::isSystemBigEndian()) {
             $dateData = strrev($dateData);
         }
         $this->sDate .= $dateData;
         //time zone, not supported. int set to 0
         $this->sDate .= pack('n', 0);
-
-
     }
 
-    public function buildLongString(){
+    /**
+     * build long string
+     */
+    public function buildLongString() {
         //needs to be more than 65535 characters.
         $this->dLongString = str_repeat('a', 70000);
         //type : 0x0C
@@ -404,11 +693,10 @@ class AmfTestData {
         $this->sLongString .= $this->dLongString;
     }
 
-
     /**
      * TODO: no writeUnsupported method, and no PHP for unsupported. Write it A.S.
      */
-    public function buildUnsupported(){
+    public function buildUnsupported() {
         $this->dUnsupported = 'unsupported';
         //type: 0x0D
         $this->sUnsupported = pack('C', 0x0D);
@@ -417,7 +705,7 @@ class AmfTestData {
     /**
      * note: the writeXml method gets rids of CRs and LFs
      */
-    public function buildXml(){
+    public function buildXml() {
         $this->dXml = new Amfphp_Core_Amf_Types_Xml('<testXml>test</testXml>');
         //type : 0xOF
         $this->sXml = pack('C', 0x0F);
@@ -430,7 +718,7 @@ class AmfTestData {
     /**
      * note: the writeXml method gets rids of CRs and LFs
      */
-    public function buildTypedObject(){
+    public function buildTypedObject() {
         $this->dTypedObject = new stdClass();
         $this->dTypedObject->data = 'dummyData';
         $this->dTypedObject->_explicitType = 'DummyClass';
@@ -454,11 +742,9 @@ class AmfTestData {
         $this->sTypedObject .= pack('Cn', 0, 9);
     }
 
-
-
-   /**
-    * Amf Packets
-    */
+    /**
+     * Amf Packets
+     */
 
     /**
      * test serializing an empty Amfphp_Core_Amf_Packet.
@@ -467,7 +753,7 @@ class AmfTestData {
      * 2nd int : number of headers
      * 3rd int : number of Messages
      */
-    public function buildEmptyPacket(){
+    public function buildEmptyPacket() {
         $this->dEmptyPacket = new Amfphp_Core_Amf_Packet();
         $this->sEmptyPacket = pack('nnn', 0, 0, 0);
     }
@@ -475,11 +761,11 @@ class AmfTestData {
     /**
      * one header containing a null, and with required set to true
      */
-    public function buildNullHeaderPacket(){
+    public function buildNullHeaderPacket() {
         $nullHeader = new Amfphp_Core_Amf_Header('null header', TRUE, NULL);
 
         $this->dNullHeaderPacket = new Amfphp_Core_Amf_Packet();
-	$this->dNullHeaderPacket->headers[] = $nullHeader;
+        $this->dNullHeaderPacket->headers[] = $nullHeader;
 
         //version (int)
         $this->sNullHeaderPacket = pack('n', 0);
@@ -502,17 +788,16 @@ class AmfTestData {
 
         //number of Messages
         $this->sNullHeaderPacket .= pack('n', 0);
-
     }
 
     /**
      *  with one header containing a string
      */
-    public function buildStringHeaderPacket(){
+    public function buildStringHeaderPacket() {
         $stringHeader = new Amfphp_Core_Amf_Header('string header', FALSE, 'zzzzzz');
 
         $this->dStringHeaderPacket = new Amfphp_Core_Amf_Packet();
-	$this->dStringHeaderPacket->headers[] = $stringHeader;
+        $this->dStringHeaderPacket->headers[] = $stringHeader;
         //version (int)
         $this->sStringHeaderPacket = pack('n', 0);
         //number of headers (int)
@@ -538,19 +823,17 @@ class AmfTestData {
 
         //number of Messages
         $this->sStringHeaderPacket .= pack('n', 0);
-
     }
-
 
     /**
      * no headers and a Message containing a null
      */
-    public function buildNullMessagePacket(){
+    public function buildNullMessagePacket() {
         $nullMessage = new Amfphp_Core_Amf_Message();
         $nullMessage->targetUri = '/onStatus';
         $nullMessage->responseUri = 'null';
         $this->dNullMessagePacket = new Amfphp_Core_Amf_Packet();
-	$this->dNullMessagePacket->messages[] = $nullMessage;
+        $this->dNullMessagePacket->messages[] = $nullMessage;
 
         //version (int)
         $this->sNullMessagePacket = pack('n', 0);
@@ -573,13 +856,12 @@ class AmfTestData {
         $this->sNullMessagePacket .= pack('N', strlen($messageResultsData));
         //add the result itself
         $this->sNullMessagePacket .= $messageResultsData;
-
     }
 
     /**
      *  no headers and a Message containing a string
      */
-    public function buildStringMessagePacket(){
+    public function buildStringMessagePacket() {
         $stringMessage = new Amfphp_Core_Amf_Message();
         $testString = 'test string';
         $stringMessage->targetUri = '/onStatus';
@@ -609,14 +891,12 @@ class AmfTestData {
         $this->sStringMessagePacket .= pack('N', strlen($messageResultsData));
         //add the result itself
         $this->sStringMessagePacket .= $messageResultsData;
-
     }
-
 
     /**
      * an Amfphp_Core_Amf_Packet with two headers one with a string and one with a null , and two Messages, one with a string and one with a null
      */
-    public function build2HeadersAndTwoMessagesPacket(){
+    public function build2HeadersAndTwoMessagesPacket() {
         $nullHeader = new Amfphp_Core_Amf_Header('null header', TRUE, NULL);
         $stringHeader = new Amfphp_Core_Amf_Header('string header', FALSE, 'zzzzzz');
         $nullMessage = new Amfphp_Core_Amf_Message();
@@ -629,8 +909,8 @@ class AmfTestData {
         $stringMessage->data = $testString;
 
         $this->d2Headers2MessagesPacket = new Amfphp_Core_Amf_Packet();
-	$this->d2Headers2MessagesPacket->headers[] = $stringHeader;
-	$this->d2Headers2MessagesPacket->headers[] = $nullHeader;
+        $this->d2Headers2MessagesPacket->headers[] = $stringHeader;
+        $this->d2Headers2MessagesPacket->headers[] = $nullHeader;
         $this->d2Headers2MessagesPacket->messages[] = $stringMessage;
         $this->d2Headers2MessagesPacket->messages[] = $nullMessage;
         //version (int)
@@ -720,7 +1000,6 @@ class AmfTestData {
         $this->s2Headers2MessagesPacket .= pack('N', strlen($messageResultsData));
         //add the result itself
         $this->s2Headers2MessagesPacket .= $messageResultsData;
-
     }
 
     /**
@@ -728,11 +1007,10 @@ class AmfTestData {
      * the same as the request data.
      */
 
-
     /**
-     *
+     * build simple test service reauest and response
      */
-    public function buildSimpleTestServiceRequestAndResponse(){
+    public function buildSimpleTestServiceRequestAndResponse() {
 
         //request
 
@@ -817,19 +1095,22 @@ class AmfTestData {
 
 
         $this->testServiceResponsePacket = $responsePacket;
-
     }
 
-
-
 }
-
 
 /**
  * used for testing with typed objects
  * @package Tests_TestData
  */
-class DummyClass{
+class DummyClass {
+
+    /**
+     * data
+     * @var mixed
+     */
     public $data;
+
 }
+
 ?>

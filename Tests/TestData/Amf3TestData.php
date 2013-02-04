@@ -17,41 +17,206 @@
  * @author Ariel Sommeria-klein, based on work by ci-dev
  */
 class Amf3TestData {
+    /**
+     * serialized undefined
+     * @var string 
+     */
     public $sUndefined;
+    /**
+     * undefined
+     * @var Amfphp_Core_Amf_Types_Undefined 
+     */
     public $dUndefined;
+    /**
+     * null
+     * @var string 
+     */
     public $sNull;
+    /**
+     * false
+     * @var string 
+     */
     public $sFalse;
+    /**
+     * true
+     * @var string 
+     */
     public $sTrue;
+    /**
+     * int 1
+     * @var int 
+     */
     public $dInt1;
+    /**
+     * int 2
+     * @var string 
+     */
     public $sInt1;
-    public $dInt2;
+    /**
+     * int 2
+     * @var int 
+     */
+    public $dInt2;   
+    
+    /**
+     * int 2
+     * @var string 
+     */
     public $sInt2;
+    
+    /**
+     * double
+     * @var float 
+     */
     public $dDouble;
+    
+    /**
+     * double
+     * @var string 
+     */    
     public $sDouble;
+
+    /**
+     * string
+     * @var string
+     */       
     public $dString;
+    
+    /**
+     * string
+     * @var string 
+     */   
     public $sString;
+    
+    /**
+     * string twice
+     * @var string 
+     */   
     public $sStringTwice; //dString serialized twice. test for reference
+
+    /**
+     * long string
+     * @var string 
+     */   
     public $dLongString;
+    
+    /**
+     * long string
+     * @var string 
+     */   
     public $sLongString;
+
+    /**
+     * empty string
+     * @var string 
+     */       
     public $dEmptyString;
+
+    /**
+     * empty string
+     * @var string 
+     */   
     public $sEmptyString;
+
+    /**
+     * xml document
+     * @var Amfphp_Core_Amf_Types_XmlDocument
+     */       
     public $dXmlDocument;
+
+    /**
+     * xml document
+     * @var string 
+     */   
     public $sXmlDocument;
+
+    /**
+     * xml
+     * @var Amfphp_Core_Amf_Types_Xml 
+     */       
     public $dXml;
+
+    /**
+     * xml
+     * @var string 
+     */   
     public $sXml;
+
+    /**
+     * date
+     * @var Amfphp_Core_Amf_Types_Date
+     */       
     public $dDate;
+
+    /**
+     * date
+     * @var string 
+     */       
     public $sDate;
+
+    /**
+     * empty array
+     * @var array
+     */       
     public $dEmptyArray;
+
+    /**
+     * empty array
+     * @var string 
+     */   
     public $sEmptyArray;
+
+    /**
+     * dense array
+     * @var array
+     */       
     public $dDenseArray;
+
+    /**
+     * dense array
+     * @var string 
+     */   
     public $sDenseArray;
+
+    /**
+     * mixed array
+     * @var array
+     */       
     public $dMixedArray;
+
+    /**
+     * mixed array
+     * @var string 
+     */   
     public $sMixedArray;
+
+    /**
+     * object
+     * @var object
+     */       
     public $dObject;
+
+    /**
+     * object
+     * @var string 
+     */   
     public $sObject;
+
+    /**
+     * byte array
+     * @var Amfphp_Core_Amf_Types_ByteArray
+     */       
     public $dByteArray;
+
+    /**
+     * byte array
+     * @var string 
+     */   
     public $sByteArray;
     
+    /**
+     * constructor
+     */
     public function  __construct() {
         $this->buildBasics();
         $this->buildInt();
@@ -76,6 +241,9 @@ class Amf3TestData {
 
     }
 
+    /**
+     * build int
+     */
     public function buildInt(){
 //pack('C', 4) : the data type first. Then the data...
 // A negative integer is always serialised as U29-4.
@@ -144,6 +312,9 @@ class Amf3TestData {
         
     }
 
+    /**
+     * build xml
+     */
     public function buildXml(){
         $this->dXmlDocument = new Amfphp_Core_Amf_Types_XmlDocument('<?xml version=\'1.0\'?><testRoot><testChild1>testChild1Value</testChild1></testRoot>');
         //2nd is u29s-value : length << 1 | 1.
@@ -155,6 +326,9 @@ class Amf3TestData {
 
     }
 
+    /**
+     * build date
+     */
     public function buildDate(){
         $this->dDate = new Amfphp_Core_Amf_Types_Date(1306926779576); //1st June 2011
         //type: 0x08
@@ -170,6 +344,9 @@ class Amf3TestData {
         
     }
 
+    /**
+     * build array
+     */
     public function buildArray(){
         $this->dEmptyArray = array();
 // 'array_marker' (0x09)
@@ -225,6 +402,9 @@ class Amf3TestData {
         $this->sMixedArray = pack('C3', 9, 5, 3) . 's' . pack('CC', 6, 5) . 'sv' . pack('C', 7) . 'xyz' . pack('CC', 6, 11) . 'tvxyz' . pack('C3', 1, 6, 9) . 'zero' . pack('CC', 6, 7) . 'one';
     }
 
+    /**
+     * build object
+     */
     public function buildObject(){
         $this->dObject = new stdClass();
         $this->dObject->data= 'test';
@@ -251,6 +431,9 @@ class Amf3TestData {
         
     }
 
+    /**
+     * build byte array
+     */
     public function buildByteArray(){
         $this->dByteArray = new Amfphp_Core_Amf_Types_ByteArray('test');
         //Byte Array Marker

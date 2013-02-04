@@ -24,12 +24,21 @@ require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
 class AmfphpCharsetConverterTest extends PHPUnit_Framework_TestCase {
 
     /**
+     * object
      * @var CharsetConverter
      */
     protected $object;
-
+    
+    /**
+     * text in client charset
+     * @var string 
+     */
     protected $textInClientCharset;
 
+    /**
+     * text in php charset
+     * @var string 
+     */
     protected $textInPhpCharset;
 
     /**
@@ -52,6 +61,9 @@ class AmfphpCharsetConverterTest extends PHPUnit_Framework_TestCase {
 
     }
     
+    /**
+     * test request deserialized filter
+     */
     public function testRequestDeserializedFilter() {
         $testPacket = new Amfphp_Core_Amf_Packet();
         $testPacket->messages[] = new Amfphp_Core_Amf_Message(null, null, $this->textInClientCharset);
@@ -60,6 +72,9 @@ class AmfphpCharsetConverterTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($this->textInPhpCharset, $modifiedPacket->messages[0]->data);
     }
 
+    /**
+     * test response deserialied filter
+     */
     public function testResponseDeserializedFilter() {
         $testPacket = new Amfphp_Core_Amf_Packet();
         $testPacket->messages[] = new Amfphp_Core_Amf_Message(null, null, $this->textInPhpCharset);

@@ -21,10 +21,18 @@
  */
 
 class ExampleSerializationDebugService {
+    /**
+     * get data that creates problems
+     * @return MyVO
+     */
     public function getDataThatCreatesProblems(){
         return unserialize('O:4:"MyVO":2:{s:4:"var1";s:4:"val1";s:4:"var2";s:4:"val2";}');
     }
     
+    /**
+     * get serialized object
+     * @return MyVO
+     */
     public function getSerializedObject(){
         $ret = new MyVO();
         $ret->var1 = "val1";
@@ -36,11 +44,20 @@ class ExampleSerializationDebugService {
 }
 
 /**
- * 
+ * vo holder class
  * @package Tests_TestData_Services
  */
 class MyVO{
+    /**
+     * var1
+     * @var string 
+     */
     public $var1;
+    
+    /**
+     *var2
+     * @var string
+     */
     public $var2;
 }
 

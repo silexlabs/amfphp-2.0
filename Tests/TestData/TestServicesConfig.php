@@ -18,6 +18,9 @@
  */
 class TestServicesConfig extends Amfphp_Core_Config {
 
+    /**
+     * constructor
+     */
     public function  __construct() {
         parent::__construct();
         $this->serviceFolderPaths  = array(dirname(__FILE__) . '/Services/' ,dirname(__FILE__) . '/MoreServices/');

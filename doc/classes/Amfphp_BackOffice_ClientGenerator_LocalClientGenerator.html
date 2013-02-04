@@ -21,7 +21,6 @@
                                     API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a>Packages</a></li>
 <li><a href="../packages/Amfphp.html"><i class="icon-folder-open"></i> Amfphp</a></li>
-<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
 <li><a href="../packages/Tests.html"><i class="icon-folder-open"></i> Tests</a></li>
 </ul>
 </li>
@@ -33,7 +32,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">300</span></a></li>
+                <span class="label label-info">0</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">13</span>
@@ -60,10 +59,8 @@
 <li class="nav-header">
 <i class="icon-custom icon-method"></i> Methods
                     <ul>
-<li class="method public "><a href="#method___construct" title="__construct :: "><span class="description">__construct()
-        </span><pre>__construct()</pre></a></li>
-<li class="method public "><a href="#method_generate" title="generate :: "><span class="description">generate()
-        </span><pre>generate()</pre></a></li>
+<li class="method public "><a href="#method___construct" title="__construct :: constructor"><span class="description">constructor</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method_generate" title="generate :: generate project based on template"><span class="description">generate project based on template</span><pre>generate()</pre></a></li>
 <li class="method public "><a href="#method_getInfoUrl" title="getInfoUrl :: override to provide a custom url for a page containing info for this generator."><span class="description">override to provide a custom url for a page containing info for this generator.</span><pre>getInfoUrl()</pre></a></li>
 <li class="method public "><a href="#method_getTestUrlSuffix" title="getTestUrlSuffix :: added to the url of the generated code to go to its test page directly fro, the client generator ui
 for example: 'testhtml'/index.html'
@@ -95,13 +92,13 @@ found block.</span><pre>searchForBlocksAndApplyProcessing()</pre></a></li>
 </li>
 <li class="nav-header protected">» Protected
                     <ul>
-<li class="property protected "><a href="#property_amfphpEntryPointUrl" title="$amfphpEntryPointUrl :: "><span class="description"></span><pre>$amfphpEntryPointUrl</pre></a></li>
-<li class="property protected "><a href="#property_codeFileExtensions" title="$codeFileExtensions :: "><span class="description"></span><pre>$codeFileExtensions</pre></a></li>
+<li class="property protected "><a href="#property_amfphpEntryPointUrl" title="$amfphpEntryPointUrl :: url"><span class="description"></span><pre>$amfphpEntryPointUrl</pre></a></li>
+<li class="property protected "><a href="#property_codeFileExtensions" title="$codeFileExtensions :: code file extensions to parse."><span class="description"></span><pre>$codeFileExtensions</pre></a></li>
 <li class="property protected "><a href="#property_fileBeingProcessed" title="$fileBeingProcessed :: file being processed, useful for error messages"><span class="description"></span><pre>$fileBeingProcessed</pre></a></li>
-<li class="property protected "><a href="#property_methodBeingProcessed" title="$methodBeingProcessed :: "><span class="description"></span><pre>$methodBeingProcessed</pre></a></li>
-<li class="property protected "><a href="#property_serviceBeingProcessed" title="$serviceBeingProcessed :: "><span class="description"></span><pre>$serviceBeingProcessed</pre></a></li>
-<li class="property protected "><a href="#property_services" title="$services :: "><span class="description"></span><pre>$services</pre></a></li>
-<li class="property protected "><a href="#property_templateFolderUrl" title="$templateFolderUrl :: "><span class="description"></span><pre>$templateFolderUrl</pre></a></li>
+<li class="property protected "><a href="#property_methodBeingProcessed" title="$methodBeingProcessed :: method being processed."><span class="description"></span><pre>$methodBeingProcessed</pre></a></li>
+<li class="property protected "><a href="#property_serviceBeingProcessed" title="$serviceBeingProcessed :: service being processed."><span class="description"></span><pre>$serviceBeingProcessed</pre></a></li>
+<li class="property protected "><a href="#property_services" title="$services :: services"><span class="description"></span><pre>$services</pre></a></li>
+<li class="property protected "><a href="#property_templateFolderUrl" title="$templateFolderUrl :: absolute path to folder where template is"><span class="description"></span><pre>$templateFolderUrl</pre></a></li>
 </ul>
 </li>
 <li class="nav-header">
@@ -151,8 +148,7 @@ by '__'.  This will be replaced by a '/' in Amfphp.</p></div>
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
 <a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
-<h2>__construct()
-        </h2>
+<h2>constructor</h2>
 <pre>__construct(array $codeFileExtensions, \type $templateFolderUrl) </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
@@ -169,8 +165,7 @@ by '__'.  This will be replaced by a '/' in Amfphp.</p></div>
 </div></div>
 </div>
 <a id="method_generate"></a><div class="element clickable method public method_generate" data-toggle="collapse" data-target=".method_generate .collapse">
-<h2>generate()
-        </h2>
+<h2>generate project based on template</h2>
 <pre>generate(array $services, string $amfphpEntryPointUrl, String $targetFolder) : null</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
@@ -354,15 +349,15 @@ found block.</h2>
 </div>
 <a id="property_amfphpEntryPointUrl"> </a><div class="element clickable property protected property_amfphpEntryPointUrl" data-toggle="collapse" data-target=".property_amfphpEntryPointUrl .collapse">
 <h2></h2>
-<pre>$amfphpEntryPointUrl </pre>
+<pre>$amfphpEntryPointUrl : string</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="property_codeFileExtensions"> </a><div class="element clickable property protected property_codeFileExtensions" data-toggle="collapse" data-target=".property_codeFileExtensions .collapse">
 <h2></h2>
-<pre>$codeFileExtensions </pre>
+<pre>$codeFileExtensions : array</pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>for example array('as')</p></div></div></div>
 </div>
 <a id="property_fileBeingProcessed"> </a><div class="element clickable property protected property_fileBeingProcessed" data-toggle="collapse" data-target=".property_fileBeingProcessed .collapse">
 <h2></h2>
@@ -372,25 +367,37 @@ found block.</h2>
 </div>
 <a id="property_methodBeingProcessed"> </a><div class="element clickable property protected property_methodBeingProcessed" data-toggle="collapse" data-target=".property_methodBeingProcessed .collapse">
 <h2></h2>
-<pre>$methodBeingProcessed </pre>
+<pre>$methodBeingProcessed : <a href="http://php.net/manual/en/class.stdclass.php">\stdClass</a></pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>untyped</p></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="Amfphp.Plugins.AmfphpDiscovery.MethodDescriptor.html#%5CAmfphpDiscovery_MethodDescriptor">\AmfphpDiscovery_MethodDescriptor</a></td>
+</tr></table>
+</div></div>
 </div>
 <a id="property_serviceBeingProcessed"> </a><div class="element clickable property protected property_serviceBeingProcessed" data-toggle="collapse" data-target=".property_serviceBeingProcessed .collapse">
 <h2></h2>
-<pre>$serviceBeingProcessed </pre>
+<pre>$serviceBeingProcessed : <a href="http://php.net/manual/en/class.stdclass.php">\stdClass</a></pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>untyped</p></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="Amfphp.Plugins.AmfphpDiscovery.ServiceDescriptor.html#%5CAmfphpDiscovery_ServiceDescriptor">\AmfphpDiscovery_ServiceDescriptor</a></td>
+</tr></table>
+</div></div>
 </div>
 <a id="property_services"> </a><div class="element clickable property protected property_services" data-toggle="collapse" data-target=".property_services .collapse">
 <h2></h2>
-<pre>$services </pre>
+<pre>$services : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="property_templateFolderUrl"> </a><div class="element clickable property protected property_templateFolderUrl" data-toggle="collapse" data-target=".property_templateFolderUrl .collapse">
 <h2></h2>
-<pre>$templateFolderUrl </pre>
+<pre>$templateFolderUrl : string</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
@@ -445,7 +452,7 @@ found block.</h2>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-02-04T08:51:24+01:00.<br></footer></div>
+            generated on 2013-02-04T14:01:10+01:00.<br></footer></div>
 </div>
 </body>
 </html>

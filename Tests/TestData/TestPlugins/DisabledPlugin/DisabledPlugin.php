@@ -16,8 +16,15 @@
  * @author Ariel Sommeria-klein
  */
 class DisabledPlugin {
+    /**
+     *instanciation counter
+     * @var int
+     */
     public static $instanciationCounter = 0;
 
+    /**
+     * constructor
+     */
     public function  __construct() {
         self::$instanciationCounter++;
     }

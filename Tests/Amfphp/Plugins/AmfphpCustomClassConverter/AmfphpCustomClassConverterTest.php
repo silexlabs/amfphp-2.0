@@ -25,6 +25,7 @@ require_once dirname(__FILE__) . '/../../../TestData/CustomClasses/TestCustomCla
 class AmfphpCustomClassConverterTest extends PHPUnit_Framework_TestCase {
 
     /**
+     * object
      * @var CustomClassConverter
      */
     protected $object;
@@ -45,7 +46,9 @@ class AmfphpCustomClassConverterTest extends PHPUnit_Framework_TestCase {
     protected function tearDown() {
 
     }
-
+    /**
+     * test deserialiwed request
+     */
     public function testfilterDeserializedRequest() {
         
         $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
@@ -99,6 +102,9 @@ class AmfphpCustomClassConverterTest extends PHPUnit_Framework_TestCase {
 
     }
 
+    /**
+     * test filter deserialized response
+     */
     public function testfilterDeserializedResponse() {
         $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
         //3 level object: TestCustomClass1, untyped, TestCustomClass2 with some data around

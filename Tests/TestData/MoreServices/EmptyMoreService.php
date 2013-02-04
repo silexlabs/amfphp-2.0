@@ -18,6 +18,9 @@
  */
 class EmptyMoreService {
     
+    /**
+     * dummy function bla
+     */
     public function bla(){
     }
 }
