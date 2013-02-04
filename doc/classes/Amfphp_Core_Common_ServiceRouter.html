@@ -1,0 +1,261 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>phpDocumentor » \Amfphp_Core_Common_ServiceRouter</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">phpDocumentor</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Amfphp.html"><i class="icon-folder-open"></i> Amfphp</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Tests.html"><i class="icon-folder-open"></i> Tests</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">300</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul><li>todo 
+                <span class="label label-info">13</span>
+</li></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___construct" title="__construct :: constructor"><span class="description">constructor</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method_executeServiceCall" title="executeServiceCall :: loads and instanciates a service class matching $serviceName, then calls the function defined by $methodName using $parameters as parameters
+throws an exception if service not found."><span class="description">loads and instanciates a service class matching $serviceName, then calls the function defined by $methodName using $parameters as parameters
+throws an exception if service not found.</span><pre>executeServiceCall()</pre></a></li>
+<li class="method public "><a href="#method_getServiceObject" title="getServiceObject :: get service object"><span class="description">get service object</span><pre>getServiceObject()</pre></a></li>
+<li class="method public "><a href="#method_getServiceObjectStatically" title="getServiceObjectStatically :: get a service object by its name."><span class="description">get a service object by its name.</span><pre>getServiceObjectStatically()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul>
+<li class="property public "><a href="#property_checkArgumentCount" title="$checkArgumentCount :: check parameters."><span class="description"></span><pre>$checkArgumentCount</pre></a></li>
+<li class="property public "><a href="#property_serviceFolderPaths" title="$serviceFolderPaths :: paths to folders containing services(relative or absolute)"><span class="description"></span><pre>$serviceFolderPaths</pre></a></li>
+<li class="property public "><a href="#property_serviceNames2ClassFindInfo" title="$serviceNames2ClassFindInfo :: "><span class="description">of ClassFindInfo</span><pre>$serviceNames2ClassFindInfo</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-constant"></i> Constants
+                    <ul><li class="constant  "><a href="#constant_FILTER_SERVICE_OBJECT" title="FILTER_SERVICE_OBJECT :: filter called when the service object is created."><span class="description">filter called when the service object is created.</span><pre>FILTER_SERVICE_OBJECT</pre></a></li></ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\Amfphp_Core_Common_ServiceRouter"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/global.html">global</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/Amfphp_Core_Common_ServiceRouter.html">Amfphp_Core_Common_ServiceRouter</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">The Service Router class is responsible for executing the remote service method and returning it's value.</p>
+<div class="details">
+<div class="long_description"><p>based on the old 'Executive' of php 1.9. It looks for a service either explicitely defined in a
+ClassFindInfo object, or in a service folder.</p></div>
+<table class="table table-bordered">
+<tr>
+<th>package</th>
+<td><a href="../packages/Amfphp.Core.Common.html">Amfphp_Core_Common</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="">Ariel Sommeria-klein</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>constructor</h2>
+<pre>__construct(array $serviceFolderPaths, array $serviceNames2ClassFindInfo, Boolean $checkArgumentCount) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$serviceFolderPaths</h4>
+<code>array</code><p>folders containing service classes</p></div>
+<div class="subelement argument">
+<h4>$serviceNames2ClassFindInfo</h4>
+<code>array</code><p>a dictionary of service classes represented in a ClassFindInfo.</p></div>
+<div class="subelement argument">
+<h4>$checkArgumentCount</h4>
+<code>Boolean</code>
+</div>
+</div></div>
+</div>
+<a id="method_executeServiceCall"></a><div class="element clickable method public method_executeServiceCall" data-toggle="collapse" data-target=".method_executeServiceCall .collapse">
+<h2>loads and instanciates a service class matching $serviceName, then calls the function defined by $methodName using $parameters as parameters
+throws an exception if service not found.</h2>
+<pre>executeServiceCall(string $serviceName, string $methodName, array $parameters) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>if the service exists but not the function, an exception is thrown by call_user_func_array. It is pretty explicit, so no further code was added</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$serviceName</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$methodName</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$parameters</h4>
+<code>array</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code>the result of the function call</div>
+</div></div>
+</div>
+<a id="method_getServiceObject"></a><div class="element clickable method public method_getServiceObject" data-toggle="collapse" data-target=".method_getServiceObject .collapse">
+<h2>get service object</h2>
+<pre>getServiceObject(String $serviceName) : Object</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$serviceName</h4>
+<code>String</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>Object</code>service object</div>
+</div></div>
+</div>
+<a id="method_getServiceObjectStatically"></a><div class="element clickable method public method_getServiceObjectStatically" data-toggle="collapse" data-target=".method_getServiceObjectStatically .collapse">
+<h2>get a service object by its name.</h2>
+<pre>getServiceObjectStatically(\type $serviceName, array $serviceFolderPaths, array $serviceNames2ClassFindInfo) : Object</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Looks for a match in serviceNames2ClassFindInfo, then in the defined service folders.
+If none found, an exception is thrown</p></div>
+<table class="table table-bordered"><tr>
+<th>todo</th>
+<td>maybe option for a fully qualified class name.
+this method is static so that it can be used also by the discovery service
+ '__' are replaced by '/' to help the client generator support packages without messing with folders and the like</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$serviceName</h4>
+<code>\type</code>
+</div>
+<div class="subelement argument">
+<h4>$serviceFolderPaths</h4>
+<code>array</code>
+</div>
+<div class="subelement argument">
+<h4>$serviceNames2ClassFindInfo</h4>
+<code>array</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>Object</code>service object</div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_checkArgumentCount"> </a><div class="element clickable property public property_checkArgumentCount" data-toggle="collapse" data-target=".property_checkArgumentCount .collapse">
+<h2></h2>
+<pre>$checkArgumentCount : Boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>This is useful for development, but should be disabled for production</p></div></div></div>
+</div>
+<a id="property_serviceFolderPaths"> </a><div class="element clickable property public property_serviceFolderPaths" data-toggle="collapse" data-target=".property_serviceFolderPaths .collapse">
+<h2></h2>
+<pre>$serviceFolderPaths : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_serviceNames2ClassFindInfo"> </a><div class="element clickable property public property_serviceNames2ClassFindInfo" data-toggle="collapse" data-target=".property_serviceNames2ClassFindInfo .collapse">
+<h2>of ClassFindInfo</h2>
+<pre>$serviceNames2ClassFindInfo : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<h3>
+<i class="icon-custom icon-constant"></i> Constants</h3>
+<a id="constant_FILTER_SERVICE_OBJECT"> </a><div class="element clickable constant  constant_FILTER_SERVICE_OBJECT" data-toggle="collapse" data-target=".constant_FILTER_SERVICE_OBJECT .collapse">
+<h2>filter called when the service object is created.</h2>
+<pre>FILTER_SERVICE_OBJECT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Useful for authentication</p></div>
+<table class="table table-bordered">
+<tr>
+<th>param</th>
+<td></td>
+</tr>
+<tr>
+<th>param</th>
+<td></td>
+</tr>
+<tr>
+<th>param</th>
+<td></td>
+</tr>
+<tr>
+<th>param</th>
+<td></td>
+</tr>
+</table>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-02-04T08:51:24+01:00.<br></footer></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,905 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>phpDocumentor » global</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">phpDocumentor</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Amfphp.html"><i class="icon-folder-open"></i> Amfphp</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Tests.html"><i class="icon-folder-open"></i> Tests</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">300</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul><li>todo 
+                <span class="label label-info">13</span>
+</li></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-map-marker"></i> Namespaces</li>
+<li>
+<a href="../namespaces/global.html" title="global"><i class="icon-th"></i>global</a><ul class="nav nav-list nav-namespaces"></ul>
+</li>
+</ul>
+</div>
+<div class="span8 namespace-contents">
+<ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-th"></i></a><span class="divider">\</span>
+</li>
+<li class="active"><a href="../namespaces/global.html">global</a></li>
+</ul>
+<div class="namespace-indent">
+<h3>
+<i class="icon-custom icon-function"></i> Functions</h3>
+<a id="function_custom_warning_handler"></a><div class="element clickable function  function_custom_warning_handler" data-toggle="collapse" data-target=".function_custom_warning_handler .collapse">
+<h2>throw an exceptino containing error info</h2>
+<pre>custom_warning_handler(int $errno, string $errstr, string $errfile, int $errline, mixed $errcontext) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$errno</h4>
+<code>int</code>
+</div>
+<div class="subelement argument">
+<h4>$errstr</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$errfile</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$errline</h4>
+<code>int</code>
+</div>
+<div class="subelement argument">
+<h4>$errcontext</h4>
+<code>mixed</code>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="http://php.net/manual/en/class.exception.php">\Exception</a></code></th>
+<td></td>
+</tr></table>
+</div></div>
+</div>
+<a id="function_objToTreeData"></a><div class="element clickable function  function_objToTreeData" data-toggle="collapse" data-target=".function_objToTreeData .collapse">
+<h2>create tree data string for the representation of a result object.</h2>
+<pre>objToTreeData(mixed $obj, string $objName) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>A bit like a var dump but for displaying with jstree
+recursive.</p></div>
+<table class="table table-bordered"><tr>
+<th>todo</th>
+<td>reunderstand and comment this objname thing...</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$obj</h4>
+<code>mixed</code>
+</div>
+<div class="subelement argument">
+<h4>$objName</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
+<div id="Amfphp_Core_Common_IDeserializedRequestHandler" class="element ajax clickable interface">
+<h1>Amfphp_Core_Common_IDeserializedRequestHandler<a href="../classes/Amfphp_Core_Common_IDeserializedRequestHandler.html">¶</a>
+</h1>
+<p class="short_description">interface for a class that can handle a deserialized request</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_Common_IDeserializedRequestHandler.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_Core_Common_IDeserializer" class="element ajax clickable interface">
+<h1>Amfphp_Core_Common_IDeserializer<a href="../classes/Amfphp_Core_Common_IDeserializer.html">¶</a>
+</h1>
+<p class="short_description">interface for deserializers.</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_Common_IDeserializer.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_Core_Common_IExceptionHandler" class="element ajax clickable interface">
+<h1>Amfphp_Core_Common_IExceptionHandler<a href="../classes/Amfphp_Core_Common_IExceptionHandler.html">¶</a>
+</h1>
+<p class="short_description">An exception handler is passed an exception and must translate that into something that is serializable.</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_Common_IExceptionHandler.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_Core_Common_ISerializer" class="element ajax clickable interface">
+<h1>Amfphp_Core_Common_ISerializer<a href="../classes/Amfphp_Core_Common_ISerializer.html">¶</a>
+</h1>
+<p class="short_description">interface for serializers.</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_Common_ISerializer.html" class="more">« More »</a>
+</div>
+<div id="Amf3DeserializationTest" class="element ajax clickable class">
+<h1>Amf3DeserializationTest<a href="../classes/Amf3DeserializationTest.html">¶</a>
+</h1>
+<p class="short_description">Unit tests for Amfphp_Core_Amf_Serializer, but using amf3
+note: phpunit dataProvider mechanism doesn't work well, so lots of boiler plate code here.</p>
+<div class="details collapse"></div>
+<a href="../classes/Amf3DeserializationTest.html" class="more">« More »</a>
+</div>
+<div id="Amf3SerializationTest" class="element ajax clickable class">
+<h1>Amf3SerializationTest<a href="../classes/Amf3SerializationTest.html">¶</a>
+</h1>
+<p class="short_description">Unit tests for Amfphp_Core_Amf_Serializer, but using amf3
+note: phpunit dataProvider mechanism doesn't work well, so lots of boiler plate code here.</p>
+<div class="details collapse"></div>
+<a href="../classes/Amf3SerializationTest.html" class="more">« More »</a>
+</div>
+<div id="Amf3TestData" class="element ajax clickable class">
+<h1>Amf3TestData<a href="../classes/Amf3TestData.html">¶</a>
+</h1>
+<p class="short_description">See AmfTestData for details, this is the extension for Amf3</p>
+<div class="details collapse"></div>
+<a href="../classes/Amf3TestData.html" class="more">« More »</a>
+</div>
+<div id="AmfDeserializerWrapper" class="element ajax clickable class">
+<h1>AmfDeserializerWrapper<a href="../classes/AmfDeserializerWrapper.html">¶</a>
+</h1>
+<p class="short_description">This class exports some internal (public) methods.</p>
+<div class="details collapse"></div>
+<a href="../classes/AmfDeserializerWrapper.html" class="more">« More »</a>
+</div>
+<div id="AmfSerializerWrapper" class="element ajax clickable class">
+<h1>AmfSerializerWrapper<a href="../classes/AmfSerializerWrapper.html">¶</a>
+</h1>
+<p class="short_description">This class exports some internal (public) methods.</p>
+<div class="details collapse"></div>
+<a href="../classes/AmfSerializerWrapper.html" class="more">« More »</a>
+</div>
+<div id="AmfTestData" class="element ajax clickable class">
+<h1>AmfTestData<a href="../classes/AmfTestData.html">¶</a>
+</h1>
+<p class="short_description">test data for the Amfphp unit tests
+data types have the s prefix for 'serialized' and 'd' prefix for 'deserialized'
+for Packets there is a flaw in the Amfphp design which means that serializng and deserializing is not symmetrical.</p>
+<div class="details collapse"></div>
+<a href="../classes/AmfTestData.html" class="more">« More »</a>
+</div>
+<div id="AmfphpAuthentication" class="element ajax clickable class">
+<h1>AmfphpAuthentication<a href="../classes/AmfphpAuthentication.html">¶</a>
+</h1>
+<p class="short_description">Authentication for Amfphp.</p>
+<div class="details collapse"></div>
+<a href="../classes/AmfphpAuthentication.html" class="more">« More »</a>
+</div>
+<div id="AmfphpAuthenticationTest" class="element ajax clickable class">
+<h1>AmfphpAuthenticationTest<a href="../classes/AmfphpAuthenticationTest.html">¶</a>
+</h1>
+<p class="short_description">Test class for AmfphpAuthentication.</p>
+<div class="details collapse"></div>
+<a href="../classes/AmfphpAuthenticationTest.html" class="more">« More »</a>
+</div>
+<div id="AmfphpCharsetConverter" class="element ajax clickable class">
+<h1>AmfphpCharsetConverter<a href="../classes/AmfphpCharsetConverter.html">¶</a>
+</h1>
+<p class="short_description">Converts strings to the right encoding in incoming and outgoing packets.</p>
+<div class="details collapse"></div>
+<a href="../classes/AmfphpCharsetConverter.html" class="more">« More »</a>
+</div>
+<div id="AmfphpCharsetConverterTest" class="element ajax clickable class">
+<h1>AmfphpCharsetConverterTest<a href="../classes/AmfphpCharsetConverterTest.html">¶</a>
+</h1>
+<p class="short_description">Test class for CharsetConverter.</p>
+<div class="details collapse"></div>
+<a href="../classes/AmfphpCharsetConverterTest.html" class="more">« More »</a>
+</div>
+<div id="AmfphpCustomClassConverter" class="element ajax clickable class">
+<h1>AmfphpCustomClassConverter<a href="../classes/AmfphpCustomClassConverter.html">¶</a>
+</h1>
+<p class="short_description">Converts data from incoming packets with explicit types to custom classes, and vice versa for the outgoing packets.</p>
+<div class="details collapse"></div>
+<a href="../classes/AmfphpCustomClassConverter.html" class="more">« More »</a>
+</div>
+<div id="AmfphpCustomClassConverterTest" class="element ajax clickable class">
+<h1>AmfphpCustomClassConverterTest<a href="../classes/AmfphpCustomClassConverterTest.html">¶</a>
+</h1>
+<p class="short_description">Test class for CustomClassConverter.</p>
+<div class="details collapse"></div>
+<a href="../classes/AmfphpCustomClassConverterTest.html" class="more">« More »</a>
+</div>
+<div id="AmfphpDiscovery" class="element ajax clickable class">
+<h1>AmfphpDiscovery<a href="../classes/AmfphpDiscovery.html">¶</a>
+</h1>
+<p class="short_description">adds the discovery service, a service that returns information about available services.</p>
+<div class="details collapse"></div>
+<a href="../classes/AmfphpDiscovery.html" class="more">« More »</a>
+</div>
+<div id="AmfphpDiscoveryService" class="element ajax clickable class">
+<h1>AmfphpDiscoveryService<a href="../classes/AmfphpDiscoveryService.html">¶</a>
+</h1>
+<p class="short_description">analyses existing services.</p>
+<div class="details collapse"></div>
+<a href="../classes/AmfphpDiscoveryService.html" class="more">« More »</a>
+</div>
+<div id="AmfphpDiscovery_MethodDescriptor" class="element ajax clickable class">
+<h1>AmfphpDiscovery_MethodDescriptor<a href="../classes/AmfphpDiscovery_MethodDescriptor.html">¶</a>
+</h1>
+<p class="short_description">Contains all collected information about a service method.</p>
+<div class="details collapse"></div>
+<a href="../classes/AmfphpDiscovery_MethodDescriptor.html" class="more">« More »</a>
+</div>
+<div id="AmfphpDiscovery_ParameterDescriptor" class="element ajax clickable class">
+<h1>AmfphpDiscovery_ParameterDescriptor<a href="../classes/AmfphpDiscovery_ParameterDescriptor.html">¶</a>
+</h1>
+<p class="short_description">Contains all collected information about a service method parameter</p>
+<div class="details collapse"></div>
+<a href="../classes/AmfphpDiscovery_ParameterDescriptor.html" class="more">« More »</a>
+</div>
+<div id="AmfphpDiscovery_ServiceDescriptor" class="element ajax clickable class">
+<h1>AmfphpDiscovery_ServiceDescriptor<a href="../classes/AmfphpDiscovery_ServiceDescriptor.html">¶</a>
+</h1>
+<p class="short_description">Contains all collected information about a service.</p>
+<div class="details collapse"></div>
+<a href="../classes/AmfphpDiscovery_ServiceDescriptor.html" class="more">« More »</a>
+</div>
+<div id="AmfphpDummy" class="element ajax clickable class">
+<h1>AmfphpDummy<a href="../classes/AmfphpDummy.html">¶</a>
+</h1>
+<p class="short_description">This catches browser requests to the gateway, to show something more helpful than an error message.</p>
+<div class="details collapse"></div>
+<a href="../classes/AmfphpDummy.html" class="more">« More »</a>
+</div>
+<div id="AmfphpErrorHandler" class="element ajax clickable class">
+<h1>AmfphpErrorHandler<a href="../classes/AmfphpErrorHandler.html">¶</a>
+</h1>
+<p class="short_description">sets a custom error handler to catch notices and such and transform them to exceptions.</p>
+<div class="details collapse"></div>
+<a href="../classes/AmfphpErrorHandler.html" class="more">« More »</a>
+</div>
+<div id="AmfphpFlashClientGenerator" class="element ajax clickable class">
+<h1>AmfphpFlashClientGenerator<a href="../classes/AmfphpFlashClientGenerator.html">¶</a>
+</h1>
+<p class="short_description">generates a Flash project for consumption of amfPHP services</p>
+<div class="details collapse"></div>
+<a href="../classes/AmfphpFlashClientGenerator.html" class="more">« More »</a>
+</div>
+<div id="AmfphpFlexClientGenerator" class="element ajax clickable class">
+<h1>AmfphpFlexClientGenerator<a href="../classes/AmfphpFlexClientGenerator.html">¶</a>
+</h1>
+<p class="short_description">generates a Flash project for consumption of amfPHP services</p>
+<div class="details collapse"></div>
+<a href="../classes/AmfphpFlexClientGenerator.html" class="more">« More »</a>
+</div>
+<div id="AmfphpFlexMessaging" class="element ajax clickable class">
+<h1>AmfphpFlexMessaging<a href="../classes/AmfphpFlexMessaging.html">¶</a>
+</h1>
+<p class="short_description">Support for flex messaging.</p>
+<div class="details collapse"></div>
+<a href="../classes/AmfphpFlexMessaging.html" class="more">« More »</a>
+</div>
+<div id="AmfphpFlexMessagingTest" class="element ajax clickable class">
+<h1>AmfphpFlexMessagingTest<a href="../classes/AmfphpFlexMessagingTest.html">¶</a>
+</h1>
+<p class="short_description">Test class for FlexMessaging.</p>
+<div class="details collapse"></div>
+<a href="../classes/AmfphpFlexMessagingTest.html" class="more">« More »</a>
+</div>
+<div id="AmfphpFlexMessaging_AcknowledgeMessage" class="element ajax clickable class">
+<h1>AmfphpFlexMessaging_AcknowledgeMessage<a href="../classes/AmfphpFlexMessaging_AcknowledgeMessage.html">¶</a>
+</h1>
+<p class="short_description">Used to generate a Flex Acknowledge message.</p>
+<div class="details collapse"></div>
+<a href="../classes/AmfphpFlexMessaging_AcknowledgeMessage.html" class="more">« More »</a>
+</div>
+<div id="AmfphpFlexMessaging_ErrorMessage" class="element ajax clickable class">
+<h1>AmfphpFlexMessaging_ErrorMessage<a href="../classes/AmfphpFlexMessaging_ErrorMessage.html">¶</a>
+</h1>
+<p class="short_description">Used to generate a Flex Error message.</p>
+<div class="details collapse"></div>
+<a href="../classes/AmfphpFlexMessaging_ErrorMessage.html" class="more">« More »</a>
+</div>
+<div id="AmfphpGet" class="element ajax clickable class">
+<h1>AmfphpGet<a href="../classes/AmfphpGet.html">¶</a>
+</h1>
+<p class="short_description">Adds support for HTTP GET requests to services, useful for simple test calls and for cross domain ajax calls.</p>
+<div class="details collapse"></div>
+<a href="../classes/AmfphpGet.html" class="more">« More »</a>
+</div>
+<div id="AmfphpHtmlClientGenerator" class="element ajax clickable class">
+<h1>AmfphpHtmlClientGenerator<a href="../classes/AmfphpHtmlClientGenerator.html">¶</a>
+</h1>
+<p class="short_description">generates a Flash project for consumption of amfPHP services</p>
+<div class="details collapse"></div>
+<a href="../classes/AmfphpHtmlClientGenerator.html" class="more">« More »</a>
+</div>
+<div id="AmfphpIncludedRequest" class="element ajax clickable class">
+<h1>AmfphpIncludedRequest<a href="../classes/AmfphpIncludedRequest.html">¶</a>
+</h1>
+<p class="short_description">allows inclusion of an amfPHP entry point script.</p>
+<div class="details collapse"></div>
+<a href="../classes/AmfphpIncludedRequest.html" class="more">« More »</a>
+</div>
+<div id="AmfphpJson" class="element ajax clickable class">
+<h1>AmfphpJson<a href="../classes/AmfphpJson.html">¶</a>
+</h1>
+<p class="short_description">Enables amfPHP to receive and reply with JSON
+This plugin can be deactivated if the project doesn't need to support JSON
+strings and returned as JSON strings using POST parameters.</p>
+<div class="details collapse"></div>
+<a href="../classes/AmfphpJson.html" class="more">« More »</a>
+</div>
+<div id="AmfphpLogger" class="element ajax clickable class">
+<h1>AmfphpLogger<a href="../classes/AmfphpLogger.html">¶</a>
+</h1>
+<p class="short_description">logs requests and responses in their serialized and deserialized forms.</p>
+<div class="details collapse"></div>
+<a href="../classes/AmfphpLogger.html" class="more">« More »</a>
+</div>
+<div id="AmfphpLoggerTest" class="element ajax clickable class">
+<h1>AmfphpLoggerTest<a href="../classes/AmfphpLoggerTest.html">¶</a>
+</h1>
+<p class="short_description">Test class for AmfphpLogger.</p>
+<div class="details collapse"></div>
+<a href="../classes/AmfphpLoggerTest.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_BackOffice_AccessManager" class="element ajax clickable class">
+<h1>Amfphp_BackOffice_AccessManager<a href="../classes/Amfphp_BackOffice_AccessManager.html">¶</a>
+</h1>
+<p class="short_description">controls access to back office, along with SignIn, SignOut scripts</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_BackOffice_AccessManager.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_BackOffice_ClientGenerator_GeneratorManager" class="element ajax clickable class">
+<h1>Amfphp_BackOffice_ClientGenerator_GeneratorManager<a href="../classes/Amfphp_BackOffice_ClientGenerator_GeneratorManager.html">¶</a>
+</h1>
+<p class="short_description">loads the generators</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_BackOffice_ClientGenerator_GeneratorManager.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_BackOffice_ClientGenerator_LocalClientGenerator" class="element ajax clickable class">
+<h1>Amfphp_BackOffice_ClientGenerator_LocalClientGenerator<a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html">¶</a>
+</h1>
+<p class="short_description">Handles typical client generation, override various methods for customisation
+1.</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_BackOffice_ClientGenerator_RemoteClientGenerator" class="element ajax clickable class">
+<h1>Amfphp_BackOffice_ClientGenerator_RemoteClientGenerator<a href="../classes/Amfphp_BackOffice_ClientGenerator_RemoteClientGenerator.html">¶</a>
+</h1>
+<p class="short_description">This file is part of amfPHP</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_BackOffice_ClientGenerator_RemoteClientGenerator.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_BackOffice_ClientGenerator_Util" class="element ajax clickable class">
+<h1>Amfphp_BackOffice_ClientGenerator_Util<a href="../classes/Amfphp_BackOffice_ClientGenerator_Util.html">¶</a>
+</h1>
+<p class="short_description">common utilities for generators</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_BackOffice_ClientGenerator_Util.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_BackOffice_Config" class="element ajax clickable class">
+<h1>Amfphp_BackOffice_Config<a href="../classes/Amfphp_BackOffice_Config.html">¶</a>
+</h1>
+<p class="short_description">config for the backoffice</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_BackOffice_Config.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_BackOffice_IncludeServiceCaller" class="element ajax clickable class">
+<h1>Amfphp_BackOffice_IncludeServiceCaller<a href="../classes/Amfphp_BackOffice_IncludeServiceCaller.html">¶</a>
+</h1>
+<p class="short_description">Makes a call to the amfphp entry point and returns the data</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_BackOffice_IncludeServiceCaller.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_BackOffice_JsonServiceCaller" class="element ajax clickable class">
+<h1>Amfphp_BackOffice_JsonServiceCaller<a href="../classes/Amfphp_BackOffice_JsonServiceCaller.html">¶</a>
+</h1>
+<p class="short_description">Makes a call to the amfphp entry point and returns the data.</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_BackOffice_JsonServiceCaller.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_Core_Amf_Constants" class="element ajax clickable class">
+<h1>Amfphp_Core_Amf_Constants<a href="../classes/Amfphp_Core_Amf_Constants.html">¶</a>
+</h1>
+<p class="short_description">constants relative to the Amf format</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_Amf_Constants.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_Core_Amf_Deserializer" class="element ajax clickable class">
+<h1>Amfphp_Core_Amf_Deserializer<a href="../classes/Amfphp_Core_Amf_Deserializer.html">¶</a>
+</h1>
+<p class="short_description">Amfphp_Core_Amf_Deserializer takes the raw amf input stream and converts it PHP objects
+representing the data.</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_Amf_Deserializer.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_Core_Amf_Handler" class="element ajax clickable class">
+<h1>Amfphp_Core_Amf_Handler<a href="../classes/Amfphp_Core_Amf_Handler.html">¶</a>
+</h1>
+<p class="short_description">This is the default handler for the gateway.</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_Amf_Handler.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_Core_Amf_Header" class="element ajax clickable class">
+<h1>Amfphp_Core_Amf_Header<a href="../classes/Amfphp_Core_Amf_Header.html">¶</a>
+</h1>
+<p class="short_description">Amfphp_Core_Amf_Header is a data type that represents a single header passed via Amf</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_Amf_Header.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_Core_Amf_Message" class="element ajax clickable class">
+<h1>Amfphp_Core_Amf_Message<a href="../classes/Amfphp_Core_Amf_Message.html">¶</a>
+</h1>
+<p class="short_description">Amfphp_Core_Amf_Message is a data type that encapsulates all of the various properties a Message object can have.</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_Amf_Message.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_Core_Amf_Packet" class="element ajax clickable class">
+<h1>Amfphp_Core_Amf_Packet<a href="../classes/Amfphp_Core_Amf_Packet.html">¶</a>
+</h1>
+<p class="short_description">content holder for an Amf Packet.</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_Amf_Packet.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_Core_Amf_Serializer" class="element ajax clickable class">
+<h1>Amfphp_Core_Amf_Serializer<a href="../classes/Amfphp_Core_Amf_Serializer.html">¶</a>
+</h1>
+<p class="short_description">AmfSerializer manages the job of translating PHP objects into
+the actionscript equivalent via Amf.</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_Amf_Serializer.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_Core_Amf_Types_ByteArray" class="element ajax clickable class">
+<h1>Amfphp_Core_Amf_Types_ByteArray<a href="../classes/Amfphp_Core_Amf_Types_ByteArray.html">¶</a>
+</h1>
+<p class="short_description">Amf byte arrays will be converted to and from this class</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_Amf_Types_ByteArray.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_Core_Amf_Types_Date" class="element ajax clickable class">
+<h1>Amfphp_Core_Amf_Types_Date<a href="../classes/Amfphp_Core_Amf_Types_Date.html">¶</a>
+</h1>
+<p class="short_description">Amf dates will be converted to and from this class.</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_Amf_Types_Date.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_Core_Amf_Types_Undefined" class="element ajax clickable class">
+<h1>Amfphp_Core_Amf_Types_Undefined<a href="../classes/Amfphp_Core_Amf_Types_Undefined.html">¶</a>
+</h1>
+<p class="short_description">Amf Undefined will be converted to and from this class</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_Amf_Types_Undefined.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_Core_Amf_Types_Xml" class="element ajax clickable class">
+<h1>Amfphp_Core_Amf_Types_Xml<a href="../classes/Amfphp_Core_Amf_Types_Xml.html">¶</a>
+</h1>
+<p class="short_description">Amf xml (not the AS3/AMF3 XMLDocument) will be converted to and from this class.</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_Amf_Types_Xml.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_Core_Amf_Types_XmlDocument" class="element ajax clickable class">
+<h1>Amfphp_Core_Amf_Types_XmlDocument<a href="../classes/Amfphp_Core_Amf_Types_XmlDocument.html">¶</a>
+</h1>
+<p class="short_description">AS3 XMLDocument type.</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_Amf_Types_XmlDocument.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_Core_Amf_Util" class="element ajax clickable class">
+<h1>Amfphp_Core_Amf_Util<a href="../classes/Amfphp_Core_Amf_Util.html">¶</a>
+</h1>
+<p class="short_description">utils for Amf handling</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_Amf_Util.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_Core_Amf_UtilTest" class="element ajax clickable class">
+<h1>Amfphp_Core_Amf_UtilTest<a href="../classes/Amfphp_Core_Amf_UtilTest.html">¶</a>
+</h1>
+<p class="short_description">Test class for Amfphp_Core_Amf_Util.</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_Amf_UtilTest.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_Core_Common_ClassFindInfo" class="element ajax clickable class">
+<h1>Amfphp_Core_Common_ClassFindInfo<a href="../classes/Amfphp_Core_Common_ClassFindInfo.html">¶</a>
+</h1>
+<p class="short_description">The information necessary for a service router to be able to load a class' file and instanciate it
+could be extended later with namespaces when they become mainstream</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_Common_ClassFindInfo.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_Core_Common_ServiceCallParameters" class="element ajax clickable class">
+<h1>Amfphp_Core_Common_ServiceCallParameters<a href="../classes/Amfphp_Core_Common_ServiceCallParameters.html">¶</a>
+</h1>
+<p class="short_description">place holder class for the variables necessary to make a service call</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_Common_ServiceCallParameters.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_Core_Common_ServiceRouter" class="element ajax clickable class">
+<h1>Amfphp_Core_Common_ServiceRouter<a href="../classes/Amfphp_Core_Common_ServiceRouter.html">¶</a>
+</h1>
+<p class="short_description">The Service Router class is responsible for executing the remote service method and returning it's value.</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_Common_ServiceRouter.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_Core_Common_ServiceRouterTest" class="element ajax clickable class">
+<h1>Amfphp_Core_Common_ServiceRouterTest<a href="../classes/Amfphp_Core_Common_ServiceRouterTest.html">¶</a>
+</h1>
+<p class="short_description">Test class for Amfphp_Core_Common_ServiceRouter.</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_Common_ServiceRouterTest.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_Core_Config" class="element ajax clickable class">
+<h1>Amfphp_Core_Config<a href="../classes/Amfphp_Core_Config.html">¶</a>
+</h1>
+<p class="short_description">responsable for loading and maintaining Amfphp configuration</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_Config.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_Core_Exception" class="element ajax clickable class">
+<h1>Amfphp_Core_Exception<a href="../classes/Amfphp_Core_Exception.html">¶</a>
+</h1>
+<p class="short_description">just a type to distinguish between Amfphp exceptions and any other exceptions</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_Exception.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_Core_FilterManager" class="element ajax clickable class">
+<h1>Amfphp_Core_FilterManager<a href="../classes/Amfphp_Core_FilterManager.html">¶</a>
+</h1>
+<p class="short_description">Filters are provided by Amfphp to allow your contexts to 'filter into' the rest of Amfphp, i.e.</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_FilterManager.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_Core_FilterManagerTest" class="element ajax clickable class">
+<h1>Amfphp_Core_FilterManagerTest<a href="../classes/Amfphp_Core_FilterManagerTest.html">¶</a>
+</h1>
+<p class="short_description">Test class for Amfphp_Core_FilterManager.</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_FilterManagerTest.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_Core_Gateway" class="element ajax clickable class">
+<h1>Amfphp_Core_Gateway<a href="../classes/Amfphp_Core_Gateway.html">¶</a>
+</h1>
+<p class="short_description">where everything comes together in amfphp.</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_Gateway.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_Core_GatewayTest" class="element ajax clickable class">
+<h1>Amfphp_Core_GatewayTest<a href="../classes/Amfphp_Core_GatewayTest.html">¶</a>
+</h1>
+<p class="short_description">Test class for Amfphp_Core_Gateway.</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_GatewayTest.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_Core_HttpRequestGatewayFactory" class="element ajax clickable class">
+<h1>Amfphp_Core_HttpRequestGatewayFactory<a href="../classes/Amfphp_Core_HttpRequestGatewayFactory.html">¶</a>
+</h1>
+<p class="short_description">A gateway factory's job is to create a gateway.</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_HttpRequestGatewayFactory.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_Core_PluginManager" class="element ajax clickable class">
+<h1>Amfphp_Core_PluginManager<a href="../classes/Amfphp_Core_PluginManager.html">¶</a>
+</h1>
+<p class="short_description">Loads plugins for Amfphp.</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_PluginManager.html" class="more">« More »</a>
+</div>
+<div id="Amfphp_Core_PluginManagerTest" class="element ajax clickable class">
+<h1>Amfphp_Core_PluginManagerTest<a href="../classes/Amfphp_Core_PluginManagerTest.html">¶</a>
+</h1>
+<p class="short_description">Test class for Amfphp_Core_PluginManager.</p>
+<div class="details collapse"></div>
+<a href="../classes/Amfphp_Core_PluginManagerTest.html" class="more">« More »</a>
+</div>
+<div id="AuthenticationService" class="element ajax clickable class">
+<h1>AuthenticationService<a href="../classes/AuthenticationService.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/AuthenticationService.html" class="more">« More »</a>
+</div>
+<div id="AuthenticationService" class="element ajax clickable class">
+<h1>AuthenticationService<a href="../classes/AuthenticationService.html">¶</a>
+</h1>
+<p class="short_description">a simple authentication service, used for testing the AmfphpAuthentication plugin</p>
+<div class="details collapse"></div>
+<a href="../classes/AuthenticationService.html" class="more">« More »</a>
+</div>
+<div id="BadSyntaxService" class="element ajax clickable class">
+<h1>BadSyntaxService<a href="../classes/BadSyntaxService.html">¶</a>
+</h1>
+<p class="short_description">bad syntax</p>
+<div class="details collapse"></div>
+<a href="../classes/BadSyntaxService.html" class="more">« More »</a>
+</div>
+<div id="BlaService" class="element ajax clickable class">
+<h1>BlaService<a href="../classes/BlaService.html">¶</a>
+</h1>
+<p class="short_description">simple service for testing service subfolder support</p>
+<div class="details collapse"></div>
+<a href="../classes/BlaService.html" class="more">« More »</a>
+</div>
+<div id="ByteArrayTestService" class="element ajax clickable class">
+<h1>ByteArrayTestService<a href="../classes/ByteArrayTestService.html">¶</a>
+</h1>
+<p class="short_description">a service for tests on byte arrays</p>
+<div class="details collapse"></div>
+<a href="../classes/ByteArrayTestService.html" class="more">« More »</a>
+</div>
+<div id="DBUtils" class="element ajax clickable class">
+<h1>DBUtils<a href="../classes/DBUtils.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/DBUtils.html" class="more">« More »</a>
+</div>
+<div id="DeserializationTest" class="element ajax clickable class">
+<h1>DeserializationTest<a href="../classes/DeserializationTest.html">¶</a>
+</h1>
+<p class="short_description">Unit tests for Amfphp_Core_Amf_Serializer
+note: phpunit dataProvider mechanism doesn't work well, so lots of boiler plate code here.</p>
+<div class="details collapse"></div>
+<a href="../classes/DeserializationTest.html" class="more">« More »</a>
+</div>
+<div id="DisabledPlugin" class="element ajax clickable class">
+<h1>DisabledPlugin<a href="../classes/DisabledPlugin.html">¶</a>
+</h1>
+<p class="short_description">a dummy plugin to test if loading in the plugin manager works properly.</p>
+<div class="details collapse"></div>
+<a href="../classes/DisabledPlugin.html" class="more">« More »</a>
+</div>
+<div id="DummyClass" class="element ajax clickable class">
+<h1>DummyClass<a href="../classes/DummyClass.html">¶</a>
+</h1>
+<p class="short_description">used for testing with typed objects</p>
+<div class="details collapse"></div>
+<a href="../classes/DummyClass.html" class="more">« More »</a>
+</div>
+<div id="DummyPlugin" class="element ajax clickable class">
+<h1>DummyPlugin<a href="../classes/DummyPlugin.html">¶</a>
+</h1>
+<p class="short_description">a dummy plugin to test if loading in the plugin manager works properly.</p>
+<div class="details collapse"></div>
+<a href="../classes/DummyPlugin.html" class="more">« More »</a>
+</div>
+<div id="DummyService" class="element ajax clickable class">
+<h1>DummyService<a href="../classes/DummyService.html">¶</a>
+</h1>
+<p class="short_description">a dummy service to test locating services in folders</p>
+<div class="details collapse"></div>
+<a href="../classes/DummyService.html" class="more">« More »</a>
+</div>
+<div id="EmptyMoreService" class="element ajax clickable class">
+<h1>EmptyMoreService<a href="../classes/EmptyMoreService.html">¶</a>
+</h1>
+<p class="short_description">empty service, just to test support for multiple service folders</p>
+<div class="details collapse"></div>
+<a href="../classes/EmptyMoreService.html" class="more">« More »</a>
+</div>
+<div id="ExampleSerializationDebugService" class="element ajax clickable class">
+<h1>ExampleSerializationDebugService<a href="../classes/ExampleSerializationDebugService.html">¶</a>
+</h1>
+<p class="short_description">this service illustrates parsing a PHP serialized object to load test data.</p>
+<div class="details collapse"></div>
+<a href="../classes/ExampleSerializationDebugService.html" class="more">« More »</a>
+</div>
+<div id="ExampleService" class="element ajax clickable class">
+<h1>ExampleService<a href="../classes/ExampleService.html">¶</a>
+</h1>
+<p class="short_description">This is a test/example service.</p>
+<div class="details collapse"></div>
+<a href="../classes/ExampleService.html" class="more">« More »</a>
+</div>
+<div id="MySQLUtil" class="element ajax clickable class">
+<h1>MySQLUtil<a href="../classes/MySQLUtil.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/MySQLUtil.html" class="more">« More »</a>
+</div>
+<div id="MyVO" class="element ajax clickable class">
+<h1>MyVO<a href="../classes/MyVO.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/MyVO.html" class="more">« More »</a>
+</div>
+<div id="PizzaService" class="element ajax clickable class">
+<h1>PizzaService<a href="../classes/PizzaService.html">¶</a>
+</h1>
+<p class="short_description">an example service for the pizza examples</p>
+<div class="details collapse"></div>
+<a href="../classes/PizzaService.html" class="more">« More »</a>
+</div>
+<div id="SerializationTest" class="element ajax clickable class">
+<h1>SerializationTest<a href="../classes/SerializationTest.html">¶</a>
+</h1>
+<p class="short_description">Unit tests for Amfphp_Core_Amf_Serializer
+note: phpunit dataProvider mechanism doesn't work well, so lots of boiler plate code here.</p>
+<div class="details collapse"></div>
+<a href="../classes/SerializationTest.html" class="more">« More »</a>
+</div>
+<div id="TestCustomClass1" class="element ajax clickable class">
+<h1>TestCustomClass1<a href="../classes/TestCustomClass1.html">¶</a>
+</h1>
+<p class="short_description">dummy class for testing custom class conversion</p>
+<div class="details collapse"></div>
+<a href="../classes/TestCustomClass1.html" class="more">« More »</a>
+</div>
+<div id="TestCustomClass2" class="element ajax clickable class">
+<h1>TestCustomClass2<a href="../classes/TestCustomClass2.html">¶</a>
+</h1>
+<p class="short_description">dummy class for testing custom class conversion</p>
+<div class="details collapse"></div>
+<a href="../classes/TestCustomClass2.html" class="more">« More »</a>
+</div>
+<div id="TestCustomClass3" class="element ajax clickable class">
+<h1>TestCustomClass3<a href="../classes/TestCustomClass3.html">¶</a>
+</h1>
+<p class="short_description">dummy class for testing custom class conversion</p>
+<div class="details collapse"></div>
+<a href="../classes/TestCustomClass3.html" class="more">« More »</a>
+</div>
+<div id="TestPlugin" class="element ajax clickable class">
+<h1>TestPlugin<a href="../classes/TestPlugin.html">¶</a>
+</h1>
+<p class="short_description">an example plugin as in the documentation.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestPlugin.html" class="more">« More »</a>
+</div>
+<div id="TestService" class="element ajax clickable class">
+<h1>TestService<a href="../classes/TestService.html">¶</a>
+</h1>
+<p class="short_description">This is a test/example service.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestService.html" class="more">« More »</a>
+</div>
+<div id="TestServicesConfig" class="element ajax clickable class">
+<h1>TestServicesConfig<a href="../classes/TestServicesConfig.html">¶</a>
+</h1>
+<p class="short_description">testing requires some services.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestServicesConfig.html" class="more">« More »</a>
+</div>
+<div id="UserService" class="element ajax clickable class">
+<h1>UserService<a href="../classes/UserService.html">¶</a>
+</h1>
+<p class="short_description"></p>
+<div class="details collapse"></div>
+<a href="../classes/UserService.html" class="more">« More »</a>
+</div>
+<div id="UserVo1" class="element ajax clickable class">
+<h1>UserVo1<a href="../classes/UserVo1.html">¶</a>
+</h1>
+<p class="short_description">an example service for the pizza examples</p>
+<div class="details collapse"></div>
+<a href="../classes/UserVo1.html" class="more">« More »</a>
+</div>
+<div id="VoService" class="element ajax clickable class">
+<h1>VoService<a href="../classes/VoService.html">¶</a>
+</h1>
+<p class="short_description">an example service for typed objects</p>
+<div class="details collapse"></div>
+<a href="../classes/VoService.html" class="more">« More »</a>
+</div>
+<h3>
+<i class="icon-custom icon-constant"></i> Constants</h3>
+<a id="constant_AMFPHP_BACKOFFICE_ROOTPATH"> </a><div class="element clickable constant  constant_AMFPHP_BACKOFFICE_ROOTPATH" data-toggle="collapse" data-target=".constant_AMFPHP_BACKOFFICE_ROOTPATH .collapse">
+<h2>AMFPHP_BACKOFFICE_ROOTPATH</h2>
+<pre>AMFPHP_BACKOFFICE_ROOTPATH </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_AMFPHP_ROOTPATH"> </a><div class="element clickable constant  constant_AMFPHP_ROOTPATH" data-toggle="collapse" data-target=".constant_AMFPHP_ROOTPATH .collapse">
+<h2>AMFPHP_ROOTPATH</h2>
+<pre>AMFPHP_ROOTPATH </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_MYSQL_DB"> </a><div class="element clickable constant  constant_MYSQL_DB" data-toggle="collapse" data-target=".constant_MYSQL_DB .collapse">
+<h2>MYSQL_DB</h2>
+<pre>MYSQL_DB </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_MYSQL_HOST"> </a><div class="element clickable constant  constant_MYSQL_HOST" data-toggle="collapse" data-target=".constant_MYSQL_HOST .collapse">
+<h2>MYSQL_HOST</h2>
+<pre>MYSQL_HOST </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_MYSQL_PASS"> </a><div class="element clickable constant  constant_MYSQL_PASS" data-toggle="collapse" data-target=".constant_MYSQL_PASS .collapse">
+<h2>MYSQL_PASS</h2>
+<pre>MYSQL_PASS </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_MYSQL_PORT"> </a><div class="element clickable constant  constant_MYSQL_PORT" data-toggle="collapse" data-target=".constant_MYSQL_PORT .collapse">
+<h2>MYSQL_PORT</h2>
+<pre>MYSQL_PORT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_MYSQL_USER"> </a><div class="element clickable constant  constant_MYSQL_USER" data-toggle="collapse" data-target=".constant_MYSQL_USER .collapse">
+<h2>MYSQL_USER</h2>
+<pre>MYSQL_USER </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_USER_ROLE_ADMIN"> </a><div class="element clickable constant  constant_USER_ROLE_ADMIN" data-toggle="collapse" data-target=".constant_USER_ROLE_ADMIN .collapse">
+<h2>USER_ROLE_ADMIN</h2>
+<pre>USER_ROLE_ADMIN </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_USER_ROLE_EDITOR"> </a><div class="element clickable constant  constant_USER_ROLE_EDITOR" data-toggle="collapse" data-target=".constant_USER_ROLE_EDITOR .collapse">
+<h2>USER_ROLE_EDITOR</h2>
+<pre>USER_ROLE_EDITOR </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_USER_ROLE_MANAGER"> </a><div class="element clickable constant  constant_USER_ROLE_MANAGER" data-toggle="collapse" data-target=".constant_USER_ROLE_MANAGER .collapse">
+<h2>USER_ROLE_MANAGER</h2>
+<pre>USER_ROLE_MANAGER </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_USER_ROLE_READER"> </a><div class="element clickable constant  constant_USER_ROLE_READER" data-toggle="collapse" data-target=".constant_USER_ROLE_READER .collapse">
+<h2>USER_ROLE_READER</h2>
+<pre>USER_ROLE_READER </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-02-04T08:51:23+01:00.<br></footer></div>
+</div>
+</body>
+</html>

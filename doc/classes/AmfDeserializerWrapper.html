@@ -1,0 +1,729 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>phpDocumentor » \AmfDeserializerWrapper</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">phpDocumentor</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Amfphp.html"><i class="icon-folder-open"></i> Amfphp</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Tests.html"><i class="icon-folder-open"></i> Tests</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">300</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul><li>todo 
+                <span class="label label-info">13</span>
+</li></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___construct" title="__construct :: "><span class="description">__construct()
+        </span><pre>__construct()</pre></a></li>
+<li class="method public inherited"><a href="#method_deserialize" title="deserialize :: convert from text/binary to php object"><span class="description">convert from text/binary to php object</span><pre>deserialize()</pre></a></li>
+<li class="method public "><a href="#method_readAmf3Array" title="readAmf3Array :: read amf 3 array"><span class="description">read amf 3 array</span><pre>readAmf3Array()</pre></a></li>
+<li class="method public "><a href="#method_readAmf3ByteArray" title="readAmf3ByteArray :: read Amf 3 byte array"><span class="description">read Amf 3 byte array</span><pre>readAmf3ByteArray()</pre></a></li>
+<li class="method public "><a href="#method_readAmf3Data" title="readAmf3Data :: read the type byte, then call the corresponding amf3 data reading function"><span class="description">read the type byte, then call the corresponding amf3 data reading function</span><pre>readAmf3Data()</pre></a></li>
+<li class="method public "><a href="#method_readAmf3Object" title="readAmf3Object :: read amf 3 object"><span class="description">read amf 3 object</span><pre>readAmf3Object()</pre></a></li>
+<li class="method public "><a href="#method_readAmf3String" title="readAmf3String :: readString"><span class="description">readString</span><pre>readAmf3String()</pre></a></li>
+<li class="method public "><a href="#method_readArray" title="readArray :: readArray turns an all numeric keyed actionscript array into a php array."><span class="description">readArray turns an all numeric keyed actionscript array into a php array.</span><pre>readArray()</pre></a></li>
+<li class="method public "><a href="#method_readByte" title="readByte :: readByte grabs the next byte from the data stream and returns it."><span class="description">readByte grabs the next byte from the data stream and returns it.</span><pre>readByte()</pre></a></li>
+<li class="method public inherited"><a href="#method_readData" title="readData :: readData is the main switch for mapping a type code to an actual
+implementation for deciphering it."><span class="description">readData is the main switch for mapping a type code to an actual
+implementation for deciphering it.</span><pre>readData()</pre></a></li>
+<li class="method public "><a href="#method_readDate" title="readDate :: readDate reads a date from the amf Packet and returns the time in ms."><span class="description">readDate reads a date from the amf Packet and returns the time in ms.</span><pre>readDate()</pre></a></li>
+<li class="method public "><a href="#method_readDouble" title="readDouble :: readDouble reads the floating point value from the bytes stream and properly orders
+the bytes depending on the system architecture."><span class="description">readDouble reads the floating point value from the bytes stream and properly orders
+the bytes depending on the system architecture.</span><pre>readDouble()</pre></a></li>
+<li class="method public "><a href="#method_readInt" title="readInt :: readInt grabs the next 2 bytes and returns the next two bytes, shifted and combined
+to produce the resulting integer"><span class="description">readInt grabs the next 2 bytes and returns the next two bytes, shifted and combined
+to produce the resulting integer</span><pre>readInt()</pre></a></li>
+<li class="method public "><a href="#method_readLong" title="readLong :: readLong grabs the next 4 bytes shifts and combines them to produce an integer"><span class="description">readLong grabs the next 4 bytes shifts and combines them to produce an integer</span><pre>readLong()</pre></a></li>
+<li class="method public "><a href="#method_readLongUtf" title="readLongUtf :: "><span class="description">readLongUtf()
+        </span><pre>readLongUtf()</pre></a></li>
+<li class="method public "><a href="#method_readMixedArray" title="readMixedArray :: readMixedArray turns an array with numeric and string indexes into a php array"><span class="description">readMixedArray turns an array with numeric and string indexes into a php array</span><pre>readMixedArray()</pre></a></li>
+<li class="method public "><a href="#method_readObject" title="readObject :: readObject reads the name/value properties of the amf Packet and converts them into
+their equivilent php representation"><span class="description">readObject reads the name/value properties of the amf Packet and converts them into
+their equivilent php representation</span><pre>readObject()</pre></a></li>
+<li class="method public "><a href="#method_readReference" title="readReference :: readReference replaces the old readFlushedSO."><span class="description">readReference replaces the old readFlushedSO.</span><pre>readReference()</pre></a></li>
+<li class="method public "><a href="#method_readUtf" title="readUtf :: "><span class="description">readUtf()
+        </span><pre>readUtf()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="method protected inherited"><a href="#method_readAmf3Date" title="readAmf3Date :: read amf 3 date"><span class="description">read amf 3 date</span><pre>readAmf3Date()</pre></a></li>
+<li class="method protected inherited"><a href="#method_readAmf3Int" title="readAmf3Int :: Handle decoding of the variable-length representation
+which gives seven bits of value per serialized byte by using the high-order bit
+of each byte as a continuation flag."><span class="description">Handle decoding of the variable-length representation
+which gives seven bits of value per serialized byte by using the high-order bit
+of each byte as a continuation flag.</span><pre>readAmf3Int()</pre></a></li>
+<li class="method protected inherited"><a href="#method_readAmf3Xml" title="readAmf3Xml :: read amf 3 xml"><span class="description">read amf 3 xml</span><pre>readAmf3Xml()</pre></a></li>
+<li class="method protected inherited"><a href="#method_readAmf3XmlDocument" title="readAmf3XmlDocument :: read amf 3 xml doc"><span class="description">read amf 3 xml doc</span><pre>readAmf3XmlDocument()</pre></a></li>
+<li class="method protected inherited"><a href="#method_readBuffer" title="readBuffer :: read some data and move pointer"><span class="description">read some data and move pointer</span><pre>readBuffer()</pre></a></li>
+<li class="method protected inherited"><a href="#method_readCustomClass" title="readCustomClass :: readCustomClass reads the amf content associated with a class instance which was registered
+with Object.registerClass."><span class="description">readCustomClass reads the amf content associated with a class instance which was registered
+with Object.registerClass.</span><pre>readCustomClass()</pre></a></li>
+<li class="method protected inherited"><a href="#method_readHeaders" title="readHeaders :: readHeaders converts that header section of the amf Packet into php obects."><span class="description">readHeaders converts that header section of the amf Packet into php obects.</span><pre>readHeaders()</pre></a></li>
+<li class="method protected inherited"><a href="#method_readLongUTF" title="readLongUTF :: readLongUTF first grabs the next 4 bytes which represent the string length."><span class="description">readLongUTF first grabs the next 4 bytes which represent the string length.</span><pre>readLongUTF()</pre></a></li>
+<li class="method protected inherited"><a href="#method_readMessages" title="readMessages :: read messages in AMF packet"><span class="description">read messages in AMF packet</span><pre>readMessages()</pre></a></li>
+<li class="method protected inherited"><a href="#method_readMixedObject" title="readMixedObject :: readMixedObject reads the name/value properties of the amf Packet and converts
+numeric looking keys to numeric keys"><span class="description">readMixedObject reads the name/value properties of the amf Packet and converts
+numeric looking keys to numeric keys</span><pre>readMixedObject()</pre></a></li>
+<li class="method protected inherited"><a href="#method_readUTF" title="readUTF :: readUTF first grabs the next 2 bytes which represent the string length."><span class="description">readUTF first grabs the next 2 bytes which represent the string length.</span><pre>readUTF()</pre></a></li>
+<li class="method protected inherited"><a href="#method_readXml" title="readXml :: read xml"><span class="description">read xml</span><pre>readXml()</pre></a></li>
+<li class="method protected inherited"><a href="#method_resetReferences" title="resetReferences :: reset reference stores"><span class="description">reset reference stores</span><pre>resetReferences()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul></ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="property protected inherited"><a href="#property_amf0storedObjects" title="$amf0storedObjects :: objects stored for tracking references(amf0)"><span class="description"></span><pre>$amf0storedObjects</pre></a></li>
+<li class="property protected inherited"><a href="#property_currentByte" title="$currentByte :: The current seek cursor of the stream"><span class="description"></span><pre>$currentByte</pre></a></li>
+<li class="property protected inherited"><a href="#property_deserializedPacket" title="$deserializedPacket :: the Packet contained in the serialized data"><span class="description"></span><pre>$deserializedPacket</pre></a></li>
+<li class="property protected inherited"><a href="#property_headersLeftToProcess" title="$headersLeftToProcess :: The number of headers in the packet left to process"><span class="description"></span><pre>$headersLeftToProcess</pre></a></li>
+<li class="property protected inherited"><a href="#property_messagesLeftToProcess" title="$messagesLeftToProcess :: The number of Messages in the packet left to process"><span class="description"></span><pre>$messagesLeftToProcess</pre></a></li>
+<li class="property protected inherited"><a href="#property_rawData" title="$rawData :: data to deserialize"><span class="description"></span><pre>$rawData</pre></a></li>
+<li class="property protected inherited"><a href="#property_storedDefinitions" title="$storedDefinitions :: class definitions(traits) stored for tracking references(amf3)"><span class="description"></span><pre>$storedDefinitions</pre></a></li>
+<li class="property protected inherited"><a href="#property_storedObjects" title="$storedObjects :: objects stored for tracking references(amf3)"><span class="description"></span><pre>$storedObjects</pre></a></li>
+<li class="property protected inherited"><a href="#property_storedStrings" title="$storedStrings :: strings stored for tracking references(amf3)"><span class="description"></span><pre>$storedStrings</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\AmfDeserializerWrapper"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/global.html">global</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/AmfDeserializerWrapper.html">AmfDeserializerWrapper</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">This class exports some internal (public) methods.</p>
+<div class="details">
+<div class="long_description"><p>This way, those methods
+can be tested separately.</p></div>
+<table class="table table-bordered">
+<tr>
+<th>package</th>
+<td><a href="../packages/Tests.Amfphp.Core.Amf.html">Tests_Amfphp_Core_Amf</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="">Ariel Sommeria-klein</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>__construct()
+        </h2>
+<pre>__construct($raw) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$raw</h4></div>
+</div></div>
+</div>
+<a id="method_deserialize"></a><div class="element clickable method public method_deserialize" data-toggle="collapse" data-target=".method_deserialize .collapse">
+<h2>convert from text/binary to php object</h2>
+<pre>deserialize(array $getData, array $postData, string $rawPostData) : <a href="../classes/Amfphp_Core_Amf_Packet.html">\Amfphp_Core_Amf_Packet</a></pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Amfphp_Core_Amf_Deserializer::deserialize()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$getData</h4>
+<code>array</code>
+</div>
+<div class="subelement argument">
+<h4>$postData</h4>
+<code>array</code>
+</div>
+<div class="subelement argument">
+<h4>$rawPostData</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Amfphp_Core_Amf_Packet.html">\Amfphp_Core_Amf_Packet</a></code></div>
+</div></div>
+</div>
+<a id="method_readAmf3Array"></a><div class="element clickable method public method_readAmf3Array" data-toggle="collapse" data-target=".method_readAmf3Array .collapse">
+<h2>read amf 3 array</h2>
+<pre>readAmf3Array() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_readAmf3ByteArray"></a><div class="element clickable method public method_readAmf3ByteArray" data-toggle="collapse" data-target=".method_readAmf3ByteArray .collapse">
+<h2>read Amf 3 byte array</h2>
+<pre>readAmf3ByteArray() : <a href="../classes/Amfphp_Core_Amf_Types_ByteArray.html">\Amfphp_Core_Amf_Types_ByteArray</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Amfphp_Core_Amf_Types_ByteArray.html">\Amfphp_Core_Amf_Types_ByteArray</a></code></div>
+</div></div>
+</div>
+<a id="method_readAmf3Data"></a><div class="element clickable method public method_readAmf3Data" data-toggle="collapse" data-target=".method_readAmf3Data .collapse">
+<h2>read the type byte, then call the corresponding amf3 data reading function</h2>
+<pre>readAmf3Data() : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<a id="method_readAmf3Object"></a><div class="element clickable method public method_readAmf3Object" data-toggle="collapse" data-target=".method_readAmf3Object .collapse">
+<h2>read amf 3 object</h2>
+<pre>readAmf3Object() : <a href="http://php.net/manual/en/class.stdclass.php">\stdClass</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="http://php.net/manual/en/class.stdclass.php">\stdClass</a></code></div>
+</div></div>
+</div>
+<a id="method_readAmf3String"></a><div class="element clickable method public method_readAmf3String" data-toggle="collapse" data-target=".method_readAmf3String .collapse">
+<h2>readString</h2>
+<pre>readAmf3String() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_readArray"></a><div class="element clickable method public method_readArray" data-toggle="collapse" data-target=".method_readArray .collapse">
+<h2>readArray turns an all numeric keyed actionscript array into a php array.</h2>
+<pre>readArray() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>The php array</div>
+</div></div>
+</div>
+<a id="method_readByte"></a><div class="element clickable method public method_readByte" data-toggle="collapse" data-target=".method_readByte .collapse">
+<h2>readByte grabs the next byte from the data stream and returns it.</h2>
+<pre>readByte() : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>int</code>The next byte converted into an integer</div>
+</div></div>
+</div>
+<a id="method_readData"></a><div class="element clickable method public method_readData" data-toggle="collapse" data-target=".method_readData .collapse">
+<h2>readData is the main switch for mapping a type code to an actual
+implementation for deciphering it.</h2>
+<pre>readData(mixed $type) : mixed</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Amfphp_Core_Amf_Deserializer::readData()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>mixed</code><p>The $type integer</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code>The php version of the data in the Packet block</div>
+</div></div>
+</div>
+<a id="method_readDate"></a><div class="element clickable method public method_readDate" data-toggle="collapse" data-target=".method_readDate .collapse">
+<h2>readDate reads a date from the amf Packet and returns the time in ms.</h2>
+<pre>readDate() : \long</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method is still under development.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\long</code>The date in ms.</div>
+</div></div>
+</div>
+<a id="method_readDouble"></a><div class="element clickable method public method_readDouble" data-toggle="collapse" data-target=".method_readDouble .collapse">
+<h2>readDouble reads the floating point value from the bytes stream and properly orders
+the bytes depending on the system architecture.</h2>
+<pre>readDouble() : float</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>float</code>The floating point value of the next 8 bytes</div>
+</div></div>
+</div>
+<a id="method_readInt"></a><div class="element clickable method public method_readInt" data-toggle="collapse" data-target=".method_readInt .collapse">
+<h2>readInt grabs the next 2 bytes and returns the next two bytes, shifted and combined
+to produce the resulting integer</h2>
+<pre>readInt() : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>int</code>The resulting integer from the next 2 bytes</div>
+</div></div>
+</div>
+<a id="method_readLong"></a><div class="element clickable method public method_readLong" data-toggle="collapse" data-target=".method_readLong .collapse">
+<h2>readLong grabs the next 4 bytes shifts and combines them to produce an integer</h2>
+<pre>readLong() : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>int</code>The resulting integer from the next 4 bytes</div>
+</div></div>
+</div>
+<a id="method_readLongUtf"></a><div class="element clickable method public method_readLongUtf" data-toggle="collapse" data-target=".method_readLongUtf .collapse">
+<h2>readLongUtf()
+        </h2>
+<pre>readLongUtf() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_readMixedArray"></a><div class="element clickable method public method_readMixedArray" data-toggle="collapse" data-target=".method_readMixedArray .collapse">
+<h2>readMixedArray turns an array with numeric and string indexes into a php array</h2>
+<pre>readMixedArray() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>The php array with mixed indexes</div>
+</div></div>
+</div>
+<a id="method_readObject"></a><div class="element clickable method public method_readObject" data-toggle="collapse" data-target=".method_readObject .collapse">
+<h2>readObject reads the name/value properties of the amf Packet and converts them into
+their equivilent php representation</h2>
+<pre>readObject() : Object</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>Object</code>The php object filled with the data</div>
+</div></div>
+</div>
+<a id="method_readReference"></a><div class="element clickable method public method_readReference" data-toggle="collapse" data-target=".method_readReference .collapse">
+<h2>readReference replaces the old readFlushedSO.</h2>
+<pre>readReference() : String</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>It treats where there
+are references to other objects. Currently it does not resolve the
+object as this would involve a serious amount of overhead, unless
+you have a genius idea</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>String</code></div>
+</div></div>
+</div>
+<a id="method_readUtf"></a><div class="element clickable method public method_readUtf" data-toggle="collapse" data-target=".method_readUtf .collapse">
+<h2>readUtf()
+        </h2>
+<pre>readUtf() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_readAmf3Date"></a><div class="element clickable method protected method_readAmf3Date" data-toggle="collapse" data-target=".method_readAmf3Date .collapse">
+<h2>read amf 3 date</h2>
+<pre>readAmf3Date() : boolean | <a href="../classes/Amfphp_Core_Amf_Types_Date.html">\Amfphp_Core_Amf_Types_Date</a></pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Amfphp_Core_Amf_Deserializer::readAmf3Date()</td>
+</tr></table>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/Amfphp_Core_Exception.html">\Amfphp_Core_Exception</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code><code><a href="../classes/Amfphp_Core_Amf_Types_Date.html">\Amfphp_Core_Amf_Types_Date</a></code>
+</div>
+</div></div>
+</div>
+<a id="method_readAmf3Int"></a><div class="element clickable method protected method_readAmf3Int" data-toggle="collapse" data-target=".method_readAmf3Int .collapse">
+<h2>Handle decoding of the variable-length representation
+which gives seven bits of value per serialized byte by using the high-order bit
+of each byte as a continuation flag.</h2>
+<pre>readAmf3Int() : \read</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Amfphp_Core_Amf_Deserializer::readAmf3Int()</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\read</code>integer value</div>
+</div></div>
+</div>
+<a id="method_readAmf3Xml"></a><div class="element clickable method protected method_readAmf3Xml" data-toggle="collapse" data-target=".method_readAmf3Xml .collapse">
+<h2>read amf 3 xml</h2>
+<pre>readAmf3Xml() : <a href="../classes/Amfphp_Core_Amf_Types_Xml.html">\Amfphp_Core_Amf_Types_Xml</a></pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Amfphp_Core_Amf_Deserializer::readAmf3Xml()</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Amfphp_Core_Amf_Types_Xml.html">\Amfphp_Core_Amf_Types_Xml</a></code></div>
+</div></div>
+</div>
+<a id="method_readAmf3XmlDocument"></a><div class="element clickable method protected method_readAmf3XmlDocument" data-toggle="collapse" data-target=".method_readAmf3XmlDocument .collapse">
+<h2>read amf 3 xml doc</h2>
+<pre>readAmf3XmlDocument() : <a href="../classes/Amfphp_Core_Amf_Types_Xml.html">\Amfphp_Core_Amf_Types_Xml</a></pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Amfphp_Core_Amf_Deserializer::readAmf3XmlDocument()</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Amfphp_Core_Amf_Types_Xml.html">\Amfphp_Core_Amf_Types_Xml</a></code></div>
+</div></div>
+</div>
+<a id="method_readBuffer"></a><div class="element clickable method protected method_readBuffer" data-toggle="collapse" data-target=".method_readBuffer .collapse">
+<h2>read some data and move pointer</h2>
+<pre>readBuffer(\type $len) : mixed</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Amfphp_Core_Amf_Deserializer::readBuffer()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$len</h4>
+<code>\type</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<a id="method_readCustomClass"></a><div class="element clickable method protected method_readCustomClass" data-toggle="collapse" data-target=".method_readCustomClass .collapse">
+<h2>readCustomClass reads the amf content associated with a class instance which was registered
+with Object.registerClass.</h2>
+<pre>readCustomClass() : object</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>In order to preserve the class name an additional property is assigned
+to the object Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE.  This property will be overwritten if it existed within the class already.</p></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Amfphp_Core_Amf_Deserializer::readCustomClass()</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>The php representation of the object</div>
+</div></div>
+</div>
+<a id="method_readHeaders"></a><div class="element clickable method protected method_readHeaders" data-toggle="collapse" data-target=".method_readHeaders .collapse">
+<h2>readHeaders converts that header section of the amf Packet into php obects.</h2>
+<pre>readHeaders() </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Header information typically contains meta data about the Packet.</p></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Amfphp_Core_Amf_Deserializer::readHeaders()</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_readLongUTF"></a><div class="element clickable method protected method_readLongUTF" data-toggle="collapse" data-target=".method_readLongUTF .collapse">
+<h2>readLongUTF first grabs the next 4 bytes which represent the string length.</h2>
+<pre>readLongUTF() : string</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Then it grabs the next (len) bytes of the resulting in the string</p></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Amfphp_Core_Amf_Deserializer::readLongUTF()</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The utf8 decoded string</div>
+</div></div>
+</div>
+<a id="method_readMessages"></a><div class="element clickable method protected method_readMessages" data-toggle="collapse" data-target=".method_readMessages .collapse">
+<h2>read messages in AMF packet</h2>
+<pre>readMessages() </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Amfphp_Core_Amf_Deserializer::readMessages()</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_readMixedObject"></a><div class="element clickable method protected method_readMixedObject" data-toggle="collapse" data-target=".method_readMixedObject .collapse">
+<h2>readMixedObject reads the name/value properties of the amf Packet and converts
+numeric looking keys to numeric keys</h2>
+<pre>readMixedObject() : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Amfphp_Core_Amf_Deserializer::readMixedObject()</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>The php array with the object data</div>
+</div></div>
+</div>
+<a id="method_readUTF"></a><div class="element clickable method protected method_readUTF" data-toggle="collapse" data-target=".method_readUTF .collapse">
+<h2>readUTF first grabs the next 2 bytes which represent the string length.</h2>
+<pre>readUTF() : string</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Then it grabs the next (len) bytes of the resulting string.</p></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Amfphp_Core_Amf_Deserializer::readUTF()</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The utf8 decoded string</div>
+</div></div>
+</div>
+<a id="method_readXml"></a><div class="element clickable method protected method_readXml" data-toggle="collapse" data-target=".method_readXml .collapse">
+<h2>read xml</h2>
+<pre>readXml() : <a href="../classes/Amfphp_Core_Amf_Types_Xml.html">\Amfphp_Core_Amf_Types_Xml</a></pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Amfphp_Core_Amf_Deserializer::readXml()</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Amfphp_Core_Amf_Types_Xml.html">\Amfphp_Core_Amf_Types_Xml</a></code></div>
+</div></div>
+</div>
+<a id="method_resetReferences"></a><div class="element clickable method protected method_resetReferences" data-toggle="collapse" data-target=".method_resetReferences .collapse">
+<h2>reset reference stores</h2>
+<pre>resetReferences() </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Amfphp_Core_Amf_Deserializer::resetReferences()</td>
+</tr></table>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_amf0storedObjects"> </a><div class="element clickable property protected property_amf0storedObjects" data-toggle="collapse" data-target=".property_amf0storedObjects .collapse">
+<h2></h2>
+<pre>$amf0storedObjects : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Amfphp_Core_Amf_Deserializer::$$amf0storedObjects</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_currentByte"> </a><div class="element clickable property protected property_currentByte" data-toggle="collapse" data-target=".property_currentByte .collapse">
+<h2></h2>
+<pre>$currentByte : int</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>access</th>
+<td>protected</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Amfphp_Core_Amf_Deserializer::$$currentByte</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_deserializedPacket"> </a><div class="element clickable property protected property_deserializedPacket" data-toggle="collapse" data-target=".property_deserializedPacket .collapse">
+<h2></h2>
+<pre>$deserializedPacket : \&lt;Amfphp_Core_Amf_Packet&gt;</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Amfphp_Core_Amf_Deserializer::$$deserializedPacket</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_headersLeftToProcess"> </a><div class="element clickable property protected property_headersLeftToProcess" data-toggle="collapse" data-target=".property_headersLeftToProcess .collapse">
+<h2></h2>
+<pre>$headersLeftToProcess : int</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>access</th>
+<td>protected</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Amfphp_Core_Amf_Deserializer::$$headersLeftToProcess</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_messagesLeftToProcess"> </a><div class="element clickable property protected property_messagesLeftToProcess" data-toggle="collapse" data-target=".property_messagesLeftToProcess .collapse">
+<h2></h2>
+<pre>$messagesLeftToProcess : int</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>access</th>
+<td>protected</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Amfphp_Core_Amf_Deserializer::$$messagesLeftToProcess</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_rawData"> </a><div class="element clickable property protected property_rawData" data-toggle="collapse" data-target=".property_rawData .collapse">
+<h2></h2>
+<pre>$rawData : string</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Amfphp_Core_Amf_Deserializer::$$rawData</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_storedDefinitions"> </a><div class="element clickable property protected property_storedDefinitions" data-toggle="collapse" data-target=".property_storedDefinitions .collapse">
+<h2></h2>
+<pre>$storedDefinitions : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Amfphp_Core_Amf_Deserializer::$$storedDefinitions</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_storedObjects"> </a><div class="element clickable property protected property_storedObjects" data-toggle="collapse" data-target=".property_storedObjects .collapse">
+<h2></h2>
+<pre>$storedObjects : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Amfphp_Core_Amf_Deserializer::$$storedObjects</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_storedStrings"> </a><div class="element clickable property protected property_storedStrings" data-toggle="collapse" data-target=".property_storedStrings .collapse">
+<h2></h2>
+<pre>$storedStrings : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Amfphp_Core_Amf_Deserializer::$$storedStrings</td>
+</tr></table>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-02-04T08:51:24+01:00.<br></footer></div>
+</div>
+</body>
+</html>

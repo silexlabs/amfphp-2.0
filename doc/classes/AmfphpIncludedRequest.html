@@ -1,0 +1,269 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>phpDocumentor » \AmfphpIncludedRequest</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">phpDocumentor</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Amfphp.html"><i class="icon-folder-open"></i> Amfphp</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Tests.html"><i class="icon-folder-open"></i> Tests</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">300</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul><li>todo 
+                <span class="label label-info">13</span>
+</li></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list"><li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___construct" title="__construct :: constructor."><span class="description">constructor.</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method_deserialize" title="deserialize :: deserialize"><span class="description">deserialize</span><pre>deserialize()</pre></a></li>
+<li class="method public "><a href="#method_filterHandler" title="filterHandler :: if no content type, then returns this."><span class="description">if no content type, then returns this.</span><pre>filterHandler()</pre></a></li>
+<li class="method public "><a href="#method_filterHeaders" title="filterHeaders :: filter the headers to make sure the content type is set to text/html if the request was handled by the service browser"><span class="description">filter the headers to make sure the content type is set to text/html if the request was handled by the service browser</span><pre>filterHeaders()</pre></a></li>
+<li class="method public "><a href="#method_handleDeserializedRequest" title="handleDeserializedRequest :: call service"><span class="description">call service</span><pre>handleDeserializedRequest()</pre></a></li>
+<li class="method public "><a href="#method_handleException" title="handleException :: handle exception"><span class="description">handle exception</span><pre>handleException()</pre></a></li>
+<li class="method public "><a href="#method_serialize" title="serialize :: set the return data in global $amfphpIncludedRequestReturnValue"><span class="description">set the return data in global $amfphpIncludedRequestReturnValue</span><pre>serialize()</pre></a></li>
+</ul>
+</li></ul>
+</div>
+<div class="span8">
+<a id="\AmfphpIncludedRequest"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/global.html">global</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/AmfphpIncludedRequest.html">AmfphpIncludedRequest</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">allows inclusion of an amfPHP entry point script.</p>
+<div class="details">
+<div class="long_description"><p>This is so that a script running on the same server can
+include the entry point script and execute a request.</p>
+
+<p>It works by setting the required globals describing the request, including the entry point script, and retrieving the response data.</p>
+
+<p>globals are:
+$amfphpIncludedRequestServiceName
+$amfphpIncludedRequestMethodName
+$amfphpIncludedRequestParameters
+$amfphpIncludedRequestReturnValue</p>
+
+<p>declare and them before including your entry point script. For example:</p>
+
+<p>$amfphpIncludedRequestServiceName = "AmfphpDiscoveryService";
+$amfphpIncludedRequestMethodName = "discover";
+$amfphpIncludedRequestParameters = array();
+$amfphpIncludedRequestReturnValue = null;
+require(dirname(<strong>FILE</strong>) . '/../../Amfphp/index.php');
+print_r($amfphpIncludedRequestReturnValue);</p>
+
+<p>the plugin considers that if $amfphpIncludedRequestServiceName is set, then the request is an included request and that it must be handled here.</p></div>
+<table class="table table-bordered">
+<tr>
+<th>package</th>
+<td><a href="../packages/Amfphp.Plugins.AmfphpIncludedRequest.html">Amfphp_Plugins_AmfphpIncludedRequest</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="">Ariel Sommeria-Klein</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>constructor.</h2>
+<pre>__construct(array $config) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$config</h4>
+<code>array</code><p>optional key/value pairs in an associative array. Used to override default configuration values.</p>
+</div>
+</div></div>
+</div>
+<a id="method_deserialize"></a><div class="element clickable method public method_deserialize" data-toggle="collapse" data-target=".method_deserialize .collapse">
+<h2>deserialize</h2>
+<pre>deserialize(array $getData, array $postData, string $rawPostData) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="Amfphp.Core.Common.IDeserializer.html#%5CAmfphp_Core_Common_IDeserializer">\Amfphp_Core_Common_IDeserializer</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$getData</h4>
+<code>array</code>
+</div>
+<div class="subelement argument">
+<h4>$postData</h4>
+<code>array</code>
+</div>
+<div class="subelement argument">
+<h4>$rawPostData</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_filterHandler"></a><div class="element clickable method public method_filterHandler" data-toggle="collapse" data-target=".method_filterHandler .collapse">
+<h2>if no content type, then returns this.</h2>
+<pre>filterHandler(mixed $handler, String $contentType) : \this</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$handler</h4>
+<code>mixed</code><p>null at call in gateway.</p></div>
+<div class="subelement argument">
+<h4>$contentType</h4>
+<code>String</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\this</code>or null</div>
+</div></div>
+</div>
+<a id="method_filterHeaders"></a><div class="element clickable method public method_filterHeaders" data-toggle="collapse" data-target=".method_filterHeaders .collapse">
+<h2>filter the headers to make sure the content type is set to text/html if the request was handled by the service browser</h2>
+<pre>filterHeaders(array $headers, string $contentType) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$headers</h4>
+<code>array</code>
+</div>
+<div class="subelement argument">
+<h4>$contentType</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_handleDeserializedRequest"></a><div class="element clickable method public method_handleDeserializedRequest" data-toggle="collapse" data-target=".method_handleDeserializedRequest .collapse">
+<h2>call service</h2>
+<pre>handleDeserializedRequest(array $deserializedRequest, \Amfphp_Core_Common_ServiceRouter $serviceRouter) : \the</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This should not handle exceptions, as this is done separately</p></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="Amfphp.Core.Common.IDeserializedRequestHandler.html#%5CAmfphp_Core_Common_IDeserializedRequestHandler">\Amfphp_Core_Common_IDeserializedRequestHandler</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$deserializedRequest</h4>
+<code>array</code>
+</div>
+<div class="subelement argument">
+<h4>$serviceRouter</h4>
+<code><a href="../classes/Amfphp_Core_Common_ServiceRouter.html">\Amfphp_Core_Common_ServiceRouter</a></code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\the</code>service call response</div>
+</div></div>
+</div>
+<a id="method_handleException"></a><div class="element clickable method public method_handleException" data-toggle="collapse" data-target=".method_handleException .collapse">
+<h2>handle exception</h2>
+<pre>handleException(\Exception $exception) : <a href="http://php.net/manual/en/class.exception.php">\Exception</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="Amfphp.Core.Common.IExceptionHandler.html#%5CAmfphp_Core_Common_IExceptionHandler">\Amfphp_Core_Common_IExceptionHandler</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$exception</h4>
+<code><a href="http://php.net/manual/en/class.exception.php">\Exception</a></code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="http://php.net/manual/en/class.exception.php">\Exception</a></code></div>
+</div></div>
+</div>
+<a id="method_serialize"></a><div class="element clickable method public method_serialize" data-toggle="collapse" data-target=".method_serialize .collapse">
+<h2>set the return data in global $amfphpIncludedRequestReturnValue</h2>
+<pre>serialize(mixed $data) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>The return type is noted as a String, but is a binary stream. echo it to the output buffer</p></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="Amfphp.Core.Common.ISerializer.html#%5CAmfphp_Core_Common_ISerializer">\Amfphp_Core_Common_ISerializer</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$data</h4>
+<code>mixed</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>the encoded JSON string sent to JavaScript</div>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-02-04T08:51:24+01:00.<br></footer></div>
+</div>
+</body>
+</html>
