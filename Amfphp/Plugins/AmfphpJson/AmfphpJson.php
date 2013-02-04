@@ -37,6 +37,11 @@ class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common
      */
     const JSON_CONTENT_TYPE = 'application/json';
 
+    /**
+     * return error details.
+     * @see Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS
+     * @var boolean
+     */
     protected $returnErrorDetails = false;
 
     /**
@@ -64,6 +69,15 @@ class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common
         }
     }
 
+    
+    /**
+     * deserialize
+     * @see Amfphp_Core_Common_IDeserializer
+     * @param array $getData
+     * @param array $postData
+     * @param string $rawPostData
+     * @return string
+     */
     public function deserialize(array $getData, array $postData, $rawPostData) {
         $jsonString = '';
         if ($rawPostData != '') {
@@ -114,7 +128,10 @@ class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common
     /**
      * Retrieve the serviceName, methodName and parameters from the PHP object
      * representing the JSON string
+     * call service
      * @see Amfphp_Core_Common_IDeserializedRequestHandler
+     * @param array $deserializedRequest
+     * @param Amfphp_Core_Common_ServiceRouter $serviceRouter
      * @return the service call response
      */
     public function handleDeserializedRequest($deserializedRequest, Amfphp_Core_Common_ServiceRouter $serviceRouter) {
@@ -130,6 +147,7 @@ class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common
 
     /**
      * don't format; just throw! In this way ajax libs will have their error functions triggered
+     * @param Exception $exception
      * @see Amfphp_Core_Common_IExceptionHandler
      */
     public function handleException(Exception $exception) {
@@ -140,6 +158,7 @@ class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common
     /**
      * Encode the PHP object returned from the service call into a JSON string
      * @see Amfphp_Core_Common_ISerializer
+     * @param mixed $data
      * @return the encoded JSON string sent to JavaScript
      */
     public function serialize($data) {

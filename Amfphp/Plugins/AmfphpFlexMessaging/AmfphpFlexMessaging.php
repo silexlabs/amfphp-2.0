@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of amfPHP
  *
@@ -8,12 +9,12 @@
  * with this package in the file license.txt.
  * @package Amfphp_Plugins_FlexMessaging
  */
-
 /**
-*  includes
-*  */
+ *  includes
+ *  */
 require_once dirname(__FILE__) . '/AcknowledgeMessage.php';
 require_once dirname(__FILE__) . '/ErrorMessage.php';
+
 /**
  * Support for flex messaging.
  * 
@@ -29,12 +30,12 @@ require_once dirname(__FILE__) . '/ErrorMessage.php';
  * @package Amfphp_Plugins_FlexMessaging
  * @author Ariel Sommeria-Klein
  */
-class AmfphpFlexMessaging{
+class AmfphpFlexMessaging {
+
     const FLEX_TYPE_COMMAND_MESSAGE = 'flex.messaging.messages.CommandMessage';
     const FLEX_TYPE_REMOTING_MESSAGE = 'flex.messaging.messages.RemotingMessage';
     const FLEX_TYPE_ACKNOWLEDGE_MESSAGE = 'flex.messaging.messages.AcknowledgeMessage';
     const FLEX_TYPE_ERROR_MESSAGE = 'flex.messaging.messages.ErrorMessage';
-    
     const FIELD_MESSAGE_ID = 'messageId';
 
     /**
@@ -55,41 +56,46 @@ class AmfphpFlexMessaging{
      */
     protected $lastFlexMessageResponseUri;
 
+    /**
+     * return error details.
+     * @see Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS
+     * @var boolean
+     */
     protected $returnErrorDetails = false;
+
     /**
      * constructor.
      * @param array $config optional key/value pairs in an associative array. Used to override default configuration values.
      */
-    public function  __construct(array $config = null) {
+    public function __construct(array $config = null) {
         Amfphp_Core_FilterManager::getInstance()->addFilter(Amfphp_Core_Amf_Handler::FILTER_AMF_REQUEST_MESSAGE_HANDLER, $this, 'filterAmfRequestMessageHandler');
         Amfphp_Core_FilterManager::getInstance()->addFilter(Amfphp_Core_Amf_Handler::FILTER_AMF_EXCEPTION_HANDLER, $this, 'filterAmfExceptionHandler');
         $this->clientUsesFlexMessaging = false;
-        $this->returnErrorDetails = (isset ($config[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]) && $config[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]);
-
+        $this->returnErrorDetails = (isset($config[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]) && $config[Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS]);
     }
 
     /**
-     *
-     * @param Object $handler. null at call. If the plugin takes over the handling of the request message,
+     * filter amf request message handler
+     * @param Object $handler null at call. If the plugin takes over the handling of the request message,
      * it must set this to a proper handler for the message, probably itself.
      * @param Amfphp_Core_Amf_Message $requestMessage the request message
      * @return array
      */
-    public function filterAmfRequestMessageHandler($handler, Amfphp_Core_Amf_Message $requestMessage){
-        if($requestMessage->data == null){
+    public function filterAmfRequestMessageHandler($handler, Amfphp_Core_Amf_Message $requestMessage) {
+        if ($requestMessage->data == null) {
             //all flex messages have data
             return;
         }
 
         $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
 
-        if(!isset ($requestMessage->data[0]) || !isset ($requestMessage->data[0]->$explicitTypeField)){
+        if (!isset($requestMessage->data[0]) || !isset($requestMessage->data[0]->$explicitTypeField)) {
             //and all flex messages have data containing one object with an explicit type
             return;
         }
 
         $messageType = $requestMessage->data[0]->$explicitTypeField;
-        if($messageType == self::FLEX_TYPE_COMMAND_MESSAGE || $messageType == self::FLEX_TYPE_REMOTING_MESSAGE){
+        if ($messageType == self::FLEX_TYPE_COMMAND_MESSAGE || $messageType == self::FLEX_TYPE_REMOTING_MESSAGE) {
             //recognized message type! This plugin will handle it
             $this->clientUsesFlexMessaging = true;
             return $this;
@@ -97,13 +103,13 @@ class AmfphpFlexMessaging{
     }
 
     /**
-     *
-     * @param Object $handler. null at call. If the plugin takes over the handling of the request message,
+     * filter amf exception handler
+     * @param Object $handler null at call. If the plugin takes over the handling of the request message,
      * it must set this to a proper handler for the message, probably itself.
      * @return array
      */
-    public function filterAmfExceptionHandler($handler){
-        if($this->clientUsesFlexMessaging){
+    public function filterAmfExceptionHandler($handler) {
+        if ($this->clientUsesFlexMessaging) {
             return $this;
         }
     }
@@ -114,7 +120,7 @@ class AmfphpFlexMessaging{
      * @param Amfphp_Core_Common_ServiceRouter $serviceRouter
      * @return Amfphp_Core_Amf_Message
      */
-    public function handleRequestMessage(Amfphp_Core_Amf_Message $requestMessage, Amfphp_Core_Common_ServiceRouter $serviceRouter){
+    public function handleRequestMessage(Amfphp_Core_Amf_Message $requestMessage, Amfphp_Core_Common_ServiceRouter $serviceRouter) {
         $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
         $messageType = $requestMessage->data[0]->$explicitTypeField;
         $messageIdField = self::FIELD_MESSAGE_ID;
@@ -122,22 +128,20 @@ class AmfphpFlexMessaging{
         $this->lastFlexMessageResponseUri = $requestMessage->responseUri;
 
 
-        if($messageType == self::FLEX_TYPE_COMMAND_MESSAGE){
+        if ($messageType == self::FLEX_TYPE_COMMAND_MESSAGE) {
             //command message. An empty AcknowledgeMessage is expected.
             $acknowledge = new AmfphpFlexMessaging_AcknowledgeMessage($requestMessage->data[0]->$messageIdField);
             return new Amfphp_Core_Amf_Message($requestMessage->responseUri . Amfphp_Core_Amf_Constants::CLIENT_SUCCESS_METHOD, null, $acknowledge);
-
         }
 
 
-        if($messageType == self::FLEX_TYPE_REMOTING_MESSAGE){
+        if ($messageType == self::FLEX_TYPE_REMOTING_MESSAGE) {
             //remoting message. An AcknowledgeMessage with the result of the service call is expected.
             $remoting = $requestMessage->data[0];
             $serviceCallResult = $serviceRouter->executeServiceCall($remoting->source, $remoting->operation, $remoting->body);
             $acknowledge = new AmfphpFlexMessaging_AcknowledgeMessage($remoting->$messageIdField);
             $acknowledge->body = $serviceCallResult;
             return new Amfphp_Core_Amf_Message($requestMessage->responseUri . Amfphp_Core_Amf_Constants::CLIENT_SUCCESS_METHOD, null, $acknowledge);
-
         }
         throw new Amfphp_Core_Exception('unrecognized flex message');
     }
@@ -147,11 +151,11 @@ class AmfphpFlexMessaging{
      * @return Amfphp_Core_Amf_Packet
      * @param Exception $exception
      */
-    public function generateErrorResponse(Exception $exception){
+    public function generateErrorResponse(Exception $exception) {
         $error = new AmfphpFlexMessaging_ErrorMessage($this->lastFlexMessageId);
         $error->faultCode = $exception->getCode();
         $error->faultString = $exception->getMessage();
-        if($this->returnErrorDetails){
+        if ($this->returnErrorDetails) {
             $error->faultDetail = $exception->getTraceAsString();
             $error->rootCause = $exception;
         }
@@ -160,6 +164,7 @@ class AmfphpFlexMessaging{
         $errorPacket->messages[] = $errorMessage;
         return $errorPacket;
     }
+
 }
 
 ?>

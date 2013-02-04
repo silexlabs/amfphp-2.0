@@ -70,7 +70,12 @@ class AmfphpIncludedRequest implements Amfphp_Core_Common_IDeserializer, Amfphp_
     }
 
     /**
+     * deserialize
      * @see Amfphp_Core_Common_IDeserializer
+     * @param array $getData
+     * @param array $postData
+     * @param string $rawPostData
+     * @return string
      */
     public function deserialize(array $getData, array $postData, $rawPostData) {
         global $amfphpIncludedRequestServiceName;
@@ -80,21 +85,31 @@ class AmfphpIncludedRequest implements Amfphp_Core_Common_IDeserializer, Amfphp_
     }
 
     /**
+     * call service
      * @see Amfphp_Core_Common_IDeserializedRequestHandler
+     * @param array $deserializedRequest
+     * @param Amfphp_Core_Common_ServiceRouter $serviceRouter
+     * @return the service call response
      */
     public function handleDeserializedRequest($deserializedRequest, Amfphp_Core_Common_ServiceRouter $serviceRouter) {
         return $serviceRouter->executeServiceCall($deserializedRequest->serviceName, $deserializedRequest->methodName, $deserializedRequest->parameters);
     }
 
     /**
+     * handle exception
      * @see Amfphp_Core_Common_IExceptionHandler
+     * @param Exception $exception
+     * @return Exception
      */
     public function handleException(Exception $exception) {
         return $exception;
     }
 
     /**
+     * set the return data in global $amfphpIncludedRequestReturnValue
      * @see Amfphp_Core_Common_ISerializer
+     * @param mixed $data
+     * @return string the encoded JSON string sent to JavaScript
      */
     public function serialize($data) {
         global $amfphpIncludedRequestReturnValue;
@@ -107,6 +122,7 @@ class AmfphpIncludedRequest implements Amfphp_Core_Common_IDeserializer, Amfphp_
     /**
      * filter the headers to make sure the content type is set to text/html if the request was handled by the service browser
      * @param array $headers
+     * @param string $contentType
      * @return array
      */
     public function filterHeaders($headers, $contentType) {

@@ -42,6 +42,11 @@ class AmfphpGet implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_
     */
     const CONTENT_TYPE = 'text/amfphpget';
     
+    /**
+     * return error details.
+     * @see Amfphp_Core_Config::CONFIG_RETURN_ERROR_DETAILS
+     * @var boolean
+     */
     protected $returnErrorDetails = false;
 	
     /**
@@ -72,7 +77,12 @@ class AmfphpGet implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_
     }
 
     /**
+     * deserialize
      * @see Amfphp_Core_Common_IDeserializer
+     * @param array $getData
+     * @param array $postData
+     * @param string $rawPostData
+     * @return string
      */
     public function deserialize(array $getData, array $postData, $rawPostData){
         return $getData;
@@ -81,12 +91,15 @@ class AmfphpGet implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_
     /**
      * Retrieve the serviceName, methodName and parameters from the PHP object
      * representing the JSON string
+     * call service
      * @see Amfphp_Core_Common_IDeserializedRequestHandler
+     * @param array $deserializedRequest
+     * @param Amfphp_Core_Common_ServiceRouter $serviceRouter
      * @return the service call response
      */
     public function handleDeserializedRequest($deserializedRequest, Amfphp_Core_Common_ServiceRouter $serviceRouter){
 		
-		if(isset ($deserializedRequest['serviceName'])){
+        if(isset ($deserializedRequest['serviceName'])){
             $serviceName = $deserializedRequest['serviceName'];
         }else{
             throw new Exception('Service name field missing in call parameters \n' . print_r($deserializedRequest, true));
@@ -107,7 +120,10 @@ class AmfphpGet implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_
     }
 
     /**
+     * handle exception
      * @see Amfphp_Core_Common_IExceptionHandler
+     * @param Exception $exception
+     * @return stdClass
      */
     public function handleException(Exception $exception){
         $error = new stdClass();
@@ -125,7 +141,8 @@ class AmfphpGet implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_
     /**
      * Encode the PHP object returned from the service call into a JSON string
      * @see Amfphp_Core_Common_ISerializer
-     * @return the encoded JSON string sent to JavaScript
+     * @param mixed $data
+     * @return string the encoded JSON string sent to JavaScript
      */
     public function serialize($data){
         $encoded = json_encode($data);
@@ -140,6 +157,7 @@ class AmfphpGet implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_
     /**
      * sets return content type to json
      * @param array $headers
+     * @param string $contentType
      * @return array
      */
     public function filterHeaders($headers, $contentType){

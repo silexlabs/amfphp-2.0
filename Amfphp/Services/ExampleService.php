@@ -18,6 +18,11 @@
  */
 class ExampleService {
 
+    /**
+     * return the same data as what was sent
+     * @param mixed $param
+     * @return mixed
+     */
     public function returnOneParam($param){
         return $param;
     }

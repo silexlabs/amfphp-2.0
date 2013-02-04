@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file is part of amfPHP
  *
@@ -16,21 +17,48 @@
  * @package Amfphp_Plugins_FlexMessaging
  * @author Ariel Sommeria-Klein
  */
+class AmfphpFlexMessaging_ErrorMessage {
 
+    /**
+     * correlation id. guid
+     * @var string 
+     */
+    public $correlationId;
 
+    /**
+     * fault code
+     * @var float 
+     */
+    public $faultCode;
 
-class AmfphpFlexMessaging_ErrorMessage
-{
-	public $correlationId;
-	public $faultCode;
-	public $faultDetail;
-	public $faultString;
-        public $rootCause;
+    /**
+     * fault detail
+     * @var string 
+     */
+    public $faultDetail;
 
-        public function  __construct($correlationId) {
-            $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
-            $this->$explicitTypeField = AmfphpFlexMessaging::FLEX_TYPE_ERROR_MESSAGE;
-	    $this->correlationId = $correlationId;
-        }
+    /**
+     * fault string
+     * @var string 
+     */
+    public $faultString;
+
+    /**
+     * an object describing the cause. Whatever you need.
+     * @var mixed 
+     */
+    public $rootCause;
+
+    /**
+     * constructor
+     * @param type $correlationId
+     */
+    public function __construct($correlationId) {
+        $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
+        $this->$explicitTypeField = AmfphpFlexMessaging::FLEX_TYPE_ERROR_MESSAGE;
+        $this->correlationId = $correlationId;
+    }
+
 }
+
 ?>

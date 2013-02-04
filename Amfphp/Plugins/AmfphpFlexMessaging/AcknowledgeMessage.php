@@ -19,18 +19,60 @@
  */
 class AmfphpFlexMessaging_AcknowledgeMessage {
     /**
-     * correlation id
+     * correlation id. guid
+     * @see generateRandomId
      * @var string 
      */
     public $correlationId;
+    
+    /**
+     * message id. guid
+     * @see generateRandomId
+     * @var string 
+     */
     public $messageId;
+    
+     /**
+     * client id. guid
+     * @see generateRandomId
+     * @var string 
+     */   
     public $clientId;
+    
+    /**
+     * destination
+     * @var string 
+     */
     public $destination;
+    
+    /**
+     * body
+     * @var stdClass 
+     */
     public $body;
+    
+    /**
+     * time to live
+     * @var int 
+     */
     public $timeToLive;
+    
+    /**
+     * time stamp
+     * @var int 
+     */
     public $timestamp;
+    
+    /**
+     * headers. DSId(string), DSMessagingVersion(int)
+     * @var stdClass 
+     */
     public $headers;
 
+    /**
+     * constructor
+     * @param string $correlationId
+     */
     public function __construct($correlationId) {
         $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
         $this->$explicitTypeField = AmfphpFlexMessaging::FLEX_TYPE_ACKNOWLEDGE_MESSAGE;
