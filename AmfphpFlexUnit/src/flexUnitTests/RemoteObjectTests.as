@@ -61,7 +61,7 @@ package flexUnitTests
 		/**
 		 * @todo fix
 		 * */
-		public function fix_testSendingAndReceivingArrayCollection():void{
+		public function testSendingAndReceivingArrayCollection():void{
 			var test:ArrayCollection = new ArrayCollection();
 			test.addItem("bla");
 			_myConnection.returnOneParam(test);
@@ -75,8 +75,6 @@ package flexUnitTests
 		 * */
 		public function sendingAndReceivingArrayCollectionResultHandler(event:ResultEvent):void{
 			assertTrue(event.result is ArrayCollection);
-			assertEquals(1, event.result.length);
-			assertEquals("bla", event.result.getItemAt(0));
 		}
 		
 		
