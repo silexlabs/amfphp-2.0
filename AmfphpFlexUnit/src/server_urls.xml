@@ -6,9 +6,11 @@
 	<url description="xp 32 php 5.3 ts" active="n">http://192.168.1.36:8888/amfphp_master/Tests/TestData/</url>
 	<url description="win7 64, php 32 php 5.3 nts" active="n">http://192.168.1.42/amfphp_master/Tests/TestData/</url>
 	<url description="win7 64, php 32 5.3 ts" active="n">http://192.168.1.42:8888/amfphp_master/Tests/TestData/</url>
-	<url description="debian 32 php 5.2" active="n">http://192.168.10.40/amfphp-2.1/Tests/TestData/</url>
-	<url description="debian 32 php 5.3" active="n">http://192.168.1.37:5302/amfphp_master/Tests/TestData/</url>
-	<url description="debian 64 php 5.2" active="n">http://192.168.1.40:5213/amfphp_master/Tests/TestData/</url>
-	<url description="debian 64 php 5.3" active="n">http://192.168.1.40:5302/amfphp_master/Tests/TestData/</url>
+	<url description="debian 32 php 5.2" active="n">http://192.168.0.15:5213/amfphp_master/Tests/TestData/</url>
+	<url description="debian 32 php 5.3" active="n">http://192.168.0.15:5302/amfphp_master/Tests/TestData/</url>
+	<url description="debian 32 php 5.4" active="n">http://192.168.0.15:5411/amfphp_master/Tests/TestData/</url>
+	<url description="debian 64 php 5.2" active="n">http://192.168.0.16:5213/amfphp_master/Tests/TestData/</url>
+	<url description="debian 64 php 5.3" active="n">http://192.168.0.16:5302/amfphp_master/Tests/TestData/</url>
+	<url description="debian 64 php 5.4" active="n">http://192.168.0.16:5411/amfphp_master/Tests/TestData/</url>
 </server_urls>
 
