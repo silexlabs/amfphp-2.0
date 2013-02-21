@@ -52,3 +52,11 @@ ehthumbs.db
 Icon?
 Thumbs.db
 BackOffice/ClientGenerator/Generators/AmfphpFlexClientGenerator/Template/bin-debug/header-amfphp.jpg
+
+Amfphp/Plugins/BaguetteAmf/BaguetteAmfSerializer.php
+
+Amfphp/Plugins/BaguetteAmf/BaguetteAmfDeserializer.php
+
+Amfphp/Plugins/BaguetteAmf/BaguetteAmfService.php
+
+Amfphp/Plugins/BaguetteAmf/BaguetteAmf.php
