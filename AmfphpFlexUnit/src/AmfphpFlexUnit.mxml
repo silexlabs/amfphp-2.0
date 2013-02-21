@@ -57,7 +57,7 @@
 				for (i=0; i < urls.length(); i++) {
 					var urlNode:XML = urls[i];
 					if(urlNode.@active == "y"){
-						
+						//todo support runs on multiple urls. It seems tests are always repeated on the first
 						TestConfig.gateway = urlNode;
 						urlLabel.text = urlNode.@description + ': ' + urlNode;
 						testRunner.runWithFlexUnit4Runner(currentRunTestSuite(), "AmfphpFlexUnit");
