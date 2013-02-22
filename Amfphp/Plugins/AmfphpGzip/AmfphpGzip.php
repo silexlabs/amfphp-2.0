@@ -36,7 +36,7 @@ class AmfphpGzip {
      */
     public function  __construct(array $config = null) {
 
-        if(!$this->is_compression_enable) {
+        if(!$this->is_compression_enable()) {
             return;
         }
 
