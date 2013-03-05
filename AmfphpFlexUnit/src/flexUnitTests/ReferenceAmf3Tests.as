@@ -12,7 +12,7 @@ package flexUnitTests
 	/**
 	 * adds amf3 specific tests to the tests that work for both amf0 and am3
 	 * */
-	public class ReferenceAmf3Tests extends ReferenceCommonTests
+	public class ReferenceAmf3Tests extends ReferenceCommonTestsDisable
 	{		
 		
 		[Before]

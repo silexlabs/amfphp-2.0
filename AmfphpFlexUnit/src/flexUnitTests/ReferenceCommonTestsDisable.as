@@ -20,8 +20,10 @@ package flexUnitTests
 	 * In Charles this shows up as a circular reference, as it means the main array contains itself.
 	 * This is because the parameters to the call is an array itself. IE what is being decoded is [ [["bla"], ["bla"]] ]
 	 * Unoortnuately this means a lot of tests fail with AMF0.
+	 * 
+	 * named xxxDisable to avoid being picked up by ant testrunner generation
 	 * */
-	public class ReferenceCommonTests extends TestCase
+	public class ReferenceCommonTestsDisable extends TestCase
 	{		
 		
 		protected var _nc:EnhancedNetConnection;

@@ -9,12 +9,12 @@
 			import flexUnitTests.Amf3TraitsTests;
 			import flexUnitTests.AmfCommonTests;
 			import flexUnitTests.AuthenticationTests;
-			import flexUnitTests.ByteArrayTests;
+			import flexUnitTests.ByteArrayTestsDisable;
 			import flexUnitTests.ExceptionTests;
 			import flexUnitTests.HeaderTests;
 			import flexUnitTests.NetConnectionTests;
 			import flexUnitTests.ReferenceAmf3Tests;
-			import flexUnitTests.ReferenceCommonTests;
+			import flexUnitTests.ReferenceCommonTestsDisable;
 			import flexUnitTests.RemoteObjectTests;
 			import flexUnitTests.TestConfig;
 			import flexUnitTests.voTests.VoTests;
@@ -41,7 +41,7 @@
 				testsToRun.push(flexUnitTests.AuthenticationTests);
 				testsToRun.push(flexUnitTests.Amf3NumberTests);
 				testsToRun.push(flexUnitTests.ExceptionTests);
-				testsToRun.push(flexUnitTests.ByteArrayTests);
+				testsToRun.push(flexUnitTests.ByteArrayTestsDisable);
 				/*
 				var testsToRun:Array = new Array();
 				testsToRun.push(flexUnitTests.RemoteObjectTests);

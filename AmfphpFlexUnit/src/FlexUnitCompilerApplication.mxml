@@ -13,12 +13,12 @@ Please click on the "Refresh" icon in "FlexUnit Results" view to regenerate this
 			import flexUnitTests.Amf3NumberTests;
 			import flexUnitTests.RemoteObjectTests;
 			import flexUnitTests.Amf3Tests;
-			import flexUnitTests.ReferenceCommonTests;
+			import flexUnitTests.ReferenceCommonTestsDisable;
 			import flexUnitTests.HeaderTests;
 			import flexUnitTests.AuthenticationTests;
 			import flexUnitTests.ExceptionTests;
 			import flexUnitTests.NetConnectionTests;
-			import flexUnitTests.ByteArrayTests;
+			import flexUnitTests.ByteArrayTestsDisable;
 			import flexUnitTests.voTests.VoTests;
 			import flexUnitTests.AmfCommonTests;
 			
@@ -26,7 +26,7 @@ Please click on the "Refresh" icon in "FlexUnit Results" view to regenerate this
 			
 			private var flexUnitTests_voTests_VoTests_obj:flexUnitTests.voTests.VoTests;
 			
-			private var flexUnitTests_ByteArrayTests_obj:flexUnitTests.ByteArrayTests;
+			private var flexUnitTests_ByteArrayTests_obj:flexUnitTests.ByteArrayTestsDisable;
 			
 			private var flexUnitTests_NetConnectionTests_obj:flexUnitTests.NetConnectionTests;
 			
@@ -36,7 +36,7 @@ Please click on the "Refresh" icon in "FlexUnit Results" view to regenerate this
 			
 			private var flexUnitTests_HeaderTests_obj:flexUnitTests.HeaderTests;
 			
-			private var flexUnitTests_ReferenceCommonTests_obj:flexUnitTests.ReferenceCommonTests;
+			private var flexUnitTests_ReferenceCommonTests_obj:flexUnitTests.ReferenceCommonTestsDisable;
 			
 			private var flexUnitTests_Amf3Tests_obj:flexUnitTests.Amf3Tests;
 			
