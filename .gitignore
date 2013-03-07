@@ -34,7 +34,6 @@ Backoffice/ClientGenerator/Generated
 *.dmg
 *.gz
 *.iso
-*.jar
 *.rar
 *.tar
 *.zip
