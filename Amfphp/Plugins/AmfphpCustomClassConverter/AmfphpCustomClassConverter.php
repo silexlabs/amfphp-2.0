@@ -152,6 +152,11 @@ class AmfphpCustomClassConverter {
         if ($className != 'stdClass' && !isset($obj->$explicitTypeField)) {
             $obj->$explicitTypeField = $className;
         }
+		//hack to support returning Array Collections. TODO: find a better mechanism for this, as it should be in the flex messaging plugin
+		if($className == 'flex.io.ArrayCollection'){
+			$obj->source = $obj->_externalizedData;
+			unset($obj->_externalizedData);	
+		}
         return $obj;
     }
 
