@@ -60,9 +60,11 @@ class Amfphp_Core_Common_ServiceRouter {
     /**
      * get a service object by its name. Looks for a match in serviceNames2ClassFindInfo, then in the defined service folders.
      * If none found, an exception is thrown
-     * @todo maybe option for a fully qualified class name. 
      * this method is static so that it can be used also by the discovery service
      *  '__' are replaced by '/' to help the client generator support packages without messing with folders and the like
+     * the service object can either be in the global namespace or in the namespace suggested by the name.
+     * For example a call to Sub1/Sub2/NamespaceTestService will load the PHP file in Sub1/Sub2/NamespaceTestService,
+     * and return an instance of either NamespaceTestService or Sub1\Sub2\NamespaceTestService
      * 
      * @param type $serviceName
      * @param array $serviceFolderPaths
@@ -86,8 +88,12 @@ class Amfphp_Core_Common_ServiceRouter {
                 $servicePath = $folderPath . $serviceIncludePath;
                 if (file_exists($servicePath)) {
                     require_once $servicePath;
-                    $serviceObject = new $className();
-                    break;
+                    if(class_exists($className, false)){
+                        $serviceObject = new $className();
+                    }else{
+                        $namespacedClassName = str_replace('/', '\\', $serviceNameWithSlashes);
+                        $serviceObject = new $namespacedClassName;
+                    }
                 }
             }
         }

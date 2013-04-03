@@ -92,6 +92,16 @@ package flexUnitTests
 			assertTrue(event.obj.AmfphpDiscoveryService.methods.discover.parameters.length == 0);
 		}
 		
+				
+		public function testNamespaceServiceCall():void{
+			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyNamespaceServiceCall, 1000));
+			_nc.callWithEvents("Sub1/Sub2/NamespaceTestService/bla");	
+		}
+		private function verifyNamespaceServiceCall(event:ObjEvent):void{
+			assertTrue(event.obj is String);
+			assertEquals("bla", event.obj);
+		}
+		
 
 		
 		
