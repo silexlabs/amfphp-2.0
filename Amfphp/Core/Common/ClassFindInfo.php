@@ -26,7 +26,7 @@ class Amfphp_Core_Common_ClassFindInfo {
     public $absolutePath;
 
     /**
-     * the name of the class.
+     * the name of the class.can include a namespace, for example : \namespace\class
      * @var String
      */
     public $className;
