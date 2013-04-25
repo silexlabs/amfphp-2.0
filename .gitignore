@@ -34,16 +34,13 @@ Backoffice/ClientGenerator/Generated
 *.dmg
 *.gz
 *.iso
-*.jar
 *.rar
 *.tar
 *.zip
 
-# Logs and databases #
+# Logs  #
 ######################
 *.log
-*.sql
-*.sqlite
 
 # OS generated files #
 ######################
