@@ -1,0 +1,1 @@
+O:22:"Amfphp_Core_Amf_Packet":5:{s:7:"headers";a:0:{}s:8:"messages";a:1:{i:0;O:23:"Amfphp_Core_Amf_Message":4:{s:9:"targetUri";s:11:"/1/onResult";s:11:"responseUri";s:4:"null";s:4:"data";O:8:"stdClass":0:{}s:13:"_explicitType";s:23:"Amfphp_Core_Amf_Message";}}s:10:"amfVersion";i:0;s:11:"headerTable";a:0:{}s:13:"_explicitType";s:22:"Amfphp_Core_Amf_Packet";}
