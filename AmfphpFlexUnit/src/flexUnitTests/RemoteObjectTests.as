@@ -75,6 +75,7 @@ package flexUnitTests
 		 * */
 		public function sendingAndReceivingArrayCollectionResultHandler(event:ResultEvent):void{
 			assertTrue(event.result is ArrayCollection);
+			assertEquals("bla", event.result.getItemAt(0));
 		}
 		
 		
