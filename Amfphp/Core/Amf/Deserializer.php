@@ -658,9 +658,17 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
 
         //Add to references as circular references may search for this object
         $this->storedObjects[] = & $obj;
+        if ($type != '') {
+            $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
+            $obj->$explicitTypeField = $type;
+        }
             
         if($classDefinition['externalizable']){
             $externalizedDataField = Amfphp_Core_Amf_Constants::FIELD_EXTERNALIZED_DATA;
+			if($type == 'flex.messaging.io.ArrayCollection'){
+				//special for Flex array collection. This doesn't belong here, but it's the least worst way I found to support returning them
+				$externalizedDataField = 'source';
+			}
             $obj->$externalizedDataField = $this->readAmf3Data();
         }else{
             $members = $classDefinition['members'];
@@ -679,11 +687,6 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
                     $key = $this->readAmf3String();
                 }
             }
-        }
-
-        if ($type != '') {
-            $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
-            $obj->$explicitTypeField = $type;
         }
 
         return $obj;
