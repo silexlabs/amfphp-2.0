@@ -8,11 +8,11 @@ package flexUnitTests
 	import flash.net.URLRequest;
 	import flash.utils.ByteArray;
 	
-	import flexunit.framework.TestCase;
-	
 	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
 	import mx.rpc.remoting.RemoteObject;
+	
+	import flexunit.framework.TestCase;
 	
 	import org.amfphp.test.EnhancedNetConnection;
 	import org.amfphp.test.ExternalizableDummy;
@@ -42,8 +42,15 @@ package flexUnitTests
 
 		private function onComplete(event:Event):void
 		{
-			var data:ByteArray = _urlLoader.data; 
-			data.compress();
+			var data:Array = new Array();
+			var byteArray:ByteArray = _urlLoader.data;
+			byteArray.compress();
+			data.push(byteArray);
+			
+			var byteArray2:ByteArray = new ByteArray();
+			byteArray2.writeBoolean(true);
+			data.push(byteArray2);
+			
 			_myConnection.uploadCompressedByteArray(data);
 			
 			_myConnection.addEventListener(ResultEvent.RESULT, addAsync(sendingAndReceivingACompressedImageResultHandler, 3000));

@@ -20,14 +20,18 @@ class ByteArrayTestService {
 
     /**
      * uncompresses a bytearray, writes the uncompressed data to a file, received.jpg
-     * @param Amfphp_Core_Amf_Types_ByteArray $ba a comporessed bytearray
+     * @param data, an array containing 2 byte arrays, one compressed one not
      * @return true 
      */
-    public function uploadCompressedByteArray(Amfphp_Core_Amf_Types_ByteArray $ba){
+    public function uploadCompressedByteArray($data){
+		
 		//uncomment to test with gzuncompress
-        //$uncompressed = gzuncompress($ba->data);
+        $uncompressed = gzuncompress($data[0]->data);
         //uncomment to save file to jpeg
         //file_put_contents('received.jpg', $uncompressed);
+		if(get_class($data[1]) != 'Amfphp_Core_Amf_Types_ByteArray'){
+			throw new Exception("second element on data not a byte array");
+		}
         return true;
 
     }
