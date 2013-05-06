@@ -1,22 +1,13 @@
 package org.amfphp.test
 {
-	import flash.desktop.NativeProcess;
-	import flash.desktop.NativeProcessStartupInfo;
 	import flash.events.AsyncErrorEvent;
 	import flash.events.IOErrorEvent;
-	import flash.events.NativeProcessExitEvent;
 	import flash.events.NetStatusEvent;
-	import flash.events.ProgressEvent;
 	import flash.events.SecurityErrorEvent;
-	import flash.filesystem.File;
-	import flash.filesystem.FileMode;
-	import flash.filesystem.FileStream;
 	import flash.net.NetConnection;
 	import flash.net.ObjectEncoding;
 	import flash.net.Responder;
 	import flash.utils.ByteArray;
-	
-	import flashx.textLayout.tlf_internal;
 	
 	import flexUnitTests.TestConfig;
 	
@@ -33,9 +24,8 @@ package org.amfphp.test
 		static public const EVENT_ONRESULT:String = "onResult";
 		static public const EVENT_ONSTATUS:String = "onStatus";
 		
-		private var process:NativeProcess;
 		
-		static private var requestCounter = 0;
+		static private var requestCounter:uint = 0;
 		
 		private var testMeta:String;
 		
@@ -48,7 +38,7 @@ package org.amfphp.test
 			addEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError);	
 		}
 		
-		public function setTestMeta(testClassName:String, testMethodName:String){
+		public function setTestMeta(testClassName:String, testMethodName:String):void{
 			//hackish, todo
 			testMeta = testClassName.replace('flexUnitTests::', '').replace('flexUnitTests.voTests::', '') + "_" + testMethodName;
 		}
@@ -137,6 +127,8 @@ package org.amfphp.test
 				//Then the object
 				data.writeObject(args);
 				
+				//needs AIR  (with extendedDesktop profile)
+				/*
 				//write message to file
 				var fs : FileStream = new FileStream();
 				var amfRequestFile : File = File.applicationStorageDirectory.resolvePath(requestCounter + "_" + testMeta + 'request.amf');
@@ -166,9 +158,11 @@ package org.amfphp.test
 				process.addEventListener(NativeProcessExitEvent.EXIT, onExit);
 				process.addEventListener(IOErrorEvent.STANDARD_OUTPUT_IO_ERROR, onIOError);
 				process.addEventListener(IOErrorEvent.STANDARD_ERROR_IO_ERROR, onIOError);
+				*/
 			}				
 			
 		}
+		/*
 		public function onOutputData(event:ProgressEvent):void
 		{
 			trace('bytes ' + process.standardOutput.bytesAvailable);
@@ -295,12 +289,12 @@ package org.amfphp.test
 		{
 			trace("ERROR -", process.standardError.readUTFBytes(process.standardError.bytesAvailable)); 
 		}
-		
+		/*
 		public function onExit(event:NativeProcessExitEvent):void
 		{
 			//trace("Process exited with ", event.exitCode);
 		}
-		
+		*/
 		public function onIOError(event:IOErrorEvent):void
 		{
 			trace(event.toString());
