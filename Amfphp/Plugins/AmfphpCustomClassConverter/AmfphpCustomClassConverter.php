@@ -90,6 +90,7 @@ class AmfphpCustomClassConverter {
      */
     public function filterDeserializedResponse($deserializedResponse) {
         $deserializedResponse = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($deserializedResponse, array($this, 'markExplicitType'));
+//		file_put_contents("rawdata.txt", serialize($deserializedResponse));
         return $deserializedResponse;
     }
 
@@ -152,11 +153,6 @@ class AmfphpCustomClassConverter {
         if ($className != 'stdClass' && !isset($obj->$explicitTypeField)) {
             $obj->$explicitTypeField = $className;
         }
-		//hack to support returning Array Collections. TODO: find a better mechanism for this, as it should be in the flex messaging plugin
-		if($className == 'flex.io.ArrayCollection'){
-			$obj->source = $obj->_externalizedData;
-			unset($obj->_externalizedData);	
-		}
         return $obj;
     }
 
