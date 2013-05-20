@@ -84,23 +84,28 @@ class Amfphp_Core_Common_ServiceRouter {
             $exploded = explode('/', $serviceNameWithSlashes);
             $className = $exploded[count($exploded) - 1];
             //no class find info. try to look in the folders
-            foreach ($serviceFolderPaths as $folderPath) {
-                $namespaceRoot = NULL;
-                if(is_array($folderPath)){
-                    //add support for namespace but respect backward compatibility, for now
-                    $namespaceRoot = $folderPath[1];
-                    $folderPath = $folderPath[0];
+            foreach ($serviceFolderPaths as $folder) {
+                $folderPath = NULL;
+                $rootNamespace = NULL;
+                if(is_array($folder)){
+                    $rootNamespace = $folder[1];
+                    $folderPath = $folder[0];
+                }else{
+                    $folderPath = $folder;
                 }
                 $servicePath = $folderPath . $serviceIncludePath;
+                
                 if (file_exists($servicePath)) {
                     require_once $servicePath;
-                    if(isset ($namespaceRoot)){
-                        $namespacedClassName = $namespaceRoot . '\\' . $className;
-                        echo $nameSpacedClassName;
-                        $serviceObject = new $namespacedClassName;
-                    }else{
+                    if($rootNamespace == NULL){
                         $serviceObject = new $className();
+                    }else{
+                        $namespacedClassName = $rootNamespace . '\\' . str_replace('/', '\\', $serviceNameWithSlashes);
+                       
+                        $serviceObject = new $namespacedClassName;
+                        
                     }
+                    
                 }
             }
         }

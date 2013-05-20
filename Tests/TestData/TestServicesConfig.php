@@ -24,7 +24,7 @@ class TestServicesConfig extends Amfphp_Core_Config {
     public function  __construct() {
         parent::__construct();
         $this->serviceFolderPaths  = array(dirname(__FILE__) . '/Services/' ,dirname(__FILE__) . '/MoreServices/');
-        $this->serviceFolderPaths[] = array(dirname(__FILE__) . '/NamespacedServices/', '');
+        $this->serviceFolderPaths[] = array(dirname(__FILE__) . '/NamespacedServices/', 'TestNamespace');
         $testServicePath = dirname(__FILE__) . '/TestService.php';
         $classFindInfo = new Amfphp_Core_Common_ClassFindInfo($testServicePath, 'TestService');
 		//uncomment to disable baguette amf

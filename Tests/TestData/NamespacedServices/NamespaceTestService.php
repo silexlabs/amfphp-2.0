@@ -10,7 +10,7 @@
  */
 
 
-namespace Sub1\Sub2;
+namespace TestNamespace;
 
 
 /**
