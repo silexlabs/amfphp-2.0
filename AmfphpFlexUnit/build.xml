@@ -47,6 +47,7 @@
 	<target name="test" depends="init">
 		<!-- Execute FlexUnit tests and publish reports -->
 		<flexunit 
+			player="air"
 		    workingDir="${bin.loc}"
 		    toDir="${report.loc}" 
 			haltonfailure="false" 

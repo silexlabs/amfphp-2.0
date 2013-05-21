@@ -74,8 +74,13 @@ package flexUnitTests
 		 * this is a special amf trait. see spec for details
 		 * */
 		public function sendingAndReceivingArrayCollectionResultHandler(event:ResultEvent):void{
-			assertTrue(event.result is ArrayCollection);
-			assertEquals("bla", event.result.getItemAt(0));
+			if(event.result is ArrayCollection){
+				//amfphp without baguette, handles externalized properly
+				assertEquals("bla", event.result.getItemAt(0));
+			}else{
+				//baguette amf. shortcut to support externalized data. array is returned directly by deserializer
+				assertEquals("bla", event.result[0]);
+			}
 		}
 		
 		
