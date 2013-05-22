@@ -18,6 +18,8 @@ package org.amfphp.test
 	import flash.net.Responder;
 	import flash.utils.ByteArray;
 	
+	import flexUnitTests.TestConfig;
+	
 	
 	/**
 	 * better class for tests, with extra events, traces, and no responder
@@ -31,7 +33,6 @@ package org.amfphp.test
 		static public const EVENT_ONRESULT:String = "onResult";
 		static public const EVENT_ONSTATUS:String = "onStatus";
 		
-		static public const FAKE:Boolean = true;
 		private var process:NativeProcess;
 		
 		public function EnhancedNetConnection()
@@ -73,9 +74,10 @@ package org.amfphp.test
 		
 		/**
 		 * like call, but with out responder, and events instead. necessary for use with flex unit
+		 * support for doing without server added
 		 * */
 		public function callWithEvents(command:String, ... args):void{
-			if(!FAKE){
+			if(!TestConfig.gateway.substr(0, 4) == "http"){
 				var callArgs:Array = new Array(command, new Responder(onResult, onStatus));
 				for each(var arg:* in args){
 					callArgs.push(arg);
@@ -84,6 +86,7 @@ package org.amfphp.test
 				call.apply(this, callArgs);
 				
 			}else{
+				//local php exe
 				var data:ByteArray = new ByteArray();
 				data.objectEncoding = objectEncoding;	// Set the AMF encoding
 				
@@ -125,18 +128,23 @@ package org.amfphp.test
 				
 				//write message to file
 				var fs : FileStream = new FileStream();
-				var targetFile : File = File.documentsDirectory.resolvePath('test.amf');
+				var targetFile : File = File.applicationStorageDirectory.resolvePath('test.amf');
 				fs.open(targetFile, FileMode.WRITE);
 				fs.writeBytes(data);
 				fs.close();
 				
 				//send to php
 				var nativeProcessStartupInfo:NativeProcessStartupInfo = new NativeProcessStartupInfo();
-				var file:File = File.applicationDirectory.resolvePath("/php-5.3.2/bin/php.dSYM");
+				var file:File = File.applicationDirectory.resolvePath(TestConfig.gateway);
 				nativeProcessStartupInfo.executable = file;
 				
+				//find path to test.php
+				var scriptFile:File = File.applicationDirectory.resolvePath('test.php');
+				
+				
 				var processArgs:Vector.<String> = new Vector.<String>();
-				processArgs[0] = "/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/AmfphpFlexUnit/src/test.php";
+				
+				processArgs[0] = scriptFile.nativePath;
 				//processArgs[1] = "'echo \"blq\"'";
 //				processArgs[1] = "'file_put_contents(\"zer\",\"eeee\");'";
 				nativeProcessStartupInfo.arguments = processArgs;
@@ -153,9 +161,21 @@ package org.amfphp.test
 		}
 		public function onOutputData(event:ProgressEvent):void
 		{
-			trace('bytes ' + process.standardOutput.bytesAvailable); 
+			trace('bytes ' + process.standardOutput.bytesAvailable);
+			//trace("got : " + process.standardOutput.readUTFBytes(process.standardOutput.bytesAvailable));
 			var rawData:ByteArray = new ByteArray();
+			
 			process.standardOutput.readBytes(rawData);
+			
+			//save to file
+			var fs : FileStream = new FileStream();
+			var targetFile : File = File.applicationStorageDirectory.resolvePath('ret.amf');
+			fs.open(targetFile, FileMode.WRITE);
+			fs.writeBytes(rawData);
+			//reset byte array, just in case
+			rawData.position = 0;
+			fs.close();
+			
 //			rawData.objectEncoding = ObjectEncoding.AMF3;
 			
 			//Determine if data is valid
@@ -187,13 +207,13 @@ package org.amfphp.test
 					//var key:String = rawData.readUTFBytes(strlen);
 					//var required:Boolean = rawData.readByte() == 1;
 					//var len:int = rawData.readUnsignedInt();
-					
+					/*
 					if (objectEncoding == ObjectEncoding.AMF3)
 					{
 						var amf3Byte:uint = rawData.readUnsignedByte();
 						rawData.objectEncoding = ObjectEncoding.AMF3;
 					}
-					
+					*/
 					var bodyVal:Object = rawData.readObject();
 					rawData.objectEncoding = ObjectEncoding.AMF0;
 					

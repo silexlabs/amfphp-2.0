@@ -13,6 +13,7 @@
 	<url description="debian 32 php 5.4" active="n">http://192.168.0.15:5411/amfphp_master/Tests/TestData/</url>
 	<url description="debian 64 php 5.2" active="n">http://192.168.0.13:5213/amfphp_master/Tests/TestData/</url>
 	<url description="debian 64 php 5.3" active="n">http://192.168.0.13:5302/amfphp_master/Tests/TestData/</url>
-	<url description="debian 64 php 5.4" active="y">http://192.168.0.13:5411/amfphp_master/Tests/TestData/</url>
+	<url description="debian 64 php 5.4" active="n">http://192.168.0.13:5411/amfphp_master/Tests/TestData/</url>
+	<url description="serverless php 5.4 ts" active="y">file:///c:/php-sdk/php54dev/vc9/x64/php-5.4.11/x64/Release_TS/php.exe</url>
 </server_urls>
 
