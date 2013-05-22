@@ -18,12 +18,7 @@ package org.amfphp.test
 	import flash.net.Responder;
 	import flash.utils.ByteArray;
 	
-	import mx.messaging.messages.RemotingMessage;
-	import mx.rpc.Fault;
-	import mx.rpc.events.AbstractEvent;
-	import mx.rpc.events.FaultEvent;
-	import mx.rpc.events.ResultEvent;
-
+	
 	/**
 	 * better class for tests, with extra events, traces, and no responder
 	 * */
@@ -202,7 +197,7 @@ package org.amfphp.test
 					var bodyVal:Object = rawData.readObject();
 					rawData.objectEncoding = ObjectEncoding.AMF0;
 					
-					var sendEvent:AbstractEvent;
+					var sendEvent:ObjEvent;
 					if (target == '/1/onDebugEvents')
 					{
 						//Look at the bodyVal
@@ -228,7 +223,7 @@ package org.amfphp.test
 					else if (target == '/1/onStatus')
 					{
 						trace("onStatus. faultcode :" + bodyVal.faultCode + "\r faultDetail : " + bodyVal.faultDetail + "\r faultString : " + bodyVal.faultString);
-						dispatchEvent(new ObjEvent(EVENT_ONSTATUS, bodyVal)); 
+						sendEvent = new ObjEvent(EVENT_ONSTATUS, bodyVal); 
 						//dispatchEvent(fe);
 					}
 				}
@@ -238,8 +233,7 @@ package org.amfphp.test
 				//Create a new Fault event
 				rawData.position = 0;
 				var errorMessage:String = rawData.readUTFBytes(rawData.length);
-				var fault:Fault = new Fault("INVALID_AMF_MESSAGE", "Invalid AMF message", errorMessage);
-				sendEvent = new FaultEvent(FaultEvent.FAULT, false, true, fault);
+				sendEvent = new ObjEvent(EVENT_ONSTATUS, "Invalid AMF message" +  errorMessage);
 				//dispatchEvent(fe);
 			}
 			
