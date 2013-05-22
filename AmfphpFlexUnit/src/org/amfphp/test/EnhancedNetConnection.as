@@ -128,8 +128,8 @@ package org.amfphp.test
 				
 				//write message to file
 				var fs : FileStream = new FileStream();
-				var targetFile : File = File.applicationStorageDirectory.resolvePath('test.amf');
-				fs.open(targetFile, FileMode.WRITE);
+				var amfRequestFile : File = File.applicationStorageDirectory.resolvePath('test.amf');
+				fs.open(amfRequestFile, FileMode.WRITE);
 				fs.writeBytes(data);
 				fs.close();
 				
@@ -141,11 +141,10 @@ package org.amfphp.test
 				//find path to test.php
 				var scriptFile:File = File.applicationDirectory.resolvePath('test.php');
 				
-				
 				var processArgs:Vector.<String> = new Vector.<String>();
 				
 				processArgs[0] = scriptFile.nativePath;
-				//processArgs[1] = "'echo \"blq\"'";
+				processArgs[1] = amfRequestFile.nativePath;
 //				processArgs[1] = "'file_put_contents(\"zer\",\"eeee\");'";
 				nativeProcessStartupInfo.arguments = processArgs;
 				
@@ -169,10 +168,12 @@ package org.amfphp.test
 			
 			//save to file
 			var fs : FileStream = new FileStream();
-			var targetFile : File = File.applicationStorageDirectory.resolvePath('ret.amf');
-			fs.open(targetFile, FileMode.WRITE);
+			var responseAmfFile : File = File.applicationStorageDirectory.resolvePath('ret.amf');
+			fs.open(responseAmfFile, FileMode.WRITE);
 			fs.writeBytes(rawData);
 			//reset byte array, just in case
+			rawData.position = 0;
+			trace(rawData.readUTFBytes(rawData.bytesAvailable));
 			rawData.position = 0;
 			fs.close();
 			
@@ -207,13 +208,14 @@ package org.amfphp.test
 					//var key:String = rawData.readUTFBytes(strlen);
 					//var required:Boolean = rawData.readByte() == 1;
 					//var len:int = rawData.readUnsignedInt();
-					/*
+					
+					
 					if (objectEncoding == ObjectEncoding.AMF3)
 					{
 						var amf3Byte:uint = rawData.readUnsignedByte();
 						rawData.objectEncoding = ObjectEncoding.AMF3;
 					}
-					*/
+					
 					var bodyVal:Object = rawData.readObject();
 					rawData.objectEncoding = ObjectEncoding.AMF0;
 					
@@ -237,12 +239,14 @@ package org.amfphp.test
 					}
 					else if (target == '/1/onResult')
 					{
-						sendEvent = new ObjEvent(EVENT_ONRESULT, bodyVal.body);
+						sendEvent = new ObjEvent(EVENT_ONRESULT, bodyVal);
 						
 					}
 					else if (target == '/1/onStatus')
 					{
-						trace("onStatus. faultcode :" + bodyVal.faultCode + "\r faultDetail : " + bodyVal.faultDetail + "\r faultString : " + bodyVal.faultString);
+						if(bodyVal){
+							trace("onStatus. faultcode :" + bodyVal.faultCode + "\r faultDetail : " + bodyVal.faultDetail + "\r faultString : " + bodyVal.faultString);
+						}
 						sendEvent = new ObjEvent(EVENT_ONSTATUS, bodyVal); 
 						//dispatchEvent(fe);
 					}
