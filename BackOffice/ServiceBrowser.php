@@ -134,7 +134,10 @@ $isAccessGranted = $accessManager->isAccessGranted();
                 echo "\n <li><b>$service->name</b>";
                 echo "\n<ul>";
                 foreach ($service->methods as $method) {
-                    if (substr($method->name, 0, 1) == '_') {
+                    if (
+                        substr($method->name, 0, 1) == '_'
+                        || false !== strpos($method->comment, '@amfIgnore')
+                    ) {
                         //methods starting with a '_' as they are reserved, so filter them out 
                         continue;
                     }
