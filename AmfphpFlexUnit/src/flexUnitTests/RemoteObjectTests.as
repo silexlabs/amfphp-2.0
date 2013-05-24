@@ -21,7 +21,9 @@ package flexUnitTests
 
 			_myConnection.destination = "amfphp2TestGateway"; 
 			_myConnection.endpoint = TestConfig.gateway;
-			_myConnection.source = "TestService";			
+			_myConnection.source = "TestService";	
+			_myConnection.setTestMeta(className, methodName);
+
 		}
 		
 		[After]

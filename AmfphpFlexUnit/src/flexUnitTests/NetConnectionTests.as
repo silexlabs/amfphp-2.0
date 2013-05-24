@@ -27,6 +27,8 @@ package flexUnitTests
 			
 			_nc = new EnhancedNetConnection();
 			_nc.connect(TestConfig.gateway);
+			_nc.setTestMeta(className, methodName);
+			
 			
 		}
 		

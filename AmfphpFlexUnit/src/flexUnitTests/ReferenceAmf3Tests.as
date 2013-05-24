@@ -23,6 +23,7 @@ package flexUnitTests
 			//this second connect call is important because of a flash bug: 
 			//As the setting to AMF3 is done after the connect in super.setup, the actual data sent is in amf3 without this workaround
 			_nc.connect(TestConfig.gateway);
+			_nc.setTestMeta(className, methodName);
 			
 		}
 		

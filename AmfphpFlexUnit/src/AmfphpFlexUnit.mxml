@@ -4,6 +4,8 @@
 			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" creationComplete="application1_creationCompleteHandler(event)" xmlns:flexui="flexunit.flexui.*">
 	<fx:Script>
 		<![CDATA[
+			import mx.events.FlexEvent;
+			
 			import flexUnitTests.Amf3NumberTests;
 			import flexUnitTests.Amf3Tests;
 			import flexUnitTests.Amf3TraitsTests;
@@ -14,13 +16,9 @@
 			import flexUnitTests.HeaderTests;
 			import flexUnitTests.NetConnectionTests;
 			import flexUnitTests.ReferenceAmf3Tests;
-			import flexUnitTests.ReferenceCommonTestsDisable;
 			import flexUnitTests.RemoteObjectTests;
 			import flexUnitTests.TestConfig;
 			import flexUnitTests.voTests.VoTests;
-			
-			import mx.controls.Alert;
-			import mx.events.FlexEvent;
 			
 			public function currentRunTestSuite():Array
 			{
