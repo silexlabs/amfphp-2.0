@@ -22,7 +22,7 @@ package flexUnitTests
 		{
 			_nc = new EnhancedNetConnection();
 			_nc.connect(TestConfig.gateway);	
-			_nc.setTestMeta(className, methodName);
+			org.amfphp.test.Util.traceTestMeta(className, methodName);
 			
 		}
 		

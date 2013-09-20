@@ -5,7 +5,7 @@ package flexUnitTests
 	 * */
 	public class TestConfig
 	{
-		public static var gateway:String = "file:///c:/php-sdk/php54dev/vc9/x64/php-5.4.11/x64/Release_TS/php.exe";
+		public static var gateway:String = "http://localhost/baguetteamf/test/amfphp/Tests/TestData/";
 		//online http://arielsommeria.com/amfphp-2.1/Tests/TestData/
 		//virtual machine http://192.168.1.36/amfphp-2.1/Tests/TestData/
 		//old amfphp

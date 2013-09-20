@@ -9,6 +9,7 @@ package flexUnitTests
 	
 	import org.amfphp.test.ExternalizableDummy;
 	import org.amfphp.test.TestCustomClass1;
+	import org.amfphp.test.Util;
 
 	public class RemoteObjectTests extends TestCase
 	{		
@@ -22,7 +23,7 @@ package flexUnitTests
 			_myConnection.destination = "amfphp2TestGateway"; 
 			_myConnection.endpoint = TestConfig.gateway;
 			_myConnection.source = "TestService";	
-			_myConnection.setTestMeta(className, methodName);
+			Util.traceTestMeta(className, methodName);
 
 		}
 		

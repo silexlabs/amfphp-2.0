@@ -35,7 +35,7 @@ package flexUnitTests
 			_nc = new EnhancedNetConnection();
 			_nc.objectEncoding = ObjectEncoding.AMF0;
 			_nc.connect(TestConfig.gateway);
-			_nc.setTestMeta(className, methodName);
+			org.amfphp.test.Util.traceTestMeta(className, methodName);
 
 			
 		}

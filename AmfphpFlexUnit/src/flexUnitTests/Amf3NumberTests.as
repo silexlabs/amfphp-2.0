@@ -7,6 +7,7 @@ package flexUnitTests
 	
 	import org.amfphp.test.EnhancedNetConnection;
 	import org.amfphp.test.ObjEvent;
+	import org.amfphp.test.Util;
 
 	public class Amf3NumberTests extends TestCase
 	{		
@@ -18,7 +19,7 @@ package flexUnitTests
 		{
 			
 			_nc = new EnhancedNetConnection();
-			_nc.setTestMeta(className, methodName);
+			org.amfphp.test.Util.traceTestMeta(className, methodName);
 			_nc.objectEncoding = ObjectEncoding.AMF3;
 			_nc.connect(TestConfig.gateway);
 			
@@ -38,14 +39,14 @@ package flexUnitTests
 		
 		public function test2Power30():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturn2Power30, 1000));
-			var testVar:Number = 2^30;
+			var testVar:Number = 1073741824; //2^30
 			_nc.callWithEvents("TestService.returnOneParam", testVar);	
 			
 		}
 		
 		private function verifyReturn2Power30(event:ObjEvent):void{
 			assertTrue(event.obj is Number);
-			assertEquals(2^30, event.obj);
+			assertEquals(1073741824, event.obj);
 		}	
 		
 	}
