@@ -1,11 +1,11 @@
 <server_urls>
-	<url description="trunk with baguette" active="n">http://localhost/workspaceNetbeans/amfphp-2.0/Tests/TestData/</url>
+	<url description="trunk with baguette" active="y">http://localhost/workspaceNetbeans/amfphp-2.0/Tests/TestData/</url>
 	<url description="trunk without baguette" active="n">http://localhost:8888/workspaceNetbeans/amfphp-2.0/Tests/TestData/</url>
 	<url description="trunk without baguette, mampstack php 5.5" active="n">http://localhost:8080/workspaceNetbeans/amfphp-2.0/Tests/TestData/</url>
 	<url description="online" active="n">http://arielsommeria.com/amfphp-2.1/Tests/TestData/</url>
 	<url description="Baguette AMF Server" active="n">http://localhost/baguetteamf/BaguetteAMF_server/gateway.php</url>
 	<url description="Baguette AMF Server debian 32 php 5.2" active="n">http://192.168.0.15:5213/baguetteamf/test/amfphp/Tests/TestData/</url>
-	<url description="trunk, mampstack php 5.5" active="y">http://localhost:8080/amfphp-2.0/Tests/TestData/</url>
+	<url description="trunk, mampstack php 5.5" active="n">http://localhost:8080/amfphp-2.0/Tests/TestData/</url>
 	
 	<url description="xp something" active="n">http://192.168.1.36/amfphp_master/Tests/TestData/</url>
 	<url description="xp 32 php 5.3 nts" active="n">http://192.168.1.36/amfphp_master/Tests/TestData/</url>
