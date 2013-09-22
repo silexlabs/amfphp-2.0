@@ -11,7 +11,6 @@
 /**
  * includes
  */
-require_once(dirname(__FILE__) . '/../Amfphp/ClassLoader.php');
 require_once(dirname(__FILE__) . '/ClassLoader.php');
 $accessManager = new Amfphp_BackOffice_AccessManager();
 $isAccessGranted = $accessManager->isAccessGranted();

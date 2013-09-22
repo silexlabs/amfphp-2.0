@@ -19,7 +19,6 @@
  * includes
  */
 require_once(dirname(__FILE__) . '/ClassLoader.php');
-require_once(dirname(__FILE__) . '/../Amfphp/ClassLoader.php');
 
 
 

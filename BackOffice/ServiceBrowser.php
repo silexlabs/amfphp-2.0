@@ -12,7 +12,6 @@
  * includes
  */
 require_once(dirname(__FILE__) . '/ClassLoader.php');
-require_once(dirname(__FILE__) . '/../Amfphp/ClassLoader.php');
 $accessManager = new Amfphp_BackOffice_AccessManager();
 $isAccessGranted = $accessManager->isAccessGranted();
 ?>
@@ -132,6 +131,7 @@ $isAccessGranted = $accessManager->isAccessGranted();
 //generate service/method menu
             foreach ($services as $service) {
                 echo "\n <li><b>$service->name</b>";
+                //echo "<pre>$service->comment </pre";
                 echo "\n<ul>";
                 foreach ($service->methods as $method) {
                     if (substr($method->name, 0, 1) == '_') {
