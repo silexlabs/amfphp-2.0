@@ -5,9 +5,9 @@ if(!amfphp){
 
 amfphp.services = {};
 
-amfphp.entryPointUrl = "/**ACG_AMFPHPURL_**/";
+amfphp.entryPointUrl = "/*ACG_AMFPHPURL*/";
 
-/*ACG_SERVICE*/
+/*ACG_SERVICE*//*ACG_SERVICE*/
 amfphp.services._SERVICE_ = {};
 
 	/*ACG_METHOD*/

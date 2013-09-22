@@ -18,7 +18,7 @@ package org.silexlabs.amfphp.clientgenerator
 		public static function getNetConnection():NetConnection{
 			if(!_netConnectionInstance){
 				_netConnectionInstance = new NetConnection();
-				var amfphpEntryPointUrl:String = "/**ACG_AMFPHPURL_**/";
+				var amfphpEntryPointUrl:String = "/*ACG_AMFPHPURL*/";
 				
 				//amfphpEntryPointUrl = "http://localhost:8888/workspaceNetbeans/amfphp-2.0/Tests/TestData/";
 				_netConnectionInstance.connect(amfphpEntryPointUrl);

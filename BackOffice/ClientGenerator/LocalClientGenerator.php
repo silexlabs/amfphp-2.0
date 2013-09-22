@@ -85,7 +85,9 @@ class Amfphp_BackOffice_ClientGenerator_LocalClientGenerator {
     const _PARAMETER_ = '_PARAMETER_';
     //directive types
     const SERVICE = 'SERVICE';
+    const SERVICE_COMMENT = 'SERVICE_COMMENT';
     const METHOD = 'METHOD';
+    const METHOD_COMMENT = 'METHOD_COMMENT';
     const PARAMETER = 'PARAMETER';
     const PARAMETER_COMMA = 'PARAMETER_COMMA';
 
@@ -205,7 +207,7 @@ class Amfphp_BackOffice_ClientGenerator_LocalClientGenerator {
     }
 
     /**
-     * load the code, and look if either file is a service block, or il it contains service blocks.
+     * load the code, and look if either file is a service block, or if it contains service blocks.
      * If the file is a service block(detected by having '_SERVICE_' in the file name), call generateServiceFiles
      * If not, look for block delimited by the 'SERVICE' directive and call processServiceListBlock on them
      * Also sets the amfphp entry point url
@@ -213,9 +215,9 @@ class Amfphp_BackOffice_ClientGenerator_LocalClientGenerator {
      */
     protected function processSourceFile(SplFileInfo $file) {
         $code = file_get_contents($file);
-        $amfphpUrlMarkerPos = strpos($code, '/**ACG_AMFPHPURL_**/');
+        $amfphpUrlMarkerPos = strpos($code, '/*ACG_AMFPHPURL*/');
         if ($amfphpUrlMarkerPos !== false) {
-            $code = str_replace('/**ACG_AMFPHPURL_**/', $this->amfphpEntryPointUrl, $code);
+            $code = str_replace('/*ACG_AMFPHPURL*/', $this->amfphpEntryPointUrl, $code);
             file_put_contents($file, $code);
         }
         $fileName = $file->getFilename();
@@ -253,6 +255,7 @@ class Amfphp_BackOffice_ClientGenerator_LocalClientGenerator {
      */
     protected function generateOneServiceFileCode($code) {
         $codeMatchingService = str_replace(self::_SERVICE_, $this->serviceBeingProcessed->name, $code);
+        $codeMatchingService = str_replace('/**ACG_SERVICE_COMMENT**/', $service->comment, $codeMatchingService);
         $processed = $this->searchForBlocksAndApplyProcessing($codeMatchingService, self::METHOD, 'processMethodListBlock');
         if ($processed) {
             $codeMatchingService = $processed;
@@ -271,6 +274,7 @@ class Amfphp_BackOffice_ClientGenerator_LocalClientGenerator {
         foreach ($this->services as $service) {
             $this->serviceBeingProcessed = $service;
             $blockForService = str_replace(self::_SERVICE_, $service->name, $code);
+            $blockForService = str_replace('/**ACG_SERVICE_COMMENT**/', $service->comment, $blockForService);
 
 
             $processed = $this->searchForBlocksAndApplyProcessing($blockForService, self::METHOD, 'processMethodListBlock');
@@ -294,6 +298,8 @@ class Amfphp_BackOffice_ClientGenerator_LocalClientGenerator {
         foreach ($this->serviceBeingProcessed->methods as $method) {
             $this->methodBeingProcessed = $method;
             $blockForMethod = str_replace(self::_METHOD_, $method->name, $code);
+            $blockForMethod = str_replace('/**ACG_METHOD_COMMENT**/', $method->comment, $blockForMethod);
+            
             $processed = $this->searchForBlocksAndApplyProcessing($blockForMethod, self::PARAMETER, 'processParameterListBlock');
             if ($processed) {
                 $blockForMethod = $processed;

@@ -14,7 +14,7 @@
 	</services>
 	<channels>
 		<channel-definition id="amfphp" class="mx.messaging.channels.AMFChannel">
-			<endpoint uri="/**ACG_AMFPHPURL_**/" class="flex.messaging.endpoints.AMFEndpoint"/>
+			<endpoint uri="/*ACG_AMFPHPURL*/" class="flex.messaging.endpoints.AMFEndpoint"/>
 		</channel-definition>
 	</channels>
 </services-config>
