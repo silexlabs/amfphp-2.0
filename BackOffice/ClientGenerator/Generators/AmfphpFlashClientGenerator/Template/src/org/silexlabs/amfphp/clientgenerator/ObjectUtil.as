@@ -1,4 +1,4 @@
-package org.silexlabs.amfphp.clientgenerator.generated
+package org.silexlabs.amfphp.clientgenerator
 {
 	public class ObjectUtil
 	{
