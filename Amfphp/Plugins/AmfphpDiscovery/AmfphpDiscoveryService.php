@@ -134,6 +134,16 @@ class AmfphpDiscoveryService {
     }
 
     /**
+     * gets rid of blocks of 4 spaces and tabs.
+     * @param type $comment
+     * @return type 
+     */
+    private function trimComment($comment){
+        $ret = str_replace('    ', '', $comment);
+        $ret = str_replace("\t", '', $ret);
+        return $ret;
+    }
+    /**
      * does the actual collection of data about available services
      * @return array of AmfphpDiscovery_ServiceInfo
      */
@@ -143,7 +153,7 @@ class AmfphpDiscoveryService {
         foreach ($serviceNames as $serviceName) {
             $serviceObject = Amfphp_Core_Common_ServiceRouter::getServiceObjectStatically($serviceName, self::$serviceFolderPaths, self::$serviceNames2ClassFindInfo);
             $objR = new ReflectionObject($serviceObject);
-            $objComment = $objR->getDocComment();
+            $objComment = $this->trimComment($objR->getDocComment());
             $methodRs = $objR->getMethods(ReflectionMethod::IS_PUBLIC);
             $methods = array();
             foreach ($methodRs as $methodR) {
@@ -157,7 +167,7 @@ class AmfphpDiscoveryService {
                 $parameters = array();
                 $paramRs = $methodR->getParameters();
 
-                $methodComment = $methodR->getDocComment();
+                $methodComment = $this->trimComment($methodR->getDocComment());
                 $parsedMethodComment = $this->parseMethodComment($methodComment);
                 foreach ($paramRs as $paramR) {
 
