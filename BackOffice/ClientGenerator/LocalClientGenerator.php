@@ -85,9 +85,7 @@ class Amfphp_BackOffice_ClientGenerator_LocalClientGenerator {
     const _PARAMETER_ = '_PARAMETER_';
     //directive types
     const SERVICE = 'SERVICE';
-    const SERVICE_COMMENT = 'SERVICE_COMMENT';
     const METHOD = 'METHOD';
-    const METHOD_COMMENT = 'METHOD_COMMENT';
     const PARAMETER = 'PARAMETER';
     const PARAMETER_COMMA = 'PARAMETER_COMMA';
 
@@ -254,8 +252,8 @@ class Amfphp_BackOffice_ClientGenerator_LocalClientGenerator {
      * @return String 
      */
     protected function generateOneServiceFileCode($code) {
-        $codeMatchingService = str_replace(self::_SERVICE_, $this->serviceBeingProcessed->name, $code);
-        $codeMatchingService = str_replace('/**ACG_SERVICE_COMMENT**/', $service->comment, $codeMatchingService);
+        $codeMatchingService = str_replace('/*ACG_SERVICE_COMMENT*/', $this->serviceBeingProcessed->comment, $code);
+        $codeMatchingService = str_replace(self::_SERVICE_, $this->serviceBeingProcessed->name, $codeMatchingService);
         $processed = $this->searchForBlocksAndApplyProcessing($codeMatchingService, self::METHOD, 'processMethodListBlock');
         if ($processed) {
             $codeMatchingService = $processed;
@@ -273,9 +271,8 @@ class Amfphp_BackOffice_ClientGenerator_LocalClientGenerator {
         $ret = '';
         foreach ($this->services as $service) {
             $this->serviceBeingProcessed = $service;
-            $blockForService = str_replace(self::_SERVICE_, $service->name, $code);
-            $blockForService = str_replace('/**ACG_SERVICE_COMMENT**/', $service->comment, $blockForService);
-
+            $blockForService = str_replace('/*ACG_SERVICE_COMMENT*/', $service->comment, $code);
+            $blockForService = str_replace(self::_SERVICE_, $service->name, $blockForService);
 
             $processed = $this->searchForBlocksAndApplyProcessing($blockForService, self::METHOD, 'processMethodListBlock');
             if ($processed) {
@@ -297,8 +294,8 @@ class Amfphp_BackOffice_ClientGenerator_LocalClientGenerator {
         $ret = '';
         foreach ($this->serviceBeingProcessed->methods as $method) {
             $this->methodBeingProcessed = $method;
-            $blockForMethod = str_replace(self::_METHOD_, $method->name, $code);
-            $blockForMethod = str_replace('/**ACG_METHOD_COMMENT**/', $method->comment, $blockForMethod);
+            $blockForMethod = str_replace('/*ACG_METHOD_COMMENT*/', $method->comment, $code);
+            $blockForMethod = str_replace(self::_METHOD_, $method->name, $blockForMethod);
             
             $processed = $this->searchForBlocksAndApplyProcessing($blockForMethod, self::PARAMETER, 'processParameterListBlock');
             if ($processed) {

@@ -1,12 +1,10 @@
-package org.silexlabs.amfphp.clientgenerator.generated.service {
+package org.silexlabs.amfphp.clientgenerator.generated.service{
     import flash.net.NetConnection;
     import flash.net.Responder;
     import org.silexlabs.amfphp.clientgenerator.AMFPHPServiceClient;
     import org.silexlabs.amfphp.clientgenerator.IResponderSignal;
 
-    /**
-    * generated with AmfphpCodeGen. Don't edit directly.
-    **/
+    /*ACG_SERVICE_COMMENT*/
     public class _SERVICE_Client extends AMFPHPServiceClient {
         /**
         * constructor.
@@ -17,11 +15,12 @@ package org.silexlabs.amfphp.clientgenerator.generated.service {
 			super(nc, "_SERVICE_");
         }
 		
-		/*ACG_METHOD*/
+/*ACG_METHOD*/
+/*ACG_METHOD_COMMENT*/
         public function _METHOD_(/*ACG_PARAMETER_COMMA*/_PARAMETER_:Object/*ACG_PARAMETER_COMMA*/	):IResponderSignal{ 
 			return callService("_METHOD_" /*ACG_PARAMETER*/, _PARAMETER_/*ACG_PARAMETER*/);
         }
-		/*ACG_METHOD*/
+/*ACG_METHOD*/
                 
         
     }

@@ -4,9 +4,7 @@ package org.silexlabs.amfphp.clientgenerator.generated.service {
     import mx.rpc.remoting.RemoteObject;
     
 
-    /**
-    * generated with AmfphpCodeGen. Don't edit directly.
-    **/
+/*ACG_SERVICE_COMMENT*/
     public class _SERVICE_Client {
         
         private var _ro:RemoteObject;
@@ -24,11 +22,12 @@ package org.silexlabs.amfphp.clientgenerator.generated.service {
             return _ro;
         }
         
-        /*ACG_METHOD*/
+/*ACG_METHOD*/
+/*ACG_METHOD_COMMENT*/
         public function _METHOD_(/*ACG_PARAMETER_COMMA*/_PARAMETER_:Object/*ACG_PARAMETER_COMMA*/):AsyncToken { 
             return _ro._METHOD_(/*ACG_PARAMETER_COMMA*/_PARAMETER_/*ACG_PARAMETER_COMMA*/);
         }
-		/*ACG_METHOD*/
+/*ACG_METHOD*/
         
     }
 }

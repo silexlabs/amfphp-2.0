@@ -21,6 +21,7 @@
 	
 	<fx:Script>
 		<![CDATA[
+			import org.silexlabs.amfphp.clientgenerator.generated.service._SERVICE_Client;
 			import mx.events.FlexEvent;
 			import mx.rpc.AsyncToken;
 			import mx.rpc.Responder;

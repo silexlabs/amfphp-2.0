@@ -3,7 +3,7 @@
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
 			   backgroundColor="0"
 			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" xmlns:local="*" 
-			   xmlns:ui="org.silexlabs.amfphp.clientgenerator.generated.ui.*" >
+			   xmlns:ui="org.silexlabs.amfphp.clientgenerator.generated.ui.*" xmlns:amfphp="amfphp.*" >
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
