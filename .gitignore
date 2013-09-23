@@ -76,3 +76,7 @@ BackOffice/ClientGenerator/Generators/AmfphpFlashClientGenerator/Template/bin-de
 BackOffice/ClientGenerator/Generators/AmfphpFlashClientGenerator/Template/bin-debug/history/historyFrame.html
 
 BackOffice/ClientGenerator/Generators/AmfphpFlashClientGenerator/Template/bin-debug/history/historyFrame.html
+
+BackOffice/ClientGenerator/Generators/AmfphpFlexClientGenerator/Template/bin-debug/AmfphpFlexClient.swf
+
+BackOffice/ClientGenerator/Generators/AmfphpFlexClientGenerator/Template/bin-debug/AmfphpFlexClient.swf
