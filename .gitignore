@@ -62,3 +62,17 @@ Amfphp/Plugins/BaguetteAmf/BaguetteAmf.php
 .DS_Store
 
 AmfphpFlexUnit/src/FlexUnitCompilerApplication.mxml
+
+BackOffice/ClientGenerator/Generators/AmfphpFlashClientGenerator/Template/bin-debug/swfobject.js
+
+BackOffice/ClientGenerator/Generators/AmfphpFlashClientGenerator/Template/bin-debug/AmfphpFlashClient.html
+
+BackOffice/ClientGenerator/Generators/AmfphpFlashClientGenerator/Template/bin-debug/AmfphpFlashClient.swf
+
+BackOffice/ClientGenerator/Generators/AmfphpFlashClientGenerator/Template/bin-debug/history/history.css
+
+BackOffice/ClientGenerator/Generators/AmfphpFlashClientGenerator/Template/bin-debug/history/history.js
+
+BackOffice/ClientGenerator/Generators/AmfphpFlashClientGenerator/Template/bin-debug/history/historyFrame.html
+
+BackOffice/ClientGenerator/Generators/AmfphpFlashClientGenerator/Template/bin-debug/history/historyFrame.html
