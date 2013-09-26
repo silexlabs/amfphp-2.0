@@ -87,7 +87,13 @@ class AmfphpDiscoveryService {
     protected function getServiceNames(array $serviceFolderPaths, array $serviceNames2ClassFindInfo) {
         $ret = array();
         foreach ($serviceFolderPaths as $serviceFolderPath) {
-            $ret = array_merge($ret, $this->searchFolderForServices($serviceFolderPath, ''));
+            if(is_array($serviceFolderPath)){
+                //case when using namespace
+                $ret = array_merge($ret, $this->searchFolderForServices($serviceFolderPath[0], ''));
+            }else{
+                //case without namespace
+                $ret = array_merge($ret, $this->searchFolderForServices($serviceFolderPath, ''));
+            }
         }
 
         foreach ($serviceNames2ClassFindInfo as $key => $value) {
