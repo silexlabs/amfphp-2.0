@@ -104,7 +104,9 @@ input {
         position:relative;
 }
 
-
+textarea{
+    color:black;
+}
 #right h3 {
 	background: #525252;
 	padding: 10px;

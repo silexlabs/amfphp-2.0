@@ -14,6 +14,7 @@
 require_once(dirname(__FILE__) . '/ClassLoader.php');
 $accessManager = new Amfphp_BackOffice_AccessManager();
 $isAccessGranted = $accessManager->isAccessGranted();
+$config = new Amfphp_BackOffice_Config();
 ?>
 
 <html>
@@ -25,214 +26,204 @@ $isAccessGranted = $accessManager->isAccessGranted();
         ?>
 
         <div id='main'>
-            <div class="left">
-            <?php
-            if (!$isAccessGranted) {
-                ?>
-                <script>
-                    window.location = './SignIn.php';
-                </script>
+            <div id="left">
                 <?php
-                return;
-            }
-            require_once(dirname(__FILE__) . '/MainMenu.inc.php');
-
-            /**
-             * create tree data string for the representation of a result object. A bit like a var dump but for displaying with jstree
-             * recursive.
-             * @todo reunderstand and comment this objname thing...
-             * @param mixed $obj
-             * @param string $objName
-             * @return mixed
-             */
-            function objToTreeData($obj, $objName) {
-                if (is_array($obj) || is_object($obj)) {
-
-                    $children = array();
-                    foreach ($obj as $key => $subObj) {
-                        $children[] = objToTreeData($subObj, $key);
-                    }
-                    if ($objName !== null) {
-                        $ret = array();
-                        $type = '';
-                        if (is_array($obj)) {
-                            $type = 'array';
-                        } else {
-                            $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
-                            if (isset($obj->$explicitTypeField)) {
-                                $type = $obj->$explicitTypeField;
-                            } else {
-                                $type = get_class($obj);
-                                if ($type == 'stdClass') {
-                                    //easier to read
-                                    $type = 'anonymous object';
-                                }
-                            }
-                        }
-                        $ret['data'] = "$objName ( $type )";
-                        $ret['children'] = $children;
-                        //$ret['state'] = 'open';
-                        return $ret;
-                    } else {
-                        return $children;
-                    }
-                } else {
-                    return "$objName => $obj";
+                if (!$isAccessGranted) {
+                    ?>
+                    <script>
+                        window.location = './SignIn.php';
+                    </script>
+                    <?php
+                    return;
                 }
-            }
-
-            $config = new Amfphp_BackOffice_Config();
-            $serviceCaller = new Amfphp_BackOffice_IncludeServiceCaller($config->amfphpEntryPointPath);
-//load service descriptors
-            $services = $serviceCaller->call("AmfphpDiscoveryService", "discover");
-
-//what are we calling? 
-            $callMethodName = null;
-            if (isset($_GET['methodName'])) {
-                $callMethodName = $_GET['methodName'];
-            }
-            $callServiceName = null;
-            if (isset($_GET['serviceName'])) {
-                $callServiceName = $_GET['serviceName'];
-            }
-
-            $callParameters = $_POST;
-            /**
-             * 3 cases: 
-             * - POST has some content, this means there is at least one parameter and the call must be made. set to true.
-             * - GET callWithoutParams is set, this means it's a call to a method without parameters. set to true.
-             * - lastly, it can be just a call to select a service method, but without a call. set to false.
-             *  
-             */
-            $makeServiceCall = false;
-            if ((count($_POST) > 0) || isset($_GET['callWithoutParams'])) {
-                $makeServiceCall = true;
-            }
-
-
-            echo "\n<ul class='menu' id='serviceMethods'>";
-            if($services instanceof Exception){
-                throw $services;
-            }
-            if (!is_array($services)) {
+                require_once(dirname(__FILE__) . '/MainMenu.inc.php');
                 ?>
-                No services available. Please check : <br/>
-                <ul>
-                    <li>That your service classes don't contain syntax errors</li>
-                    <li>BackOffice Configuration in BackOffice/Config.php, specifically $amfphpEntryPointUrl</li>
-                    
+
+                <ul class='menu' id='serviceMethods'>
+                    Loading Service Data...
                 </ul>
-                Service Object as returned by AmfphpDiscoveryService:
-                <br/> <br/>
-                <pre><?php            var_dump($services)?></pre>
-                <?php
-                return;
-            }
-//generate service/method menu
-            foreach ($services as $service) {
-                echo "\n <li><b>$service->name</b>";
-                //echo "<pre>$service->comment </pre";
-                echo "\n<ul>";
-                foreach ($service->methods as $method) {
-                    if (substr($method->name, 0, 1) == '_') {
-                        //methods starting with a '_' as they are reserved, so filter them out 
-                        continue;
-                    }
-                    echo "\n <li><a href='?serviceName=" . $service->name . "&methodName=" . $method->name . "'>" . $method->name . "</a></li>";
-                }
-                echo "\n</ul>";
-                echo "</li>";
-            }
-            echo "\n</ul>\n";
-
-            echo "</div>";
-
-            echo "\n<div class='userInput' id='callDialog'>";
-//generate method calling interface
-            if ($callServiceName && $callMethodName) {
-                $serviceDescriptor = $services[$callServiceName];
-                $methodDescriptor = $serviceDescriptor->methods[$callMethodName];
-                $parameterDescriptors = $methodDescriptor->parameters;
-                echo "<h3>$callMethodName method on $callServiceName service</h3>";
-                if (count($parameterDescriptors) > 0) {
-
-                    echo "\nUse JSON notation for complex values. ";
-                    echo "\n<form action='?serviceName=$callServiceName&amp;methodName=$callMethodName' method='POST'>\n<table>";
-                    foreach ($parameterDescriptors as $parameterDescriptor) {
-                        $parameterName = $parameterDescriptor->name;
-                        echo "\n <tr><td>$parameterName</td><td><input name='$parameterName' ";
-                        if ($callParameters) {
-                            echo "value='" . $callParameters[$parameterName] . "'";
-                        }
-                        echo "></td></tr>";
-                    }
-                    echo "\n</table>\n<input type='submit' value='Call method &raquo;'></form>";
-                } else {
-                    echo "This method has no parameters.";
-                    echo "\n<form action='?serviceName=$callServiceName&amp;methodName=$callMethodName&amp;callWithoutParams' method='POST'>\n";
-                    echo "\n<input type='submit' value='Call method &raquo;'></form>";
-                }
-            }
-
-//make service call and show results 
-            $resultTreeData = null;
-            if ($makeServiceCall) {
-                $callStartTimeMs = microtime(true);
-                $parsedCallParameters = array();
-
-                foreach ($callParameters as $value) {
-                    //try to get json decoded value
-                    $decoded = json_decode($value);
-                    if ($decoded !== null) {
-                        $parsedCallParameters[] = $decoded;
-                    } else {
-                        $parsedCallParameters[] = $value;
-                    }
-                }
-                $result = $serviceCaller->call($callServiceName, $callMethodName, $parsedCallParameters);
-                $callDurationMs = round((microtime(true) - $callStartTimeMs) * 1000);
-
-
-                $resultTreeData = objToTreeData($result, null);
-                ?>
-                <h3>Result ( call took <?php echo $callDurationMs; ?> " ms )  
-
-                    <span class="showResultView">
-                        <a id="tree">Tree</a>
-                        <a id="print_r">print_r</a>
-                        <a id="json">JSON</a>
-                        <a id="php">PHP Serialized</a>
-                        <a id="raw">Raw</a>
-                    </span>
-                </h3>
-                <pre>
+            </div>                    
+            <div id='right'>
+                <div id='callDialog'>
+                </div>
+                <div id="result">
+                    <h3>Result ( call took <span id="callDuration">23</span> ms )  
+                        <span class="showResultView">
+                            <a id="tree">Tree</a>
+                            <a id="print_r">print_r</a>
+                            <a id="json">JSON</a>
+                            <a id="php">PHP Serialized</a>
+                            <a id="raw">Raw</a>
+                        </span>
+                    </h3>
                     <div id='tree' class='resultView'></div>
-                    <div id="print_r" class='resultView'><?php echo print_r($result, true); ?></div>
-                    <div id="json" class='resultView'><?php echo json_encode($result); ?></div>
-                    <div id="php" class='resultView'><?php echo serialize($result); ?></div>
-                    <div id="raw" class='resultView'><?php
-                    if(method_exists($result, '__toString')){
-                        echo $result;
-                    }else{
-                        echo "cannot display raw";
-                    }
-                     ?></div>
-                </pre>
-
-                <?php
-            }
-            echo "\n</div>\n";
-            echo "\n</div>\n";
-            ?>
-
+                    <div id="print_r" class='resultView'></div>
+                    <div id="json" class='resultView'></div>
+                    <div id="php" class='resultView'></div>
+                    <div id="raw" class='resultView'></div>
+                </div>
+            </div>
             <script>
-        
+                /**
+                 * data about the services, loaded from server via AmfphpDiscoveryService/discover
+                 * @var array
+                 * */ 
+                var serviceData;
+                    
+                /**
+                 *call start time, in ms
+                 */
+                var callStartTime;
+                
+                /**
+                 * id of currently visible result view
+                 */
+                var resultViewId;
+
+                $(function () {	        
+                    console.log($('#right').offset());
+                    var callData = JSON.stringify({"serviceName":"AmfphpDiscoveryService", "methodName":"discover","parameters":[]});
+                    $.post("<?php echo $config->amfphpEntryPointPath ?>?contentType=application/json", callData, onServicesLoaded);
+                    $('#main').hide();  
+                    showResultView('tree');
+
+
+                });
+
+                function setRightDivMaxWidth() {
+                    $( "#right" ).css( "maxWidth", ( $( '#main' ).width() - 400) +  "px" );
+                }                    
+                /**
+                 * callback for when service data loaded from server . 
+                 * generates method list. 
+                 * each method link has its corresponding method object attached as data, and this is retrieved on click
+                 * to call openMethodDialog with it.
+                 */
+                function onServicesLoaded(data)
+                {
+                    serviceData = data;
+                        
+                    //generate service/method list
+                    var rootUl = $('ul#serviceMethods');
+                    $(rootUl).empty();
+                    for(serviceName in serviceData){
+                        var service = serviceData[serviceName];
+                        var serviceLi = $('<li><b>' + serviceName + '</b></li>')
+                        .appendTo(rootUl);
+                        var serviceUl = $('<ul/>').appendTo(serviceLi);
+                        for(methodName in service.methods){
+                            var method = service.methods[methodName];
+                            var li = $('<li/>')
+                            .appendTo(serviceUl);
+                            var link = $('<a/>',{
+                                text: methodName,
+                                click: function(){ 
+                                    var savedServiceName = $(this).data("serviceName");
+                                    var savedMethodName = $(this).data("methodName");
+                                    openMethodDialog(savedServiceName, savedMethodName);
+                                    return false;
+                                }})
+                            .appendTo(li);
+                            $(link).data("serviceName", serviceName);    
+                            $(link).data("methodName", methodName);    
+                            $(li).append('?');
+                                
+                        }
+                    }
+                    $('.showResultView a').click(function(eventObject){
+                        showResultView(eventObject.currentTarget.id);
+
+                    });
+                    $('#main').show();
+                    $('#right').hide();  
+                    setRightDivMaxWidth();
+                    $( window ).bind( "resize", setRightDivMaxWidth ); 
+                }
+                
+                /**
+                 * sets the max width for the right div.
+                 * used on loading services, and when window resizes
+                 * */
+                function setRightDivMaxWidth(){
+                    var availableWidthForRightDiv = $( '#main' ).width() - $('#left').outerWidth(true) - 20;
+                    $( "#right" ).css( "maxWidth", availableWidthForRightDiv +  "px" );
+                }
+                
+                /**
+                 * shows method dialog so that the user can call the method.
+                 * */
+                function openMethodDialog(serviceName, methodName){
+                    method = serviceData[serviceName].methods[methodName];    
+                    parameters = method.parameters;
+                    //@todo style header for better readability
+                    var html = "<h3>" + method.name + " method on " + serviceName + " service</h3>";
+                    if (parameters.length > 0) {
+
+                        html += "\nUse JSON notation for complex values. ";
+                        html += "\n<table>";
+                        for (i in parameters) {
+                            var parameter = parameters[i];
+                            var parameterName = parameter.name;
+                            html += "\n <tr><td>" + parameterName + "</td><td><textarea class='parameterInputs'/></td></tr>";
+                        }
+                        html += "\n</table>";
+                            
+                    } else {
+                        html += "This method has no parameters.";
+                    }
+                    html += "\n<input type='submit' value='Call method &raquo;' onclick='callMethod(\"" + serviceName + "\", \"" + methodName + "\");'>";
+                    $('#callDialog').empty();
+                    $('#callDialog').append(html);
+                    var rightDivTop = Math.round(Math.max(0, $(window).scrollTop() - $('#main').offset().top));
+                    console.log(rightDivTop);
+                    //note that trying with jquery 'offset' messes up!
+                    $('#right').css('top', rightDivTop + 'px');
+                    $('#right').show();
+                    $('#result').hide();
+                    //$(".parameterInputs").resizable();
+                      
+                }
+                
+                /**
+                 * takes the values typed by user and makes a json service call 
+                 * */
+                function callMethod(serviceName, methodName){
+                    var parameters = [];
+                    $.each($('.parameterInputs'), function(index, paramInput){
+                        var paramValue = $(paramInput).val();
+                        try{
+                            //if it's JSON it needs to be parsed to avoid being treated as a string 
+                            parameters[index] = JSON.parse(paramValue); 
+                        }catch(e){
+                            //exception: it's not valid json, so keep as is
+                            parameters[index] = paramValue;
+                        }
+                    });
+                    var callData = JSON.stringify({"serviceName":serviceName, "methodName":methodName,"parameters":parameters});
+                    callStartTime = $.now();
+                    console.log(callData);
+                    $.post("<?php echo $config->amfphpEntryPointPath ?>?contentType=application/json", callData, onResult);
+                }
+                
+                /**
+                 * callback to show service call result
+                 * */
+                function onResult(data){
+                    console.log(data);
+                    var callEndTime = $.now() - callStartTime;
+                    $('#callDuration').text(callEndTime);
+                    var treeData = objToTreeData(data, null);
+                    setTreeData(treeData, ".resultView#tree");  
+                    $('.resultView#print_r').empty().append('<pre>' + print_r(data, true) + '</pre>');
+                    $('.resultView#json').empty().append(JSON.stringify(data));
+                    $('.resultView#php').empty().append(serialize(data));
+                    $('.resultView#raw').empty().append('<pre>' + data + '</pre>');
+                    $('#result').show();
+                        
+                                                
+                }
                 function setTreeData(data, targetDivSelector){
-                    $(targetDivSelector).bind("loaded.jstree", function (event, data) {
-                        resetWidth();
-                    }).bind("after_open.jstree", function (node) {
-                        resetWidth();
-                    }).jstree({ 
+                    $(targetDivSelector).jstree({ 
 
                         "json_data" : {
                             "data" : data
@@ -251,19 +242,7 @@ $isAccessGranted = $accessManager->isAccessGranted();
                     });
 
                 }
-    
-                /**
-                 * sets the main div width to avoid wrapping
-                 * */
-                function resetWidth(){
-                    //adjust size of main div so that the callDialog doesn't wrap
-                    var totalWidth = $('.menu#backOffice').width() + $('.menu#serviceMethods').width() + $('#callDialog').width();
-                    $('#main').width(totalWidth + 200);
-        
-                }
-    
-                //current result view id
-                var resultViewId;
+
                 /**
                  * underline active result view link only
                  * show right result view
@@ -275,40 +254,7 @@ $isAccessGranted = $accessManager->isAccessGranted();
                     $('.resultView#' + viewId).show();
                     resultViewId = viewId;
                 }
-    
-                $(function () {	        
-                    setTreeData(<?php echo json_encode($resultTreeData); ?>, ".resultView#tree");  
-                    $('.showResultView a').click(function(eventObject){
-                        showResultView(eventObject.currentTarget.id);
-                        resetWidth();
-            
-                    });
-                    //default result view is tree
-                    var startResultViewId = $.cookie('resultViewId');
-                    if(startResultViewId == null){
-                        startResultViewId = 'tree';
-                    };
-        
-                    showResultView(startResultViewId);
-                    resetWidth();
-        
-                    //reset scroll position to one from last time. position callDialog div so that it's just below the top of the view port
-                    var oldScrollPos = parseFloat($.cookie('scrollPos'));
-                    window.scrollTo(0, oldScrollPos);
-                    var callDialogY = Math.max(oldScrollPos + 20, $('#callDialog').offset().top);
-                    $('#callDialog').offset({ top: callDialogY});
-        
-                    //save state on leaving page
-                    $(window).bind('beforeunload', function(e) {   
-                        $.cookie('scrollPos', $(window).scrollTop());
-                        $.cookie('resultViewId', resultViewId);
-            
-                    });
-                
-                });
-
-
-
+                    
 
 
             </script>
@@ -316,6 +262,3 @@ $isAccessGranted = $accessManager->isAccessGranted();
         </div>
     </body>    
 </html>
-
-
-
