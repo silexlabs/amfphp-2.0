@@ -74,7 +74,7 @@ class AmfphpDiscovery {
      * @param array $serviceNames2ClassFindInfo associative array of key -> class find info
      */
     public function filterServiceNames2ClassFindInfo(array $serviceNames2ClassFindInfo){
-        $serviceNames2ClassFindInfo["AmfphpDiscoveryService"] = new Amfphp_Core_Common_ClassFindInfo( dirname(__FILE__) . '/AmfphpDiscoveryService.php', 'AmfphpDiscoveryService');
+        $serviceNames2ClassFindInfo['AmfphpDiscoveryService'] = new Amfphp_Core_Common_ClassFindInfo( dirname(__FILE__) . '/AmfphpDiscoveryService.php', 'AmfphpDiscoveryService');
         AmfphpDiscoveryService::$serviceNames2ClassFindInfo = $serviceNames2ClassFindInfo;
         return $serviceNames2ClassFindInfo;
     }    
