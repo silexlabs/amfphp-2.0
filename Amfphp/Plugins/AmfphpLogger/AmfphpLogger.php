@@ -38,7 +38,7 @@ class AmfphpLogger {
     }
 
     /**
-     * write éessage to log file at LOG_FILE_PATH
+     * write message to log file at LOG_FILE_PATH
      * @see LOG_FILE_PATH
      * @param String $message
      * @throws Amfphp_Core_Exception
