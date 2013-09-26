@@ -76,7 +76,7 @@ input {
 	border-radius: 8px;
 }
 
-.left{
+#left{
     float: left;
     margin: 20px;
 }
@@ -98,13 +98,14 @@ input {
 	margin-bottom: 2px;
 }
 
-.userInput {
+#right {
 	float: left;
 	margin-top: 20px;
+        position:relative;
 }
 
 
-.userInput h3 {
+#right h3 {
 	background: #525252;
 	padding: 10px;
 	-moz-border-radius: 8px;
@@ -114,7 +115,7 @@ input {
 	margin-bottom: 10px;
 }
 
-.userInput form {
+#right form {
 	margin-bottom: 20px;
 }
 

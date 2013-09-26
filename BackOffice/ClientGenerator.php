@@ -25,7 +25,7 @@ $isAccessGranted = $accessManager->isAccessGranted();
         ?>
 
         <div id='main'>
-            <div class="left">
+            <div id="left">
                 <?php
                 if (!$isAccessGranted) {
                     ?>
@@ -38,7 +38,7 @@ $isAccessGranted = $accessManager->isAccessGranted();
                 require_once(dirname(__FILE__) . '/MainMenu.inc.php');
                 ?>
             </div>
-            <div  class='userInput'>
+            <div  id='right'>
                 <div class="menu">
 
                     Use one of the following generators to generate a client Stub project. <br/>
