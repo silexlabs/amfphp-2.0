@@ -20,8 +20,8 @@ $temp = 0;
 ?>
 
         <ul class="menu" id='backOffice'>
-            <a href="SignOut.php"><b>Sign Out</b></a>
+            <a href="SignOut.php">Sign Out</a>
             <br/><br/>
-            <li><a href="ServiceBrowser.php"><b>Service Browser</b></a></li>
-            <li><a href="ClientGenerator.php"><b>Client Generator</b></a></li>
+            <li><a href="ServiceBrowser.php">Service Browser</a></li>
+            <li><a href="ClientGenerator.php">Client Generator</a></li>
         </ul>

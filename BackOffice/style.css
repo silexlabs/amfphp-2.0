@@ -1,17 +1,17 @@
 * {
-	font-size: 12px;
+	font-size: 14px;
 	font-family: Arial, Helvetica, sans-serif;
-	color: #FFFFFF;
+	color: #524656;
 	margin: 0px;
 	padding: 0px;
 }
 
-html, body {
-	background: #333333;
+html, body, input, #result {
+	background: #E4DCCB;
 }
 
-a {
-	color: #C4D6DC;
+a, input[type="submit"]  {
+	color: #EA7458;
 	text-decoration: none;
         cursor:pointer;
 }
@@ -21,8 +21,7 @@ a {
     
 }
 
-input {
-	background: none;
+input, #result {
 	padding: 5px;
 	border: 1px solid #525252;
 	-moz-border-radius: 8px;
@@ -32,7 +31,7 @@ input {
 }
 
 .static {
-	background: #000000;
+	background: #A6C4BC;
 	height: 20px;
 	padding: 20px;
 	padding-top: 10px;
@@ -42,7 +41,6 @@ input {
 
 .static b {
 	font-size: 24px;
-	color: #C4D6DC;
 } 
 
 .static ul {
@@ -69,26 +67,20 @@ input {
 	margin-left: 20px;
 }
 .menu {
-	padding: 11px;
-	background: #525252;
+	padding: 16px;
+	background: #A6C4BC;
 	-moz-border-radius: 8px;
 	-webkit-border-radius: 8px;
 	border-radius: 8px;
 }
 
-.ui-tooltip{
-    
-    background: black;
-    border: 2px solid white;
-
-}
 #left{
     float: left;
     margin: 20px;
 }
 .menu li {
 	margin-left: 15px;
-	margin-bottom: 10px;
+	margin-bottom: 2px;
 }
 
 .menu li b {
@@ -97,11 +89,7 @@ input {
 
 .menu li ul {
 	padding-left: 15px;
-}
-
-.menu li ul li {
-	margin-left: 0px;
-	margin-bottom: 2px;
+	margin-bottom: 10px;
 }
 
 .menu a{
@@ -114,18 +102,6 @@ input {
         position:relative;
 }
 
-textarea{
-    color:black;
-}
-#right h3 {
-	background: #525252;
-	padding: 10px;
-	-moz-border-radius: 8px;
-	-webkit-border-radius: 8px;
-	border-radius: 8px;
-	font-size: 14px;
-	margin-bottom: 10px;
-}
 
 #right form {
 	margin-bottom: 20px;
@@ -135,6 +111,7 @@ textarea{
 .underline {
    text-decoration: underline;
 }
+
 
 #signin input{
     margin-left: 0;
@@ -150,9 +127,20 @@ textarea{
 }
 
 #callDialog{
-    background-color: grey;
 	margin-bottom: 10px;
 	-moz-border-radius: 8px;
 	-webkit-border-radius: 8px;
 	border-radius: 8px;
+}
+
+h3{
+    padding: 5px;
+}
+
+#dataView{
+    padding: 5px;
+}
+
+#dataView#tree{
+    font-size: 12px;
 }

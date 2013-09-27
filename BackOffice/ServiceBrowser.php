@@ -39,28 +39,29 @@ $config = new Amfphp_BackOffice_Config();
                 require_once(dirname(__FILE__) . '/MainMenu.inc.php');
                 ?>
 
-                <ul class='menu' id='serviceMethods'>
+                <ul id='serviceMethods'  class='menu'>
                     Loading Service Data...
                 </ul>
             </div>                    
-            <div id='right'>
+            <div id='right' class='menu' >
                 <div id='callDialog'>
                 </div>
                 <div id="result">
-                    <h3>Result ( call took <span id="callDuration">23</span> ms )  
-                        <span class="showResultView">
-                            <a id="tree">Tree</a>
-                            <a id="print_r">print_r</a>
-                            <a id="json">JSON</a>
-                            <a id="php">PHP Serialized</a>
-                            <a id="raw">Raw</a>
-                        </span>
-                    </h3>
-                    <div id='tree' class='resultView'></div>
-                    <div id="print_r" class='resultView'></div>
-                    <div id="json" class='resultView'></div>
-                    <div id="php" class='resultView'></div>
-                    <div id="raw" class='resultView'></div>
+                    Result ( call took <span id="callDuration">23</span> ms )  
+                    <span class="showResultView">
+                        <a id="tree">Tree</a>
+                        <a id="print_r">print_r</a>
+                        <a id="json">JSON</a>
+                        <a id="php">PHP Serialized</a>
+                        <a id="raw">Raw</a>
+                    </span>
+                    <div id="dataView">
+                        <div id='tree' class='resultView'></div>
+                        <div id="print_r" class='resultView'></div>
+                        <div id="json" class='resultView'></div>
+                        <div id="php" class='resultView'></div>
+                        <div id="raw" class='resultView'></div>
+                    </div>
                 </div>
             </div>
             <script>
@@ -140,6 +141,10 @@ $config = new Amfphp_BackOffice_Config();
                     $('#right').hide();  
                     setRightDivMaxWidth();
                     $( window ).bind( "resize", setRightDivMaxWidth ); 
+                    
+                    //test 
+                    //openMethodDialog("AuthenticationService", "login");
+                    openMethodDialog("AmfphpDiscoveryService", "discover");
                 }
                 
                 /**
@@ -147,7 +152,7 @@ $config = new Amfphp_BackOffice_Config();
                  * used on loading services, and when window resizes
                  * */
                 function setRightDivMaxWidth(){
-                    var availableWidthForRightDiv = $( '#main' ).width() - $('#left').outerWidth(true) - 20;
+                    var availableWidthForRightDiv = $( '#main' ).width() - $('#left').outerWidth(true) - 50;
                     $( "#right" ).css( "maxWidth", availableWidthForRightDiv +  "px" );
                 }
                 
@@ -220,7 +225,7 @@ $config = new Amfphp_BackOffice_Config();
                     var treeData = objToTreeData(data, null);
                     setTreeData(treeData, ".resultView#tree");  
                     $('.resultView#print_r').empty().append('<pre>' + print_r(data, true) + '</pre>');
-                    $('.resultView#json').empty().append(JSON.stringify(data));
+                    $('.resultView#json').empty().append(JSON.stringify(data, null, true));
                     $('.resultView#php').empty().append(serialize(data));
                     $('.resultView#raw').empty().append('<pre>' + data + '</pre>');
                     $('#result').show();
