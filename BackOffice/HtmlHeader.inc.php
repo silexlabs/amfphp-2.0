@@ -27,7 +27,6 @@ $temp = 0;
         <link rel="stylesheet" type="text/css" href="style.css" />
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
-        <script type="text/javascript" src="lib/jquery.cookie.js"></script>
         <script type="text/javascript" src="lib/jquery.hotkeys.js"></script>
         <script type="text/javascript" src="lib/jquery.jstree.js"></script>
         <script type="text/javascript" src="lib/dataparse.js"></script>
