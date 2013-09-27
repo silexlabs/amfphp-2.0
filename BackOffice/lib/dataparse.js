@@ -19,7 +19,7 @@ function objToTreeData(obj, objName) {
             if ($.isArray(obj)) {
                 type = 'array';
             } else {
-                explicitTypeField = '<?php echo Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE ?>';
+                explicitTypeField = '_explicitType';
                 if (obj[explicitTypeField]) {
                     type = obj[explicitTypeField];
                 } else {
