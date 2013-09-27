@@ -76,6 +76,12 @@ input {
 	border-radius: 8px;
 }
 
+.ui-tooltip{
+    
+    background: black;
+    border: 2px solid white;
+
+}
 #left{
     float: left;
     margin: 20px;
@@ -96,6 +102,10 @@ input {
 .menu li ul li {
 	margin-left: 0px;
 	margin-bottom: 2px;
+}
+
+.menu a{
+    padding-right: 10px;
 }
 
 #right {
@@ -137,4 +147,12 @@ textarea{
 
 #serviceMethods{
     margin-top: 20px;
+}
+
+#callDialog{
+    background-color: grey;
+	margin-bottom: 10px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
 }

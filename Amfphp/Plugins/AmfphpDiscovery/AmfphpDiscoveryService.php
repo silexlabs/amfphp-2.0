@@ -11,7 +11,7 @@
  */
 
 /**
- * analyses existing services. Warning: if 2 or more services have the same name, t-only one will appear in the returned data, 
+ * analyses existing services. Warning: if 2 or more services have the same name, only one will appear in the returned data, 
  * as it is an associative array using the service name as key. 
  * @package Amfphp_Plugins_Discovery
  * @author Ariel Sommeria-Klein
@@ -67,7 +67,7 @@ class AmfphpDiscoveryService {
         if ($folderContent) {
             foreach ($folderContent as $fileName) {
                 //add all .php file names, but removing the .php suffix
-                if (strpos($fileName, ".php")) {
+                if (strpos($fileName, '.php')) {
                     $fullServiceName = $subFolder . substr($fileName, 0, strlen($fileName) - 4);
                     $ret[] = $fullServiceName;
                 } else if ((substr($fileName, 0, 1) != '.') && is_dir($rootPath . $subFolder . $fileName)) {
@@ -140,13 +140,16 @@ class AmfphpDiscoveryService {
     }
 
     /**
-     * gets rid of blocks of 4 spaces and tabs.
+     * gets rid of blocks of 4 spaces and tabs, as well as comment markers. 
      * @param type $comment
      * @return type 
      */
-    private function trimComment($comment){
+    private function formatComment($comment){
         $ret = str_replace('    ', '', $comment);
         $ret = str_replace("\t", '', $ret);
+        $ret = str_replace('/**', '', $ret);
+        $ret = str_replace('*/', '', $ret);
+        $ret = str_replace('*', '', $ret);
         return $ret;
     }
     /**
@@ -159,7 +162,7 @@ class AmfphpDiscoveryService {
         foreach ($serviceNames as $serviceName) {
             $serviceObject = Amfphp_Core_Common_ServiceRouter::getServiceObjectStatically($serviceName, self::$serviceFolderPaths, self::$serviceNames2ClassFindInfo);
             $objR = new ReflectionObject($serviceObject);
-            $objComment = $this->trimComment($objR->getDocComment());
+            $objComment = $this->formatComment($objR->getDocComment());
             $methodRs = $objR->getMethods(ReflectionMethod::IS_PUBLIC);
             $methods = array();
             foreach ($methodRs as $methodR) {
@@ -173,7 +176,7 @@ class AmfphpDiscoveryService {
                 $parameters = array();
                 $paramRs = $methodR->getParameters();
 
-                $methodComment = $this->trimComment($methodR->getDocComment());
+                $methodComment = $this->formatComment($methodR->getDocComment());
                 $parsedMethodComment = $this->parseMethodComment($methodComment);
                 foreach ($paramRs as $paramR) {
 

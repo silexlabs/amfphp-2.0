@@ -110,13 +110,15 @@ $config = new Amfphp_BackOffice_Config();
                         var service = serviceData[serviceName];
                         var serviceLi = $('<li><b>' + serviceName + '</b></li>')
                         .appendTo(rootUl);
+                        $(serviceLi).attr('title', service.comment);
                         var serviceUl = $('<ul/>').appendTo(serviceLi);
                         for(methodName in service.methods){
                             var method = service.methods[methodName];
                             var li = $('<li/>')
                             .appendTo(serviceUl);
-                            var link = $('<a/>',{
+                            var dialogLink = $('<a/>',{
                                 text: methodName,
+                                title: method.comment,
                                 click: function(){ 
                                     var savedServiceName = $(this).data("serviceName");
                                     var savedMethodName = $(this).data("methodName");
@@ -124,9 +126,9 @@ $config = new Amfphp_BackOffice_Config();
                                     return false;
                                 }})
                             .appendTo(li);
-                            $(link).data("serviceName", serviceName);    
-                            $(link).data("methodName", methodName);    
-                            $(li).append('?');
+                            $(dialogLink).data("serviceName", serviceName);    
+                            $(dialogLink).data("methodName", methodName);    
+                            
                                 
                         }
                     }
@@ -153,10 +155,15 @@ $config = new Amfphp_BackOffice_Config();
                  * shows method dialog so that the user can call the method.
                  * */
                 function openMethodDialog(serviceName, methodName){
-                    method = serviceData[serviceName].methods[methodName];    
+                    var service = serviceData[serviceName];
+                    method = service.methods[methodName];    
                     parameters = method.parameters;
                     //@todo style header for better readability
-                    var html = "<h3>" + method.name + " method on " + serviceName + " service</h3>";
+                    var html = "<h3>" + serviceName + " Service</h3>";
+                    html += "<pre>" + service.comment + "</pre>";
+                    html += "<h3>" + methodName + " Method</h3>";
+                    html += "<pre>" + method.comment + "</pre>";
+                    //var html = "<h3>" + method.name + " method on " + serviceName + " service</h3>";
                     if (parameters.length > 0) {
 
                         html += "\nUse JSON notation for complex values. ";
@@ -180,7 +187,6 @@ $config = new Amfphp_BackOffice_Config();
                     $('#right').css('top', rightDivTop + 'px');
                     $('#right').show();
                     $('#result').hide();
-                    //$(".parameterInputs").resizable();
                       
                 }
                 
@@ -201,7 +207,6 @@ $config = new Amfphp_BackOffice_Config();
                     });
                     var callData = JSON.stringify({"serviceName":serviceName, "methodName":methodName,"parameters":parameters});
                     callStartTime = $.now();
-                    console.log(callData);
                     $.post("<?php echo $config->amfphpEntryPointPath ?>?contentType=application/json", callData, onResult);
                 }
                 
