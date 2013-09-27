@@ -20,7 +20,7 @@ class ExampleService {
 
     /**
      * return the same data as what was sent
-     * @param mixed $param
+     * @param mixed $param example: {"_explicitType":"myType", "intVal":2, "stringVal":"bla", "arrayVal":[1,2, "ert"]}
      * @return mixed
      */
     public function returnOneParam($param){

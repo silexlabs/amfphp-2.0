@@ -145,6 +145,7 @@ $config = new Amfphp_BackOffice_Config();
                     //test 
                     //openMethodDialog("AuthenticationService", "login");
                     openMethodDialog("AmfphpDiscoveryService", "discover");
+                    openMethodDialog("TestService", "returnOneParam");
                 }
                 
                 /**
@@ -176,7 +177,8 @@ $config = new Amfphp_BackOffice_Config();
                         for (i in parameters) {
                             var parameter = parameters[i];
                             var parameterName = parameter.name;
-                            html += "\n <tr><td>" + parameterName + "</td><td><textarea class='parameterInputs'/></td></tr>";
+                            var defaultValue = parameter.example;
+                            html += "\n <tr><td>" + parameterName + "</td><td><textarea rows='4'cols='50' class='parameterInputs'>" + defaultValue + "</textarea></td></tr>";
                         }
                         html += "\n</table>";
                             

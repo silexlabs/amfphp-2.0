@@ -105,29 +105,39 @@ class AmfphpDiscoveryService {
 
     /**
      * extracts 
-     * - types from param tags. type is first word after tag name, name of the variable is second word ($ is removed)
-     * - return tag
+     * - meta data from param tags:
+     *     1) type is first word after tag name, name of the variable is second word ($ is removed)
+     *     2) example is end of line after 'example: '
      * 
+     * - return type
+     * If data is missing because comment is incomplete the values are simply not set
      * @param string $comment 
-     * @return array{'returns' => type, 'params' => array{var name => type}}
+     * @return array{'returns' => type, 'params' => array{variable name => parameter meta}}
      */
     protected function parseMethodComment($comment) {
-        //get rid of phpdoc formatting
-        $comment = str_replace('/**', '', $comment);
-        $comment = str_replace('*', '', $comment);
-        $comment = str_replace('*/', '', $comment);
         $exploded = explode('@', $comment);
         $ret = array();
         $params = array();
-        foreach ($exploded as $value) {
-            if (strtolower(substr($value, 0, 5)) == 'param') {
-                $words = explode(' ', $value);
+        foreach ($exploded as $tagLine) {
+            if (strtolower(substr($tagLine, 0, 5)) == 'param') {
+                //type
+                $words = explode(' ', $tagLine);
                 $type = trim($words[1]);
                 $varName = trim(str_replace('$', '', $words[2]));
-                $params[$varName] = $type;
-            } else if (strtolower(substr($value, 0, 6)) == 'return') {
+                $paramMeta = array();
+                $paramMeta['type'] = $type;
+                //example
+                $example = '';
+                $examplePos = strpos($tagLine, 'example: ');
+                if($examplePos !== false){
+                    $example = substr($tagLine, $examplePos + 8);
+                }
+                $paramMeta['example'] = $example;
+                $params[$varName] = $paramMeta;
+                
+            } else if (strtolower(substr($tagLine, 0, 6)) == 'return') {
 
-                $words = explode(' ', $value);
+                $words = explode(' ', $tagLine);
                 $type = trim($words[1]);
                 $ret['return'] = $type;
             }
@@ -181,17 +191,33 @@ class AmfphpDiscoveryService {
                 foreach ($paramRs as $paramR) {
 
                     $parameterName = $paramR->name;
+                    //get type from type hinting or from parsed method comment. type hinting has priority
                     $type = '';
+                    //get example from parsed method comment only
+                    $example = '';
+                    
+                    if (isset($parsedMethodComment['param'][$parameterName])) {
+                        $paramMeta = $parsedMethodComment['param'][$parameterName]; 
+                        if(isset($paramMeta['type'])){
+                            $type = $paramMeta['type'];
+                        }
+                        if(isset($paramMeta['example'])){
+                            $example = $paramMeta['example'];
+                        }
+                    }
                     if ($paramR->getClass()) {
                         $type = $paramR->getClass()->name;
-                    } else if (isset($parsedMethodComment['param'][$parameterName])) {
-                        $type = $parsedMethodComment['param'][$parameterName];
-                    }
-                    $parameterInfo = new AmfphpDiscovery_ParameterDescriptor($parameterName, $type);
+                    } 
+                    $parameterInfo = new AmfphpDiscovery_ParameterDescriptor($parameterName, $type, $example);
 
                     $parameters[] = $parameterInfo;
                 }
-                $methods[$methodName] = new AmfphpDiscovery_MethodDescriptor($methodName, $parameters, $methodComment, $parsedMethodComment['return']);
+                //get return from parsed return comment if exists
+                $return = '';
+                if(isset ($parsedMethodComment['return'])){
+                    $return = $parsedMethodComment['return'];
+                }
+                $methods[$methodName] = new AmfphpDiscovery_MethodDescriptor($methodName, $parameters, $methodComment, $return);
             }
 
             $ret[$serviceName] = new AmfphpDiscovery_ServiceDescriptor($serviceName, $methods, $objComment);

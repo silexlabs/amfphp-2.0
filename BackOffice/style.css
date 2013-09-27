@@ -87,7 +87,7 @@ input, #result {
 	font-size: 14px;
 }
 
-.menu li ul {
+#left li ul {
 	padding-left: 15px;
 	margin-bottom: 10px;
 }

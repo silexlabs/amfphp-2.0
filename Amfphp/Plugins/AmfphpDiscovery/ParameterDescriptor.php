@@ -26,10 +26,17 @@ class AmfphpDiscovery_ParameterDescriptor {
     public $name;
 
     /**
-     * This can be gathered in 2 manners: commentary tag analysis and type hinting analysis. For starters only the second method is used
+     * This can be gathered in 2 manners: commentary tag analysis and type hinting analysis. 
      * @var String
      */
     public $type;
+    
+    /**
+     * This can be gathered by commentary tag analysis. It should be in json format so that it can be used by the service browser.
+     * This is an example tag @param object obj This is a really important object. example: {"key":"value"}
+     * @var string 
+     */
+    public $example;
 
     /**
      * @todo 
@@ -42,9 +49,10 @@ class AmfphpDiscovery_ParameterDescriptor {
      * @param String $name
      * @param String $type
      */
-    public function __construct($name, $type) {
+    public function __construct($name, $type, $example) {
         $this->name = $name;
         $this->type = $type;
+        $this->example = $example;
     }
 
 }
