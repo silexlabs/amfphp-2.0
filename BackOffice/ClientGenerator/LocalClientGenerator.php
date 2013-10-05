@@ -252,7 +252,8 @@ class Amfphp_BackOffice_ClientGenerator_LocalClientGenerator {
      * @return String 
      */
     protected function generateOneServiceFileCode($code) {
-        $codeMatchingService = str_replace('/*ACG_SERVICE_COMMENT*/', $this->serviceBeingProcessed->comment, $code);
+        $wrappedComment = $this->wrapComment($this->serviceBeingProcessed->comment);
+        $codeMatchingService = str_replace('/*ACG_SERVICE_COMMENT*/', $wrappedComment, $code);
         $codeMatchingService = str_replace(self::_SERVICE_, $this->serviceBeingProcessed->name, $codeMatchingService);
         $processed = $this->searchForBlocksAndApplyProcessing($codeMatchingService, self::METHOD, 'processMethodListBlock');
         if ($processed) {
@@ -271,7 +272,8 @@ class Amfphp_BackOffice_ClientGenerator_LocalClientGenerator {
         $ret = '';
         foreach ($this->services as $service) {
             $this->serviceBeingProcessed = $service;
-            $blockForService = str_replace('/*ACG_SERVICE_COMMENT*/', $service->comment, $code);
+            $wrappedComment = $this->wrapComment($service->comment);
+            $blockForService = str_replace('/*ACG_SERVICE_COMMENT*/', $wrappedComment, $code);
             $blockForService = str_replace(self::_SERVICE_, $service->name, $blockForService);
 
             $processed = $this->searchForBlocksAndApplyProcessing($blockForService, self::METHOD, 'processMethodListBlock');
@@ -283,6 +285,8 @@ class Amfphp_BackOffice_ClientGenerator_LocalClientGenerator {
         }
         return $ret;
     }
+    
+   
 
     /**
      * finds parameter blocks.
@@ -294,7 +298,8 @@ class Amfphp_BackOffice_ClientGenerator_LocalClientGenerator {
         $ret = '';
         foreach ($this->serviceBeingProcessed->methods as $method) {
             $this->methodBeingProcessed = $method;
-            $blockForMethod = str_replace('/*ACG_METHOD_COMMENT*/', $method->comment, $code);
+            $wrappedComment = $this->wrapComment($method->comment);
+            $blockForMethod = str_replace('/*ACG_METHOD_COMMENT*/', $wrappedComment, $code);
             $blockForMethod = str_replace(self::_METHOD_, $method->name, $blockForMethod);
             
             $processed = $this->searchForBlocksAndApplyProcessing($blockForMethod, self::PARAMETER, 'processParameterListBlock');
@@ -337,6 +342,16 @@ class Amfphp_BackOffice_ClientGenerator_LocalClientGenerator {
         //remove last comma
         $ret = substr($ret, 0, -2);
         return $ret;
+    }
+    
+    /**
+     * $comment is stripped in discovery service, and needs to be wrapped with comment markers before 
+     *  being reinserted in code. Here this is done with slashes and stars 
+     * @param type $comment 
+     */
+    protected function wrapComment($comment){
+        $comment = "/** $comment */";
+        $comment = str_replace("\n", "\n* ", $comment);
     }
 
 }
