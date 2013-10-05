@@ -26,7 +26,9 @@ class Amfphp_BackOffice_ClientGenerator_Util {
      */
     public static function recurseCopy($src, $dst) {
         $dir = opendir($src);
-        mkdir($dst);
+        if(!file_exists($dst)){
+            mkdir($dst);
+        }
         while (false !== ( $file = readdir($dir))) {
             if (( $file != '.' ) && ( $file != '..' )) {
                 if (is_dir($src . '/' . $file)) {
@@ -38,7 +40,14 @@ class Amfphp_BackOffice_ClientGenerator_Util {
         }
         closedir($dir);
     }
-
+    
+    /**
+     * looks if the server has the necessary zip functions.
+     * @return boolean 
+     */
+    public static function serverCanZip(){
+        return class_exists('ZipArchive');
+    }
     /**
      * zip folder
      * @param type $sourcefolder
