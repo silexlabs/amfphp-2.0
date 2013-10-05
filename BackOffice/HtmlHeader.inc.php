@@ -21,12 +21,15 @@ $temp = 0;
 ?>
 
     <head>
-        <title>AmfPHP Back Office</title>
+        <title>AmfPHP Back Office<?php
+if (isset($addToTitle)) {
+    echo $addToTitle;
+}
+?></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
         <link rel="stylesheet" type="text/css" href="style.css" />
-
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
+        <script type="text/javascript" src="lib/jquery.js"></script>
         <script type="text/javascript" src="lib/jquery.hotkeys.js"></script>
         <script type="text/javascript" src="lib/jquery.jstree.js"></script>
         <script type="text/javascript" src="lib/dataparse.js"></script>
