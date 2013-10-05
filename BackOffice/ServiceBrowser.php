@@ -18,10 +18,11 @@ $config = new Amfphp_BackOffice_Config();
 ?>
 
 <html>
-    <?php require_once(dirname(__FILE__) . '/HtmlHeader.inc.php'); ?>
+    
+    <?php $addToTitle = ' - Service Browser';
+        require_once(dirname(__FILE__) . '/HtmlHeader.inc.php'); ?>
     <body>
         <?php
-        $addToTitle = ' - Service Browser';
         require_once(dirname(__FILE__) . '/LinkBar.inc.php');
         ?>
 
@@ -82,18 +83,15 @@ $config = new Amfphp_BackOffice_Config();
                 var resultViewId;
 
                 $(function () {	        
-                    console.log($('#right').offset());
                     var callData = JSON.stringify({"serviceName":"AmfphpDiscoveryService", "methodName":"discover","parameters":[]});
-                    $.post("<?php echo $config->amfphpEntryPointPath ?>?contentType=application/json", callData, onServicesLoaded);
+                    $.post("<?php echo $config->resolveAmfphpEntryPointUrl() ?>?contentType=application/json", callData, onServicesLoaded);
+                    //@todo error handling with explicit messages. use $.ajax instead of $.post
                     $('#main').hide();  
                     showResultView('tree');
 
 
                 });
 
-                function setRightDivMaxWidth() {
-                    $( "#right" ).css( "maxWidth", ( $( '#main' ).width() - 400) +  "px" );
-                }                    
                 /**
                  * callback for when service data loaded from server . 
                  * generates method list. 
@@ -189,7 +187,6 @@ $config = new Amfphp_BackOffice_Config();
                     $('#callDialog').empty();
                     $('#callDialog').append(html);
                     var rightDivTop = Math.round(Math.max(0, $(window).scrollTop() - $('#main').offset().top));
-                    console.log(rightDivTop);
                     //note that trying with jquery 'offset' messes up!
                     $('#right').css('top', rightDivTop + 'px');
                     $('#right').show();
@@ -214,7 +211,7 @@ $config = new Amfphp_BackOffice_Config();
                     });
                     var callData = JSON.stringify({"serviceName":serviceName, "methodName":methodName,"parameters":parameters});
                     callStartTime = $.now();
-                    $.post("<?php echo $config->amfphpEntryPointPath ?>?contentType=application/json", callData, onResult);
+                    $.post("<?php echo $config->resolveAmfphpEntryPointUrl() ?>?contentType=application/json", callData, onResult);
                 }
                 
                 /**
