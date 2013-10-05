@@ -17,10 +17,10 @@ $isAccessGranted = $accessManager->isAccessGranted();
 ?>
 
 <html>
-    <?php require_once(dirname(__FILE__) . '/HtmlHeader.inc.php'); ?>
+    <?php         $addToTitle = ' - Client Generator';
+                    require_once(dirname(__FILE__) . '/HtmlHeader.inc.php'); ?>
     <body>
         <?php
-        $addToTitle = ' - Client Generator';
         require_once(dirname(__FILE__) . '/LinkBar.inc.php');
         ?>
 
@@ -117,7 +117,9 @@ $isAccessGranted = $accessManager->isAccessGranted();
 
                         $generatorClass = $_GET['generate'];
                         $generator = $generators[$generatorClass];
-                        $newFolderName = date("Ymd-his-") . $generatorClass;
+                        //$newFolderName = date("Ymd-his-") . $generatorClass;
+                        //temp for testing. 
+                        $newFolderName = $generatorClass;
                         $genRootRelativeUrl = 'ClientGenerator/Generated/';
                         $genRootFolder = AMFPHP_BACKOFFICE_ROOTPATH . $genRootRelativeUrl;
                         $targetFolder = $genRootFolder . $newFolderName;
@@ -129,11 +131,14 @@ $isAccessGranted = $accessManager->isAccessGranted();
                         if ($urlSuffix !== false) {
                             echo '<br/><br/><a href="' . $genRootRelativeUrl . $newFolderName . '/' . $urlSuffix . '"> try it here</a>';
                         }
-
-                        $zipFileName = "$newFolderName.zip";
-                        $zipFilePath = $genRootFolder . $zipFileName;
-                        Amfphp_BackOffice_ClientGenerator_Util::zipFolder($targetFolder, $zipFilePath, $genRootFolder);
-                        echo '<br/><br/><a href="' . $genRootRelativeUrl . $zipFileName . '"> get zip here</a>';
+                        if(Amfphp_BackOffice_ClientGenerator_Util::serverCanZip()){
+                            $zipFileName = "$newFolderName.zip";
+                            $zipFilePath = $genRootFolder . $zipFileName;
+                            Amfphp_BackOffice_ClientGenerator_Util::zipFolder($targetFolder, $zipFilePath, $genRootFolder);
+                            echo '<br/><br/><a href="' . $genRootRelativeUrl . $zipFileName . '"> get zip here</a>';
+                        }else{
+                            echo " Server can not create zip of generated project, because ZipArchive is not available.";
+                        }
                     }
                     ?>
                 </div>
