@@ -40,6 +40,42 @@ class AmfphpFlexClientGenerator extends Amfphp_BackOffice_ClientGenerator_LocalC
     public function getInfoUrl(){
         return "http://www.silexlabs.org/amfphp/documentation/client-generators/flex/";
     }
+    
+    /**
+     * multiplies and adapts the code for each parameter, but adds a comma between each.
+     * duplicated and enhanced to add typing. Right now vo typing is not supported, only primitive types, like int, boolean, string etc.
+     * note: this is copied from the flash generator. @todo maybe find a way to maintain the code only in one place
+     * @param type $code
+     */
+    protected function processParameterCommaListBlock($code) {
+        $ret = '';
+        foreach ($this->methodBeingProcessed->parameters as $parameter) {
+            $blockForParameter = str_replace(self::_PARAMETER_, $parameter->name, $code);
+            $as3Type = null;
+            switch(strtolower($parameter->type)){
+                case 'string':
+                    $as3Type = 'String';
+                case 'bool':
+                case 'boolean':
+                    $as3Type = 'Boolean';
+                case 'int':
+                    $as3Type = 'int';
+                case 'uint':
+                    $as3Type = 'uint';
+                case 'float':
+                case 'number':
+                    $as3Type = 'Number';
+            }
+            if($as3Type){
+                $blockForParameter = str_replace('Object', $as3Type, $blockForParameter);
+            }
+            $ret .= $blockForParameter . ', ';
+        }
+        //remove last comma
+        $ret = substr($ret, 0, -2);
+        return $ret;
+    }
+    
 }
 
 ?>

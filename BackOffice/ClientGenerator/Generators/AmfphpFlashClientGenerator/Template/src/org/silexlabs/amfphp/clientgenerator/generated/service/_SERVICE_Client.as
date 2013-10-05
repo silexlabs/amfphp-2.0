@@ -17,7 +17,7 @@ package org.silexlabs.amfphp.clientgenerator.generated.service{
 		
 /*ACG_METHOD*/
 /*ACG_METHOD_COMMENT*/
-        public function _METHOD_(/*ACG_PARAMETER_COMMA*/_PARAMETER_:Object/*ACG_PARAMETER_COMMA*/	):IResponderSignal{ 
+        public function _METHOD_(/*ACG_PARAMETER_COMMA*/_PARAMETER_:Object/*ACG_PARAMETER_COMMA*/):IResponderSignal{ 
 			return callService("_METHOD_" /*ACG_PARAMETER*/, _PARAMETER_/*ACG_PARAMETER*/);
         }
 /*ACG_METHOD*/
