@@ -128,7 +128,7 @@ class AmfphpDiscoveryService {
                 $paramMeta['type'] = $type;
                 //example
                 $example = '';
-                $examplePos = strpos($tagLine, 'example: ');
+                $examplePos = strpos($tagLine, 'example:');
                 if($examplePos !== false){
                     $example = substr($tagLine, $examplePos + 8);
                 }
