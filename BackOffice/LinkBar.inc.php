@@ -18,11 +18,7 @@
 $temp = 0;
 ?>
         <div class='static'>
-            <a href="?" id="titleLink"><b>AmfPHP Back Office<?php
-if (isset($addToTitle)) {
-    echo $addToTitle;
-}
-?></b></a>
+            <span id="titleLink">AmfPHP Back Office</span>
             <ul>
                 <li><a href="http://www.silexlabs.org/amfphp/feedback/">Feedback</a></li>
                 <li><a href="http://www.silexlabs.org/groups/amfphp/amfphp-users/">Forum</a></li>

@@ -16,11 +16,6 @@ a, input[type="submit"]  {
         cursor:pointer;
 }
 
-.warning{
-    color:yellow;
-    
-}
-
 input, #result {
 	padding: 5px;
 	border: 1px solid #525252;
@@ -39,7 +34,7 @@ input, #result {
 	font-size: 24px;
 } 
 
-.static b {
+#titleLink {
 	font-size: 24px;
 } 
 
@@ -49,9 +44,6 @@ input, #result {
 	margin-top: 7px;
 }
 
-.errorMessage{
-    color:red;
-}
 .static a{
 	padding-right: 20px;
     
@@ -62,38 +54,14 @@ input, #result {
 	margin-left: 20px;
 }
 
-#signin {
-	float: left;
-	margin-left: 20px;
-}
-.menu {
-	padding: 16px;
-	background: #A6C4BC;
-	-moz-border-radius: 8px;
-	-webkit-border-radius: 8px;
-	border-radius: 8px;
-}
-
-#left{
-    float: left;
-    margin: 20px;
-}
-.menu li {
-	margin-left: 15px;
-	margin-bottom: 2px;
-}
-
-.menu li b {
-	font-size: 14px;
-}
-
 #left li ul {
 	padding-left: 15px;
 	margin-bottom: 10px;
 }
 
-.menu a{
-    padding-right: 10px;
+#left{
+    float: left;
+    margin: 20px;
 }
 
 #right {
@@ -105,6 +73,29 @@ input, #result {
 
 #right form {
 	margin-bottom: 20px;
+}
+
+.menu {
+	padding: 16px;
+        margin-bottom:16px;
+	background: #A6C4BC;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+}
+
+.menu li {
+	margin-left: 15px;
+	margin-bottom: 2px;
+}
+
+.menu li b {
+	font-size: 14px;
+}
+
+
+.menu a{
+    padding-right: 10px;
 }
 
 
@@ -143,4 +134,12 @@ h3{
 
 #dataView#tree{
     font-size: 12px;
+}
+.warning{
+    color:yellow;
+    
+}
+
+.errorMessage{
+    color:red;
 }

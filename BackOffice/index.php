@@ -26,7 +26,7 @@ $isAccessGranted = $accessManager->isAccessGranted();
         <?php require_once(dirname(__FILE__) . '/LinkBar.inc.php'); ?>
 
         <div id='main'>
-            <div class="left">
+            <div id="left">
                 <?php
                 $accessManager = new Amfphp_BackOffice_AccessManager();
                 if (!$isAccessGranted) {

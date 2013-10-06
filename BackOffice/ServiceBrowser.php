@@ -18,9 +18,9 @@ $config = new Amfphp_BackOffice_Config();
 ?>
 
 <html>
-    
+
     <?php $addToTitle = ' - Service Browser';
-        require_once(dirname(__FILE__) . '/HtmlHeader.inc.php'); ?>
+    require_once(dirname(__FILE__) . '/HtmlHeader.inc.php'); ?>
     <body>
         <?php
         require_once(dirname(__FILE__) . '/LinkBar.inc.php');
@@ -39,10 +39,12 @@ $config = new Amfphp_BackOffice_Config();
                 }
                 require_once(dirname(__FILE__) . '/MainMenu.inc.php');
                 ?>
+                <div class='menu'>
+                    <ul id='serviceMethods' >
+                        Loading Service Data...
 
-                <ul id='serviceMethods'  class='menu'>
-                    Loading Service Data...
-                </ul>
+                    </ul>
+                </div>                            
             </div>                    
             <div id='right' class='menu' >
                 <div id='callDialog'>
@@ -144,6 +146,8 @@ $config = new Amfphp_BackOffice_Config();
                     //openMethodDialog("AuthenticationService", "login");
                     openMethodDialog("AmfphpDiscoveryService", "discover");
                     openMethodDialog("TestService", "returnOneParam");
+                    document.title = "AmfPHP - Service Browser";
+                    $("#titleLink").text("AmfPHP - Service Browser");
                 }
                 
                 /**

@@ -45,9 +45,8 @@ try {
             }
 
             $_SESSION[Amfphp_BackOffice_AccessManager::SESSION_FIELD_ROLES][Amfphp_BackOffice_AccessManager::AMFPHP_ADMIN_ROLE] = true;
-        
+
             $redirectToHome = true;
-            
         } else {
             throw new Amfphp_Core_Exception('Invalid username/password');
         }
@@ -72,18 +71,20 @@ try {
 
         <div id='main'>
 
-            <div class = "userInput" id = "signin">
-                <form method = "POST">
-                    <h3>Sign In</h3>
-                    <div class="errorMessage">
-                        <?php echo $errorMessage ?>
-                    </div>
-                    User Name<br/>
-                    <input name = "username"/><br/>
-                    Password<br/>
-                    <input name = "password" type = "password"/><br/>
-                    <input type = "Submit" value = "Sign In"/>
+            <div id = "left">
+                <div class="menu">
+                    <form method = "POST">
+                        <h3>Sign In</h3>
+                        <div class="errorMessage">
+                            <?php echo $errorMessage ?>
+                        </div>
+                        User Name<br/>
+                        <input name = "username"/><br/>
+                        Password<br/>
+                        <input name = "password" type = "password"/><br/>
+                        <input type = "Submit" value = "Sign In"/>
 
-                </form>
+                    </form>
+                </div>                    
             </div>
 
