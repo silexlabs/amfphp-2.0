@@ -14,7 +14,7 @@
  *  */
 require_once dirname(__FILE__) . '/../../../../Amfphp/Plugins/AmfphpAuthentication/AmfphpAuthentication.php';
 require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
-require_once dirname(__FILE__) . '/../../../TestData/Services/AuthenticationService.php';
+require_once dirname(__FILE__) . '/../../../TestData/Services/TestAuthenticationService.php';
 
 /**
  * Test class for AmfphpAuthentication.
@@ -41,7 +41,7 @@ class AmfphpAuthenticationTest extends PHPUnit_Framework_TestCase {
      */
     protected function setUp() {
         $this->object = new AmfphpAuthentication;
-        $this->serviceObj = new AuthenticationService();
+        $this->serviceObj = new TestAuthenticationService();
     }
 
     /**

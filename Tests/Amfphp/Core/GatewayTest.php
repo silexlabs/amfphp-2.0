@@ -27,11 +27,10 @@ class Amfphp_Core_GatewayTest extends PHPUnit_Framework_TestCase {
      */
     public function testService() {
         $amfTestData = new AmfTestData();
-        $config = new Amfphp_Core_Config();
         $testServiceConfig = new TestServicesConfig();
-        $config->serviceFolderPaths = $testServiceConfig->serviceFolderPaths;
-        $config->serviceNames2ClassFindInfo = $testServiceConfig->serviceNames2ClassFindInfo;
-        $gateway = new Amfphp_Core_Gateway(array(), array(), $amfTestData->testServiceRequestPacket, Amfphp_Core_Amf_Constants::CONTENT_TYPE, $config);
+        $testServiceConfig->serviceFolderPaths = $testServiceConfig->serviceFolderPaths;
+        $testServiceConfig->serviceNames2ClassFindInfo = $testServiceConfig->serviceNames2ClassFindInfo;
+        $gateway = new Amfphp_Core_Gateway(array(), array(), $amfTestData->testServiceRequestPacket, Amfphp_Core_Amf_Constants::CONTENT_TYPE, $testServiceConfig);
         $ret = $gateway->service();
         $this->assertEquals(bin2hex($amfTestData->testServiceResponsePacket), bin2hex($ret));
     }
@@ -39,8 +38,8 @@ class Amfphp_Core_GatewayTest extends PHPUnit_Framework_TestCase {
      * test empty message
      */
     public function testEmptyMessage() {
-        $config = new Amfphp_Core_Config();
-        $gateway = new Amfphp_Core_Gateway(array(), array(), array(), Amfphp_Core_Amf_Constants::CONTENT_TYPE, $config);
+        $testServiceConfig = new TestServicesConfig();
+        $gateway = new Amfphp_Core_Gateway(array(), array(), array(), Amfphp_Core_Amf_Constants::CONTENT_TYPE, $testServiceConfig);
         $ret = $gateway->service();
 
         $this->assertTrue(strpos($ret, 'service') != false);

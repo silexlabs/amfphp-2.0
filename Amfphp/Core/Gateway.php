@@ -162,7 +162,7 @@ class Amfphp_Core_Gateway {
      * handles the messages as requests to services, and returns the responses from the services
      * It does not however handle output headers, gzip compression, etc. that is the job of the calling script
      *
-     * @return <String> the serialized amf packet containg the service responses
+     * @return <String> the serialized data
      */
     public function service(){
         $filterManager = Amfphp_Core_FilterManager::getInstance();

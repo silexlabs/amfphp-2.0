@@ -11,7 +11,7 @@
  */
 
 /**
- * an example service for the pizza examples
+ * an example Value Object(Vo) object, used by VoService
  * @package Amfphp_Examples_ExampleService
  * @author Ariel Sommeria-klein
  */
