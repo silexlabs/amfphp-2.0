@@ -96,8 +96,9 @@ class Amfphp_Core_Config {
         //disable logging and error handler by default
         $this->disabledPlugins[] = 'AmfphpLogger';
         $this->disabledPlugins[] = 'AmfphpErrorHandler';
-        //example of setting config switch in a plugin:
+        //some useful examples of setting a config value in a plugin:
         //$this->pluginsConfig['AmfphpDiscovery']['restrictAccess'] = false;
+        $this->pluginsConfig['AmfphpCustomClassConverter']['enforceConversion'] = true;
     }
 
 }

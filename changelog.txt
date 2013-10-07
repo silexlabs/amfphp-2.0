@@ -1,4 +1,12 @@
 Version history
+--------- 2.2 -----------
+Custom class converter:
+enforceConversion flag to throw exception when custom class not found
+
+Service browser :
+functionality all moved to client. 
+Better use of service comments: comments appear in service browser, possibility to set default for use in service browser.
+
 --------- 2.1.1 -----------
 Flex Client Generator
 example services for Authentication and User management with a Database(PHP Only)

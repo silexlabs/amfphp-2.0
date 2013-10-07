@@ -33,6 +33,8 @@ class TestServicesConfig extends Amfphp_Core_Config {
         $this->serviceNames2ClassFindInfo = array('TestService' => $classFindInfo);
         $this->serviceNames2ClassFindInfo = array('TestService' => $classFindInfo);
         
+        $this->pluginsConfig['AmfphpCustomClassConverter']['customClassFolderPaths'] = array(AMFPHP_ROOTPATH . '/Services/Vo/', dirname(__FILE__). '/../../Examples/Php/ExampleServices/Vo/');
+        
         $this->disabledPlugins[] = 'AmfphpMonitor';
     }
 

@@ -55,6 +55,14 @@ class AmfphpCustomClassConverter {
      * @var array of paths
      */
     public $customClassFolderPaths;
+    
+    /**
+     * Set this to true if you want an exception to be thrown when a custom class is not found. 
+     * Avoid setting this to true on a public server as the exception contains details about your server configuration.
+     * 
+     * @var boolean 
+     */
+    public $enforceConversion;
 
     /**
      * constructor.
@@ -67,6 +75,9 @@ class AmfphpCustomClassConverter {
             if (isset($config['customClassFolderPaths'])) {
                 $this->customClassFolderPaths = $config['customClassFolderPaths'];
             }
+            if (isset($config['enforceConversion'])) {
+                $this->enforceConversion = $config['enforceConversion'];
+            }            
         }
         $filterManager = Amfphp_Core_FilterManager::getInstance();
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_REQUEST, $this, 'filterDeserializedRequest');
@@ -108,6 +119,7 @@ class AmfphpCustomClassConverter {
         if (!is_object($obj)) {
             return $obj;
         }
+        
         $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
         if (isset($obj->$explicitTypeField)) {
             $customClassName = $obj->$explicitTypeField;
@@ -129,6 +141,10 @@ class AmfphpCustomClassConverter {
                     }
                 }
                 return $typedObj;
+            }else{
+                if($this->enforceConversion){
+                    throw new Exception("$customClassName Custom Class not found. \nCustom Class folder paths : " . print_r($this->customClassFolderPaths, true));
+                }
             }
         }
 
