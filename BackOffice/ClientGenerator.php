@@ -17,8 +17,8 @@ $isAccessGranted = $accessManager->isAccessGranted();
 ?>
 
 <html>
-    <?php         $addToTitle = ' - Client Generator';
-                    require_once(dirname(__FILE__) . '/HtmlHeader.inc.php'); ?>
+    <?php $addToTitle = ' - Client Generator';
+    require_once(dirname(__FILE__) . '/HtmlHeader.inc.php'); ?>
     <body>
         <?php
         require_once(dirname(__FILE__) . '/LinkBar.inc.php');
@@ -131,15 +131,23 @@ $isAccessGranted = $accessManager->isAccessGranted();
                         if ($urlSuffix !== false) {
                             echo '<br/><br/><a href="' . $genRootRelativeUrl . $newFolderName . '/' . $urlSuffix . '"> try it here</a>';
                         }
-                        if(Amfphp_BackOffice_ClientGenerator_Util::serverCanZip()){
+                        if (Amfphp_BackOffice_ClientGenerator_Util::serverCanZip()) {
                             $zipFileName = "$newFolderName.zip";
                             $zipFilePath = $genRootFolder . $zipFileName;
                             Amfphp_BackOffice_ClientGenerator_Util::zipFolder($targetFolder, $zipFilePath, $genRootFolder);
                             echo '<br/><br/><a href="' . $genRootRelativeUrl . $zipFileName . '"> get zip here</a>';
-                        }else{
+                        } else {
                             echo " Server can not create zip of generated project, because ZipArchive is not available.";
                         }
                     }
                     ?>
                 </div>
             </div>
+            <script>
+                $(function () {	        
+                    document.title = "AmfPHP - Client Generator";
+                    $("#titleSpan").text("AmfPHP - Client Generator");
+
+
+                });                
+            </script>

@@ -18,7 +18,7 @@
 $temp = 0;
 ?>
         <div class='static'>
-            <span id="titleLink">AmfPHP Back Office</span>
+            <span id="titleSpan">AmfPHP Back Office</span>
             <ul>
                 <li><a href="http://www.silexlabs.org/amfphp/feedback/">Feedback</a></li>
                 <li><a href="http://www.silexlabs.org/groups/amfphp/amfphp-users/">Forum</a></li>

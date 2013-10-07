@@ -1,5 +1,5 @@
 * {
-	font-size: 14px;
+	font-size: 15px;
 	font-family: Arial, Helvetica, sans-serif;
 	color: #524656;
 	margin: 0px;
@@ -34,7 +34,7 @@ input, #result {
 	font-size: 24px;
 } 
 
-#titleLink {
+#titleSpan {
 	font-size: 24px;
 } 
 

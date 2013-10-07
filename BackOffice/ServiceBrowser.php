@@ -90,6 +90,8 @@ $config = new Amfphp_BackOffice_Config();
                     //@todo error handling with explicit messages. use $.ajax instead of $.post
                     $('#main').hide();  
                     showResultView('tree');
+                    document.title = "AmfPHP - Service Browser";
+                    $("#titleSpan").text("AmfPHP - Service Browser");
 
 
                 });
@@ -142,12 +144,6 @@ $config = new Amfphp_BackOffice_Config();
                     setRightDivMaxWidth();
                     $( window ).bind( "resize", setRightDivMaxWidth ); 
                     
-                    //test 
-                    //openMethodDialog("AuthenticationService", "login");
-                    openMethodDialog("AmfphpDiscoveryService", "discover");
-                    openMethodDialog("TestService", "returnOneParam");
-                    document.title = "AmfPHP - Service Browser";
-                    $("#titleLink").text("AmfPHP - Service Browser");
                 }
                 
                 /**
