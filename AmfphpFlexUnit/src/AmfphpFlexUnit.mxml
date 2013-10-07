@@ -4,8 +4,6 @@
 			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" creationComplete="application1_creationCompleteHandler(event)" xmlns:flexui="flexunit.flexui.*">
 	<fx:Script>
 		<![CDATA[
-			import mx.events.FlexEvent;
-			
 			import flexUnitTests.Amf3NumberTests;
 			import flexUnitTests.Amf3Tests;
 			import flexUnitTests.Amf3TraitsTests;
@@ -19,6 +17,8 @@
 			import flexUnitTests.RemoteObjectTests;
 			import flexUnitTests.TestConfig;
 			import flexUnitTests.voTests.VoTests;
+			
+			import mx.events.FlexEvent;
 			
 			public function currentRunTestSuite():Array
 			{
@@ -56,7 +56,8 @@
 					var urlNode:XML = urls[i];
 					if(urlNode.@active == "y"){
 						//todo support runs on multiple urls. It seems tests are always repeated on the first
-						TestConfig.gateway = urlNode;
+						var url:String = urlNode;
+						TestConfig.gateway = url;
 						urlLabel.text = urlNode.@description + ': ' + urlNode;
 						testRunner.runWithFlexUnit4Runner(currentRunTestSuite(), "AmfphpFlexUnit");
 					}								
