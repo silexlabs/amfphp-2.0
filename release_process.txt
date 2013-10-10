@@ -5,12 +5,12 @@ deploy to a unix server(case sensitive)
 test service browser
 test generators
 test examples
+regenerate doc, and update online version
 tag repository: 
     git tag -a v2.2_comments -m "2.2 Teaser # 1 putting comments to good use "
     git push --tags
 
 
-regenerate doc, and update online version
 create release zip
 upload to distribution platform(sourceforge)
 blog post on silexlabs. publishes automatically to twitter and facebook. publish on google plus.

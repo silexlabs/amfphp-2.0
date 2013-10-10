@@ -308,8 +308,16 @@ $config = new Amfphp_BackOffice_Config();
                 function makeCall(){
                     var parameters = [];
                     for(var i=0; i < paramEditors.length; i++){
-                        parameters.push(paramEditors[i].getValue());
-                         console.log(paramEditors[i].getValue());
+                        var value = paramEditors[i].getValue();
+                         try{
+                            //if it's JSON it needs to be parsed to avoid being treated as a string 
+                            value = JSON.parse(value.trim()); 
+                        }catch(e){
+                            //exception: it's not valid json, so keep as is
+                            
+                        }
+                        parameters.push(value);
+                        console.log(value);
                     }
                     
                     var callData = JSON.stringify({"serviceName":serviceName, "methodName":methodName,"parameters":parameters});
