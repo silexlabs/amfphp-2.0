@@ -9,11 +9,11 @@
  * with this package in the file license.txt.
  * @package Amfphp_Plugins_Monitor
 
-  /**
- * 
+/**
+ * monitoring service. controls logging, qnd provides method to fetch data.
  *
- * @author Ariel Sommeria-klein
  * @package Amfphp_Plugins_Monitor
+ * @author Ariel Sommeria-klein
  */
 class AmfphpMonitorService {
     public static $logPath;

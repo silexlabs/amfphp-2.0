@@ -89,10 +89,10 @@ class Amf3TestData {
     public $sString;
     
     /**
-     * string twice
+     * string twice. dString serialized twice. test for reference
      * @var string 
      */   
-    public $sStringTwice; //dString serialized twice. test for reference
+    public $sStringTwice; 
 
     /**
      * long string

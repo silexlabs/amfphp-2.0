@@ -47,7 +47,7 @@ class AmfphpMonitor {
     
     /**
      * was there an exception during service call.
-     * @todo. unused.
+     * todo. unused.
      * @var boolean 
      */
     protected $isException;
