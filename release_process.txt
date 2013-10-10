@@ -1,3 +1,5 @@
+make sure config is not modified
+update version flag
 run unit tests, php and flash builder
 deploy to a unix server(case sensitive)
 test service browser
