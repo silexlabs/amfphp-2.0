@@ -27,6 +27,7 @@ Backoffice/ClientGenerator/Generated
 *.o
 *.so
 
+
 # Packages #
 ############
 # it's better to unpack these files and commit the raw source
@@ -49,7 +50,7 @@ Backoffice/ClientGenerator/Generated
 ehthumbs.db
 Icon?
 Thumbs.db
-BackOffice/ClientGenerator/Generators/AmfphpFlexClientGenerator/Template/bin-debug/header-amfphp.jpg
+BackOffice/ClientGenerator/Generators/AmfphpFlexClientGenerator/Template/bin-debug/*
 
 Amfphp/Plugins/BaguetteAmf/BaguetteAmfSerializer.php
 
@@ -63,22 +64,6 @@ Amfphp/Plugins/BaguetteAmf/BaguetteAmf.php
 
 AmfphpFlexUnit/src/FlexUnitCompilerApplication.mxml
 
-BackOffice/ClientGenerator/Generators/AmfphpFlashClientGenerator/Template/bin-debug/swfobject.js
-
-BackOffice/ClientGenerator/Generators/AmfphpFlashClientGenerator/Template/bin-debug/AmfphpFlashClient.html
-
-BackOffice/ClientGenerator/Generators/AmfphpFlashClientGenerator/Template/bin-debug/AmfphpFlashClient.swf
-
-BackOffice/ClientGenerator/Generators/AmfphpFlashClientGenerator/Template/bin-debug/history/history.css
-
-BackOffice/ClientGenerator/Generators/AmfphpFlashClientGenerator/Template/bin-debug/history/history.js
-
-BackOffice/ClientGenerator/Generators/AmfphpFlashClientGenerator/Template/bin-debug/history/historyFrame.html
-
-BackOffice/ClientGenerator/Generators/AmfphpFlashClientGenerator/Template/bin-debug/history/historyFrame.html
-
-BackOffice/ClientGenerator/Generators/AmfphpFlexClientGenerator/Template/bin-debug/AmfphpFlexClient.swf
-
-BackOffice/ClientGenerator/Generators/AmfphpFlexClientGenerator/Template/bin-debug/AmfphpFlexClient.swf
+BackOffice/ClientGenerator/Generators/AmfphpFlashClientGenerator/Template/bin-debug/*
 
 Amfphp/Plugins/AmfphpMonitor/log.txt
