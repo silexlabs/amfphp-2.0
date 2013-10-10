@@ -299,7 +299,7 @@ $config = new Amfphp_BackOffice_Config();
                     //note that trying with jquery "offset" messes up!
                     $("#right").css("top", rightDivTop + "px");
                     
-                      
+                    setRightDivMaxWidth();  
                 }
                 
                 /**
