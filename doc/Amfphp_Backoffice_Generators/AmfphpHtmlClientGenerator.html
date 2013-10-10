@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class AmfphpHtmlClientGenerator</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class AmfphpHtmlClientGenerator</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-vars">Vars</a>
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+											<a href="#sec-consts">Constants</a>
+						
+			</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">generates a Flash project for consumption of amfPHP services</p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Ariel Sommeria-klein</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_BackOffice---ClientGenerator---Generators---AmfphpHtmlClientGenerator---AmfphpHtmlClientGenerator.php.html">/BackOffice/ClientGenerator/Generators/AmfphpHtmlClientGenerator/AmfphpHtmlClientGenerator.php</a> (line <span class="field">20</span>)
+		</p>
+		
+				
+		<pre><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</a>
+   |
+   --AmfphpHtmlClientGenerator</pre>
+	
+			</div>
+</div>
+
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-consts">Constants</a>
+							
+															<a href="#sec-vars">Vars</a>
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																				
+												<div class="method-definition">
+											<span class="method-result">AmfphpHtmlClientGenerator</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getInfoUrl" title="details" class="method-name">getInfoUrl</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#getTestUrlSuffix" title="details" class="method-name">getTestUrlSuffix</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getUiCallText" title="details" class="method-name">getUiCallText</a>
+										()
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-consts">Constants</a>
+							
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+										<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#var$amfphpEntryPointUrl">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::$amfphpEntryPointUrl</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#var$codeFileExtensions">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::$codeFileExtensions</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#var$fileBeingProcessed">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::$fileBeingProcessed</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#var$methodBeingProcessed">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::$methodBeingProcessed</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#var$serviceBeingProcessed">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::$serviceBeingProcessed</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#var$services">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::$services</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#var$targetFolder">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::$targetFolder</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#var$templateFolderUrl">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::$templateFolderUrl</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-vars">Vars</a>
+																			<a href="#sec-consts">Constants</a>
+							
+										<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">25</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">constructor</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">AmfphpHtmlClientGenerator</span>
+		<span class="method-name">
+			__construct
+		</span>
+				()
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#method__construct">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::__construct()</a></dt>
+						<dd>constructor</dd>
+					</dl>
+			
+	</div>
+<a name="methodgetInfoUrl" id="getInfoUrl"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getInfoUrl</span> (line <span class="line-number">41</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">info url</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getInfoUrl
+		</span>
+				()
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#methodgetInfoUrl">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::getInfoUrl()</a></dt>
+						<dd>override to provide a custom url for a page containing info for this generator.</dd>
+					</dl>
+			
+	</div>
+<a name="methodgetTestUrlSuffix" id="getTestUrlSuffix"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getTestUrlSuffix</span> (line <span class="line-number">49</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">(non-PHPdoc)</p>
+	<ul class="tags">
+				<li><span class="field">see:</span> ClientGenerator/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::getTestUrlSuffix()</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getTestUrlSuffix
+		</span>
+				()
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#methodgetTestUrlSuffix">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::getTestUrlSuffix()</a></dt>
+						<dd>added to the url of the generated code to go to its test page directly fro, the client generator ui</dd>
+					</dl>
+			
+	</div>
+<a name="methodgetUiCallText" id="getUiCallText"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getUiCallText</span> (line <span class="line-number">33</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">get ui call text</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getUiCallText
+		</span>
+				()
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#methodgetUiCallText">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::getUiCallText()</a></dt>
+						<dd>override to provide a custom text in the Client Generator UI button for this generator.</dd>
+					</dl>
+			
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#method__construct">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::__construct()</a></span><br>
+													<span class="method-name"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#methodgenerate">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::generate()</a></span><br>
+													<span class="method-name"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#methodgenerateOneServiceFileCode">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::generateOneServiceFileCode()</a></span><br>
+													<span class="method-name"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#methodgenerateServiceFiles">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::generateServiceFiles()</a></span><br>
+													<span class="method-name"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#methodgetInfoUrl">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::getInfoUrl()</a></span><br>
+													<span class="method-name"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#methodgetTestUrlSuffix">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::getTestUrlSuffix()</a></span><br>
+													<span class="method-name"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#methodgetUiCallText">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::getUiCallText()</a></span><br>
+													<span class="method-name"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#methodprocessMethodListBlock">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::processMethodListBlock()</a></span><br>
+													<span class="method-name"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#methodprocessParameterCommaListBlock">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::processParameterCommaListBlock()</a></span><br>
+													<span class="method-name"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#methodprocessParameterListBlock">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::processParameterListBlock()</a></span><br>
+													<span class="method-name"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#methodprocessServiceListBlock">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::processServiceListBlock()</a></span><br>
+													<span class="method-name"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#methodprocessSourceFile">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::processSourceFile()</a></span><br>
+													<span class="method-name"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#methodsearchForBlocksAndApplyProcessing">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::searchForBlocksAndApplyProcessing()</a></span><br>
+													<span class="method-name"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#methodwrapComment">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::wrapComment()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+	<a name="sec-consts"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constants</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-vars">Vars</a>
+														| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+										<h4>Inherited Constants</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</a></span></p>
+					<blockquote>
+													<img src="../media/images/Variable.png" />
+							<span class="const-title">
+								<span class="const-name"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#constMETHOD">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::METHOD</a></span><br>
+							</span>
+													<img src="../media/images/Variable.png" />
+							<span class="const-title">
+								<span class="const-name"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#constPARAMETER">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::PARAMETER</a></span><br>
+							</span>
+													<img src="../media/images/Variable.png" />
+							<span class="const-title">
+								<span class="const-name"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#constPARAMETER_COMMA">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::PARAMETER_COMMA</a></span><br>
+							</span>
+													<img src="../media/images/Variable.png" />
+							<span class="const-title">
+								<span class="const-name"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#constSERVICE">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::SERVICE</a></span><br>
+							</span>
+													<img src="../media/images/Variable.png" />
+							<span class="const-title">
+								<span class="const-name"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#const_METHOD_">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::_METHOD_</a></span><br>
+							</span>
+													<img src="../media/images/Variable.png" />
+							<span class="const-title">
+								<span class="const-name"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#const_PARAMETER_">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::_PARAMETER_</a></span><br>
+							</span>
+													<img src="../media/images/Variable.png" />
+							<span class="const-title">
+								<span class="const-name"><a href="../Amfphp_Backoffice_Generators/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#const_SERVICE_">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator::_SERVICE_</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+
+	<p class="notes" id="credit">
+		Documentation generated on Thu, 10 Oct 2013 13:04:00 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>
