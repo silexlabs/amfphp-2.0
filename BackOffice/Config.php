@@ -51,6 +51,7 @@ class Amfphp_BackOffice_Config {
     public function __construct() {
         $this->backOfficeCredentials = array();
         //example code for username + password:
+        //$this->backOfficeCredentials['login'] = 'password';
         //$this->backOfficeCredentials['a'] = 'a';
     }
 
