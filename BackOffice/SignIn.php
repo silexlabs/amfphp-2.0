@@ -75,7 +75,7 @@ try {
                 <div class="menu">
                     <form method = "POST">
                         <h3>Sign In</h3>
-                        <div class="errorMessage">
+                        <div>
                             <?php echo $errorMessage ?>
                         </div>
                         User Name<br/>
