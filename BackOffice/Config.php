@@ -27,7 +27,7 @@ class Amfphp_BackOffice_Config {
      * '../Tests/TestData/index.php'
      * @var String 
      */
-    public $amfphpEntryPointPath = '../Amfphp/index.php';
+    public $amfphpEntryPointPath = '../Tests/TestData/index.php';
 
     /**
      * set credentials for back office here.
@@ -51,7 +51,7 @@ class Amfphp_BackOffice_Config {
     public function __construct() {
         $this->backOfficeCredentials = array();
         //example code for username + password:
-        //$this->backOfficeCredentials['your Username'] = 'your Password';
+        $this->backOfficeCredentials['a'] = 'a';
     }
 
     /**

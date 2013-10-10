@@ -29,8 +29,8 @@ class TestService {
 
     /**
      * return sum
-     * @param int $number1
-     * @param int $number2
+     * @param int $number1 example: 2
+     * @param int $number2 example: 3
      * @return int 
      */
     public function returnSum($number1, $number2) {
@@ -101,7 +101,7 @@ class TestService {
      * @return boolean 
      */
     public function returnOpposite($value) {
-        return !$value;
+        return!$value;
     }
 
     /**
@@ -123,23 +123,26 @@ class TestService {
         return $param;
     }
 
-	/**
-	* use to test for serialization performance. Each item contains a random int, float, and string
-	* @param $numItems int
-	* @return array 
-	*/
-	public function returnLargeDataSet($numItems){
-		$ret = array();
-		for($i = 0; $i < $numItems; $i++){
-			$item = new stdClass();
-			$item->int = rand(-1000, 1000);
-			$item->float = rand(-1000, 1000) / 100;
-			$item->string = md5(rand(-1000, 1000));
-			$ret[] = $item;
-			
-		}
-		return $ret;
-	}
+    /**
+     * use to test for serialization performance. Each item contains a random int, float, and string
+     * @param $numItems int
+     * @return array 
+     */
+    public function returnLargeDataSet($numItems) {
+        $ret = array();
+        for ($i = 0; $i < $numItems; $i++) {
+            $item = new stdClass();
+            $item->int = rand(-1000, 1000);
+            $item->float = rand(-1000, 1000) / 100;
+            $item->string = md5(rand(-1000, 1000));
+            $ret[] = $item;
+        }
+        return $ret;
+    }
+    
+    public function manyParams($a, $b, $c, $d, $e, $f){
+        
+    }
 
 }
 

@@ -24,10 +24,15 @@ $temp = 0;
         <title>AmfPHP Back Office</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-        <link rel="stylesheet" type="text/css" href="style.css" />
-        <script type="text/javascript" src="lib/jquery.js"></script>
-        <script type="text/javascript" src="lib/jquery.hotkeys.js"></script>
-        <script type="text/javascript" src="lib/jquery.jstree.js"></script>
-        <script type="text/javascript" src="lib/dataparse.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.10.3.custom.min.css" />
+        
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery.hotkeys.js"></script>
+        <script type="text/javascript" src="js/jquery.jstree.js"></script>
+        <script type="text/javascript" src="js/dataparse.js"></script>
+        <script type="text/javascript" src="js/ace/ace.js"></script>
+        <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
+        
    
     </head>
