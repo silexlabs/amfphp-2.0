@@ -120,6 +120,7 @@ class AmfphpCustomClassConverter {
             return $obj;
         }
         
+        
         $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
         if (isset($obj->$explicitTypeField)) {
             $customClassName = $obj->$explicitTypeField;
@@ -143,7 +144,7 @@ class AmfphpCustomClassConverter {
                 return $typedObj;
             }else{
                 if($this->enforceConversion){
-                    throw new Exception("$customClassName Custom Class not found. \nCustom Class folder paths : " . print_r($this->customClassFolderPaths, true));
+                    throw new Amfphp_Core_Exception("$customClassName Custom Class not found. \nCustom Class folder paths : " . print_r($this->customClassFolderPaths, true));
                 }
             }
         }

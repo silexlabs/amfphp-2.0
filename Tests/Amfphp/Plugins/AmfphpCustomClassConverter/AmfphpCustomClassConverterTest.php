@@ -98,7 +98,24 @@ class AmfphpCustomClassConverterTest extends PHPUnit_Framework_TestCase {
         $modifiedPacket = $ret;
         $modifiedObj = $modifiedPacket->messages[0]->data[0];
         $this->assertEquals('flex.messaging.Bla', $modifiedObj->$explicitTypeField);
+        
+        
 
+    }
+    /**
+     * test bad folder
+     * @expectedException Amfphp_Core_Exception
+     */
+    public function testEnforceConversion(){
+        $this->object->enforceConversion = true;
+        $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
+        $testObj1 = new stdClass();
+        $testObj1->$explicitTypeField = 'doesntExist';
+
+        $testMessage = new Amfphp_Core_Amf_Message(null, null, array($testObj1));
+        $testPacket = new Amfphp_Core_Amf_Packet();
+        $testPacket->messages[] = $testMessage;
+        $ret = $this->object->filterDeserializedRequest($testPacket);
 
     }
 
