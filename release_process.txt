@@ -13,6 +13,8 @@ tag repository:
 
 create release zip
 upload to distribution platform(sourceforge)
+download it again for a quick test
+
 blog post on silexlabs. publishes automatically to twitter and facebook. publish on google plus.
 update download link on silex labs page
 update version info on wikipedia page
