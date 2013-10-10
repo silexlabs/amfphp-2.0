@@ -98,7 +98,7 @@ class Amfphp_Core_Config {
         $this->disabledPlugins[] = 'AmfphpErrorHandler';
         //some useful examples of setting a config value in a plugin:
         //$this->pluginsConfig['AmfphpDiscovery']['restrictAccess'] = false;
-        $this->pluginsConfig['AmfphpCustomClassConverter']['enforceConversion'] = true;
+        //$this->pluginsConfig['AmfphpCustomClassConverter']['enforceConversion'] = true;
     }
 
 }
