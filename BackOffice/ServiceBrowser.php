@@ -57,7 +57,14 @@ $config = new Amfphp_BackOffice_Config();
                     <table id="paramDialogs"><tbody></tbody></table>
                     <span class="notParamEditor" id="noParamsIndicator">This method has no parameters.</span>
                     <div id="callBtn">
-                        <input class="notParamEditor" type="submit" value="Call &raquo;" onclick="makeCall()"/>                    
+                        <input class="notParamEditor" type="submit" value="Call JSON&raquo;" onclick="makeJsonCall()"/>  
+                        <input class="notParamEditor" type="submit" value="Call AMF &raquo;" onclick="makeAmfCall()"/>       
+                        <div id="amfCallerContainer">
+                            Flash Player is needed to make AMF calls. 
+                            <a href="http://www.adobe.com/go/getflashplayer">
+                                    <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" />
+                            </a>
+		</div>                        
                     </div>
 
                 </div>
@@ -116,6 +123,16 @@ $config = new Amfphp_BackOffice_Config();
                  * */
                 var paramEditors = [];
                 
+                /**
+                 * reference to amf caller, set once it is loaded. Used to make AMF calls.
+                 * */
+                var amfCaller;
+                
+                /**
+                 * where the requests are sent to
+                 * */
+                var amfphpEntryPointUrl = "<?php echo $config->resolveAmfphpEntryPointUrl() ?>";
+                
                 $(function () {	        
                     var callData = JSON.stringify({"serviceName":"AmfphpDiscoveryService", "methodName":"discover","parameters":[]});
                     $.post("<?php echo $config->resolveAmfphpEntryPointUrl() ?>?contentType=application/json", callData, onServicesLoaded);
@@ -124,6 +141,20 @@ $config = new Amfphp_BackOffice_Config();
                     showResultView("tree");
                     document.title = "AmfPHP - Service Browser";
                     $("#titleSpan").text("AmfPHP - Service Browser");
+                    var flashvars = {};
+                    var params = {};
+                    params.allowscriptaccess = "sameDomain";
+                    var attributes = {};
+                    attributes.id = "amfCaller";
+                    swfobject.embedSWF("AmfCaller.swf", "amfCallerContainer", "0", "0", "9.0.0", false, flashvars, params, attributes, function (e) {
+                        if(e.success){
+                            amfCaller = e.ref;
+                        }else{
+                            alert("could not load AMF Caller.");
+                            console.log(e);
+                        }
+                            
+                    });
 
 
                 });
@@ -181,7 +212,7 @@ $config = new Amfphp_BackOffice_Config();
                     //createParamDialog();
                      
 
-                    //manipulateMathod("TestService", "returnOneParam");
+                    manipulateMathod("TestService", "returnOneParam");
                     //manipulateMathod("TestService", "returnSum");
                     
                 }
@@ -303,9 +334,10 @@ $config = new Amfphp_BackOffice_Config();
                 }
                 
                 /**
-                 * takes the values typed by user and makes a json service call 
+                 * get the call parameters from the user interface
+                 * @returns array
                  * */
-                function makeCall(){
+                function getCallParameters(){
                     var parameters = [];
                     for(var i=0; i < paramEditors.length; i++){
                         var value = paramEditors[i].getValue();
@@ -317,16 +349,36 @@ $config = new Amfphp_BackOffice_Config();
                             
                         }
                         parameters.push(value);
-                        console.log(value);
+                        return parameters;
                     }
                     
-                    var callData = JSON.stringify({"serviceName":serviceName, "methodName":methodName,"parameters":parameters});
+                }
+                /**
+                 * takes the values typed by user and makes a json service call 
+                 * */
+                function makeJsonCall(){
+                    
+                    var callData = JSON.stringify({"serviceName":serviceName, "methodName":methodName,"parameters":getCallParameters()});
                     callStartTime = $.now();
-                    $.post("<?php echo $config->resolveAmfphpEntryPointUrl() ?>?contentType=application/json", callData, onResult);
+                    $.post(amfphpEntryPointUrl + "?contentType=application/json", callData, onResult);
                 }
                 
                 /**
-                 * callback to show service call result
+                 * make a call using AMF(via the AMF Caller SWF)
+                 * show an error message if the AMF Caller is not available
+                 * */
+                function makeAmfCall(){
+                    if(!amfCaller || !amfCaller.isAlive()){
+                        alert('AMF Caller not available.');
+                    }
+                    callStartTime = $.now();
+                    amfCaller.call(amfphpEntryPointUrl, serviceName + "/" + methodName, getCallParameters());
+                    
+                }
+                
+                /**
+                 * callback to show service call result. Used for both JSON and AMF.
+                 * 
                  * */
                 function onResult(data){
                     console.log(data);
@@ -374,8 +426,8 @@ $config = new Amfphp_BackOffice_Config();
                     $(".resultView#" + viewId).show();
                     resultViewId = viewId;
                 }
-                    
-
+              
+                
 
             </script>
 

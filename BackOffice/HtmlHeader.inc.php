@@ -33,6 +33,7 @@ $temp = 0;
         <script type="text/javascript" src="js/dataparse.js"></script>
         <script type="text/javascript" src="js/ace/ace.js"></script>
         <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
+        <script type="text/javascript" src="js/swfobject.js"></script>
         
    
     </head>

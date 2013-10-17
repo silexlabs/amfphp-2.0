@@ -7,6 +7,7 @@ Service browser :
 functionality all moved to client. 
 Better use of service comments: comments appear in service browser, possibility to set default for use in service browser.
 ace editor added to edit params
+add possibility to call using AMF or JSON
 
 --------- 2.1.1 -----------
 Flex Client Generator

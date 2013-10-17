@@ -15,7 +15,7 @@ create release zip
 upload to distribution platform(sourceforge)
 download it again for a quick test
 
-blog post on silexlabs. publishes automatically to twitter and facebook. publish on google plus.
+blog post on silexlabs. publishes automatically to twitter and facebook. publish on google plus, publish on linkedin.
 update download link on silex labs page
 update version info on wikipedia page
 send link to amfphp-general@lists.sourceforge.net
