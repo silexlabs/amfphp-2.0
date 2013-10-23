@@ -1,41 +1,62 @@
+
 /**
  * create tree data string for the representation of a result object. A bit like a var dump but for displaying with jstree
  * recursive.
- * @param mixed $obj
- * @param string $objName the key for obj in the containing object
- * @return mixed
+ * @param obj
+ * @param maxNodes the maximum number nodes to show. default is 100
+ * @return string or array
  */
-function objToTreeData(obj, objName) {
-    if ($.isArray(obj) || $.isPlainObject(obj)) {
-
-        var children = [];
-        for (key in obj) {
-            var subObj = obj[key];
-            children.push(objToTreeData(subObj, key));
+function objToTreeData(obj, maxNodes) {
+    var nodeCount = 0;
+    if(!maxNodes){
+        maxNodes = 100;
+    }
+    
+    function recurse(obj, objName){
+         nodeCount++;
+        if(nodeCount >= maxNodes){
+            throw "Too many nodes.";
         }
-        if (objName !== null) {
-            ret = {};
-            type = '';
-            if ($.isArray(obj)) {
-                type = 'array';
-            } else {
-                explicitTypeField = '_explicitType';
-                if (obj[explicitTypeField]) {
-                    type = obj[explicitTypeField];
-                } else {
-                    type = "object";
+        if ($.isArray(obj) || $.isPlainObject(obj)) {
+
+            var children = [];
+            for (key in obj) {
+                var subObj = obj[key];
+                try{
+                    children.push(recurse(subObj, key));
+                }catch(e){
+                    children.push("Data truncated : " + e);
+                    break;
                 }
             }
-            ret.data = objName +" (" + type + ")";
-            ret.children = children;
-            //ret.state = 'open';
-            return ret;
+            if (objName !== null) {
+                ret = {};
+                type = '';
+                if ($.isArray(obj)) {
+                    type = 'array';
+                } else {
+                    explicitTypeField = '_explicitType';
+                    if (obj[explicitTypeField]) {
+                        type = obj[explicitTypeField];
+                    } else {
+                        type = "object";
+                    }
+                }
+                ret.data = objName +" (" + type + ")";
+                ret.children = children;
+                //uncomment to show tree completely open 
+                //ret.state = 'open';
+                return ret;
+            } else {
+                return children;
+            }
         } else {
-            return children;
+            return objName + " => " + obj;
         }
-    } else {
-        return objName + " => " + obj;
+        
     }
+    
+    return recurse(obj, null);
 }                    
 
 
