@@ -69,7 +69,6 @@ $config = new Amfphp_BackOffice_Config();
 
                 </div>
                 <div id="result"  class="notParamEditor">
-                    Result ( call took <span id="callDuration">-</span> ms )  
                     <span class="showResultView">
                         <a id="tree">Tree</a>
                         <a id="print_r">print_r</a>
@@ -94,6 +93,11 @@ $config = new Amfphp_BackOffice_Config();
                 var serviceData;
                 
                 /**
+                 * The current method's parameters. Here just for easy access.
+                 */
+                var methodParams;
+                
+                /**
                  * name of service being manipulated
                  **/
                 var serviceName = "";
@@ -114,12 +118,7 @@ $config = new Amfphp_BackOffice_Config();
                 var resultViewId;
                 
                 /**
-                 * number of currently instanciated parameter edition dialogs. A dilaog is a label and an editor.
-                 **/
-                var numParamDialogs = 0;
-                
-                /**
-                 * array of pointers to parameter editors
+                 * array of pointers to parameter editors. 
                  * */
                 var paramEditors = [];
                 
@@ -137,7 +136,6 @@ $config = new Amfphp_BackOffice_Config();
                     var callData = JSON.stringify({"serviceName":"AmfphpDiscoveryService", "methodName":"discover","parameters":[]});
                     $.post("<?php echo $config->resolveAmfphpEntryPointUrl() ?>?contentType=application/json", callData, onServicesLoaded);
                     //@todo error handling with explicit messages. use $.ajax instead of $.post
-                    $("#main").hide();  
                     showResultView("tree");
                     document.title = "AmfPHP - Service Browser";
                     $("#titleSpan").text("AmfPHP - Service Browser");
@@ -235,8 +233,8 @@ $config = new Amfphp_BackOffice_Config();
                  * 
                  * */
                 function createParamDialog(){
-                    //no function, just shorter to read
-                    var i = numParamDialogs;
+                   
+                    var i = paramEditors.length;
                     //note: this works because the tbody is defined in the html from the start.
                     $("#paramDialogs").find("tbody")
                         .append($("<tr/>")
@@ -282,7 +280,7 @@ $config = new Amfphp_BackOffice_Config();
                         }
                     });
                     
-                    numParamDialogs++;
+                    
 
                 }
                 /**
@@ -293,12 +291,12 @@ $config = new Amfphp_BackOffice_Config();
                     this.methodName = methodName;
                     var service = serviceData[serviceName];
                     var method = service.methods[methodName];   
-                    var parameters = method.parameters;
+                    methodParams = method.parameters;
                     $("#serviceHeader").text(serviceName + " Service");
                     $("#serviceComment").text(service.comment);
                     $("#methodHeader").text(methodName + " Method");
                     $("#methodComment").text(method.comment);
-                    if(parameters.length == 0){
+                    if(methodParams.length == 0){
                         $("#jsonTip").hide();
                         $("#noParamsIndicator").show();
                     }else{
@@ -307,12 +305,12 @@ $config = new Amfphp_BackOffice_Config();
                     }
                     
                     var i;
-                    for (i = 0; i< parameters.length; i++) {
-                        if(i > numParamDialogs - 1){
+                    for (i = 0; i< methodParams.length; i++) {
+                        if(i > paramEditors.length - 1){
                             createParamDialog();
                         }
                         
-                        var parameter = parameters[i];
+                        var parameter = methodParams[i];
                         $("#paramLabel" + i).text(parameter.name);
                         paramEditors[i].setValue(parameter.example);
                         //make sure dialog is visible
@@ -321,7 +319,7 @@ $config = new Amfphp_BackOffice_Config();
                     }
                     
                     //hide unused dialogs
-                    for (i = parameters.length; i< numParamDialogs; i++) {
+                    for (i = methodParams.length; i< paramEditors.length; i++) {
                         $("#paramRow" + i).hide();
                         
                     }
@@ -334,12 +332,12 @@ $config = new Amfphp_BackOffice_Config();
                 }
                 
                 /**
-                 * get the call parameters from the user interface
+                 * get the call parameter values from the user interface
                  * @returns array
                  * */
-                function getCallParameters(){
-                    var parameters = [];
-                    for(var i=0; i < paramEditors.length; i++){
+                function getCallParameterValues(){
+                    var values = [];
+                    for(var i=0; i < methodParams.length; i++){
                         var value = paramEditors[i].getValue();
                          try{
                             //if it's JSON it needs to be parsed to avoid being treated as a string 
@@ -348,8 +346,8 @@ $config = new Amfphp_BackOffice_Config();
                             //exception: it's not valid json, so keep as is
                             
                         }
-                        parameters.push(value);
-                        return parameters;
+                        values.push(value);
+                        return values;
                     }
                     
                 }
@@ -358,7 +356,7 @@ $config = new Amfphp_BackOffice_Config();
                  * */
                 function makeJsonCall(){
                     
-                    var callData = JSON.stringify({"serviceName":serviceName, "methodName":methodName,"parameters":getCallParameters()});
+                    var callData = JSON.stringify({"serviceName":serviceName, "methodName":methodName,"parameters":getCallParameterValues()});
                     callStartTime = $.now();
                     $.post(amfphpEntryPointUrl + "?contentType=application/json", callData, onResult);
                 }
@@ -372,18 +370,18 @@ $config = new Amfphp_BackOffice_Config();
                         alert('AMF Caller not available.');
                     }
                     callStartTime = $.now();
-                    amfCaller.call(amfphpEntryPointUrl, serviceName + "/" + methodName, getCallParameters());
+                    amfCaller.call(amfphpEntryPointUrl, serviceName + "/" + methodName, getCallParameterValues());
                     
                 }
                 
+
                 /**
-                 * callback to show service call result. Used for both JSON and AMF.
-                 * 
+                 * callback to show service call result. 
+                 * @param data the returned data
                  * */
                 function onResult(data){
                     console.log(data);
-                    var callEndTime = $.now() - callStartTime;
-                    $("#callDuration").text(callEndTime);
+                    
                     var treeData = objToTreeData(data, null);
                     setTreeData(treeData, ".resultView#tree");  
                     $(".resultView#print_r").empty().append("<pre>" + print_r(data, true) + "</pre>");
