@@ -6,16 +6,16 @@
  *
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
- * @package Tests_TestData_CustomClasses
+ * @package Tests_TestData_Vos
  */
 
 /**
- * dummy class for testing custom class conversion
+ * dummy class for testing vo conversion
  *
- * @package Tests_TestData_CustomClasses
- * @author Ariel Sommeria-klein
+ * @package Tests_TestData_Vos
+ * @author Ariel Sommeria-Klein
  */
-class TestCustomClass1 {
+class TestVo3 {
     //put your code here
 }
 ?>

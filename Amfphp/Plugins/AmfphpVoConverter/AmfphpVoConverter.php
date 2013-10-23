@@ -7,23 +7,23 @@
  *
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
- * @package Amfphp_Plugins_CustomClassConverter
+ * @package Amfphp_Plugins_VoConverter
  */
 
 /**
- * Converts data from incoming packets with explicit types to custom classes, and vice versa for the outgoing packets.
+ * Converts data from incoming packets with explicit types to Value Objects(Vos), and vice versa for the outgoing packets.
  * 
- * This plugin can be deactivated if the project doesn't use custom classes.
+ * This plugin can be deactivated if the project doesn't use Value Objects.
  * 
  * The AMF deserializer reads a typed AMF object as a stdObj class, and sets the AMF type to a reserved "explicit type" field.
- * This plugin will look at deserialized data and try to convert any such objects to a real custom class.
+ * This plugin will look at deserialized data and try to convert any such objects to a real Value Object.
  * 
  * It works in the opposite way on the way out: The AMF serializer needs a stdObj class with the explicit type marker set 
  * to write a typed AMF object. This plugin will convert any typed PHP objects to a stdObj with the explicit type marker set.
  * 
  * The explicit type marker is defined in Amfphp_Core_Amf_Constants
  * 
- * If after deserialization the custom class is not found, the object is unmodified and the explicit type marker is left set.
+ * If after deserialization the Value Object is not found, the object is unmodified and the explicit type marker is left set.
  * If the explicit type marker is already set in an outgoing object, the value is left as is.
  * 
  * 
@@ -44,54 +44,66 @@
  * @see Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE
  * @link http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/net/package.html#registerClassAlias%28%29 
  * @link http://livedocs.adobe.com/flex/3/html/metadata_3.html#198729
- * @package Amfphp_Plugins_CustomClassConverter
+ * @package Amfphp_Plugins_VoConverter
  * @author Ariel Sommeria-Klein
  */
-class AmfphpCustomClassConverter {
+class AmfphpVoConverter implements Amfphp_Core_Common_IVoConverter {
 
     /**
-     * paths to folders containing custom classes(relative or absolute)
+     * paths to folders containing Value Objects(relative or absolute)
      * default is /Services/Vo/
      * @var array of paths
      */
-    public $customClassFolderPaths;
+    public $voFolderPaths;
     
     /**
-     * Set this to true if you want an exception to be thrown when a custom class is not found. 
+     * Set this to true if you want an exception to be thrown when a Value Object is not found. 
      * Avoid setting this to true on a public server as the exception contains details about your server configuration.
      * 
      * @var boolean 
      */
     public $enforceConversion;
-
+    
+    /**
+     * @see setScanEnabled
+     * default true
+     * @var boolean
+     */
+    protected $scanEnabled = true;
     /**
      * constructor.
      * @param array $config optional key/value pairs in an associative array. Used to override default configuration values.
      */
     public function __construct(array $config = null) {
         //default
-        $this->customClassFolderPaths = array(AMFPHP_ROOTPATH . '/Services/Vo/');
+        $this->voFolderPaths = array(AMFPHP_ROOTPATH . '/Services/Vo/');
         if ($config) {
-            if (isset($config['customClassFolderPaths'])) {
-                $this->customClassFolderPaths = $config['customClassFolderPaths'];
+            if (isset($config['voFolderPaths'])) {
+                $this->voFolderPaths = $config['voFolderPaths'];
             }
             if (isset($config['enforceConversion'])) {
                 $this->enforceConversion = $config['enforceConversion'];
             }            
         }
         $filterManager = Amfphp_Core_FilterManager::getInstance();
+        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_VO_CONVERTER, $this, 'filterVoConverter');
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_REQUEST, $this, 'filterDeserializedRequest');
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_RESPONSE, $this, 'filterDeserializedResponse');
     }
-
+    
+    public function filterVoConverter(){
+        return $this;
+    }
     /**
      * converts untyped objects to their typed counterparts. Loads the class if necessary
      * @param mixed $deserializedRequest
      * @return mixed
      */
     public function filterDeserializedRequest($deserializedRequest) {
-        $deserializedRequest = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($deserializedRequest, array($this, 'convertToTyped'));
-        return $deserializedRequest;
+        if($this->scanEnabled){
+            $deserializedRequest = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($deserializedRequest, array($this, 'convertToTyped'));
+            return $deserializedRequest;
+        }
     }
 
     /**
@@ -100,15 +112,34 @@ class AmfphpCustomClassConverter {
      * @return mixed
      */
     public function filterDeserializedResponse($deserializedResponse) {
-        $deserializedResponse = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($deserializedResponse, array($this, 'markExplicitType'));
-//		file_put_contents("rawdata.txt", serialize($deserializedResponse));
-        return $deserializedResponse;
+        if($this->scanEnabled){
+            //$startTime = microtime(true);
+            $deserializedResponse = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($deserializedResponse, array($this, 'markExplicitType'));
+            //file_put_contents(dirname(__FILE__) . "/debug.txt", date('l jS \of F Y h:i:s A') . ' : ' . ((microtime(true) - $startTime) * 1000) . "\n", FILE_APPEND);
+            return $deserializedResponse;
+        }
     }
-
+    
+    /**
+     * for some protocols it is possible to call convertToType and markExplicitObject directly during deserialization and serialization.
+     * This is typically the case of AMF, but not JSON.
+     * In that case this function must be called with enabled set to false, so the plugin does not scan the objects to do it itself. 
+     * By default scanning is enabled
+     * @param boolean $enabled
+     */
+    public function setScanEnabled($enabled){
+        $this->scanEnabled = $enabled;
+    }
+    /**
+     * get scan enabled.
+     * @return boolean  
+     */
+    public function getScanEnabled(){
+        return $this->scanEnabled;
+    }
+    
     /**
      * if the object contains an explicit type marker, this method attempts to convert it to its typed counterpart
-     * if the typed class is already available, then simply creates a new instance of it. If not,
-     * attempts to load the file from the available service folders.
      * If then the class is still not available, the object is not converted
      * note: This is not a recursive function. Rather the recusrion is handled by Amfphp_Core_Amf_Util::applyFunctionToContainedObjects.
      * must be public so that Amfphp_Core_Amf_Util::applyFunctionToContainedObjects can call it
@@ -123,37 +154,57 @@ class AmfphpCustomClassConverter {
         
         $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
         if (isset($obj->$explicitTypeField)) {
-            $customClassName = $obj->$explicitTypeField;
-            if (!class_exists($customClassName, false)) {
-                foreach ($this->customClassFolderPaths as $folderPath) {
-                    $customClassPath = $folderPath . '/' . $customClassName . '.php';
-                    if (file_exists($customClassPath)) {
-                        require_once $customClassPath;
-                        break;
-                    }
-                }
-            }
-            if (class_exists($customClassName, false)) {
-                //class is available. Use it!
-                $typedObj = new $customClassName();
+            $voName = $obj->$explicitTypeField;
+            $typedObj = $this->getNewVoInstance($voName);
+            if($typedObj){
                 foreach ($obj as $key => $data) { // loop over each element to copy it into typed object
                     if ($key != $explicitTypeField) {
                         $typedObj->$key = $data;
                     }
                 }
                 return $typedObj;
-            }else{
-                if($this->enforceConversion){
-                    throw new Amfphp_Core_Exception("$customClassName Custom Class not found. \nCustom Class folder paths : " . print_r($this->customClassFolderPaths, true));
-                }
             }
         }
 
         return $obj;
     }
+    
+    /**
+     * creates and returns an instance of of $voName.
+     * if the Vo class is already available, then simply creates a new instance of it. If not,
+     * attempts to load the file from the available service folders.
+     * If all fails, there is the option to throw an error.
+     * 
+     * @param type $voName
+     * @return typed object or null
+     */
+    public function getNewVoInstance($voName){
+        $classPath = null;
+        if (!class_exists($voName, false)) {
+            foreach ($this->voFolderPaths as $folderPath) {
+                $classPath = $folderPath . '/' . $voName . '.php';
+                if (file_exists($classPath)) {
+                    require_once $classPath;
+                    break;
+                }
+            }
+        }
+        if (class_exists($voName, false)) {
+            //class is available. Use it!
+            $vo = new $voName();
+            return $vo;
+        }else{
+            if($this->enforceConversion){
+                throw new Amfphp_Core_Exception("\"$voName\" Vo not found. \nCustom Class folder paths : " . print_r($this->voFolderPaths, true));
+            }
+        }
+        return null;
+        
+    }
+    
 
     /**
-     * sets the the explicit type marker on the object and its sub-objects. This is only done if it not already set, as in some cases
+     * sets the the explicit type marker on the object. This is only done if it not already set, as in some cases
      * the service class might want to do this manually.
      * note: This is not a recursive function. Rather the recusrion is handled by Amfphp_Core_Amf_Util::applyFunctionToContainedObjects.
      * must be public so that Amfphp_Core_Amf_Util::applyFunctionToContainedObjects can call it

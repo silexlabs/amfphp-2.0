@@ -63,6 +63,12 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer {
      * @var array
      */
     protected $className2TraitsInfo;
+    
+    /**
+     *
+     * @var Amfphp_Core_Common_IVoConverter
+     */
+    public $voConverter;
 
     /**
      * converts from php object to binary
@@ -400,7 +406,6 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer {
             return;
         }
         $this->writeByte(16); // write  the custom class code
-
         $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
         $className = $d->$explicitTypeField;
         if (!$className) {
@@ -455,6 +460,9 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer {
             $this->writeXML($d);
             return;
         } elseif (is_object($d)) {
+            if($this->voConverter){
+                $this->voConverter->markExplicitType($d);
+            }            
             $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
             if (isset($d->$explicitTypeField)) {
                 $this->writeTypedObject($d);
@@ -513,6 +521,9 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer {
             $this->writeAmf3XmlDocument($d);
             return;
         } elseif (is_object($d)) {
+            if($this->voConverter){
+                $this->voConverter->markExplicitType($d);
+            }
             $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
             if (isset($d->$explicitTypeField)) {
                 $this->writeAmf3TypedObject($d);

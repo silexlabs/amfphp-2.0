@@ -33,9 +33,13 @@ class TestServicesConfig extends Amfphp_Core_Config {
         $this->serviceNames2ClassFindInfo = array('TestService' => $classFindInfo);
         $this->serviceNames2ClassFindInfo = array('TestService' => $classFindInfo);
         
-        $this->pluginsConfig['AmfphpCustomClassConverter']['customClassFolderPaths'] = array(AMFPHP_ROOTPATH . '/Services/Vo/', dirname(__FILE__). '/../../Examples/Php/ExampleServices/Vo/');
+        $this->pluginsConfig['AmfphpVoConverter']['voFolderPaths'] = array(AMFPHP_ROOTPATH . '/Services/Vo/', dirname(__FILE__). '/../../Examples/Php/ExampleServices/Vo/');
         
         $this->disabledPlugins[] = 'AmfphpMonitor';
+        
+        //My tests, shouldn't be in release code!!
+        $this->pluginsFolders[] = '/Users/arielsommeria-klein/Documents/workspaces/baguetteamf/BaguetteAMF/amfphp_plugin/';
+        $this->serviceFolderPaths [] = '/Users/arielsommeria-klein/Documents/workspaces/baguetteamf/test/Services/';
     }
 
 }

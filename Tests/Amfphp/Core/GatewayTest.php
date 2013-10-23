@@ -34,16 +34,7 @@ class Amfphp_Core_GatewayTest extends PHPUnit_Framework_TestCase {
         $ret = $gateway->service();
         $this->assertEquals(bin2hex($amfTestData->testServiceResponsePacket), bin2hex($ret));
     }
-    /**
-     * test empty message
-     */
-    public function testEmptyMessage() {
-        $testServiceConfig = new TestServicesConfig();
-        $gateway = new Amfphp_Core_Gateway(array(), array(), array(), Amfphp_Core_Amf_Constants::CONTENT_TYPE, $testServiceConfig);
-        $ret = $gateway->service();
 
-        $this->assertTrue(strpos($ret, 'service') != false);
-    }
 
 }
 

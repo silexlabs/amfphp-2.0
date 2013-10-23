@@ -61,6 +61,11 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
     protected $returnErrorDetails = true;
 
     /**
+     * Vo Converter. 
+     * @var Amfphp_Core_Common_IVoConverter 
+     */
+    protected $voConverter;
+    /**
      * use this to manipulate the packet directly from your services. This is an advanced option, and should be used with caution!
      * @var Amfphp_Core_Amf_Packet
      */
@@ -71,7 +76,7 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      * @var Amfphp_Core_Amf_Packet
      */
     public static $responsePacket;
-
+    
     /**
      * constructor
      * @param array $sharedConfig
@@ -92,7 +97,12 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      * @return string
      */
     public function deserialize(array $getData, array $postData, $rawPostData) {
+        //note: this has to be done here and not in the constructor to avoid 
+        //disabling scanning when it's another handler that ends up handling the request
+        $this->voConverter = Amfphp_Core_FilterManager::getInstance()->callFilters(Amfphp_Core_Gateway::FILTER_VO_CONVERTER, null);
+        $this->voConverter->setScanEnabled(false);
         $deserializer = new Amfphp_Core_Amf_Deserializer();
+        $deserializer->voConverter = $this->voConverter;
         $requestPacket = $deserializer->deserialize($getData, $postData, $rawPostData);
         return $requestPacket;
     }
@@ -222,6 +232,7 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
     public function serialize($data) {
 
         $serializer = new Amfphp_Core_Amf_Serializer();
+        $serializer->voConverter = $this->voConverter;
         return $serializer->serialize($data);
     }
 

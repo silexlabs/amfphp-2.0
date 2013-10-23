@@ -139,11 +139,38 @@ class TestService {
         }
         return $ret;
     }
-    
+
+    /**
+     * use to test Vo conversion performance. Each item contains a random int, float, and string, and is typed
+     * @param $numItems int
+     * @return array 
+     */
+    public function returnLargeTypedDataSet($numItems) {
+        $ret = array();
+        for ($i = 0; $i < $numItems; $i++) {
+            $item = new DummyVo();
+            $item->int = rand(-1000, 1000);
+            $item->float = rand(-1000, 1000) / 100;
+            $item->string = md5(rand(-1000, 1000));
+            $ret[] = $item;
+        }
+        return $ret;
+    }    
+    /**
+     * dummy function to see how the backoffice tools react when there are many parameters.
+     * @param type $a
+     * @param type $b
+     * @param type $c
+     * @param type $d
+     * @param type $e
+     * @param type $f 
+     */
     public function manyParams($a, $b, $c, $d, $e, $f){
         
     }
 
 }
+
+class DummyVo {}
 
 ?>

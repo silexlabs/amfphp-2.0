@@ -10,12 +10,12 @@
  */
 
 /**
- * dummy class for testing custom class conversion
+ * dummy class for testing vo conversion
  *
- * @package Tests_TestData_CustomClasses
- * @author Ariel Sommeria-Klein
+ * @package Tests_TestData_Vos
+ * @author Ariel Sommeria-klein
  */
-class TestCustomClass2 {
+class TestVo1 {
     //put your code here
 }
 ?>

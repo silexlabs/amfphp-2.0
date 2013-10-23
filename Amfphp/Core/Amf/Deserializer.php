@@ -76,6 +76,12 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
      * @var array
      */    
     protected $amf0storedObjects;
+    
+    /**
+     *
+     * @var Amfphp_Core_Common_IVoConverter
+     */
+    public $voConverter;
 
     /**
      * convert from text/binary to php object
@@ -383,14 +389,24 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
 
     /**
      * readCustomClass reads the amf content associated with a class instance which was registered
-     * with Object.registerClass.  In order to preserve the class name an additional property is assigned
+     * with Object.registerClass.  
+     * If a VoConverter is available, it is used to instanciate the Vo. 
+     * If not, In order to preserve the class name an additional property is assigned
      * to the object Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE.  This property will be overwritten if it existed within the class already.
      *
      * @return object The php representation of the object
      */
     protected function readCustomClass() {
+        //not really sure why the replace is here? A.S. 201310
         $typeIdentifier = str_replace('..', '', $this->readUTF());
-        $obj = new stdClass();
+        $obj = null;
+        if(($typeIdentifier != '') && ($this->voConverter)){
+            $obj = $this->voConverter->getNewObjectByTypeName($typeIdentifier);
+        }else{
+            $obj = new stdClass();
+            $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
+            $obj->$explicitTypeField = $typeIdentifier;
+        }
         $this->amf0storedObjects[] = & $obj;
         $key = $this->readUTF(); // grab the key
         for ($type = $this->readByte(); $type != 9; $type = $this->readByte()) {
@@ -398,9 +414,7 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
             $obj->$key = $val; // save the name/value pair in the array
             $key = $this->readUTF(); // get the next name
         }
-        $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
-        $obj->$explicitTypeField = $typeIdentifier;
-        return $obj; // return the array
+        return $obj; 
     }
 
     /**
@@ -613,7 +627,7 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
 
     /**
      * read amf 3 object
-     * @return stdClass
+     * @return mixed stdClass, or VoClass if VoConverter could find it. 
      */
     protected function readAmf3Object() {
         $handle = $this->readAmf3Int();
@@ -653,19 +667,22 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
         }
 
 
-        $type = $classDefinition['type'];
-        $obj = new stdClass();
+        $obj = null;
 
+        $typeIdentifier = $classDefinition['type'];
         //Add to references as circular references may search for this object
         $this->storedObjects[] = & $obj;
-        if ($type != '') {
+        if(($typeIdentifier != '') && ($this->voConverter)){
+            $obj = $this->voConverter->getNewObjectByTypeName($typeIdentifier);
+        }else{
+            $obj = new stdClass();
             $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
-            $obj->$explicitTypeField = $type;
+            $obj->$explicitTypeField = $typeIdentifier;
         }
             
         if($classDefinition['externalizable']){
             $externalizedDataField = Amfphp_Core_Amf_Constants::FIELD_EXTERNALIZED_DATA;
-			if($type == 'flex.messaging.io.ArrayCollection'){
+			if($typeIdentifier == 'flex.messaging.io.ArrayCollection'){
 				//special for Flex array collection. This doesn't belong here, but it's the least worst way I found to support returning them
 				$externalizedDataField = 'source';
 			}

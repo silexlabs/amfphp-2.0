@@ -27,6 +27,7 @@ require_once AMFPHP_ROOTPATH . 'Core/Common/IDeserializer.php';
 require_once AMFPHP_ROOTPATH . 'Core/Common/IExceptionHandler.php';
 require_once AMFPHP_ROOTPATH . 'Core/Common/IDeserializedRequestHandler.php';
 require_once AMFPHP_ROOTPATH . 'Core/Common/ISerializer.php';
+require_once AMFPHP_ROOTPATH . 'Core/Common/IVoConverter.php';
 require_once AMFPHP_ROOTPATH . 'Core/Common/ServiceRouter.php';
 require_once AMFPHP_ROOTPATH . 'Core/Common/ServiceCallParameters.php';
 

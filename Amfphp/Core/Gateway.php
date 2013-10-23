@@ -95,6 +95,13 @@ class Amfphp_Core_Gateway {
      * @param String $contentType
      */
     const FILTER_HEADERS = 'FILTER_HEADERS';
+    
+    /**
+     * filter Vo Converter
+     * note: this has nothing to do with the gateway. Filter definitions should one day be centralized in an independant place.
+     * @param Amfphp_Core_Common_IVoConverter
+     */
+    const FILTER_VO_CONVERTER = 'FILTER_VO_CONVERTER';
 
 
     /**
@@ -166,10 +173,10 @@ class Amfphp_Core_Gateway {
      */
     public function service(){
         $filterManager = Amfphp_Core_FilterManager::getInstance();
-        $defaultHandler = new Amfphp_Core_Amf_Handler($this->config->sharedConfig);
         $deserializedResponse = null;
         try{
             Amfphp_Core_PluginManager::getInstance()->loadPlugins($this->config->pluginsFolders, $this->config->pluginsConfig, $this->config->sharedConfig, $this->config->disabledPlugins);
+            $defaultHandler = new Amfphp_Core_Amf_Handler($this->config->sharedConfig);
             
             //filter service folder paths
             $this->config->serviceFolderPaths = $filterManager->callFilters(self::FILTER_SERVICE_FOLDER_PATHS, $this->config->serviceFolderPaths);

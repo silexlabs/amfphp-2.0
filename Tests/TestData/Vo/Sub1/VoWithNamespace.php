@@ -17,7 +17,7 @@ namespace Sub1;
  * @package Tests_TestData_CustomClasses
  * @author Ariel Sommeria-klein
  */
-class CustomClassWithNamespace {
+class VoWithNamespace {
     public $dummyData = "bla";
     
 }

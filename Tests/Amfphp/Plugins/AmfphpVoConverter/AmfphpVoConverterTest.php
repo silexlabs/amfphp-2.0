@@ -6,27 +6,27 @@
  *
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
- * @package Tests_Amfphp_Plugins_CustomClassConverter
+ * @package Tests_Amfphp_Plugins_VoConverter
  */
 
 /**
 *  includes
 *  */
-require_once dirname(__FILE__) . '/../../../../Amfphp/Plugins/AmfphpCustomClassConverter/AmfphpCustomClassConverter.php';
+require_once dirname(__FILE__) . '/../../../../Amfphp/Plugins/AmfphpVoConverter/AmfphpVoConverter.php';
 require_once dirname(__FILE__) . '/../../../../Amfphp/ClassLoader.php';
-require_once dirname(__FILE__) . '/../../../TestData/CustomClasses/TestCustomClass1.php';
-require_once dirname(__FILE__) . '/../../../TestData/CustomClasses/TestCustomClass2.php';
+require_once dirname(__FILE__) . '/../../../TestData/Vo/TestVo1.php';
+require_once dirname(__FILE__) . '/../../../TestData/Vo/TestVo2.php';
 
 /**
- * Test class for CustomClassConverter.
- * @package Tests_Amfphp_Plugins_CustomClassConverter
+ * Test class for VoConverter.
+ * @package Tests_Amfphp_Plugins_VoConverter
  * @author Ariel Sommeria-klein
  */
-class AmfphpCustomClassConverterTest extends PHPUnit_Framework_TestCase {
+class AmfphpVoConverterTest extends PHPUnit_Framework_TestCase {
 
     /**
      * object
-     * @var CustomClassConverter
+     * @var VoConverter
      */
     protected $object;
 
@@ -35,8 +35,8 @@ class AmfphpCustomClassConverterTest extends PHPUnit_Framework_TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp() {
-        $pluginConfig = array('customClassFolderPaths' => array(dirname(__FILE__) . '/../../../TestData/CustomClasses'));
-        $this->object = new AmfphpCustomClassConverter($pluginConfig);
+        $pluginConfig = array('voFolderPaths' => array(dirname(__FILE__) . '/../../../TestData/Vo/'));
+        $this->object = new AmfphpVoConverter($pluginConfig);
     }
 
     /**
@@ -52,17 +52,19 @@ class AmfphpCustomClassConverterTest extends PHPUnit_Framework_TestCase {
     public function testfilterDeserializedRequest() {
         
         $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
-        //3 level object: TestCustomClass1, untyped, TestCustomClass2 with some data around
+        //3 level object: TestVo1, untyped, TestVo2 with some data around
         $testObj1 = new stdClass();
-        $testObj1->$explicitTypeField = 'TestCustomClass1';
+        $testObj1->$explicitTypeField = 'TestVo1';
         $testObj1->data = 'bla1';
         $subObj1 = new stdClass();
         $subObj1->data = 'bla2';
         $subObj2 = new stdClass();
-        $subObj2->$explicitTypeField = 'TestCustomClass2';
+        $subObj2->$explicitTypeField = 'TestVo2';
         $subObj2->data = 'bla3';
         $subObj1->sub = $subObj2;
         $testObj1->sub = $subObj1;
+        
+        
 
         $testMessage = new Amfphp_Core_Amf_Message(null, null, array($testObj1));
         $testPacket = new Amfphp_Core_Amf_Packet();
@@ -70,23 +72,23 @@ class AmfphpCustomClassConverterTest extends PHPUnit_Framework_TestCase {
         $ret = $this->object->filterDeserializedRequest($testPacket);
         $modifiedPacket = $ret;
         $modifiedObj = $modifiedPacket->messages[0]->data[0];
-        $this->assertEquals('TestCustomClass1', get_class($modifiedObj));
+        $this->assertEquals('TestVo1', get_class($modifiedObj));
         $this->assertEquals('bla1', $modifiedObj->data);
         $this->assertEquals('stdClass', get_class($modifiedObj->sub));
         $this->assertEquals('bla2', $modifiedObj->sub->data);
-        $this->assertEquals('TestCustomClass2', get_class($modifiedObj->sub->sub));
+        $this->assertEquals('TestVo2', get_class($modifiedObj->sub->sub));
         $this->assertEquals('bla3', $modifiedObj->sub->sub->data);
 
         //test using a class that isn't loaded yet
         $testObj2 = new stdClass();
-        $testObj2->$explicitTypeField = 'TestCustomClass3';
+        $testObj2->$explicitTypeField = 'TestVo3';
         $testMessage = new Amfphp_Core_Amf_Message(null, null, array($testObj2));
         $testPacket = new Amfphp_Core_Amf_Packet();
         $testPacket->messages[] = $testMessage;
         $ret = $this->object->filterDeserializedRequest($testPacket);
         $modifiedPacket = $ret;
         $modifiedObj = $modifiedPacket->messages[0]->data[0];
-        $this->assertEquals('TestCustomClass3', get_class($modifiedObj));
+        $this->assertEquals('TestVo3', get_class($modifiedObj));
 
         //test using a class that isn't available. The data should be left untouched for now
         $testObj3 = new stdClass();
@@ -103,7 +105,7 @@ class AmfphpCustomClassConverterTest extends PHPUnit_Framework_TestCase {
 
     }
     /**
-     * test bad folder
+     * test enforce conversion
      * @expectedException Amfphp_Core_Exception
      */
     public function testEnforceConversion(){
@@ -124,12 +126,12 @@ class AmfphpCustomClassConverterTest extends PHPUnit_Framework_TestCase {
      */
     public function testfilterDeserializedResponse() {
         $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
-        //3 level object: TestCustomClass1, untyped, TestCustomClass2 with some data around
-        $testObj1 = new TestCustomClass1();
+        //3 level object: TestVo1, untyped, TestVo2 with some data around
+        $testObj1 = new TestVo1();
         $testObj1->data = 'bla1';
         $subObj1 = new stdClass();
         $subObj1->data = 'bla2';
-        $subObj2 = new TestCustomClass2();
+        $subObj2 = new TestVo2();
         $subObj2->data = 'bla3';
         $subObj1->sub = $subObj2;
         $testObj1->sub = $subObj1;
@@ -140,15 +142,15 @@ class AmfphpCustomClassConverterTest extends PHPUnit_Framework_TestCase {
         $ret = $this->object->filterDeserializedResponse($testPacket);
         $modifiedPacket = $ret;
         $modifiedObj = $modifiedPacket->messages[0]->data;
-        $this->assertEquals('TestCustomClass1', $modifiedObj->$explicitTypeField);
+        $this->assertEquals('TestVo1', $modifiedObj->$explicitTypeField);
         $this->assertEquals('bla1', $modifiedObj->data);
         $this->assertFalse(isset($modifiedObj->sub->$explicitTypeField));
         $this->assertEquals('bla2', $modifiedObj->sub->data);
-        $this->assertEquals('TestCustomClass2', $modifiedObj->sub->sub->$explicitTypeField);
+        $this->assertEquals('TestVo2', $modifiedObj->sub->sub->$explicitTypeField);
         $this->assertEquals('bla3', $modifiedObj->sub->sub->data);
 
         //test don't overwrite explicit type when already set
-        $testObj2 = new TestCustomClass1();
+        $testObj2 = new TestVo1();
         $testObj2->$explicitTypeField = 'alreadySet';
         $testMessage = new Amfphp_Core_Amf_Message(null, null, $testObj2);
         $testPacket = new Amfphp_Core_Amf_Packet();
