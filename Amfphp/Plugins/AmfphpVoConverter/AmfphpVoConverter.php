@@ -196,9 +196,13 @@ class AmfphpVoConverter implements Amfphp_Core_Common_IVoConverter {
         }else{
             if($this->enforceConversion){
                 throw new Amfphp_Core_Exception("\"$voName\" Vo not found. \nCustom Class folder paths : " . print_r($this->voFolderPaths, true));
+            }else{
+                $ret = new stdClass();
+                $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
+                $ret->$explicitTypeField = $voName;
+                return $ret;
             }
         }
-        return null;
         
     }
     

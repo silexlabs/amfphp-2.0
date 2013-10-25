@@ -386,7 +386,28 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
 
         return $val; // return the string
     }
-
+    
+    /**
+     * tries to use the type to get a typed object. If not possible, return a stdClass, 
+     * with the explicit type marker set if the type was not just an empty string
+     * @param type $typeIdentifier
+     * @return stdClass or typed object 
+     */
+    protected function resolveType($typeIdentifier){
+        if($typeIdentifier != ''){
+            if($this->voConverter){
+                $obj = $this->voConverter->getNewVoInstance($typeIdentifier);
+            }else{
+                $obj = new stdClass();
+                $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
+                $obj->$explicitTypeField = $typeIdentifier;
+            }
+        }else{
+            $obj = new stdClass();
+        }
+        return $obj;
+        
+    }
     /**
      * readCustomClass reads the amf content associated with a class instance which was registered
      * with Object.registerClass.  
@@ -399,14 +420,7 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
     protected function readCustomClass() {
         //not really sure why the replace is here? A.S. 201310
         $typeIdentifier = str_replace('..', '', $this->readUTF());
-        $obj = null;
-        if(($typeIdentifier != '') && ($this->voConverter)){
-            $obj = $this->voConverter->getNewObjectByTypeName($typeIdentifier);
-        }else{
-            $obj = new stdClass();
-            $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
-            $obj->$explicitTypeField = $typeIdentifier;
-        }
+        $obj = $this->resolveType($typeIdentifier);
         $this->amf0storedObjects[] = & $obj;
         $key = $this->readUTF(); // grab the key
         for ($type = $this->readByte(); $type != 9; $type = $this->readByte()) {
@@ -666,19 +680,10 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
             return $this->storedObjects[$handle];
         }
 
-
-        $obj = null;
-
         $typeIdentifier = $classDefinition['type'];
+        $obj = $this->resolveType($typeIdentifier);
         //Add to references as circular references may search for this object
         $this->storedObjects[] = & $obj;
-        if(($typeIdentifier != '') && ($this->voConverter)){
-            $obj = $this->voConverter->getNewObjectByTypeName($typeIdentifier);
-        }else{
-            $obj = new stdClass();
-            $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
-            $obj->$explicitTypeField = $typeIdentifier;
-        }
             
         if($classDefinition['externalizable']){
             $externalizedDataField = Amfphp_Core_Amf_Constants::FIELD_EXTERNALIZED_DATA;
