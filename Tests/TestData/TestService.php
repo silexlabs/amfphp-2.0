@@ -170,13 +170,20 @@ class TestService {
     }
     
     /**
-     * simply to see if this doesn't appear in the back office
+     * simply to see if this doesn't appear in the back office, but is still callable
      * @amfHide
      */
     public function testAmfHide(){
-        
+        return "bla";
     }
-
+    
+    public function testArrayCollection(array $data){
+        $ret = new stdClass();
+        $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
+        $ret->$explicitTypeField = "flex.messaging.io.ArrayCollection";
+        $ret->source = $data;
+        return $ret;
+    }
 }
 
 class DummyVo {}

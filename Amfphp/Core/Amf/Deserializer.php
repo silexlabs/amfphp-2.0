@@ -686,12 +686,13 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
         $this->storedObjects[] = & $obj;
             
         if($classDefinition['externalizable']){
-            $externalizedDataField = Amfphp_Core_Amf_Constants::FIELD_EXTERNALIZED_DATA;
-			if($typeIdentifier == 'flex.messaging.io.ArrayCollection'){
-				//special for Flex array collection. This doesn't belong here, but it's the least worst way I found to support returning them
-				$externalizedDataField = 'source';
-			}
-            $obj->$externalizedDataField = $this->readAmf3Data();
+            if(($typeIdentifier == 'flex.messaging.io.ArrayCollection') || ($typeIdentifier == 'flex.messaging.io.ObjectProxy')){
+                    //special for Flex. This doesn't belong here, but it's the least worst way I found to support returning them
+                    $obj = $this->readAmf3Data();
+            }else{
+                $externalizedDataField = Amfphp_Core_Amf_Constants::FIELD_EXTERNALIZED_DATA;
+                $obj->$externalizedDataField = $this->readAmf3Data();
+            }
         }else{
             $members = $classDefinition['members'];
             $memberCount = count($members);

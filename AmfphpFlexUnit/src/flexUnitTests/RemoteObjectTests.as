@@ -61,29 +61,20 @@ package flexUnitTests
 			assertTrue(event.result is TestCustomClass1);
 		}
 		
-		/**
-		 * @todo fix
-		 * */
 		public function testSendingAndReceivingArrayCollection():void{
 			var test:ArrayCollection = new ArrayCollection();
-			test.addItem("bla");
-			_myConnection.returnOneParam(test);
+			test.addItem("bla1");
+			test.addItem("bla2");
+			_myConnection.testArrayCollection(test);
 			_myConnection.addEventListener(ResultEvent.RESULT, addAsync(sendingAndReceivingArrayCollectionResultHandler, 1000));
 			
 		}
 		
-		/**
-		 * this fails, as sending an externalized object from amfphp is not yet supported(an array collection is externalized, 
-		 * this is a special amf trait. see spec for details
-		 * */
 		public function sendingAndReceivingArrayCollectionResultHandler(event:ResultEvent):void{
-			if(event.result is ArrayCollection){
-				//amfphp without baguette, handles externalized properly
-				assertEquals("bla", event.result.getItemAt(0));
-			}else{
-				//baguette amf. shortcut to support externalized data. array is returned directly by deserializer
-				assertEquals("bla", event.result[0]);
-			}
+			assertTrue(event.result is ArrayCollection);
+			assertEquals("bla1", event.result.getItemAt(0));
+			assertEquals("bla2", event.result.getItemAt(1));
+			
 		}
 		
 		
