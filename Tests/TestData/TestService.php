@@ -168,6 +168,14 @@ class TestService {
     public function manyParams($a, $b, $c, $d, $e, $f){
         
     }
+    
+    /**
+     * simply to see if this doesn't appear in the back office
+     * @amfHide
+     */
+    public function testAmfHide(){
+        
+    }
 
 }
 

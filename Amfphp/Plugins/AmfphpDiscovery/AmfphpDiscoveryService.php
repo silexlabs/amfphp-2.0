@@ -187,6 +187,10 @@ class AmfphpDiscoveryService {
                 $paramRs = $methodR->getParameters();
 
                 $methodComment = $this->formatComment($methodR->getDocComment());
+                if (false !== strpos($methodComment, '@amfHide')) {
+                    //methods including @amfHide should not appear in the back office but should still be accessible.
+                    continue;
+                }
                 $parsedMethodComment = $this->parseMethodComment($methodComment);
                 foreach ($paramRs as $paramR) {
 

@@ -4,12 +4,17 @@ Custom class converter renamed to VoConverter:
 enforceConversion flag to throw exception when vo class not found
 Add optimization to not iterate on content in case of AMF(not applicable to JSON because no callbacks)
 
+backoffice :
+add support for @amfHide in method comments so that the method is callable but does not appear in the back office.
+
 Service browser :
 Better use of service comments: comments appear in service browser, possibility to set default for use in service browser.
 ace editor added to edit params
 add possibility to call using AMF or JSON
 truncate tree at 100 nodes to allow calls to methods that return large datasets
 functionality all moved to client. 
+
+
 
 --------- 2.1.1 -----------
 Flex Client Generator
