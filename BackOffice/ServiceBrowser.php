@@ -48,8 +48,7 @@ $config = new Amfphp_BackOffice_Config();
             </div>                    
             <div id="right" class="menu" >
                 <div id="callDialog" class="notParamEditor">
-                    Choose a Method From the list on the left.
-                    <h3 id="serviceHeader"></h3>
+                    <h3 id="serviceHeader">Choose a Method From the list on the left. </h3>
                     <pre id="serviceComment"></pre>
                     <h3 id="methodHeader"></h3>
                     <pre id="methodComment"></pre>
@@ -134,7 +133,17 @@ $config = new Amfphp_BackOffice_Config();
                 
                 $(function () {	        
                     var callData = JSON.stringify({"serviceName":"AmfphpDiscoveryService", "methodName":"discover","parameters":[]});
-                    $.post("<?php echo $config->resolveAmfphpEntryPointUrl() ?>?contentType=application/json", callData, onServicesLoaded);
+                    var request = $.ajax({
+                      url: "<?php echo $config->resolveAmfphpEntryPointUrl() ?>?contentType=application/json",
+                      type: "POST",
+                      data: callData
+                    });
+
+                    request.done(onServicesLoaded);
+
+                    request.fail(function( jqXHR, textStatus ) {
+                        displayCallErrorMessage(textStatus + "<br/><br/>" + jqXHR.responseText);
+                    });
                     //@todo error handling with explicit messages. use $.ajax instead of $.post
                     showResultView("tree");
                     document.title = "AmfPHP - Service Browser";
@@ -156,6 +165,10 @@ $config = new Amfphp_BackOffice_Config();
 
 
                 });
+                
+                function displayCallErrorMessage(html){
+                    $('#callDialog').html(html);
+                }
 
                 /**
                  * callback for when service data loaded from server . 
@@ -165,6 +178,10 @@ $config = new Amfphp_BackOffice_Config();
                  */
                 function onServicesLoaded(data)
                 {
+                    if(typeof data == "string"){
+                        displayCallErrorMessage(data);
+                        return;
+                    }
                     serviceData = data;
                         
                     //generate service/method list
@@ -172,7 +189,7 @@ $config = new Amfphp_BackOffice_Config();
                     $(rootUl).empty();
                     for(serviceName in serviceData){
                         var service = serviceData[serviceName];
-                        var serviceLi = $("<li><b>" + serviceName + "</b></li>")
+                        var serviceLi = $("<li>" + serviceName + "</li>")
                         .appendTo(rootUl);
                         $(serviceLi).attr("title", service.comment);
                         var serviceUl = $("<ul/>").appendTo(serviceLi);
