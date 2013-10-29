@@ -48,6 +48,13 @@ $isAccessGranted = $accessManager->isAccessGranted();
                         <li>a starting point for a user interface you can customize</li>
                     </ul>
                     <br/><br/>
+                    <?php 
+                    $writeTestFolder = AMFPHP_BACKOFFICE_ROOTPATH . 'ClientGenerator/Generated/';
+                    if(!is_writable($writeTestFolder)){
+                        die("could not write to ClientGenerator/Generated/. You need to change your permissions to be able to use the client generator.");
+                    }
+                    
+                    ?>
                     Code will be generated for the following services:
                     <br/><br/>
                     <ul id="serviceList"></ul><br/>
