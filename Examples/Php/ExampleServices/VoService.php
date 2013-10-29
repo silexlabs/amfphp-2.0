@@ -30,7 +30,7 @@ class VoService {
     /**
      * This method accepts any object. The idea here is that you send an object that is typed(see client example projects)
      * and it will be returned. This allows you to use typing on the client side without needing to create
-     * corresponding PHP VO classes. If you do this exclusively, you can disable the CustomClassConverter plugin,
+     * corresponding PHP VO classes. If you do this exclusively, you can disable the VoConverter plugin,
      * which will increase performance.
      * amfPHP does this by using the reserved '_explicitType' marker on anonymous PHP objects.
      * 

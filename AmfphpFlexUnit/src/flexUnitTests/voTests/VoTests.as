@@ -26,6 +26,7 @@ package flexUnitTests.voTests
 			org.amfphp.test.Util.traceTestMeta(className, methodName);
 			
 			VoWithArrays.register();
+			NamespaceTestVo.register();
 		}
 		
 		
@@ -39,5 +40,17 @@ package flexUnitTests.voTests
 		public function sendingVoWithArraysResultHandler(event:ObjEvent):void{
 			assertTrue(event.obj is VoWithArrays);
 		}
+		
+		public function testSendingNamespaceTestVo():void{
+			_nc.callWithEvents("Sub1.NamespaceTestService.useVo", new NamespaceTestVo());
+			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(sendingNamespaceTestVoResultHandler, 1000));
+			
+		}
+		
+		
+		public function sendingNamespaceTestVoResultHandler(event:ObjEvent):void{
+			assertTrue(event.obj is NamespaceTestVo);
+		}
+		
 	}
 }

@@ -16,7 +16,13 @@
 require_once dirname(__FILE__) . '/../../Amfphp/ClassLoader.php';
 $config = new Amfphp_Core_Config();
 $config->serviceFolderPaths = array(dirname(__FILE__) . '/ExampleServices/');
-$config->pluginsConfig['AmfphpCustomClassConverter'] = array('customClassFolderPaths' => array(dirname(__FILE__) . '/ExampleServices/Vo'));
+$config->serviceFolderPaths[] = array(dirname(__FILE__) . '/ServicesWithNamespace/', 'NService');
+$voFolders = array(dirname(__FILE__) . '/Vo/');
+//add the folder with the namespace. 1st comes the pass, 2nd comes the namespace root.
+$voFolders[] = array(dirname(__FILE__) . '/NamespaceVo/', 'NVo');
+$config->pluginsConfig['AmfphpVoConverter'] = array('voFolders' => $voFolders);
+//set this to enforce vo conversion. If you do that, only sending UserVo1 shall work, not UserVo2
+//$config->pluginsConfig['AmfphpVoConverter']['enforceConversion'] => true;
 $gateway = Amfphp_Core_HttpRequestGatewayFactory::createGateway($config);
 $gateway->service();
 $gateway->output();

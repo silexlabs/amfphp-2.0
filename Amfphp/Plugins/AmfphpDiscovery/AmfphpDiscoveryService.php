@@ -13,6 +13,7 @@
 /**
  * analyses existing services. Warning: if 2 or more services have the same name, only one will appear in the returned data, 
  * as it is an associative array using the service name as key. 
+ * @amfphpHide
  * @package Amfphp_Plugins_Discovery
  * @author Ariel Sommeria-Klein
  */
@@ -173,6 +174,10 @@ class AmfphpDiscoveryService {
             $serviceObject = Amfphp_Core_Common_ServiceRouter::getServiceObjectStatically($serviceName, self::$serviceFolderPaths, self::$serviceNames2ClassFindInfo);
             $objR = new ReflectionObject($serviceObject);
             $objComment = $this->formatComment($objR->getDocComment());
+            if (false !== strpos($objComment, '@amfphpHide')) {
+                //methods including @amfHide should not appear in the back office but should still be accessible.
+                continue;
+            }            
             $methodRs = $objR->getMethods(ReflectionMethod::IS_PUBLIC);
             $methods = array();
             foreach ($methodRs as $methodR) {
@@ -187,7 +192,7 @@ class AmfphpDiscoveryService {
                 $paramRs = $methodR->getParameters();
 
                 $methodComment = $this->formatComment($methodR->getDocComment());
-                if (false !== strpos($methodComment, '@amfHide')) {
+                if (false !== strpos($methodComment, '@amfphpHide')) {
                     //methods including @amfHide should not appear in the back office but should still be accessible.
                     continue;
                 }
@@ -209,9 +214,15 @@ class AmfphpDiscoveryService {
                             $example = $paramMeta['example'];
                         }
                     }
-                    if ($paramR->getClass()) {
-                        $type = $paramR->getClass()->name;
-                    } 
+                    try{
+                        //this code will throw an exception saying that the class does not exist, only if the class is a namespace.
+                        //in that case there's not much that can be done, so just ignore type.
+                        if ($paramR->getClass()) {
+                            $type = $paramR->getClass()->name;
+                        }                         
+                    }catch(Exception $e){
+                    }
+
                     $parameterInfo = new AmfphpDiscovery_ParameterDescriptor($parameterName, $type, $example);
 
                     $parameters[] = $parameterInfo;

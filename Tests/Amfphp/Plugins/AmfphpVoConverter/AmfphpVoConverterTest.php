@@ -35,7 +35,11 @@ class AmfphpVoConverterTest extends PHPUnit_Framework_TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp() {
-        $pluginConfig = array('voFolderPaths' => array(dirname(__FILE__) . '/../../../TestData/Vo/'));
+        $voFolders = array(dirname(__FILE__) . '/../../../TestData/Vo/');
+        //add namespace test vo folder
+        $voFolders[] = array(dirname(__FILE__). '/../../../TestData/NamespaceVos/', 'NVo');
+        $pluginConfig['voFolders'] = $voFolders;
+
         $this->object = new AmfphpVoConverter($pluginConfig);
     }
 
@@ -100,6 +104,17 @@ class AmfphpVoConverterTest extends PHPUnit_Framework_TestCase {
         $modifiedPacket = $ret;
         $modifiedObj = $modifiedPacket->messages[0]->data[0];
         $this->assertEquals('flex.messaging.Bla', $modifiedObj->$explicitTypeField);
+        
+        //test using a Vo with a namespace
+        $testObj3 = new stdClass();
+        $testObj3->$explicitTypeField = 'Sub1.NamespaceTestVo';
+        $testMessage = new Amfphp_Core_Amf_Message(null, null, array($testObj3));
+        $testPacket = new Amfphp_Core_Amf_Packet();
+        $testPacket->messages[] = $testMessage;
+        $ret = $this->object->filterDeserializedRequest($testPacket);
+        $modifiedPacket = $ret;
+        $modifiedObj = $modifiedPacket->messages[0]->data[0];
+        $this->assertEquals('NVo\Sub1\NamespaceTestVo', get_class($modifiedObj));
         
         
 

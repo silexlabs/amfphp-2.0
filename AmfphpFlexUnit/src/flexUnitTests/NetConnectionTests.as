@@ -97,7 +97,7 @@ package flexUnitTests
 				
 		public function testNamespaceServiceCall():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyNamespaceServiceCall, 1000));
-			_nc.callWithEvents("NamespaceTestService/bla");	
+			_nc.callWithEvents("Sub1/NamespaceTestService/bla");	
 		}
 		private function verifyNamespaceServiceCall(event:ObjEvent):void{
 			assertTrue(event.obj is String);

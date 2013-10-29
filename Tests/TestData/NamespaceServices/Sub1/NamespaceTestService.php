@@ -10,7 +10,7 @@
  */
 
 
-namespace TestNamespace;
+namespace NService\Sub1;
 
 
 /**
@@ -20,8 +20,21 @@ namespace TestNamespace;
  * @author Ariel Sommeria-klein
  */
 class NamespaceTestService {
+    /**
+     * bla function, dummy
+     * @return string 
+     */
     function bla(){
         return "bla";
+    }
+    /**
+     *
+     * @param type $vo example:  {"_explicitType":"Sub1.NamespaceTestVo", "dummyData":"blabla"}
+     * @return type 
+     */
+    function useVo(\NVo\Sub1\NamespaceTestVo $vo){
+        return $vo;
+        
     }
 }
 

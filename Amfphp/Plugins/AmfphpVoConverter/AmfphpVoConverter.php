@@ -52,9 +52,11 @@ class AmfphpVoConverter implements Amfphp_Core_Common_IVoConverter {
     /**
      * paths to folders containing Value Objects(relative or absolute)
      * default is /Services/Vo/
-     * @var array of paths
+     * if you need a namespace, use an array instead. First value is the path, second is the root namespace.
+     * for example: array(AMFPHP_ROOTPATH . '/Services/Vo/', 'namespace');
+     * @var array of folders
      */
-    public $voFolderPaths;
+    public $voFolders;
     
     /**
      * Set this to true if you want an exception to be thrown when a Value Object is not found. 
@@ -76,10 +78,10 @@ class AmfphpVoConverter implements Amfphp_Core_Common_IVoConverter {
      */
     public function __construct(array $config = null) {
         //default
-        $this->voFolderPaths = array(AMFPHP_ROOTPATH . '/Services/Vo/');
+        $this->voFolders = array(AMFPHP_ROOTPATH . '/Services/Vo/');
         if ($config) {
-            if (isset($config['voFolderPaths'])) {
-                $this->voFolderPaths = $config['voFolderPaths'];
+            if (isset($config['voFolders'])) {
+                $this->voFolders = $config['voFolders'];
             }
             if (isset($config['enforceConversion'])) {
                 $this->enforceConversion = $config['enforceConversion'];
@@ -179,23 +181,37 @@ class AmfphpVoConverter implements Amfphp_Core_Common_IVoConverter {
      * @return typed object or null
      */
     public function getNewVoInstance($voName){
-        $classPath = null;
+        $fullyQualifiedClassName = $voName;
         if (!class_exists($voName, false)) {
-            foreach ($this->voFolderPaths as $folderPath) {
-                $classPath = $folderPath . '/' . $voName . '.php';
-                if (file_exists($classPath)) {
-                    require_once $classPath;
+            foreach ($this->voFolders as $folder) {
+                $folderPath = NULL;
+                $rootNamespace = NULL;
+                if(is_array($folder)){
+                    $rootNamespace = $folder[1];
+                    $folderPath = $folder[0];
+                }else{
+                    $folderPath = $folder;
+                }
+                $voNameWithSlashes = str_replace('.', '/', $voName);
+                $voPath = $folderPath . $voNameWithSlashes . '.php';
+                 
+                if (file_exists($voPath)) {
+                    require_once $voPath;
+                    if($rootNamespace != NULL){
+                        $fullyQualifiedClassName = $rootNamespace . '\\' . str_replace('/', '\\', $voNameWithSlashes); 
+                    }
                     break;
+                    
                 }
             }
         }
-        if (class_exists($voName, false)) {
+        if (class_exists($fullyQualifiedClassName, false)) {
             //class is available. Use it!
-            $vo = new $voName();
+            $vo = new $fullyQualifiedClassName();
             return $vo;
         }else{
             if($this->enforceConversion){
-                throw new Amfphp_Core_Exception("\"$voName\" Vo not found. \nCustom Class folder paths : " . print_r($this->voFolderPaths, true));
+                throw new Amfphp_Core_Exception("\"$voName\" Vo not found. \nCustom Class folder paths : " . print_r($this->voFolders, true));
             }else{
                 $ret = new stdClass();
                 $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;

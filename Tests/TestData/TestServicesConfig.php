@@ -24,16 +24,16 @@ class TestServicesConfig extends Amfphp_Core_Config {
     public function  __construct() {
         parent::__construct();
         $this->serviceFolderPaths  = array(dirname(__FILE__) . '/Services/' ,dirname(__FILE__) . '/MoreServices/');
-        $this->serviceFolderPaths[] = array(dirname(__FILE__) . '/NamespacedServices/', 'TestNamespace');
+        $this->serviceFolderPaths[] = array(dirname(__FILE__) . '/NamespaceServices/', 'NService');
         $this->serviceFolderPaths[] = dirname(__FILE__) . '/../../Examples/Php/ExampleServices/';
         $testServicePath = dirname(__FILE__) . '/TestService.php';
         $classFindInfo = new Amfphp_Core_Common_ClassFindInfo($testServicePath, 'TestService');
-		//uncomment to disable baguette amf
-		//$this->disabledPlugins[] = 'BaguetteAmf';
-        $this->serviceNames2ClassFindInfo = array('TestService' => $classFindInfo);
-        $this->serviceNames2ClassFindInfo = array('TestService' => $classFindInfo);
+	$this->serviceNames2ClassFindInfo = array('TestService' => $classFindInfo);
         
-        $this->pluginsConfig['AmfphpVoConverter']['voFolderPaths'] = array(AMFPHP_ROOTPATH . '/Services/Vo/', dirname(__FILE__). '/../../Examples/Php/ExampleServices/Vo/');
+        $voFolders = array(AMFPHP_ROOTPATH . 'Services/Vo/', dirname(__FILE__). '/../../Examples/Php/ExampleServices/Vo/');
+        $voFolders[] = array(dirname(__FILE__). '/NamespaceVos/', 'NVo');
+        
+        $this->pluginsConfig['AmfphpVoConverter']['voFolders'] = $voFolders;
         
         $this->disabledPlugins[] = 'AmfphpMonitor';
         
