@@ -24,7 +24,7 @@ $isAccessGranted = $accessManager->isAccessGranted();
         require_once(dirname(__FILE__) . '/LinkBar.inc.php');
         ?>
 
-        <div id='main'>
+        <div id='main' class="notParamEditor">
             <div id="left">
                 <?php
                 if (!$isAccessGranted) {
@@ -39,7 +39,7 @@ $isAccessGranted = $accessManager->isAccessGranted();
                 ?>
             </div>
             <div  id='right'>
-                <div class="menu">
+                <div class="menu" id="callDialog">
 
                     Use one of the following generators to generate a client Stub project. <br/>
                     The project includes :<br/><br/>
@@ -50,41 +50,13 @@ $isAccessGranted = $accessManager->isAccessGranted();
                     <br/><br/>
                     Code will be generated for the following services:
                     <br/><br/>
+                    <ul id="serviceList"></ul><br/>
                     <?php
                     $generatorManager = new Amfphp_BackOffice_ClientGenerator_GeneratorManager();
                     $generators = $generatorManager->loadGenerators(array('ClientGenerator/Generators'));
 
                     $config = new Amfphp_BackOffice_Config();
-                    $serviceCaller = new Amfphp_BackOffice_IncludeServiceCaller($config->amfphpEntryPointPath);
-                    $amfphpUrl = $config->resolveAmfphpEntryPointUrl();
-//load service descriptors
-                    $services = $serviceCaller->call("AmfphpDiscoveryService", "discover");
-                    if ($services instanceof Exception) {
-                        throw $services;
-                    }
-                    if (!is_array($services)) {
-                        ?>
-                        No services available. Please check : <br/>
-                        <ul>
-                            <li>That your service classes don't contain syntax errors</li>
-                            <li>BackOffice Configuration in BackOffice/Config.php, specifically $amfphpEntryPointUrl</li>
-
-                        </ul>
-                        Service Object as returned by AmfphpDiscoveryService:
-                        <br/> <br/>
-                        <pre><?php var_dump($services) ?></pre>
-                        <?php
-                        return;
-                    }
-//remove discovery service from list
-                    unset($services->AmfphpDiscoveryService);
-//list services 
-                    echo '<ul>';
-                    foreach ($services as $service) {
-                        echo "<li>$service->name</li>";
-                    }
-                    echo '</ul>';
-
+                    
 
 //links for each generator
                     echo "\n<table>";
@@ -95,7 +67,7 @@ $isAccessGranted = $accessManager->isAccessGranted();
                         $infoUrl = $generator->getInfoUrl();
                         echo "\n        <td>$generatorName</td>";
                         echo "\n        <td><a href=\"$infoUrl\">Info</a></td>";
-                        echo "\n        <td><a href=\"?generate=$generatorClass\">Generate!</a></td>";
+                        echo "\n        <td><a onclick='generate(\"" . $generatorClass . "\")'>Generate!</a></td>";
                         echo "\n    </tr>";
                     }
                     ?>
@@ -106,48 +78,95 @@ $isAccessGranted = $accessManager->isAccessGranted();
 
 
                     </table>
-                    <?php
-                    if (isset($_GET['generate'])) {
-                        //test values
-                        /* $services = json_decode('{"ExampleService":{"name":"ExampleService","methods":{"returnOneParam":{"name":"returnOneParam","parameters":[{"name":"param","type":"","_explicitType":"AmfphpDiscovery_ParameterDescriptor"}],"_explicitType":"AmfphpDiscovery_MethodDescriptor"}},"_explicitType":"AmfphpDiscovery_ServiceDescriptor"},"SommeriaSearchService":{"name":"SommeriaSearchService","methods":{"searchTwitter":{"name":"searchTwitter","parameters":[{"name":"query","type":"","_explicitType":"AmfphpDiscovery_ParameterDescriptor"}],"_explicitType":"AmfphpDiscovery_MethodDescriptor"}},"_explicitType":"AmfphpDiscovery_ServiceDescriptor"},"AmfphpDiscoveryService":{"name":"AmfphpDiscoveryService","methods":{"discover":{"name":"discover","parameters":[],"_explicitType":"AmfphpDiscovery_MethodDescriptor"}},"_explicitType":"AmfphpDiscovery_ServiceDescriptor"}}');
-                          $services = json_decode('{"AuthenticationService":{"name":"AuthenticationService","methods":{"login":{"name":"login","parameters":[{"name":"userId","type":"","_explicitType":"AmfphpDiscovery_ParameterDescriptor"},{"name":"password","type":"","_explicitType":"AmfphpDiscovery_ParameterDescriptor"}],"_explicitType":"AmfphpDiscovery_MethodDescriptor"},"logout":{"name":"logout","parameters":[],"_explicitType":"AmfphpDiscovery_MethodDescriptor"},"adminMethod":{"name":"adminMethod","parameters":[],"_explicitType":"AmfphpDiscovery_MethodDescriptor"}},"_explicitType":"AmfphpDiscovery_ServiceDescriptor"},"ByteArrayTestService":{"name":"ByteArrayTestService","methods":{"uploadCompressedByteArray":{"name":"uploadCompressedByteArray","parameters":[{"name":"ba","type":"Amfphp_Core_Amf_Types_ByteArray","_explicitType":"AmfphpDiscovery_ParameterDescriptor"}],"_explicitType":"AmfphpDiscovery_MethodDescriptor"}},"_explicitType":"AmfphpDiscovery_ServiceDescriptor"},"DummyService":{"name":"DummyService","methods":{"returnNull":{"name":"returnNull","parameters":[],"_explicitType":"AmfphpDiscovery_MethodDescriptor"}},"_explicitType":"AmfphpDiscovery_ServiceDescriptor"},"ExampleSerializationDebugService":{"name":"ExampleSerializationDebugService","methods":{"getDataThatCreatesProblems":{"name":"getDataThatCreatesProblems","parameters":[],"_explicitType":"AmfphpDiscovery_MethodDescriptor"},"getSerializedObject":{"name":"getSerializedObject","parameters":[],"_explicitType":"AmfphpDiscovery_MethodDescriptor"}},"_explicitType":"AmfphpDiscovery_ServiceDescriptor"},"bla\/BlaService":{"name":"bla\/BlaService","methods":{"returnDouble":{"name":"returnDouble","parameters":[{"name":"param","type":"","_explicitType":"AmfphpDiscovery_ParameterDescriptor"}],"_explicitType":"AmfphpDiscovery_MethodDescriptor"}},"_explicitType":"AmfphpDiscovery_ServiceDescriptor"},"SommeriaSearchService":{"name":"SommeriaSearchService","methods":{"searchTwitter":{"name":"searchTwitter","parameters":[{"name":"query","type":"","_explicitType":"AmfphpDiscovery_ParameterDescriptor"}],"_explicitType":"AmfphpDiscovery_MethodDescriptor"}},"_explicitType":"AmfphpDiscovery_ServiceDescriptor"},"TestService":{"name":"TestService","methods":{"returnOneParam":{"name":"returnOneParam","parameters":[{"name":"param","type":"","_explicitType":"AmfphpDiscovery_ParameterDescriptor"}],"_explicitType":"AmfphpDiscovery_MethodDescriptor"},"returnSum":{"name":"returnSum","parameters":[{"name":"number1","type":"","_explicitType":"AmfphpDiscovery_ParameterDescriptor"},{"name":"number2","type":"","_explicitType":"AmfphpDiscovery_ParameterDescriptor"}],"_explicitType":"AmfphpDiscovery_MethodDescriptor"},"returnNull":{"name":"returnNull","parameters":[],"_explicitType":"AmfphpDiscovery_MethodDescriptor"},"returnBla":{"name":"returnBla","parameters":[],"_explicitType":"AmfphpDiscovery_MethodDescriptor"},"throwException":{"name":"throwException","parameters":[{"name":"arg1","type":"","_explicitType":"AmfphpDiscovery_ParameterDescriptor"}],"_explicitType":"AmfphpDiscovery_MethodDescriptor"},"returnAfterOneSecond":{"name":"returnAfterOneSecond","parameters":[],"_explicitType":"AmfphpDiscovery_MethodDescriptor"}},"_explicitType":"AmfphpDiscovery_ServiceDescriptor"},"AmfphpDiscoveryService":{"name":"AmfphpDiscoveryService","methods":{"discover":{"name":"discover","parameters":[],"_explicitType":"AmfphpDiscovery_MethodDescriptor"}},"_explicitType":"AmfphpDiscovery_ServiceDescriptor"}} ');
-                          $services = json_decode('{"TestService":{"name":"TestService","methods":{"returnOneParam":{"name":"returnOneParam","parameters":[{"name":"param","type":"","_explicitType":"AmfphpDiscovery_ParameterDescriptor"}],"_explicitType":"AmfphpDiscovery_MethodDescriptor"},"returnSum":{"name":"returnSum","parameters":[{"name":"number1","type":"","_explicitType":"AmfphpDiscovery_ParameterDescriptor"},{"name":"number2","type":"","_explicitType":"AmfphpDiscovery_ParameterDescriptor"}],"_explicitType":"AmfphpDiscovery_MethodDescriptor"},"returnNull":{"name":"returnNull","parameters":[],"_explicitType":"AmfphpDiscovery_MethodDescriptor"},"returnBla":{"name":"returnBla","parameters":[],"_explicitType":"AmfphpDiscovery_MethodDescriptor"},"throwException":{"name":"throwException","parameters":[{"name":"arg1","type":"","_explicitType":"AmfphpDiscovery_ParameterDescriptor"}],"_explicitType":"AmfphpDiscovery_MethodDescriptor"},"returnAfterOneSecond":{"name":"returnAfterOneSecond","parameters":[],"_explicitType":"AmfphpDiscovery_MethodDescriptor"}},"_explicitType":"AmfphpDiscovery_ServiceDescriptor"}} ');
-                         */
-
-
-                        $generatorClass = $_GET['generate'];
-                        $generator = $generators[$generatorClass];
-                        //$newFolderName = date("Ymd-his-") . $generatorClass;
-                        //temp for testing. 
-                        $newFolderName = $generatorClass;
-                        $genRootRelativeUrl = 'ClientGenerator/Generated/';
-                        $genRootFolder = AMFPHP_BACKOFFICE_ROOTPATH . $genRootRelativeUrl;
-                        $targetFolder = $genRootFolder . $newFolderName;
-                        $generator->generate($services, $amfphpUrl, $targetFolder);
-                        $urlSuffix = $generator->getTestUrlSuffix();
-                        echo '<br/><br/>';
-                        echo 'client project written to ' . $targetFolder;
-
-                        if ($urlSuffix !== false) {
-                            echo '<br/><br/><a href="' . $genRootRelativeUrl . $newFolderName . '/' . $urlSuffix . '"> try it here</a>';
-                        }
-                        if (Amfphp_BackOffice_ClientGenerator_Util::serverCanZip()) {
-                            $zipFileName = "$newFolderName.zip";
-                            $zipFilePath = $genRootFolder . $zipFileName;
-                            Amfphp_BackOffice_ClientGenerator_Util::zipFolder($targetFolder, $zipFilePath, $genRootFolder);
-                            echo '<br/><br/><a href="' . $genRootRelativeUrl . $zipFileName . '"> get zip here</a>';
-                        } else {
-                            echo " Server can not create zip of generated project, because ZipArchive is not available.";
-                        }
-                    }
-                    ?>
+                    <div id="statusMessage" style="max-width:100%"></div>
                 </div>
             </div>
             <script>
                 $(function () {	        
                     document.title = "AmfPHP - Client Generator";
                     $("#titleSpan").text("AmfPHP - Client Generator");
+                    
+                    var callData = JSON.stringify({"serviceName":"AmfphpDiscoveryService", "methodName":"discover","parameters":[]});
+                    var request = $.ajax({
+                      url: "<?php echo $config->resolveAmfphpEntryPointUrl() ?>?contentType=application/json",
+                      type: "POST",
+                      data: callData
+                    });
+
+                    request.done(onServicesLoaded);
+
+                    request.fail(function( jqXHR, textStatus ) {
+                        displayCallErrorMessage(textStatus + "<br/><br/>" + jqXHR.responseText);
+                    });
+
+                    setRightDivMaxWidth();
+                    $( window ).bind( "resize", setRightDivMaxWidth ); 
 
 
-                });                
+                });    
+                
+                                
+                /**
+                 * sets the max width for the right div.
+                 * used on loading services, and when window resizes
+                 * */
+                function setRightDivMaxWidth(){
+                    var availableWidthForRightDiv = $( "#main" ).width() - $("#left").outerWidth(true) - 50;
+                    $( "#right" ).css( "maxWidth", availableWidthForRightDiv +  "px" );
+                }
+                
+                function displayCallErrorMessage(html){
+                    $('#statusMessage').html(html);
+                }
+                
+/**
+                 * callback for when service data loaded from server . 
+                 * generates method list. 
+                 * each method link has its corresponding method object attached as data, and this is retrieved on click
+                 * to call openMethodDialog with it.
+                 */
+                function onServicesLoaded(data)
+                {
+                    if(typeof data == "string"){
+                        displayCallErrorMessage(data);
+                        return;
+                    }
+                    serviceData = data;
+                        
+                    //generate service/method list
+                    var rootUl = $("ul#serviceList");
+                    $(rootUl).empty();
+                    for(serviceName in serviceData){
+                        var service = serviceData[serviceName];
+                        var serviceLi = $("<li>" + serviceName + "</li>")
+                        .appendTo(rootUl);
+                        $(serviceLi).attr("title", service.comment);
+                        $("<ul/>").appendTo(serviceLi);
+                    }
+                     
+
+                    
+                }
+                
+                function generate(generatorClass){
+                    var callData = JSON.stringify({"serviceName":"AmfphpDiscoveryService", "methodName":"discover","parameters":[]});
+                    var request = $.ajax({
+                      url: "ClientGeneratorBackend.php?generatorClass=" + generatorClass,
+                      type: "POST",
+                      data: JSON.stringify(serviceData)
+                    });
+
+                    request.done(onGenerationDone);
+
+                    request.fail(function( jqXHR, textStatus ) {
+                        displayCallErrorMessage(textStatus + "<br/><br/>" + jqXHR.responseText);
+                    });
+
+ 
+                }
+                
+                function onGenerationDone(data){
+                    $('#statusMessage').html(data);
+                }
+
             </script>

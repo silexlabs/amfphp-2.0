@@ -144,7 +144,7 @@ $config = new Amfphp_BackOffice_Config();
                     request.fail(function( jqXHR, textStatus ) {
                         displayCallErrorMessage(textStatus + "<br/><br/>" + jqXHR.responseText);
                     });
-                    //@todo error handling with explicit messages. use $.ajax instead of $.post
+
                     showResultView("tree");
                     document.title = "AmfPHP - Service Browser";
                     $("#titleSpan").text("AmfPHP - Service Browser");

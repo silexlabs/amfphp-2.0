@@ -7,9 +7,11 @@ array collection is now decoded straight to array
 namespace support added for services and vos.
 serviceFolderPaths renamed to serviceFolders  
 voFolderPaths renamed to voFolders
+AmfphpIncludedRequest plugin deleted
 
 backoffice :
 add support for @amfHide in method comments so that the method is callable but does not appear in the back office.
+move all service calls to client side (ajax)
 
 Service browser :
 Better use of service comments: comments appear in service browser, possibility to set default for use in service browser.
