@@ -222,9 +222,6 @@ $config = new Amfphp_BackOffice_Config();
                     $( window ).bind( "resize", setRightDivMaxWidth ); 
                     $("#jsonTip").hide();
                     $("#noParamsIndicator").hide();
-                    //test
-                    //createParamDialog();
-                    //createParamDialog();
                      
 
                     manipulateMathod("TestService", "returnOneParam");
