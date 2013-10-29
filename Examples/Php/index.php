@@ -15,8 +15,8 @@
  */
 require_once dirname(__FILE__) . '/../../Amfphp/ClassLoader.php';
 $config = new Amfphp_Core_Config();
-$config->serviceFolderPaths = array(dirname(__FILE__) . '/ExampleServices/');
-$config->serviceFolderPaths[] = array(dirname(__FILE__) . '/ServicesWithNamespace/', 'NService');
+$config->serviceFolders = array(dirname(__FILE__) . '/ExampleServices/');
+$config->serviceFolders[] = array(dirname(__FILE__) . '/ServicesWithNamespace/', 'NService');
 $voFolders = array(dirname(__FILE__) . '/Vo/');
 //add the folder with the namespace. 1st comes the pass, 2nd comes the namespace root.
 $voFolders[] = array(dirname(__FILE__) . '/NamespaceVo/', 'NVo');

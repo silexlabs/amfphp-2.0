@@ -21,7 +21,7 @@ class Amfphp_Core_Gateway {
 
     /**
      * filter just after plugin init. Use this to add a service folder for a plugin
-     * @param array serviceFolderPaths array of absolute paths
+     * @param array serviceFolders array of absolute paths
      */
     const FILTER_SERVICE_FOLDER_PATHS = 'FILTER_SERVICE_FOLDER_PATHS';
 
@@ -179,7 +179,7 @@ class Amfphp_Core_Gateway {
             $defaultHandler = new Amfphp_Core_Amf_Handler($this->config->sharedConfig);
             
             //filter service folder paths
-            $this->config->serviceFolderPaths = $filterManager->callFilters(self::FILTER_SERVICE_FOLDER_PATHS, $this->config->serviceFolderPaths);
+            $this->config->serviceFolders = $filterManager->callFilters(self::FILTER_SERVICE_FOLDER_PATHS, $this->config->serviceFolders);
 
             //filter service names 2 class find info
             $this->config->serviceNames2ClassFindInfo = $filterManager->callFilters(self::FILTER_SERVICE_NAMES_2_CLASS_FIND_INFO, $this->config->serviceNames2ClassFindInfo);
@@ -197,7 +197,7 @@ class Amfphp_Core_Gateway {
             $deserializedRequest = $filterManager->callFilters(self::FILTER_DESERIALIZED_REQUEST, $deserializedRequest);
 
             //create service router
-            $serviceRouter = new Amfphp_Core_Common_ServiceRouter($this->config->serviceFolderPaths, $this->config->serviceNames2ClassFindInfo, $this->config->checkArgumentCount);
+            $serviceRouter = new Amfphp_Core_Common_ServiceRouter($this->config->serviceFolders, $this->config->serviceNames2ClassFindInfo, $this->config->checkArgumentCount);
 
             //filter deserialized request handler
             $deserializedRequestHandler = $filterManager->callFilters(self::FILTER_DESERIALIZED_REQUEST_HANDLER, $defaultHandler, $this->contentType);

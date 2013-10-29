@@ -22,7 +22,7 @@ class Amfphp_Core_Config {
      * paths to folders containing services(relative or absolute)
      * @var <array> of paths
      */
-    public $serviceFolderPaths;
+    public $serviceFolders;
 
     /**
      * a dictionary of service classes represented in a ClassFindInfo.
@@ -86,8 +86,8 @@ class Amfphp_Core_Config {
      * constructor
      */
     public function __construct() {
-        $this->serviceFolderPaths = array();
-        $this->serviceFolderPaths [] = dirname(__FILE__) . '/../Services/';
+        $this->serviceFolders = array();
+        $this->serviceFolders [] = dirname(__FILE__) . '/../Services/';
         $this->serviceNames2ClassFindInfo = array();
         $this->pluginsFolders = array(AMFPHP_ROOTPATH . 'Plugins/');
         $this->pluginsConfig = array();

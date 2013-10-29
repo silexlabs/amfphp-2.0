@@ -28,7 +28,7 @@ class Amfphp_Core_GatewayTest extends PHPUnit_Framework_TestCase {
     public function testService() {
         $amfTestData = new AmfTestData();
         $testServiceConfig = new TestServicesConfig();
-        $testServiceConfig->serviceFolderPaths = $testServiceConfig->serviceFolderPaths;
+        $testServiceConfig->serviceFolders = $testServiceConfig->serviceFolders;
         $testServiceConfig->serviceNames2ClassFindInfo = $testServiceConfig->serviceNames2ClassFindInfo;
         $gateway = new Amfphp_Core_Gateway(array(), array(), $amfTestData->testServiceRequestPacket, Amfphp_Core_Amf_Constants::CONTENT_TYPE, $testServiceConfig);
         $ret = $gateway->service();

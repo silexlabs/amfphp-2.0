@@ -29,7 +29,7 @@ class AmfphpDiscoveryService {
      * paths to folders containing services(relative or absolute). set by plugin.
      * @var array of paths
      */
-    public static $serviceFolderPaths;
+    public static $serviceFolders;
 
     /**
      *
@@ -81,13 +81,13 @@ class AmfphpDiscoveryService {
 
     /**
      * returns a list of available services
-     * @param array $serviceFolderPaths
+     * @param array $serviceFolders
      * @param array $serviceNames2ClassFindInfo
      * @return array of service names
      */
-    protected function getServiceNames(array $serviceFolderPaths, array $serviceNames2ClassFindInfo) {
+    protected function getServiceNames(array $serviceFolders, array $serviceNames2ClassFindInfo) {
         $ret = array();
-        foreach ($serviceFolderPaths as $serviceFolderPath) {
+        foreach ($serviceFolders as $serviceFolderPath) {
             if(is_array($serviceFolderPath)){
                 //case when using namespace
                 $ret = array_merge($ret, $this->searchFolderForServices($serviceFolderPath[0], ''));
@@ -168,10 +168,10 @@ class AmfphpDiscoveryService {
      * @return array of AmfphpDiscovery_ServiceInfo
      */
     public function discover() {
-        $serviceNames = $this->getServiceNames(self::$serviceFolderPaths, self::$serviceNames2ClassFindInfo);
+        $serviceNames = $this->getServiceNames(self::$serviceFolders, self::$serviceNames2ClassFindInfo);
         $ret = array();
         foreach ($serviceNames as $serviceName) {
-            $serviceObject = Amfphp_Core_Common_ServiceRouter::getServiceObjectStatically($serviceName, self::$serviceFolderPaths, self::$serviceNames2ClassFindInfo);
+            $serviceObject = Amfphp_Core_Common_ServiceRouter::getServiceObjectStatically($serviceName, self::$serviceFolders, self::$serviceNames2ClassFindInfo);
             $objR = new ReflectionObject($serviceObject);
             $objComment = $this->formatComment($objR->getDocComment());
             if (false !== strpos($objComment, '@amfphpHide')) {

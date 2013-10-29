@@ -42,7 +42,7 @@ class AmfphpFlexMessagingTest extends PHPUnit_Framework_TestCase {
     protected function setUp() {
         $this->object = new AmfphpFlexMessaging();
         $testServiceConfig = new TestServicesConfig();
-        $this->serviceRouter = new Amfphp_Core_Common_ServiceRouter($testServiceConfig->serviceFolderPaths, $testServiceConfig->serviceNames2ClassFindInfo);
+        $this->serviceRouter = new Amfphp_Core_Common_ServiceRouter($testServiceConfig->serviceFolders, $testServiceConfig->serviceNames2ClassFindInfo);
     }
 
     /**

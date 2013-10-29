@@ -62,12 +62,12 @@ class AmfphpDiscovery {
     }
     
      /**
-     * grabs serviceFolderPaths from config
-     * @param array serviceFolderPaths array of absolute paths
+     * grabs serviceFolders from config
+     * @param array serviceFolders array of absolute paths
      */
-    public function filterServiceFolderPaths(array $serviceFolderPaths){
-        AmfphpDiscoveryService::$serviceFolderPaths = $serviceFolderPaths;
-        return $serviceFolderPaths;
+    public function filterServiceFolderPaths(array $serviceFolders){
+        AmfphpDiscoveryService::$serviceFolders = $serviceFolders;
+        return $serviceFolders;
     }
      /**
      * grabs serviceNames2ClassFindInfo from config and add discovery service

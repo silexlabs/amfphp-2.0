@@ -31,7 +31,7 @@ class Amfphp_Core_Common_ServiceRouter {
      * paths to folders containing services(relative or absolute)
      * @var array of paths
      */
-    public $serviceFolderPaths;
+    public $serviceFolders;
 
     /**
      *
@@ -47,12 +47,12 @@ class Amfphp_Core_Common_ServiceRouter {
 
     /**
      * constructor
-     * @param array $serviceFolderPaths folders containing service classes
+     * @param array $serviceFolders folders containing service classes
      * @param array $serviceNames2ClassFindInfo a dictionary of service classes represented in a ClassFindInfo.
      * @param Boolean $checkArgumentCount
      */
-    public function __construct($serviceFolderPaths, $serviceNames2ClassFindInfo, $checkArgumentCount = false) {
-        $this->serviceFolderPaths = $serviceFolderPaths;
+    public function __construct($serviceFolders, $serviceNames2ClassFindInfo, $checkArgumentCount = false) {
+        $this->serviceFolders = $serviceFolders;
         $this->serviceNames2ClassFindInfo = $serviceNames2ClassFindInfo;
         $this->checkArgumentCount = $checkArgumentCount;
     }
@@ -67,11 +67,11 @@ class Amfphp_Core_Common_ServiceRouter {
      * and return an instance of either NamespaceTestService or Sub1\Sub2\NamespaceTestService
      * 
      * @param type $serviceName
-     * @param array $serviceFolderPaths
+     * @param array $serviceFolders
      * @param array $serviceNames2ClassFindInfo
      * @return Object service object
      */
-    public static function getServiceObjectStatically($serviceName, array $serviceFolderPaths, array $serviceNames2ClassFindInfo){
+    public static function getServiceObjectStatically($serviceName, array $serviceFolders, array $serviceNames2ClassFindInfo){
         $serviceObject = null;
         if (isset($serviceNames2ClassFindInfo[$serviceName])) {
             $classFindInfo = $serviceNames2ClassFindInfo[$serviceName];
@@ -84,7 +84,7 @@ class Amfphp_Core_Common_ServiceRouter {
             $exploded = explode('/', $serviceNameWithSlashes);
             $className = $exploded[count($exploded) - 1];
             //no class find info. try to look in the folders
-            foreach ($serviceFolderPaths as $folder) {
+            foreach ($serviceFolders as $folder) {
                 $folderPath = NULL;
                 $rootNamespace = NULL;
                 if(is_array($folder)){
@@ -123,7 +123,7 @@ class Amfphp_Core_Common_ServiceRouter {
      * @return Object service object
      */
     public function getServiceObject($serviceName) {
-        return self::getServiceObjectStatically($serviceName, $this->serviceFolderPaths, $this->serviceNames2ClassFindInfo);
+        return self::getServiceObjectStatically($serviceName, $this->serviceFolders, $this->serviceNames2ClassFindInfo);
     }
 
     /**

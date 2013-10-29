@@ -23,9 +23,9 @@ class TestServicesConfig extends Amfphp_Core_Config {
      */
     public function  __construct() {
         parent::__construct();
-        $this->serviceFolderPaths  = array(dirname(__FILE__) . '/Services/' ,dirname(__FILE__) . '/MoreServices/');
-        $this->serviceFolderPaths[] = array(dirname(__FILE__) . '/NamespaceServices/', 'NService');
-        $this->serviceFolderPaths[] = dirname(__FILE__) . '/../../Examples/Php/ExampleServices/';
+        $this->serviceFolders  = array(dirname(__FILE__) . '/Services/' ,dirname(__FILE__) . '/MoreServices/');
+        $this->serviceFolders[] = array(dirname(__FILE__) . '/NamespaceServices/', 'NService');
+        $this->serviceFolders[] = dirname(__FILE__) . '/../../Examples/Php/ExampleServices/';
         $testServicePath = dirname(__FILE__) . '/TestService.php';
         $classFindInfo = new Amfphp_Core_Common_ClassFindInfo($testServicePath, 'TestService');
 	$this->serviceNames2ClassFindInfo = array('TestService' => $classFindInfo);
@@ -39,7 +39,7 @@ class TestServicesConfig extends Amfphp_Core_Config {
         
         //My tests, shouldn't be in release code!!
         $this->pluginsFolders[] = '/Users/arielsommeria-klein/Documents/workspaces/baguetteamf/BaguetteAMF/amfphp_plugin/';
-        $this->serviceFolderPaths [] = '/Users/arielsommeria-klein/Documents/workspaces/baguetteamf/test/Services/';
+        $this->serviceFolders [] = '/Users/arielsommeria-klein/Documents/workspaces/baguetteamf/test/Services/';
     }
 
 }

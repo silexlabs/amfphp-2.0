@@ -36,7 +36,7 @@ class Amfphp_Core_Common_ServiceRouterTest extends PHPUnit_Framework_TestCase {
      */
     protected function setUp() {
         $testServiceConfig = new TestServicesConfig();
-        $this->object = new Amfphp_Core_Common_ServiceRouter($testServiceConfig->serviceFolderPaths, $testServiceConfig->serviceNames2ClassFindInfo);
+        $this->object = new Amfphp_Core_Common_ServiceRouter($testServiceConfig->serviceFolders, $testServiceConfig->serviceNames2ClassFindInfo);
     }
 
     /**

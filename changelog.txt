@@ -4,6 +4,9 @@ Custom class converter renamed to VoConverter:
 enforceConversion flag to throw exception when vo class not found
 Add optimization to not iterate on content in case of AMF(not applicable to JSON because no callbacks)
 array collection is now decoded straight to array
+namespace support added for services and vos.
+serviceFolderPaths renamed to serviceFolders  
+voFolderPaths renamed to voFolders
 
 backoffice :
 add support for @amfHide in method comments so that the method is callable but does not appear in the back office.
