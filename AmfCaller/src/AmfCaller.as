@@ -82,7 +82,9 @@ package
 		
 		/**
 		 * replaces an object marked with _explicitType by a Dummy class, and registers the Dummy class with an alias set to _explicitType.
-		 * Yes this is absolutely bending over backwards.
+		 * Yes this is absolutely bending over backwards, and is limited to 20 different explicit types.
+		 * A possible way to override this would be to manipulate the byte code directly but it's more trouble than it's worth.
+		 * Any suggestion on how to do this in a cleaner fashion is welcome.
 		 * */
 		private function convertObjectUsingExplicitType(obj:*):*{
 			var type:String = getQualifiedClassName(obj);
