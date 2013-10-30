@@ -79,13 +79,6 @@ package
 			
 		}
 		
-		private function setExplicitTypeMarkerRecursively(obj:*):*{
-			var type:String = getQualifiedClassName(obj);
-			if((type != "Array") && (type != "Object")){
-				return obj;
-			}
-			
-		}
 		
 		/**
 		 * replaces an object marked with _explicitType by a Dummy class, and registers the Dummy class with an alias set to _explicitType.
