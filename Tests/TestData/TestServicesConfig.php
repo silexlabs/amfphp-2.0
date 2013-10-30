@@ -30,10 +30,11 @@ class TestServicesConfig extends Amfphp_Core_Config {
         $classFindInfo = new Amfphp_Core_Common_ClassFindInfo($testServicePath, 'TestService');
 	$this->serviceNames2ClassFindInfo = array('TestService' => $classFindInfo);
         
-        $voFolders = array(AMFPHP_ROOTPATH . 'Services/Vo/', dirname(__FILE__). '/../../Examples/Php/ExampleServices/Vo/');
+        $voFolders = array(AMFPHP_ROOTPATH . 'Services/Vo/', dirname(__FILE__). '/../../Examples/Php/Vo/');
         $voFolders[] = array(dirname(__FILE__). '/NamespaceVos/', 'NVo');
         
         $this->pluginsConfig['AmfphpVoConverter']['voFolders'] = $voFolders;
+        //$this->pluginsConfig['AmfphpVoConverter']['enforceConversion'] = true;
         
         $this->disabledPlugins[] = 'AmfphpMonitor';
         

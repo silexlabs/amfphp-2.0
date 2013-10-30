@@ -177,13 +177,24 @@ class TestService {
         return "bla";
     }
     
-    public function testArrayCollection(array $data){
+/**
+ * receives an array(flex array collections are deserialized to arrays), and sends back an array collection.
+*/
+  public function testArrayCollection(array $data){
         $ret = new stdClass();
         $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
         $ret->$explicitTypeField = "flex.messaging.io.ArrayCollection";
         $ret->source = $data;
         return $ret;
     }
+	
+	/**
+	* @param mixed $param example:  {"_explicitType":"UserVo1", "name":"ariel", "status":"bla", "sub1":  {"_explicitType":"Sub1", "name":"ariel", "status":"bla", "sub2":  {"_explicitType":"Sub2", "name":"ariel", "status":"bla"}, "sub2again": {"_explicitType":"Sub2", "name":"ariel2", "status":"bla2"}}}
+	*/
+	
+	public function testComplicatedTypedObj($param){
+		return $param;
+	}
 }
 
 class DummyVo {}

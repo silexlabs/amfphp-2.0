@@ -163,7 +163,6 @@ $config = new Amfphp_BackOffice_Config();
                             
                     });
 
-
                 });
                 
                 function displayCallErrorMessage(html){
@@ -203,7 +202,7 @@ $config = new Amfphp_BackOffice_Config();
                                 click: function(){ 
                                     var savedServiceName = $(this).data("serviceName");
                                     var savedMethodName = $(this).data("methodName");
-                                    manipulateMathod(savedServiceName, savedMethodName);
+                                    manipulateMethod(savedServiceName, savedMethodName);
                                     return false;
                                 }})
                             .appendTo(li);
@@ -224,9 +223,11 @@ $config = new Amfphp_BackOffice_Config();
                     $("#noParamsIndicator").hide();
                      
 
-                    manipulateMathod("TestService", "returnOneParam");
-                    //manipulateMathod("TestService", "returnSum");
-                    
+                    manipulateMethod("TestService", "returnOneParam");
+                    //manipulateMethod("TestService", "returnSum");
+
+					manipulateMethod("TestService", "testComplicatedTypedObj");
+                   makeAmfCall();
                 }
                 
                 /**
@@ -300,7 +301,7 @@ $config = new Amfphp_BackOffice_Config();
                 /**
                  * manipulates call dialog so that the user can call the method.
                  * */
-                function manipulateMathod(serviceName, methodName){
+                function manipulateMethod(serviceName, methodName){
                     this.serviceName = serviceName;
                     this.methodName = methodName;
                     var service = serviceData[serviceName];

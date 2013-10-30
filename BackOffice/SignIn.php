@@ -48,7 +48,7 @@ try {
 
             $redirectToHome = true;
         } else {
-            throw new Amfphp_Core_Exception('Invalid username/password');
+            throw new Exception('Invalid username/password');
         }
     }
 } catch (Exception $e) {
