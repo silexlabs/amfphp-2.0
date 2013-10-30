@@ -254,7 +254,7 @@ $config = new Amfphp_BackOffice_Config();
                     $("#paramDialogs").find("tbody")
                         .append($("<tr/>")
                             .attr("id", "paramRow" + i)
-                            .append($("<td/>").attr("id", "paramLabel" + i))
+                            .append($("<td/>").attr("id", "paramLabel" + i).attr("class", "notParamEditor"))
                             .append($("<td/>")
                                 .append($("<div/>")
                                     .addClass("paramEditorContainer")

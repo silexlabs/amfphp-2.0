@@ -50,7 +50,7 @@ $isAccessGranted = $accessManager->isAccessGranted();
                     <br/><br/>
                     <?php 
                     $writeTestFolder = AMFPHP_BACKOFFICE_ROOTPATH . 'ClientGenerator/Generated/';
-                    if(is_writable($writeTestFolder)){
+                    if(!is_writable($writeTestFolder)){
                         echo "WARNING: could not write to ClientGenerator/Generated/. <br/> You need to change your permissions to be able to use the client generator.<br/><br/>";
                     }
                     
@@ -66,7 +66,7 @@ $isAccessGranted = $accessManager->isAccessGranted();
                     
 
 //links for each generator
-                    echo "\n<table>";
+                    echo "\n<table class='notParamEditor'>";
                     foreach ($generators as $generator) {
                         echo "\n    <tr>";
                         $generatorName = $generator->getUiCallText();
