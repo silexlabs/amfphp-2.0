@@ -50,8 +50,8 @@ $isAccessGranted = $accessManager->isAccessGranted();
                     <br/><br/>
                     <?php 
                     $writeTestFolder = AMFPHP_BACKOFFICE_ROOTPATH . 'ClientGenerator/Generated/';
-                    if(!is_writable($writeTestFolder)){
-                        die("could not write to ClientGenerator/Generated/. You need to change your permissions to be able to use the client generator.");
+                    if(is_writable($writeTestFolder)){
+                        echo "WARNING: could not write to ClientGenerator/Generated/. <br/> You need to change your permissions to be able to use the client generator.<br/><br/>";
                     }
                     
                     ?>
