@@ -9,6 +9,17 @@
  * @package Tests_TestData
  */
 
+//uncomment to log request
+/*
+function getRawPostData(){
+    if (isset($GLOBALS['HTTP_RAW_POST_DATA'])) {
+        return $GLOBALS['HTTP_RAW_POST_DATA'];
+    }else{
+        return file_get_contents('php://input');
+    }
+}
+file_put_contents('request.amf', getRawPostData());
+*/
 /** 
  * a gateway php script like the normal gateway except that it uses test services 
  * @author Ariel Sommeria-klein
@@ -18,7 +29,10 @@ require_once dirname(__FILE__) . '/TestServicesConfig.php';
 $config = new TestServicesConfig();
 $gateway = Amfphp_Core_HttpRequestGatewayFactory::createGateway($config);
 $gateway->service();
-$gateway->output();
+$output = $gateway->output();
+//uncomment to log response
+//file_put_contents('response.amf', $output);
+
 
 
 ?>

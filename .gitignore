@@ -67,3 +67,5 @@ AmfphpFlexUnit/src/FlexUnitCompilerApplication.mxml
 BackOffice/ClientGenerator/Generators/AmfphpFlashClientGenerator/Template/bin-debug/*
 
 Amfphp/Plugins/AmfphpMonitor/log.txt
+
+Tests/TestData/request.amf
