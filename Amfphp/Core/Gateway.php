@@ -256,6 +256,7 @@ class Amfphp_Core_Gateway {
             header($header);
         }
         echo $this->rawOutputData;
+        return $this->rawOutputData;
     }
 
 }
