@@ -63,6 +63,7 @@ package
 			var netConnection:NetConnection = new NetConnection();
 			netConnection.connect(url);
 			var callArgs:Array = new Array(command, new Responder(resultHandler, resultHandler));
+			type2Class = new Dictionary();
 			for each(var param:* in parameters){
 				callArgs.push(convertObjectUsingExplicitType(param));
 				
