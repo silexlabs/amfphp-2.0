@@ -8,6 +8,7 @@ namespace support added for services and vos.
 serviceFolderPaths renamed to serviceFolders  
 voFolderPaths renamed to voFolders
 AmfphpIncludedRequest plugin deleted
+Only throw an exception in error handler plugin if the error level would report it
 
 backoffice :
 add support for @amfphpHide in method comments so that the method is callable but does not appear in the back office.

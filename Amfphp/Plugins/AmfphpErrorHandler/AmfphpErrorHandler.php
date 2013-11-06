@@ -29,7 +29,7 @@ class AmfphpErrorHandler {
 }
 
 /**
- * throw an exceptino containing error info
+ * Only throw an exception if the error level would report it
  * @param int $errno
  * @param string $errstr
  * @param string $errfile
@@ -38,7 +38,9 @@ class AmfphpErrorHandler {
  * @throws Exception
  */
 function custom_warning_handler($errno, $errstr, $errfile, $errline, $errcontext) {
-    throw new Exception("$errstr . \n<br>file:  $errfile \n<br>line: $errline \n<br>context: " . print_r($errcontext, true), $errno);
+    if ($errno & error_reporting()) {
+        throw new Amfphp_Core_Exception("$errstr . \n<br>file:  $errfile \n<br>line: $errline \n<br>context: " . print_r($errcontext, true), $errno);
+    }
 }
 
 ?>
