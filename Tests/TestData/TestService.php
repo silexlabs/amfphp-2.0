@@ -171,9 +171,9 @@ class TestService {
     
     /**
      * simply to see if this doesn't appear in the back office, but is still callable
-     * @amfHide
+     * @amfphpHide
      */
-    public function testAmfHide(){
+    public function testAmfphpHide(){
         return "bla";
     }
     

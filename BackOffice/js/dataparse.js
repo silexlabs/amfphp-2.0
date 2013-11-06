@@ -1,7 +1,7 @@
 
 /**
  * create tree data string for the representation of a result object. A bit like a var dump but for displaying with jstree
- * recursive.
+ * recursive. developed for amfphp
  * @param obj
  * @param maxNodes the maximum number nodes to show. default is 100
  * @return string or array

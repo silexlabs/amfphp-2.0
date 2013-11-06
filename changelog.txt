@@ -10,8 +10,9 @@ voFolderPaths renamed to voFolders
 AmfphpIncludedRequest plugin deleted
 
 backoffice :
-add support for @amfHide in method comments so that the method is callable but does not appear in the back office.
+add support for @amfphpHide in method comments so that the method is callable but does not appear in the back office.
 move all service calls to client side (ajax)
+fetch update info
 
 Service browser :
 Better use of service comments: comments appear in service browser, possibility to set default for use in service browser.

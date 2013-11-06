@@ -32,8 +32,12 @@ $temp = 0;
         <script type="text/javascript" src="js/jquery.jstree.js"></script>
         <script type="text/javascript" src="js/dataparse.js"></script>
         <script type="text/javascript" src="js/ace/ace.js"></script>
+        <script type="text/javascript" src="js/amfphp_updates.js"></script>
         <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
         <script type="text/javascript" src="js/swfobject.js"></script>
-        
+        <script type="text/javascript" src="js/jquery.cookie.js"></script>
+        <script type="text/javascript">
+            <?php echo 'var amfphpVersion = "' . AMFPHP_VERSION . '";'; ?>
+        </script>  
    
     </head>

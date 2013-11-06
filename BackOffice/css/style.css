@@ -15,15 +15,14 @@ input{
 	color:black;
 }
 
-html, body, input, #result {
-}
 
-a, input[type="submit"]  {
+a, input[type="submit"], button  {
 	color: #D78B97;
         cursor:pointer;
+        text-decoration: none;
 }
 
-input, #result {
+input, #result, button {
 	padding: 5px;
 	border: 1px solid #525252;
 	-moz-border-radius: 8px;
@@ -117,7 +116,7 @@ input, #result {
 #signin input[type="submit"] {
     float: right;
 }
-input[type="submit"] {
+input[type="submit"], button {
     padding: 5px;
     margin: 5px;
     background: #FFFFFF;
@@ -162,4 +161,16 @@ h3{
     width: 500px;
     margin:5px;
     
+}
+
+button img,
+button span {
+    vertical-align: middle;
+}
+
+#newsBtn{
+    /*
+    Hide news button by default
+    */
+    display:none;
 }

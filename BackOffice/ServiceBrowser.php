@@ -40,6 +40,7 @@ $config = new Amfphp_BackOffice_Config();
                 require_once(dirname(__FILE__) . '/MainMenu.inc.php');
                 ?>
                 <div class='menu'>
+                    <h2>Services and Methods</h2>
                     <ul id='serviceMethods' >
                         Loading Service Data...
 
@@ -162,7 +163,7 @@ $config = new Amfphp_BackOffice_Config();
                         }
                             
                     });
-
+                    
                 });
                 
                 function displayCallErrorMessage(html){
@@ -223,11 +224,16 @@ $config = new Amfphp_BackOffice_Config();
                     $("#noParamsIndicator").hide();
                      
 
-                    manipulateMethod("TestService", "returnOneParam");
-                    //manipulateMethod("TestService", "returnSum");
-
-					manipulateMethod("TestService", "testComplicatedTypedObj");
-                   makeAmfCall();
+                    //for testing
+                    //manipulateMethod("TestService", "testComplicatedTypedObj");
+                   
+                    <?php if($config->fetchAmfphpUpdates){
+                    //only load update info once services loaded(that's the important stuff)
+                        echo 'showAmfphpUpdates();';
+                    }?>
+                            
+                    $( "#divRss" ).css( "maxWidth", $("#serviceMethods").outerWidth(true) +  "px" );
+                  
                 }
                 
                 /**

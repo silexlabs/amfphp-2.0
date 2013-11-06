@@ -109,7 +109,6 @@ $isAccessGranted = $accessManager->isAccessGranted();
                     setRightDivMaxWidth();
                     $( window ).bind( "resize", setRightDivMaxWidth ); 
 
-
                 });    
                 
                                 
@@ -150,7 +149,10 @@ $isAccessGranted = $accessManager->isAccessGranted();
                         $(serviceLi).attr("title", service.comment);
                         $("<ul/>").appendTo(serviceLi);
                     }
-                     
+                    <?php if($config->fetchAmfphpUpdates){
+                    //only load update info once services loaded(that's the important stuff)
+                        echo 'showAmfphpUpdates();';
+                    }?> 
 
                     
                 }

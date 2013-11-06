@@ -22,6 +22,10 @@
  * includes
  */
 define( 'AMFPHP_BACKOFFICE_ROOTPATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
+
+//note this is duplicated from the front ClassLoader.php file
+define( 'AMFPHP_VERSION', '2.2_vos');
+
 require_once AMFPHP_BACKOFFICE_ROOTPATH . 'Config.php'; 
 require_once AMFPHP_BACKOFFICE_ROOTPATH .  'AccessManager.php';
 require_once AMFPHP_BACKOFFICE_ROOTPATH . 'ClientGenerator/LocalClientGenerator.php';

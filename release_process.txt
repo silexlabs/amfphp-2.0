@@ -1,5 +1,5 @@
 make sure config is not modified
-update version flag
+update version flag inb 3 places: in the front/classloader.php, in backoffice/classloader.php ,and at downloads.silexlabs.org/amfphp/amfphp_updates.php
 run unit tests, php and flash builder
 deploy to a unix server(case sensitive)
 test service browser

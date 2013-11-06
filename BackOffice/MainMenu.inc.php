@@ -24,4 +24,13 @@ $temp = 0;
             <br/><br/>
             <li><a href="ServiceBrowser.php">Service Browser</a></li>
             <li><a href="ClientGenerator.php">Client Generator</a></li>
+            <br/>
+            AmfPHP <?php echo AMFPHP_VERSION; ?> <span id="latestVersionInfo"></span>
+            <br/>
+            <button id="newsBtn" onclick="toggleNews()">
+                <img src="feed-icon-14x14.png"></img>
+                <span id="toggleNewsText">Show News</span>
+            </button>
+            <div id="divRss"></div>
         </ul>
+
