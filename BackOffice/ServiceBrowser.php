@@ -57,8 +57,8 @@ $config = new Amfphp_BackOffice_Config();
                     <table id="paramDialogs"><tbody></tbody></table>
                     <span class="notParamEditor" id="noParamsIndicator">This method has no parameters.</span>
                     <div id="callBtn">
-                        <input class="notParamEditor" type="submit" value="Call JSON&raquo;" onclick="makeJsonCall()"/>  
-                        <input class="notParamEditor" type="submit" value="Call AMF &raquo;" onclick="makeAmfCall()"/>       
+                        <input class="notParamEditor" type="submit" id="callJsonBtn" value="Call JSON&raquo;" onclick="makeJsonCall()"/>  
+                        <input class="notParamEditor" type="submit" id="callAmfBtn" value="Call AMF &raquo;" onclick="makeAmfCall()"/>       
                         <div id="amfCallerContainer">
                             Flash Player is needed to make AMF calls. 
                             <a href="http://www.adobe.com/go/getflashplayer">
@@ -132,7 +132,10 @@ $config = new Amfphp_BackOffice_Config();
                  * */
                 var amfphpEntryPointUrl = "<?php echo $config->resolveAmfphpEntryPointUrl() ?>";
                 
-                $(function () {	        
+                $(function () {	       
+					//fix for ie 8
+					if (!window.console) console = {log: function() {}}; 
+					
                     var callData = JSON.stringify({"serviceName":"AmfphpDiscoveryService", "methodName":"discover","parameters":[]});
                     var request = $.ajax({
                       url: "<?php echo $config->resolveAmfphpEntryPointUrl() ?>?contentType=application/json",
@@ -154,6 +157,7 @@ $config = new Amfphp_BackOffice_Config();
                     params.allowscriptaccess = "sameDomain";
                     var attributes = {};
                     attributes.id = "amfCaller";
+					$("#callBtn").hide();
                     swfobject.embedSWF("AmfCaller.swf", "amfCallerContainer", "0", "0", "9.0.0", false, flashvars, params, attributes, function (e) {
                         if(e.success){
                             amfCaller = e.ref;
@@ -308,6 +312,7 @@ $config = new Amfphp_BackOffice_Config();
                  * manipulates call dialog so that the user can call the method.
                  * */
                 function manipulateMethod(serviceName, methodName){
+					$("#callBtn").show();
                     this.serviceName = serviceName;
                     this.methodName = methodName;
                     var service = serviceData[serviceName];
