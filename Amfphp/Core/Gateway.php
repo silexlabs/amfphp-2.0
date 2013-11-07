@@ -161,6 +161,21 @@ class Amfphp_Core_Gateway {
         }else{
             $this->config = new Amfphp_Core_Config();
         }
+        
+        //check for deprecated config settings. replace "true" by "false" if you want to keep this around, or simply delete once your upgrade works
+        if(true){
+            if(isset($this->config->serviceFolderPaths)){
+                throw new Exception('In the AmfPHP config, serviceFolderPaths have been renamed to serviceFolders. See http://www.silexlabs.org/amfphp/documentation/upgrading-from-2-0-x-and-2-1-x-to-2-2/');
+            }
+            if(isset($this->config->pluginsConfig['AmfphpCustomClassConverter'])){
+                throw new Exception('The AmfphpCustomClassConverter has been renamed to AmfphpVoConverter. Please update your config accordingly. See http://www.silexlabs.org/amfphp/documentation/upgrading-from-2-0-x-and-2-1-x-to-2-2/');
+            }
+            if(isset($this->config->pluginsConfig['AmfphpVoConverter'])){
+                $voConverterConfig = $this->config->pluginsConfig['AmfphpVoConverter'];
+                if(isset($voConverterConfig['customClassFolderPaths']) || isset($voConverterConfig['voFolderPaths']))
+                throw new Exception('The AmfphpVoConverter folder info is to be set in "voFolderPaths" . Please update your config accordingly. See http://www.silexlabs.org/amfphp/documentation/upgrading-from-2-0-x-and-2-1-x-to-2-2/');
+            }
+        }
 
     }
     
