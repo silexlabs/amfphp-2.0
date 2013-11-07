@@ -2,7 +2,7 @@ Version history
 --------- 2.2 -----------
 Custom class converter renamed to VoConverter:
 enforceConversion flag to throw exception when vo class not found
-Add optimization for VO hnadling for AMF(not applicable to JSON because no callbacks)
+Add optimization for VO handling for AMF(not applicable to JSON because no callbacks)
 array collection is now decoded straight to array
 namespace support added for services and vos.
 serviceFolderPaths renamed to serviceFolders  

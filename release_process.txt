@@ -1,6 +1,6 @@
 make sure config is not modified
 update version flag inb 3 places: in the front/classloader.php, in backoffice/classloader.php ,and at downloads.silexlabs.org/amfphp/amfphp_updates.php
-run unit tests, php and flash builder
+run unit tests, php and flash builder(with and without baguette amf)
 deploy to a unix server(case sensitive)
 test service browser
 test generators
