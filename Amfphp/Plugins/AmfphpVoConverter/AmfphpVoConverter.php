@@ -102,10 +102,15 @@ class AmfphpVoConverter implements Amfphp_Core_Common_IVoConverter {
      * @return mixed
      */
     public function filterDeserializedRequest($deserializedRequest) {
+        $ret = null;
         if($this->scanEnabled){
-            $deserializedRequest = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($deserializedRequest, array($this, 'convertToTyped'));
-            return $deserializedRequest;
+            $ret = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($deserializedRequest, array($this, 'convertToTyped'));
         }
+        if(class_exists('AmfphpMonitor', false)){
+            AmfphpMonitor::addTime('Request Vo Conversion');
+        }
+
+        return $ret;
     }
 
     /**
@@ -114,12 +119,14 @@ class AmfphpVoConverter implements Amfphp_Core_Common_IVoConverter {
      * @return mixed
      */
     public function filterDeserializedResponse($deserializedResponse) {
+        $ret = null;
         if($this->scanEnabled){
-            //$startTime = microtime(true);
-            $deserializedResponse = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($deserializedResponse, array($this, 'markExplicitType'));
-            //file_put_contents(dirname(__FILE__) . "/debug.txt", date('l jS \of F Y h:i:s A') . ' : ' . ((microtime(true) - $startTime) * 1000) . "\n", FILE_APPEND);
-            return $deserializedResponse;
+            $ret = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($deserializedResponse, array($this, 'markExplicitType'));
         }
+        if(class_exists('AmfphpMonitor', false)){
+            AmfphpMonitor::addTime('Response Vo Conversion');
+        }
+        return $ret;
     }
     
     /**

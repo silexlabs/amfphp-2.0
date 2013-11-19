@@ -119,6 +119,9 @@ class AmfphpCharsetConverter {
      */
     public function filterDeserializedRequest($deserializedRequest){
         $deserializedRequest = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($deserializedRequest, array($this, 'convertStringFromClientToPhpCharsets'));
+        if(class_exists('AmfphpMonitor', false)){
+            AmfphpMonitor::addTime('Request Charset Conversion');
+        }
         return $deserializedRequest;
 
     }
@@ -130,6 +133,9 @@ class AmfphpCharsetConverter {
      */
     public function filterDeserializedResponse($deserializedResponse){
         $deserializedResponse = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($deserializedResponse, array($this, 'convertStringFromPhpToClientCharsets'));
+        if(class_exists('AmfphpMonitor', false)){
+            AmfphpMonitor::addTime('Response Charset Conversion');
+        }
         return $deserializedResponse;
 
     }
