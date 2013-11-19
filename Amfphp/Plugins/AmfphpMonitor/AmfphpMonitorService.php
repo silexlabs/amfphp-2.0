@@ -17,47 +17,60 @@
  */
 class AmfphpMonitorService {
     public static $logPath;
-    
 
-    /**
-     * creates log file, which serves as indicator to plugin that it should log.
-     */
-    public function startLogging(){
-        if(!file_exists(self::$logPath)){
-            file_put_contents(self::$logPath, '');
-        }
-    }
     
     /**
-     * destroys log file, which serves as indicator to plugin that it should not log.
-     */
-    public function stopLogging(){
-        if(file_exists(self::$logPath)){
-            unlink(self::$logPath);
-        }
-                   
-    }
-    
-    /**
-     * get the logged data
+     * parse logged data and return it. 
+     * the format is 
+     * obj -> sortedDatas ( array ( uri => times (array (name => array of times)) 
+     * obj -> timeNames 
+     * 
+     * note: timeNames are needed for rendering on the client side, to make sure that each series has the same times.
+     * This could be done on the client side, but is faster to do here.
+     * 
      * @todo calculate averages per service instead of just returning the data raw.
-     * @param boolean $flush get rid of the logged data (default true)
+     * @param boolean $flush get rid of the logged data 
      * @return array 
      */
-    public function getData($flush = true){
+    public function getData($flush){
         if(!file_exists(self::$logPath)){
             return null;
         }
-        $data = file_get_contents(self::$logPath);
+        $fileContent = file_get_contents(self::$logPath);
+        //ignore "php exit " line
+        $loggedData = substr($fileContent, 16);
         if($flush){
-            file_put_contents(self::$logPath, '');
+            file_put_contents(self::$logPath, "<?php exit();?>\n");
         }
-        $exploded = explode("\n", $data);
-        $ret = array();
-        foreach($exploded as $callData){
-            $ret[] = unserialize($callData); 
-        }
+        $exploded = explode("\n", $loggedData);
+        
+        //data is sorted by target uri
+        $sortedData = array();
+        //use associative array to avoid duplicating time  names, then return keys.
+        $timeNamesAssoc = array();
+        foreach($exploded as $serializedRecord){
+            $record = unserialize($serializedRecord); 
+            if(!$record){
+                continue;
+            }
+            $uri = $record->uri;
+            if(!isset($sortedData[$uri])){
+                $sortedData[$uri] = array();
+            }
+            $uriData = &$sortedData[$uri];
+            //sort times
+            foreach($record->times as $timeName => $timeValue){
+                if(!isset ($uriData[$timeName])){
+                    $uriData[$timeName] = array();
+                }
+                $uriData[$timeName][] = $timeValue;
+                $timeNamesAssoc[$timeName] = '';
+            }
             
+        }
+        $ret = new stdClass();
+        $ret->sortedData = $sortedData;
+        $ret->timeNames = array_keys($timeNamesAssoc);
         return $ret;
     }
 

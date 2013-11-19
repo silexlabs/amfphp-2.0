@@ -126,12 +126,6 @@ input[type="submit"], button {
     margin-top: 20px;
 }
 
-#callDialog{
-	margin-bottom: 10px;
-	-moz-border-radius: 8px;
-	-webkit-border-radius: 8px;
-	border-radius: 8px;
-}
 
 h3{
     padding: 5px;
@@ -173,4 +167,9 @@ button span {
     Hide news button by default
     */
     display:none;
+}
+
+#chartDivContainer{
+    background-color: white;
+    padding: 10px;
 }

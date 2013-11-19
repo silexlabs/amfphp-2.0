@@ -188,13 +188,20 @@ class TestService {
         return $ret;
     }
 	
-	/**
-	* @param mixed $param example:  {"_explicitType":"UserVo1", "name":"ariel", "status":"bla", "sub1":  {"_explicitType":"Sub1", "name":"ariel", "status":"bla", "sub2":  {"_explicitType":"Sub2", "name":"ariel", "status":"bla"}, "sub2again": {"_explicitType":"Sub2", "name":"ariel2", "status":"bla2"}}}
-	*/
-	
-	public function testComplicatedTypedObj($param){
-		return $param;
-	}
+    /**
+    * @param mixed $param example:  {"_explicitType":"UserVo1", "name":"ariel", "status":"bla", "sub1":  {"_explicitType":"Sub1", "name":"ariel", "status":"bla", "sub2":  {"_explicitType":"Sub2", "name":"ariel", "status":"bla"}, "sub2again": {"_explicitType":"Sub2", "name":"ariel2", "status":"bla2"}}}
+    */
+
+    public function testComplicatedTypedObj($param){
+        return $param;
+    }
+    
+    public function testCustomMonitorTime(){
+        sleep(1);
+        AmfphpMonitor::addTime('custom time');
+        sleep(1);
+        return 'bla';
+    }
 }
 
 class DummyVo {}

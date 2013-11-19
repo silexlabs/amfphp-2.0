@@ -96,7 +96,7 @@ class Amfphp_Core_Config {
         //disable logging and error handler by default
         $this->disabledPlugins[] = 'AmfphpLogger';
         $this->disabledPlugins[] = 'AmfphpErrorHandler';
-        //not ready yet
+        //comment to log
         $this->disabledPlugins[] = 'AmfphpMonitor';
         //some useful examples of setting a config value in a plugin:
         //$this->pluginsConfig['AmfphpDiscovery']['restrictAccess'] = false;

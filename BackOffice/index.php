@@ -42,6 +42,14 @@ $isAccessGranted = $accessManager->isAccessGranted();
             </div>
 
         </div>
+        <script>
+            $(function () {	        
+                    document.title = "AmfPHP Back Office";
+                    $("#titleSpan").text("AmfPHP Back Office");
+            });
+            
+        </script>
+        
     </body>    
 </html>
 

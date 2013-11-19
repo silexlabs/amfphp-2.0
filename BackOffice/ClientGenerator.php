@@ -14,10 +14,11 @@
 require_once(dirname(__FILE__) . '/ClassLoader.php');
 $accessManager = new Amfphp_BackOffice_AccessManager();
 $isAccessGranted = $accessManager->isAccessGranted();
+$config = new Amfphp_BackOffice_Config();
 ?>
 
 <html>
-    <?php $addToTitle = ' - Client Generator';
+    <?php
     require_once(dirname(__FILE__) . '/HtmlHeader.inc.php'); ?>
     <body>
         <?php
@@ -61,8 +62,6 @@ $isAccessGranted = $accessManager->isAccessGranted();
                     <?php
                     $generatorManager = new Amfphp_BackOffice_ClientGenerator_GeneratorManager();
                     $generators = $generatorManager->loadGenerators(array('ClientGenerator/Generators'));
-
-                    $config = new Amfphp_BackOffice_Config();
                     
 
 //links for each generator

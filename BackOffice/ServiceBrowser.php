@@ -19,7 +19,7 @@ $config = new Amfphp_BackOffice_Config();
 
 <html>
 
-    <?php $addToTitle = ' - Service Browser';
+    <?php 
     require_once(dirname(__FILE__) . '/HtmlHeader.inc.php'); ?>
     <body>
         <?php

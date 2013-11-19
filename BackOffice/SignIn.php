@@ -88,3 +88,11 @@ try {
                 </div>                    
             </div>
 
+        <script>
+            $(function () {	        
+                    document.title = "AmfPHP Back Office - Sign In";
+                    $("#titleSpan").text("AmfPHP Back Office - Sign In");
+            });
+            
+        </script>
+                    

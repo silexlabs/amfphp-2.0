@@ -21,11 +21,11 @@ $temp = 0;
 ?>
 
     <head>
-        <title>AmfPHP Back Office</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-        <link rel="stylesheet" type="text/css" href="css/style.css" />
         <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.10.3.custom.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/jquery.jqplot.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
         
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/jquery.hotkeys.js"></script>
@@ -36,6 +36,12 @@ $temp = 0;
         <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
         <script type="text/javascript" src="js/swfobject.js"></script>
         <script type="text/javascript" src="js/jquery.cookie.js"></script>
+        <!--[if IE]><script language="javascript" type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
+        <script language="javascript" type="text/javascript" src="js/jquery.jqplot.min.js"></script>
+        <script language="javascript" type="text/javascript" src="js/jqplot.barRenderer.js"></script>
+        <script language="javascript" type="text/javascript" src="js/jqplot.categoryAxisRenderer.js"></script>
+        <script language="javascript" type="text/javascript" src="js/jqplot.pointLabels.js"></script>
+
         <script type="text/javascript">
             <?php echo 'var amfphpVersion = "' . AMFPHP_VERSION . '";'; ?>
         </script>  
