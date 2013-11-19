@@ -36,7 +36,7 @@ class AmfphpDiscovery {
     protected $excludePaths = array('Vo/'); 
     
     /**
-     * restrict access to amfphp_admin. default is true. Set to false if this is a private server. 
+     * restrict access to amfphp_admin, the role set when using the back office. default is true. 
      * @var boolean
      */
     protected $restrictAccess = true;

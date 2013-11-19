@@ -62,6 +62,13 @@ class AmfphpMonitor {
     protected static $times;
 
     /**
+     * restrict access to amfphp_admin, the role set when using the back office. default is true. 
+     * @var boolean
+     */
+    protected $restrictAccess = true;
+    
+
+    /**
      * constructor.
      * manages log path. If file exists at log path, adds hooks for logging.
      * @param array $config 
@@ -76,6 +83,11 @@ class AmfphpMonitor {
             $this->logPath = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'log.txt.php';
         }
         AmfphpMonitorService::$logPath = $this->logPath;
+        if(isset($config['restrictAccess'])){
+            $this->restrictAccess = $config['restrictAccess'];    
+        }
+        AmfphpMonitorService::$restrictAccess = $this->restrictAccess;
+        
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_REQUEST, $this, 'filterDeserializedRequest');
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_RESPONSE, $this, 'filterDeserializedResponse');
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_SERIALIZED_RESPONSE, $this, 'filterSerializedResponse');

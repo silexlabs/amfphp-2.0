@@ -12,12 +12,30 @@
 /**
  * monitoring service. controls logging, qnd provides method to fetch data.
  *
+ * @amfphpHide
  * @package Amfphp_Plugins_Monitor
  * @author Ariel Sommeria-klein
  */
 class AmfphpMonitorService {
     public static $logPath;
 
+
+    /**
+     * restrict access to amfphp_admin. 
+     * @var boolean
+     */
+    public static $restrictAccess;
+    
+    /**
+     * get method roles
+     * @param string $methodName
+     * @return array
+     */
+    public function _getMethodRoles($methodName) {
+        if (self::$restrictAccess) {
+            return array('amfphp_admin');
+        }
+    }
     
     /**
      * parse logged data and return it. 
