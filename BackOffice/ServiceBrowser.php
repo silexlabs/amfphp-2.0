@@ -373,8 +373,8 @@ $config = new Amfphp_BackOffice_Config();
                             
                         }
                         values.push(value);
-                        return values;
                     }
+                    return values;
                     
                 }
                 /**
