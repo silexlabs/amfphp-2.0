@@ -105,8 +105,8 @@ $config = new Amfphp_BackOffice_Config();
                         displayStatusMessage(textStatus + "<br/><br/>" + jqXHR.responseText);
                     });
 
-                    setRightDivMaxWidth();
-                    $( window ).bind( "resize", setRightDivMaxWidth ); 
+                    resize();
+                    $( window ).bind( "resize", resize ); 
 
                 });    
                 
@@ -115,7 +115,7 @@ $config = new Amfphp_BackOffice_Config();
                  * sets the max width for the right div.
                  * used on loading services, and when window resizes
                  * */
-                function setRightDivMaxWidth(){
+                function resize(){
                     var availableWidthForRightDiv = $( "#main" ).width() - $("#left").outerWidth(true) - 50;
                     $( "#right" ).css( "maxWidth", availableWidthForRightDiv +  "px" );
                 }

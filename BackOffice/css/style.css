@@ -143,7 +143,9 @@ h3{
     
 }
 
-
+#statusMessage{
+    margin: 10px;
+}
 
 .paramEditorContainer{
     /* 

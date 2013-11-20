@@ -14,7 +14,7 @@ function showAmfphpUpdates(){
         }else{
             $("#latestVersionInfo").html("(latest)");
         }
-        setRightDivMaxWidth();
+        resize();
     }
     if(!$.cookie('amfphp_latest_version')){
         $.getJSON("http://downloads.silexlabs.org/amfphp/updates/amfphp_updates.php?callback=?", {"backlink":document.URL}, function(data) {

@@ -43,13 +43,19 @@ $config = new Amfphp_BackOffice_Config();
             </div>
             <div  id='right'>
                 <div class="menu" id="performanceDisplay">
+                    <div id="statusMessage" style="max-width:100%"></div>
                     <div id="chartDivContainer">
                         <div id="chartDiv"></div>
                     </div>                  
-                    <div id="statusMessage" style="max-width:100%"></div>
                 </div>
             </div>
             <script>
+                
+                /**
+                 * the chart
+                 * */
+                var plot;
+                
                 $(function () {	
                     document.title = "AmfPHP - Performance Monitor";
                     $("#titleSpan").text(document.title);
@@ -67,20 +73,30 @@ $config = new Amfphp_BackOffice_Config();
                         displayStatusMessage(textStatus + "<br/><br/>" + jqXHR.responseText);
                     });
 
-                    var availableWidthForRightDiv = $( "#main" ).width() - $("#left").outerWidth(true) - 50;
-                    $( "#right" ).css( "width", availableWidthForRightDiv +  "px" );
+                    <?php if($config->fetchAmfphpUpdates){
+                    //only load update info once services loaded(that's the important stuff)
+                        echo 'showAmfphpUpdates();';
+                    }?> 
 
+                    $( window ).bind( "resize", resize );                             
 
                 });    
-
-
+                
                 /**
-                 * sets the max width for the right div.
-                 * used on loading services, and when window resizes
-                 * */
-                function setRightDivWidth(){
-                    var availableWidthForRightDiv = $( "#main" ).width() - $("#left").outerWidth(true) - 50;
-                    $( "#right" ).css( "width", availableWidthForRightDiv +  "px" );
+                 * sizes the div containing the chart
+                 * @todo redraw the graph
+                 **/
+                function resize(){
+                    var availableWidth = $( "#main" ).width() - $("#left").outerWidth(true) - 100;
+                    $( "#chartDiv" ).css( "width", availableWidth +  "px" );
+                    
+                    var availableHeight = $( "body" ).height() - $("#main").offset().top - 130;
+                    $( "#chartDiv" ).css( "height", availableHeight +  "px" );
+                    if(plot){
+                        plot.replot( { resetAxes: true } );
+                    }
+                    
+                    
                 }
 
                 function displayStatusMessage(html){
@@ -94,12 +110,17 @@ $config = new Amfphp_BackOffice_Config();
                 function onDataLoaded(data)
                 {
                     if(typeof data == "string"){
-                        displayStatusMessage(data);
+                        //some predictable error messages
+                        if(data.indexOf("AmfphpMonitorService service not found") != -1){
+                            displayStatusMessage("The AmfphpMonitorService could not be called. This is most likely because AmfphpMonitor plugin is not enabled. See the <a href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/performance-monitor/'>documentation</a>.")
+                        }else{
+                            displayStatusMessage(data);
+                        }
                         return;
                     }
                     
                     if(data.sortedData.length == 0){
-                        
+                        displayStatusMessage("No data was available. Please make a service call then refresh. This can be done with the <a href='ServiceBrowser.php'>Service Browser</a>.");
                     }
 
                     console.log(data);
@@ -181,7 +202,7 @@ $config = new Amfphp_BackOffice_Config();
                         message += "<br/>For a service method to appear in the chart make sur it logs those times.<br/>";
                         $("#statusMessage").html(message);
                     }
-                    $.jqplot('chartDiv', flippedSeriesData, {
+                    plot = $.jqplot('chartDiv', flippedSeriesData, {
                         // Tell the plot to stack the bars.
                         stackSeries: true,
                         captureRightClick: true,
