@@ -64,7 +64,7 @@ $config = new Amfphp_BackOffice_Config();
                     request.done(onDataLoaded);
 
                     request.fail(function( jqXHR, textStatus ) {
-                        displayCallErrorMessage(textStatus + "<br/><br/>" + jqXHR.responseText);
+                        displayStatusMessage(textStatus + "<br/><br/>" + jqXHR.responseText);
                     });
 
                     var availableWidthForRightDiv = $( "#main" ).width() - $("#left").outerWidth(true) - 50;
@@ -83,7 +83,7 @@ $config = new Amfphp_BackOffice_Config();
                     $( "#right" ).css( "width", availableWidthForRightDiv +  "px" );
                 }
 
-                function displayCallErrorMessage(html){
+                function displayStatusMessage(html){
                     $('#statusMessage').html(html);
                 }
 
@@ -94,8 +94,12 @@ $config = new Amfphp_BackOffice_Config();
                 function onDataLoaded(data)
                 {
                     if(typeof data == "string"){
-                        displayCallErrorMessage(data);
+                        displayStatusMessage(data);
                         return;
+                    }
+                    
+                    if(data.sortedData.length == 0){
+                        
                     }
 
                     console.log(data);

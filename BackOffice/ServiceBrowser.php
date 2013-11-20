@@ -146,7 +146,7 @@ $config = new Amfphp_BackOffice_Config();
                     request.done(onServicesLoaded);
 
                     request.fail(function( jqXHR, textStatus ) {
-                        displayCallErrorMessage(textStatus + "<br/><br/>" + jqXHR.responseText);
+                        displayStatusMessage(textStatus + "<br/><br/>" + jqXHR.responseText);
                     });
 
                     showResultView("tree");
@@ -170,7 +170,7 @@ $config = new Amfphp_BackOffice_Config();
                     
                 });
                 
-                function displayCallErrorMessage(html){
+                function displayStatusMessage(html){
                     $('#callDialog').html(html);
                 }
 
@@ -183,7 +183,7 @@ $config = new Amfphp_BackOffice_Config();
                 function onServicesLoaded(data)
                 {
                     if(typeof data == "string"){
-                        displayCallErrorMessage(data);
+                        displayStatusMessage(data);
                         return;
                     }
                     serviceData = data;
