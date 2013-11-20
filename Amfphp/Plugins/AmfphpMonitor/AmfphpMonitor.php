@@ -15,23 +15,28 @@
 require_once dirname(__FILE__) . '/AmfphpMonitorService.php';
 
 /**
- * logs monitoring information, and makes it possible to toggle logging and retrieve the data via a service.
- * The logging state is persisted by looking if the log file existes.
- * note that it is not possible with current system to stop logging but still keep the log file. 
- * It would be possible to address this by creating a separate file just to persist the logging state. 
- * @todo possibility to add custom times to logged data to measure duration of operations within the service call.
+ * logs monitoring information, and makes it possible to toggle logging and retrieve the data via the AmfphpMonitorService.
+ * If the log file is superior to maxLogFileSize, logging shall fail silently. This is designed to avoid errors being generated 
+ * when a developer forgets to turn off monitoring. 
+ * 
+ * The log file is by default at [AmfphpMonitor plugin folder]/log.txt.php 
+ * To change this set 'logPath' in the config.
+ * 
+ * 
  * 
  * note: Logging multiple times with the same name is not possible!
+ * @todo maybe change storage mechanism to sqlite. This means checking that it is indeed available, checking if performance is ok etc., so it might be a bit heavy handed.
  * 
  * @author Ariel Sommeria-klein
  * @package Amfphp_Plugins_Monitor
  */
 class AmfphpMonitor {
     /**
-     * path to log file. 
+     * path to log file. If it is publicly accessible
      * @var string 
      */
     protected $logPath;
+    
     
     /**
      * service and method name. If they are multiple calls in request, they are spearated with a ', '
@@ -67,7 +72,14 @@ class AmfphpMonitor {
      */
     protected $restrictAccess = true;
     
-
+    /**
+     * The maximum size of the log file, in bytes. Once the log is bigger than this, logging stops.
+     * Note that this is not strict, it can overflow with the last log.
+     * 
+     * @var int 
+     */
+    protected $maxLogFileSize = 1000000;
+    
     /**
      * constructor.
      * manages log path. If file exists at log path, adds hooks for logging.
@@ -75,8 +87,10 @@ class AmfphpMonitor {
      */
     public function __construct(array $config = null) {
         self::$lastMeasuredTime = round(microtime(true) * 1000);
+        self::$times = array();
         $filterManager = Amfphp_Core_FilterManager::getInstance();
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_SERVICE_NAMES_2_CLASS_FIND_INFO, $this, 'filterServiceNames2ClassFindInfo');
+        
         if (isset($config['logPath'])) {
             $this->logPath = $config['logPath'];
         }else{
@@ -87,6 +101,19 @@ class AmfphpMonitor {
             $this->restrictAccess = $config['restrictAccess'];    
         }
         AmfphpMonitorService::$restrictAccess = $this->restrictAccess;
+        if(isset($config['maxLogFileSize'])){
+            $this->maxLogFileSize = $config['maxLogFileSize'];    
+        }
+        
+        if(!is_writable($this->logPath) && !is_readable($this->logPath)){
+            throw new Amfphp_Core_Exception('AmfphpMonitor does not have permission to write to ' . $this->logPath);
+        }
+        
+        $this->dbConnection = new SQLite3($this->logPath);
+
+        if(filesize($this->logPath) > $this->maxLogFileSize){
+            return;
+        }
         
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_REQUEST, $this, 'filterDeserializedRequest');
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_RESPONSE, $this, 'filterDeserializedResponse');
@@ -155,22 +182,40 @@ class AmfphpMonitor {
     }
 
     /**
-     * logs the time for end of serialization
-     * ignores calls to AmfphpMonitorService/getData
+     * logs the time for end of serialization and writes log
+     * ignores calls to Amfphp services (checks for 'Amfphp' at beginning of name)
+     * tries to get a lock on the file, and if not then just drops the log. 
+     * 
      * @param mixed $rawData
      */
     public function filterSerializedResponse($rawData) {
-        if($this->uri == 'AmfphpMonitorService/getData'){
+        if(substr($this->uri, 0, 6) == 'Amfphp'){
             return;
         }
+        
+        if(filesize($this->logPath) > $this->maxLogFileSize){
+            return;
+        }
+        
         self::addTime('Serialization');
         $record = new stdClass();
         $record->uri = $this->uri;
         $record->times = self::$times;
-        file_put_contents($this->logPath, "\n" . serialize($record), FILE_APPEND);
+        
+        $fp = fopen($this->logPath, "a");
+
+        if (flock($fp, LOCK_EX)) {  // acquire an exclusive lock
+            fwrite($fp, "\n" . serialize($record));
+            fflush($fp);            // flush output before releasing the lock
+            flock($fp, LOCK_UN);    // release the lock
+        } else {
+            echo "Couldn't get the lock!";
+        }
+
+        fclose($fp);        
         
     }
-    
+
     
 }
 
