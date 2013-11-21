@@ -453,6 +453,7 @@ function toggleLoadTest(){
 
 function onLoadTestResult(callsPerSec){
     console.log(callsPerSec);
+    onResult(callsPerSec + ' calls per second');
 }
 
 /**
