@@ -194,6 +194,9 @@ $(function () {
     $("#callDialog").hide();
     $("#advancedCall").hide();
     isAdvancedDialogVisible = false;
+    if($.cookie('advanced')){
+        toggleAdvanced();
+    }
     
 
 
@@ -509,10 +512,13 @@ function toggleAdvanced(){
         $("#advancedCall").show();
         $("#basicCall").hide();
         $("#toggleAdvancedLink").text("Hide Advanced Call Options");
+        $.cookie('advanced', true);
     }else{
         $("#advancedCall").hide();
         $("#basicCall").show();
         $("#toggleAdvancedLink").text("Show Advanced Call Options");
+        $.removeCookie('advanced');
+
     }
     
 }
