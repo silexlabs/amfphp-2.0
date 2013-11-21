@@ -68,6 +68,13 @@ $config = new Amfphp_BackOffice_Config();
                  * */
                 var focusedUri;
                 
+                /**
+                 *The server returns a list of time names that we know is complete 
+                 *but is not necessarily in the right order. 
+                 *So create an ordered list here
+                 **/
+                var orderedTimeNames;
+                
                 $(function () {	
                     document.title = "AmfPHP - Performance Monitor";
                     $("#titleSpan").text(document.title);
@@ -149,6 +156,18 @@ $config = new Amfphp_BackOffice_Config();
                     
                     showAllUris();
                     
+                    $('#chartDiv').bind('jqplotDataClick', 
+                        function (ev, seriesIndex, pointIndex, data) {
+                            var message = "";
+                            if(!focusedUri){
+                                message = "Average ";
+                            }
+                            message += orderedTimeNames[seriesIndex] + ' Duration : '+data + 'ms';
+                            $('#statusMessage').html(message);
+                        }
+                    );       
+                    
+                    
                     
                 }
                 
@@ -164,7 +183,8 @@ $config = new Amfphp_BackOffice_Config();
                     var missingTimes = [];
                     var missingTimesAssoc = {};
                     var seriesOptions = [];
-                    var seriesOptionsSet = false;
+                    var orderedTimedNamesSet = false;
+                    orderedTimeNames = [];
                     
                     //here a uri referes to a service method, as that is what is used to sort the data
                     for(var uri in serverData.sortedData){
@@ -206,13 +226,14 @@ $config = new Amfphp_BackOffice_Config();
                             }
                             formattedUriData.push(totalDuration / numTimes);
                             //first time round grab the time names for series labels
-                            if(!seriesOptionsSet){
+                            if(!orderedTimedNamesSet){
                                 seriesOptions.push({label:timeName});
+                                orderedTimeNames.push(timeName);
                             }
                         }
                         seriesData.push(formattedUriData);
                         ticks.push(uri);
-                        seriesOptionsSet = true;
+                        orderedTimedNamesSet = true;
                     }
                     
                     console.log(seriesData);
@@ -228,9 +249,9 @@ $config = new Amfphp_BackOffice_Config();
                     console.log(flippedSeriesData);
                     
                     if(ignoredUris.length > 0){
-                        var message = "The following service methods were ignored because their data does not have all expected times.<br/>";
+                        var message = "The following service methods were ignored because their data does not have all expected times: ";
                         message += ignoredUris.join(', ');
-                        message += "<br/>The missing times are the following : <br/>";
+                        message += "<br/>The missing times are the following : ";
                         message += missingTimes.join(', ');
                         message += "<br/>For a service method to appear in the chart make sur it logs those times.<br/>";
                         $("#statusMessage").html(message);
@@ -277,11 +298,6 @@ $config = new Amfphp_BackOffice_Config();
                             focusOnUri($(this).text());
                             
                         });
-                    $('#chartDiv').bind('jqplotDataClick', 
-                        function (ev, seriesIndex, pointIndex, data) {
-                            $('#statusMessage').html('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
-                        }
-                    );       
                     updateControls();
                 }
                 
@@ -292,9 +308,8 @@ $config = new Amfphp_BackOffice_Config();
                     focusedUri = uri;
                     console.log("focussing on " + focusedUri);
                     var seriesData = [];
-                    var ticks = [];
                     var seriesOptions = [];
-                    var seriesOptionsSet = false;
+                    var orderedTimedNamesSet = false;
                     
                     //data for each target uri
                     var rawUriData = serverData.sortedData[uri];
@@ -303,13 +318,11 @@ $config = new Amfphp_BackOffice_Config();
                     for(var timeName in rawUriData){
 
                         var timeData = rawUriData[timeName];
-                        //first time round grab the time names for series labels
-                        if(!seriesOptionsSet){
-                            seriesOptions.push({label:timeName});
-                        }
-                        seriesData.push(timeData);
+                        seriesOptions.push({label:timeName});
+                        orderedTimeNames.push(timeName);
+                        seriesData.push(timeData.reverse());
+                        
                     }
-                    seriesOptionsSet = true;
                     
                     console.log(seriesData);
                     
@@ -332,13 +345,7 @@ $config = new Amfphp_BackOffice_Config();
                         axes: {
                            
                             yaxis: {
-                                // Don't pad out the bottom of the data range.  By default,
-                                // axes scaled as if data extended 10% above and below the
-                                // actual range to prevent data points right on grid boundaries.
-                                // Don't want to do that here.
-                                padMin: 0,
-                                renderer: $.jqplot.CategoryAxisRenderer,
-                                ticks: ticks
+                                showTicks:false
                             }
                         },
                         legend: {

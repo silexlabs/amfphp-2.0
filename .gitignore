@@ -69,3 +69,5 @@ BackOffice/ClientGenerator/Generators/AmfphpFlashClientGenerator/Template/bin-de
 Amfphp/Plugins/AmfphpMonitor/log.txt
 
 Tests/TestData/request.amf
+
+Amfphp/Plugins/AmfphpMonitor/log.txt.php
