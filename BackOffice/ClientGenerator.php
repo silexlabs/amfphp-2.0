@@ -40,7 +40,7 @@ $config = new Amfphp_BackOffice_Config();
                 ?>
             </div>
             <div  id='right'>
-                <div class="menu" id="callDialog">
+                <div class="menu" id="methodDialog">
 
                     Use one of the following generators to generate a client Stub project. <br/>
                     The project includes :<br/><br/>

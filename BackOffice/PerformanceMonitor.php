@@ -156,18 +156,6 @@ $config = new Amfphp_BackOffice_Config();
                     
                     showAllUris();
                     
-                    $('#chartDiv').bind('jqplotDataClick', 
-                        function (ev, seriesIndex, pointIndex, data) {
-                            var message = "";
-                            if(!focusedUri){
-                                message = "Average ";
-                            }
-                            message += orderedTimeNames[seriesIndex] + ' Duration : '+data + 'ms';
-                            $('#statusMessage').html(message);
-                        }
-                    );       
-                    
-                    
                     
                 }
                 
@@ -299,8 +287,22 @@ $config = new Amfphp_BackOffice_Config();
                             
                         });
                     updateControls();
+                    $('#chartDiv').bind('jqplotDataClick', 
+                        function (ev, seriesIndex, pointIndex, data) {
+                            var message = "";
+                            if(!focusedUri){
+                                message = "Average ";
+                            }
+                            message += orderedTimeNames[seriesIndex] + ' Duration : '+data + 'ms';
+                            $('#statusMessage').html(message);
+                        }
+                    );                       
                 }
                 
+                /**
+                 * show data for 1 call uri.
+                 * note: only the first 20 calls are shown, so as not to drown the browser.
+                 */
                 function focusOnUri(uri){
                     if(plot){
                         plot.destroy();
@@ -318,6 +320,7 @@ $config = new Amfphp_BackOffice_Config();
                     for(var timeName in rawUriData){
 
                         var timeData = rawUriData[timeName];
+                        timeData = timeData.slice(0, 20);
                         seriesOptions.push({label:timeName});
                         orderedTimeNames.push(timeName);
                         seriesData.push(timeData.reverse());

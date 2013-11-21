@@ -1,15 +1,19 @@
 package
 {
 	
+	
 	import flash.display.Sprite;
+	import flash.events.TimerEvent;
 	import flash.external.ExternalInterface;
 	import flash.net.NetConnection;
 	import flash.net.Responder;
 	import flash.net.getClassByAlias;
 	import flash.net.registerClassAlias;
 	import flash.utils.Dictionary;
+	import flash.utils.Timer;
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
+	import flash.utils.getTimer;
 	
 	
 	
@@ -22,10 +26,27 @@ package
 		private var numUsedDummyClasses:int = 0;
 		private var type2Class:Dictionary = new Dictionary();
 		
+		private var enhancedNetConnections:Array;
+		
+		private var isLoadTesting:Boolean;
+		
+		private var loadTestingCallArgs:Array;
+		
+		private var callCounter:uint;
+		
+		//not used yet
+		private var pauseBetweenCallsMs:uint;
+		
+		private var timeAtLastMeasure:uint; 
+		
+		private var measureTimer:Timer;
+		
 		public function AmfCaller()
 		{
 			ExternalInterface.addCallback("call", call);
 			ExternalInterface.addCallback("isAlive", isAlive);
+			ExternalInterface.addCallback("loadTest", loadTest);
+			ExternalInterface.addCallback("stopLoadTest", stopLoadTest);
 			
 			//need this to make sure compiler includes dummy classes
 			var dummyRef:Class = Dummy0;
@@ -48,6 +69,9 @@ package
 			dummyRef = Dummy17;
 			dummyRef = Dummy18;
 			dummyRef = Dummy19;
+			measureTimer = new Timer(1000);
+			measureTimer.addEventListener(TimerEvent.TIMER, measureTimerHandler);
+			
 		}
 		
 		/**
@@ -70,12 +94,69 @@ package
 			}	
 			netConnection.call.apply(netConnection, callArgs);
 		}
+		
+		/**
+		 * make concurrent looped calls to server.
+		 * call stopLoadTest to stop
+		 * */
+		public function loadTest(url:String, command:String, numConcurrentCalls:uint, parameters:Array):void{
+			callCounter = 0;
+			enhancedNetConnections = new Array();
+			loadTestingCallArgs = new Array(command);
+			type2Class = new Dictionary();
+			for each(var param:* in parameters){
+				loadTestingCallArgs.push(convertObjectUsingExplicitType(param));
+				
+			}	
+			for(var i:int = 0; i < numConcurrentCalls; i++){
+				var enc:EnhancedNetConnection = new EnhancedNetConnection();
+				enhancedNetConnections.push(enc);
+				enc.connect(url);
+				enc.callWithEvents.apply(enc, loadTestingCallArgs);
+				enc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, encResultHandler);
+				enc.addEventListener(EnhancedNetConnection.EVENT_ONSTATUS, encResultHandler);
+			}
+			
+			isLoadTesting = true;
+			timeAtLastMeasure = getTimer();
+			measureTimer.start();
+		}
+		
+		private function encResultHandler(event:ObjEvent):void{
+			callCounter++;
+			if(isLoadTesting){
+				var enc:EnhancedNetConnection = EnhancedNetConnection(event.target);
+				enc.callWithEvents.apply(enc, loadTestingCallArgs);
+			}
+		}	
+		/**
+		 * measure number of executed calls since last timer
+		 * and call onLoadTestResult JS callback.
+		 * */
+		private function measureTimerHandler(event:TimerEvent):void{
+			var now:int = getTimer();
+			var callsPerSecond:Number = callCounter / (now - timeAtLastMeasure) * 1000;
+			ExternalInterface.call("onLoadTestResult", callsPerSecond);
+			timeAtLastMeasure = now;
+			callCounter = 0;
+			if(!isLoadTesting){
+				measureTimer.stop();
+			}
+			
+		}
+		
+		/**
+		 * called from js to stop load testing.
+		 * 
+		 * */
+		public function stopLoadTest():void{
+			isLoadTesting = false;
+		}
 
 		/**
 		 * callback used both for error and success. calls onResult in JS.
 		 * */
 		private function resultHandler(obj:Object):void{
-			
 			ExternalInterface.call("onResult", obj);
 			
 		}
