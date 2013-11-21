@@ -143,10 +143,6 @@ h3{
     
 }
 
-#statusMessage{
-    margin: 10px;
-}
-
 .paramEditorContainer{
     /* 
     The editor must be created in a div with absolute position. So use a wrapper for positioning. 
@@ -175,3 +171,8 @@ button span {
     background-color: white;
     padding: 10px;
 }
+
+#controls{
+    margin-bottom: 10px;
+}
+

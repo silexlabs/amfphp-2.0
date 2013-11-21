@@ -24,8 +24,8 @@ require_once(dirname(__FILE__) . '/ClassLoader.php');
 
 $errorMessage = '';
 $redirectToHome = false;
+$config = new Amfphp_BackOffice_Config();
 try {
-    $config = new Amfphp_BackOffice_Config();
     if (count($config->backOfficeCredentials) == 0) {
         throw new Exception('Sign In is not possible because no credentials were set. <a href="http://www.silexlabs.org/amfphp/documentation/using-the-back-office/">Help</a>');
     }
@@ -85,14 +85,24 @@ try {
                         <input type = "Submit" value = "Sign In"/>
 
                     </form>
+                    AmfPHP <?php echo AMFPHP_VERSION; ?> <span id="latestVersionInfo"></span>
+                    <br/>
+                    <button id="newsBtn" onclick="toggleNews()">
+                        <img src="feed-icon-14x14.png"></img>
+                        <span id="toggleNewsText">Show News</span>
+                    </button>
+                    <div id="divRss"></div>
                 </div>                    
             </div>
 
-        <script>
-            $(function () {	        
+            <script>
+                $(function () {	        
                     document.title = "AmfPHP Back Office - Sign In";
                     $("#titleSpan").text("AmfPHP Back Office - Sign In");
-            });
+                    <?php if($config->fetchAmfphpUpdates){
+                    //only load update info once services loaded(that's the important stuff)
+                        echo 'showAmfphpUpdates();';
+                    }?>                     
+                });
             
-        </script>
-                    
+            </script>

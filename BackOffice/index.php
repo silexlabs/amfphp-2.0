@@ -19,6 +19,7 @@
 require_once(dirname(__FILE__) . '/ClassLoader.php');
 $accessManager = new Amfphp_BackOffice_AccessManager();
 $isAccessGranted = $accessManager->isAccessGranted();
+$config = new Amfphp_BackOffice_Config();
 ?>
 <html>
     <?php require_once(dirname(__FILE__) . '/HtmlHeader.inc.php'); ?>
@@ -46,7 +47,14 @@ $isAccessGranted = $accessManager->isAccessGranted();
             $(function () {	        
                     document.title = "AmfPHP Back Office";
                     $("#titleSpan").text("AmfPHP Back Office");
+                    <?php if($config->fetchAmfphpUpdates){
+                        echo 'showAmfphpUpdates();';
+                    }?> 
+
+                    
             });
+            
+
             
         </script>
         

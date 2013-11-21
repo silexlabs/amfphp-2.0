@@ -65,7 +65,7 @@ $config = new Amfphp_BackOffice_Config();
                         <div id="advancedCall">
                             <input class="notParamEditor" type="submit" value="Call JSON" onclick="makeJsonCall()"/>  
                             <input class="notParamEditor" type="submit" value="Call AMF" onclick="makeAmfCall()"/>       
-                            <input class="notParamEditor" type="submit" id="toggleLoadTestBtn" value="Start Load Test AMF" onclick="toggleLoadTest()"/>       
+                            <input class="notParamEditor" type="submit" id="toggleLoopBtn" value="Start Loop AMF" onclick="toggleLoop()"/>       
                             Number of Concurrent Requests
                             <input id="concurrencyInput" value="1"/>       
                             <div id="amfCallerContainer">
@@ -140,9 +140,9 @@ var paramEditors = [];
 var amfCaller;
 
 /**
- * is load testing
+ * is Looping
  */
-var isLoadTesting;
+var isLooping;
 
 /**
  * maintains state for showing or hiding advanced call options
@@ -190,13 +190,15 @@ $(function () {
 
     });
 
-    isLoadTesting = false;
+    isLooping = false;
     $("#callDialog").hide();
     $("#advancedCall").hide();
     isAdvancedDialogVisible = false;
     if($.cookie('advanced')){
         toggleAdvanced();
     }
+
+    resize();    
     
 
 
@@ -429,8 +431,8 @@ function makeAmfCall(){
 
 }
 
-function toggleLoadTest(){
-    if(!isLoadTesting){
+function toggleLoop(){
+    if(!isLooping){
         var concurrency = parseInt($("#concurrencyInput").val());
         if(isNaN(concurrency)){
             alert("Invalid number of concurrent requests");
@@ -438,21 +440,20 @@ function toggleLoadTest(){
         }
     }
     
-    isLoadTesting = !isLoadTesting;
-    if(isLoadTesting){
-        $("#toggleLoadTestBtn").prop("value", "Stop Load Test AMF");
-        amfCaller.loadTest(amfphpEntryPointUrl, serviceName + "/" + methodName, concurrency, getCallParameterValues());
+    isLooping = !isLooping;
+    if(isLooping){
+        $("#toggleLoopBtn").prop("value", "Stop Loop AMF");
+        amfCaller.loop(amfphpEntryPointUrl, serviceName + "/" + methodName, concurrency, getCallParameterValues());
         
     }else{
-        $("#toggleLoadTestBtn").prop("value", "Start Load Test AMF");
-        amfCaller.stopLoadTest();
+        $("#toggleLoopBtn").prop("value", "Start Loop AMF");
+        amfCaller.stopLoop();
         
     }
 
 }
 
-function onLoadTestResult(callsPerSec){
-    console.log(callsPerSec);
+function onLoopResult(callsPerSec){
     onResult(callsPerSec + ' calls per second');
 }
 

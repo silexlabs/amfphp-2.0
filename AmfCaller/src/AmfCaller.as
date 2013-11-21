@@ -28,9 +28,9 @@ package
 		
 		private var enhancedNetConnections:Array;
 		
-		private var isLoadTesting:Boolean;
+		private var isLooping:Boolean;
 		
-		private var loadTestingCallArgs:Array;
+		private var loopingCallArgs:Array;
 		
 		private var callCounter:uint;
 		
@@ -45,8 +45,8 @@ package
 		{
 			ExternalInterface.addCallback("call", call);
 			ExternalInterface.addCallback("isAlive", isAlive);
-			ExternalInterface.addCallback("loadTest", loadTest);
-			ExternalInterface.addCallback("stopLoadTest", stopLoadTest);
+			ExternalInterface.addCallback("loop", loop);
+			ExternalInterface.addCallback("stopLoop", stopLoop);
 			
 			//need this to make sure compiler includes dummy classes
 			var dummyRef:Class = Dummy0;
@@ -97,49 +97,49 @@ package
 		
 		/**
 		 * make concurrent looped calls to server.
-		 * call stopLoadTest to stop
+		 * call stopLoop to stop
 		 * */
-		public function loadTest(url:String, command:String, numConcurrentCalls:uint, parameters:Array):void{
+		public function loop(url:String, command:String, numConcurrentCalls:uint, parameters:Array):void{
 			callCounter = 0;
 			enhancedNetConnections = new Array();
-			loadTestingCallArgs = new Array(command);
+			loopingCallArgs = new Array(command);
 			type2Class = new Dictionary();
 			for each(var param:* in parameters){
-				loadTestingCallArgs.push(convertObjectUsingExplicitType(param));
+				loopingCallArgs.push(convertObjectUsingExplicitType(param));
 				
 			}	
 			for(var i:int = 0; i < numConcurrentCalls; i++){
 				var enc:EnhancedNetConnection = new EnhancedNetConnection();
 				enhancedNetConnections.push(enc);
 				enc.connect(url);
-				enc.callWithEvents.apply(enc, loadTestingCallArgs);
+				enc.callWithEvents.apply(enc, loopingCallArgs);
 				enc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, encResultHandler);
 				enc.addEventListener(EnhancedNetConnection.EVENT_ONSTATUS, encResultHandler);
 			}
 			
-			isLoadTesting = true;
+			isLooping = true;
 			timeAtLastMeasure = getTimer();
 			measureTimer.start();
 		}
 		
 		private function encResultHandler(event:ObjEvent):void{
 			callCounter++;
-			if(isLoadTesting){
+			if(isLooping){
 				var enc:EnhancedNetConnection = EnhancedNetConnection(event.target);
-				enc.callWithEvents.apply(enc, loadTestingCallArgs);
+				enc.callWithEvents.apply(enc, loopingCallArgs);
 			}
 		}	
 		/**
 		 * measure number of executed calls since last timer
-		 * and call onLoadTestResult JS callback.
+		 * and call onLoopResult JS callback.
 		 * */
 		private function measureTimerHandler(event:TimerEvent):void{
 			var now:int = getTimer();
 			var callsPerSecond:Number = callCounter / (now - timeAtLastMeasure) * 1000;
-			ExternalInterface.call("onLoadTestResult", callsPerSecond);
+			ExternalInterface.call("onLoopResult", callsPerSecond);
 			timeAtLastMeasure = now;
 			callCounter = 0;
-			if(!isLoadTesting){
+			if(!isLooping){
 				measureTimer.stop();
 			}
 			
@@ -149,8 +149,8 @@ package
 		 * called from js to stop load testing.
 		 * 
 		 * */
-		public function stopLoadTest():void{
-			isLoadTesting = false;
+		public function stopLoop():void{
+			isLooping = false;
 		}
 
 		/**
