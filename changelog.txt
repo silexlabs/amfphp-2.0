@@ -14,11 +14,15 @@ backoffice :
 add support for @amfphpHide in method comments so that the method is callable but does not appear in the back office.
 move all service calls to client side (ajax)
 fetch update info
+add extra config option to avoid editing config directly(better for upgrades)
+
+New Performance Monitor in back office. 
 
 Service browser :
 Better use of service comments: comments appear in service browser, possibility to set default for use in service browser.
 ace editor added to edit params
 add possibility to call using AMF or JSON
+basic load testing with AMF
 truncate tree at 100 nodes to allow calls to methods that return large datasets
 functionality all moved to client. 
 

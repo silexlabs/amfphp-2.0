@@ -44,7 +44,14 @@ class Amfphp_BackOffice_Config {
      * @var boolean
      */
     public $requireSignIn = true;
-
+    
+    /**
+     * if true the back office shall fetch information about the latest version of amfphp and read the 
+     * amfphp news on opening. This information is stored and refreshed only once a week.
+     * 
+     * @var boolean 
+     */
+    public $fetchAmfphpUpdates = true;
     /**
      * constructor
      */
@@ -53,6 +60,10 @@ class Amfphp_BackOffice_Config {
         //example code for username + password:
         //$this->backOfficeCredentials['login'] = 'password';
         //$this->backOfficeCredentials['a'] = 'a';
+        $extraConfigPath = dirname(__FILE__) . '/extraConfig.php';
+        if(file_exists($extraConfigPath)){
+            include $extraConfigPath;
+        }
     }
 
     /**
