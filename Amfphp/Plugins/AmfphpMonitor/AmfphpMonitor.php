@@ -109,8 +109,6 @@ class AmfphpMonitor {
             throw new Amfphp_Core_Exception('AmfphpMonitor does not have permission to write to ' . $this->logPath);
         }
         
-        $this->dbConnection = new SQLite3($this->logPath);
-
         if(filesize($this->logPath) > $this->maxLogFileSize){
             return;
         }

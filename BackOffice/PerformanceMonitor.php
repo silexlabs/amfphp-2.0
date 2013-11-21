@@ -43,7 +43,10 @@ $config = new Amfphp_BackOffice_Config();
             </div>
             <div  id='right'>
                 <div class="menu" id="performanceDisplay">
-                    <div id="statusMessage" style="max-width:100%"></div>
+                    <div id="controls">
+                        <a onclick="showAllUris()">All Calls</a><span id="focusedUriInfo"></span>
+                    </div>
+                    <div id="statusMessage" style="max-width:100%"> &nbsp;</div>
                     <div id="chartDivContainer">
                         <div id="chartDiv"></div>
                     </div>                  
@@ -55,6 +58,15 @@ $config = new Amfphp_BackOffice_Config();
                  * the chart
                  * */
                 var plot;
+                /**
+                 * the full data received from the server
+                 * */
+                var serverData;
+                
+                /**
+                 * the uri of the service method on which the focus is. null when all uris are shown
+                 * */
+                var focusedUri;
                 
                 $(function () {	
                     document.title = "AmfPHP - Performance Monitor";
@@ -90,7 +102,7 @@ $config = new Amfphp_BackOffice_Config();
                     var availableWidth = $( "#main" ).width() - $("#left").outerWidth(true) - 100;
                     $( "#chartDiv" ).css( "width", availableWidth +  "px" );
                     
-                    var availableHeight = $( "body" ).height() - $("#main").offset().top - 130;
+                    var availableHeight = $( "body" ).height() - $("#main").offset().top - 150;
                     $( "#chartDiv" ).css( "height", availableHeight +  "px" );
                     if(plot){
                         plot.replot( { resetAxes: true } );
@@ -102,6 +114,14 @@ $config = new Amfphp_BackOffice_Config();
                 function displayStatusMessage(html){
                     $('#statusMessage').html(html);
                 }
+                
+                function updateControls(){
+                    if(focusedUri){
+                        $("#focusedUriInfo").text("> " + focusedUri);
+                    }else{
+                        $("#focusedUriInfo").empty();
+                    }
+                }
 
                 /**
                  * callback for when performance data loaded from server . 
@@ -109,6 +129,8 @@ $config = new Amfphp_BackOffice_Config();
                  */
                 function onDataLoaded(data)
                 {
+                    serverData = data;
+                    
                     if(typeof data == "string"){
                         //some predictable error messages
                         if(data.indexOf("AmfphpMonitorService service not found") != -1){
@@ -124,7 +146,18 @@ $config = new Amfphp_BackOffice_Config();
                     }
 
                     console.log(data);
-
+                    
+                    showAllUris();
+                    
+                    
+                }
+                
+                function showAllUris(){
+                    if(plot){
+                        plot.destroy();
+                    }
+                    focusedUri = null;
+                    
                     var seriesData = [];
                     var ticks = [];
                     var ignoredUris = [];
@@ -134,14 +167,14 @@ $config = new Amfphp_BackOffice_Config();
                     var seriesOptionsSet = false;
                     
                     //here a uri referes to a service method, as that is what is used to sort the data
-                    for(var uri in data.sortedData){
-                        //                        //data for each target uri
-                        var rawUriData = data.sortedData[uri];
+                    for(var uri in serverData.sortedData){
+                        //data for each target uri
+                        var rawUriData = serverData.sortedData[uri];
                         var formattedUriData = [];
                         //sanity check: ignore uri if a time is missing
                         var ignoreUri = false;
-                        for(var i = 0; i < data.timeNames.length; i++){
-                            var expectedTimeName = data.timeNames[i];
+                        for(var i = 0; i < serverData.timeNames.length; i++){
+                            var expectedTimeName = serverData.timeNames[i];
                             if(!rawUriData.hasOwnProperty(expectedTimeName)){
                                 ignoreUri = true;
                                 if(!missingTimesAssoc.hasOwnProperty(expectedTimeName)){
@@ -216,8 +249,7 @@ $config = new Amfphp_BackOffice_Config();
                                 // Disables default highlighting on mouse over.
                                 highlightMouseDown: true
                             },
-                            pointLabels: {show: true, labelsFromSeries:true}
-                            //, labels:[['a','b'], ['c', 'd']]
+                            pointLabels: {show: true}
                         },
                         axes: {
                            
@@ -236,10 +268,87 @@ $config = new Amfphp_BackOffice_Config();
                             location: 'e',
                             placement: 'inside'
                         }, 
-                         series:seriesOptions, 
+                         series:seriesOptions 
                     });
         
+                    $('.jqplot-yaxis-tick')
+                        .css({ cursor: "pointer", zIndex: "1" })
+                        .click(function (ev) { 
+                            focusOnUri($(this).text());
+                            
+                        });
+                    $('#chartDiv').bind('jqplotDataClick', 
+                        function (ev, seriesIndex, pointIndex, data) {
+                            $('#statusMessage').html('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
+                        }
+                    );       
+                    updateControls();
+                }
+                
+                function focusOnUri(uri){
+                    if(plot){
+                        plot.destroy();
+                    }
+                    focusedUri = uri;
+                    console.log("focussing on " + focusedUri);
+                    var seriesData = [];
+                    var ticks = [];
+                    var seriesOptions = [];
+                    var seriesOptionsSet = false;
                     
+                    //data for each target uri
+                    var rawUriData = serverData.sortedData[uri];
+
+                    //look at data for each time 
+                    for(var timeName in rawUriData){
+
+                        var timeData = rawUriData[timeName];
+                        //first time round grab the time names for series labels
+                        if(!seriesOptionsSet){
+                            seriesOptions.push({label:timeName});
+                        }
+                        seriesData.push(timeData);
+                    }
+                    seriesOptionsSet = true;
+                    
+                    console.log(seriesData);
+                    
+                    plot = $.jqplot('chartDiv', seriesData, {
+                        // Tell the plot to stack the bars.
+                        stackSeries: true,
+                        captureRightClick: true,
+                        seriesDefaults:{
+                            renderer:$.jqplot.BarRenderer,
+                            rendererOptions: {
+                                // Put a 30 pixel margin between bars.
+                                barMargin: 30,
+                                barDirection: 'horizontal',
+                                // Highlight bars when mouse button pressed.
+                                // Disables default highlighting on mouse over.
+                                highlightMouseDown: true
+                            },
+                            pointLabels: {show: true}
+                        },
+                        axes: {
+                           
+                            yaxis: {
+                                // Don't pad out the bottom of the data range.  By default,
+                                // axes scaled as if data extended 10% above and below the
+                                // actual range to prevent data points right on grid boundaries.
+                                // Don't want to do that here.
+                                padMin: 0,
+                                renderer: $.jqplot.CategoryAxisRenderer,
+                                ticks: ticks
+                            }
+                        },
+                        legend: {
+                            show: true,
+                            location: 'e',
+                            placement: 'inside'
+                        }, 
+                         series:seriesOptions 
+                    });
+                    updateControls();
                 }
 
             </script>
