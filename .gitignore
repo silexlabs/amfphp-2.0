@@ -52,22 +52,11 @@ Icon?
 Thumbs.db
 BackOffice/ClientGenerator/Generators/AmfphpFlexClientGenerator/Template/bin-debug/*
 
-Amfphp/Plugins/BaguetteAmf/BaguetteAmfSerializer.php
-
-Amfphp/Plugins/BaguetteAmf/BaguetteAmfDeserializer.php
-
-Amfphp/Plugins/BaguetteAmf/BaguetteAmfService.php
-
-Amfphp/Plugins/BaguetteAmf/BaguetteAmf.php
-
 .DS_Store
 
 AmfphpFlexUnit/src/FlexUnitCompilerApplication.mxml
 
 BackOffice/ClientGenerator/Generators/AmfphpFlashClientGenerator/Template/bin-debug/*
 
-Amfphp/Plugins/AmfphpMonitor/log.txt
 
 Tests/TestData/request.amf
-
-Amfphp/Plugins/AmfphpMonitor/log.txt.php
