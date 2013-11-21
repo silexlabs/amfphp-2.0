@@ -376,8 +376,7 @@ function focusOnUri(uri){
 /**
  * load data, and optionally flush
  */
-function refresh(){
-    displayStatusMessage("");    
+function refresh(){ 
     var flush = $("#flushOnRefreshCb").is(':checked');
     var callData = JSON.stringify({"serviceName":"AmfphpMonitorService", "methodName":"getData","parameters":[flush]});
     var request = $.ajax({
