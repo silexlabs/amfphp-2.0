@@ -58,7 +58,7 @@ class AmfphpMonitorService {
         //ignore "php exit " line
         $loggedData = substr($fileContent, 16);
         if($flush){
-            file_put_contents(self::$logPath, "<?php exit();?>\n");
+            $this->flush();
         }
         $exploded = explode("\n", $loggedData);
         
@@ -91,7 +91,12 @@ class AmfphpMonitorService {
         $ret->timeNames = array_keys($timeNamesAssoc);
         return $ret;
     }
-
+    /**
+     * flush monitor log
+     */
+    public function flush(){
+        file_put_contents(self::$logPath, "<?php exit();?>\n");
+    }
 }
 
 ?>

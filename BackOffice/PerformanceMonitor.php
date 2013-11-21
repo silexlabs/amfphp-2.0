@@ -44,9 +44,18 @@ $config = new Amfphp_BackOffice_Config();
             <div  id='right'>
                 <div class="menu" id="performanceDisplay">
                     <div id="controls">
-                        <a onclick="showAllUris()">All Calls</a><span id="focusedUriInfo"></span>
+                        <input type="submit" value="Flush" onclick="flush()"></input>
+                        <input type="submit" value="Refresh" onclick="refresh()"></input>
+                        <input type="checkbox" id="flushOnRefreshCb"></input>
+                        Flush on refresh
+                        <input type="submit" id="toggleAutoRefreshBtn" value="Start Auto Refresh" onclick="toggleAutoRefresh()"></input>
+                        Every
+                        <input value="1" id="autoRefreshIntervalInput"></input>
+                        Seconds<br/>
+                        <a onclick="showAllUris()">All Calls</a>
+                        <span id="focusedUriInfo"></span> &nbsp;&nbsp;
+                        <span id="statusMessage" style="max-width:100%"> </span>
                     </div>
-                    <div id="statusMessage" style="max-width:100%"> &nbsp;</div>
                     <div id="chartDivContainer">
                         <div id="chartDiv"></div>
                     </div>                  
@@ -75,29 +84,27 @@ var focusedUri;
  **/
 var orderedTimeNames;
 
+var isAutoRefreshing;
+
+/**
+ *auto refresh timer
+ **/
+var timer;
+
+var amfphpEntryPointUrl = "<?php echo $config->resolveAmfphpEntryPointUrl() ?>?contentType=application/json";
+
 $(function () {	
     document.title = "AmfPHP - Performance Monitor";
     $("#titleSpan").text(document.title);
 
-    var callData = JSON.stringify({"serviceName":"AmfphpMonitorService", "methodName":"getData","parameters":[false]});
-    var request = $.ajax({
-        url: "<?php echo $config->resolveAmfphpEntryPointUrl() ?>?contentType=application/json",
-        type: "POST",
-        data: callData
-    });
-
-    request.done(onDataLoaded);
-
-    request.fail(function( jqXHR, textStatus ) {
-        displayStatusMessage(textStatus + "<br/><br/>" + jqXHR.responseText);
-    });
-
     <?php if($config->fetchAmfphpUpdates){
-    //only load update info once services loaded(that's the important stuff)
         echo 'showAmfphpUpdates();';
     }?> 
 
     $( window ).bind( "resize", resize );                             
+    resize();
+    refresh();
+    isAutoRefreshing = false;
 
 });    
 
@@ -112,7 +119,9 @@ function resize(){
     var availableHeight = $( "body" ).height() - $("#main").offset().top - 150;
     $( "#chartDiv" ).css( "height", availableHeight +  "px" );
     if(plot){
-        plot.replot( { resetAxes: true } );
+        plot.replot({resetAxes:true});
+        //replotting removes listeners on labels which allow the user to select a call for details. So reset them.
+        addLabelListeners();
     }
 
 
@@ -126,7 +135,7 @@ function updateControls(){
     if(focusedUri){
         $("#focusedUriInfo").text("> " + focusedUri);
     }else{
-        $("#focusedUriInfo").empty();
+        $("#focusedUriInfo").text("(Click method for details)");
     }
 }
 
@@ -151,11 +160,12 @@ function onDataLoaded(data)
     if(data.sortedData.length == 0){
         displayStatusMessage("No data was available. Please make a service call then refresh. This can be done with the <a href='ServiceBrowser.php'>Service Browser</a>.");
     }
-
-    console.log(data);
-
-    showAllUris();
-
+    if(focusedUri){
+        focusOnUri(focusedUri);
+    }else{
+        showAllUris();
+    }
+    
 
 }
 
@@ -173,7 +183,10 @@ function showAllUris(){
     var seriesOptions = [];
     var orderedTimedNamesSet = false;
     orderedTimeNames = [];
-
+    
+    if(serverData.sortedData.length == 0){
+        return;
+    }
     //here a uri referes to a service method, as that is what is used to sort the data
     for(var uri in serverData.sortedData){
         //data for each target uri
@@ -278,13 +291,18 @@ function showAllUris(){
          series:seriesOptions 
     });
 
+                      
+    updateControls();
+    addLabelListeners();
+}
+
+function addLabelListeners(){
     $('.jqplot-yaxis-tick')
         .css({ cursor: "pointer", zIndex: "1" })
         .click(function (ev) { 
             focusOnUri($(this).text());
 
         });
-    updateControls();
     $('#chartDiv').bind('jqplotDataClick', 
         function (ev, seriesIndex, pointIndex, data) {
             var message = "";
@@ -294,9 +312,8 @@ function showAllUris(){
             message += orderedTimeNames[seriesIndex] + ' Duration : '+data + 'ms';
             $('#statusMessage').html(message);
         }
-    );                       
+    );     
 }
-
 /**
  * show data for 1 call uri.
  * note: only the first 20 calls are shown, so as not to drown the browser.
@@ -354,6 +371,72 @@ function focusOnUri(uri){
          series:seriesOptions 
     });
     updateControls();
+}
+
+/**
+ * load data, and optionally flush
+ */
+function refresh(){
+    displayStatusMessage("");    
+    var flush = $("#flushOnRefreshCb").is(':checked');
+    var callData = JSON.stringify({"serviceName":"AmfphpMonitorService", "methodName":"getData","parameters":[flush]});
+    var request = $.ajax({
+        url: amfphpEntryPointUrl,
+        type: "POST",
+        data: callData
+    });
+
+    request.done(onDataLoaded);
+
+    request.fail(function( jqXHR, textStatus ) {
+        displayStatusMessage(textStatus + "<br/><br/>" + jqXHR.responseText);
+    });
+    
+}
+
+/**
+ * flush monitor data on server.
+ */
+function flush(){
+    var callData = JSON.stringify({"serviceName":"AmfphpMonitorService", "methodName":"flush","parameters":[]});
+    var request = $.ajax({
+        url: amfphpEntryPointUrl,
+        type: "POST",
+        data: callData
+    });
+    request.done(function(){
+        displayStatusMessage("Data Flushed");
+    });
+    request.fail(function( jqXHR, textStatus ) {
+        displayStatusMessage(textStatus + "<br/><br/>" + jqXHR.responseText);
+    });
+    
+}
+
+
+/**
+ * start and stop auto refresh
+ */
+function toggleAutoRefresh(){
+    if(!isAutoRefreshing){
+        var interval = parseInt($("#autoRefreshIntervalInput").val());
+        if(isNaN(interval)){
+            alert("Invalid auto refresh interval");
+            return;
+        }
+    }
+    
+    isAutoRefreshing = !isAutoRefreshing;
+    if(isAutoRefreshing){
+        timer = setInterval(refresh, interval * 1000);
+        $("#toggleAutoRefreshBtn").prop("value", "Stop Auto Refresh");
+        
+    }else{
+        clearInterval(timer);
+        $("#toggleAutoRefreshBtn").prop("value", "Start Auto Refresh");
+        
+    }
+    
 }
 
 </script>
