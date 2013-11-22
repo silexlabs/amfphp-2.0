@@ -33,15 +33,16 @@ $temp = 0;
         <script type="text/javascript" src="js/dataparse.js"></script>
         <script type="text/javascript" src="js/ace/ace.js"></script>
         <script type="text/javascript" src="js/amfphp_updates.js"></script>
-        <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
         <script type="text/javascript" src="js/swfobject.js"></script>
         <script type="text/javascript" src="js/jquery.cookie.js"></script>
         <!--[if IE]><script language="javascript" type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
-        <script language="javascript" type="text/javascript" src="js/jquery.jqplot.min.js"></script>
+        <script language="javascript" type="text/javascript" src="js/jquery.jqplot.js"></script>
         <script language="javascript" type="text/javascript" src="js/jqplot.barRenderer.js"></script>
         <script language="javascript" type="text/javascript" src="js/jqplot.categoryAxisRenderer.js"></script>
         <script language="javascript" type="text/javascript" src="js/jqplot.pointLabels.js"></script>
-
+        
+        <script language="javascript" type="text/javascript" src="js/require.js"></script>
         <script type="text/javascript">
             <?php echo 'var amfphpVersion = "' . AMFPHP_VERSION . '";'; ?>
         </script>  
