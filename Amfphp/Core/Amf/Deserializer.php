@@ -13,10 +13,13 @@
 /**
  * Amfphp_Core_Amf_Deserializer takes the raw amf input stream and converts it PHP objects
  * representing the data.
- *
+ * 
+ * Based on code from amfphp 1.9, adapted and enhanced by Ariel Sommeria-Klein to amfphp 2.x architecture
+ * Vector code by Mick Powell
  * @package Amfphp_Core_Amf
  */
-class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
+class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer {
+
     /**
      * data to deserialize
      * @var string 
@@ -58,25 +61,25 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
      * @var array
      */
     protected $storedStrings;
-     
+
     /**
      *  objects stored for tracking references(amf3)
      * @var array
      */
     protected $storedObjects;
-    
+
     /**
      *  class definitions(traits) stored for tracking references(amf3)
      * @var array
-     */    
+     */
     protected $storedDefinitions;
-     
+
     /**
      *  objects stored for tracking references(amf0)
      * @var array
-     */    
+     */
     protected $amf0storedObjects;
-    
+
     /**
      *
      * @var Amfphp_Core_Common_IVoConverter
@@ -98,16 +101,15 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
         $this->readMessages(); // read the binary Messages
         return $this->deserializedPacket;
     }
-    
+
     /**
      * reset reference stores
      */
-    protected function resetReferences(){
+    protected function resetReferences() {
         $this->amf0storedObjects = array();
         $this->storedStrings = array();
         $this->storedObjects = array();
         $this->storedDefinitions = array();
-        
     }
 
     /**
@@ -123,10 +125,10 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
 			if (!($topByte == 0 || $topByte == 3)) {
             throw new Amfphp_Core_Exception('Malformed Amf Packet, connection may have dropped');
         }
-        if($secondByte == 3){
+        if ($secondByte == 3) {
             $this->deserializedPacket->amfVersion = Amfphp_Core_Amf_Constants::AMF3_ENCODING;
         }
-        
+
         $this->headersLeftToProcess = $this->readInt(); //  find the total number of header elements
 
         while ($this->headersLeftToProcess--) { // loop over all of the header elements
@@ -136,7 +138,7 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
             //$length   = $this->readLong(); // grab the length of  the header element
             $this->currentByte += 4; // grab the length of the header element
 
-            
+
             $type = $this->readByte();  // grab the type of the element
             $content = $this->readData($type); // turn the element into real data
 
@@ -162,7 +164,6 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
             $this->deserializedPacket->messages[] = $message;
         }
     }
-    
 
     /**
      * readInt grabs the next 2 bytes and returns the next two bytes, shifted and combined
@@ -386,28 +387,28 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
 
         return $val; // return the string
     }
-    
+
     /**
      * tries to use the type to get a typed object. If not possible, return a stdClass, 
      * with the explicit type marker set if the type was not just an empty string
      * @param type $typeIdentifier
      * @return stdClass or typed object 
      */
-    protected function resolveType($typeIdentifier){
-        if($typeIdentifier != ''){
-            if($this->voConverter){
+    protected function resolveType($typeIdentifier) {
+        if ($typeIdentifier != '') {
+            if ($this->voConverter) {
                 $obj = $this->voConverter->getNewVoInstance($typeIdentifier);
-            }else{
+            } else {
                 $obj = new stdClass();
                 $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
                 $obj->$explicitTypeField = $typeIdentifier;
             }
-        }else{
+        } else {
             $obj = new stdClass();
         }
         return $obj;
-        
     }
+
     /**
      * readCustomClass reads the amf content associated with a class instance which was registered
      * with Object.registerClass.  
@@ -428,7 +429,7 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
             $obj->$key = $val; // save the name/value pair in the array
             $key = $this->readUTF(); // get the next name
         }
-        return $obj; 
+        return $obj;
     }
 
     /**
@@ -464,6 +465,13 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
                 return $this->readAmf3Xml();
             case 0x0C :
                 return $this->readAmf3ByteArray();
+            case 0x0D :
+            case 0x0E :
+            case 0x0F :
+            case 0x10 :
+                return $this->readAmf3Vector($type);
+            case 0x11 :
+                throw new Amfphp_Core_Exception('dictionaries not supported, as it is not possible to use an object as array key in PHP ');
             default:
                 throw new Amfphp_Core_Exception('undefined Amf3 type encountered: ' . $type);
         }
@@ -508,7 +516,7 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
             }
         }
     }
-    
+
     /**
      * read amf 3 date
      * @return boolean|\Amfphp_Core_Amf_Types_Date
@@ -684,16 +692,16 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
         $obj = $this->resolveType($typeIdentifier);
         //Add to references as circular references may search for this object
         $this->storedObjects[] = & $obj;
-            
-        if($classDefinition['externalizable']){
-            if(($typeIdentifier == 'flex.messaging.io.ArrayCollection') || ($typeIdentifier == 'flex.messaging.io.ObjectProxy')){
-                    //special for Flex. This doesn't belong here, but it's the least worst way I found to support returning them
-                    $obj = $this->readAmf3Data();
-            }else{
+
+        if ($classDefinition['externalizable']) {
+            if (($typeIdentifier == 'flex.messaging.io.ArrayCollection') || ($typeIdentifier == 'flex.messaging.io.ObjectProxy')) {
+                //special for Flex. This doesn't belong here, but it's the least worst way I found to support returning them
+                $obj = $this->readAmf3Data();
+            } else {
                 $externalizedDataField = Amfphp_Core_Amf_Constants::FIELD_EXTERNALIZED_DATA;
                 $obj->$externalizedDataField = $this->readAmf3Data();
             }
-        }else{
+        } else {
             $members = $classDefinition['members'];
             $memberCount = count($members);
             for ($i = 0; $i < $memberCount; $i++) {
@@ -741,6 +749,93 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer{
         $this->currentByte += $len;
         return $data;
     }
+    
+
+    /**
+     * Reads a vector array of objects from the AMF stream. This works for all vector arrays: vector-object, vector-int vector-uint and 
+     * vector-double. The Vector is cast to a PHP array. Please note that because of the way php handles integers, uints have to be cast as 
+     * floats. See {@link http://php.net/manual/en/language.types.integer.php}
+     * @param        int             Type - the AMF vector array type.
+     * @return       array   The objects in the vector in a native PHP array.
+     */
+    protected function readAmf3Vector($type) {
+        /* AMF Spec: "The first (low) bit is a flag with value 1. The remaining 1 to 28 significant bits are used to encode the count of 
+          items in Vector." */
+        // according to the above - $inline will always be 1 after the bitshift, and what remains in $handle
+        // after the bitshift is the count of the vector 
+        $handle = $this->readAmf3Int();
+        $inline = (($handle & 1) != 0 );
+        $handle = $handle >> 1;
+        if ($inline) {
+            $vector = new Amfphp_Core_Amf_Types_Vector();
+            $vector->type = $type;
+            /* AMF Spec: "Boolean U8 value, 0x00 if not a fixed-length Vector, otherwise 0x01 if fixed-length." */
+            // we are not really concerned in PHP if the vector is fixed-length right now.
+            $vector->fixed = $this->readByte();
+            $vector->data = array();
+            $this->storedObjects[] = & $vector;
+            
+            if ($type === Amfphp_Core_Amf_Types_Vector::VECTOR_OBJECT) {
+                $vector->className = $this->readAmf3String();
+                for ($i = 0; $i < $handle; $i++) {
+                    //Grab the type for each element.
+                    $vector->data[] = $this->readAmf3Data();
+                }
+            }else{
+                switch ($type) {
+                    case Amfphp_Core_Amf_Types_Vector::VECTOR_INT : ;
+                        $length = 4;
+                        $format = "ival";
+                        break;
+                    case Amfphp_Core_Amf_Types_Vector::VECTOR_UINT :;
+                        $length = 4;
+                        $format = "Ival";
+                        break;
+                    case Amfphp_Core_Amf_Types_Vector::VECTOR_DOUBLE : ;
+                        $length = 8;
+                        $format = "dval";
+                        break;
+                }
+                for ($i = 0; $i < $handle; $i++) {
+                    //Grab the type for each element.
+                    $vector->data[] = $this->readAmf3VectorValue($length, $format);
+                }
+
+                
+            }
+
+            
+            return $vector;
+        } else {
+            return $this->storedObjects[$handle];
+        }
+    }
+
+    /**
+     * Read numeric values from the AMF byte stream. Please be aware that unsigned integers are not really supported in PHP, and for this reason
+     * unsigned integers are cast to float. {@link http://php.net/manual/en/language.types.integer.php}.
+     * 
+     * @param   integer You can specify 4 for integers or 8 for double precision floating point.
+     * @param   string  'ival' for signed integers, 'Ival' for unsigned integers, and "dval" for double precision floating point
+     * 
+     * @return <type>
+     */
+    protected function readAmf3VectorValue($length, $format) {
+        $bytes = $this->readBuffer($length);
+        if (Amfphp_Core_Amf_Util::isSystemBigEndian()) {
+            $bytes = strrev($bytes);
+        }
+        $array = unpack($format, $bytes);
+
+        // Unsigned Integers don't work in PHP amazingly enough. If you go into the "upper" region
+        // on the Actionscript side, this will come through as a negative without this cast to a float
+        // see http://php.net/manual/en/language.types.integer.php
+        if ($format === "Ival") {
+            $array["val"] = floatval(sprintf('%u', $array["val"]));
+        }
+        return $array["val"];
+    }
+
 
 }
 

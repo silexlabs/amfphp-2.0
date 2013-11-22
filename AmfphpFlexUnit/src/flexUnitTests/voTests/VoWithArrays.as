@@ -6,9 +6,7 @@ package flexUnitTests.voTests {
 		public var test1_arr:Array = new Array();
 		public var test2_arr:Array = new Array();
 		
-		static public function register():void {
-			registerClassAlias("VoWithArrays", VoWithArrays);
-		}
+		private static const REGISTERED:* = registerClassAlias("VoWithArrays", VoWithArrays);
 		
 	}
 }

@@ -51,7 +51,6 @@ package flexUnitTests
 		 * note: the 2 vos must be different, otherwise the second can be sent as a reference to the first
 		 * */
 		public function testSendingMixOfAnonymousAndTypedObjects():void{
-			VoWithArrays.register();
 			var vo1:VoWithArrays = new VoWithArrays();
 			vo1.test1_arr = new Array("bla");
 			var anon:Object = new Object();

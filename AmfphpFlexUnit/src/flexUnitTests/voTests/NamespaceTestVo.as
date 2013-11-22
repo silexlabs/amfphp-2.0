@@ -6,12 +6,8 @@ package flexUnitTests.voTests
 	{
 		public var dummyData:String = "client dummy data";
 		
-		public function NamespaceTestVo()
-		{
-		}
+		private static const REGISTERED:* = registerClassAlias("Sub1.NamespaceTestVo", NamespaceTestVo);
 		
-		static public function register():void {
-			registerClassAlias("Sub1.NamespaceTestVo", NamespaceTestVo);
-		}
+		
 	}
 }

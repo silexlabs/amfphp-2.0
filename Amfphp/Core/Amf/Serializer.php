@@ -35,7 +35,6 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer {
     /**
      * the maximum amount of objects stored for reference
      */
-
     const MAX_STORED_OBJECTS = 1024;
 
     /**
@@ -63,7 +62,7 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer {
      * @var array
      */
     protected $className2TraitsInfo;
-    
+
     /**
      *
      * @var Amfphp_Core_Common_IVoConverter
@@ -447,22 +446,22 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer {
         } elseif (is_null($d)) { // null
             $this->writeNull();
             return;
-        } elseif (Amfphp_Core_Amf_Util::is_undefined($d)) { // undefined
+        } elseif ($d instanceof Amfphp_Core_Amf_Types_Undefined) {
             $this->writeUndefined();
             return;
         } elseif (is_array($d)) { // array
             $this->writeArrayOrObject($d);
             return;
-        } elseif (Amfphp_Core_Amf_Util::is_date($d)) { // date
+        } elseif ($d instanceof Amfphp_Core_Amf_Types_Date) { // date
             $this->writeDate($d);
             return;
-        } elseif (Amfphp_Core_Amf_Util::is_Xml($d)) { // Xml (note, no XmlDoc in AMF0)
+        } elseif ($d instanceof Amfphp_Core_Amf_Types_Xml) { // Xml (note, no XmlDoc in AMF0)
             $this->writeXML($d);
             return;
         } elseif (is_object($d)) {
-            if($this->voConverter){
+            if ($this->voConverter) {
                 $this->voConverter->markExplicitType($d);
-            }            
+            }
             $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
             if (isset($d->$explicitTypeField)) {
                 $this->writeTypedObject($d);
@@ -502,26 +501,29 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer {
         } elseif (is_null($d)) { // null
             $this->writeAmf3Null();
             return;
-        } elseif (Amfphp_Core_Amf_Util::is_undefined($d)) { // undefined
+        } elseif ($d instanceof Amfphp_Core_Amf_Types_Undefined) { // undefined
             $this->writeAmf3Undefined();
             return;
-        } elseif (Amfphp_Core_Amf_Util::is_date($d)) { // date
+        } elseif ($d instanceof Amfphp_Core_Amf_Types_Date) { // date
             $this->writeAmf3Date($d);
             return;
         } elseif (is_array($d)) { // array
             $this->writeAmf3Array($d);
             return;
-        } elseif (Amfphp_Core_Amf_Util::is_byteArray($d)) { //byte array
+        } elseif ($d instanceof Amfphp_Core_Amf_Types_ByteArray) { //byte array
             $this->writeAmf3ByteArray($d);
             return;
-        } elseif (Amfphp_Core_Amf_Util::is_Xml($d)) { // Xml
+        } elseif ($d instanceof Amfphp_Core_Amf_Types_Xml) { // Xml
             $this->writeAmf3Xml($d);
             return;
-        } elseif (Amfphp_Core_Amf_Util::is_XmlDocument($d)) { // XmlDoc
+        } elseif ($d instanceof Amfphp_Core_Amf_Types_XmlDocument) { // XmlDoc
             $this->writeAmf3XmlDocument($d);
             return;
+        } elseif ($d instanceof Amfphp_Core_Amf_Types_Vector) {
+            $this->writeAmf3Vector($d);
+            return;
         } elseif (is_object($d)) {
-            if($this->voConverter){
+            if ($this->voConverter) {
                 $this->voConverter->markExplicitType($d);
             }
             $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
@@ -868,7 +870,6 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer {
         if ($this->handleReference($d, $this->storedObjects)) {
             return;
         }
-
         $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
 
         $className = $d->$explicitTypeField;
@@ -910,6 +911,72 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer {
             $this->writeAmf3Data($d->$propertyName);
         }
     }
+    
+    /**
+     * write vector
+     * @param Amfphp_Core_Amf_Types_Vector $d 
+     */
+    protected function writeAMF3Vector(Amfphp_Core_Amf_Types_Vector $d) {
+        //Write the vector tag
+        $this->writeByte($d->type);
+        // referencing is disabled in vectors as in arrays
+        //Because if the array contains only primitive values,
+        //Then === will say that the two arrays are strictly equal
+        //if they contain the same values, even if they are really distinct
+        $count = count($this->storedObjects);
+        if ($count <= self::MAX_STORED_OBJECTS) {
+            $this->storedObjects[$count] = & $d;
+        }
+        $num_count = count($d->data);
+
+        $handle = $num_count * 2 + 1;
+        $this->writeAmf3Int($handle);
+
+        $this->writeByte($d->fixed);
+
+        if ($d->type === Amfphp_Core_Amf_Types_Vector::VECTOR_OBJECT) {
+            $className = $d->className;
+
+            if ($className == "String" or $className == "Boolean") {
+                $this->writeByte(0x01);
+                $function = "writeAmf3Data";
+            } else {
+                $this->writeAmf3String($className);
+                $function = "writeAmf3TypedObject";
+            }
+        } else {
+            if ($d->type == Amfphp_Core_Amf_Types_Vector::VECTOR_INT) {
+                $className = "i";
+            } elseif ($d->type == Amfphp_Core_Amf_Types_Vector::VECTOR_UINT) {
+                $className = "I";
+            } elseif ($d->type == Amfphp_Core_Amf_Types_Vector::VECTOR_DOUBLE) {
+                $className = "d";
+            }
+            $function = "writeAmf3VectorValue";
+        }
+
+
+        for ($i = 0; $i < $num_count; $i++) {
+            $this->$function($d->data[$i], $className);
+        }
+
+    }
+
+    /**
+     * Writes numeric values for int, uint and double (floating point) vectors to the AMF byte stream. 
+     * 
+     * @param   mixed   But should be either an integer (signed or unsigned) or a floating point.
+     * @param   string  'i' for signed integers, 'I' for unsigned integers, and 'd' for double precision floating point
+     */
+    function writeAmf3VectorValue($value, $format) {
+        $bytes = pack($format, $value);
+        if (Amfphp_Core_Amf_Util::isSystemBigEndian()) {
+            $bytes = strrev($bytes);
+        }
+        $this->outBuffer .= $bytes;
+    }
+
+
 
 }
 

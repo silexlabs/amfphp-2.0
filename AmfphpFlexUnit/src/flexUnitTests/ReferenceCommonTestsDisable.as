@@ -109,7 +109,6 @@ package flexUnitTests
 		
 		public function testTypedObjectReference():void{
 			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyTypedObjectReturnReference, 1000));
-			VoWithArrays.register();
 			var reffered:* = new VoWithArrays();
 			var testVar:Array = [reffered, reffered];
 			_nc.callWithEvents("TestService.returnOneParam", testVar);	

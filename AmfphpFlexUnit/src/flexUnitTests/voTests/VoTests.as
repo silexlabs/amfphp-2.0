@@ -25,8 +25,6 @@ package flexUnitTests.voTests
 			//_nc.objectEncoding = ObjectEncoding.AMF0;
 			org.amfphp.test.Util.traceTestMeta(className, methodName);
 			
-			VoWithArrays.register();
-			NamespaceTestVo.register();
 		}
 		
 		

@@ -253,6 +253,23 @@ class AmfSerializerWrapper extends Amfphp_Core_Amf_Serializer {
     public function writeAmf3ByteArray(/* ByteArray */ $d) {
         parent::writeAmf3ByteArray($d);
     }
+    
+    /**
+     * write Amfphp_Core_Amf_Types_Vector in amf3
+     * @param Amfphp_Core_Amf_Types_Vector $d
+     */
+    public function writeAmf3Vector(/* Vector */ $d) {
+        parent::writeAmf3Vector($d);
+    }    
+    
+    /**
+     * write Amfphp_Core_Amf_Types_Dictionary in amf3
+     * @param Amfphp_Core_Amf_Types_Dictionary $d
+     */
+    public function writeAmf3Dictionary(/* Dictionary */ $d) {
+        parent::writeAmf3Dictionary($d);
+    }    
+    
 
 }
 

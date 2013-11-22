@@ -137,6 +137,39 @@ class Amf3DeserializationTest extends PHPUnit_Framework_TestCase {
         $expectedDeserialized = $testData->dByteArray;
         $this->assertEquals($expectedDeserialized, $deserialized);
 
+        //VectorInt
+        $deserializer = new AmfDeserializerWrapper($testData->sVectorInt);
+        $deserialized = $deserializer->readAmf3Data();
+        $expectedDeserialized = $testData->dVectorInt;
+        $this->assertEquals($expectedDeserialized, $deserialized);
+        
+        //VectorUint
+        $deserializer = new AmfDeserializerWrapper($testData->sVectorUint);
+        $deserialized = $deserializer->readAmf3Data();
+        $expectedDeserialized = $testData->dVectorUint;
+        $this->assertEquals($expectedDeserialized, $deserialized);
+
+        //VectorDouble
+        $deserializer = new AmfDeserializerWrapper($testData->sVectorDouble);
+        $deserialized = $deserializer->readAmf3Data();
+        $expectedDeserialized = $testData->dVectorDouble;
+        $this->assertEquals($expectedDeserialized, $deserialized);
+
+        //VectorObject
+        $deserializer = new AmfDeserializerWrapper($testData->sVectorObject);
+        $deserialized = $deserializer->readAmf3Data();
+        $expectedDeserialized = $testData->dVectorObject;
+        $this->assertEquals($expectedDeserialized, $deserialized);
+
+        //Dictionary
+        /* not supported
+        $deserializer = new AmfDeserializerWrapper($testData->sDictionary);
+        $deserialized = $deserializer->readAmf3Data();
+        $expectedDeserialized = $testData->dDictionary;
+        $this->assertEquals($expectedDeserialized, $deserialized);
+         * 
+         */
+
     }
 
 }

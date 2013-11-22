@@ -5,6 +5,8 @@ package flexUnitTests
 	import flash.utils.describeType;
 	import flash.xml.XMLDocument;
 	
+	import flexUnitTests.voTests.VoWithArrays;
+	
 	import flexunit.framework.TestCase;
 	
 	import org.amfphp.test.EnhancedNetConnection;
@@ -59,6 +61,77 @@ package flexUnitTests
 		private function verifyReturnXml(event:ObjEvent):void{
 			assertTrue(event.obj is XML);
 		}		
+		
+		
+		/**
+		 * send a int vector
+		 * */
+		public function testIntVector():void{
+			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnIntVector, 1000));
+			var testVar:Vector.<int> = new Vector.<int>();
+			testVar.push(1, 2, 3);
+			_nc.callWithEvents("TestService.returnOneParam", testVar);	
+			
+			
+		}
+		
+		private function verifyReturnIntVector(event:ObjEvent):void{
+			assertTrue(event.obj is Vector.<int>);
+			assertTrue(event.obj[2] == 3);
+		}		
+		
+		
+		/**
+		 * send a uint vector
+		 * */
+		public function testUintVector():void{
+			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnUintVector, 1000));
+			var testVar:Vector.<uint> = new Vector.<uint>();
+			testVar.push(1, 2, 3);
+			_nc.callWithEvents("TestService.returnOneParam", testVar);	
+			
+		}
+		
+		private function verifyReturnUintVector(event:ObjEvent):void{
+			assertTrue(event.obj is Vector.<uint>);
+			assertTrue(event.obj[2] == 3);
+		}		
+		
+		
+		/**
+		 * send a double vector
+		 * */
+		public function testDoubleVector():void{
+			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnDoubleVector, 1000));
+			var testVar:Vector.<Number> = new Vector.<Number>();
+			testVar.push(0.1, 0.2, 0.3);
+			_nc.callWithEvents("TestService.returnOneParam", testVar);	
+			
+		}
+		
+		private function verifyReturnDoubleVector(event:ObjEvent):void{
+			assertTrue(event.obj is Vector.<Number>);
+			assertTrue(event.obj[2] == 0.3);
+		}		
+		
+		
+		/**
+		 * send a object vector
+		 * */
+		public function testObjectVector():void{
+			_nc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, addAsync(verifyReturnObjectVector, 1000));
+			var testVar:Vector.<VoWithArrays> = new Vector.<VoWithArrays>();
+			testVar.push(new VoWithArrays());
+			_nc.callWithEvents("TestService.returnOneParam", testVar);	
+			
+		}
+		
+		private function verifyReturnObjectVector(event:ObjEvent):void{
+			assertTrue(event.obj is Vector.<VoWithArrays>);
+			assertTrue(event.obj[0] is VoWithArrays);
+				
+		}		
+		
 		
 		
 		

@@ -74,60 +74,6 @@ class Amfphp_Core_Amf_Util {
         return $obj;
     }
 
-    /**
-     * Determines whether an object is the ActionScript type 'undefined'
-     *
-     * @static
-     * @param  $obj
-     * @return bool
-     */
-    static public function is_undefined($obj) {
-        return is_object($obj) ? get_class($obj) == 'Amfphp_Core_Amf_Types_Undefined' : false;
-    }
-
-    /**
-     * Determines whether an object is the ActionScript type 'ByteArray'
-     *
-     * @static
-     * @param  $obj
-     * @return bool
-     */
-    static public function is_byteArray($obj) {
-        return is_object($obj) ? get_class($obj) == 'Amfphp_Core_Amf_Types_ByteArray' : false;
-    }
-
-    /**
-     * Determines whether an object is the ActionScript type 'Date'
-     *
-     * @static
-     * @param  $obj
-     * @return bool
-     */
-    static public function is_date($obj) {
-        return is_object($obj) ? get_class($obj) == 'Amfphp_Core_Amf_Types_Date' : false;
-    }
-
-    /**
-     * Determines whether an object is the ActionScript type 'XML'
-     *
-     * @static
-     * @param  $obj
-     * @return bool
-     */
-    static public function is_Xml($obj) {
-        return is_object($obj) ? get_class($obj) == 'Amfphp_Core_Amf_Types_Xml' : false;
-    }
-
-    /**
-     * Determines whether an object is the ActionScript type 'XmlDoument'
-     *
-     * @static
-     * @param  $obj
-     * @return bool
-     */
-    static public function is_XmlDocument($obj) {
-        return is_object($obj) ? get_class($obj) == 'Amfphp_Core_Amf_Types_XmlDocument' : false;
-    }
 
 }
 

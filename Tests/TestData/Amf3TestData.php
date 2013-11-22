@@ -215,6 +215,68 @@ class Amf3TestData {
     public $sByteArray;
     
     /**
+     * vector int
+     * @var Amfphp_Core_Amf_Types_Vector
+     */       
+    public $dVectorInt;
+
+    /**
+     * vector int
+     * @var string 
+     */   
+    public $sVectorInt;
+    
+    /**
+     * vector uint
+     * @var Amfphp_Core_Amf_Types_Vector
+     */       
+    public $dVectorUint;
+
+    /**
+     * vector uint
+     * @var string 
+     */   
+    public $sVectorUint;
+    
+    /**
+     * vector double
+     * @var Amfphp_Core_Amf_Types_Vector
+     */       
+    public $dVectorDouble;
+
+    /**
+     * vector double
+     * @var string 
+     */   
+    public $sVectorDouble;
+    
+    /**
+     * vector object
+     * @var Amfphp_Core_Amf_Types_Vector
+     */       
+    public $dVectorObject;
+
+    /**
+     * vector object
+     * @var string 
+     */   
+    public $sVectorObject;
+    
+    /**
+     * dictionary
+     * @var Amfphp_Core_Amf_Types_Dictionary
+     */       
+    public $dDictionary;
+
+    /**
+     * dictionary
+     * @var string 
+     */   
+    public $sDictionary;
+    
+    
+    
+    /**
      * constructor
      */
     public function  __construct() {
@@ -227,6 +289,8 @@ class Amf3TestData {
         $this->buildArray();
         $this->buildObject();
         $this->buildByteArray();
+        $this->buildVector();
+        $this->buildDictionary();
     }
 
     /**
@@ -275,10 +339,7 @@ class Amf3TestData {
     public function buildDouble(){
         $this->dDouble = 0.42;
         $packedData = pack('d', 0.42);
-        if(Amfphp_Core_Amf_Util::isSystemBigEndian()){
-            $packedData = strrev($packedData);
-        }
-        $this->sDouble = pack('C', 5) . $packedData;
+        $this->sDouble = pack('C', 5) . $this->revIfBigEndian($packedData);
     }
 
     /**
@@ -335,12 +396,9 @@ class Amf3TestData {
         $this->sDate = pack('C', 0x08);
         //U29D-value = 1. Marker to distinguish from references, I think
         $this->sDate .= pack('C', 0x01);
-        //date is a double, see writeDouble for little/big endian
         $dateData = pack('d', 1306926779576);
-        if(Amfphp_Core_Amf_Util::isSystemBigEndian()){
-            $dateData = strrev($dateData);
-        }
-        $this->sDate .= $dateData;
+        //date is a double, see writeDouble for little/big endian
+        $this->sDate .= $this->revIfBigEndian($dateData);
         
     }
 
@@ -356,7 +414,7 @@ class Amf3TestData {
 
 
 
-// Serialise an array with 0-based integer keys (Adobe calls it 'dense array').
+// Serialise an array with 0-based integer keys (Spec calls it 'dense array').
         $this->dDenseArray = array(0 => 'zero', 1 => 'one');
 // 'array_marker' (0x09)
 // 'U29A-value' with size of 'dense portion' (2 << 1 | 1 = 0x05)
@@ -406,10 +464,7 @@ class Amf3TestData {
      * build object
      */
     public function buildObject(){
-        $this->dObject = new stdClass();
-        $this->dObject->data= 'test';
-        $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
-        $this->dObject->$explicitTypeField ='DummyClass2';
+        $this->dObject = $this->createDummyObj();
         //object marker
         $this->sObject = pack('C', 0x0A);
         //traits.
@@ -446,6 +501,128 @@ class Amf3TestData {
 
         
     }
+    
+    /**
+     * revers packed data if big endian 
+     * @see Amfphp_Core_Amf_Util
+     * @param string $packedData
+     * @return string 
+     */
+    private function revIfBigEndian($packedData){
+        if(Amfphp_Core_Amf_Util::isSystemBigEndian()){
+            return strrev($packedData);
+        }else{
+            return $packedData;
+        }
+        
+    }
+    
+
+    /**
+     * build vector (different types)
+     */
+    public function buildVector(){
+        //int 
+        $this->dVectorInt = new Amfphp_Core_Amf_Types_Vector();
+        $this->dVectorInt->type = Amfphp_Core_Amf_Types_Vector::VECTOR_INT;
+        $this->dVectorInt->data = array(1,2,3);
+        //int vector type marker
+        $this->sVectorInt = pack('C', 0x0D);
+        //data length, on a U29-1 : 3 << 1 | 1 = 7
+        $this->sVectorInt .= $this->revIfBigEndian(pack('C', 7));
+        //not fixed
+        $this->sVectorInt .= pack('C', 0);
+        //data (U32)
+        $this->sVectorInt .= $this->revIfBigEndian(pack('i', 1));
+        $this->sVectorInt .= $this->revIfBigEndian(pack('i', 2));
+        $this->sVectorInt .= $this->revIfBigEndian(pack('i', 3));
+
+        
+        //uint
+        $this->dVectorUint = new Amfphp_Core_Amf_Types_Vector();
+        $this->dVectorUint->type = Amfphp_Core_Amf_Types_Vector::VECTOR_UINT;
+        $this->dVectorUint->data = array(1,2,3);
+        //Uint vector type marker
+        $this->sVectorUint = pack('C', 0x0E);
+        //data length, on a U29-1 : 3 << 1 | 1 = 7
+        $this->sVectorUint .= $this->revIfBigEndian(pack('C', 7));
+        //not fixed
+        $this->sVectorUint .= pack('C', 0);
+        //data (U32)
+        $this->sVectorUint .= $this->revIfBigEndian(pack('I', 1));
+        $this->sVectorUint .= $this->revIfBigEndian(pack('I', 2));
+        $this->sVectorUint .= $this->revIfBigEndian(pack('I', 3));
+
+        
+        //double
+        $this->dVectorDouble = new Amfphp_Core_Amf_Types_Vector();
+        $this->dVectorDouble->type = Amfphp_Core_Amf_Types_Vector::VECTOR_DOUBLE;
+        $this->dVectorDouble->data = array(0.1, 0.2, 0.3);
+        //Double vector type marker
+        $this->sVectorDouble = pack('C', 0x0F);
+        //data length, on a U29-1 : 3 << 1 | 1 = 7
+        $this->sVectorDouble .= $this->revIfBigEndian(pack('C', 7));
+        //not fixed
+        $this->sVectorDouble .= pack('C', 0);
+        //data (U32)
+        $this->sVectorDouble .= $this->revIfBigEndian(pack('d', 0.1));
+        $this->sVectorDouble .= $this->revIfBigEndian(pack('d', 0.2));
+        $this->sVectorDouble .= $this->revIfBigEndian(pack('d', 0.3));
+
+        
+        //object
+        $this->dVectorObject = new Amfphp_Core_Amf_Types_Vector();
+        $this->dVectorObject->type = Amfphp_Core_Amf_Types_Vector::VECTOR_OBJECT;
+        $this->dVectorObject->data = array($this->createDummyObj());
+        $this->dVectorObject->className = 'DummyClass2';
+        //Object vector type marker
+        $this->sVectorObject = pack('C', 0x010);
+        //data length, on a U29-1 : 1 << 1 | 1 = 3
+        $this->sVectorObject .= $this->revIfBigEndian(pack('C', 3));
+        //not fixed
+        $this->sVectorObject .= pack('C', 0);
+        //class name length, on a U29-1 : 11 << 1 | 1 = 23 
+        $this->sVectorObject .= pack('C', 0x17);
+        //class name
+        $this->sVectorObject .= 'DummyClass2';
+        //data (dummy object)
+        //object marker
+        $this->sVectorObject .= pack('C', 0x0A);
+        //traits.
+        $this->sVectorObject .= pack('C', 0x13);
+        //null
+        $this->sVectorObject .= pack('C', 0x0);
+        //member name length, on a U29-1 : 4 << 1 | 1 = 9
+        $this->sVectorObject .= pack('C', 0x9);
+        //member name
+        $this->sVectorObject .= 'data';
+        //string marker
+        $this->sVectorObject .= pack('C', 6);
+        //member value length, on a U29-1 : 4 << 1 | 1 = 9
+        $this->sVectorObject .= pack('C', 0x9);
+        //member value
+        $this->sVectorObject .= 'test';
+
+        
+    }    
+    
+    private function createDummyObj(){
+        $ret = new stdClass();
+        $ret->data= 'test';
+        $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
+        $ret->$explicitTypeField ='DummyClass2'; 
+        return $ret;
+    }
+
+    /**
+     * build dictionary
+     * @todo
+     */
+    public function buildDictionary(){
+
+
+        
+    }     
 }
 
 

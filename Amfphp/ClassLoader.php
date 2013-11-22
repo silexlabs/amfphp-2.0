@@ -45,6 +45,7 @@ require_once AMFPHP_ROOTPATH . 'Core/Amf/Util.php';
 require_once AMFPHP_ROOTPATH . 'Core/Amf/Types/ByteArray.php';
 require_once AMFPHP_ROOTPATH . 'Core/Amf/Types/Undefined.php';
 require_once AMFPHP_ROOTPATH . 'Core/Amf/Types/Date.php';
+require_once AMFPHP_ROOTPATH . 'Core/Amf/Types/Vector.php';
 require_once AMFPHP_ROOTPATH . 'Core/Amf/Types/Xml.php';
 require_once AMFPHP_ROOTPATH . 'Core/Amf/Types/XmlDocument.php';
 

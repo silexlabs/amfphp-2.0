@@ -155,6 +155,22 @@ class AmfDeserializerWrapper extends Amfphp_Core_Amf_Deserializer {
         return parent::readAmf3ByteArray();
     }
 
+    /**
+     * read vector
+     * @return Amfphp_Core_Amf_Types_Vector
+     */
+    public function readAmf3Vector($type) {
+        return parent::readAmf3Vector($type);
+    }
+    
+    /**
+     * read byte array
+     * @return Amfphp_Core_Amf_Types_Dictionary
+     */
+    public function readAmf3Dictionary() {
+        return parent::readAmf3Dictionary();
+    }    
+
 }
 
 ?>
