@@ -45,7 +45,7 @@ $config = new Amfphp_BackOffice_Config();
                 <div class="menu" id="performanceDisplay">
                     <div id="controls">
                         <input type="submit" value="Flush" onclick="flush()"></input>
-                        <input type="submit" value="Refresh" onclick="refresh()"></input>
+                        <input type="submit" value="Refresh" onclick="refreshClickHandler()"></input>
                         <input type="checkbox" id="flushOnRefreshCb"></input>
                         Flush on refresh
                         <input type="submit" id="toggleAutoRefreshBtn" value="Start Auto Refresh" onclick="toggleAutoRefresh()"></input>
@@ -113,10 +113,10 @@ $(function () {
  * @todo redraw the graph
  **/
 function resize(){
-    var availableWidth = $( "#main" ).width() - $("#left").outerWidth(true) - 100;
+    var availableWidth = $( "#main" ).width() - $("#left").outerWidth(true) - 70;
     $( "#chartDiv" ).css( "width", availableWidth +  "px" );
 
-    var availableHeight = $( "body" ).height() - $("#main").offset().top - 150;
+    var availableHeight = $( "body" ).height() - $("#main").offset().top - 160;
     $( "#chartDiv" ).css( "height", availableHeight +  "px" );
     if(plot){
         plot.replot({resetAxes:true});
@@ -309,7 +309,7 @@ function addLabelListeners(){
             if(!focusedUri){
                 message = "Average ";
             }
-            message += orderedTimeNames[seriesIndex] + ' Duration : '+data + 'ms';
+            message += orderedTimeNames[seriesIndex] + ' Duration : '+data[0] + ' ms';
             $('#statusMessage').html(message);
         }
     );     
@@ -373,6 +373,10 @@ function focusOnUri(uri){
     updateControls();
 }
 
+function refreshClickHandler(){
+    displayStatusMessage("");
+    refresh();
+}
 /**
  * load data, and optionally flush
  */
@@ -417,6 +421,7 @@ function flush(){
  * start and stop auto refresh
  */
 function toggleAutoRefresh(){
+    displayStatusMessage("");
     if(!isAutoRefreshing){
         var interval = parseInt($("#autoRefreshIntervalInput").val());
         if(isNaN(interval)){
