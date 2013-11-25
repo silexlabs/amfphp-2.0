@@ -88,93 +88,93 @@ $config = new Amfphp_BackOffice_Config();
                 </div>
             </div>
             <script>
-                $(function () {	        
-                    document.title = "AmfPHP - Client Generator";
-                    $("#titleSpan").text("AmfPHP - Client Generator");
-                    
-                    var callData = JSON.stringify({"serviceName":"AmfphpDiscoveryService", "methodName":"discover","parameters":[]});
-                    var request = $.ajax({
-                      url: "<?php echo $config->resolveAmfphpEntryPointUrl() ?>?contentType=application/json",
-                      type: "POST",
-                      data: callData
-                    });
+$(function () {	        
+    document.title = "AmfPHP - Client Generator";
+    $("#titleSpan").text("AmfPHP - Client Generator");
 
-                    request.done(onServicesLoaded);
+    var callData = JSON.stringify({"serviceName":"AmfphpDiscoveryService", "methodName":"discover","parameters":[]});
+    var request = $.ajax({
+      url: "<?php echo $config->resolveAmfphpEntryPointUrl() ?>?contentType=application/json",
+      type: "POST",
+      data: callData
+    });
 
-                    request.fail(function( jqXHR, textStatus ) {
-                        displayStatusMessage(textStatus + "<br/><br/>" + jqXHR.responseText);
-                    });
+    request.done(onServicesLoaded);
 
-                    resize();
-                    $( window ).bind( "resize", resize ); 
+    request.fail(function( jqXHR, textStatus ) {
+        displayStatusMessage(textStatus + "<br/><br/>" + jqXHR.responseText);
+    });
 
-                });    
-                
-                                
-                /**
-                 * sets the max width for the right div.
-                 * used on loading services, and when window resizes
-                 * */
-                function resize(){
-                    var availableWidthForRightDiv = $( "#main" ).width() - $("#left").outerWidth(true) - 50;
-                    $( "#right" ).css( "maxWidth", availableWidthForRightDiv +  "px" );
-                }
-                
-                function displayStatusMessage(html){
-                    $('#statusMessage').html(html);
-                }
-                
+    resize();
+    $( window ).bind( "resize", resize ); 
+
+});    
+
+
 /**
-                 * callback for when service data loaded from server . 
-                 * generates method list. 
-                 * each method link has its corresponding method object attached as data, and this is retrieved on click
-                 * to call openMethodDialog with it.
-                 */
-                function onServicesLoaded(data)
-                {
-                    if(typeof data == "string"){
-                        displayStatusMessage(data);
-                        return;
-                    }
-                    serviceData = data;
-                        
-                    //generate service/method list
-                    var rootUl = $("ul#serviceList");
-                    $(rootUl).empty();
-                    for(serviceName in serviceData){
-                        var service = serviceData[serviceName];
-                        var serviceLi = $("<li>" + serviceName + "</li>")
-                        .appendTo(rootUl);
-                        $(serviceLi).attr("title", service.comment);
-                        $("<ul/>").appendTo(serviceLi);
-                    }
-                    <?php if($config->fetchAmfphpUpdates){
-                    //only load update info once services loaded(that's the important stuff)
-                        echo 'showAmfphpUpdates();';
-                    }?> 
+ * sets the max width for the right div.
+ * used on loading services, and when window resizes
+ * */
+function resize(){
+    var availableWidthForRightDiv = $( "#main" ).width() - $("#left").outerWidth(true) - 50;
+    $( "#right" ).css( "maxWidth", availableWidthForRightDiv +  "px" );
+}
 
-                    
-                }
-                
-                function generate(generatorClass){
-                    var callData = JSON.stringify({"serviceName":"AmfphpDiscoveryService", "methodName":"discover","parameters":[]});
-                    var request = $.ajax({
-                      url: "ClientGeneratorBackend.php?generatorClass=" + generatorClass,
-                      type: "POST",
-                      data: JSON.stringify(serviceData)
-                    });
+function displayStatusMessage(html){
+    $('#statusMessage').html(html);
+}
 
-                    request.done(onGenerationDone);
+/**
+ * callback for when service data loaded from server . 
+ * generates method list. 
+ * each method link has its corresponding method object attached as data, and this is retrieved on click
+ * to call openMethodDialog with it.
+ */
+function onServicesLoaded(data)
+{
+    if(typeof data == "string"){
+        displayStatusMessage(data);
+        return;
+    }
+    serviceData = data;
 
-                    request.fail(function( jqXHR, textStatus ) {
-                        displayStatusMessage(textStatus + "<br/><br/>" + jqXHR.responseText);
-                    });
+    //generate service/method list
+    var rootUl = $("ul#serviceList");
+    $(rootUl).empty();
+    for(serviceName in serviceData){
+        var service = serviceData[serviceName];
+        var serviceLi = $("<li>" + serviceName + "</li>")
+        .appendTo(rootUl);
+        $(serviceLi).attr("title", service.comment);
+        $("<ul/>").appendTo(serviceLi);
+    }
+    <?php if($config->fetchAmfphpUpdates){
+    //only load update info once services loaded(that's the important stuff)
+        echo 'showAmfphpUpdates();';
+    }?> 
 
- 
-                }
-                
-                function onGenerationDone(data){
-                    $('#statusMessage').html(data);
-                }
+
+}
+
+function generate(generatorClass){
+    var callData = JSON.stringify({"serviceName":"AmfphpDiscoveryService", "methodName":"discover","parameters":[]});
+    var request = $.ajax({
+      url: "ClientGeneratorBackend.php?generatorClass=" + generatorClass,
+      type: "POST",
+      data: JSON.stringify(serviceData)
+    });
+
+    request.done(onGenerationDone);
+
+    request.fail(function( jqXHR, textStatus ) {
+        displayStatusMessage(textStatus + "<br/><br/>" + jqXHR.responseText);
+    });
+
+
+}
+
+function onGenerationDone(data){
+    $('#statusMessage').html(data);
+}
 
             </script>
