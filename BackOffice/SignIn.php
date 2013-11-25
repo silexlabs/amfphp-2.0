@@ -104,5 +104,7 @@ try {
                         echo 'showAmfphpUpdates();';
                     }?>                     
                 });
-            
+                function resize(){
+                    //dummy
+                }
             </script>

@@ -68,7 +68,7 @@ $config = new Amfphp_BackOffice_Config();
                 }
                 require_once(dirname(__FILE__) . '/MainMenu.inc.php');
                 ?>
-                <div class='menu'>
+                    <div class='menu' id="services">
                     <h2>Services and Methods</h2>
                     <ul id='serviceMethods' >
                         Loading Service Data...

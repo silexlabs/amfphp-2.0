@@ -55,6 +55,9 @@ $config = new Amfphp_BackOffice_Config();
             });
             
 
+                function resize(){
+                    //dummy
+                }
             
         </script>
         

@@ -287,16 +287,12 @@ function showAllUris(){
     plot = $.jqplot('chartDiv', flippedSeriesData, {
         // Tell the plot to stack the bars.
         stackSeries: true,
-        captureRightClick: true,
         seriesDefaults:{
             renderer:$.jqplot.BarRenderer,
             rendererOptions: {
                 // Put a 30 pixel margin between bars.
                 barMargin: 30,
-                barDirection: 'horizontal',
-                // Highlight bars when mouse button pressed.
-                // Disables default highlighting on mouse over.
-                highlightMouseDown: true
+                barDirection: 'horizontal'
             },
             pointLabels: {show: true}
         },
@@ -377,16 +373,12 @@ function focusOnUri(uri){
     plot = $.jqplot('chartDiv', seriesData, {
         // Tell the plot to stack the bars.
         stackSeries: true,
-        captureRightClick: true,
         seriesDefaults:{
             renderer:$.jqplot.BarRenderer,
             rendererOptions: {
                 // Put a 30 pixel margin between bars.
-                barMargin: 30,
-                barDirection: 'horizontal',
-                // Highlight bars when mouse button pressed.
-                // Disables default highlighting on mouse over.
-                highlightMouseDown: true
+                barMargin: 10,
+                barDirection: 'horizontal'
             },
             pointLabels: {show: true}
         },
