@@ -7,7 +7,6 @@ Supports Jsonp requests.
 needs update_service_consts.php where DB config constants are defined.
 */
 
-define('AMFPHP_VERSION', '2.2');
 require_once 'update_service_consts.php';
 header('Content-type: application/json');
 
