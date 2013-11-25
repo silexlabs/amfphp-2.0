@@ -198,7 +198,9 @@ class TestService {
     
     public function testCustomMonitorTime(){
         sleep(1);
-        AmfphpMonitor::addTime('custom time');
+        AmfphpMonitor::addTime('operation 1');
+        sleep(1);
+        AmfphpMonitor::addTime('operation 2');
         sleep(1);
         return 'bla';
     }

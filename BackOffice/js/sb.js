@@ -56,7 +56,7 @@ $(function () {
 
         var callData = JSON.stringify({"serviceName":"AmfphpDiscoveryService", "methodName":"discover","parameters":[]});
         var request = $.ajax({
-            url: amfphpEntryPointUrl,
+            url: amfphpEntryPointUrl + "?contentType=application/json",
             type: "POST",
             data: callData
         });
@@ -277,7 +277,8 @@ function manipulateMethod(serviceName, methodName){
     //note that trying with jquery "offset" messes up!
     $("#right").css("top", rightDivTop + "px");
 
-    resize();  
+    resize(); 
+    onResult('');
 }
 
 /**
@@ -308,6 +309,8 @@ function makeJsonCall(){
     var callData = JSON.stringify({"serviceName":serviceName, "methodName":methodName,"parameters":getCallParameterValues()});
     callStartTime = $.now();
     $.post(amfphpEntryPointUrl + "?contentType=application/json", callData, onResult);
+    onResult('loading...');
+
 }
 
 /**
@@ -320,6 +323,7 @@ function makeAmfCall(){
     }
     callStartTime = $.now();
     amfCaller.call(amfphpEntryPointUrl, serviceName + "/" + methodName, getCallParameterValues());
+    onResult('loading...');
 
 }
 
@@ -336,6 +340,7 @@ function toggleLoop(){
     if(isLooping){
         $("#toggleLoopBtn").prop("value", "Stop Loop AMF");
         amfCaller.loop(amfphpEntryPointUrl, serviceName + "/" + methodName, concurrency, getCallParameterValues());
+        onResult('loading...');
         
     }else{
         $("#toggleLoopBtn").prop("value", "Start Loop AMF");

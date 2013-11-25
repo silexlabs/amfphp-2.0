@@ -39,7 +39,7 @@ $config = new Amfphp_BackOffice_Config();
         <script type="text/javascript">
 <?php 
     echo 'var amfphpVersion = "' . AMFPHP_VERSION . "\";\n"; 
-    echo 'var amfphpEntryPointUrl = "' . $config->resolveAmfphpEntryPointUrl() . "?contentType=application/json\";\n"; 
+    echo 'var amfphpEntryPointUrl = "' . $config->resolveAmfphpEntryPointUrl() . "\";\n"; 
     if ($config->fetchAmfphpUpdates) {
         echo "var shouldFetchUpdates = true;\n"; 
     }else{
