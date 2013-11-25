@@ -56,7 +56,19 @@ try {
 }
 ?>
 <html>
-    <?php require_once(dirname(__FILE__) . '/HtmlHeader.inc.php'); ?>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery.cookie.js"></script>
+        <script type="text/javascript" src="js/amfphp_updates.js"></script>
+        <script type="text/javascript">
+            <?php echo 'var amfphpVersion = "' . AMFPHP_VERSION . '";'; ?>
+        </script>  
+   
+    </head>
     <body>
         <?php if ($redirectToHome) {
             ?>

@@ -22,7 +22,6 @@ $config = new Amfphp_BackOffice_Config();
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
         <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.10.3.custom.min.css" />
-        <link rel="stylesheet" type="text/css" href="css/jquery.jqplot.min.css" />
         <link rel="stylesheet" type="text/css" href="css/style.css" />
 
         <script type="text/javascript" src="js/jquery.js"></script>
@@ -34,8 +33,6 @@ $config = new Amfphp_BackOffice_Config();
         <script type="text/javascript" src="js/jquery-ui.js"></script>
         <script type="text/javascript" src="js/swfobject.js"></script>
         <script type="text/javascript" src="js/jquery.cookie.js"></script>
-        <!--[if IE]><script language="javascript" type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
-        
         <script language="javascript" type="text/javascript" src="js/sb.js"></script>
         <script type="text/javascript">
 <?php 

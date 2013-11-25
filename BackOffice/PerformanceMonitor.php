@@ -21,7 +21,26 @@ $config = new Amfphp_BackOffice_Config();
 ?>
 
 <html>
-    <?php require_once(dirname(__FILE__) . '/HtmlHeader.inc.php'); ?>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <link rel="stylesheet" type="text/css" href="css/jquery.jqplot.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery.cookie.js"></script>
+        <script type="text/javascript" src="js/amfphp_updates.js"></script>
+        <!--[if IE]><script language="javascript" type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
+        <script language="javascript" type="text/javascript" src="js/jquery.jqplot.js"></script>
+        <script language="javascript" type="text/javascript" src="js/jqplot.barRenderer.js"></script>
+        <script language="javascript" type="text/javascript" src="js/jqplot.categoryAxisRenderer.js"></script>
+        <script language="javascript" type="text/javascript" src="js/jqplot.pointLabels.js"></script>
+        
+        <script type="text/javascript">
+            <?php echo 'var amfphpVersion = "' . AMFPHP_VERSION . '";'; ?>
+        </script>  
+   
+    </head>
     <body>
         <?php
         require_once(dirname(__FILE__) . '/LinkBar.inc.php');
