@@ -1,11 +1,11 @@
 make sure config is not modified
-update version flag inb 3 places: in the front/classloader.php, in backoffice/classloader.php ,and at downloads.silexlabs.org/amfphp/amfphp_updates.php
 run unit tests, php and flash builder(with and without baguette amf)
 deploy to a unix server(case sensitive)
 test service browser
 test generators
 test examples
 regenerate doc, and update online version
+update version flag inb 3 places: in the front/classloader.php, in backoffice/classloader.php ,and at downloads.silexlabs.org/amfphp/amfphp_updates.php
 tag repository: 
     git tag -a v2.2_comments -m "2.2 Teaser # 1 putting comments to good use "
     git push --tags
@@ -15,10 +15,10 @@ create release zip
 upload to distribution platform(sourceforge)
 download it again for a quick test
 
-blog post on silexlabs. publishes automatically to twitter and facebook. publish on google plus, publish on linkedin.
+blog post on silexlabs. publish to twitter, facebook, google plus, linkedin.
 update download link on silex labs page
 update version info on wikipedia page
-send link to amfphp-general@lists.sourceforge.net
+send link to amfphp-general@lists.sourceforge.net (from proper email address!)
 
 
 note on how to delete a tag:
