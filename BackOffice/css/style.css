@@ -2,7 +2,7 @@
      /*don't apply font to ACE editor or else cursor position is messed up. :not selector dones't work, so need 
      to do it to everything but it' */
         font-family: Arial, Helvetica, sans-serif;
-		color: #F6FBFF;
+        color: #33536D;
 }
 
 *{
@@ -17,24 +17,21 @@ input{
 
 
 a, input[type="submit"], button  {
-	color: #D78B97;
+	color: #007EE5;
         cursor:pointer;
         text-decoration: none;
 }
 
-input, #result, button {
-	padding: 5px;
+input, #result, button{
+	padding: 8px;
 	border: 1px solid #525252;
-	-moz-border-radius: 8px;
-	-webkit-border-radius: 8px;
-	border-radius: 8px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
 	margin: 5px;
 }
 
-.static, .menu{
-	background: #4B525C;
-    
-}
+
 
 .static {
 	height: 20px;
@@ -77,6 +74,7 @@ input, #result, button {
 	float: left;
 	margin-top: 20px;
         position:relative;
+        border-left: 1px solid #525252;
 }
 
 
@@ -139,7 +137,7 @@ h3{
     font-size: 12px;
 }
 .warning{
-    color:yellow;
+    color:red;
     
 }
 
@@ -152,6 +150,7 @@ h3{
     height: 4em;
     width: 500px;
     margin:5px;
+    border: 1px solid #525252;
     
 }
 
