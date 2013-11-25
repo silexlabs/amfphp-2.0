@@ -155,6 +155,9 @@ function onDataLoaded(data)
     if(data.sortedData.length == 0){
         displayStatusMessage("No data was available. Please make a service call then refresh. This can be done with the <a href='ServiceBrowser.php'>Service Browser</a>.");
     }
+    //test
+    //focusedUri = "TestService/returnOneParam";
+    
     if(focusedUri){
         focusOnUri(focusedUri);
     }else{
@@ -202,7 +205,6 @@ function showAllUris(){
     var ignoredUris = [];
     var missingTimes = [];
     var missingTimesAssoc = {};
-    var seriesOptions = [];
     var orderedTimedNamesSet = false;
     var orderedTimeNames = [];
     
@@ -250,7 +252,6 @@ function showAllUris(){
             formattedUriData.push(totalDuration / numTimes);
             //first time round grab the time names for series labels
             if(!orderedTimedNamesSet){
-                seriesOptions.push({label:timeName});
                 orderedTimeNames.push(timeName);
             }
         }
@@ -278,8 +279,10 @@ function showAllUris(){
         $("#statusMessage").html(message);
     }
     buildChart(flippedSeriesData, ticks, getLegendLabels(orderedTimeNames));
+
     updateControls();
 }
+
 
 /**
  * show data for 1 call uri.
@@ -291,9 +294,7 @@ function focusOnUri(uri){
     }
     focusedUri = uri;
     var seriesData = [];
-    var seriesOptions = [];
     var orderedTimeNames = [];
-    var ticks = [];
     
     //data for each target uri
     var rawUriData = serverData.sortedData[uri];
@@ -304,20 +305,19 @@ function focusOnUri(uri){
 
         var timeData = rawUriData[timeName];
         timeData = timeData.slice(0, 20);
-        seriesOptions.push({label:timeName});
         orderedTimeNames.push(timeName);
         seriesData.push(timeData.reverse());
-        ticks.push(i++);
 
     }
 
-
-    buildChart(seriesData, ticks, getLegendLabels(orderedTimeNames), seriesOptions);
+    //the empty ticks array is important, otherwise the category axis renderer 
+    //messes up the layout
+    buildChart(seriesData, [], getLegendLabels(orderedTimeNames));
 
     updateControls();
 }
 
-function buildChart(seriesData, ticks, legendLabels, seriesOptions){
+function buildChart(seriesData, ticks, legendLabels){
     plot = $.jqplot('chartDiv', seriesData, {
         // Tell the plot to stack the bars.
         stackSeries: true,
@@ -347,8 +347,7 @@ function buildChart(seriesData, ticks, legendLabels, seriesOptions){
             location: 'e',
             placement: 'inside',
             labels:legendLabels           
-        }, 
-         series:seriesOptions 
+        }
     });
 
     $('.jqplot-yaxis-tick')
