@@ -50,10 +50,6 @@ var isLooping;
 var isAdvancedDialogVisible;
 
 $(function () {
-        
-        //fix for ie 8
-        if (!window.console) console = {log: function() {}}; 
-
         var callData = JSON.stringify({"serviceName":"AmfphpDiscoveryService", "methodName":"discover","parameters":[]});
         var request = $.ajax({
             url: amfphpEntryPointUrl + "?contentType=application/json",
@@ -81,7 +77,9 @@ $(function () {
                 amfCaller = e.ref;
             }else{
                 alert("could not load AMF Caller.");
-                console.log(e);
+                if(console){
+                    console.log(e);
+                }
             }
 
         });
@@ -359,7 +357,6 @@ function onLoopResult(callsPerSec){
  * @param data the returned data
  * */
 function onResult(data){
-    console.log(data);
 
     var treeData = objToTreeData(data, null);
     setTreeData(treeData, ".resultView#tree");  

@@ -20,6 +20,7 @@ $config = new Amfphp_BackOffice_Config();
 <html>
 
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
         <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.10.3.custom.min.css" />
         <link rel="stylesheet" type="text/css" href="css/jquery.jqplot.min.css" />
         <link rel="stylesheet" type="text/css" href="css/style.css" />

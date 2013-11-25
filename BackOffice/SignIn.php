@@ -75,7 +75,7 @@ try {
                 <div class="menu">
                     <form method = "POST">
                         <h3>Sign In</h3>
-                        <div>
+                        <div class="warning">
                             <?php echo $errorMessage ?>
                         </div>
                         User Name<br/>
@@ -100,7 +100,6 @@ try {
                     document.title = "AmfPHP Back Office - Sign In";
                     $("#titleSpan").text("AmfPHP Back Office - Sign In");
                     <?php if($config->fetchAmfphpUpdates){
-                    //only load update info once services loaded(that's the important stuff)
                         echo 'showAmfphpUpdates();';
                     }?>                     
                 });

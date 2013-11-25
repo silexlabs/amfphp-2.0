@@ -77,13 +77,6 @@ var serverData;
  * */
 var focusedUri;
 
-/**
- *The server returns a list of time names that we know is complete 
- *but is not necessarily in the right order. 
- *So create an ordered list here
- **/
-var orderedTimeNames;
-
 var isAutoRefreshing;
 
 /**
@@ -211,7 +204,7 @@ function showAllUris(){
     var missingTimesAssoc = {};
     var seriesOptions = [];
     var orderedTimedNamesSet = false;
-    orderedTimeNames = [];
+    var orderedTimeNames = [];
     
     if(serverData.sortedData.length == 0){
         return;
@@ -284,7 +277,48 @@ function showAllUris(){
         message += "<br/>For a service method to appear in the chart make sur it logs those times.<br/>";
         $("#statusMessage").html(message);
     }
-    plot = $.jqplot('chartDiv', flippedSeriesData, {
+    buildChart(flippedSeriesData, ticks, getLegendLabels(orderedTimeNames));
+    updateControls();
+}
+
+/**
+ * show data for 1 call uri.
+ * note: only the first 20 calls are shown, so as not to drown the browser.
+ */
+function focusOnUri(uri){
+    if(plot){
+        plot.destroy();
+    }
+    focusedUri = uri;
+    var seriesData = [];
+    var seriesOptions = [];
+    var orderedTimeNames = [];
+    var ticks = [];
+    
+    //data for each target uri
+    var rawUriData = serverData.sortedData[uri];
+    
+    var i = 0;
+    //look at data for each time 
+    for(var timeName in rawUriData){
+
+        var timeData = rawUriData[timeName];
+        timeData = timeData.slice(0, 20);
+        seriesOptions.push({label:timeName});
+        orderedTimeNames.push(timeName);
+        seriesData.push(timeData.reverse());
+        ticks.push(i++);
+
+    }
+
+
+    buildChart(seriesData, ticks, getLegendLabels(orderedTimeNames), seriesOptions);
+
+    updateControls();
+}
+
+function buildChart(seriesData, ticks, legendLabels, seriesOptions){
+    plot = $.jqplot('chartDiv', seriesData, {
         // Tell the plot to stack the bars.
         stackSeries: true,
         seriesDefaults:{
@@ -312,17 +346,11 @@ function showAllUris(){
             show: true,
             location: 'e',
             placement: 'inside',
-            labels:getLegendLabels(orderedTimeNames)            
+            labels:legendLabels           
         }, 
          series:seriesOptions 
     });
 
-                      
-    updateControls();
-    addLabelListeners();
-}
-
-function addLabelListeners(){
     $('.jqplot-yaxis-tick')
         .css({ cursor: "pointer", zIndex: "1" })
         .click(function (ev) { 
@@ -342,61 +370,7 @@ function addLabelListeners(){
         }
     );     
     */
-}
-/**
- * show data for 1 call uri.
- * note: only the first 20 calls are shown, so as not to drown the browser.
- */
-function focusOnUri(uri){
-    if(plot){
-        plot.destroy();
-    }
-    focusedUri = uri;
-    var seriesData = [];
-    var seriesOptions = [];
-
-    //data for each target uri
-    var rawUriData = serverData.sortedData[uri];
-
-    //look at data for each time 
-    for(var timeName in rawUriData){
-
-        var timeData = rawUriData[timeName];
-        timeData = timeData.slice(0, 20);
-        seriesOptions.push({label:timeName});
-        orderedTimeNames.push(timeName);
-        seriesData.push(timeData.reverse());
-
-    }
-
-
-    plot = $.jqplot('chartDiv', seriesData, {
-        // Tell the plot to stack the bars.
-        stackSeries: true,
-        seriesDefaults:{
-            renderer:$.jqplot.BarRenderer,
-            rendererOptions: {
-                // Put a 30 pixel margin between bars.
-                barMargin: 10,
-                barDirection: 'horizontal'
-            },
-            pointLabels: {show: true}
-        },
-        axes: {
-
-            yaxis: {
-                showTicks:false
-            }
-        },
-        legend: {
-            show: true,
-            location: 'e',
-            placement: 'inside',
-            labels:getLegendLabels(orderedTimeNames)
-        }, 
-         series:seriesOptions 
-    });
-    updateControls();
+    
 }
 
 function refreshClickHandler(){
