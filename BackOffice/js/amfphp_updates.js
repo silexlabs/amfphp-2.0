@@ -19,9 +19,11 @@ function showAmfphpUpdates(){
         $.getJSON("http://downloads.silexlabs.org/amfphp/updates/amfphp_updates.php?callback=?", {"backlink":document.URL}, function(data) {
             $.cookie('amfphp_latest_version', data.version, {expires: 7});
             showVersionComparison(data.version);
+            resize();
         });    
     }else{
         showVersionComparison($.cookie('amfphp_latest_version'));
+        resize();
     }
     
     /**
@@ -51,6 +53,7 @@ function showAmfphpUpdates(){
                     entries.push({"title":item.title, "link": item.link, "publishedDate":item.publishedDate});
                 });
                 buildNewsDisplay(entries);
+                resize();
             }
         });
         
@@ -77,5 +80,6 @@ function toggleNews(){
         $('#toggleNewsText').text("Hide News");
     }
     amfphpNewsVisible = !amfphpNewsVisible;
+    resize();
     
 }

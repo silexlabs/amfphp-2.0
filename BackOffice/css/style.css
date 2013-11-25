@@ -176,3 +176,11 @@ button span {
     margin-bottom: 10px;
 }
 
+
+.jqplot-table-legend{
+    z-index: 1;
+}
+
+#divRss{
+    max-width: 300px;
+}

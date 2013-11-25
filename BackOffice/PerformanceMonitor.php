@@ -54,7 +54,7 @@ $config = new Amfphp_BackOffice_Config();
                         Seconds<br/>
                         <a onclick="showAllUris()">All Calls</a>
                         <span id="focusedUriInfo"></span> &nbsp;&nbsp;
-                        <span id="statusMessage" style="max-width:100%"> </span>
+                        <div id="statusMessage" class="warning"> </div>
                     </div>
                     <div id="chartDivContainer">
                         <div id="chartDiv"></div>
@@ -113,22 +113,24 @@ $(function () {
  * @todo redraw the graph
  **/
 function resize(){
-    var availableWidth = $( "#main" ).width() - $("#left").outerWidth(true) - 70;
-    $( "#chartDiv" ).css( "width", availableWidth +  "px" );
+    var availableWidth = $( "#main" ).width() - $("#left").outerWidth(true) - 20;
+    $( "#right" ).css( "width", availableWidth +  "px" );
 
-    var availableHeight = $( "body" ).height() - $("#main").offset().top - 160;
+    var availableHeight = $( "body" ).height() - $("#chartDiv").offset().top - 50;
     $( "#chartDiv" ).css( "height", availableHeight +  "px" );
     if(plot){
         plot.replot({resetAxes:true});
         //replotting removes listeners on labels which allow the user to select a call for details. So reset them.
         addLabelListeners();
     }
+ 
 
 
 }
 
 function displayStatusMessage(html){
     $('#statusMessage').html(html);
+    resize();
 }
 
 function updateControls(){
@@ -167,6 +169,33 @@ function onDataLoaded(data)
     }
     
 
+}
+
+/**
+ * process ordered names to create labels linked to the doc
+ * */
+function getLegendLabels(orderedTimeNames){
+    var labels = [];
+    for(var i = 0; i < orderedTimeNames.length; i++){
+        var timeName = orderedTimeNames[i];
+        var label;
+        switch(timeName){
+            case "Deserialization": 
+            case "Request Vo Conversion":
+            case "Request Charset Conversion":
+            case "Service Call":
+            case "Response Vo Conversion":
+            case "Response Charset Conversion":
+            case "Serialization":
+                label = timeName  + "<a href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/performance-monitor/#";
+                label += timeName + "'> ?</a>";
+                break;
+            default:
+                label = "CUSTOM " + timeName + "<a href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/performance-monitor/#more data'> ?</a>";
+        }
+        labels.push(label);
+    }
+    return labels;
 }
 
 function showAllUris(){
@@ -286,7 +315,8 @@ function showAllUris(){
         legend: {
             show: true,
             location: 'e',
-            placement: 'inside'
+            placement: 'inside',
+            labels:getLegendLabels(orderedTimeNames)            
         }, 
          series:seriesOptions 
     });
@@ -303,6 +333,7 @@ function addLabelListeners(){
             focusOnUri($(this).text());
 
         });
+/* not useful at this point.        
     $('#chartDiv').bind('jqplotDataClick', 
         function (ev, seriesIndex, pointIndex, data) {
             var message = "";
@@ -311,8 +342,10 @@ function addLabelListeners(){
             }
             message += orderedTimeNames[seriesIndex] + ' Duration : '+data[0] + ' ms';
             $('#statusMessage').html(message);
+            resize();
         }
     );     
+    */
 }
 /**
  * show data for 1 call uri.
@@ -366,7 +399,8 @@ function focusOnUri(uri){
         legend: {
             show: true,
             location: 'e',
-            placement: 'inside'
+            placement: 'inside',
+            labels:getLegendLabels(orderedTimeNames)
         }, 
          series:seriesOptions 
     });
