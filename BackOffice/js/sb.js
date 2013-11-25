@@ -278,7 +278,7 @@ function manipulateMethod(serviceName, methodName){
     $("#right").css("top", rightDivTop + "px");
 
     resize(); 
-    onResult('');
+    onResult([]);
 }
 
 /**
