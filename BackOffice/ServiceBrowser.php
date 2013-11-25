@@ -34,10 +34,6 @@ $config = new Amfphp_BackOffice_Config();
         <script type="text/javascript" src="js/swfobject.js"></script>
         <script type="text/javascript" src="js/jquery.cookie.js"></script>
         <!--[if IE]><script language="javascript" type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
-        <script language="javascript" type="text/javascript" src="js/jquery.jqplot.js"></script>
-        <script language="javascript" type="text/javascript" src="js/jqplot.barRenderer.js"></script>
-        <script language="javascript" type="text/javascript" src="js/jqplot.categoryAxisRenderer.js"></script>
-        <script language="javascript" type="text/javascript" src="js/jqplot.pointLabels.js"></script>
         
         <script language="javascript" type="text/javascript" src="js/sb.js"></script>
         <script type="text/javascript">
