@@ -350,7 +350,12 @@ function buildChart(seriesData, ticks, legendLabels){
         }
     });
 
-    $('.jqplot-yaxis-tick')
+    addLabelListeners();
+    
+}
+
+function addLabelListeners(){
+       $('.jqplot-yaxis-tick')
         .css({ cursor: "pointer", zIndex: "1" })
         .click(function (ev) { 
             focusOnUri($(this).text());
@@ -368,10 +373,8 @@ function buildChart(seriesData, ticks, legendLabels){
             resize();
         }
     );     
-    */
-    
+    */ 
 }
-
 function refreshClickHandler(){
     displayStatusMessage("");
     refresh();
