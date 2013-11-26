@@ -277,6 +277,9 @@ function manipulateMethod(serviceName, methodName){
 
     resize(); 
     onResult([]);
+    if(isRepeating){
+         toggleRepeat();
+    }
 }
 
 /**
