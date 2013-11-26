@@ -39,7 +39,7 @@ class TestServicesConfig extends Amfphp_Core_Config {
         
         //My tests, shouldn't be in release code!!
         //
-        $this->pluginsFolders[] = '/Users/arielsommeria-klein/Documents/workspaces/baguetteamf/BaguetteAMF/amfphp_plugin/';
+        //$this->pluginsFolders[] = '/Users/arielsommeria-klein/Documents/workspaces/baguetteamf/BaguetteAMF/amfphp_plugin/';
         //$this->serviceFolders [] = '/Users/arielsommeria-klein/Documents/workspaces/baguetteamf/test/Services/';
     }
 

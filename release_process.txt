@@ -5,15 +5,16 @@ test service browser
 test generators
 test examples
 regenerate doc, and update online version
-update version flag inb 3 places: in the front/classloader.php, in backoffice/classloader.php ,and at downloads.silexlabs.org/amfphp/amfphp_updates.php
+make sure no flex builds, no generated clients, no extraConfig.php, no monitor log
+update version flag in 3 places: in the front/classloader.php, in backoffice/classloader.php ,and at downloads.silexlabs.org/amfphp/amfphp_updates.php
+create release zip
+upload to distribution platform(sourceforge)
+download it again for a quick test
+
 tag repository: 
     git tag -a v2.2_comments -m "2.2 Teaser # 1 putting comments to good use "
     git push --tags
 
-
-create release zip
-upload to distribution platform(sourceforge)
-download it again for a quick test
 
 blog post on silexlabs. publish to twitter, facebook, google plus, linkedin.
 update download link on silex labs page
