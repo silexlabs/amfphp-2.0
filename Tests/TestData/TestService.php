@@ -202,6 +202,7 @@ class TestService {
         sleep(1);
         AmfphpMonitor::addTime('operation 2');
         sleep(1);
+        AmfphpMonitor::addTime('operation 3');
         return 'bla';
     }
 }
