@@ -40,9 +40,9 @@ var paramEditors = [];
 var amfCaller;
 
 /**
- * is Looping
+ * is Repeating
  */
-var isLooping;
+var isRepeating;
 
 /**
  * maintains state for showing or hiding advanced call options
@@ -84,7 +84,7 @@ $(function () {
 
         });
 
-        isLooping = false;
+        isRepeating = false;
         $("#callDialog").hide();
         $("#advancedCall").hide();
         isAdvancedDialogVisible = false;
@@ -325,8 +325,8 @@ function makeAmfCall(){
 
 }
 
-function toggleLoop(){
-    if(!isLooping){
+function toggleRepeat(){
+    if(!isRepeating){
         var concurrency = parseInt($("#concurrencyInput").val());
         if(isNaN(concurrency)){
             alert("Invalid number of concurrent requests");
@@ -334,21 +334,21 @@ function toggleLoop(){
         }
     }
     
-    isLooping = !isLooping;
-    if(isLooping){
-        $("#toggleLoopBtn").prop("value", "Stop Loop AMF");
-        amfCaller.loop(amfphpEntryPointUrl, serviceName + "/" + methodName, concurrency, getCallParameterValues());
+    isRepeating = !isRepeating;
+    if(isRepeating){
+        $("#toggleRepeatBtn").prop("value", "Stop Repeat Call AMF");
+        amfCaller.repeat(amfphpEntryPointUrl, serviceName + "/" + methodName, concurrency, getCallParameterValues());
         onResult('loading...');
         
     }else{
-        $("#toggleLoopBtn").prop("value", "Start Loop AMF");
-        amfCaller.stopLoop();
+        $("#toggleRepeatBtn").prop("value", "Start Repeat Call AMF");
+        amfCaller.stopRepeat();
         
     }
 
 }
 
-function onLoopResult(callsPerSec){
+function onRepeatResult(callsPerSec){
     onResult(callsPerSec + ' calls per second');
 }
 

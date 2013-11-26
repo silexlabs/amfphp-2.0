@@ -91,7 +91,7 @@ $config = new Amfphp_BackOffice_Config();
                         <div id="advancedCall">
                             <input class="notParamEditor" type="submit" value="Call JSON" onclick="makeJsonCall()"/>  
                             <input class="notParamEditor" type="submit" value="Call AMF" onclick="makeAmfCall()"/>       
-                            <input class="notParamEditor" type="submit" id="toggleLoopBtn" value="Start Loop AMF" onclick="toggleLoop()"/>       
+                            <input class="notParamEditor" type="submit" id="toggleRepeatBtn" value="Start Repeat Call AMF" onclick="toggleRepeat()"/>       
                             Number of Concurrent Requests
                             <input id="concurrencyInput" value="1"/>       
                             <div id="amfCallerContainer">
