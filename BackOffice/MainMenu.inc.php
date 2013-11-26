@@ -24,7 +24,7 @@ $temp = 0;
             <br/><br/>
             <li><a href="ServiceBrowser.php">Service Browser</a></li>
             <li><a href="ClientGenerator.php">Client Generator</a></li>
-            <li><a href="PerformanceMonitor.php">Performance Monitor</a></li>
+            <li><a href="Profiler.php">Profiler</a></li>
             <br/>
             AmfPHP <?php echo AMFPHP_VERSION; ?> <span id="latestVersionInfo"></span>
             <br/>

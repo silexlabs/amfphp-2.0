@@ -8,7 +8,7 @@
  * with this package in the file license.txt.
  * 
  * note: It would be nice to have logarithmic time rendering, but this doesn't seem to work nicely with horizontal graphs
- * @package Amfphp_BackOffice_PerformanceMonitor
+ * @package Amfphp_BackOffice_Profiler
  * 
  */
 /**
@@ -106,7 +106,7 @@ var timer;
 var amfphpEntryPointUrl = "<?php echo $config->resolveAmfphpEntryPointUrl() ?>?contentType=application/json";
 
 $(function () {	
-    document.title = "AmfPHP - Performance Monitor";
+    document.title = "AmfPHP - Profiler";
     $("#titleSpan").text(document.title);
 
     <?php if($config->fetchAmfphpUpdates){
@@ -169,7 +169,7 @@ function onDataLoaded(data)
     if(typeof data == "string"){
         //some predictable error messages
         if(data.indexOf("AmfphpMonitorService service not found") != -1){
-            displayStatusMessage("The AmfphpMonitorService could not be called. This is most likely because AmfphpMonitor plugin is not enabled. See the <a href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/performance-monitor/'>documentation</a>.")
+            displayStatusMessage("The AmfphpMonitorService could not be called. This is most likely because AmfphpMonitor plugin is not enabled. See the <a href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/'>documentation</a>.")
         }else{
             displayStatusMessage(data);
         }
@@ -207,11 +207,11 @@ function getLegendLabels(orderedTimeNames){
             case "Response Vo Conversion":
             case "Response Charset Conversion":
             case "Serialization":
-                label = timeName  + "<a href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/performance-monitor/#";
+                label = timeName  + "<a href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/#";
                 label += timeName + "'> ?</a>";
                 break;
             default:
-                label = "CUSTOM " + timeName + "<a href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/performance-monitor/#more data'> ?</a>";
+                label = "CUSTOM " + timeName + "<a href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/#more data'> ?</a>";
         }
         labels.push(label);
     }
@@ -382,7 +382,9 @@ function addLabelListeners(){
        $('.jqplot-yaxis-tick')
         .css({ cursor: "pointer", zIndex: "1" })
         .click(function (ev) { 
-            focusOnUri($(this).text());
+            focusOnUri($(this).text());            
+            displayStatusMessage(''); 
+
 
         });
 /* not useful at this point.        
