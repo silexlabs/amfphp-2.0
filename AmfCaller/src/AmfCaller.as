@@ -113,8 +113,8 @@ package
 				enhancedNetConnections.push(enc);
 				enc.connect(url);
 				enc.callWithEvents.apply(enc, repeatingCallArgs);
-				enc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, encResultHandler);
-				enc.addEventListener(EnhancedNetConnection.EVENT_ONSTATUS, encResultHandler);
+				enc.addEventListener(EnhancedNetConnection.EVENT_ONRESULT, encResultHandler, false, 0, true);
+				enc.addEventListener(EnhancedNetConnection.EVENT_ONSTATUS, encResultHandler, false, 0, true);
 			}
 			
 			isRepeating = true;
