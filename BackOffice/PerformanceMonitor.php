@@ -159,6 +159,11 @@ function updateControls(){
  */
 function onDataLoaded(data)
 {
+    
+    if(plot){
+        plot.destroy();
+    }
+    displayStatusMessage('');
     serverData = data;
 
     if(typeof data == "string"){
