@@ -198,11 +198,11 @@ class ExampleService {
     }
     
     public function testCustomMonitorTime(){
-        sleep(1);
+        usleep(200000);
         AmfphpMonitor::addTime('operation 1');
-        sleep(1);
+        usleep(200000);
         AmfphpMonitor::addTime('operation 2');
-        sleep(1);
+        usleep(200000);
         AmfphpMonitor::addTime('operation 3');
         return 'bla';
     }
