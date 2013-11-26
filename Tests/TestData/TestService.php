@@ -136,6 +136,7 @@ class TestService {
             $item->float = rand(-1000, 1000) / 100;
             $item->string = md5(rand(-1000, 1000));
             $ret[] = $item;
+           
         }
         return $ret;
     }
@@ -197,11 +198,11 @@ class TestService {
     }
     
     public function testCustomMonitorTime(){
-        sleep(1);
+        usleep(200000);
         AmfphpMonitor::addTime('operation 1');
-        sleep(1);
+        usleep(200000);
         AmfphpMonitor::addTime('operation 2');
-        sleep(1);
+        usleep(200000);
         AmfphpMonitor::addTime('operation 3');
         return 'bla';
     }
