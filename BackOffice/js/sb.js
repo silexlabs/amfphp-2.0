@@ -92,7 +92,7 @@ $(function () {
             toggleAdvanced();
         }
 
-        resize();    
+resize();    
 
 });
 
@@ -160,6 +160,16 @@ function onServicesLoaded(data)
     if (shouldFetchUpdates) {
         //only load update info once services loaded(that's the important stuff)
         showAmfphpUpdates();
+    }
+    
+    var manipulatedUri = $.cookie('manipulatedUri');
+    if(manipulatedUri){
+        var split = manipulatedUri.split("/");
+        var serviceName = split[0];
+        var methodName = split[1];
+        if(serviceData[serviceName] && serviceData[serviceName].methods[methodName]){
+            manipulateMethod(serviceName, methodName);
+        }
     }
 
 
@@ -279,6 +289,8 @@ function manipulateMethod(serviceName, methodName){
     if(isRepeating){
          toggleRepeat();
     }
+    
+    $.cookie('manipulatedUri', serviceName + "/" + methodName);    
 }
 
 /**
