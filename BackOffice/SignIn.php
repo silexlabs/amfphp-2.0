@@ -79,7 +79,7 @@ try {
             return;
         }
         ?>
-        <?php require_once(dirname(__FILE__) . '/LinkBar.inc.php'); ?>
+        <?php require_once(dirname(__FILE__) . '/Header.inc.php'); ?>
 
         <div id='main'>
 
@@ -97,14 +97,9 @@ try {
                         <input type = "Submit" value = "Sign In"/>
 
                     </form>
-                    AmfPHP <?php echo AMFPHP_VERSION; ?> <span id="latestVersionInfo"></span>
-                    <br/>
-                    <button id="newsBtn" onclick="toggleNews()">
-                        <img src="feed-icon-14x14.png"></img>
-                        <span id="toggleNewsText">Show News</span>
-                    </button>
-                    <div id="divRss"></div>
+
                 </div>                    
+        <?php require_once(dirname(__FILE__) . '/Footer.inc.php'); ?>
             </div>
 
             <script>

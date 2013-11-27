@@ -50,7 +50,7 @@ $config = new Amfphp_BackOffice_Config();
     </head>
     <body>
         <?php
-        require_once(dirname(__FILE__) . '/LinkBar.inc.php');
+        require_once(dirname(__FILE__) . '/Header.inc.php');
         ?>
 
         <div id="main">
@@ -64,7 +64,6 @@ $config = new Amfphp_BackOffice_Config();
                     <?php
                     return;
                 }
-                require_once(dirname(__FILE__) . '/MainMenu.inc.php');
                 ?>
                     <div class='menu' id="services">
                     <h2>Services and Methods</h2>
@@ -126,5 +125,8 @@ $config = new Amfphp_BackOffice_Config();
 
 
         </div>
+        <?php
+        require_once(dirname(__FILE__) . '/Footer.inc.php');
+        ?>        
     </body>    
 </html>

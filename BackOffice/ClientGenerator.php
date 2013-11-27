@@ -33,11 +33,10 @@ $config = new Amfphp_BackOffice_Config();
     </head>
     <body>
         <?php
-        require_once(dirname(__FILE__) . '/LinkBar.inc.php');
+        require_once(dirname(__FILE__) . '/Header.inc.php');
         ?>
 
         <div id='main' class="notParamEditor">
-            <div id="left">
                 <?php
                 if (!$isAccessGranted) {
                     ?>
@@ -47,57 +46,57 @@ $config = new Amfphp_BackOffice_Config();
                     <?php
                     return;
                 }
-                require_once(dirname(__FILE__) . '/MainMenu.inc.php');
                 ?>
-            </div>
-            <div  id='right'>
-                <div class="menu" id="methodDialog">
+            <div class="menu" id="methodDialog">
 
-                    Use one of the following generators to generate a client Stub project. <br/>
-                    The project includes :<br/><br/>
-                    <ul>
-                        <li>code to make calling your services easy</li>
-                        <li>a starting point for a user interface you can customize</li>
-                    </ul>
-                    <br/><br/>
-                    <?php 
-                    $writeTestFolder = AMFPHP_BACKOFFICE_ROOTPATH . 'ClientGenerator/Generated/';
-                    if(!is_writable($writeTestFolder)){
-                        echo "WARNING: could not write to ClientGenerator/Generated/. <br/> You need to change your permissions to be able to use the client generator.<br/><br/>";
-                    }
-                    
-                    ?>
-                    Code will be generated for the following services:
-                    <br/><br/>
-                    <ul id="serviceList"></ul><br/>
-                    <?php
-                    $generatorManager = new Amfphp_BackOffice_ClientGenerator_GeneratorManager();
-                    $generators = $generatorManager->loadGenerators(array('ClientGenerator/Generators'));
-                    
+                Use one of the following generators to generate a client Stub project. <br/>
+                The project includes :<br/><br/>
+                <ul>
+                    <li>code to make calling your services easy</li>
+                    <li>a starting point for a user interface you can customize</li>
+                </ul>
+                <br/><br/>
+                <?php 
+                $writeTestFolder = AMFPHP_BACKOFFICE_ROOTPATH . 'ClientGenerator/Generated/';
+                if(!is_writable($writeTestFolder)){
+                    echo "WARNING: could not write to ClientGenerator/Generated/. <br/> You need to change your permissions to be able to use the client generator.<br/><br/>";
+                }
+
+                ?>
+                Code will be generated for the following services:
+                <br/><br/>
+                <ul id="serviceList"></ul><br/>
+                <?php
+                $generatorManager = new Amfphp_BackOffice_ClientGenerator_GeneratorManager();
+                $generators = $generatorManager->loadGenerators(array('ClientGenerator/Generators'));
+
 
 //links for each generator
-                    echo "\n<table class='notParamEditor'>";
-                    foreach ($generators as $generator) {
-                        echo "\n    <tr>";
-                        $generatorName = $generator->getUiCallText();
-                        $generatorClass = get_class($generator);
-                        $infoUrl = $generator->getInfoUrl();
-                        echo "\n        <td>$generatorName</td>";
-                        echo "\n        <td><a href=\"$infoUrl\">Info</a></td>";
-                        echo "\n        <td><a onclick='generate(\"" . $generatorClass . "\")'>Generate!</a></td>";
-                        echo "\n    </tr>";
-                    }
-                    ?>
-                    <tr><td>IOS</td><td><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/ios/">Info/Vote Up</a></td>        <td>Not Available Yet</td>    </tr>
-                    <tr><td>Haxe</td><td><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/haxe/">Info/Vote Up</a></td>        <td>Not Available Yet</td>    </tr>
-                    <tr><td>Android</td><td><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/android/">Info/Vote Up</a></td>        <td>Not Available Yet </td></tr>
-                    <tr><td>Write your Own?</td><td><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/writing-you-own-client-generator/">Info</a></td>        <td></td></tr>
+                echo "\n<table class='notParamEditor'>";
+                foreach ($generators as $generator) {
+                    echo "\n    <tr>";
+                    $generatorName = $generator->getUiCallText();
+                    $generatorClass = get_class($generator);
+                    $infoUrl = $generator->getInfoUrl();
+                    echo "\n        <td>$generatorName</td>";
+                    echo "\n        <td><a href=\"$infoUrl\">Info</a></td>";
+                    echo "\n        <td><a onclick='generate(\"" . $generatorClass . "\")'>Generate!</a></td>";
+                    echo "\n    </tr>";
+                }
+                ?>
+                <tr><td>IOS</td><td><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/ios/">Info/Vote Up</a></td>        <td>Not Available Yet</td>    </tr>
+                <tr><td>Haxe</td><td><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/haxe/">Info/Vote Up</a></td>        <td>Not Available Yet</td>    </tr>
+                <tr><td>Android</td><td><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/android/">Info/Vote Up</a></td>        <td>Not Available Yet </td></tr>
+                <tr><td>Write your Own?</td><td><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/writing-you-own-client-generator/">Info</a></td>        <td></td></tr>
 
 
-                    </table>
-                    <div id="statusMessage" style="max-width:100%"></div>
-                </div>
+                </table>
+                <div id="statusMessage" style="max-width:100%"></div>
             </div>
+                
+        <?php
+        require_once(dirname(__FILE__) . '/Footer.inc.php');
+        ?>
             <script>
 $(function () {	        
     document.title = "AmfPHP - Client Generator";

@@ -172,7 +172,6 @@ function onServicesLoaded(data)
 function resize(){
     var availableWidthForRightDiv = $( "#main" ).width() - $("#left").outerWidth(true) - 50;
     $( "#right" ).css( "maxWidth", availableWidthForRightDiv +  "px" );
-    $( "#divRss" ).css( "maxWidth", $("#serviceMethods").outerWidth(true) +  "px" );
 }
 
 /**

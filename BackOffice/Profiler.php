@@ -43,11 +43,10 @@ $config = new Amfphp_BackOffice_Config();
     </head>
     <body>
         <?php
-        require_once(dirname(__FILE__) . '/LinkBar.inc.php');
+        require_once(dirname(__FILE__) . '/Header.inc.php');
         ?>
 
         <div id='main' class="notParamEditor">
-            <div id="left">
                 <?php
                 if (!$isAccessGranted) {
                     ?>
@@ -57,29 +56,28 @@ $config = new Amfphp_BackOffice_Config();
                     <?php
                     return;
                 }
-                require_once(dirname(__FILE__) . '/MainMenu.inc.php');
                 ?>
-            </div>
-            <div  id='right'>
-                <div class="menu" id="performanceDisplay">
-                    <div id="controls">
-                        <input type="submit" value="Flush" onclick="flush()"></input>
-                        <input type="submit" value="Refresh" onclick="refreshClickHandler()"></input>
-                        <input type="checkbox" id="flushOnRefreshCb"></input>
-                        Flush on refresh
-                        <input type="submit" id="toggleAutoRefreshBtn" value="Start Auto Refresh" onclick="toggleAutoRefresh()"></input>
-                        Every
-                        <input value="1" id="autoRefreshIntervalInput"></input>
-                        Seconds<br/>
-                        <a onclick="showAllUris()">All Calls</a>
-                        <span id="focusedUriInfo"></span> &nbsp;&nbsp;
-                        <div id="statusMessage" class="warning"> </div>
-                    </div>
-                    <div id="chartDivContainer">
-                        <div id="chartDiv"></div>
-                    </div>                  
+            <div class="menu" id="performanceDisplay">
+                <div id="controls">
+                    <input type="submit" value="Flush" onclick="flush()"></input>
+                    <input type="submit" value="Refresh" onclick="refreshClickHandler()"></input>
+                    <input type="checkbox" id="flushOnRefreshCb"></input>
+                    Flush on refresh
+                    <input type="submit" id="toggleAutoRefreshBtn" value="Start Auto Refresh" onclick="toggleAutoRefresh()"></input>
+                    Every
+                    <input value="1" id="autoRefreshIntervalInput"></input>
+                    Seconds<br/>
+                    <a onclick="showAllUris()">All Calls</a>
+                    <span id="focusedUriInfo"></span> &nbsp;&nbsp;
+                    <div id="statusMessage" class="warning"> </div>
                 </div>
+                <div id="chartDivContainer">
+                    <div id="chartDiv"></div>
+                </div>                  
             </div>
+        <?php
+        require_once(dirname(__FILE__) . '/Footer.inc.php');
+        ?>            
             <script>
                 
 /**

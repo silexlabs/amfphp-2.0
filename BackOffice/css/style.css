@@ -1,4 +1,4 @@
-.static, #left, .notParamEditor, pre{
+#header, #left, .notParamEditor, pre, #footer{
      /*don't apply font to ACE editor or else cursor position is messed up. :not selector dones't work, so need 
      to do it to everything but it' */
         font-family: Arial, Helvetica, sans-serif;
@@ -32,33 +32,6 @@ input, #result, button{
 }
 
 
-
-.static {
-	height: 20px;
-	padding: 20px;
-	padding-top: 10px;
-	border-bottom: 1px solid #525252;
-} 
-
-#titleSpan {
-	font-size: 24px;
-} 
-
-.static ul {
-	float: right;
-	list-style-type: none;
-	margin-top: 7px;
-}
-
-.static a{
-	padding-right: 20px;
-    
-}
-
-.static ul li {
-	float: left;
-	margin-left: 20px;
-}
 
 #left li ul {
 	padding-left: 15px;
@@ -159,11 +132,8 @@ button span {
     vertical-align: middle;
 }
 
-#newsBtn{
-    /*
-    Hide news button by default
-    */
-    display:none;
+#newsLink{
+    width:137px;
 }
 
 #chartDivContainer{
@@ -181,5 +151,75 @@ button span {
 }
 
 #divRss{
-    max-width: 300px;
+    float:right;
+    background: white;
+    border:1px solid #525252;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    padding:5px;
 }
+
+#divRss .dateCell{
+    text-align: right;
+}
+
+#titleSpan {
+	font-size: 24px;
+} 
+
+
+#header {
+	height: 20px;
+	padding: 20px;
+	padding-top: 10px;
+	border-bottom: 1px solid #525252;
+} 
+
+#header ul {
+	float: right;
+	list-style-type: none;
+	margin-top: 7px;
+}
+
+#header a{
+	padding-right: 20px;
+    
+}
+
+#header ul li {
+	float: left;
+	margin-left: 20px;
+}
+
+
+
+#footer
+{
+    clear: both;
+    border-top: 1px solid #525252;
+    background: White;
+    padding: 0;
+    text-align: center;
+    vertical-align: middle;
+    line-height: normal;
+    margin: 0;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    padding: 20px;
+    padding-top: 10px;
+    border-bottom: 1px solid #525252;
+} 
+
+
+
+#footer a{
+	padding-right: 20px;
+    
+}
+
+
+
+
+

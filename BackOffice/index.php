@@ -35,7 +35,7 @@ $config = new Amfphp_BackOffice_Config();
    
     </head>
     <body>
-        <?php require_once(dirname(__FILE__) . '/LinkBar.inc.php'); ?>
+        <?php require_once(dirname(__FILE__) . '/Header.inc.php'); ?>
 
         <div id='main'>
             <div id="left">
@@ -49,11 +49,12 @@ $config = new Amfphp_BackOffice_Config();
                     <?php
                     return;
                 }
-                require_once(dirname(__FILE__) . '/MainMenu.inc.php');
                 ?>
             </div>
 
         </div>
+        <?php require_once(dirname(__FILE__) . '/Footer.inc.php'); ?>
+        
         <script>
             $(function () {	        
                     document.title = "AmfPHP Back Office";

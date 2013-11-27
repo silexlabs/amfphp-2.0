@@ -32,5 +32,5 @@ if (isset($_SESSION[Amfphp_BackOffice_AccessManager::SESSION_FIELD_ROLES])) {
 }
 ?>
 <script>
-    window.location = './index.php';
+    window.location = './SignIn.php';
 </script>

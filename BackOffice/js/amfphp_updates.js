@@ -33,19 +33,20 @@ function showAmfphpUpdates(){
      */
     function buildNewsDisplay(entries){
         $("#divRss").empty();
-        var s = "";
+        var s = "<table>";
         $.each(entries, function (e, item) {
-            s += '<li><div class="itemTitle"><a href="' + item.link + '" target="_blank" >' + item.title + "</a></div>";
+            s += '<tr><td><a href="' + item.link + '" target="_blank" >' + item.title + "</a></td>";
             i = new Date(item.publishedDate);
-            s += '<div class="itemDate">' + i.toLocaleDateString() + "</div>";
+            s += "<td class='dateCell'>" + i.toLocaleDateString() + "</td></tr>";
         });
-        $("#divRss").append('<ul>' + s + "</ul>");
+        s += "</table>";
+        $("#divRss").append(s);
         $.cookie('amfphp_news', JSON.stringify(entries), {expires: 7})
 
     }
     if(!$.cookie('amfphp_news')){
         $.ajax({
-            url: "http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=" + 3 + "&output=json&q=" + encodeURIComponent('http://www.silexlabs.org/category/the-blog/blog-amfphp/feed/') + "&hl=en&callback=?",
+            url: "http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=" + 6 + "&output=json&q=" + encodeURIComponent('http://www.silexlabs.org/category/the-blog/blog-amfphp/feed/') + "&hl=en&callback=?",
             dataType: "json",
             success: function(data){
                 var entries = [];
