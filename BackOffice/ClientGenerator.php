@@ -18,6 +18,7 @@ $config = new Amfphp_BackOffice_Config();
 ?>
 
 <html>
+    <title>AmfPHP Back Office - Client Generator</title>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -99,8 +100,7 @@ $config = new Amfphp_BackOffice_Config();
         ?>
             <script>
 $(function () {	        
-    document.title = "AmfPHP - Client Generator";
-    $("#titleSpan").text("AmfPHP - Client Generator");
+    $("#tabName").text("Client Generator");
 
     var callData = JSON.stringify({"serviceName":"AmfphpDiscoveryService", "methodName":"discover","parameters":[]});
     var request = $.ajax({

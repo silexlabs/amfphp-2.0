@@ -2,13 +2,17 @@
      /*don't apply font to ACE editor or else cursor position is messed up. :not selector dones't work, so need 
      to do it to everything but it' */
         font-family: Arial, Helvetica, sans-serif;
-        color: #33536D;
+        color: #666666;
 }
 
-*{
-	font-size: 15px;
-	margin: 0px;
-	padding: 0px;
+body{
+    font-size: 15px;
+    
+}
+
+#backoffice{
+    font-style: italic;
+    font-weight: normal;
 }
 
 input{
@@ -127,6 +131,11 @@ h3{
     
 }
 
+a.important{
+    font-size: 16px;
+    font-weight: bold;
+}
+
 button img,
 button span {
     vertical-align: middle;
@@ -146,7 +155,7 @@ button span {
 }
 
 
-.jqplot-table-legend{
+.jqplot-table-legend, .jqplot-title{
     z-index: 1;
 }
 
@@ -160,12 +169,18 @@ button span {
     padding:5px;
 }
 
+#divRss, #newsLink{
+    /* hide these elements by default */
+    display: none;
+}
 #divRss .dateCell{
     text-align: right;
 }
 
 #titleSpan {
 	font-size: 24px;
+        padding-right: 20px;
+        
 } 
 
 
@@ -221,5 +236,7 @@ button span {
 
 
 
-
+.tip{
+    color:green;
+}
 

@@ -61,7 +61,7 @@ function showAmfphpUpdates(){
     }else{
         buildNewsDisplay(JSON.parse($.cookie('amfphp_news')));
     }
-    $('#newsBtn').show();
+    $('#newsLink').show();
     
     $('#divRss').hide();
 

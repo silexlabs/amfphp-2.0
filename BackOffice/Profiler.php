@@ -21,6 +21,7 @@ $config = new Amfphp_BackOffice_Config();
 ?>
 
 <html>
+    <title>AmfPHP Back Office - Profiler</title>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -67,8 +68,6 @@ $config = new Amfphp_BackOffice_Config();
                     Every
                     <input value="1" id="autoRefreshIntervalInput"></input>
                     Seconds<br/>
-                    <a onclick="showAllUris()">All Calls</a>
-                    <span id="focusedUriInfo"></span> &nbsp;&nbsp;
                     <div id="statusMessage" class="warning"> </div>
                 </div>
                 <div id="chartDivContainer">
@@ -104,8 +103,7 @@ var timer;
 var amfphpEntryPointUrl = "<?php echo $config->resolveAmfphpEntryPointUrl() ?>?contentType=application/json";
 
 $(function () {	
-    document.title = "AmfPHP - Profiler";
-    $("#titleSpan").text(document.title);
+    $("#tabName").text("Profiler");
 
     <?php if($config->fetchAmfphpUpdates){
         echo 'showAmfphpUpdates();';
@@ -143,13 +141,6 @@ function displayStatusMessage(html){
     resize();
 }
 
-function updateControls(){
-    if(focusedUri){
-        $("#focusedUriInfo").text("> " + focusedUri);
-    }else{
-        $("#focusedUriInfo").text("(Click method for details)");
-    }
-}
 
 /**
  * callback for when performance data loaded from server . 
@@ -199,10 +190,10 @@ function getLegendLabels(orderedTimeNames){
         var label;
         switch(timeName){
             case "Deserialization": 
-            case "Request Vo Conversion":
+            case "Request Value Object Conversion":
             case "Request Charset Conversion":
             case "Service Call":
-            case "Response Vo Conversion":
+            case "Response Value Object Conversion":
             case "Response Charset Conversion":
             case "Serialization":
                 label = timeName  + "<a href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/#";
@@ -300,9 +291,10 @@ function showAllUris(){
         message += "<br/>For a service method to appear in the chart make sur it logs those times.<br/>";
         $("#statusMessage").html(message);
     }
-    buildChart(flippedSeriesData, ticks, getLegendLabels(orderedTimeNames));
+    var titleHtml = "Average durations for all calls (ms)";
+    
+    buildChart(flippedSeriesData, ticks, getLegendLabels(orderedTimeNames), titleHtml);
 
-    updateControls();
 }
 
 
@@ -331,15 +323,17 @@ function focusOnUri(uri){
         seriesData.push(timeData.reverse());
 
     }
+    var titleHtml = '<a onclick="showAllUris()">Average durations for all calls(ms)</a>&nbsp;> ' + focusedUri;
 
     //the empty ticks array is important, otherwise the category axis renderer 
     //messes up the layout
-    buildChart(seriesData, [], getLegendLabels(orderedTimeNames));
+    buildChart(seriesData, [], getLegendLabels(orderedTimeNames), titleHtml);
 
-    updateControls();
 }
 
-function buildChart(seriesData, ticks, legendLabels){
+function buildChart(seriesData, ticks, legendLabels, titleHtml){
+    var numRows = seriesData[0].length;
+    
     plot = $.jqplot('chartDiv', seriesData, {
         // Tell the plot to stack the bars.
         stackSeries: true,
@@ -350,7 +344,9 @@ function buildChart(seriesData, ticks, legendLabels){
                 barMargin: 30,
                 barDirection: 'horizontal'
             },
-            pointLabels: {show: true}
+            pointLabels: {show: true},
+            shadow:false
+            
         },
         axes: {
 
@@ -361,15 +357,22 @@ function buildChart(seriesData, ticks, legendLabels){
                 // Don't want to do that here.
                 padMin: 0,
                 renderer: $.jqplot.CategoryAxisRenderer,
-                ticks: ticks
+                ticks: ticks,
+                tickOptions: {
+            fontSize: '12pt'
+          }
             }
         },
         legend: {
             show: true,
-            location: 'e',
-            placement: 'inside',
+            location: 's',
+            placement: 'outsideGrid',
             labels:legendLabels           
-        }
+        },
+        title:{
+            text:titleHtml
+        },
+        grid:{shadow:false}
     });
 
     addLabelListeners();

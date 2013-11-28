@@ -17,9 +17,11 @@
 $temp = 0;
 ?>
 <div id="header">
-    <span id="titleSpan"></span>
-    <a href="ServiceBrowser.php">Service Browser</a><a href="ClientGenerator.php">Client Generator</a>
-    <a href="Profiler.php">Profiler</a>
+    <span id="titleSpan">AmfPHP <span id="backoffice">Back Office</span> - <span id="tabName"></span></span>
+    <a class="important" href="index.php">Home</a>
+    <a class="important" href="ServiceBrowser.php">Service Browser</a>
+    <a class="important" href="ClientGenerator.php">Client Generator</a>
+    <a class="important" href="Profiler.php">Profiler</a>
 
     <ul>
         <li>AmfPHP <?php echo AMFPHP_VERSION; ?> <span id="latestVersionInfo"></span></li>

@@ -12,12 +12,12 @@ var methodParams;
 /**
  * name of service being manipulated
  **/
-var serviceName = "";
+var manipulatedServiceName = "";
 
 /**
  * name of method being manipulated
  * */
-var methodName = "";
+var manipulatedMethodName = "";
 
 /**
  *call start time, in ms
@@ -50,49 +50,48 @@ var isRepeating;
 var isAdvancedDialogVisible;
 
 $(function () {
-        var callData = JSON.stringify({"serviceName":"AmfphpDiscoveryService", "methodName":"discover","parameters":[]});
-        var request = $.ajax({
-            url: amfphpEntryPointUrl + "?contentType=application/json",
-            type: "POST",
-            data: callData
-        });
+    var callData = JSON.stringify({"serviceName":"AmfphpDiscoveryService", "methodName":"discover","parameters":[]});
+    var request = $.ajax({
+        url: amfphpEntryPointUrl + "?contentType=application/json",
+        type: "POST",
+        data: callData
+    });
 
-        request.done(onServicesLoaded);
+    request.done(onServicesLoaded);
 
-        request.fail(function( jqXHR, textStatus ) {
-            displayStatusMessage(textStatus + "<br/><br/>" + jqXHR.responseText);
-        });
+    request.fail(function( jqXHR, textStatus ) {
+        displayStatusMessage(textStatus + "<br/><br/>" + jqXHR.responseText);
+    });
 
-        showResultView("tree");
-        document.title = "AmfPHP - Service Browser";
-        $("#titleSpan").text("AmfPHP - Service Browser");
-        var flashvars = {};
-        var params = {};
-        params.allowscriptaccess = "sameDomain";
-        var attributes = {};
-        attributes.id = "amfCaller";
+    showResultView("tree");
+    $("#tabName").text("Service Browser");
+    var flashvars = {};
+    var params = {};
+    params.allowscriptaccess = "sameDomain";
+    var attributes = {};
+    attributes.id = "amfCaller";
 
-        swfobject.embedSWF("AmfCaller.swf", "amfCallerContainer", "0", "0", "9.0.0", false, flashvars, params, attributes, function (e) {
-            if(e.success){
-                amfCaller = e.ref;
-            }else{
-                alert("could not load AMF Caller.");
-                if(console){
-                    console.log(e);
-                }
+    swfobject.embedSWF("AmfCaller.swf", "amfCallerContainer", "0", "0", "9.0.0", false, flashvars, params, attributes, function (e) {
+        if(e.success){
+            amfCaller = e.ref;
+        }else{
+            alert("could not load AMF Caller.");
+            if(console){
+                console.log(e);
             }
-
-        });
-
-        isRepeating = false;
-        $("#callDialog").hide();
-        $("#advancedCall").hide();
-        isAdvancedDialogVisible = false;
-        if($.cookie('advanced')){
-            toggleAdvanced();
         }
 
-resize();    
+    });
+
+    isRepeating = false;
+    $("#callDialog").hide();
+    $("#advancedCall").hide();
+    isAdvancedDialogVisible = false;
+    if($.cookie('advanced')){
+        toggleAdvanced();
+    }
+
+    resize();    
 
 });
 
@@ -113,12 +112,16 @@ function onServicesLoaded(data)
         return;
     }
     serviceData = data;
-
+    
+    var serviceName;
+    var methodName;
+    var service;
+    
     //generate service/method list
     var rootUl = $("ul#serviceMethods");
     $(rootUl).empty();
     for(serviceName in serviceData){
-        var service = serviceData[serviceName];
+        service = serviceData[serviceName];
         var serviceLi = $("<li>" + serviceName + "</li>")
         .appendTo(rootUl);
         $(serviceLi).attr("title", service.comment);
@@ -163,14 +166,29 @@ function onServicesLoaded(data)
     }
     
     var manipulatedUri = $.cookie('manipulatedUri');
+    
     if(manipulatedUri){
         var split = manipulatedUri.split("/");
-        var serviceName = split[0];
-        var methodName = split[1];
+        serviceName = split[0];
+        methodName = split[1];
         if(serviceData[serviceName] && serviceData[serviceName].methods[methodName]){
+            //manipulate method saved in cookie
             manipulateMethod(serviceName, methodName);
         }
     }
+    if(!manipulatedMethodName){
+        //manipulate first available service + method
+        for(serviceName in serviceData){
+            service = serviceData[serviceName];
+            for(methodName in service.methods){
+                manipulateMethod(serviceName, methodName);
+                break;
+            }
+            break;
+        }
+        
+    }
+    
 
 
 }
@@ -243,8 +261,8 @@ function createParamDialog(){
  * */
 function manipulateMethod(serviceName, methodName){
     $("#callDialog").show();
-    this.serviceName = serviceName;
-    this.methodName = methodName;
+    this.manipulatedServiceName = serviceName;
+    this.manipulatedMethodName = methodName;
     var service = serviceData[serviceName];
     var method = service.methods[methodName];   
     methodParams = method.parameters;
@@ -318,7 +336,7 @@ function getCallParameterValues(){
  * */
 function makeJsonCall(){
 
-    var callData = JSON.stringify({"serviceName":serviceName, "methodName":methodName,"parameters":getCallParameterValues()});
+    var callData = JSON.stringify({"serviceName":manipulatedServiceName, "methodName":manipulatedMethodName,"parameters":getCallParameterValues()});
     callStartTime = $.now();
     $.post(amfphpEntryPointUrl + "?contentType=application/json", callData, onResult);
     onResult('loading...');
@@ -334,7 +352,7 @@ function makeAmfCall(){
         alert('AMF Caller not available.');
     }
     callStartTime = $.now();
-    amfCaller.call(amfphpEntryPointUrl, serviceName + "/" + methodName, getCallParameterValues());
+    amfCaller.call(amfphpEntryPointUrl, manipulatedServiceName + "/" + manipulatedMethodName, getCallParameterValues());
     onResult('loading...');
 
 }
@@ -351,7 +369,7 @@ function toggleRepeat(){
     isRepeating = !isRepeating;
     if(isRepeating){
         $("#toggleRepeatBtn").prop("value", "Stop Repeat Call AMF");
-        amfCaller.repeat(amfphpEntryPointUrl, serviceName + "/" + methodName, concurrency, getCallParameterValues());
+        amfCaller.repeat(amfphpEntryPointUrl, manipulatedServiceName + "/" + manipulatedMethodName, concurrency, getCallParameterValues());
         onResult('loading...');
         
     }else{
@@ -362,6 +380,9 @@ function toggleRepeat(){
 
 }
 
+/**
+ * callback from AMF caller repeat
+ * */
 function onRepeatResult(callsPerSec){
     onResult(callsPerSec + ' calls per second');
 }
@@ -415,6 +436,9 @@ function showResultView(viewId){
     resultViewId = viewId;
 }
 
+/**
+ * show/hide advanced call options 
+ */
 function toggleAdvanced(){
     isAdvancedDialogVisible = !isAdvancedDialogVisible;
 

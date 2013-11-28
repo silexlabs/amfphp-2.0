@@ -18,7 +18,7 @@ $config = new Amfphp_BackOffice_Config();
 ?>
 
 <html>
-
+    <title>AmfPHP Back Office - Service Browser</title>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
         <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.10.3.custom.min.css" />
@@ -75,11 +75,13 @@ $config = new Amfphp_BackOffice_Config();
             </div>                    
             <div id="right" class="menu" >
                 <div id="methodDialog" class="notParamEditor">
-                    <h3 id="serviceHeader">Choose a Method From the list on the left. </h3>
+                    <h2>Method Caller </h2>
+                    <span class="tip">Choose a Method From the list on the left.</span> 
+                    <h3 id="serviceHeader"></h3>
                     <pre id="serviceComment"></pre>
                     <h3 id="methodHeader"></h3>
                     <pre id="methodComment"></pre>
-                    <span class="notParamEditor" id="jsonTip">Use JSON notation for complex values. </span>    
+                    <span class="notParamEditor tip">Use JSON notation for complex values. </span>    
                     <table id="paramDialogs"><tbody></tbody></table>
                     <span class="notParamEditor" id="noParamsIndicator">This method has no parameters.</span>
                     <div id="callDialog">
@@ -106,6 +108,7 @@ $config = new Amfphp_BackOffice_Config();
 
                 </div>
                 <div id="result"  class="notParamEditor">
+                    Result 
                     <span class="showResultView">
                         <a id="tree">Tree</a>
                         <a id="print_r">print_r</a>

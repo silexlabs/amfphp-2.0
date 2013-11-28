@@ -22,6 +22,8 @@ $isAccessGranted = $accessManager->isAccessGranted();
 $config = new Amfphp_BackOffice_Config();
 ?>
 <html>
+
+    <title>AmfPHP Back Office</title>    
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="css/style.css" />
