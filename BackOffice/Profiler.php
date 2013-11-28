@@ -333,17 +333,18 @@ function focusOnUri(uri){
 
 function buildChart(seriesData, ticks, legendLabels, titleHtml){
     var numRows = seriesData[0].length;
-    
+    var rendererOptions = {
+                barDirection: 'horizontal'
+            };
+    if(numRows < 5){
+        rendererOptions.barWidth = 70;
+    }        
     plot = $.jqplot('chartDiv', seriesData, {
         // Tell the plot to stack the bars.
         stackSeries: true,
         seriesDefaults:{
             renderer:$.jqplot.BarRenderer,
-            rendererOptions: {
-                // Put a 30 pixel margin between bars.
-                barMargin: 30,
-                barDirection: 'horizontal'
-            },
+            rendererOptions: rendererOptions,
             pointLabels: {show: true},
             shadow:false
             
