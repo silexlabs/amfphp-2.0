@@ -111,6 +111,7 @@ var timer;
 
 $(function () {	
     $("#tabName").text("Profiler");
+    $("#profilerLink").addClass("chosen");
 
     $( window ).bind( "resize", resize );                             
     resize();
@@ -127,7 +128,7 @@ function resize(){
     var availableWidth = $( "#main" ).width() - $("#left").outerWidth(true) - 20;
     $( "#right" ).css( "width", availableWidth +  "px" );
 
-    var availableHeight = $( "body" ).height() - $("#chartDiv").offset().top - 50;
+    var availableHeight = $( "body" ).height() - $("#chartDiv").offset().top - 80;
     $( "#chartDiv" ).css( "height", availableHeight +  "px" );
     if(plot){
         plot.replot({resetAxes:true});

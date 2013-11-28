@@ -73,7 +73,8 @@ $config = new Amfphp_BackOffice_Config();
                         //only load update info once services loaded(that's the important stuff)
                         showAmfphpUpdates();
                     }
-
+                    $("#tabName").text("Home");
+                    $("#homeLink").addClass("chosen");
                     
             });
             

@@ -65,6 +65,7 @@ $(function () {
 
     showResultView("tree");
     $("#tabName").text("Service Browser");
+    $("#serviceBrowserLink").addClass("chosen");
     var flashvars = {};
     var params = {};
     params.allowscriptaccess = "sameDomain";
@@ -198,8 +199,6 @@ function onServicesLoaded(data)
  * used on loading services, and when window resizes
  * */
 function resize(){
-    var availableWidthForRightDiv = $( "#main" ).width() - $("#left").outerWidth(true) - 50;
-    $( "#right" ).css( "maxWidth", availableWidthForRightDiv +  "px" );
 }
 
 /**

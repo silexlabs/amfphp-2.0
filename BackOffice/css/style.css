@@ -1,13 +1,14 @@
 #header, #left, .notParamEditor, pre, #footer{
-     /*don't apply font to ACE editor or else cursor position is messed up. :not selector dones't work, so need 
-     to do it to everything but it' */
-        font-family: Arial, Helvetica, sans-serif;
-        color: #666666;
+    /*don't apply font to ACE editor or else cursor position is messed up. :not selector dones't work, so need 
+    to do it to everything but it' */
+    font-family: Arial, Helvetica, sans-serif;
+    color: #666666;
 }
 
 body{
     font-size: 15px;
     
+ 
 }
 
 #backoffice{
@@ -16,73 +17,54 @@ body{
 }
 
 input{
-	color:black;
+    color:black;
 }
 
 
 a, input[type="submit"], button  {
-	color: #007EE5;
-        cursor:pointer;
-        text-decoration: none;
+    color: #007EE5;
+    cursor:pointer;
+    text-decoration: none;
 }
 
 input, #result, button{
-	padding: 8px;
-	border: 1px solid #525252;
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
-	border-radius: 4px;
-	margin: 5px;
+    padding: 8px;
+    border: 1px solid #525252;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    margin: 5px;
 }
 
 
 
 #left li ul {
-	padding-left: 15px;
-	margin-bottom: 10px;
+    padding-left: 15px;
+    margin-bottom: 10px;
 }
 
 #left{
     float: left;
-    margin: 20px;
+    max-width:300px;
 }
 
 #right {
-	float: left;
-	margin-top: 20px;
-        position:relative;
-        border-left: 1px solid #525252;
-        padding-left: 10px;
-        padding-bottom: 10px;
+    float: left;
+    margin-top: 20px;
+    position:relative;
+    border-left: 1px solid #525252;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    max-width:700px;
 }
 
 
 #right form {
-	margin-bottom: 20px;
+    margin-bottom: 20px;
 }
-
-.menu {
-	padding: 16px;
-        margin-bottom:16px;
-}
-
-.menu li {
-	margin-left: 15px;
-	margin-bottom: 2px;
-}
-
-.menu li b {
-	font-size: 14px;
-}
-
-
-.menu a{
-    padding-right: 10px;
-}
-
 
 .underline {
-   text-decoration: underline;
+    text-decoration: underline;
 }
 
 
@@ -117,7 +99,7 @@ h3{
 }
 .warning{
     color:red;
-    
+
 }
 
 .paramEditorContainer{
@@ -130,12 +112,13 @@ h3{
     width: 500px;
     margin:5px;
     border: 1px solid #525252;
-    
+
 }
 
 a.important{
     font-size: 16px;
     font-weight: bold;
+    margin-right: 50px;
 }
 
 button img,
@@ -169,6 +152,9 @@ button span {
     -webkit-border-radius: 4px;
     border-radius: 4px;
     padding:5px;
+    position:fixed;
+    right: 10px;
+    top:40px;
 }
 
 #divRss, #newsLink{
@@ -180,33 +166,48 @@ button span {
 }
 
 #titleSpan {
-	font-size: 24px;
-        padding-right: 20px;
-        
+    font-size: 24px;
+    padding-right: 20px;
 } 
 
 
 #header {
-	height: 20px;
-	padding: 20px;
-	padding-top: 10px;
-	border-bottom: 1px solid #525252;
-} 
-
-#header ul {
-	float: right;
-	list-style-type: none;
-	margin-top: 7px;
-}
-
-#header a{
-	padding-right: 20px;
+    background: White;
+    padding: 0;
+    margin: 0;
+    vertical-align: middle;
+    width: 1000px;
+    margin-left: auto ;
+    margin-right: auto ;
     
 }
 
+#header div{
+    border-bottom: 1px solid #525252;
+}
+
+#header p{
+    margin:5px;
+}
+
+#header div#middle{
+    padding:5px;
+}
+
+#header ul {
+    float: right;
+    list-style-type: none;
+    margin-top: 7px;
+}
+
+#header a{
+    padding-right: 20px;
+
+}
+
 #header ul li {
-	float: left;
-	margin-left: 20px;
+    float: left;
+    margin-left: 20px;
 }
 
 
@@ -227,8 +228,8 @@ button span {
 
 
 #footer a{
-	padding-right: 20px;
-    
+    padding-right: 20px;
+
 }
 
 
@@ -238,17 +239,12 @@ button span {
     font-style: italic;
 }
 
-#main{
-  width: 1200px ;
-  margin-left: auto ;
-  margin-right: auto ;
-}
 
 #clientGenContent{
-  width: 600px ;
-  margin-left: auto ;
-  margin-right: auto ;
-    
+    width: 600px ;
+    margin-left: auto ;
+    margin-right: auto ;
+
 }
 .borderTop{
     border-top: 1px solid #525252;    
@@ -257,5 +253,33 @@ button span {
 }
 
 table{
-border-collapse:collapse;
+    border-collapse:collapse;
+}
+
+.chosen{
+    color:red;
+}
+
+.alignleft {
+	float: left;
+        text-align: left;
+}
+.alignright {
+	float: right;
+        text-align: right;
+}
+
+#main{
+    width:1000px;
+    margin-left: auto;
+    margin-right:auto;
+}
+
+.overFlowAuto{
+    overflow: auto;    
+}
+
+#tabName{
+    color:red;
+    font-size: 24px;
 }

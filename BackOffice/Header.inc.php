@@ -17,22 +17,31 @@
 $temp = 0;
 ?>
 <div id="header">
-    <span id="titleSpan">AmfPHP <span id="backoffice">Back Office</span> - <span id="tabName"></span></span>
-    <a class="important" href="index.php">Home</a>
-    <a class="important" href="ServiceBrowser.php">Service Browser</a>
-    <a class="important" href="ClientGenerator.php">Client Generator</a>
-    <a class="important" href="Profiler.php">Profiler</a>
-
-    <ul>
-        <li>AmfPHP <?php echo AMFPHP_VERSION; ?> <span id="latestVersionInfo"></span></li>
-        <li id="newsLink">    
-            
-            <a onclick="toggleNews()">
+    <div class="overFlowAuto"> 
+        <p class="alignLeft">
+            <span id="titleSpan">AmfPHP <span id="backoffice">Back Office</span></span>
+        </p>
+        <p class="alignRight">
+            <a id="newsLink" onclick="toggleNews()">
                 <img src="feed-icon-14x14.png"></img>&nbsp;<span id="toggleNewsText">Show News</span>
             </a>
-        </li>
-        <li><a href="SignOut.php">Sign Out</a></li>
-    </ul>
+            <a href="SignOut.php">Sign Out</a>
+        </p>
+        <div id="divRss"></div>    
+    </div>
+    <div id="middle">
+        <a class="important" href="index.php" id="homeLink">Home</a>
+        <a class="important" href="ServiceBrowser.php" id="serviceBrowserLink">Service Browser</a>
+        <a class="important" href="ClientGenerator.php" id="clientGeneratorLink">Client Generator</a>
+        <a class="important" href="Profiler.php" id="profilerLink">Profiler</a>
+    </div>
+    <div class="overFlowAuto">
+        <p class="alignLeft">
+            <span id="tabName"></span>
+        </p>   
+        <p class="alignRight">
+            You are running AmfPHP <?php echo AMFPHP_VERSION; ?><br/> <span id="latestVersionInfo"></span>            
+        </p>
+        </div>
 
-    <div id="divRss"></div>    
 </div>

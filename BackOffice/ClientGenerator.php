@@ -106,6 +106,7 @@ $config = new Amfphp_BackOffice_Config();
             <script>
 $(function () {	        
     $("#tabName").text("Client Generator");
+    $("#clientGeneratorLink").addClass("chosen");
 
     var callData = JSON.stringify({"serviceName":"AmfphpDiscoveryService", "methodName":"discover","parameters":[]});
     var request = $.ajax({
