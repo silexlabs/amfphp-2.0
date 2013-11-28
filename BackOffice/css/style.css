@@ -217,14 +217,9 @@ button span {
     padding: 0;
     text-align: center;
     vertical-align: middle;
-    line-height: normal;
     margin: 0;
-    position: fixed;
-    bottom: 0px;
     width: 100%;
-    padding: 20px;
     padding-top: 10px;
-    border-bottom: 1px solid #525252;
 } 
 
 
@@ -239,4 +234,3 @@ button span {
 .tip{
     color:green;
 }
-
