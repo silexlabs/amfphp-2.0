@@ -28,7 +28,15 @@ $config = new Amfphp_BackOffice_Config();
         <script type="text/javascript" src="js/jquery.cookie.js"></script>
         <script type="text/javascript" src="js/amfphp_updates.js"></script>
         <script type="text/javascript">
-            <?php echo 'var amfphpVersion = "' . AMFPHP_VERSION . '";'; ?>
+<?php 
+    echo 'var amfphpVersion = "' . AMFPHP_VERSION . "\";\n"; 
+    echo 'var amfphpEntryPointUrl = "' . $config->resolveAmfphpEntryPointUrl() . "\";\n"; 
+    if ($config->fetchAmfphpUpdates) {
+        echo "var shouldFetchUpdates = true;\n"; 
+    }else{
+        echo "var shouldFetchUpdates = false;\n"; 
+    }
+?>
         </script>  
    
     </head>
@@ -153,12 +161,11 @@ function onServicesLoaded(data)
         $(serviceLi).attr("title", service.comment);
         $("<ul/>").appendTo(serviceLi);
     }
-    <?php if($config->fetchAmfphpUpdates){
-    //only load update info once services loaded(that's the important stuff)
-        echo 'showAmfphpUpdates();';
-    }?> 
-
-
+    if (shouldFetchUpdates) {
+        //only load update info once services loaded(that's the important stuff)
+        showAmfphpUpdates();
+    }
+    
 }
 
 function generate(generatorClass){

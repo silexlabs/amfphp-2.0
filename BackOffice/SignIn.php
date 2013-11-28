@@ -25,9 +25,12 @@ require_once(dirname(__FILE__) . '/ClassLoader.php');
 $errorMessage = '';
 $redirectToHome = false;
 $config = new Amfphp_BackOffice_Config();
+$showCredentialsExplanation = false;
+
 try {
     if (count($config->backOfficeCredentials) == 0) {
-        throw new Exception('Sign In is not possible because no credentials were set. <a href="http://www.silexlabs.org/amfphp/documentation/using-the-back-office/">Help</a>');
+        throw new Exception('Sign In is not possible because no credentials were set. ');
+        $showCredentialsExplanation = true;
     }
 
     if (isset($_POST['username'])) {
@@ -60,14 +63,27 @@ try {
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
         <link rel="stylesheet" type="text/css" href="css/style.css" />
-        
+
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/jquery.cookie.js"></script>
         <script type="text/javascript" src="js/amfphp_updates.js"></script>
         <script type="text/javascript">
-            <?php echo 'var amfphpVersion = "' . AMFPHP_VERSION . '";'; ?>
+<?php
+echo 'var amfphpVersion = "' . AMFPHP_VERSION . "\";\n";
+echo 'var amfphpEntryPointUrl = "' . $config->resolveAmfphpEntryPointUrl() . "\";\n";
+if ($config->fetchAmfphpUpdates) {
+    echo "var shouldFetchUpdates = true;\n";
+} else {
+    echo "var shouldFetchUpdates = false;\n";
+}
+if($showCredentialsExplanation){
+    echo "var showCredentialsExplanation = true;\n";
+} else {
+    echo "var showCredentialsExplanation = false;\n";
+}
+?>
         </script>  
-   
+
     </head>
     <body>
         <?php if ($redirectToHome) {
@@ -99,18 +115,29 @@ try {
                     </form>
 
                 </div>                    
-        <?php require_once(dirname(__FILE__) . '/Footer.inc.php'); ?>
             </div>
-
-            <script>
-                $(function () {	        
-                    document.title = "AmfPHP Back Office - Sign In";
-                    $("#titleSpan").text("AmfPHP Back Office - Sign In");
-                    <?php if($config->fetchAmfphpUpdates){
-                        echo 'showAmfphpUpdates();';
-                    }?>                     
-                });
-                function resize(){
-                    //dummy
+            <div id="right" class="notParamEditor">
+                <p>No credentials are set, so it is not possible to access the Back Office.</p>
+                <p>Add some credentials by editing the BackOffice/Config file in the class __construct method:</p>
+                <pre>    <span class="tip">$this-&gt;backOfficeCredentials['yourUserName'] = 'yourPassWord';</span></pre>
+                <p>Once you’ve done this you should be able to sign in to the Back Office.</p>            
+                <a href="http://www.silexlabs.org/amfphp/documentation/using-the-back-office/">Documentation</a>
+            </div>
+            <?php require_once(dirname(__FILE__) . '/Footer.inc.php'); ?>
+        </div>
+        <script>
+            $(function () {	        
+                document.title = "AmfPHP Back Office - Sign In";
+                $("#titleSpan").text("AmfPHP Back Office - Sign In");
+                if(!showCredentialsExplanation){
+                    $("#right").hide();
                 }
-            </script>
+                if (shouldFetchUpdates) {
+                    //only load update info once services loaded(that's the important stuff)
+                    showAmfphpUpdates();
+                }
+            });
+            function resize(){
+                //dummy
+            }
+        </script>

@@ -38,7 +38,15 @@ $config = new Amfphp_BackOffice_Config();
         <script language="javascript" type="text/javascript" src="js/jqplot.pointLabels.js"></script>
         
         <script type="text/javascript">
-            <?php echo 'var amfphpVersion = "' . AMFPHP_VERSION . '";'; ?>
+<?php 
+    echo 'var amfphpVersion = "' . AMFPHP_VERSION . "\";\n"; 
+    echo 'var amfphpEntryPointUrl = "' . $config->resolveAmfphpEntryPointUrl() . "\";\n"; 
+    if ($config->fetchAmfphpUpdates) {
+        echo "var shouldFetchUpdates = true;\n"; 
+    }else{
+        echo "var shouldFetchUpdates = false;\n"; 
+    }
+?>
         </script>  
    
     </head>
@@ -100,14 +108,9 @@ var isAutoRefreshing;
  **/
 var timer;
 
-var amfphpEntryPointUrl = "<?php echo $config->resolveAmfphpEntryPointUrl() ?>?contentType=application/json";
 
 $(function () {	
     $("#tabName").text("Profiler");
-
-    <?php if($config->fetchAmfphpUpdates){
-        echo 'showAmfphpUpdates();';
-    }?> 
 
     $( window ).bind( "resize", resize );                             
     resize();
@@ -177,7 +180,10 @@ function onDataLoaded(data)
         showAllUris();
     }
     
-
+    if (shouldFetchUpdates) {
+        //only load update info once services loaded(that's the important stuff)
+        showAmfphpUpdates();
+    }
 }
 
 /**
@@ -414,7 +420,7 @@ function refresh(){
     var flush = $("#flushOnRefreshCb").is(':checked');
     var callData = JSON.stringify({"serviceName":"AmfphpMonitorService", "methodName":"getData","parameters":[flush]});
     var request = $.ajax({
-        url: amfphpEntryPointUrl,
+        url: amfphpEntryPointUrl + "?contentType=application/json",
         type: "POST",
         data: callData
     });

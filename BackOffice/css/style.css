@@ -52,6 +52,8 @@ input, #result, button{
 	margin-top: 20px;
         position:relative;
         border-left: 1px solid #525252;
+        padding-left: 10px;
+        padding-bottom: 10px;
 }
 
 
@@ -232,7 +234,8 @@ button span {
 
 
 .tip{
-    color:green;
+    color:grey;
+    font-style: italic;
 }
 
 #main{
