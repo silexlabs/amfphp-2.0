@@ -48,15 +48,14 @@ $config = new Amfphp_BackOffice_Config();
                     return;
                 }
                 ?>
-            <div class="menu" id="methodDialog">
+            <div class="menu" id="clientGenContent">
 
                 Use one of the following generators to generate a client Stub project. <br/>
-                The project includes :<br/><br/>
+                The project includes :<br/>
                 <ul>
                     <li>code to make calling your services easy</li>
                     <li>a starting point for a user interface you can customize</li>
                 </ul>
-                <br/><br/>
                 <?php 
                 $writeTestFolder = AMFPHP_BACKOFFICE_ROOTPATH . 'ClientGenerator/Generated/';
                 if(!is_writable($writeTestFolder)){
@@ -64,16 +63,16 @@ $config = new Amfphp_BackOffice_Config();
                 }
 
                 ?>
-                Code will be generated for the following services:
-                <br/><br/>
-                <ul id="serviceList"></ul><br/>
+                Code shall be generated for the following services:
+                <br/>
+                <ul id="serviceList"></ul>
                 <?php
                 $generatorManager = new Amfphp_BackOffice_ClientGenerator_GeneratorManager();
                 $generators = $generatorManager->loadGenerators(array('ClientGenerator/Generators'));
 
 
 //links for each generator
-                echo "\n<table class='notParamEditor'>";
+                echo "\n<table class='notParamEditor borderTop' style='width:600px'>";
                 foreach ($generators as $generator) {
                     echo "\n    <tr>";
                     $generatorName = $generator->getUiCallText();
@@ -85,12 +84,10 @@ $config = new Amfphp_BackOffice_Config();
                     echo "\n    </tr>";
                 }
                 ?>
-                <tr><td>IOS</td><td><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/ios/">Info/Vote Up</a></td>        <td>Not Available Yet</td>    </tr>
-                <tr><td>Haxe</td><td><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/haxe/">Info/Vote Up</a></td>        <td>Not Available Yet</td>    </tr>
-                <tr><td>Android</td><td><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/android/">Info/Vote Up</a></td>        <td>Not Available Yet </td></tr>
-                <tr><td>Write your Own?</td><td><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/writing-you-own-client-generator/">Info</a></td>        <td></td></tr>
-
-
+                    <tr><td class="borderTop">IOS</td><td class="borderTop"><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/ios/">Info/Vote Up</a></td>        <td class="borderTop">Not Available Yet</td>    </tr>
+                    <tr><td>Haxe</td><td><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/haxe/">Info/Vote Up</a></td>        <td>Not Available Yet</td>    </tr>
+                    <tr><td>Android</td><td><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/android/">Info/Vote Up</a></td>        <td>Not Available Yet </td></tr>
+                    <tr class="borderTop"><td class="borderTop">Write your Own?</td><td class="borderTop"><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/writing-you-own-client-generator/">Info</a></td>        <td class="borderTop"></td></tr>
                 </table>
                 <div id="statusMessage" style="max-width:100%"></div>
             </div>
@@ -137,8 +134,6 @@ function displayStatusMessage(html){
 /**
  * callback for when service data loaded from server . 
  * generates method list. 
- * each method link has its corresponding method object attached as data, and this is retrieved on click
- * to call openMethodDialog with it.
  */
 function onServicesLoaded(data)
 {

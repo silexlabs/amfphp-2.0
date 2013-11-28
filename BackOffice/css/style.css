@@ -234,3 +234,25 @@ button span {
 .tip{
     color:green;
 }
+
+#main{
+  width: 1200px ;
+  margin-left: auto ;
+  margin-right: auto ;
+}
+
+#clientGenContent{
+  width: 600px ;
+  margin-left: auto ;
+  margin-right: auto ;
+    
+}
+.borderTop{
+    border-top: 1px solid #525252;    
+    padding-top: 5px;
+    margin-top: 5px;
+}
+
+table{
+border-collapse:collapse;
+}
