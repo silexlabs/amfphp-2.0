@@ -115,10 +115,6 @@ h3{
 
 }
 
-table.jqplot-table-legend{
-    border:none;
-}
-
 a.important{
     font-size: 16px;
     font-weight: bold;
@@ -144,14 +140,6 @@ button span {
 }
 
 
-.jqplot-table-legend, .jqplot-title{
-    z-index: 1;
-}
-
-.jqplot-seriesToggle a{
-    padding-right: 10px;
-    font-weight: bold;
-}
 
 #divRss{
     float:right;
@@ -244,6 +232,31 @@ table{
 
 .padLeft{
     padding-left: 10px;
+}
+
+table#clientGen{
+    width:600px;
+    margin-top: 10px;
+}
+table#clientGen td{
+    width:600px;
+    margin-top: 10px;
+    padding: 3px;
+    padding-left: 10px;
+}
+/* jqplot*/
+
+table.jqplot-table-legend{
+    border:none;
+}
+
+.jqplot-table-legend, .jqplot-title{
+    z-index: 1;
+}
+
+.jqplot-seriesToggle a{
+    padding-right: 10px;
+    font-weight: bold;
 }
 
 /* header */

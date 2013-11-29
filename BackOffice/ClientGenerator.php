@@ -59,11 +59,12 @@ $config = new Amfphp_BackOffice_Config();
                 <div class="menu" id="clientGenContent">
 
                     Use one of the following generators to generate a client Stub project. <br/>
-                    The project includes :<br/>
+                    <br/>The project includes :<br/>
                     <ul>
                         <li>code to make calling your services easy</li>
                         <li>a starting point for a user interface you can customize</li>
                     </ul>
+                    <br/>
                     <?php 
                     $writeTestFolder = AMFPHP_BACKOFFICE_ROOTPATH . 'ClientGenerator/Generated/';
                     if(!is_writable($writeTestFolder)){
@@ -74,13 +75,14 @@ $config = new Amfphp_BackOffice_Config();
                     Code shall be generated for the following services:
                     <br/>
                     <ul id="serviceList"></ul>
+                    <br/>
                     <?php
                     $generatorManager = new Amfphp_BackOffice_ClientGenerator_GeneratorManager();
                     $generators = $generatorManager->loadGenerators(array('ClientGenerator/Generators'));
 
-
+ 
     //links for each generator
-                    echo "\n<table class='notParamEditor borderTop' style='width:600px'>";
+                    echo "\n<table class='notParamEditor borderTop' id='clientGen'>";
                     foreach ($generators as $generator) {
                         echo "\n    <tr>";
                         $generatorName = $generator->getUiCallText();
