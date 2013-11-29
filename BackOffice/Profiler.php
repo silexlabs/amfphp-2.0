@@ -127,7 +127,7 @@ if ($config->fetchAmfphpUpdates) {
                 refresh();
                 isAutoRefreshing = false;
                 if (shouldFetchUpdates) {
-                    amfphpUpdates.init("#divRss", "#newsLink", "#toggleNewsText", "#latestVersionInfo");
+                    amfphpUpdates.init("#divRss", ".newsLink", "#textNewsLink", "#latestVersionInfo");
                     amfphpUpdates.loadAndInitUi();
                 }
 

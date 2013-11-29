@@ -146,9 +146,9 @@ if($showCredentialsExplanation){
                         amfphpUpdates.loadAndInitUi();
                     }
                 }else{
-                    $("#news").hide();
+                    $(".newsLink").hide();
                     if (shouldFetchUpdates) {
-                        amfphpUpdates.init("#divRss", "#newsLink", "#toggleNewsText", "#latestVersionInfo");
+                        amfphpUpdates.init("#divRss", ".newsLink", "#textNewsLink", "#latestVersionInfo");
                         amfphpUpdates.loadAndInitUi();
                     }
                     
