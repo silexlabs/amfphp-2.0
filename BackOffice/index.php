@@ -93,7 +93,7 @@ $config = new Amfphp_BackOffice_Config();
                         The idea is to help you better understand how your server shall perform live, 
                         and to give you easy access to the information you need to eliminate bottlenecks and fine-tune performance.
                         <br/><a class="padLeft" href="http://silexlabs.org/amfphp/documentation/using-the-back-office/profiler/">Documentation</a>
-                                                <div class="imgWrapper">
+                        <div class="imgWrapper">
                             <a href="Profiler.php">
                                 <img src="img/Profiler.jpg"></img>
                             </a>    

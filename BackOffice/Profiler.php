@@ -78,6 +78,11 @@ $config = new Amfphp_BackOffice_Config();
                     <input value="1" id="autoRefreshIntervalInput"></input>
                     Seconds<br/>
                     <div id="statusMessage" class="warning"> </div>
+                    <div class="imgWrapper" id="profilerImg" style="display:none">
+                        <a href="Profiler.php">
+                            <img src="img/Profiler.jpg"></img>
+                        </a>    
+                    </div>
                 </div>
                 <div id="chartDivContainer">
                     <div id="chartDiv"></div>
@@ -159,19 +164,25 @@ function onDataLoaded(data)
     }
     displayStatusMessage('');
     serverData = data;
-
+    
+    var errorMsg = null;
     if(typeof data == "string"){
-        //some predictable error messages
         if(data.indexOf("AmfphpMonitorService service not found") != -1){
-            displayStatusMessage("The AmfphpMonitorService could not be called. This is most likely because AmfphpMonitor plugin is not enabled. See the <a href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/'>documentation</a>.")
+            errorMsg = "The AmfphpMonitorService could not be called. This is most likely because AmfphpMonitor plugin is not enabled. See the <a href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/'>documentation</a>.";
         }else{
-            displayStatusMessage(data);
+            errorMsg = data;
         }
-        return;
     }
 
     if(data.sortedData.length == 0){
-        displayStatusMessage("No data was available. Please make a service call then refresh. This can be done with the <a href='ServiceBrowser.php'>Service Browser</a>.");
+        errorMsg = "No data was available. Please make a service call then refresh. This can be done with the <a href='ServiceBrowser.php'>Service Browser</a>.";
+    }
+    
+    if(errorMsg){
+        errorMsg += "<br/>Once you have some data, this is what you should see : ";
+        displayStatusMessage(errorMsg);
+        $("#profilerImg").show();
+        
     }
     //test
     //focusedUri = "TestService/returnOneParam";
