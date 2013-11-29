@@ -119,36 +119,20 @@ $(function () {
     $("#tabName").text("Profiler");
     $("#profilerLink").addClass("chosen");
 
-    $( window ).bind( "resize", resize );                             
-    resize();
+    var availableHeight = $( "body" ).height() - $("#chartDiv").offset().top - 80;
+    $( "#chartDiv" ).css( "height", availableHeight +  "px" );
+    
     refresh();
     isAutoRefreshing = false;
+    if (shouldFetchUpdates) {
+        amfphpUpdates.init("#divRss", "#newsLink", "#toggleNewsText", "#latestVersionInfo");
+        amfphpUpdates.loadAndInitUi();
+    }
 
 });    
 
-/**
- * sizes the div containing the chart
- * @todo redraw the graph
- **/
-function resize(){
-    var availableWidth = $( "#main" ).width() - $("#left").outerWidth(true) - 20;
-    $( "#right" ).css( "width", availableWidth +  "px" );
-
-    var availableHeight = $( "body" ).height() - $("#chartDiv").offset().top - 80;
-    $( "#chartDiv" ).css( "height", availableHeight +  "px" );
-    if(plot){
-        plot.replot({resetAxes:true});
-        //replotting removes listeners on labels which allow the user to select a call for details. So reset them.
-        addLabelListeners();
-    }
- 
-
-
-}
-
 function displayStatusMessage(html){
     $('#statusMessage').html(html);
-    resize();
 }
 
 
@@ -162,7 +146,6 @@ function onDataLoaded(data)
     if(plot){
         plot.destroy();
     }
-    displayStatusMessage('');
     serverData = data;
     
     var errorMsg = null;
@@ -182,8 +165,14 @@ function onDataLoaded(data)
         errorMsg += "<br/>Once you have some data, this is what you should see : ";
         displayStatusMessage(errorMsg);
         $("#profilerImg").show();
-        
+        $("#chartDivContainer").hide();
+        return;
     }
+    
+    
+    displayStatusMessage('');
+    $("#profilerImg").hide();
+    $("#chartDivContainer").show();
     //test
     //focusedUri = "TestService/returnOneParam";
     
@@ -193,11 +182,6 @@ function onDataLoaded(data)
         showAllUris();
     }
     
-    if (shouldFetchUpdates) {
-        //only load update info once services loaded(that's the important stuff)
-        amfphpUpdates.init("#divRss", "#newsLink", "#toggleNewsText", "#latestVersionInfo");
-        amfphpUpdates.loadAndInitUi();
-    }
 }
 
 /**
@@ -397,6 +381,7 @@ function buildChart(seriesData, ticks, legendLabels, titleHtml){
         title:{
             text:titleHtml
         },
+        //seriesColors: [ "#eee", "#ccc", "#999"],
         grid:{shadow:false}
     });
 
@@ -408,8 +393,7 @@ function addLabelListeners(){
        $('.jqplot-yaxis-tick')
         .css({ cursor: "pointer", zIndex: "1" })
         .click(function (ev) { 
-            focusOnUri($(this).text());            
-            displayStatusMessage(''); 
+            focusOnUri($(this).text());           
 
 
         });
@@ -422,13 +406,11 @@ function addLabelListeners(){
             }
             message += orderedTimeNames[seriesIndex] + ' Duration : '+data[0] + ' ms';
             $('#statusMessage').html(message);
-            resize();
         }
     );     
     */ 
 }
 function refreshClickHandler(){
-    displayStatusMessage("");
     refresh();
 }
 /**
@@ -457,7 +439,7 @@ function refresh(){
 function flush(){
     var callData = JSON.stringify({"serviceName":"AmfphpMonitorService", "methodName":"flush","parameters":[]});
     var request = $.ajax({
-        url: amfphpEntryPointUrl,
+        url: amfphpEntryPointUrl + "?contentType=application/json",
         type: "POST",
         data: callData
     });
@@ -475,7 +457,6 @@ function flush(){
  * start and stop auto refresh
  */
 function toggleAutoRefresh(){
-    displayStatusMessage("");
     if(!isAutoRefreshing){
         var interval = parseInt($("#autoRefreshIntervalInput").val());
         if(isNaN(interval)){
