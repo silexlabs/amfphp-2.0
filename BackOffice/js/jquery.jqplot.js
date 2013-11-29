@@ -7957,12 +7957,9 @@
                 s;
             for (var i = 0; i< series.length; i++) {
                 s = series[i];
-                /*
-                 *not true for amfphp!!! A.S.
                 if (s._stack || s.renderer.constructor == $.jqplot.BezierCurveRenderer){
                     reverse = true;
                 }
-                */
                 if (s.show && s.showLabel) {
                     var lt = this.labels[i] || s.label.toString();
                     if (lt) {

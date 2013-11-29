@@ -48,7 +48,6 @@ $config = new Amfphp_BackOffice_Config();
         <?php require_once(dirname(__FILE__) . '/Header.inc.php'); ?>
 
         <div id='main'>
-            <div id="left">
                 <?php
                 $accessManager = new Amfphp_BackOffice_AccessManager();
                 if (!$isAccessGranted) {
@@ -60,7 +59,6 @@ $config = new Amfphp_BackOffice_Config();
                     return;
                 }
                 ?>
-            </div>
 
         </div>
         <?php require_once(dirname(__FILE__) . '/Footer.inc.php'); ?>

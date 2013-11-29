@@ -35,6 +35,7 @@ $config = new Amfphp_BackOffice_Config();
         <script language="javascript" type="text/javascript" src="js/jquery.jqplot.js"></script>
         <script language="javascript" type="text/javascript" src="js/jqplot.barRenderer.js"></script>
         <script language="javascript" type="text/javascript" src="js/jqplot.categoryAxisRenderer.js"></script>
+        <script language="javascript" type="text/javascript" src="js/jqplot.enhancedLegendRenderer.js"></script>
         <script language="javascript" type="text/javascript" src="js/jqplot.pointLabels.js"></script>
         
         <script type="text/javascript">
@@ -375,7 +376,11 @@ function buildChart(seriesData, ticks, legendLabels, titleHtml){
             show: true,
             location: 's',
             placement: 'outsideGrid',
-            labels:legendLabels           
+            labels:legendLabels,
+            renderer: $.jqplot.EnhancedLegendRenderer,
+            rendererOptions: {
+                numberRows: 1
+            }            
         },
         title:{
             text:titleHtml
