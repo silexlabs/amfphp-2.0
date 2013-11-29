@@ -117,24 +117,37 @@ if($showCredentialsExplanation){
                 </div>                    
             </div>
             <div id="right" class="notParamEditor">
-                <p>No credentials are set, so it is not possible to access the Back Office.</p>
-                <p>Add some credentials by editing the BackOffice/Config file in the class __construct method:</p>
-                <pre>    <span class="tip">$this-&gt;backOfficeCredentials['yourUserName'] = 'yourPassWord';</span></pre>
-                <p>Once you’ve done this you should be able to sign in to the Back Office.</p>            
-                <a href="http://www.silexlabs.org/amfphp/documentation/using-the-back-office/">Documentation</a>
+                <div id="credentialsExplanation">
+                    <p>No credentials are set, so it is not possible to access the Back Office.</p>
+                    <p>Add some credentials by editing the BackOffice/Config file in the class __construct method:</p>
+                    <pre>    <span class="tip">$this-&gt;backOfficeCredentials['yourUserName'] = 'yourPassWord';</span></pre>
+                    <p>Once you’ve done this you should be able to sign in to the Back Office.</p>            
+                    <a href="http://www.silexlabs.org/amfphp/documentation/using-the-back-office/">Documentation</a>
+                    
+                </div>
+                <div id="news"><h3 class="newsDivTitle">AmfPHP News</h3><br/></div>
             </div>
             <?php require_once(dirname(__FILE__) . '/Footer.inc.php'); ?>
         </div>
         <script>
-            $(function () {	        
-                document.title = "AmfPHP Back Office - Sign In";
-                $("#titleSpan").text("AmfPHP Back Office - Sign In");
+            $(function () {	    
+                //customize header
+                $("#tabName").text("Sign In");
+                $("#signOutLink").hide();
+                $("#tabNav").hide();
+                
                 if(!showCredentialsExplanation){
-                    $("#right").hide();
-                }
-                if (shouldFetchUpdates) {
-                    //only load update info once services loaded(that's the important stuff)
-                    showAmfphpUpdates();
+                    $("#credentialsExplanation").hide();
+                    if (shouldFetchUpdates) {
+                        amfphpUpdates.init("#news", null, null, "#latestVersionInfo");
+                        amfphpUpdates.loadAndInitUi();
+                    }
+                }else{
+                    if (shouldFetchUpdates) {
+                        amfphpUpdates.init("#divRss", "#newsLink", "#toggleNewsText", "#latestVersionInfo");
+                        amfphpUpdates.loadAndInitUi();
+                    }
+                    
                 }
             });
             function resize(){

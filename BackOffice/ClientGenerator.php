@@ -164,7 +164,8 @@ function onServicesLoaded(data)
     }
     if (shouldFetchUpdates) {
         //only load update info once services loaded(that's the important stuff)
-        showAmfphpUpdates();
+        amfphpUpdates.init("#divRss", "#newsLink", "#toggleNewsText", "#latestVersionInfo");
+        amfphpUpdates.loadAndInitUi();
     }
     
 }

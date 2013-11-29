@@ -22,14 +22,14 @@ $temp = 0;
             <span id="titleSpan">AmfPHP <span id="backoffice">Back Office</span></span>
         </p>
         <p class="alignRight">
-            <a id="newsLink" onclick="toggleNews()">
+            <a id="newsLink" onclick="amfphpUpdates.toggleNews()">
                 <img src="feed-icon-14x14.png"></img>&nbsp;<span id="toggleNewsText">Show News</span>
             </a>
-            <a href="SignOut.php">Sign Out</a>
+            <a id="signOutLink" href="SignOut.php">Sign Out</a>
         </p>
-        <div id="divRss"></div>    
+        <div id="divRss"><h3 class="newsDivTitle">AmfPHP News</h3></div>    
     </div>
-    <div id="middle">
+    <div id="tabNav">
         <a class="important" href="index.php" id="homeLink">Home</a>
         <a class="important" href="ServiceBrowser.php" id="serviceBrowserLink">Service Browser</a>
         <a class="important" href="ClientGenerator.php" id="clientGeneratorLink">Client Generator</a>

@@ -68,8 +68,8 @@ $config = new Amfphp_BackOffice_Config();
                     document.title = "AmfPHP Back Office";
                     $("#titleSpan").text("AmfPHP Back Office");
                     if (shouldFetchUpdates) {
-                        //only load update info once services loaded(that's the important stuff)
-                        showAmfphpUpdates();
+                        amfphpUpdates.init("#divRss", "#newsLink", "#toggleNewsText", "#latestVersionInfo");
+                        amfphpUpdates.loadAndInitUi();
                     }
                     $("#tabName").text("Home");
                     $("#homeLink").addClass("chosen");

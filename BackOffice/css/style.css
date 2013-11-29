@@ -46,13 +46,16 @@ input, #result, button{
 #left{
     float: left;
     max-width:300px;
+    padding-right: 10px;
+    border-right: 1px solid #525252;
+    margin-top: 10px;
+    margin-bottom:10px;
 }
 
 #right {
     float: left;
     margin-top: 20px;
     position:relative;
-    border-left: 1px solid #525252;
     padding-left: 10px;
     padding-bottom: 10px;
     max-width:700px;
@@ -170,7 +173,7 @@ button span {
     /* hide these elements by default */
     display: none;
 }
-#divRss .dateCell{
+.dateCell{
     text-align: right;
 }
 
@@ -199,7 +202,7 @@ button span {
     margin:5px;
 }
 
-#header div#middle{
+#tabNav{
     padding:5px;
 }
 
@@ -219,6 +222,10 @@ button span {
     margin-left: 20px;
 }
 
+.newsDivTitle{
+    text-align: center;
+    margin:0;
+}
 
 
 #footer
