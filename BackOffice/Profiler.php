@@ -211,6 +211,43 @@ function getLegendLabels(orderedTimeNames){
     return labels;
 }
 
+
+
+/**
+ * get some colors from the series
+ * some are predefined as they are standard for amfphp.
+ * Some are generated using stringToColor
+ * */
+function getSeriesColors(orderedTimeNames){
+    
+    var colors = [];
+    var customTimeToggle = false;
+    for(var i = 0; i < orderedTimeNames.length; i++){
+        var timeName = orderedTimeNames[i];
+        var color;
+        switch(timeName){
+            case "Deserialization": color = "#F5521B"; break;
+            case "Request Value Object Conversion": color = "#0D3D63"; break;
+            case "Request Charset Conversion": color = "#EAA228"; break;
+            case "Service Call": color = "#F4BA01"; break;
+            case "Response Charset Conversion": color = "#EAA228"; break;
+            case "Response Value Object Conversion": color = "#1879C4"; break;
+            case "Serialization": color = "#00A500"; break;
+            default:
+                //alternate these 2 colors for custom times
+                if(customTimeToggle){
+                    color = "#958c12"; 
+                }else{
+                    color = "#c5b47f"; 
+                } 
+                customTimeToggle = !customTimeToggle;
+        }
+        colors.push(color);
+    }
+    return colors;
+    
+}
+
 function showAllUris(){
     if(plot){
         plot.destroy();
@@ -297,7 +334,7 @@ function showAllUris(){
     }
     var titleHtml = "Average durations for all calls (ms)";
     
-    buildChart(flippedSeriesData, ticks, getLegendLabels(orderedTimeNames), titleHtml);
+    buildChart(flippedSeriesData, ticks, getLegendLabels(orderedTimeNames), titleHtml, getSeriesColors(orderedTimeNames));
 
 }
 
@@ -331,11 +368,11 @@ function focusOnUri(uri){
 
     //the empty ticks array is important, otherwise the category axis renderer 
     //messes up the layout
-    buildChart(seriesData, [], getLegendLabels(orderedTimeNames), titleHtml);
+    buildChart(seriesData, [], getLegendLabels(orderedTimeNames), titleHtml, getSeriesColors(orderedTimeNames));
 
 }
 
-function buildChart(seriesData, ticks, legendLabels, titleHtml){
+function buildChart(seriesData, ticks, legendLabels, titleHtml, seriesColors){
     var numRows = seriesData[0].length;
     var rendererOptions = {
                 barDirection: 'horizontal'
@@ -350,7 +387,8 @@ function buildChart(seriesData, ticks, legendLabels, titleHtml){
             renderer:$.jqplot.BarRenderer,
             rendererOptions: rendererOptions,
             pointLabels: {show: true},
-            shadow:false
+            shadow:false,
+            fillAlpha:0.5
             
         },
         axes: {
@@ -364,8 +402,8 @@ function buildChart(seriesData, ticks, legendLabels, titleHtml){
                 renderer: $.jqplot.CategoryAxisRenderer,
                 ticks: ticks,
                 tickOptions: {
-            fontSize: '12pt'
-          }
+                    fontSize: '12pt'
+                }
             }
         },
         legend: {
@@ -381,7 +419,7 @@ function buildChart(seriesData, ticks, legendLabels, titleHtml){
         title:{
             text:titleHtml
         },
-        //seriesColors: [ "#eee", "#ccc", "#999"],
+        seriesColors: seriesColors,
         grid:{shadow:false}
     });
 
