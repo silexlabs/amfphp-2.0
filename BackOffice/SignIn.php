@@ -95,39 +95,42 @@ if($showCredentialsExplanation){
             return;
         }
         ?>
-        <?php require_once(dirname(__FILE__) . '/Header.inc.php'); ?>
-
-        <div id='main'>
-
-            <div id = "left">
-                <div class="menu">
-                    <form method = "POST">
-                        <h3>Sign In</h3>
-                        <div class="warning">
-                            <?php echo $errorMessage ?>
+            <div class="page-wrap">
+                <?php require_once(dirname(__FILE__) . '/Header.inc.php'); ?>
+            
+                <div id='main'>
+            
+                    <div id = "left">
+                        <div class="menu">
+                            <form method = "POST">
+                                <h3>Sign In</h3>
+                                <div class="warning">
+                                    <?php echo $errorMessage ?>
+                                </div>
+                                User Name<br/>
+                                <input name = "username"/><br/>
+                                Password<br/>
+                                <input name = "password" type = "password"/><br/>
+                                <input type = "Submit" value = "Sign In"/>
+                            
+                            </form>
+                        
+                        </div>                    
+                    </div>
+                    <div id="right" class="notParamEditor">
+                        <div id="credentialsExplanation">
+                            <p>No credentials are set, so it is not possible to access the Back Office.</p>
+                            <p>Add some credentials by editing the BackOffice/Config file in the class __construct method:</p>
+                            <pre>    <span class="tip">$this-&gt;backOfficeCredentials['yourUserName'] = 'yourPassWord';</span></pre>
+                            <p>Once you’ve done this you should be able to sign in to the Back Office.</p>            
+                            <a href="http://www.silexlabs.org/amfphp/documentation/using-the-back-office/">Documentation</a>
+                        
                         </div>
-                        User Name<br/>
-                        <input name = "username"/><br/>
-                        Password<br/>
-                        <input name = "password" type = "password"/><br/>
-                        <input type = "Submit" value = "Sign In"/>
-
-                    </form>
-
-                </div>                    
-            </div>
-            <div id="right" class="notParamEditor">
-                <div id="credentialsExplanation">
-                    <p>No credentials are set, so it is not possible to access the Back Office.</p>
-                    <p>Add some credentials by editing the BackOffice/Config file in the class __construct method:</p>
-                    <pre>    <span class="tip">$this-&gt;backOfficeCredentials['yourUserName'] = 'yourPassWord';</span></pre>
-                    <p>Once you’ve done this you should be able to sign in to the Back Office.</p>            
-                    <a href="http://www.silexlabs.org/amfphp/documentation/using-the-back-office/">Documentation</a>
-                    
+                        <div id="news"><h3 class="newsDivTitle">AmfPHP News</h3><br/></div>
+                    </div>
                 </div>
-                <div id="news"><h3 class="newsDivTitle">AmfPHP News</h3><br/></div>
             </div>
-        </div>
+                
             <?php require_once(dirname(__FILE__) . '/Footer.inc.php'); ?>
         <script>
             $(function () {	    
