@@ -282,13 +282,14 @@ table.jqplot-table-legend{
     margin-top: 7px;
 }
 
-#header a{
+#newsLink{
     padding-right: 20px;
 
 }
 
 #header p{
     margin:5px;
+    line-height: 150%;
 }
 
 #header ul li {
@@ -332,14 +333,16 @@ table.jqplot-table-legend{
     color:#F65511;
     font-size: 24px;
 }
-
+#tabNameP{
+    padding-top: 10px;
+}
 .headerLine{
     border-bottom: 1px solid #B0B0B0;    
 }
 
 
 
-/* sticky footer */
+/* sticky footer http://css-tricks.com/snippets/css/sticky-footer/  */
 
 * {
   margin: 0;

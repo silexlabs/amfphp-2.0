@@ -40,14 +40,14 @@ $temp = 0;
         </div>
     </div>
     <div id="line3" class="overFlowAuto middleBound headerLine">
-        <p class="alignLeft">
+        <p class="alignLeft" id="tabNameP">
             <span id="tabName"></span>
         </p>   
         <p class="alignRight">
             <span id="currentVersionPre">You are running </span>
-            <span id="currentVersion">AmfPHP <?php echo AMFPHP_VERSION; ?></span>
+            <span id="currentVersion"><?php echo AMFPHP_VERSION; ?></span>
             <br/> 
-            <span id="latestVersionInfo"></span>            
+            <span id="latestVersionInfo">&nbsp;</span>            
         </p>
         </div>
 
