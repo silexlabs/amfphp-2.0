@@ -127,8 +127,8 @@ if($showCredentialsExplanation){
                 </div>
                 <div id="news"><h3 class="newsDivTitle">AmfPHP News</h3><br/></div>
             </div>
-            <?php require_once(dirname(__FILE__) . '/Footer.inc.php'); ?>
         </div>
+            <?php require_once(dirname(__FILE__) . '/Footer.inc.php'); ?>
         <script>
             $(function () {	    
                 //customize header
