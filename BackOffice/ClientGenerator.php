@@ -99,6 +99,7 @@ $config = new Amfphp_BackOffice_Config();
                 </table>
                 <div id="statusMessage" style="max-width:100%"></div>
             </div>
+        </div>
                 
         <?php
         require_once(dirname(__FILE__) . '/Footer.inc.php');

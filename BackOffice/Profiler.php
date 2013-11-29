@@ -88,6 +88,7 @@ $config = new Amfphp_BackOffice_Config();
                     <div id="chartDiv"></div>
                 </div>                  
             </div>
+        </div>
         <?php
         require_once(dirname(__FILE__) . '/Footer.inc.php');
         ?>            
@@ -119,7 +120,7 @@ $(function () {
     $("#tabName").text("Profiler");
     $("#profilerLink").addClass("chosen");
 
-    var availableHeight = $( "body" ).height() - $("#chartDiv").offset().top - 80;
+    var availableHeight = $( "body" ).height() - $("#chartDiv").offset().top - 64;
     $( "#chartDiv" ).css( "height", availableHeight +  "px" );
     
     refresh();

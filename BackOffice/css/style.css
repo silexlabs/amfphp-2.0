@@ -7,6 +7,7 @@
 
 body{
     font-size: 15px;
+    margin:0px;
     
  
 }
@@ -184,7 +185,6 @@ button span {
 
 
 #header {
-    background: White;
     padding: 0;
     margin: 0;
     vertical-align: middle;
@@ -230,21 +230,22 @@ button span {
 
 #footer
 {
-    clear: both;
-    border-top: 1px solid #525252;
-    background: White;
-    padding: 0;
     text-align: center;
-    vertical-align: middle;
-    margin: 0;
-    width: 100%;
+    padding-bottom: 10px;
     padding-top: 10px;
 } 
 
-
+#footerWrapper{
+    border-top: 1px solid #525252;    
+    background-color: black;
+    color: white;
+    margin: 0px;
+}
 
 #footer a{
     padding-right: 20px;
+    
+    
 
 }
 
@@ -289,6 +290,9 @@ table{
     width:1000px;
     margin-left: auto;
     margin-right:auto;
+    margin-top:10px;
+    margin-bottom:10px;
+    overflow:hidden;
 }
 
 .overFlowAuto{
