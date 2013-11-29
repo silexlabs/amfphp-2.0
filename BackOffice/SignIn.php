@@ -151,7 +151,5 @@ if($showCredentialsExplanation){
                     
                 }
             });
-            function resize(){
-                //dummy
-            }
+
         </script>

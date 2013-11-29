@@ -17,7 +17,7 @@
 class VoService {
     
     /**
-     * This method expects a UserVo1 object. So amfPHP must receive a typed UserVo1 object, and the CustomClassConverter plugin
+     * This method expects a UserVo1 object. So amfPHP must receive a typed UserVo1 object, and the VoConverter plugin
      * must find the UserVo1 class in its value object folders
      * @param UserVo1 $user example: {"_explicitType":"UserVo1", "name":"ariel", "status":"bla"}
      * @return UserVo1

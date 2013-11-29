@@ -54,7 +54,7 @@ input, #result, button{
 
 #right {
     float: left;
-    margin-top: 20px;
+    margin-top: 10px;
     position:relative;
     padding-left: 10px;
     padding-bottom: 10px;
@@ -298,4 +298,18 @@ table{
 #tabName{
     color:red;
     font-size: 24px;
+}
+
+.imgWrapper{
+    width:100%; 
+    text-align:center;
+}
+
+.imgWrapper img{
+    border: 1px solid grey;
+    margin: 10px;
+}
+
+.padLeft{
+    padding-left: 10px;
 }
