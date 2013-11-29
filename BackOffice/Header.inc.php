@@ -24,9 +24,9 @@ $temp = 0;
             </p>
             <p class="alignRight">
                 <a id="newsLink" onclick="amfphpUpdates.toggleNews()">
-                    <img src="feed-icon-14x14.png"></img>&nbsp;<span id="toggleNewsText">Show News</span>
+                    <img src="img/Feed.png"></img>&nbsp;<span id="toggleNewsText">Show News</span>
                 </a>
-                <a id="signOutLink" href="SignOut.php">Sign Out</a>
+                <a id="signOutLink" href="SignOut.php">Sign Out<img src="img/SignOut.png"></img></a>
             </p>
             <div id="divRss"><h3 class="newsDivTitle">AmfPHP News</h3></div>    
         </div>

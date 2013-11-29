@@ -304,6 +304,8 @@ table.jqplot-table-legend{
 #line1{
     border-bottom: 1px solid #B0B0B0;
     background: #E6E6E6;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 #backoffice{
@@ -315,6 +317,7 @@ table.jqplot-table-legend{
 
 #line2{
     padding:10px;
+    padding-left: 40px;
 }
 
 #line2 a{
