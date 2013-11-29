@@ -2,7 +2,7 @@
     /*don't apply font to ACE editor or else cursor position is messed up. :not selector dones't work, so need 
     to do it to everything but it' */
     font-family: Arial, Helvetica, sans-serif;
-    color: #666666;
+    color: black;
 }
 
 body{
@@ -12,10 +12,6 @@ body{
  
 }
 
-#backoffice{
-    font-style: italic;
-    font-weight: normal;
-}
 
 input{
     color:black;
@@ -183,45 +179,6 @@ button span {
     padding-right: 20px;
 } 
 
-
-#header {
-    padding: 0;
-    margin: 0;
-    vertical-align: middle;
-    width: 1000px;
-    margin-left: auto ;
-    margin-right: auto ;
-    
-}
-
-#header div{
-    border-bottom: 1px solid #525252;
-}
-
-#header p{
-    margin:5px;
-}
-
-#tabNav{
-    padding:5px;
-}
-
-#header ul {
-    float: right;
-    list-style-type: none;
-    margin-top: 7px;
-}
-
-#header a{
-    padding-right: 20px;
-
-}
-
-#header ul li {
-    float: left;
-    margin-left: 20px;
-}
-
 .newsDivTitle{
     text-align: center;
     margin:0;
@@ -252,7 +209,7 @@ table{
 }
 
 .chosen{
-    color:red;
+    color:#F65511;
 }
 
 .alignleft {
@@ -273,14 +230,7 @@ table{
     overflow:hidden;
 }
 
-.overFlowAuto{
-    overflow: auto;    
-}
 
-#tabName{
-    color:red;
-    font-size: 24px;
-}
 
 .imgWrapper{
     width:100%; 
@@ -295,6 +245,86 @@ table{
 .padLeft{
     padding-left: 10px;
 }
+
+/* header */
+
+
+
+#header {
+    padding: 0;
+    margin: 0;
+    vertical-align: middle;
+    
+}
+
+.middleBound{
+    width: 1000px;
+    margin-left: auto ;
+    margin-right: auto ;
+}
+
+#header ul {
+    float: right;
+    list-style-type: none;
+    margin-top: 7px;
+}
+
+#header a{
+    padding-right: 20px;
+
+}
+
+#header p{
+    margin:5px;
+}
+
+#header ul li {
+    float: left;
+    margin-left: 20px;
+}
+
+.overFlowAuto{
+    overflow: auto;    
+}
+
+#line1{
+    border-bottom: 1px solid #B0B0B0;
+    background: #E6E6E6;
+}
+
+#backoffice{
+    font-style: italic;
+    font-weight: normal;
+    color:#989898;
+}
+
+
+#line2{
+    padding:10px;
+}
+
+#line2 a{
+    padding-right: 100px;
+}
+
+#currentVersionPre{
+    color: #747474;
+}
+
+#currentVersion{
+    color: #373737;
+}
+
+#tabName{
+    color:#F65511;
+    font-size: 24px;
+}
+
+.headerLine{
+    border-bottom: 1px solid #B0B0B0;    
+}
+
+
 
 /* sticky footer */
 
@@ -329,4 +359,5 @@ html, body {
 }
 .site-footer a{
     padding-right: 10px;
+    color:white;
 }

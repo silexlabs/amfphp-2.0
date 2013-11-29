@@ -24,9 +24,9 @@ var amfphpUpdates = {
         
         function showVersionComparison(latestVersion){
             if(latestVersion != amfphpVersion){
-                $(amfphpUpdates.latestVersionInfoSpanId).html("<a target='_blank' href='http://www.silexlabs.org/amfphp/downloads/'>(Get " + latestVersion + " here)</a>");
+                $(amfphpUpdates.latestVersionInfoSpanId).html("<a target='_blank' href='http://www.silexlabs.org/amfphp/downloads/'>Get " + latestVersion + " here</a>");
             }else{
-                $(amfphpUpdates.latestVersionInfoSpanId).html("(latest)");
+                $(amfphpUpdates.latestVersionInfoSpanId).html("You are up to date");
             }
         }
         if(!$.cookie('amfphp_latest_version')){
