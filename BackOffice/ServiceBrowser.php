@@ -35,99 +35,101 @@ $config = new Amfphp_BackOffice_Config();
         <script type="text/javascript" src="js/jquery.cookie.js"></script>
         <script language="javascript" type="text/javascript" src="js/sb.js"></script>
         <script type="text/javascript">
-<?php 
-    echo 'var amfphpVersion = "' . AMFPHP_VERSION . "\";\n"; 
-    echo 'var amfphpEntryPointUrl = "' . $config->resolveAmfphpEntryPointUrl() . "\";\n"; 
-    if ($config->fetchAmfphpUpdates) {
-        echo "var shouldFetchUpdates = true;\n"; 
-    }else{
-        echo "var shouldFetchUpdates = false;\n"; 
-    }
+<?php
+echo 'var amfphpVersion = "' . AMFPHP_VERSION . "\";\n";
+echo 'var amfphpEntryPointUrl = "' . $config->resolveAmfphpEntryPointUrl() . "\";\n";
+if ($config->fetchAmfphpUpdates) {
+    echo "var shouldFetchUpdates = true;\n";
+} else {
+    echo "var shouldFetchUpdates = false;\n";
+}
 ?>
                 
         </script>  
-   
+
     </head>
     <body>
-        <?php
-        require_once(dirname(__FILE__) . '/Header.inc.php');
-        ?>
+        <div class="page-wrap">
+            <?php
+            require_once(dirname(__FILE__) . '/Header.inc.php');
+            ?>
 
-        <div id="main">
-            <div id="left">
-                <?php
-                if (!$isAccessGranted) {
-                    ?>
-                    <script>
-                        window.location = "./SignIn.php";
-                    </script>
+            <div id="main">
+                <div id="left">
                     <?php
-                    return;
-                }
-                ?>
+                    if (!$isAccessGranted) {
+                        ?>
+                        <script>
+                            window.location = "./SignIn.php";
+                        </script>
+                        <?php
+                        return;
+                    }
+                    ?>
                     <div class='menu' id="services">
-                    <h2>Services and Methods</h2>
-                    <ul id='serviceMethods' >
-                        Loading Service Data...
+                        <h2>Services and Methods</h2>
+                        <ul id='serviceMethods' >
+                            Loading Service Data...
 
-                    </ul>
-                </div>                            
-            </div>                    
-            <div id="right" class="menu" >
-                <div id="methodDialog" class="notParamEditor">
-                    <h2>Method Caller </h2>
-                    <span class="tip">Choose a Method From the list on the left.</span> 
-                    <h3 id="serviceHeader"></h3>
-                    <pre id="serviceComment"></pre>
-                    <h3 id="methodHeader"></h3>
-                    <pre id="methodComment"></pre>
-                    <span class="notParamEditor tip">Use JSON notation for complex values. </span>    
-                    <table id="paramDialogs"><tbody></tbody></table>
-                    <span class="notParamEditor" id="noParamsIndicator">This method has no parameters.</span>
-                    <div id="callDialog">
-                        <a onclick="toggleAdvanced()" id="toggleAdvancedLink">Show Advanced Call Options</a>   
-                        <div id="basicCall">
-                            <input class="notParamEditor" type="submit" value="Call" onclick="makeJsonCall()"/>  
-                        </div>
-                        <div id="advancedCall">
-                            <input class="notParamEditor" type="submit" value="Call JSON" onclick="makeJsonCall()"/>  
-                            <input class="notParamEditor" type="submit" value="Call AMF" onclick="makeAmfCall()"/>       
-                            <input class="notParamEditor" type="submit" id="toggleRepeatBtn" value="Start Repeat Call AMF" onclick="toggleRepeat()"/>       
-                            Number of Concurrent Requests
-                            <input id="concurrencyInput" value="1"/>       
-                            <div id="amfCallerContainer">
-                                Flash Player is needed to make AMF calls. 
-                                <a href="http://www.adobe.com/go/getflashplayer">
-                                    <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" />
-                                </a>
-                            </div>                        
+                        </ul>
+                    </div>                            
+                </div>                    
+                <div id="right" class="menu" >
+                    <div id="methodDialog" class="notParamEditor">
+                        <h2>Method Caller </h2>
+                        <span class="tip">Choose a Method From the list on the left.</span> 
+                        <h3 id="serviceHeader"></h3>
+                        <pre id="serviceComment"></pre>
+                        <h3 id="methodHeader"></h3>
+                        <pre id="methodComment"></pre>
+                        <span class="notParamEditor tip">Use JSON notation for complex values. </span>    
+                        <table id="paramDialogs"><tbody></tbody></table>
+                        <span class="notParamEditor" id="noParamsIndicator">This method has no parameters.</span>
+                        <div id="callDialog">
+                            <a onclick="toggleAdvanced()" id="toggleAdvancedLink">Show Advanced Call Options</a>   
+                            <div id="basicCall">
+                                <input class="notParamEditor" type="submit" value="Call" onclick="makeJsonCall()"/>  
+                            </div>
+                            <div id="advancedCall">
+                                <input class="notParamEditor" type="submit" value="Call JSON" onclick="makeJsonCall()"/>  
+                                <input class="notParamEditor" type="submit" value="Call AMF" onclick="makeAmfCall()"/>       
+                                <input class="notParamEditor" type="submit" id="toggleRepeatBtn" value="Start Repeat Call AMF" onclick="toggleRepeat()"/>       
+                                Number of Concurrent Requests
+                                <input id="concurrencyInput" value="1"/>       
+                                <div id="amfCallerContainer">
+                                    Flash Player is needed to make AMF calls. 
+                                    <a href="http://www.adobe.com/go/getflashplayer">
+                                        <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" />
+                                    </a>
+                                </div>                        
+
+                            </div>
 
                         </div>
 
                     </div>
-
-                </div>
-                <div id="result"  class="notParamEditor">
-                    Result 
-                    <span class="showResultView">
-                        <a id="tree">Tree</a>
-                        <a id="print_r">print_r</a>
-                        <a id="json">JSON</a>
-                        <a id="php">PHP Serialized</a>
-                        <a id="raw">Raw</a>
-                    </span>
-                    <div id="dataView">
-                        <div id="tree" class="resultView"></div>
-                        <div id="print_r" class="resultView"></div>
-                        <div id="json" class="resultView"></div>
-                        <div id="php" class="resultView"></div>
-                        <div id="raw" class="resultView"></div>
+                    <div id="result"  class="notParamEditor">
+                        Result 
+                        <span class="showResultView">
+                            <a id="tree">Tree</a>
+                            <a id="print_r">print_r</a>
+                            <a id="json">JSON</a>
+                            <a id="php">PHP Serialized</a>
+                            <a id="raw">Raw</a>
+                        </span>
+                        <div id="dataView">
+                            <div id="tree" class="resultView"></div>
+                            <div id="print_r" class="resultView"></div>
+                            <div id="json" class="resultView"></div>
+                            <div id="php" class="resultView"></div>
+                            <div id="raw" class="resultView"></div>
+                        </div>
                     </div>
                 </div>
+
+
             </div>
-
-
-        </div>
+        </div>            
         <?php
         require_once(dirname(__FILE__) . '/Footer.inc.php');
         ?>        

@@ -1,4 +1,4 @@
-#header, #left, .notParamEditor, pre, #footer{
+#header, #left, .notParamEditor, pre, .site-footer{
     /*don't apply font to ACE editor or else cursor position is messed up. :not selector dones't work, so need 
     to do it to everything but it' */
     font-family: Arial, Helvetica, sans-serif;
@@ -228,28 +228,6 @@ button span {
 }
 
 
-#footer
-{
-    text-align: center;
-    padding-bottom: 10px;
-    padding-top: 10px;
-} 
-
-#footerWrapper{
-    border-top: 1px solid #525252;    
-    background-color: black;
-    color: white;
-    margin: 0px;
-}
-
-#footer a{
-    padding-right: 20px;
-    
-    
-
-}
-
-
 
 .tip{
     color:grey;
@@ -265,7 +243,7 @@ button span {
 }
 .borderTop{
     border-top: 1px solid #525252;    
-    padding-top: 5px;
+    padding-top: 10px;
     margin-top: 5px;
 }
 
@@ -316,4 +294,39 @@ table{
 
 .padLeft{
     padding-left: 10px;
+}
+
+/* sticky footer */
+
+* {
+  margin: 0;
+}
+html, body {
+  height: 100%;
+}
+.page-wrap {
+  min-height: 100%;
+  /* equal to footer height */
+  margin-bottom: -40px; 
+}
+.page-wrap:after {
+  content: "";
+  display: block;
+}
+.site-footer, .page-wrap:after {
+  /* .push must be the same height as footer */
+  height: 40px; 
+}
+.site-footer {
+  background: black;
+  text-align: center;
+  
+
+}
+
+.site-footer div{
+    padding-top: 10px;
+}
+.site-footer a{
+    padding-right: 10px;
 }

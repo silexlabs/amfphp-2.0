@@ -17,8 +17,8 @@
  */
 $temp = 0;
 ?>
-<div class="wrapper" id="footerWrapper">
-    <div id='footer'>
+<footer class="site-footer">
+    <div>
         <a href="http://www.silexlabs.org/amfphp/feedback/">Feedback</a>
         <a href="http://www.silexlabs.org/groups/amfphp/amfphp-users/">Forum</a>
         <a href="http://www.silexlabs.org/amfphp/documentation/">Documentation</a>
@@ -28,4 +28,5 @@ $temp = 0;
         <a href="http://www.silexlabs.org/category/exchange/exchange-amfphp/">More Plugins</a>
         <a href="http://www.silexlabs.org/">Silex Labs</a>
     </div>
-</div>
+        
+</footer>
