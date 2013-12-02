@@ -110,8 +110,8 @@ class Amfphp_Core_FilterManager{
      * 
      * @param String $filterName  the name of the filter
      * @param Object $object the object on which to call the method
-     * @param String $methodName the name of the method to call on the object. 0 is first, 10 is default, more is later
-     * @param int $priority
+     * @param String $methodName the name of the method to call on the object.
+     * @param int $priority.  0 is first, 10 is default, more is later
      */
     public function addFilter($filterName, $object, $methodName, $priority = 10){
         // init the filter placeholder

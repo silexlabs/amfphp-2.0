@@ -75,7 +75,7 @@ class AmfphpMonitor {
     /**
      * The maximum size of the log file, in bytes. Once the log is bigger than this, logging stops.
      * Note that this is not strict, it can overflow with the last log.
-     * 
+     * zen
      * @var int 
      */
     protected $maxLogFileSize = 1000000;
@@ -113,8 +113,8 @@ class AmfphpMonitor {
             return;
         }
         
-        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_REQUEST, $this, 'filterDeserializedRequest');
-        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_RESPONSE, $this, 'filterDeserializedResponse');
+        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_REQUEST, $this, 'filterDeserializedRequest', 0);
+        $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_RESPONSE, $this, 'filterDeserializedResponse', 0);
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_SERIALIZED_RESPONSE, $this, 'filterSerializedResponse');
             
     }
