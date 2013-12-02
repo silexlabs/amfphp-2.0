@@ -134,10 +134,6 @@ if($showCredentialsExplanation){
             <?php require_once(dirname(__FILE__) . '/Footer.inc.php'); ?>
         <script>
             $(function () {	    
-                //customize header
-                $("#tabName").text("Sign In");
-                $("#signOutLink").hide();
-                $("#tabNav").hide();
                 
                 if(!showCredentialsExplanation){
                     $("#credentialsExplanation").hide();
@@ -153,6 +149,11 @@ if($showCredentialsExplanation){
                     }
                     
                 }
+                //customize header
+                $("#tabName").text("Sign In");
+                $(".signOutLink").hide();
+                $(".newsLink").hide();
+                $("#line2").hide();
             });
 
         </script>
