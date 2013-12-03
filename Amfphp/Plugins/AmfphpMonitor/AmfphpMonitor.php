@@ -16,8 +16,10 @@ require_once dirname(__FILE__) . '/AmfphpMonitorService.php';
 
 /**
  * logs monitoring information, and makes it possible to toggle logging and retrieve the data via the AmfphpMonitorService.
- * If the log file is superior to maxLogFileSize, logging shall fail silently. This is designed to avoid errors being generated 
- * when a developer forgets to turn off monitoring. 
+ * If the log file is not writable or its size is superior to maxLogFileSize, 
+ * logging shall fail silently. This is designed to avoid errors being generated 
+ * when a developer forgets to turn off monitoring, and to allow the plugin to be enabled 
+ * by default
  * 
  * The log file is by default at [AmfphpMonitor plugin folder]/log.txt.php 
  * To change this set 'logPath' in the config.
@@ -106,7 +108,7 @@ class AmfphpMonitor {
         }
         
         if(!is_writable($this->logPath) && !is_readable($this->logPath)){
-            throw new Amfphp_Core_Exception('AmfphpMonitor does not have permission to write to ' . $this->logPath);
+            return;
         }
         
         if(filesize($this->logPath) > $this->maxLogFileSize){

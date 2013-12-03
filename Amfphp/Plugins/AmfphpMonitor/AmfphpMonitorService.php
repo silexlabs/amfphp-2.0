@@ -51,6 +51,10 @@ class AmfphpMonitorService {
      * @return array 
      */
     public function getData($flush){
+        if(!is_writable(self::$logPath) || !is_readable(self::$logPath)){
+            throw new Amfphp_Core_Exception('AmfphpMonitor does not have permission to read and write to log file: ' . self::$logPath);
+        }
+                
         if(!file_exists(self::$logPath)){
             return null;
         }
@@ -95,7 +99,13 @@ class AmfphpMonitorService {
      * flush monitor log
      */
     public function flush(){
-        file_put_contents(self::$logPath, "<?php exit();?>\n");
+        if(!is_writable(self::$logPath) || !is_readable(self::$logPath)){
+            throw new Amfphp_Core_Exception('AmfphpMonitor does not have permission to read and write to log file: ' . self::$logPath);
+        }
+                
+        if(file_put_contents(self::$logPath, "<?php exit();?>\n") === false){
+            throw new Amfphp_Core_Exception('AmfphpMonitor write file failed ' . self::$logPath);
+        }
     }
 }
 
