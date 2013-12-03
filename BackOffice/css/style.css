@@ -102,6 +102,9 @@ h3{
 
 }
 
+#newComerExplanation h3{
+    text-align: center;
+}
 .paramEditorContainer{
     /* 
     The editor must be created in a div with absolute position. So use a wrapper for positioning. 
@@ -287,9 +290,6 @@ table.jqplot-table-legend{
 
 }
 
-#silexLabsLink{
-    margin-left: 200px;
-}
 
 .overFlowAuto{
     overflow: auto;    
@@ -325,12 +325,21 @@ table.jqplot-table-legend{
 }
 
 #line2{
-    padding:10px;
-    padding-left: 40px;
+    padding:0px;
+    margin-bottom: 0px;
+}
+
+#tabNavP{
+    padding-top: 5px;
 }
 
 #line2 a{
-    padding-right: 100px;
+    padding-right: 50px;
+}
+
+#header #silexLabsLinkP{
+    margin-bottom: 0px;
+    padding: 0px;
 }
 
 #currentVersionPre{

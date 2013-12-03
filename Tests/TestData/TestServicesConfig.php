@@ -35,8 +35,6 @@ class TestServicesConfig extends Amfphp_Core_Config {
         
         $this->pluginsConfig['AmfphpVoConverter']['voFolders'] = $voFolders;
         //$this->pluginsConfig['AmfphpVoConverter']['enforceConversion'] = true;
-        ////not necessary, as enabled by default
-        //unset($this->disabledPlugins[array_search('AmfphpMonitor', $this->disabledPlugins)]);
         
         //My tests, shouldn't be in release code!!
         //

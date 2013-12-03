@@ -19,9 +19,8 @@ $temp = 0;
 <div id="header">
     <div id="line1" class="headerLine">
         <div class="overFlowAuto middleBound"> 
-            <a href="http://silexlabs.org" target="_blank" id="silexLabsLink"><img src="img/SilexLabs.png"></img></a>
             <p class="alignLeft" id="titleP">
-                <span id="titleSpan">AmfPHP <span id="backoffice">Back Office</span></span>
+                <span id="titleSpan">Amfphp <span id="backoffice">Back Office</span></span>
             </p>
             <div class="alignRight">
                 <table>
@@ -35,15 +34,19 @@ $temp = 0;
                     </tr>
                 </table>
             </div>
-            <div id="divRss"><h3 class="newsDivTitle">AmfPHP News</h3></div>    
         </div>
     </div>
     <div id="line2" class="headerLine">
-        <div class="middleBound">
-            <a class="important" href="index.php" id="homeLink">Home</a>
-            <a class="important" href="ServiceBrowser.php" id="serviceBrowserLink">Service Browser</a>
-            <a class="important" href="ClientGenerator.php" id="clientGeneratorLink">Client Generator</a>
-            <a class="important" href="Profiler.php" id="profilerLink">Profiler</a>
+        <div class="overFlowAuto middleBound"> 
+            <p class="alignLeft" id="tabNavP">
+                <a class="important" href="index.php" id="homeLink">Home</a>
+                <a class="important" href="ServiceBrowser.php" id="serviceBrowserLink">Service Browser</a>
+                <a class="important" href="ClientGenerator.php" id="clientGeneratorLink">Client Generator</a>
+                <a class="important" href="Profiler.php" id="profilerLink">Profiler</a>
+            </p>
+            <p class="alignRight" id="silexLabsLinkP">
+                <a href="http://silexlabs.org" target="_blank" id="silexLabsLink"><img src="img/SilexLabs.png"></img></a>
+            </p>
         </div>
     </div>
     <div id="line3" class="overFlowAuto middleBound headerLine">
@@ -56,6 +59,7 @@ $temp = 0;
             <br/> 
             <span id="latestVersionInfo">&nbsp;</span>            
         </p>
-        </div>
+    </div>
+    <div id="divRss"><h3 class="newsDivTitle">AmfPHP News</h3></div>    
 
 </div>
