@@ -99,11 +99,8 @@ h3{
 }
 .warning{
     color:red;
+    padding-left: 40px;
 
-}
-
-#newComerExplanation h3{
-    text-align: center;
 }
 .paramEditorContainer{
     /* 
@@ -124,11 +121,6 @@ a.important{
     margin-right: 50px;
 }
 
-button img,
-button span {
-    vertical-align: middle;
-}
-
 #newsLink{
     width:137px;
 }
@@ -142,16 +134,6 @@ button span {
     margin-bottom: 10px;
 }
 
-
-
-#divNews{
-    float:right;
-    background: white;
-    border:1px solid #B0B0B0;
-    position:fixed;
-    right: 10px;
-    top:55px;
-}
 
 #newsPopup, #newsLink{
     /* hide these elements by default */
@@ -315,7 +297,7 @@ table.jqplot-table-legend{
 }
 
 #textSignOutLink, #textNewsLink{
-    font-size: 12px;
+    font-size: 11px;
     color:black;
 }
 
@@ -362,7 +344,7 @@ table.jqplot-table-legend{
     border:1px solid #B0B0B0;
     position:fixed;
     right: 100px;
-    top:100px;
+    top:95px;
 }
 
 #newsPopup table{

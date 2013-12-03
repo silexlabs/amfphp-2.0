@@ -120,15 +120,15 @@ if($showNewComerExplanation){
                     <div id="right" class="notParamEditor">
                         
                         <div id="newComerExplanation">
-                            <h3>Access is disabled by  default for security purposes</h3>
-                        <br/>
+                            <span class="warning">Access is disabled by default for security purposes</span>
+                        <br/> <br/>
+                        <h3>Getting access to the Back Office</h3>
+                            
                             <p>To access the Back Office you must first edit its configuration</p>
                             <p>Add some credentials by editing the BackOffice/Config file in the class __construct method:</p>
-                            <br/>
                             <pre>    <span class="tip">$this-&gt;backOfficeCredentials['yourUserName'] = 'yourPassWord';</span></pre>
                             <br/>
                             <p>Once this is done you should be able to sign in to the Back Office.</p>            
-                            <br/>
                             <a href="http://www.silexlabs.org/amfphp/documentation/using-the-back-office/">'Using the Back Office' Documentation</a>
                             <br/><br/>
                             <h3>What can you do with the Amfphp Back Office?</h3>
@@ -147,9 +147,10 @@ if($showNewComerExplanation){
                                 <li>Upgrading from 2.0.X and 2.1.x? Read <a href="http://www.silexlabs.org/amfphp/documentation/upgrading-from-2-0-x-and-2-1-x-to-2-2/">Upgrading from 2.0.X and 2.1.x</a></li>
                                 <li>Need some help? Read <a href="http://www.silexlabs.org/amfphp/documentation/using-the-forums/">Using the forums</a>  </li>
                             </ul>
+                            <br/>
                         </div>
                         
-                        <div id="news"><h3 class="newsDivTitle">AmfPHP News</h3><br/></div>
+                        <div id="news"><h3>AmfPHP News</h3></div>
                     </div>
                 </div>
             </div>

@@ -125,20 +125,10 @@ $(function () {
         displayStatusMessage(textStatus + "<br/><br/>" + jqXHR.responseText);
     });
 
-    resize();
-    $( window ).bind( "resize", resize ); 
 
 });    
 
 
-/**
- * sets the max width for the right div.
- * used on loading services, and when window resizes
- * */
-function resize(){
-    var availableWidthForRightDiv = $( "#main" ).width() - $("#left").outerWidth(true) - 50;
-    $( "#right" ).css( "maxWidth", availableWidthForRightDiv +  "px" );
-}
 
 function displayStatusMessage(html){
     $('#statusMessage').html(html);
