@@ -217,7 +217,7 @@ function createParamDialog(){
     $("#paramDialogs").find("tbody")
     .append($("<tr/>")
     .attr("id", "paramRow" + i)
-    .append($("<td/>").attr("id", "paramLabel" + i).attr("class", "notParamEditor"))
+    .append($("<td/>").attr("id", "paramLabel" + i))
     .append($("<td/>")
     .append($("<div/>")
     .addClass("paramEditorContainer")

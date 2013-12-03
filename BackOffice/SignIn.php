@@ -117,7 +117,7 @@ if($showNewComerExplanation){
                         
                         </div>                    
                     </div>
-                    <div id="right" class="notParamEditor">
+                    <div id="right" >
                         
                         <div id="newComerExplanation">
                             <span class="warning">Access is disabled by default for security purposes</span>

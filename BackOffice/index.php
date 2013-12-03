@@ -47,7 +47,7 @@ if ($config->fetchAmfphpUpdates) {
     <body>
         <div class="page-wrap">
             <?php require_once(dirname(__FILE__) . '/Header.inc.php'); ?>
-            <div id='main' class="notParamEditor">
+            <div id='main' >
                 <?php
                 $accessManager = new Amfphp_BackOffice_AccessManager();
                 if (!$isAccessGranted) {

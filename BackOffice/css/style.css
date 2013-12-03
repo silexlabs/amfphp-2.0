@@ -1,11 +1,6 @@
-#header, #left, .notParamEditor, pre, .site-footer{
-    /*don't apply font to ACE editor or else cursor position is messed up. :not selector dones't work, so need 
-    to do it to everything but it' */
+body{
     font-family: Arial, Helvetica, sans-serif;
     color: black;
-}
-
-body{
     font-size: 15px;
     margin:0px;
     
@@ -108,6 +103,18 @@ table{
 .padLeft{
     padding-left: 10px;
 }
+
+
+/* sign in */
+#signin input{
+    margin-left: 0;
+    margin-right: 0;
+}
+#signin input[type="submit"] {
+    float: right;
+}
+
+
 /* service browser */
 
 #left li ul {
@@ -133,18 +140,11 @@ table{
     max-width:700px;
 }
 
-
+#methodDescription, #methodParameters, #methodCall, #methodCallResult{
+    border: 1px solid #A8A8A8;
+}
 #right form {
     margin-bottom: 20px;
-}
-
-
-#signin input{
-    margin-left: 0;
-    margin-right: 0;
-}
-#signin input[type="submit"] {
-    float: right;
 }
 
 #serviceMethods{

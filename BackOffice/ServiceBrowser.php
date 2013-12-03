@@ -75,25 +75,31 @@ if ($config->fetchAmfphpUpdates) {
                     </div>                            
                 </div>                    
                 <div id="right" class="menu" >
-                    <div id="methodDialog" class="notParamEditor">
+                    <div id="methodDialog" >
                         <h2>Method Caller </h2>
-                        <span class="tip">Choose a Method From the list on the left.</span> 
-                        <h3 id="serviceHeader"></h3>
-                        <span id="serviceComment"></span>
-                        <h3 id="methodHeader"></h3>
-                        <span id="methodComment"></span>
-                        <span class="notParamEditor tip">Use JSON notation for complex values. </span>    
-                        <table id="paramDialogs"><tbody></tbody></table>
-                        <span class="notParamEditor" id="noParamsIndicator">This method has no parameters.</span>
-                        <div id="callDialog">
-                            <a onclick="toggleAdvanced()" id="toggleAdvancedLink">Show Advanced Call Options</a>   
-                            <div id="basicCall">
-                                <input class="notParamEditor" type="submit" value="Call" onclick="makeJsonCall()"/>  
-                            </div>
-                            <div id="advancedCall">
-                                <input class="notParamEditor" type="submit" value="Call JSON" onclick="makeJsonCall()"/>  
-                                <input class="notParamEditor" type="submit" value="Call AMF" onclick="makeAmfCall()"/>       
-                                <input class="notParamEditor" type="submit" id="toggleRepeatBtn" value="Start Repeat Call AMF" onclick="toggleRepeat()"/>       
+                        <span class="tip"></span> 
+                        <h3>1. Choose an Amfphp Service Method From the list on the left.</h3>
+                        <div id="methodDescription">
+                            <h4 id="serviceHeader"></h4>
+                            <span id="serviceComment"></span>
+                            <h4 id="methodHeader"></h4>
+                            <span id="methodComment"></span>
+                        </div>
+                        
+                        <h3>2. Set your call parameters.</h3>
+                        <div id="methodParameters">
+                            <span class="tip">Use JSON notation for complex values. </span>  
+
+                            <table id="paramDialogs"><tbody></tbody></table>
+                            <span  id="noParamsIndicator">This method has no parameters.</span>
+                        </div>
+                        
+                        <h3>3. Make the call to Amfphp.</h3>
+                        <div id="methodCall">
+                                <input  type="submit" value="Call" onclick="makeJsonCall()"/>  
+                                <input  type="submit" value="Call JSON" onclick="makeJsonCall()"/>  
+                                <input  type="submit" value="Call AMF" onclick="makeAmfCall()"/>       
+                                <input  type="submit" id="toggleRepeatBtn" value="Start Repeat Call AMF" onclick="toggleRepeat()"/>       
                                 Number of Concurrent Requests
                                 <input id="concurrencyInput" value="1"/>       
                                 <div id="amfCallerContainer">
@@ -106,24 +112,25 @@ if ($config->fetchAmfphpUpdates) {
                             </div>
 
                         </div>
-
-                    </div>
-                    <div id="result"  class="notParamEditor">
-                        Result 
-                        <span class="showResultView">
-                            <a id="tree">Tree</a>
-                            <a id="print_r">print_r</a>
-                            <a id="json">JSON</a>
-                            <a id="php">PHP Serialized</a>
-                            <a id="raw">Raw</a>
-                        </span>
-                        <div id="dataView">
-                            <div id="tree" class="resultView"></div>
-                            <div id="print_r" class="resultView"></div>
-                            <div id="json" class="resultView"></div>
-                            <div id="php" class="resultView"></div>
-                            <div id="raw" class="resultView"></div>
+                    <h3>4. See the result.</h3>
+                        <div id="methodCallResult"  >
+                             
+                            <span class="showResultView">
+                                <a id="tree">Tree</a>
+                                <a id="print_r">print_r</a>
+                                <a id="json">JSON</a>
+                                <a id="php">PHP Serialized</a>
+                                <a id="raw">Raw</a>
+                            </span>
+                            <div id="dataView">
+                                <div id="tree" class="resultView"></div>
+                                <div id="print_r" class="resultView"></div>
+                                <div id="json" class="resultView"></div>
+                                <div id="php" class="resultView"></div>
+                                <div id="raw" class="resultView"></div>
+                            </div>
                         </div>
+                    
                     </div>
                 </div>
 

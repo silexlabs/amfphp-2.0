@@ -45,7 +45,7 @@ $config = new Amfphp_BackOffice_Config();
         <?php
         require_once(dirname(__FILE__) . '/Header.inc.php');
         ?>
-            <div id='main' class="notParamEditor">
+            <div id='main' >
                     <?php
                     if (!$isAccessGranted) {
                         ?>
@@ -82,7 +82,7 @@ $config = new Amfphp_BackOffice_Config();
 
  
     //links for each generator
-                    echo "\n<table class='notParamEditor borderTop' id='clientGen'>";
+                    echo "\n<table class='borderTop' id='clientGen'>";
                     foreach ($generators as $generator) {
                         echo "\n    <tr>";
                         $generatorName = $generator->getUiCallText();

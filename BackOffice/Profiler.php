@@ -56,7 +56,7 @@ if ($config->fetchAmfphpUpdates) {
         <?php
         require_once(dirname(__FILE__) . '/Header.inc.php');
         ?>
-            <div id='main' class="notParamEditor">
+            <div id='main' >
                 <?php
                 if (!$isAccessGranted) {
                     ?>
