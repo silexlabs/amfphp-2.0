@@ -31,121 +31,26 @@ input, #result, button{
 }
 
 
-
-#left li ul {
-    padding-left: 15px;
-    margin-bottom: 10px;
-}
-
-#left{
-    float: left;
-    max-width:300px;
-    padding-right: 10px;
-    border-right: 1px solid #A8A8A8;
-    margin-top: 10px;
-    margin-bottom:10px;
-}
-
-#right {
-    float: left;
-    margin-top: 10px;
-    position:relative;
-    padding-left: 10px;
-    padding-bottom: 10px;
-    max-width:700px;
-}
-
-
-#right form {
-    margin-bottom: 20px;
-}
-
 .underline {
     text-decoration: underline;
 }
 
-
-#signin input{
-    margin-left: 0;
-    margin-right: 0;
-}
-#signin input[type="submit"] {
-    float: right;
-}
 input[type="submit"], button {
     padding: 5px;
     margin: 5px;
     background: #FFFFFF;
 }
 
-#serviceMethods{
-    margin-top: 20px;
-}
-
-
-#dataView{
-    padding: 5px;
-}
-
-#dataView#tree{
-    font-size: 12px;
-}
 .warning{
     color:red;
     padding-left: 40px;
 
 }
-.paramEditorContainer{
-    /* 
-    The editor must be created in a div with absolute position. So use a wrapper for positioning. 
-    See http://dylemma.io/post/4
-    */
-    position: relative;
-    height: 4em;
-    width: 500px;
-    margin:5px;
-    border: 1px solid #A8A8A8;
-
-}
-
-a.important{
-    font-size: 16px;
-    font-weight: bold;
-    margin-right: 50px;
-}
-
-#newsLink{
-    width:137px;
-}
-
-#chartDivContainer{
-    background-color: white;
-    padding: 10px;
-}
-
-#controls{
-    margin-bottom: 10px;
-}
 
 
-#newsPopup, #newsLink{
-    /* hide these elements by default */
-    display: none;
-}
 .dateCell{
     text-align: right;
 }
-
-#titleSpan {
-    font-size: 24px;
-    padding-right: 20px;
-} 
-
-.newsDivTitle{
-    text-align: center;
-    margin:0;
-}
-
 
 
 .tip{
@@ -153,13 +58,6 @@ a.important{
     font-style: italic;
 }
 
-
-#clientGenContent{
-    width: 600px ;
-    margin-left: auto ;
-    margin-right: auto ;
-
-}
 .borderTop{
     border-top: 1px solid #A8A8A8;    
     padding-top: 10px;
@@ -173,6 +71,8 @@ table{
 .chosen{
     color:#F65511;
 }
+
+
 
 .alignleft {
 	float: left;
@@ -204,10 +104,76 @@ table{
     margin: 10px;
 }
 
+
 .padLeft{
     padding-left: 10px;
 }
+/* service browser */
 
+#left li ul {
+    padding-left: 15px;
+    margin-bottom: 10px;
+}
+
+#left{
+    float: left;
+    max-width:300px;
+    padding-right: 10px;
+    margin-top: 10px;
+    margin-bottom:10px;
+}
+
+#right {
+    border-left: 1px solid #A8A8A8;
+    float: left;
+    margin-top: 10px;
+    position:relative;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    max-width:700px;
+}
+
+
+#right form {
+    margin-bottom: 20px;
+}
+
+
+#signin input{
+    margin-left: 0;
+    margin-right: 0;
+}
+#signin input[type="submit"] {
+    float: right;
+}
+
+#serviceMethods{
+    margin-top: 20px;
+}
+
+
+#dataView{
+    padding: 5px;
+}
+
+#dataView#tree{
+    font-size: 12px;
+}
+
+.paramEditorContainer{
+    /* 
+    The editor must be created in a div with absolute position. So use a wrapper for positioning. 
+    See http://dylemma.io/post/4
+    */
+    position: relative;
+    height: 4em;
+    width: 500px;
+    margin:5px;
+    border: 1px solid #A8A8A8;
+
+}
+
+/* client generator */
 table#clientGen{
     width:600px;
     margin-top: 10px;
@@ -218,6 +184,29 @@ table#clientGen td{
     padding: 3px;
     padding-left: 10px;
 }
+
+/* profiler */
+#chartDivContainer{
+    background-color: white;
+    padding: 10px;
+}
+
+#controls{
+    margin-bottom: 10px;
+}
+
+
+
+
+#clientGenContent{
+    width: 600px ;
+    margin-left: auto ;
+    margin-right: auto ;
+
+}
+
+
+
 /* jqplot*/
 
 table.jqplot-table-legend{
@@ -278,10 +267,30 @@ table.jqplot-table-legend{
     color:#989898;
 }
 
+#titleSpan {
+    font-size: 24px;
+    padding-right: 20px;
+} 
+
 #titleP{
     padding-top: 5px;
 }
 
+
+a.important{
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 50px;
+}
+
+#newsLink{
+    width:137px;
+}
+
+#newsPopup, #newsLink{
+    /* hide these elements by default */
+    display: none;
+}
 #line1 table{
     margin-top: 5px;
 }
