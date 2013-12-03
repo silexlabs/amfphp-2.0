@@ -159,7 +159,7 @@ if($showNewComerExplanation){
         <script>
             $(function () {	    
                 
-                if(showNewComerExplanation){
+                if(!showNewComerExplanation){
                     $("#newComerExplanation").hide();
                 }
                 
