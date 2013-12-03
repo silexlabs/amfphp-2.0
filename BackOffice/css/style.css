@@ -144,20 +144,16 @@ button span {
 
 
 
-#divRss{
+#divNews{
     float:right;
     background: white;
-    border:1px solid #525252;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
-    padding:5px;
+    border:1px solid #B0B0B0;
     position:fixed;
     right: 10px;
     top:55px;
 }
 
-#divRss, #newsLink{
+#newsPopup, #newsLink{
     /* hide these elements by default */
     display: none;
 }
@@ -296,7 +292,6 @@ table.jqplot-table-legend{
 }
 
 #line1{
-    border-bottom: 1px solid #B0B0B0;
     background: #E6E6E6;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -350,18 +345,43 @@ table.jqplot-table-legend{
     color: #373737;
 }
 
-#tabName{
+#tabName, #newsPopupTitleText{
     color:#F65511;
     font-size: 24px;
 }
 #tabNameP{
     padding-top: 10px;
 }
-.headerLine{
+.headerLine, #newsPopupTitle{
     border-bottom: 1px solid #B0B0B0;    
 }
 
+#newsPopup{
+    float:right;
+    background: white;
+    border:1px solid #B0B0B0;
+    position:fixed;
+    right: 100px;
+    top:100px;
+}
 
+#newsPopup table{
+    margin: 10px;
+}
+
+#newsPopup table td{
+    padding: 5px;
+}
+#newsPopupContent{
+    
+}
+
+#newsPopupTitle{
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
 
 /* sticky footer http://css-tricks.com/snippets/css/sticky-footer/  */
 

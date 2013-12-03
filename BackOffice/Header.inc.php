@@ -11,7 +11,7 @@
  * @package Amfphp_Backoffice
  * 
  */
-/**
+/**+
  * dummy to get rid of phpdocumentor error...
  */
 $temp = 0;
@@ -59,7 +59,14 @@ $temp = 0;
             <br/> 
             <span id="latestVersionInfo">&nbsp;</span>            
         </p>
+        <div id="newsPopup">
+            <div id="newsPopupTitle">
+                <span class="newsDivTitle" id="newsPopupTitleText">Amfphp News</span>
+                <p class="alignRight">
+                    <a onclick="amfphpUpdates.toggleNews();"><img src="img/Close.png"></img></a>
+                </p>
+            </div>
+        </div>    
     </div>
-    <div id="divRss"><h3 class="newsDivTitle">AmfPHP News</h3></div>    
 
 </div>

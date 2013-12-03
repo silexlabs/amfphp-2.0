@@ -169,7 +169,7 @@ if($showNewComerExplanation){
                 $("#tabName").text("Sign In");
                 $(".signOutLink").hide();
                 $(".newsLink").hide();
-                $("#line2").hide();
+                
             });
 
         </script>
