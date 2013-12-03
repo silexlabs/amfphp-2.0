@@ -228,19 +228,19 @@ if ($config->fetchAmfphpUpdates) {
                     var timeName = orderedTimeNames[i];
                     var color;
                     switch(timeName){
-                        case "Deserialization": color = "#F5521B"; break;
-                        case "Request Value Object Conversion": color = "#0D3D63"; break;
-                        case "Request Charset Conversion": color = "#EAA228"; break;
-                        case "Service Call": color = "#F4BA01"; break;
-                        case "Response Charset Conversion": color = "#EAA228"; break;
-                        case "Response Value Object Conversion": color = "#1879C4"; break;
-                        case "Serialization": color = "#00A500"; break;
+                        case "Deserialization": color = "#00C800"; break;
+                        case "Request Value Object Conversion": color = "#168DE6"; break;
+                        case "Request Charset Conversion": color = "#FF9978"; break;
+                        case "Service Call": color = "#FFCC01"; break;
+                        case "Response Charset Conversion": color = "#FF551C"; break;
+                        case "Response Value Object Conversion": color = "#104E80"; break;
+                        case "Serialization": color = "#009100"; break;
                         default:
                             //alternate these 2 colors for custom times
                             if(customTimeToggle){
-                                color = "#958c12"; 
+                                color = "#E506D3"; 
                             }else{
-                                color = "#c5b47f"; 
+                                color = "#950079"; 
                             } 
                             customTimeToggle = !customTimeToggle;
                     }
