@@ -79,9 +79,9 @@ if ($config->fetchAmfphpUpdates) {
                         <h2>Method Caller </h2>
                         <span class="tip">Choose a Method From the list on the left.</span> 
                         <h3 id="serviceHeader"></h3>
-                        <pre id="serviceComment"></pre>
+                        <span id="serviceComment"></span>
                         <h3 id="methodHeader"></h3>
-                        <pre id="methodComment"></pre>
+                        <span id="methodComment"></span>
                         <span class="notParamEditor tip">Use JSON notation for complex values. </span>    
                         <table id="paramDialogs"><tbody></tbody></table>
                         <span class="notParamEditor" id="noParamsIndicator">This method has no parameters.</span>
