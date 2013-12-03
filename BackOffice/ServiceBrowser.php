@@ -78,7 +78,7 @@ if ($config->fetchAmfphpUpdates) {
                     <div id="methodDialog" >
                         <h2>Method Caller </h2>
                         <span class="tip"></span> 
-                        <h3>1. Choose an Amfphp Service Method From the list on the left.</h3>
+                        <h3>1. Select an Amfphp Service Method From the list on the left.</h3>
                         <div id="methodDescription">
                             <h4 id="serviceHeader"></h4>
                             <span id="serviceComment"></span>
@@ -112,7 +112,7 @@ if ($config->fetchAmfphpUpdates) {
                             </div>
 
                         </div>
-                    <h3>4. See the result.</h3>
+                    <h3>4. See what Amfphp returned.</h3>
                         <div id="methodCallResult"  >
                              
                             <span class="showResultView">

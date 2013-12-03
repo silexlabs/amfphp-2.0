@@ -49,6 +49,11 @@ var isRepeating;
  * */
 var isAdvancedDialogVisible;
 
+/**
+ * data structure to find links in the services and methods list using the service and method name
+ * */
+var serviceAndMethodUiMap;
+
 $(function () {
     var callData = JSON.stringify({"serviceName":"AmfphpDiscoveryService", "methodName":"discover","parameters":[]});
     var request = $.ajax({
@@ -91,8 +96,7 @@ $(function () {
     if($.cookie('advanced')){
         toggleAdvanced();
     }
-
-    resize();    
+ 
 
 });
 
@@ -112,6 +116,7 @@ function onServicesLoaded(data)
         displayStatusMessage(data);
         return;
     }
+    serviceAndMethodUiMap = {};
     serviceData = data;
     
     var serviceName;
@@ -127,6 +132,7 @@ function onServicesLoaded(data)
         .appendTo(rootUl);
         $(serviceLi).attr("title", service.comment);
         var serviceUl = $("<ul/>").appendTo(serviceLi);
+        serviceAndMethodUiMap[serviceName] = {serviceLi:serviceLi, methods:{}};
         for(methodName in service.methods){
             var method = service.methods[methodName];
             var li = $("<li/>")
@@ -143,6 +149,7 @@ function onServicesLoaded(data)
             .appendTo(li);
             $(dialogLink).data("serviceName", serviceName);    
             $(dialogLink).data("methodName", methodName);    
+            serviceAndMethodUiMap[serviceName].methods[methodName] = dialogLink;
 
 
         }
@@ -152,8 +159,6 @@ function onServicesLoaded(data)
 
     });
     $("#main").show();
-    resize();
-    $( window ).bind( "resize", resize ); 
     $("#jsonTip").hide();
     $("#noParamsIndicator").hide();
 
@@ -193,13 +198,6 @@ function onServicesLoaded(data)
     
 
 
-}
-
-/**
- * sets the max width for the right div.
- * used on loading services, and when window resizes
- * */
-function resize(){
 }
 
 /**
@@ -261,14 +259,24 @@ function createParamDialog(){
  * */
 function manipulateMethod(serviceName, methodName){
     $("#callDialog").show();
+    
+    //unselect old service and method li
+    console.log(serviceAndMethodUiMap[serviceName]);
+    if(this.manipulatedServiceName && this.manipulatedMethodName){
+        $(serviceAndMethodUiMap[this.manipulatedServiceName].serviceLi).removeClass("chosen");
+        $(serviceAndMethodUiMap[this.manipulatedServiceName].methods[this.manipulatedMethodName]).removeClass("chosen");
+    }
+    $(serviceAndMethodUiMap[serviceName].serviceLi).addClass("chosen");
+    $(serviceAndMethodUiMap[serviceName].methods[methodName]).addClass("chosen");
+    
     this.manipulatedServiceName = serviceName;
     this.manipulatedMethodName = methodName;
     var service = serviceData[serviceName];
     var method = service.methods[methodName];   
     methodParams = method.parameters;
-    $("#serviceHeader").text("Chosen Service: " + serviceName);
+    $("#serviceHeader").text("Selected Service: " + serviceName);
     $("#serviceComment").html(service.comment.replace(/\n/g, "<br/>"));
-    $("#methodHeader").text("Chosen Method: " + methodName);
+    $("#methodHeader").text("Selected Method: " + methodName);
     $("#methodComment").html(method.comment.replace(/\n/g, "<br/>"));
     if(methodParams.length == 0){
         $("#jsonTip").hide();
@@ -302,7 +310,6 @@ function manipulateMethod(serviceName, methodName){
     //note that trying with jquery "offset" messes up!
     $("#right").css("top", rightDivTop + "px");
 
-    resize(); 
     onResult([]);
     if(isRepeating){
          toggleRepeat();
