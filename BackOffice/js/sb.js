@@ -266,9 +266,9 @@ function manipulateMethod(serviceName, methodName){
     var service = serviceData[serviceName];
     var method = service.methods[methodName];   
     methodParams = method.parameters;
-    $("#serviceHeader").text(serviceName + " Service");
+    $("#serviceHeader").text("Chosen Service: " + serviceName);
     $("#serviceComment").html(service.comment.replace(/\n/g, "<br/>"));
-    $("#methodHeader").text(methodName + " Method");
+    $("#methodHeader").text("Chosen Method: " + methodName);
     $("#methodComment").html(method.comment.replace(/\n/g, "<br/>"));
     if(methodParams.length == 0){
         $("#jsonTip").hide();
