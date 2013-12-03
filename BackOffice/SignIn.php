@@ -10,7 +10,7 @@
  * 
  */
 /**
- * Sign in dialog If not checks POST data for login credentials.
+ * Sign in dialog If not checks POST data for login newComer.
  * throws Exception containing user feedback
  * @author Ariel Sommeria-klein
  *
@@ -25,12 +25,12 @@ require_once(dirname(__FILE__) . '/ClassLoader.php');
 $errorMessage = '';
 $redirectToHome = false;
 $config = new Amfphp_BackOffice_Config();
-$showCredentialsExplanation = false;
+$showNewComerExplanation = false;
 
 try {
     if (count($config->backOfficeCredentials) == 0) {
+        $showNewComerExplanation = true;
         throw new Exception('Sign In is not possible because no credentials were set. ');
-        $showCredentialsExplanation = true;
     }
 
     if (isset($_POST['username'])) {
@@ -76,10 +76,10 @@ if ($config->fetchAmfphpUpdates) {
 } else {
     echo "var shouldFetchUpdates = false;\n";
 }
-if($showCredentialsExplanation){
-    echo "var showCredentialsExplanation = true;\n";
+if($showNewComerExplanation){
+    echo "var showNewComerExplanation = true;\n";
 } else {
-    echo "var showCredentialsExplanation = false;\n";
+    echo "var showNewComerExplanation = false;\n";
 }
 ?>
         </script>  
@@ -118,14 +118,37 @@ if($showCredentialsExplanation){
                         </div>                    
                     </div>
                     <div id="right" class="notParamEditor">
-                        <div id="credentialsExplanation">
-                            <p>No credentials are set, so it is not possible to access the Back Office.</p>
-                            <p>Add some credentials by editing the BackOffice/Config file in the class __construct method:</p>
-                            <pre>    <span class="tip">$this-&gt;backOfficeCredentials['yourUserName'] = 'yourPassWord';</span></pre>
-                            <p>Once you’ve done this you should be able to sign in to the Back Office.</p>            
-                            <a href="http://www.silexlabs.org/amfphp/documentation/using-the-back-office/">Documentation</a>
                         
+                        <div id="newComerExplanation">
+                            <h3>Access is disabled by  default for security purposes</h3>
+                        <br/>
+                            <p>To access the Back Office you must first edit its configuration</p>
+                            <p>Add some credentials by editing the BackOffice/Config file in the class __construct method:</p>
+                            <br/>
+                            <pre>    <span class="tip">$this-&gt;backOfficeCredentials['yourUserName'] = 'yourPassWord';</span></pre>
+                            <br/>
+                            <p>Once this is done you should be able to sign in to the Back Office.</p>            
+                            <br/>
+                            <a href="http://www.silexlabs.org/amfphp/documentation/using-the-back-office/">'Using the Back Office' Documentation</a>
+                            <br/><br/>
+                            <h3>What can you do with the Amfphp Back Office?</h3>
+
+                            With the Amfphp Back Office you can 
+                            <ul>
+                                <li>Test your services</li>
+                                <li>Generate client projects that consume your services</li>
+                                <li>Profile your services for performance</li>
+                            </ul>
+                            <br/>
+                            <h3>Some links to get you going</h3>
+                            <ul>
+                                <li>New to Amfphp? Read <a href="http://www.silexlabs.org/amfphp/documentation/getting-started/">Getting Started</a></li>
+                                <li>Upgrading from 1.9? Read <a href="http://www.silexlabs.org/amfphp/documentation/upgrading-from-amfphp-1-9/">Upgrading from 1.9</a></li>
+                                <li>Upgrading from 2.0.X and 2.1.x? Read <a href="http://www.silexlabs.org/amfphp/documentation/upgrading-from-2-0-x-and-2-1-x-to-2-2/">Upgrading from 2.0.X and 2.1.x</a></li>
+                                <li>Need some help? Read <a href="http://www.silexlabs.org/amfphp/documentation/using-the-forums/">Using the forums</a>  </li>
+                            </ul>
                         </div>
+                        
                         <div id="news"><h3 class="newsDivTitle">AmfPHP News</h3><br/></div>
                     </div>
                 </div>
@@ -135,20 +158,13 @@ if($showCredentialsExplanation){
         <script>
             $(function () {	    
                 
-                if(!showCredentialsExplanation){
-                    $("#credentialsExplanation").hide();
-                    if (shouldFetchUpdates) {
-                        amfphpUpdates.init("#news", null, null, "#latestVersionInfo");
-                        amfphpUpdates.loadAndInitUi();
-                    }
-                }else{
-                    $(".newsLink").hide();
-                    if (shouldFetchUpdates) {
-                        amfphpUpdates.init("#divRss", ".newsLink", "#textNewsLink", "#latestVersionInfo");
-                        amfphpUpdates.loadAndInitUi();
-                    }
-                    
+                if(showNewComerExplanation){
+                    $("#newComerExplanation").hide();
                 }
+                
+                amfphpUpdates.init("#news", null, null, "#latestVersionInfo");
+                amfphpUpdates.loadAndInitUi();
+                
                 //customize header
                 $("#tabName").text("Sign In");
                 $(".signOutLink").hide();
