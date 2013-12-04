@@ -44,10 +44,6 @@ var amfCaller;
  */
 var isRepeating;
 
-/**
- * maintains state for showing or hiding advanced call options
- * */
-var isAdvancedDialogVisible;
 
 /**
  * data structure to find links in the services and methods list using the service and method name
@@ -90,12 +86,7 @@ $(function () {
     });
 
     isRepeating = false;
-    $("#callDialog").hide();
-    $("#advancedCall").hide();
-    isAdvancedDialogVisible = false;
-    if($.cookie('advanced')){
-        toggleAdvanced();
-    }
+
  
 
 });
@@ -436,30 +427,10 @@ function setTreeData(data, targetDivSelector){
  * show right result view
  */
 function showResultView(viewId){
-    $(".showResultView a").removeClass("underline");
-    $(".showResultView a#" + viewId).addClass("underline");
+    $(".showResultView a").removeClass("chosen");
+    $(".showResultView a#" + viewId).addClass("chosen");
     $(".resultView").hide();
     $(".resultView#" + viewId).show();
     resultViewId = viewId;
 }
 
-/**
- * show/hide advanced call options 
- */
-function toggleAdvanced(){
-    isAdvancedDialogVisible = !isAdvancedDialogVisible;
-
-    if(isAdvancedDialogVisible){
-        $("#advancedCall").show();
-        $("#basicCall").hide();
-        $("#toggleAdvancedLink").text("Hide Advanced Call Options");
-        $.cookie('advanced', true);
-    }else{
-        $("#advancedCall").hide();
-        $("#basicCall").show();
-        $("#toggleAdvancedLink").text("Show Advanced Call Options");
-        $.removeCookie('advanced');
-
-    }
-    
-}

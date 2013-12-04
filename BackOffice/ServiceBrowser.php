@@ -21,7 +21,7 @@ $config = new Amfphp_BackOffice_Config();
     <title>AmfPHP Back Office - Service Browser</title>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
-        <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.10.3.custom.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
         <link rel="stylesheet" type="text/css" href="css/style.css" />
 
         <script type="text/javascript" src="js/jquery.js"></script>
@@ -75,62 +75,72 @@ if ($config->fetchAmfphpUpdates) {
                     </div>                            
                 </div>                    
                 <div id="right" class="menu" >
-                    <div id="methodDialog" >
-                        <h2>Method Caller </h2>
-                        <span class="tip"></span> 
-                        <h3>1. Select an Amfphp Service Method From the list on the left.</h3>
-                        <div id="methodDescription">
-                            <h4 id="serviceHeader"></h4>
-                            <span id="serviceComment"></span>
-                            <h4 id="methodHeader"></h4>
-                            <span id="methodComment"></span>
-                        </div>
-                        
-                        <h3>2. Set your call parameters.</h3>
-                        <div id="methodParameters">
-                            <span class="tip">Use JSON notation for complex values. </span>  
+                    <h2>Method Caller </h2>
+                    <span class="tip"></span> 
+                    <h3>1. Select an Amfphp Service Method From the list on the left.</h3>
+                    <div id="methodDescription">
+                        <h4 id="serviceHeader"></h4>
+                        <span id="serviceComment"></span>
+                        <h4 id="methodHeader"></h4>
+                        <span id="methodComment"></span>
+                    </div>
 
-                            <table id="paramDialogs"><tbody></tbody></table>
-                            <span  id="noParamsIndicator">This method has no parameters.</span>
-                        </div>
-                        
-                        <h3>3. Make the call to Amfphp.</h3>
-                        <div id="methodCall">
-                                <input  type="submit" value="Call" onclick="makeJsonCall()"/>  
-                                <input  type="submit" value="Call JSON" onclick="makeJsonCall()"/>  
-                                <input  type="submit" value="Call AMF" onclick="makeAmfCall()"/>       
-                                <input  type="submit" id="toggleRepeatBtn" value="Start Repeat Call AMF" onclick="toggleRepeat()"/>       
-                                Number of Concurrent Requests
-                                <input id="concurrencyInput" value="1"/>       
-                                <div id="amfCallerContainer">
-                                    Flash Player is needed to make AMF calls. 
-                                    <a href="http://www.adobe.com/go/getflashplayer">
-                                        <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" />
-                                    </a>
-                                </div>                        
+                    <h3>2. Set your call parameters.</h3>
+                    If you need to send a complex parameter, you can use <a href="http://en.wikipedia.org/wiki/JSON">JSON</a> notation.
+                    If you want the parameter value to be prefilled, you can propose an example value in your service comments. 
+                    <a href="http://www.silexlabs.org/amfphp/documentation/using-the-back-office/service-browser/#parameters">See the documentation here.</a>
 
-                            </div>
+                    <div id="methodParameters">
+                        <table id="paramDialogs"><tbody></tbody></table>
+                        <span  id="noParamsIndicator">This method has no parameters.</span>
+                    </div>
 
+                    <h3>3. Call the server.</h3>
+                    <div id="methodCall">
+                        <table>
+                            <tr>
+                                <td>Simple</td>
+                                <td>Advanced</td>
+                                <td>Request Repeater</td>
+                            </tr>
+                            <tr>
+                                <td><input  type="submit" value="Call" onclick="makeJsonCall()"/>  </td>
+                                <td>
+                                    <input  type="submit" value="Call JSON" onclick="makeJsonCall()"/>  
+                                    <input  type="submit" value="Call AMF" onclick="makeAmfCall()"/>       
+                                </td>
+                                <td>
+                                    <input  type="submit" id="toggleRepeatBtn" value="Start Repeat Call AMF" onclick="toggleRepeat()"/>       
+                                    Number of Concurrent Requests
+                                    <input id="concurrencyInput" value="1"/>              
+                                </td>
+                            </tr>
+                        </table>
+                        <div id="amfCallerContainer">
+                            Flash Player is needed to make AMF calls. 
+                            <a href="http://www.adobe.com/go/getflashplayer">
+                                <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" />
+                            </a>
+                        </div>                                                            
+                    </div>
+
+                    <h3>4. View the server's answer.</h3>
+                    <div id="methodCallResult"  >
+
+                        <div class="showResultView">
+                            <a id="tree">Tree</a>
+                            <a id="print_r">print_r</a>
+                            <a id="json">JSON</a>
+                            <a id="php">PHP Serialized</a>
+                            <a id="raw">Raw</a>
                         </div>
-                    <h3>4. See what Amfphp returned.</h3>
-                        <div id="methodCallResult"  >
-                             
-                            <span class="showResultView">
-                                <a id="tree">Tree</a>
-                                <a id="print_r">print_r</a>
-                                <a id="json">JSON</a>
-                                <a id="php">PHP Serialized</a>
-                                <a id="raw">Raw</a>
-                            </span>
-                            <div id="dataView">
-                                <div id="tree" class="resultView"></div>
-                                <div id="print_r" class="resultView"></div>
-                                <div id="json" class="resultView"></div>
-                                <div id="php" class="resultView"></div>
-                                <div id="raw" class="resultView"></div>
-                            </div>
+                        <div id="dataView">
+                            <div id="tree" class="resultView"></div>
+                            <div id="print_r" class="resultView"></div>
+                            <div id="json" class="resultView"></div>
+                            <div id="php" class="resultView"></div>
+                            <div id="raw" class="resultView"></div>
                         </div>
-                    
                     </div>
                 </div>
 
