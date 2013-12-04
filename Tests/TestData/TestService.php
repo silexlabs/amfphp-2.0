@@ -125,7 +125,7 @@ class TestService {
 
     /**
      * use to test for serialization performance. Each item contains a random int, float, and string
-     * @param $numItems int
+     * @param int $numItems example: 1000
      * @return array 
      */
     public function returnLargeDataSet($numItems) {
@@ -143,7 +143,7 @@ class TestService {
 
     /**
      * use to test Vo conversion performance. Each item contains a random int, float, and string, and is typed
-     * @param $numItems int
+     * @param int $numItems example: 1000
      * @return array 
      */
     public function returnLargeTypedDataSet($numItems) {

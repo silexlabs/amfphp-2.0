@@ -126,7 +126,7 @@ class ExampleService {
 
     /**
      * use to test for serialization performance. Each item contains a random int, float, and string
-     * @param $numItems int
+     * @param int $numItems example: 1000
      * @return array 
      */
     public function returnLargeDataSet($numItems) {
@@ -137,13 +137,14 @@ class ExampleService {
             $item->float = rand(-1000, 1000) / 100;
             $item->string = md5(rand(-1000, 1000));
             $ret[] = $item;
+           
         }
         return $ret;
     }
 
     /**
      * use to test Vo conversion performance. Each item contains a random int, float, and string, and is typed
-     * @param $numItems int
+     * @param int $numItems example: 1000
      * @return array 
      */
     public function returnLargeTypedDataSet($numItems) {
@@ -157,6 +158,7 @@ class ExampleService {
         }
         return $ret;
     }    
+    
     /**
      * dummy function to see how the backoffice tools react when there are many parameters.
      * @param type $a
