@@ -144,7 +144,6 @@ if ($config->fetchAmfphpUpdates) {
                     </div>
                 </div>
 
-
             </div>
         </div>            
         <?php
