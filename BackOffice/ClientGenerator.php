@@ -57,14 +57,13 @@ $config = new Amfphp_BackOffice_Config();
                     }
                     ?>
                 <div id="clientGenContent">
-
-                    Use one of the following generators to generate a client Stub project. <br/>
+                    <h2>Generate a client project that consumes your services. </h2>
+                    Use one of the following generators to generate a client Stub project. 
                     <br/>The project includes :<br/>
                     <ul>
                         <li>code to make calling your services easy</li>
                         <li>a starting point for a user interface you can customize</li>
                     </ul>
-                    <br/>
                     <?php 
                     $writeTestFolder = AMFPHP_BACKOFFICE_ROOTPATH . 'ClientGenerator/Generated/';
                     if(!is_writable($writeTestFolder)){
@@ -75,7 +74,6 @@ $config = new Amfphp_BackOffice_Config();
                     Code shall be generated for the following services:
                     <br/>
                     <ul id="serviceList"></ul>
-                    <br/>
                     <?php
                     $generatorManager = new Amfphp_BackOffice_ClientGenerator_GeneratorManager();
                     $generators = $generatorManager->loadGenerators(array('ClientGenerator/Generators'));

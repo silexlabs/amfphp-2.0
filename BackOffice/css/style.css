@@ -173,13 +173,14 @@ table{
 }
 .showResultView a{
     border: 1px solid #A8A8A8;
-    padding: 3px;
+    padding: 10px;
+    padding-bottom: 3px;
+    padding-top: 3px;
+    margin-right: 30px;
 }
 
 .showResultView a.chosen{
     border-bottom: 1px solid white; 
-    padding: 3px;
-    margin:3px;
     
 }
 
@@ -232,11 +233,12 @@ table#clientGen{
 }
 table#clientGen td{
     width:600px;
-    margin-top: 10px;
-    padding: 3px;
-    padding-left: 10px;
+    padding: 10px;
 }
 
+#clientGenContent li{
+    padding: 3px;
+}
 #showResultView a{
     padding-right: 50px;
 }
