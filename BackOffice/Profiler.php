@@ -145,32 +145,17 @@ if ($config->fetchAmfphpUpdates) {
             function onDataLoaded(data)
             {
     
+    
+                if(data.sortedData.length == 0){
+                    showErrorMessage("No data was available. Please make a service call then refresh. This can be done with the <a href='ServiceBrowser.php'>Service Browser</a>.");
+                    return;
+                }
+    
+    
                 if(plot){
                     plot.destroy();
                 }
                 serverData = data;
-    
-                var errorMsg = null;
-                if(typeof data == "string"){
-                    if(data.indexOf("AmfphpMonitorService service not found") != -1){
-                        errorMsg = "The AmfphpMonitorService could not be called. This is most likely because AmfphpMonitor plugin is not enabled. See the <a href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/'>documentation</a>.";
-                    }else{
-                        errorMsg = data;
-                    }
-                }
-
-                if(data.sortedData.length == 0){
-                    errorMsg = "No data was available. Please make a service call then refresh. This can be done with the <a href='ServiceBrowser.php'>Service Browser</a>.";
-                }
-    
-                if(errorMsg){
-                    errorMsg += "<br/>Once you have some data, this is what you should see : ";
-                    displayStatusMessage(errorMsg);
-                    $("#profilerImg").show();
-                    $("#chartDivContainer").hide();
-                    return;
-                }
-    
     
                 displayStatusMessage('');
                 $("#profilerImg").hide();
@@ -184,6 +169,13 @@ if ($config->fetchAmfphpUpdates) {
                     showAllUris();
                 }
     
+            }
+            
+            function showErrorMessage(errorMsg){
+                errorMsg += "<br/>Once you have some data, this is what you should see : ";
+                displayStatusMessage(errorMsg);
+                $("#profilerImg").show();
+                $("#chartDivContainer").hide();
             }
 
             /**
@@ -459,18 +451,41 @@ $('#chartDiv').bind('jqplotDataClick',
             function refresh(){ 
                 var flush = $("#flushOnRefreshCb").is(':checked');
                 var callData = JSON.stringify({"serviceName":"AmfphpMonitorService", "methodName":"getData","parameters":[flush]});
+                callServer(callData, onDataLoaded);
+    
+            }
+            
+            function callServer(callData, successCb){
                 var request = $.ajax({
                     url: amfphpEntryPointUrl + "?contentType=application/json",
                     type: "POST",
-                    data: callData
+                    data: callData,
+                    dataType:"json"
                 });
 
-                request.done(onDataLoaded);
+                request.done(successCb);
 
                 request.fail(function( jqXHR, textStatus ) {
-                    displayStatusMessage(textStatus + "<br/><br/>" + jqXHR.responseText);
+                    var errorMsg = null;
+                    var responseText = jqXHR.responseText;
+                    if(responseText.indexOf("AmfphpMonitorService service not found") != -1){
+                        showErrorMessage("The AmfphpMonitorService could not be called. This is most likely because AmfphpMonitor plugin is not enabled. See the <a href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/'>documentation</a>.");
+                        return;
+                    }
+
+                    var errorMessagePos = responseText.indexOf("AmfphpMonitor does not have permission to read and write");
+                    if(errorMessagePos != -1){
+                        var filePathStart = responseText.indexOf("log file: ", errorMessagePos) + 10;
+                        var filePathStop = responseText.indexOf("'", filePathStart);
+                        var filePath = responseText.substring(filePathStart, filePathStop);
+                        showErrorMessage("Could not read or write log file. Please check your webserver has read and write permissions on <br/>" + filePath);
+                        return;
+                    }
+
+                    
+                    showErrorMessage(textStatus + "<br/><br/>" + jqXHR.responseText);
                 });
-    
+                
             }
 
             /**
@@ -478,16 +493,8 @@ $('#chartDiv').bind('jqplotDataClick',
              */
             function flush(){
                 var callData = JSON.stringify({"serviceName":"AmfphpMonitorService", "methodName":"flush","parameters":[]});
-                var request = $.ajax({
-                    url: amfphpEntryPointUrl + "?contentType=application/json",
-                    type: "POST",
-                    data: callData
-                });
-                request.done(function(){
+                callServer(callData, function(){
                     displayStatusMessage("Data Flushed");
-                });
-                request.fail(function( jqXHR, textStatus ) {
-                    displayStatusMessage(textStatus + "<br/><br/>" + jqXHR.responseText);
                 });
     
             }
