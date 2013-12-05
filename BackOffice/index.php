@@ -61,9 +61,9 @@ if ($config->fetchAmfphpUpdates) {
                 ?>
                 <div id="tabsExplanation">
 
-                    <h2>Welcome to the Back Office</h2>
+                    <h2>Welcome to the <span class="titleSpan">Amfphp <span class="backoffice">Back Office</span></span></h2>
                     Here you can access the 3 parts of the Back Office. 
-                    <br/><br/><br/><br/>
+                    <br/><br/>
                     <h3>The Service Browser</h3>
                     The service browser allows you to test your services. It lists all services and methods. Click a service method, and a dialog will appear allowing you to call it and optionally set some parameters.
                     Once you call the method, you have a choice of ways to display the return data. Depending on what kind of return data you are expecting you will find one view or another more useful.
@@ -73,7 +73,7 @@ if ($config->fetchAmfphpUpdates) {
                             <img src="img/ServiceBrowser.jpg"></img>
                         </a>
                     </div>
-                    <br/><br/><br/><br/>
+                    <br/><br/>
                     <h3>The Client Generator</h3>
                     The client generator allows you to generate fully functional client projects including:
                     <ul>
@@ -87,7 +87,7 @@ if ($config->fetchAmfphpUpdates) {
                             <img src="img/ClientGenerator.jpg"></img>
                         </a>    
                     </div>
-                    <br/><br/><br/><br/>
+                    <br/><br/>
                     <h3>The Profiler</h3>
                     The Profiler allows you to observe the time spent by each service call in the different stages of processing. 
                     The idea is to help you better understand how your server shall perform live, 

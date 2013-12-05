@@ -66,7 +66,7 @@ if ($config->fetchAmfphpUpdates) {
                         return;
                     }
                     ?>
-                    <div class='menu' id="services">
+                    <div id="services">
                         <h2>Services and Methods</h2>
                         <ul id='serviceMethods' >
                             Loading Service Data...
@@ -74,7 +74,7 @@ if ($config->fetchAmfphpUpdates) {
                         </ul>
                     </div>                            
                 </div>                    
-                <div id="right" class="menu" >
+                <div id="right">
                     <h2>Method Caller </h2>
                     <span class="tip"></span> 
                     <h3>1. Select an Amfphp Service Method From the list on the left.</h3>

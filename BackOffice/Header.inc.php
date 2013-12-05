@@ -20,7 +20,7 @@ $temp = 0;
     <div id="line1" class="headerLine">
         <div class="overFlowAuto middleBound"> 
             <p class="alignLeft" id="titleP">
-                <span id="titleSpan">Amfphp <span id="backoffice">Back Office</span></span>
+                <span class="titleSpan">Amfphp <span class="backoffice">Back Office</span></span>
             </p>
             <div class="alignRight">
                 <table>

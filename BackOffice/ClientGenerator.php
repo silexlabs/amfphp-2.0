@@ -56,7 +56,7 @@ $config = new Amfphp_BackOffice_Config();
                         return;
                     }
                     ?>
-                <div class="menu" id="clientGenContent">
+                <div id="clientGenContent">
 
                     Use one of the following generators to generate a client Stub project. <br/>
                     <br/>The project includes :<br/>

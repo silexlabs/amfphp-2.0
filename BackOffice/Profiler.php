@@ -67,7 +67,7 @@ if ($config->fetchAmfphpUpdates) {
                     return;
                 }
                 ?>
-                <div class="menu" id="performanceDisplay">
+                <div id="performanceDisplay">
                     <div id="controls">
                         <input type="submit" value="Flush" onclick="flush()"></input>
                         <input type="submit" value="Refresh" onclick="refreshClickHandler()"></input>
