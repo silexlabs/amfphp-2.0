@@ -6,7 +6,10 @@ body{
     
  
 }
-
+html, body
+{/* necessary for the profiler chart to size correctly */
+    height: 100%;
+}
 
 input{
     color:black;
@@ -98,23 +101,24 @@ table{
     padding-left: 10px;
 }
 
-/* 2 column layout */
+/* 2 column layout. It got in my face so much I used a table */
+#twoColumnLayout td{
+    vertical-align: top;
+}
 #left{
-    display: inline-block;
     max-width:290px;
     padding-right: 10px;
     margin-top: 10px;
     margin-bottom:10px;
+    white-space: nowrap;
 }
 
 #right {
-    display: inline-block;
     border-left: 1px solid #A8A8A8;
     margin-top: 10px;
     position:relative;
     padding-left: 10px;
     padding-bottom: 10px;
-    max-width:660px;
     
 }
 
@@ -419,7 +423,8 @@ a.important{
 }
 
 
-/* sticky footer, disabled for now http://css-tricks.com/snippets/css/sticky-footer/  */
+/* sticky footer, disabled for now because the SB has problems with overflows
+otherwise ' http://css-tricks.com/snippets/css/sticky-footer/  */
 
 
 .site-footer, .page-wrap:after {

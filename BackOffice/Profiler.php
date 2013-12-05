@@ -121,7 +121,7 @@ if ($config->fetchAmfphpUpdates) {
                 $("#tabName").text("Profiler");
                 $("#profilerLink").addClass("chosen");
 
-                var availableHeight = $( "body" ).height() - $("#chartDiv").offset().top - 70;
+                var availableHeight = $( "body" ).height() - $("#chartDiv").offset().top - 64;
                 $( "#chartDiv" ).css( "height", availableHeight +  "px" );
     
                 refresh();
