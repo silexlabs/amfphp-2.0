@@ -206,6 +206,9 @@ class TestService {
         AmfphpMonitor::addTime('operation 3');
         return 'bla';
     }
+    public function thisFunctionNameIsReallyReallyReallyReallyLong(){
+        
+    }
 }
 
 class DummyVo {}
