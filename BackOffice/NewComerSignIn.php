@@ -28,7 +28,7 @@ $config = new Amfphp_BackOffice_Config();
 $showNewComerExplanation = false;
 
 try {
-    if (count($config->backOfficeCredentials) == 0) {
+    if (count($config->backOfficeCredentials) != 0) {
         $showNewComerExplanation = true;
         throw new Exception('Sign In is not possible because no credentials were set. ');
     }
@@ -154,7 +154,7 @@ if ($showNewComerExplanation) {
         <script>
             $(function () {	    
                 
-                if(showNewComerExplanation){
+                if(!showNewComerExplanation){
                     $("#newComerExplanation").hide();
                 }
                 

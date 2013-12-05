@@ -76,7 +76,7 @@ if ($config->fetchAmfphpUpdates) {
 } else {
     echo "var shouldFetchUpdates = false;\n";
 }
-if($showNewComerExplanation){
+if ($showNewComerExplanation) {
     echo "var showNewComerExplanation = true;\n";
 } else {
     echo "var showNewComerExplanation = false;\n";
@@ -95,67 +95,62 @@ if($showNewComerExplanation){
             return;
         }
         ?>
-            <div class="page-wrap">
-                <?php require_once(dirname(__FILE__) . '/Header.inc.php'); ?>
-            
-                <div id='main'>
-            
-                    <div id = "left">
-                        <div class="menu">
-                            <form method = "POST">
-                                <h3>Sign In</h3>
-                                <div class="warning">
-                                    <?php echo $errorMessage ?>
-                                </div>
-                                User Name<br/>
-                                <input name = "username"/><br/>
-                                Password<br/>
-                                <input name = "password" type = "password"/><br/>
-                                <input type = "Submit" value = "Sign In"/>
-                            
-                            </form>
-                        
-                        </div>                    
-                    </div>
-                    <div id="right" >
-                        
-                        <div id="newComerExplanation">
-                            <span class="warning">Access is disabled by default for security purposes</span>
-                        <br/> <br/>
-                        <h3>Getting access to the Back Office</h3>
-                            
-                            <p>To access the Back Office you must first edit its configuration</p>
-                            <p>Add some credentials by editing the BackOffice/Config file in the class __construct method:</p>
-                            <pre>    <span class="tip">$this-&gt;backOfficeCredentials['yourUserName'] = 'yourPassWord';</span></pre>
-                            <br/>
-                            <p>Once this is done you should be able to sign in to the Back Office.</p>            
-                            <a href="http://www.silexlabs.org/amfphp/documentation/using-the-back-office/">'Using the Back Office' Documentation</a>
-                            <br/><br/>
-                            <h3>What can you do with the Amfphp Back Office?</h3>
+        <div class="page-wrap">
+            <?php require_once(dirname(__FILE__) . '/Header.inc.php'); ?>
 
-                            With the Amfphp Back Office you can 
-                            <ul>
-                                <li>Test your services</li>
-                                <li>Generate client projects that consume your services</li>
-                                <li>Profile your services for performance</li>
-                            </ul>
-                            <br/>
-                            <h3>Some links to get you going</h3>
-                            <ul>
-                                <li>New to Amfphp? Read <a href="http://www.silexlabs.org/amfphp/documentation/getting-started/">Getting Started</a></li>
-                                <li>Upgrading from 1.9? Read <a href="http://www.silexlabs.org/amfphp/documentation/upgrading-from-amfphp-1-9/">Upgrading from 1.9</a></li>
-                                <li>Upgrading from 2.0.X and 2.1.x? Read <a href="http://www.silexlabs.org/amfphp/documentation/upgrading-from-2-0-x-and-2-1-x-to-2-2/">Upgrading from 2.0.X and 2.1.x</a></li>
-                                <li>Need some help? Read <a href="http://www.silexlabs.org/amfphp/documentation/using-the-forums/">Using the forums</a>  </li>
-                            </ul>
-                            <br/>
-                        </div>
-                        
-                        <div id="news"><h3>AmfPHP News</h3></div>
+            <div id='main'>
+
+                <div id = "left">
+                    <div id="signIn">
+                        <form method = "POST">
+                            <h3>Sign In</h3>
+                            <div class="warning">
+                                <?php echo $errorMessage ?>
+                            </div>
+                            User Name<br/>
+                            <input name = "username"/><br/>
+                            Password<br/>
+                            <input name = "password" type = "password"/><br/>
+                            <input type = "Submit" value = "Sign In"/>
+
+                        </form>
+
+                    </div>                    
+                </div>
+                <div id="right" >
+
+                    <div id="newComerExplanation">
+                        <div class="warning" id="credentialsWarning">Access is disabled by default for security purposes</div>
+
+                        <h3>Getting access to the Back Office</h3>
+
+                        <p>To access the Back Office you must first edit its configuration.
+                        Add some credentials by editing the BackOffice/Config file in the class __construct method:
+                        <pre>    $this-&gt;backOfficeCredentials['yourUserName'] = 'yourPassWord';</pre>
+                        Once this is done you should be able to sign in to the Back Office.            
+                        For more information consult <a href="http://www.silexlabs.org/amfphp/documentation/using-the-back-office/">'Using the Back Office' Documentation</a>
+                        </p>
+                        <h3>What can you do with the Amfphp Back Office?</h3>
+
+                       <ul>
+                            <li>Test your services</li>
+                            <li>Generate client projects that consume your services</li>
+                            <li>Profile your services for performance</li>
+                        </ul>
+                        <h3>Some links to get you going</h3>
+                        <ul>
+                            <li>New to Amfphp? Read <a href="http://www.silexlabs.org/amfphp/documentation/getting-started/">Getting Started</a></li>
+                            <li>Upgrading from 1.9? Read <a href="http://www.silexlabs.org/amfphp/documentation/upgrading-from-amfphp-1-9/">Upgrading from 1.9</a></li>
+                            <li>Upgrading from 2.0.X and 2.1.x? Read <a href="http://www.silexlabs.org/amfphp/documentation/upgrading-from-2-0-x-and-2-1-x-to-2-2/">Upgrading from 2.0.X and 2.1.x</a></li>
+                            <li>Need some help? Read <a href="http://www.silexlabs.org/amfphp/documentation/using-the-forums/">Using the forums</a>  </li>
+                        </ul>
                     </div>
+                    <div id="news"><h3>AmfPHP News</h3></div>
                 </div>
             </div>
-                
-            <?php require_once(dirname(__FILE__) . '/Footer.inc.php'); ?>
+        </div>
+
+        <?php require_once(dirname(__FILE__) . '/Footer.inc.php'); ?>
         <script>
             $(function () {	    
                 
