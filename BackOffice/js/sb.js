@@ -59,7 +59,8 @@ $(function () {
     var request = $.ajax({
         url: amfphpEntryPointUrl + "?contentType=application/json",
         type: "POST",
-        data: callData
+        data: callData,
+        dataType:"json"
     });
 
     request.done(onServicesLoaded);
@@ -118,7 +119,7 @@ function setMethodDescriptionVisibility(isVisible){
 }
 
 function displayStatusMessage(html){
-    $('#methodDialog').html(html);
+    $('#statusMessage').html(html);
 }
 
 /**
@@ -132,6 +133,9 @@ function onServicesLoaded(data)
     if(typeof data == "string"){
         displayStatusMessage(data);
         return;
+    }
+    if(data.length == 0){
+        displayStatusMessage("No Services were found on the server. If this is a new installation, create a class in Amfphp/Services/ and it should appear here.");
     }
     serviceAndMethodUiMap = {};
     serviceData = data;

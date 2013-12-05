@@ -97,7 +97,7 @@ $config = new Amfphp_BackOffice_Config();
                         <tr><td>Android</td><td><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/android/">Info/Vote Up</a></td>        <td>Not Available Yet </td></tr>
                         <tr class="borderTop"><td class="borderTop">Write your Own?</td><td class="borderTop"><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/writing-you-own-client-generator/">Info</a></td>        <td class="borderTop"></td></tr>
                     </table>
-                    <div id="statusMessage" style="max-width:100%"></div>
+                    <div id="statusMessage" class="warning"></div>
                 </div>
             </div>
         </div>
@@ -114,7 +114,8 @@ $(function () {
     var request = $.ajax({
       url: "<?php echo $config->resolveAmfphpEntryPointUrl() ?>?contentType=application/json",
       type: "POST",
-      data: callData
+      data: callData,
+      dataType:"json"
     });
 
     request.done(onServicesLoaded);
@@ -142,6 +143,9 @@ function onServicesLoaded(data)
         displayStatusMessage(data);
         return;
     }
+    if(data.length == 0){
+        displayStatusMessage("No Services were found on the server. If this is a new installation, create a class in Amfphp/Services/ and it should appear here.");
+    }    
     serviceData = data;
 
     //generate service/method list

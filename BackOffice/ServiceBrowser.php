@@ -55,6 +55,7 @@ if ($config->fetchAmfphpUpdates) {
             ?>
 
             <div id="main">
+                <div id="statusMessage" class="warning"> </div>
                 <table id="twoColumnLayout">
                     <tr>
                         <td>
