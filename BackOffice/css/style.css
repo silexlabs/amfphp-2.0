@@ -119,11 +119,6 @@ table{
     
 }
 
-#right h3, #right h4{
-    margin:0px;
-    margin-top:10px;
-}
-
 
 /* sign in */
 #signin input{
@@ -157,9 +152,6 @@ table{
     padding: 5px;
     margin-top:5px;
 }
-#right form {
-    margin-bottom: 20px;
-}
 
 #serviceMethods{
     margin-top: 20px;
@@ -190,13 +182,27 @@ table{
     margin:3px;
     
 }
+
+#methodCaller h3{
+    margin-bottom:15px;
+    margin-top:15px;
+}
+#methodCaller h4{
+    margin:0px;
+    margin-top:10px;
+}
+
+#toggleMethodDescriptionBtn{
+    font-size: 14px;
+}
+
 .paramEditorContainer{
     /* 
     The editor must be created in a div with absolute position. So use a wrapper for positioning. 
     See http://dylemma.io/post/4
     */
     position: relative;
-    height: 4em;
+    height: 2em;
     width: 500px;
     margin:5px;
     border: 1px solid #A8A8A8;

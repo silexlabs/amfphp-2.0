@@ -44,6 +44,10 @@ var amfCaller;
  */
 var isRepeating;
 
+/**
+ * is the method description visible
+ * */
+var isShowingMethodDescription;
 
 /**
  * data structure to find links in the services and methods list using the service and method name
@@ -86,10 +90,32 @@ $(function () {
     });
 
     isRepeating = false;
-
- 
+    var cookieVal = $.cookie('isShowingMethodDescription');
+    if(!cookieVal || cookieVal == 'true'){
+        setMethodDescriptionVisibility(true);
+    }else{
+        setMethodDescriptionVisibility(false);
+    }
+    $('#toggleMethodDescriptionBtn').click(function(event){
+        setMethodDescriptionVisibility(!isShowingMethodDescription);
+        
+    });
 
 });
+
+function setMethodDescriptionVisibility(isVisible){
+    isShowingMethodDescription = isVisible;
+    if(isShowingMethodDescription){
+        $('#toggleMethodDescriptionBtn').text("- Hide Description");
+        $('#methodDescription').show();
+        $.cookie('isShowingMethodDescription', "true");
+    }else{
+        $('#toggleMethodDescriptionBtn').text("+ Show Description");
+        $('#methodDescription').hide();
+        $.cookie('isShowingMethodDescription', "false");
+    }
+    
+}
 
 function displayStatusMessage(html){
     $('#methodDialog').html(html);
