@@ -56,7 +56,7 @@ if (Amfphp_BackOffice_ClientGenerator_Util::serverCanZip()) {
     $zipFileName = "$newFolderName.zip";
     $zipFilePath = $genRootFolder . $zipFileName;
     Amfphp_BackOffice_ClientGenerator_Util::zipFolder($targetFolder, $zipFilePath, $genRootFolder);
-    echo '<br/><br/><a href="' . $genRootRelativeUrl . $zipFileName . '"> get zip here</a>';
+    echo '<script>window.location="' . $genRootRelativeUrl . $zipFileName . '";</script>';
 } else {
     echo " Server can not create zip of generated project, because ZipArchive is not available.";
 }

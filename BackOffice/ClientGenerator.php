@@ -185,6 +185,8 @@ function generate(generatorClass){
 
 function onGenerationDone(data){
     $('#statusMessage').html(data);
+    var n = $(document).height();
+    $('html, body').animate({ scrollTop: n }, 50);    
 }
 
-            </script>
+</script>
