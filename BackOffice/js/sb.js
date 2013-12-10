@@ -327,9 +327,9 @@ function manipulateMethod(serviceName, methodName){
 
     }
 
-    var rightDivTop = Math.round(Math.max(0, $(window).scrollTop() - $("#main").offset().top));
+    var methodCallerTop = Math.round(Math.max(0, $(window).scrollTop() - $("#main").offset().top));
     //note that trying with jquery "offset" messes up!
-    $("#right").css("top", rightDivTop + "px");
+    $("#methodCaller").css("padding-top", methodCallerTop + "px");
 
     onResult([]);
     if(isRepeating){

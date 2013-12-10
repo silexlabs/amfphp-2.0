@@ -18,7 +18,7 @@ $config = new Amfphp_BackOffice_Config();
 ?>
 
 <html>
-    <title>AmfPHP Back Office - Client Generator</title>
+    <title>Amfphp Back Office - Client Generator</title>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 

@@ -21,7 +21,7 @@ $config = new Amfphp_BackOffice_Config();
 ?>
 
 <html>
-    <title>AmfPHP Back Office - Profiler</title>
+    <title>Amfphp Back Office - Profiler</title>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -121,7 +121,7 @@ if ($config->fetchAmfphpUpdates) {
                 $("#tabName").text("Profiler");
                 $("#profilerLink").addClass("chosen");
 
-                var availableHeight = $( "body" ).height() - $("#chartDiv").offset().top - 64;
+                var availableHeight = $( "body" ).height() - $("#chartDiv").offset().top - 140;
                 $( "#chartDiv" ).css( "height", availableHeight +  "px" );
     
                 refresh();
@@ -369,7 +369,8 @@ if ($config->fetchAmfphpUpdates) {
             function buildChart(seriesData, ticks, legendLabels, titleHtml, seriesColors){
                 var numRows = seriesData[0].length;
                 var rendererOptions = {
-                    barDirection: 'horizontal'
+                    barDirection: 'horizontal',
+                    highlightMouseDown:true
                 };
                 if(numRows < 5){
                     rendererOptions.barWidth = 70;

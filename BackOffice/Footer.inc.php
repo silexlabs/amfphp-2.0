@@ -24,7 +24,7 @@ $temp = 0;
         <a href="http://www.silexlabs.org/amfphp/documentation/">Documentation</a>
         <a href="http://community.silexlabs.org/amfphp/reference/">Class Reference</a>
         <a href="https://github.com/silexlabs/amfphp-2.0">Source Code</a>
-        <a href="http://www.silexlabs.org/amfphp/">AmfPHP Website</a>
+        <a href="http://www.silexlabs.org/amfphp/">Amfphp Website</a>
         <a href="http://www.silexlabs.org/category/exchange/exchange-amfphp/">More Plugins</a>
     </div>
         

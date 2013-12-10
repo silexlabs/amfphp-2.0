@@ -101,18 +101,14 @@ table{
     padding-left: 10px;
 }
 
-/* 2 column layout. It got in my face so much I used a table */
-#twoColumnLayout td{
-    vertical-align: top;
-}
-#left{
+.left{
     max-width:290px;
     padding-right: 10px;
     margin-top: 10px;
     margin-bottom:10px;
 }
 
-#right {
+.right {
     border-left: 1px solid #A8A8A8;
     margin-top: 10px;
     position:relative;
@@ -120,6 +116,10 @@ table{
     padding-bottom: 10px;
     max-width:700px;
     
+}
+
+#main td{
+    vertical-align: top;
 }
 
 
@@ -160,8 +160,6 @@ table{
     list-style-type: none;
     padding-left: 10px;
 }
-
-
 
 
 #dataView{
@@ -348,6 +346,10 @@ a.important{
     /* hide these elements by default */
     display: none;
 }
+
+#newsPopup{
+    z-index: 1;
+}
 #line1 table{
     margin-top: 5px;
 }
@@ -376,6 +378,10 @@ a.important{
 #header #silexLabsLinkP{
     margin-bottom: 0px;
     padding: 0px;
+}
+
+#silexLabsLinkP a{
+    padding-right: 0px;
 }
 
 #currentVersionPre{
