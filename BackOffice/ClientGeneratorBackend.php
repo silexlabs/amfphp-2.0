@@ -46,11 +46,9 @@ $genRootFolder = AMFPHP_BACKOFFICE_ROOTPATH . $genRootRelativeUrl;
 $targetFolder = $genRootFolder . $newFolderName;
 $generator->generate($services, $config->resolveAmfphpEntryPointUrl(), $targetFolder);
 $urlSuffix = $generator->getTestUrlSuffix();
-echo '<br/><br/>';
-echo 'client project written to ' . $targetFolder;
 
 if ($urlSuffix !== false) {
-    echo '<br/><br/><a href="' . $genRootRelativeUrl . $newFolderName . '/' . $urlSuffix . '"> try it here</a>';
+    echo '<a href="' . $genRootRelativeUrl . $newFolderName . '/' . $urlSuffix . '"> try your generated project here</a><br/><br/>';
 }
 if (Amfphp_BackOffice_ClientGenerator_Util::serverCanZip()) {
     $zipFileName = "$newFolderName.zip";
@@ -58,6 +56,7 @@ if (Amfphp_BackOffice_ClientGenerator_Util::serverCanZip()) {
     Amfphp_BackOffice_ClientGenerator_Util::zipFolder($targetFolder, $zipFilePath, $genRootFolder);
     echo '<script>window.location="' . $genRootRelativeUrl . $zipFileName . '";</script>';
 } else {
-    echo " Server can not create zip of generated project, because ZipArchive is not available.";
+    echo " Server can not create zip of generated project, because ZipArchive is not available.<br/><br/>";
+    echo 'client project written to ' . $targetFolder;
 }
 ?>
