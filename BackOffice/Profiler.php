@@ -115,6 +115,11 @@ if ($config->fetchAmfphpUpdates) {
              *auto refresh timer
              **/
             var timer;
+            
+            /**
+             * time names ordered by time
+             * */
+            var orderedTimeNames; 
 
 
             $(function () {	
@@ -167,6 +172,10 @@ if ($config->fetchAmfphpUpdates) {
                     focusOnUri(focusedUri);
                 }else{
                     showAllUris();
+                }
+                
+                if(data.serverComment){
+                    displayStatusMessage(data.serverComment);
                 }
     
             }
@@ -254,7 +263,7 @@ if ($config->fetchAmfphpUpdates) {
                 var missingTimes = [];
                 var missingTimesAssoc = {};
                 var orderedTimedNamesSet = false;
-                var orderedTimeNames = [];
+                orderedTimeNames = [];
     
                 if(serverData.sortedData.length == 0){
                     return;
@@ -343,7 +352,7 @@ if ($config->fetchAmfphpUpdates) {
                 }
                 focusedUri = uri;
                 var seriesData = [];
-                var orderedTimeNames = [];
+                orderedTimeNames = [];
     
                 //data for each target uri
                 var rawUriData = serverData.sortedData[uri];
@@ -381,7 +390,7 @@ if ($config->fetchAmfphpUpdates) {
                     seriesDefaults:{
                         renderer:$.jqplot.BarRenderer,
                         rendererOptions: rendererOptions,
-                        pointLabels: {show: true, hideZeros:true},
+                        pointLabels: {show: true, hideZeros:true, edgeTolerance:5},
                         shadow:false,
                         fillAlpha:0.5
             
@@ -430,18 +439,18 @@ if ($config->fetchAmfphpUpdates) {
 
 
                 });
-                /* not useful at this point.        
-$('#chartDiv').bind('jqplotDataClick', 
-    function (ev, seriesIndex, pointIndex, data) {
-        var message = "";
-        if(!focusedUri){
-            message = "Average ";
-        }
-        message += orderedTimeNames[seriesIndex] + ' Duration : '+data[0] + ' ms';
-        $('#statusMessage').html(message);
-    }
-);     
-                 */ 
+                
+                $('#chartDiv').bind('jqplotDataClick', 
+                    function (ev, seriesIndex, pointIndex, data) {
+                        var message = "";
+                        if(!focusedUri){
+                            message = "Average ";
+                        }
+                        message += orderedTimeNames[seriesIndex] + ' Duration : '+data[0] + ' ms';
+                        $('#statusMessage').html(message);
+                    }
+                );     
+                
             }
             function refreshClickHandler(){
                 refresh();
