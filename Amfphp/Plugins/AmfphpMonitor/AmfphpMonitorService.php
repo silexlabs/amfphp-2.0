@@ -26,6 +26,13 @@ class AmfphpMonitorService {
      */
     public static $restrictAccess;
     
+       
+    /**
+     * @see AmfphpMonitor maxLogFileSize
+     * @var int 
+     */
+    public static $maxLogFileSize;
+    
     /**
      * get method roles
      * @param string $methodName
@@ -93,6 +100,12 @@ class AmfphpMonitorService {
         $ret = new stdClass();
         $ret->sortedData = $sortedData;
         $ret->timeNames = array_keys($timeNamesAssoc);
+        
+        if(filesize(self::$logPath) > self::$maxLogFileSize){
+            $ret->serverComment = 'The log file is full, so it is possible that your latest service calls are not represented. Either flush the log using the "flush" button or increase the log size(maxLogFileSize)';
+        }
+        
+        
         return $ret;
     }
     /**

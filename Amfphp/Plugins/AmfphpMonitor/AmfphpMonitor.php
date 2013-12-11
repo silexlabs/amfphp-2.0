@@ -77,7 +77,6 @@ class AmfphpMonitor {
     /**
      * The maximum size of the log file, in bytes. Once the log is bigger than this, logging stops.
      * Note that this is not strict, it can overflow with the last log.
-     * zen
      * @var int 
      */
     protected $maxLogFileSize = 1000000;
@@ -106,6 +105,7 @@ class AmfphpMonitor {
         if(isset($config['maxLogFileSize'])){
             $this->maxLogFileSize = $config['maxLogFileSize'];    
         }
+        AmfphpMonitorService::$maxLogFileSize = $this->maxLogFileSize;
         
         if(!is_writable($this->logPath) && !is_readable($this->logPath)){
             return;
