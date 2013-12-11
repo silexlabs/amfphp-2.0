@@ -306,7 +306,7 @@ if ($config->fetchAmfphpUpdates) {
                         {
                             totalDuration = totalDuration + timeData[i];
                         }
-                        formattedUriData.push(totalDuration / numTimes);
+                        formattedUriData.push(Math.round(totalDuration / numTimes));
                         //first time round grab the time names for series labels
                         if(!orderedTimedNamesSet){
                             orderedTimeNames.push(timeName);
