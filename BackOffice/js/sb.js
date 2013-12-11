@@ -168,7 +168,8 @@ function onServicesLoaded(data)
                     return false;
                 },
                 dblclick:function(){
-                   // alert('eeee');
+                    //assumes click was fired just before, so need to call manipulateMethod
+                    makeJsonCall();
                 }})
             .appendTo(li);
             $(dialogLink).data("serviceName", serviceName);    

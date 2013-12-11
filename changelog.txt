@@ -25,6 +25,7 @@ add possibility to call using AMF or JSON
 basic load testing with AMF
 truncate tree at 100 nodes to allow calls to methods that return large datasets
 functionality all moved to client. 
+double-click method name makes calls method with default params
 
 
 
