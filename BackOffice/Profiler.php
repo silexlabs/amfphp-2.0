@@ -165,10 +165,8 @@ if ($config->fetchAmfphpUpdates) {
                 displayStatusMessage('');
                 $("#profilerImg").hide();
                 $("#chartDivContainer").show();
-                //test
-                //focusedUri = "TestService/returnOneParam";
     
-                if(focusedUri){
+                if(focusedUri && data.sortedData && data.sortedData[focusedUri]){
                     focusOnUri(focusedUri);
                 }else{
                     showAllUris();
@@ -197,17 +195,22 @@ if ($config->fetchAmfphpUpdates) {
                     var label;
                     switch(timeName){
                         case "Deserialization": 
-                        case "Request Value Object Conversion":
-                        case "Request Charset Conversion":
-                        case "Service Call":
-                        case "Response Value Object Conversion":
-                        case "Response Charset Conversion":
                         case "Serialization":
-                            label = timeName  + "<a href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/#";
-                            label += timeName + "'> ?</a>";
+                            label = timeName  + "<a target='_blank' href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/#serialization'> ?</a>";
+                            break;
+                        case "Request Value Object Conversion":
+                        case "Response Value Object Conversion":
+                            label = timeName  + "<a target='_blank' href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/#value object conversion'> ?</a>";
+                            break;
+                        case "Request Charset Conversion":
+                        case "Response Charset Conversion":
+                            label = timeName  + "<a target='_blank' href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/#charset conversion'> ?</a>";
+                            break;
+                        case "Service Call":
+                            label = timeName  + "<a target='_blank' href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/#service call'> ?</a>";
                             break;
                         default:
-                            label = "CUSTOM " + timeName + "<a href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/#more data'> ?</a>";
+                            label = "CUSTOM " + timeName + "<a target='_blank' href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/#more data'> ?</a>";
                     }
                     labels.push(label);
                 }
@@ -417,7 +420,8 @@ if ($config->fetchAmfphpUpdates) {
                         labels:legendLabels,
                         renderer: $.jqplot.EnhancedLegendRenderer,
                         rendererOptions: {
-                            numberRows: 1
+                            numberRows: 1,
+                            seriesToggle:false
                         }            
                     },
                     title:{
