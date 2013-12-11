@@ -70,7 +70,7 @@ $(function () {
     });
 
     showResultView("tree");
-    $("#tabName").text("Service Browser");
+    $("#tabName").html("Service Browser <a href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/service-browser/' target='_blank'>?</a>");
     $("#serviceBrowserLink").addClass("chosen");
     var flashvars = {};
     var params = {};
@@ -166,6 +166,9 @@ function onServicesLoaded(data)
                     var savedMethodName = $(this).data("methodName");
                     manipulateMethod(savedServiceName, savedMethodName);
                     return false;
+                },
+                dblclick:function(){
+                   // alert('eeee');
                 }})
             .appendTo(li);
             $(dialogLink).data("serviceName", serviceName);    

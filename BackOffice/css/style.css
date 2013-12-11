@@ -269,6 +269,10 @@ table.jqplot-table-legend{
     font-weight: bold;
 }
 
+.jqplot-point-label{
+    color:white;
+}
+
 
 /* client gen */
 

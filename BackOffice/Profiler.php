@@ -118,7 +118,7 @@ if ($config->fetchAmfphpUpdates) {
 
 
             $(function () {	
-                $("#tabName").text("Profiler");
+                $("#tabName").html("Profiler <a href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/' target='_blank'>?</a>");
                 $("#profilerLink").addClass("chosen");
 
                 var availableHeight = $( "body" ).height() - $("#chartDiv").offset().top - 140;
@@ -381,7 +381,7 @@ if ($config->fetchAmfphpUpdates) {
                     seriesDefaults:{
                         renderer:$.jqplot.BarRenderer,
                         rendererOptions: rendererOptions,
-                        pointLabels: {show: true},
+                        pointLabels: {show: true, hideZeros:true},
                         shadow:false,
                         fillAlpha:0.5
             

@@ -106,8 +106,9 @@ $config = new Amfphp_BackOffice_Config();
         require_once(dirname(__FILE__) . '/Footer.inc.php');
         ?>
             <script>
-$(function () {	        
-    $("#tabName").text("Client Generator");
+$(function () {	      
+    $("#tabName").html("Client Generator <a href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/client-generator/' target='_blank'>?</a>");
+    
     $("#clientGeneratorLink").addClass("chosen");
 
     var callData = JSON.stringify({"serviceName":"AmfphpDiscoveryService", "methodName":"discover","parameters":[]});
