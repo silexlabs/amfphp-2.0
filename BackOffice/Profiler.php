@@ -356,6 +356,7 @@ if ($config->fetchAmfphpUpdates) {
                 focusedUri = uri;
                 var seriesData = [];
                 orderedTimeNames = [];
+                var ticks = [];
     
                 //data for each target uri
                 var rawUriData = serverData.sortedData[uri];
@@ -370,11 +371,15 @@ if ($config->fetchAmfphpUpdates) {
                     seriesData.push(timeData.reverse());
 
                 }
+                
+                //need to inverse ticks otherwise '1' is at the bottom
+                var numRows = seriesData[0].length;
+                for(i = 0; i < numRows; i++){
+                    ticks.push(numRows - i);
+                }
                 var titleHtml = '<a onclick="showAllUris()">Average durations for all calls(ms)</a>&nbsp;> ' + focusedUri;
 
-                //the empty ticks array is important, otherwise the category axis renderer 
-                //messes up the layout
-                buildChart(seriesData, [], getLegendLabels(orderedTimeNames), titleHtml, getSeriesColors(orderedTimeNames));
+                buildChart(seriesData, ticks, getLegendLabels(orderedTimeNames), titleHtml, getSeriesColors(orderedTimeNames));
 
             }
 
