@@ -160,7 +160,7 @@ function onServicesLoaded(data)
             .appendTo(serviceUl);
             var dialogLink = $("<a/>",{
                 text: methodName,
-                title: method.comment,
+                title: method.comment + "\n\ndouble-click to call with default parameters",
                 click: function(){ 
                     var savedServiceName = $(this).data("serviceName");
                     var savedMethodName = $(this).data("methodName");
