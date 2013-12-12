@@ -37,7 +37,26 @@ var amfphpUpdates = {
         }else{
             showVersionComparison($.cookie('amfphp_latest_version'));
         }
-
+        /**
+         * returns the date as yyyy-MM-dd
+         * */
+        function formatDate(date){
+            var ret = date.getFullYear() + "-";
+            var month = date.getMonth();
+            if(month < 10){
+                ret += "0" + month + "-";
+            }else{
+                ret += month + "-";
+            }
+            var day = date.getDate();
+            if(day < 10){
+                ret += "0" + day;
+            }else{
+                ret += day;
+            }
+            return ret;
+            
+        }
         /**
          * build the news feed display. 
          * takes entries as param, not the whole response, and stores them
@@ -46,8 +65,8 @@ var amfphpUpdates = {
         function buildNewsDisplay(entries){
             var s = "<table>";
             $.each(entries, function (e, item) {
-                i = new Date(item.publishedDate);
-                s += "<tr><td class='dateCell'>" + i.toLocaleDateString() + "</td>";
+                var formattedDate = formatDate(new Date(item.publishedDate));
+                s += "<tr><td class='dateCell'>" + formattedDate + "</td>";
                 s += '<td class="newsCell"><a target="_blank" href="' + item.link + '" news="_blank" >' + item.title + "</a></td></tr>";
             });
             s += "</table>";
