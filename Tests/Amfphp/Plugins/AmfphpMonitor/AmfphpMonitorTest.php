@@ -61,8 +61,7 @@ class AmfphpMonitorTest extends PHPUnit_Framework_TestCase {
     }
     
     /**
-     * test no write permission
-     * @expectedException Amfphp_Core_Exception 
+     * test no write permission. No error should be thrown, so the only thing to test is that there is no error/exception
      */
     public function testNoPermission(){
         $pluginConfig['logPath'] = $this->logPath. 'bla';
