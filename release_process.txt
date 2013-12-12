@@ -5,6 +5,7 @@ test service browser
 test generators
 test examples
 regenerate doc, and update online version
+check included readme.html
 make sure no flex builds, no generated clients, no extraConfig.php, no monitor log
 update version flag in 3 places: in the front/classloader.php, in backoffice/classloader.php ,and at downloads.silexlabs.org/amfphp/amfphp_updates.php
 create release zip
