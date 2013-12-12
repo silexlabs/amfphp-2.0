@@ -105,7 +105,7 @@ if ($config->fetchAmfphpUpdates) {
                                     <tr>
                                         <td>Simple</td>
                                         <td>Advanced</td>
-                                        <td>Request Repeater</td>
+                                        <td>Call Repeater</td>
                                     </tr>
                                     <tr>
                                         <td><input  type="submit" value="Call" onclick="makeJsonCall()"/>  </td>
@@ -115,7 +115,7 @@ if ($config->fetchAmfphpUpdates) {
                                         </td>
                                         <td>
                                             <input  type="submit" id="toggleRepeatBtn" value="Start Repeat Call AMF" onclick="toggleRepeat()"/>       
-                                            Number of Concurrent Requests
+                                            Number of Concurrent Calls
                                             <input id="concurrencyInput" value="1"/>              
                                         </td>
                                     </tr>
