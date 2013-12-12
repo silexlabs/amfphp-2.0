@@ -107,7 +107,7 @@ class AmfphpMonitor {
         }
         AmfphpMonitorService::$maxLogFileSize = $this->maxLogFileSize;
         
-        if(!is_writable($this->logPath) && !is_readable($this->logPath)){
+        if(!is_writable($this->logPath) || !is_readable($this->logPath)){
             return;
         }
         
