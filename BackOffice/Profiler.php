@@ -123,7 +123,7 @@ if ($config->fetchAmfphpUpdates) {
 
 
             $(function () {	
-                $("#tabName").html("Profiler <a href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/' target='_blank'>?</a>");
+                $("#tabName").html("Profiler &nbsp;&nbsp;<a href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/' target='_blank'>?</a>");
                 $("#profilerLink").addClass("chosen");
 
                 var availableHeight = $( "body" ).height() - $("#chartDiv").offset().top - 140;

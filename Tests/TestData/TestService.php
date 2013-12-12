@@ -149,7 +149,7 @@ class TestService {
     public function returnLargeTypedDataSet($numItems) {
         $ret = array();
         for ($i = 0; $i < $numItems; $i++) {
-            $item = new DummyVo();
+            $item = new DummyVo2();
             $item->int = rand(-1000, 1000);
             $item->float = rand(-1000, 1000) / 100;
             $item->string = md5(rand(-1000, 1000));
@@ -211,6 +211,6 @@ class TestService {
     }
 }
 
-class DummyVo {}
+class DummyVo2 {}
 
 ?>

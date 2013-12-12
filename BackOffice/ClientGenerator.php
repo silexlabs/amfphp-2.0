@@ -107,7 +107,7 @@ $config = new Amfphp_BackOffice_Config();
         ?>
             <script>
 $(function () {	      
-    $("#tabName").html("Client Generator <a href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/client-generator/' target='_blank'>?</a>");
+    $("#tabName").html("Client Generator  &nbsp;&nbsp;<a href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/client-generator/' target='_blank'>?</a>");
     
     $("#clientGeneratorLink").addClass("chosen");
 

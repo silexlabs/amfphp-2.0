@@ -70,7 +70,7 @@ $(function () {
     });
 
     showResultView("tree");
-    $("#tabName").html("Service Browser <a href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/service-browser/' target='_blank'>?</a>");
+    $("#tabName").html("Service Browser  &nbsp;&nbsp;<a href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/service-browser/' target='_blank'>?</a>");
     $("#serviceBrowserLink").addClass("chosen");
     var flashvars = {};
     var params = {};
