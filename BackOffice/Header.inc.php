@@ -10,6 +10,8 @@
  * with this package in the file license.txt.
  * @package Amfphp_Backoffice
  * 
+ * note: there is a weird rendering error in FF if the news and sign out btns are too near the top. A line of pixels 
+ * goes missing or something. So be vcareful when redimensioning
  */
 /**+
  * dummy to get rid of phpdocumentor error...
