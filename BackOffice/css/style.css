@@ -402,14 +402,15 @@ a.important{
     padding-right: 50px;
 }
 
-#header #silexLabsLinkP{
-    margin-bottom: 0px;
-    padding: 0px;
+#silexLabsLink{
+    background-image: url('img/SilexLabs.png') ;
+    height: 29px;
+    width: 120px;
+    margin-top: 4px;
+    cursor: pointer;
 }
 
-#silexLabsLinkP a{
-    padding-right: 0px;
-}
+
 
 #currentVersionPre{
     color: #747474;

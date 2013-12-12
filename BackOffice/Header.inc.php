@@ -44,9 +44,7 @@ $temp = 0;
                 <a class="important" href="ClientGenerator.php" id="clientGeneratorLink">Client Generator</a>
                 <a class="important" href="Profiler.php" id="profilerLink">Profiler</a>
             </p>
-            <p class="alignRight" id="silexLabsLinkP">
-                <a href="http://silexlabs.org" target="_blank" id="silexLabsLink"><img src="img/SilexLabs.png"></img></a>
-            </p>
+            <div class="alignRight" id="silexLabsLink" onclick="window.open('http://silexlabs.org','_blank');"></div>
         </div>
     </div>
     <div id="line3" class="overFlowAuto middleBound headerLine">
