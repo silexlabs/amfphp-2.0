@@ -108,7 +108,7 @@ if ($config->fetchAmfphpUpdates) {
             $(function () {	        
                     
                 if (shouldFetchUpdates) {
-                    amfphpUpdates.init("#newsPopup", ".newsLink", "#textNewsLink", "#latestVersionInfo");
+                    amfphpUpdates.init("#newsPopup", "#newsLink", "#textNewsLink", "#latestVersionInfo");
                     amfphpUpdates.loadAndInitUi();
                 }
                 $("#tabName").text("Home");

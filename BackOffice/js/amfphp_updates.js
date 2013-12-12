@@ -10,12 +10,12 @@
 var amfphpUpdates = {
     newsVisible:false, 
     newsDivId : "", 
-    showBtnClass : "", 
+    showBtnId : "", 
     toggleNewsTextId : "", 
     latestVersionInfoSpanId : "",
-    init: function(newsDivId, showBtnClass, toggleNewsTextId, latestVersionInfoSpanId){
+    init: function(newsDivId, showBtnId, toggleNewsTextId, latestVersionInfoSpanId){
         amfphpUpdates.newsDivId = newsDivId;
-        amfphpUpdates.showBtnClass = showBtnClass;
+        amfphpUpdates.showBtnId = showBtnId;
         amfphpUpdates.toggleNewsTextId = toggleNewsTextId;
         amfphpUpdates.latestVersionInfoSpanId = latestVersionInfoSpanId;
         
@@ -90,7 +90,7 @@ var amfphpUpdates = {
         }else{
             buildNewsDisplay(JSON.parse($.cookie('amfphp_news')));
         }
-        $(amfphpUpdates.showBtnClass).show();
+        $(amfphpUpdates.showBtnId).show();
 
 
     },

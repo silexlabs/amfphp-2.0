@@ -166,8 +166,8 @@ if ($showNewComerExplanation) {
                 
                 //customize header
                 $("#tabName").text("Sign In");
-                $(".newsLink").hide();
-                $(".signOutLink").hide();
+                $("#newsLink").hide();
+                $("#signOutLink").hide();
                 $("#signOutLinkImg").hide();
                 
             });

@@ -318,7 +318,6 @@ table.jqplot-table-legend{
 #line1{
     background: #E6E6E6;
     padding-top: 5px;
-    padding-bottom: 5px;
 }
 
 .backoffice{
@@ -333,7 +332,7 @@ table.jqplot-table-legend{
 } 
 
 #titleP{
-    padding-top: 5px;
+    padding-top: 2px;
 }
 
 
@@ -343,38 +342,36 @@ a.important{
     margin-right: 50px;
 }
 
-#newsLink{
-    width:137px;
-}
-
-
-#newsLink{
-    padding-right: 20px;
-
-}
-
-#newsLinkImg,#signOutLinkImg{
+#newsLink,#signOutLink{
    cursor: pointer;
    height: 33px;
-   width: 33px;
+   width: 25px;
+   font-size: 11px;
+   color:black;
+   padding-left: 35px;
+   color:grey;
+   margin-bottom: 5px;
+   margin-left: 20px;
+   
     
 }
-#newsLinkImg:hover, #signOutLinkImg:hover { background-position: 0 0}
-
-#newsLinkImg{
-   background: url('img/News.png') bottom  ;
+#newsLink:hover, #signOutLink:hover { 
+    background-position: top left;
+    background-repeat: no-repeat;
+    color:black;
 }
 
-#signOutLinkImg{
-   background: url('img/SignOut.png') bottom ;
+#newsLink{
+   background: url('img/News.png') bottom left no-repeat ;
 }
-#showNewsTextTd{
-    padding-right: 20px;
+
+#signOutLink{
+   background: url('img/SignOut.png') bottom left no-repeat;
 }
 
 #textSignOutLink, #textNewsLink{
-    font-size: 11px;
-    color:black;
+    padding-top: 4px;
+    width: 50px;
 }
 
 #newsPopup, #newsLink{
@@ -384,9 +381,6 @@ a.important{
 
 #newsPopup{
     z-index: 1;
-}
-#line1 table{
-    margin-top: 5px;
 }
 
 #line2{
@@ -407,6 +401,7 @@ a.important{
     height: 29px;
     width: 120px;
     margin-top: 4px;
+    margin-right: 3px;
     cursor: pointer;
 }
 

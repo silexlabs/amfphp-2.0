@@ -132,7 +132,7 @@ if ($config->fetchAmfphpUpdates) {
                 refresh();
                 isAutoRefreshing = false;
                 if (shouldFetchUpdates) {
-                    amfphpUpdates.init("#newsPopup", ".newsLink", "#textNewsLink", "#latestVersionInfo");
+                    amfphpUpdates.init("#newsPopup", "#newsLink", "#textNewsLink", "#latestVersionInfo");
                     amfphpUpdates.loadAndInitUi();
                 }
 
