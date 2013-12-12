@@ -90,9 +90,9 @@ if ($config->fetchAmfphpUpdates) {
                             </div>
 
                             <h3>2. Set your call parameters.</h3>
-                            If you need to send a complex parameter, you can use <a href="http://en.wikipedia.org/wiki/JSON">JSON</a> notation.
+                            If you need to send a complex parameter, you can use <a target="_blank" href="http://en.wikipedia.org/wiki/JSON">JSON</a> notation.
                             If you want the parameter value to be prefilled, you can propose an example value in your service comments. 
-                            <a href="http://www.silexlabs.org/amfphp/documentation/using-the-back-office/service-browser/#parameters">See the documentation here.</a>
+                            <a target="_blank" href="http://www.silexlabs.org/amfphp/documentation/using-the-back-office/service-browser/#parameters">See the documentation here.</a>
 
                             <div id="methodParameters">
                                 <table id="paramDialogs"><tbody></tbody></table>
@@ -122,7 +122,7 @@ if ($config->fetchAmfphpUpdates) {
                                 </table>
                                 <div id="amfCallerContainer">
                                     Flash Player is needed to make AMF calls. 
-                                    <a href="http://www.adobe.com/go/getflashplayer">
+                                    <a target="_blank" href="http://www.adobe.com/go/getflashplayer">
                                         <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" />
                                     </a>
                                 </div>                                                            

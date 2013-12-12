@@ -46,9 +46,9 @@ input[type="submit"], button {
 
 
 .dateCell{
-    text-align: right;
+    padding-right: 20px;
+    padding-bottom: 5px;
 }
-
 
 .borderTop{
     border-top: 1px solid #A8A8A8;    
@@ -142,6 +142,11 @@ table{
     font-size: 24px;
     font-weight: normal;
 }
+
+#keyMessage{
+    font-weight: bold;
+    color:#F65511;
+}
 /* service browser */
 
 #left li ul {
@@ -167,8 +172,8 @@ table{
     border: 1px solid #A8A8A8;
 }
 
-#dataView#tree{
-    font-size: 12px;
+#tree{
+    overflow: auto;
 }
 
 .showResultView{
@@ -304,10 +309,6 @@ table.jqplot-table-legend{
     line-height: 150%;
 }
 
-#newsLink{
-    padding-right: 20px;
-
-}
 
 
 .overFlowAuto{
@@ -346,6 +347,36 @@ a.important{
     width:137px;
 }
 
+
+#newsLink{
+    padding-right: 20px;
+
+}
+
+#newsLinkImg,#signOutLinkImg{
+   cursor: pointer;
+   height: 33px;
+   width: 33px;
+    
+}
+#newsLinkImg:hover , #signOutLinkImg:hover { background-position: 0 0}
+
+#newsLinkImg{
+   background-image: url('img/News.png') ;
+}
+
+#signOutLinkImg{
+   background-image: url('img/SignOut.png') ;
+}
+#showNewsTextTd{
+    padding-right: 20px;
+}
+
+#textSignOutLink, #textNewsLink{
+    font-size: 11px;
+    color:black;
+}
+
 #newsPopup, #newsLink{
     /* hide these elements by default */
     display: none;
@@ -356,14 +387,6 @@ a.important{
 }
 #line1 table{
     margin-top: 5px;
-}
-#showNewsTextTd{
-    padding-right: 20px;
-}
-
-#textSignOutLink, #textNewsLink{
-    font-size: 11px;
-    color:black;
 }
 
 #line2{

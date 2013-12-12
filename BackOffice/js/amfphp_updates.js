@@ -46,9 +46,9 @@ var amfphpUpdates = {
         function buildNewsDisplay(entries){
             var s = "<table>";
             $.each(entries, function (e, item) {
-                s += '<tr><td><a href="' + item.link + '" news="_blank" >' + item.title + "</a></td>";
                 i = new Date(item.publishedDate);
-                s += "<td class='dateCell'>" + i.toLocaleDateString() + "</td></tr>";
+                s += "<tr><td class='dateCell'>" + i.toLocaleDateString() + "</td>";
+                s += '<td class="newsCell"><a target="_blank" href="' + item.link + '" news="_blank" >' + item.title + "</a></td></tr>";
             });
             s += "</table>";
             $(amfphpUpdates.newsDivId).append(s);

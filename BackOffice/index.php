@@ -62,12 +62,12 @@ if ($config->fetchAmfphpUpdates) {
                 <div id="tabsExplanation">
 
                     <h2>Welcome to the <span class="titleSpan">Amfphp <span class="backoffice">Back Office</span></span></h2>
-                    Here you can access the 3 parts of the Back Office. 
+                    <span id="keyMessage">Here you can access the 3 parts of the Back Office. </span>
                     <br/><br/>
                     <h3>The Service Browser</h3>
                     The service browser allows you to test your services. It lists all services and methods. Click a service method, and a dialog will appear allowing you to call it and optionally set some parameters.
                     Once you call the method, you have a choice of ways to display the return data. Depending on what kind of return data you are expecting you will find one view or another more useful.
-                    <br/><a href="http://silexlabs.org/amfphp/documentation/using-the-back-office/service-browser/">Documentation</a>
+                    <br/><a target="_blank" href="http://silexlabs.org/amfphp/documentation/using-the-back-office/service-browser/">Service Browser Documentation</a>
                     <div class="imgWrapper">
                         <a href="ServiceBrowser.php">
                             <img src="img/ServiceBrowser.jpg"></img>
@@ -81,7 +81,7 @@ if ($config->fetchAmfphpUpdates) {
                         <li>a GUI class to access each service. These are great to make back offices.</li>
                         <li>project files to wrap them all and hit the ground running.</li>
                     </ul>
-                    <a href="http://silexlabs.org/amfphp/documentation/using-the-back-office/client-generator/">Documentation</a>
+                    <a target="_blank" href="http://silexlabs.org/amfphp/documentation/using-the-back-office/client-generator/">Client Generator Documentation</a>
                     <div class="imgWrapper">
                         <a href="ClientGenerator.php">
                             <img src="img/ClientGenerator.jpg"></img>
@@ -92,7 +92,7 @@ if ($config->fetchAmfphpUpdates) {
                     The Profiler allows you to observe the time spent by each service call in the different stages of processing. 
                     The idea is to help you better understand how your server shall perform live, 
                     and to give you easy access to the information you need to eliminate bottlenecks and fine-tune performance.
-                    <br/><a href="http://silexlabs.org/amfphp/documentation/using-the-back-office/profiler/">Documentation</a>
+                    <br/><a target="_blank" href="http://silexlabs.org/amfphp/documentation/using-the-back-office/profiler/">Profiler Documentation</a>
                     <div class="imgWrapper">
                         <a href="Profiler.php">
                             <img src="img/Profiler.jpg"></img>

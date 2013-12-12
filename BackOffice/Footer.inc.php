@@ -19,13 +19,13 @@ $temp = 0;
 ?>
 <footer class="site-footer">
     <div>
-        <a href="http://www.silexlabs.org/amfphp/feedback/">Feedback</a>
-        <a href="http://www.silexlabs.org/groups/amfphp/amfphp-users/">Forum</a>
-        <a href="http://www.silexlabs.org/amfphp/documentation/">Documentation</a>
-        <a href="http://community.silexlabs.org/amfphp/reference/">Class Reference</a>
-        <a href="https://github.com/silexlabs/amfphp-2.0">Source Code</a>
-        <a href="http://www.silexlabs.org/amfphp/">Amfphp Website</a>
-        <a href="http://www.silexlabs.org/category/exchange/exchange-amfphp/">More Plugins</a>
+        <a target="_blank" href="http://www.silexlabs.org/amfphp/feedback/">Feedback</a>
+        <a target="_blank" href="http://www.silexlabs.org/groups/amfphp/amfphp-users/">Forum</a>
+        <a target="_blank" href="http://www.silexlabs.org/amfphp/documentation/">Documentation</a>
+        <a target="_blank" href="http://community.silexlabs.org/amfphp/reference/">Class Reference</a>
+        <a target="_blank" href="https://github.com/silexlabs/amfphp-2.0">Source Code</a>
+        <a target="_blank" href="http://www.silexlabs.org/amfphp/">Amfphp Website</a>
+        <a target="_blank" href="http://www.silexlabs.org/category/exchange/exchange-amfphp/">More Plugins</a>
     </div>
         
 </footer>

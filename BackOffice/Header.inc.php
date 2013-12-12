@@ -25,11 +25,11 @@ $temp = 0;
             <div class="alignRight">
                 <table>
                     <tr>
-                        <td><a onclick="amfphpUpdates.toggleNews()" class="newsLink"><img src="img/News.png"></img></a></td>
+                        <td><div onclick="amfphpUpdates.toggleNews()" class="newsLink" id="newsLinkImg"></div></td>
                         <td id="showNewsTextTd">
                             <a onclick="amfphpUpdates.toggleNews()"  class="newsLink" id="textNewsLink">Show<br/>News</a>
                         </td>
-                        <td><a href="SignOut.php" class="signOutLink"><img src="img/SignOut.png"></img></a></td>
+                        <td><div onclick="window.location='SignOut.php';" id="signOutLinkImg"></div></td>
                         <td><a href="SignOut.php" id="textSignOutLink" class="signOutLink">Sign<br/>Out</a></td>
                     </tr>
                 </table>
