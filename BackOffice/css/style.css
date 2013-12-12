@@ -359,14 +359,14 @@ a.important{
    width: 33px;
     
 }
-#newsLinkImg:hover , #signOutLinkImg:hover { background-position: 0 0}
+#newsLinkImg:hover, #signOutLinkImg:hover { background-position: 0 0}
 
 #newsLinkImg{
-   background-image: url('img/News.png') ;
+   background: url('img/News.png') bottom  ;
 }
 
 #signOutLinkImg{
-   background-image: url('img/SignOut.png') ;
+   background: url('img/SignOut.png') bottom ;
 }
 #showNewsTextTd{
     padding-right: 20px;
