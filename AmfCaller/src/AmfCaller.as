@@ -20,6 +20,7 @@ package
 	/**
 	 * provides AMF calling functionality to the service browser via External Interface. 
 	 * exposes a "call" method, a "isAlive" method, and uses 1 callback: "onResult"
+	 * calls onAmfCallerLoaded once loading is done
 	 * */
 	public class AmfCaller extends Sprite
 	{
@@ -33,13 +34,12 @@ package
 		private var repeatingCallArgs:Array;
 		
 		private var callCounter:uint;
-		
-		//not used yet
-		private var pauseBetweenCallsMs:uint;
-		
+				
 		private var timeAtLastMeasure:uint; 
 		
 		private var measureTimer:Timer;
+		
+		private var resultJsCallBackName:String;
 		
 		public function AmfCaller()
 		{
@@ -71,6 +71,7 @@ package
 			dummyRef = Dummy19;
 			measureTimer = new Timer(1000);
 			measureTimer.addEventListener(TimerEvent.TIMER, measureTimerHandler);
+			ExternalInterface.call("onAmfCallerLoaded");
 			
 		}
 		
@@ -83,7 +84,7 @@ package
 		/**
 		 * make an AMF call
 		 * */
-		public function call(url:String, command:String, parameters:Array):void{
+		public function call(url:String, command:String, parameters:Array, resultJsCallBackName:String):void{
 			var netConnection:NetConnection = new NetConnection();
 			netConnection.connect(url);
 			var callArgs:Array = new Array(command, new Responder(resultHandler, resultHandler));
@@ -92,6 +93,7 @@ package
 				callArgs.push(convertObjectUsingExplicitType(param));
 				
 			}	
+			this.resultJsCallBackName = resultJsCallBackName;
 			netConnection.call.apply(netConnection, callArgs);
 		}
 		
@@ -157,7 +159,11 @@ package
 		 * callback used both for error and success. calls onResult in JS.
 		 * */
 		private function resultHandler(obj:Object):void{
-			ExternalInterface.call("onResult", obj);
+			if(resultJsCallBackName){
+				ExternalInterface.call(this.resultJsCallBackName, obj);
+			}else{
+				ExternalInterface.call("onResult", obj);
+			}
 			
 		}
 		
