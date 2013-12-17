@@ -20,11 +20,6 @@ var manipulatedServiceName = "";
 var manipulatedMethodName = "";
 
 /**
- *call start time, in ms
- */
-var callStartTime;
-
-/**
  * id of currently visible result view
  */
 var resultViewId;
@@ -55,17 +50,8 @@ var isShowingMethodDescription;
 var serviceAndMethodUiMap;
 
 $(function () {
-    var callData = JSON.stringify({"serviceName":"AmfphpDiscoveryService", "methodName":"discover","parameters":[]});
-    var request = $.ajax({
-        url: amfphpEntryPointUrl + "?contentType=application/json",
-        type: "POST",
-        data: callData,
-        dataType:"json"
-    });
-
-    request.done(onServicesLoaded);
-
-    request.fail(function( jqXHR, textStatus ) {
+    amfphp.entryPointUrl = amfphpEntryPointUrl + "?contentType=application/json";
+    amfphp.services.AmfphpDiscoveryService.discover(onServicesLoaded, function( jqXHR, textStatus ) {
         displayStatusMessage(textStatus + "<br/><br/>" + jqXHR.responseText);
     });
 
@@ -369,7 +355,6 @@ function getCallParameterValues(){
 function makeJsonCall(){
 
     var callData = JSON.stringify({"serviceName":manipulatedServiceName, "methodName":manipulatedMethodName,"parameters":getCallParameterValues()});
-    callStartTime = $.now();
     $.post(amfphpEntryPointUrl + "?contentType=application/json", callData, onResult);
     onResult('loading...');
 
@@ -383,7 +368,6 @@ function makeAmfCall(){
     if(!amfCaller || !amfCaller.isAlive()){
         alert('AMF Caller not available.');
     }
-    callStartTime = $.now();
     amfCaller.call(amfphpEntryPointUrl, manipulatedServiceName + "/" + manipulatedMethodName, getCallParameterValues());
     onResult('loading...');
 

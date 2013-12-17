@@ -33,6 +33,7 @@ $config = new Amfphp_BackOffice_Config();
         <script type="text/javascript" src="js/jquery-ui.js"></script>
         <script type="text/javascript" src="js/swfobject.js"></script>
         <script type="text/javascript" src="js/jquery.cookie.js"></script>
+        <script type="text/javascript" src="js/services.js"></script>
         <script language="javascript" type="text/javascript" src="js/sb.js"></script>
         <script type="text/javascript">
 <?php

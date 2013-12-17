@@ -37,6 +37,8 @@ $config = new Amfphp_BackOffice_Config();
         <script language="javascript" type="text/javascript" src="js/jqplot.categoryAxisRenderer.js"></script>
         <script language="javascript" type="text/javascript" src="js/jqplot.enhancedLegendRenderer.js"></script>
         <script language="javascript" type="text/javascript" src="js/jqplot.pointLabels.js"></script>
+        <script type="text/javascript" src="js/performanceCharting.js"></script>
+        <script type="text/javascript" src="js/services.js"></script>
 
         <script type="text/javascript">
 <?php
@@ -84,7 +86,7 @@ if ($config->fetchAmfphpUpdates) {
                             </a>    
                         </div>
                     </div>
-                    <div id="chartDivContainer">
+                    <div class="chartDivContainer">
                         <div id="chartDiv"></div>
                     </div>                  
                 </div>
@@ -156,10 +158,6 @@ if ($config->fetchAmfphpUpdates) {
                     return;
                 }
     
-    
-                if(plot){
-                    plot.destroy();
-                }
                 serverData = data;
     
                 displayStatusMessage('');
@@ -183,75 +181,6 @@ if ($config->fetchAmfphpUpdates) {
                 displayStatusMessage(errorMsg);
                 $("#profilerImg").show();
                 $("#chartDivContainer").hide();
-            }
-
-            /**
-             * process ordered names to create labels linked to the doc
-             * */
-            function getLegendLabels(orderedTimeNames){
-                var labels = [];
-                for(var i = 0; i < orderedTimeNames.length; i++){
-                    var timeName = orderedTimeNames[i];
-                    var label;
-                    switch(timeName){
-                        case "Deserialization": 
-                        case "Serialization":
-                            label = timeName  + "<a target='_blank' href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/#serialization'> ?</a>";
-                            break;
-                        case "Request Value Object Conversion":
-                        case "Response Value Object Conversion":
-                            label = timeName  + "<a target='_blank' href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/#value object conversion'> ?</a>";
-                            break;
-                        case "Request Charset Conversion":
-                        case "Response Charset Conversion":
-                            label = timeName  + "<a target='_blank' href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/#charset conversion'> ?</a>";
-                            break;
-                        case "Service Call":
-                            label = timeName  + "<a target='_blank' href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/#service call'> ?</a>";
-                            break;
-                        default:
-                            label = "CUSTOM " + timeName + "<a target='_blank' href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/#more data'> ?</a>";
-                    }
-                    labels.push(label);
-                }
-                return labels;
-            }
-
-
-
-            /**
-             * get some colors from the series
-             * some are predefined as they are standard for amfphp.
-             * Some are generated using stringToColor
-             * */
-            function getSeriesColors(orderedTimeNames){
-    
-                var colors = [];
-                var customTimeToggle = false;
-                for(var i = 0; i < orderedTimeNames.length; i++){
-                    var timeName = orderedTimeNames[i];
-                    var color;
-                    switch(timeName){
-                        case "Deserialization": color = "#00C800"; break;
-                        case "Request Value Object Conversion": color = "#168DE6"; break;
-                        case "Request Charset Conversion": color = "#FF9978"; break;
-                        case "Service Call": color = "#FFCC01"; break;
-                        case "Response Charset Conversion": color = "#FF551C"; break;
-                        case "Response Value Object Conversion": color = "#104E80"; break;
-                        case "Serialization": color = "#009100"; break;
-                        default:
-                            //alternate these 2 colors for custom times
-                            if(customTimeToggle){
-                                color = "#E506D3"; 
-                            }else{
-                                color = "#950079"; 
-                            } 
-                            customTimeToggle = !customTimeToggle;
-                    }
-                    colors.push(color);
-                }
-                return colors;
-    
             }
 
             function showAllUris(){
@@ -340,7 +269,8 @@ if ($config->fetchAmfphpUpdates) {
                 }
                 var titleHtml = "Average durations for all calls (ms)";
     
-                buildChart(flippedSeriesData, ticks, getLegendLabels(orderedTimeNames), titleHtml, getSeriesColors(orderedTimeNames));
+                plot = buildChart("chartDiv", flippedSeriesData, ticks, getLegendLabels(orderedTimeNames), titleHtml, getSeriesColors(orderedTimeNames));
+                addLabelListeners();
 
             }
 
@@ -379,65 +309,8 @@ if ($config->fetchAmfphpUpdates) {
                 }
                 var titleHtml = '<a onclick="showAllUris()">Average durations for all calls(ms)</a>&nbsp;> ' + focusedUri;
 
-                buildChart(seriesData, ticks, getLegendLabels(orderedTimeNames), titleHtml, getSeriesColors(orderedTimeNames));
-
-            }
-
-            function buildChart(seriesData, ticks, legendLabels, titleHtml, seriesColors){
-                var numRows = seriesData[0].length;
-                var rendererOptions = {
-                    barDirection: 'horizontal',
-                    highlightMouseDown:true
-                };
-                if(numRows < 5){
-                    rendererOptions.barWidth = 70;
-                }        
-                plot = $.jqplot('chartDiv', seriesData, {
-                    // Tell the plot to stack the bars.
-                    stackSeries: true,
-                    seriesDefaults:{
-                        renderer:$.jqplot.BarRenderer,
-                        rendererOptions: rendererOptions,
-                        pointLabels: {show: true, hideZeros:true, edgeTolerance:5},
-                        shadow:false,
-                        fillAlpha:0.5
-            
-                    },
-                    axes: {
-
-                        yaxis: {
-                            // Don't pad out the bottom of the data range.  By default,
-                            // axes scaled as if data extended 10% above and below the
-                            // actual range to prevent data points right on grid boundaries.
-                            // Don't want to do that here.
-                            padMin: 0,
-                            renderer: $.jqplot.CategoryAxisRenderer,
-                            ticks: ticks,
-                            tickOptions: {
-                                fontSize: '12pt'
-                            }
-                        }
-                    },
-                    legend: {
-                        show: true,
-                        location: 's',
-                        placement: 'outsideGrid',
-                        labels:legendLabels,
-                        renderer: $.jqplot.EnhancedLegendRenderer,
-                        rendererOptions: {
-                            numberRows: 1,
-                            seriesToggle:false
-                        }            
-                    },
-                    title:{
-                        text:titleHtml
-                    },
-                    seriesColors: seriesColors,
-                    grid:{shadow:false}
-                });
-
+                plot = buildChart("chartDiv", seriesData, ticks, getLegendLabels(orderedTimeNames), titleHtml, getSeriesColors(orderedTimeNames));
                 addLabelListeners();
-    
             }
 
             function addLabelListeners(){
@@ -469,52 +342,17 @@ if ($config->fetchAmfphpUpdates) {
              */
             function refresh(){ 
                 var flush = $("#flushOnRefreshCb").is(':checked');
-                var callData = JSON.stringify({"serviceName":"AmfphpMonitorService", "methodName":"getData","parameters":[flush]});
-                callServer(callData, onDataLoaded);
+                amfphp.services.AmfphpMonitorService.getData(onDataLoaded, onServerError, flush);
     
             }
             
-            function callServer(callData, successCb){
-                var request = $.ajax({
-                    url: amfphpEntryPointUrl + "?contentType=application/json",
-                    type: "POST",
-                    data: callData,
-                    dataType:"json"
-                });
-
-                request.done(successCb);
-
-                request.fail(function( jqXHR, textStatus ) {
-                    var errorMsg = null;
-                    var responseText = jqXHR.responseText;
-                    if(responseText.indexOf("AmfphpMonitorService service not found") != -1){
-                        showErrorMessage("The AmfphpMonitorService could not be called. This is most likely because AmfphpMonitor plugin is not enabled. See the <a href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/'>documentation</a>.");
-                        return;
-                    }
-
-                    var errorMessagePos = responseText.indexOf("AmfphpMonitor does not have permission to read and write");
-                    if(errorMessagePos != -1){
-                        var filePathStart = responseText.indexOf("log file: ", errorMessagePos) + 10;
-                        var filePathStop = responseText.indexOf("'", filePathStart);
-                        var filePath = responseText.substring(filePathStart, filePathStop);
-                        showErrorMessage("Could not read or write log file. Please check your webserver has read and write permissions on <br/>" + filePath);
-                        return;
-                    }
-
-                    
-                    showErrorMessage(textStatus + "<br/><br/>" + jqXHR.responseText);
-                });
-                
-            }
-
             /**
              * flush monitor data on server.
              */
             function flush(){
-                var callData = JSON.stringify({"serviceName":"AmfphpMonitorService", "methodName":"flush","parameters":[]});
-                callServer(callData, function(){
+                amfphp.services.AmfphpMonitorService.flush(function(){
                     displayStatusMessage("Data Flushed");
-                });
+                }, onServerError);
     
             }
 
@@ -544,4 +382,25 @@ if ($config->fetchAmfphpUpdates) {
     
             }
 
+            
+            function onServerError(jqXHR, textStatus ){
+                var responseText = jqXHR.responseText;
+                if(responseText.indexOf("AmfphpMonitorService service not found") != -1){
+                    showErrorMessage("The AmfphpMonitorService could not be called. This is most likely because AmfphpMonitor plugin is not enabled. See the <a href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/'>documentation</a>.");
+                    return;
+                }
+
+                var errorMessagePos = responseText.indexOf("AmfphpMonitor does not have permission to read and write");
+                if(errorMessagePos != -1){
+                    var filePathStart = responseText.indexOf("log file: ", errorMessagePos) + 10;
+                    var filePathStop = responseText.indexOf("'", filePathStart);
+                    var filePath = responseText.substring(filePathStart, filePathStop);
+                    showErrorMessage("Could not read or write log file. Please check your webserver has read and write permissions on <br/>" + filePath);
+                    return;
+                }
+
+
+                showErrorMessage(textStatus + "<br/><br/>" + jqXHR.responseText);
+                
+            }
         </script>

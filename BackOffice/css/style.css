@@ -26,6 +26,7 @@ input, #result, button{
     padding: 8px;
     border: 1px solid #A8A8A8;
     margin: 5px;
+    height:31px;
 }
 
 
@@ -106,6 +107,7 @@ table{
     padding-right: 10px;
     margin-top: 10px;
     margin-bottom:10px;
+    vertical-align: top;
 }
 
 .right {
@@ -115,11 +117,8 @@ table{
     padding-left: 10px;
     padding-bottom: 10px;
     max-width:700px;
-    
-}
-
-#main td{
     vertical-align: top;
+    
 }
 
 
@@ -164,6 +163,7 @@ table{
 #serviceMethods, #serviceMethods ul{
     list-style-type: none;
     padding-left: 10px;
+    padding-bottom: 5px;
 }
 
 
@@ -252,7 +252,7 @@ table#clientGen td{
     padding-right: 50px;
 }
 /* profiler */
-#chartDivContainer{
+.chartDivContainer{
     background-color: white;
     padding: 10px;
 }
@@ -286,6 +286,15 @@ table.jqplot-table-legend{
     margin-left: auto ;
     margin-right: auto ;
 
+}
+
+/* A/B Tester */
+#runTest{
+    font-weight: bold;
+}
+
+#numItemsInput{
+    width:5em;
 }
 
 /* header */

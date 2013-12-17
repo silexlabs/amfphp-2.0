@@ -27,6 +27,7 @@ $config = new Amfphp_BackOffice_Config();
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/jquery.cookie.js"></script>
         <script type="text/javascript" src="js/amfphp_updates.js"></script>
+        <script type="text/javascript" src="js/services.js"></script>
         <script type="text/javascript">
 <?php 
     echo 'var amfphpVersion = "' . AMFPHP_VERSION . "\";\n"; 
@@ -57,6 +58,8 @@ $config = new Amfphp_BackOffice_Config();
                     }
                     ?>
                 <div id="clientGenContent">
+                    <div id="statusMessage" class="warning"></div>
+                    
                     <h2>Generate a client project that consumes your services. </h2>
                     Use one of the following generators to generate a client Stub project. 
                     <br/>The project includes :<br/>
@@ -97,7 +100,6 @@ $config = new Amfphp_BackOffice_Config();
                         <tr><td>Android</td><td><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/android/">Info/Vote Up</a></td>        <td>Not Available Yet </td></tr>
                         <tr class="borderTop"><td class="borderTop">Write your Own?</td><td class="borderTop"><a href="http://www.silexlabs.org/amfphp/documentation/client-generators/writing-you-own-client-generator/">Info</a></td>        <td class="borderTop"></td></tr>
                     </table>
-                    <div id="statusMessage" class="warning"></div>
                 </div>
             </div>
         </div>
@@ -111,17 +113,8 @@ $(function () {
     
     $("#clientGeneratorLink").addClass("chosen");
 
-    var callData = JSON.stringify({"serviceName":"AmfphpDiscoveryService", "methodName":"discover","parameters":[]});
-    var request = $.ajax({
-      url: "<?php echo $config->resolveAmfphpEntryPointUrl() ?>?contentType=application/json",
-      type: "POST",
-      data: callData,
-      dataType:"json"
-    });
-
-    request.done(onServicesLoaded);
-
-    request.fail(function( jqXHR, textStatus ) {
+    amfphp.entryPointUrl = amfphpEntryPointUrl + "?contentType=application/json";
+    amfphp.services.AmfphpDiscoveryService.discover(onServicesLoaded, function( jqXHR, textStatus ) {
         displayStatusMessage(textStatus + "<br/><br/>" + jqXHR.responseText);
     });
 
