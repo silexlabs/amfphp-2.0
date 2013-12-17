@@ -352,6 +352,7 @@ class Amfphp_BackOffice_ClientGenerator_LocalClientGenerator {
     protected function wrapComment($comment){
         $comment = "/** $comment */";
         $comment = str_replace("\n", "\n* ", $comment);
+        return $comment;
     }
 
 }
