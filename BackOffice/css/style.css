@@ -278,6 +278,10 @@ table.jqplot-table-legend{
     color:white;
 }
 
+.jqplot-yaxis-tick{
+    max-width: 250px;
+    word-wrap:break-word;
+}
 
 /* client gen */
 
@@ -293,7 +297,7 @@ table.jqplot-table-legend{
     font-weight: bold;
 }
 
-#numItemsInput{
+#numObjectsInput{
     width:5em;
 }
 
@@ -389,7 +393,7 @@ a.important{
 }
 
 #newsPopup{
-    z-index: 1;
+    z-index: 2;
 }
 
 #line2{

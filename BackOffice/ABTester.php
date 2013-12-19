@@ -52,10 +52,10 @@ if ($config->fetchAmfphpUpdates) {
     echo "var shouldFetchUpdates = false;\n";
 }
 ?>
-    var amfphpEntryPointUrlB = amfphpEntryPointUrlA + '/nobaguette.php';
+    var amfphpEntryPointUrlB = amfphpEntryPointUrlA + '/with_BaguetteAMF.php';
     var serviceMethodUri = "TestService/returnLargeDataSet";
-    var titleChartA = "Performance With Baguette AMF(ms)";
-    var titleChartB = "Performance Without Baguette AMF(ms)";
+    var titleChartA = "Performance Without Baguette AMF(ms)";
+    var titleChartB = "Performance With Baguette AMF(ms)";
         </script>  
 
     </head>
@@ -75,26 +75,23 @@ if ($config->fetchAmfphpUpdates) {
                     return;
                 }
                 ?>
-                <div id="performanceDisplay" title="The server parses the request, generates some data, and serializes the response.">
+                <div id="performanceDisplay">
+                    <div class="chartDivContainer">
+                        <div id="chartDiv"></div>
+                    </div>                  
+                    <div id="controls">
+                        
+                        Choose a number of objects to generate and serialize on the server
+                        <input value="1000" id="numObjectsInput"></input>
+                        <input type="submit" id="runTest" value=">> Run Test" onclick="runTestClickHandler()"></input>
+                        <div id="statusMessage" class="warning"> </div>
+                    </div>
                     <div id="amfCallerContainer">
                         Flash Player is needed to make AMF calls. 
                         <a target="_blank" href="http://www.adobe.com/go/getflashplayer">
                             <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" />
                         </a>
                     </div>                       
-                    <div id="controls">
-                        Make a call to Amfphp with and without Baguette AMF. <br/>
-                        
-                        <input type="submit" id="runTest" value=">> Run Test" onclick="runTestClickHandler()"></input>
-                        Number of items generated
-                        <input value="1000" id="numItemsInput"></input>
-                        <div id="statusMessage" class="warning"> </div>
-                    </div>
-
-
-                    <div class="chartDivContainer">
-                        <div id="chartDiv"></div>
-                    </div>                  
                 </div>
             </div>
         </div>            
@@ -114,20 +111,20 @@ if ($config->fetchAmfphpUpdates) {
             var amfCaller;
            
             /**
-             * number of generated items
+             * number of generated objects
              * */
-            var numItems;
+            var numObjects;
 
 
             $(function () {	
+                //formatting code to embed in an iframe
                 $("#line1").hide();
                 $("#line2").hide();
-                $("#currentVersion").hide();
-                $("#currentVersionPre").hide();
-                $("#tabName").html("A/B Tester. >> Try it!");
+                $("#line3").hide();
                 $("footer").hide();
+                $("#main").css("width", "100%");
 
-                var availableHeight = $( "body" ).height() - $("#chartDiv").offset().top - 40;
+                var availableHeight = $( "body" ).height() - $("#chartDiv").offset().top - 100;
                 $( "#chartDiv" ).css( "height", (availableHeight) +  "px" );
     
                 var flashvars = {};
@@ -186,34 +183,36 @@ if ($config->fetchAmfphpUpdates) {
                     return;
                 }
                 
-                numItems = parseInt($("#numItemsInput").val());
-                if(isNaN(numItems)){
-                    alert("Invalid Number of generated items.");
-                    $("#numItemsInput").val(1000);
+                numObjects = parseInt($("#numObjectsInput").val());
+                if(isNaN(numObjects)){
+                    alert("Invalid Number of generated objects.");
+                    $("#numObjectsInput").val(1000);
                     return;
                 }
                 
-                if(numItems <= 0){
-                    alert('Please enter a strictly positive number of items to generate');
+                if(numObjects <= 0){
+                    alert('Please enter a strictly positive number of objects to generate');
                     return;
                 }
                     
-                if(numItems > 3000){
-                    alert('The number of generated items is limited in this demo to 3000.');
+                if(numObjects > 3000){
+                    alert('The number of generated objects is limited in this demo to 3000.');
                     return;
                 }
-                   
+                
+                displayStatusMessage("Running Test...<br/> Generating and returning " + numObjects + " random objects with and without Baguette AMF");
+               
                 amfphp.services.AmfphpMonitorService.flush(makeCallA, onServerError);
                 
     
             }
             
             function makeCallA(){
-                amfCaller.call(amfphpEntryPointUrlA, serviceMethodUri, [numItems], 'makeCallB');
+                amfCaller.call(amfphpEntryPointUrlA, serviceMethodUri, [numObjects], 'makeCallB');
             }
             
             function makeCallB(){
-                amfCaller.call(amfphpEntryPointUrlB, serviceMethodUri, [numItems], 'loadPerformanceData');
+                amfCaller.call(amfphpEntryPointUrlB, serviceMethodUri, [numObjects], 'loadPerformanceData');
             }
             
             function loadPerformanceData(){
@@ -260,10 +259,10 @@ if ($config->fetchAmfphpUpdates) {
                 ticks.push(titleChartB);
                 ticks.push(titleChartA);
                 
-                plot = buildChart("chartDiv", seriesData, ticks, getLegendLabels(orderedTimeNames), "A/B Test(ms)", getSeriesColors(orderedTimeNames));
+                plot = buildChart("chartDiv", seriesData, ticks, getLegendLabels(orderedTimeNames), "Comparative Test with " + numObjects + " objects. Values in Milliseconds(ms)", getSeriesColors(orderedTimeNames));
                 
                 var serializationData = data.sortedData[serviceMethodUri].Serialization;
-                displayStatusMessage("For " + numItems + " items, it takes " + serializationData[0] + " ms to serialize the data with Baguette AMF, and " + serializationData[1] + " ms without.");
+                displayStatusMessage("It took " + serializationData[0] + " ms to serialize " + numObjects + " random objects without Baguette AMF, and " + serializationData[1] + " ms with Baguette AMF.");
                 
             }
             
