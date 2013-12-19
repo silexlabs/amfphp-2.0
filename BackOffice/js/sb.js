@@ -368,7 +368,7 @@ function makeAmfCall(){
     if(!amfCaller || !amfCaller.isAlive()){
         alert('AMF Caller not available.');
     }
-    amfCaller.call(amfphpEntryPointUrl, manipulatedServiceName + "/" + manipulatedMethodName, getCallParameterValues());
+    amfCaller.call(amfphpEntryPointUrl, manipulatedServiceName + "/" + manipulatedMethodName, getCallParameterValues(), 'onResult');
     onResult('loading...');
 
 }
