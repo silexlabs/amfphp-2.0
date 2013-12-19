@@ -97,12 +97,14 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
      * @return string
      */
     public function deserialize(array $getData, array $postData, $rawPostData) {
+        $deserializer = new Amfphp_Core_Amf_Deserializer();
         //note: this has to be done here and not in the constructor to avoid 
         //disabling scanning when it's another handler that ends up handling the request
         $this->voConverter = Amfphp_Core_FilterManager::getInstance()->callFilters(Amfphp_Core_Gateway::FILTER_VO_CONVERTER, null);
-        $this->voConverter->setScanEnabled(false);
-        $deserializer = new Amfphp_Core_Amf_Deserializer();
-        $deserializer->voConverter = $this->voConverter;
+        if($this->voConverter){
+            $this->voConverter->setScanEnabled(false);
+            $deserializer->voConverter = $this->voConverter;
+        }
         $requestPacket = $deserializer->deserialize($getData, $postData, $rawPostData);
         return $requestPacket;
     }
