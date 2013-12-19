@@ -107,7 +107,7 @@ class AmfphpVoConverter implements Amfphp_Core_Common_IVoConverter {
             $ret = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($deserializedRequest, array($this, 'convertToTyped'));
         }
         if(class_exists('AmfphpMonitor', false)){
-            AmfphpMonitor::addTime('Request Value Object Conversion');
+            AmfphpMonitor::addTime('Request VO Conversion');
         }
 
         return $ret;
@@ -124,7 +124,7 @@ class AmfphpVoConverter implements Amfphp_Core_Common_IVoConverter {
             $ret = Amfphp_Core_Amf_Util::applyFunctionToContainedObjects($deserializedResponse, array($this, 'markExplicitType'));
         }
         if(class_exists('AmfphpMonitor', false)){
-            AmfphpMonitor::addTime('Response Value Object Conversion');
+            AmfphpMonitor::addTime('Response VO Conversion');
         }
         return $ret;
     }

@@ -72,21 +72,21 @@ function getLegendLabels(orderedTimeNames){
         switch(timeName){
             case "Deserialization": 
             case "Serialization":
-                label = timeName  + "<a target='_blank' href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/#serialization'> ?</a>";
+                label = timeName  + " <a target='_blank' href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/#serialization'>( ? )</a>";
                 break;
-            case "Request Value Object Conversion":
-            case "Response Value Object Conversion":
-                label = timeName  + "<a target='_blank' href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/#value object conversion'> ?</a>";
+            case "Request VO Conversion":
+            case "Response VO Conversion":
+                label = timeName  + " <a target='_blank' href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/#value object conversion'>( ? )</a>";
                 break;
             case "Request Charset Conversion":
             case "Response Charset Conversion":
-                label = timeName  + "<a target='_blank' href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/#charset conversion'> ?</a>";
+                label = timeName  + " <a target='_blank' href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/#charset conversion'>( ? )</a>";
                 break;
             case "Service Call":
-                label = timeName  + "<a target='_blank' href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/#service call'> ?</a>";
+               label = timeName  + " <a target='_blank' href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/#service call'>( ? )</a>";
                 break;
             default:
-                label = "CUSTOM " + timeName + "<a target='_blank' href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/#more data'> ?</a>";
+                label = "CUSTOM " + timeName + " (<a target='_blank' href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/#more data'>( ? )</a>)";
         }
         labels.push(label);
     }
@@ -111,7 +111,7 @@ function getSeriesColors(orderedTimeNames){
             case "Deserialization":
                 color = "#00C800";
                 break;
-            case "Request Value Object Conversion":
+            case "Request VO Conversion":
                 color = "#168DE6";
                 break;
             case "Request Charset Conversion":
@@ -123,7 +123,7 @@ function getSeriesColors(orderedTimeNames){
             case "Response Charset Conversion":
                 color = "#FF551C";
                 break;
-            case "Response Value Object Conversion":
+            case "Response VO Conversion":
                 color = "#104E80";
                 break;
             case "Serialization":
