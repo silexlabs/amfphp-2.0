@@ -54,8 +54,8 @@ if ($config->fetchAmfphpUpdates) {
 ?>
     var amfphpEntryPointUrlB = amfphpEntryPointUrlA + '/with_BaguetteAMF.php';
     var serviceMethodUri = "TestService/returnLargeDataSet";
-    var titleChartA = "Performance Without Baguette AMF(ms)";
-    var titleChartB = "Performance With Baguette AMF(ms)";
+    var titleChartA = "Without Baguette AMF(ms)";
+    var titleChartB = "With Baguette AMF(ms)";
         </script>  
 
     </head>
@@ -77,13 +77,17 @@ if ($config->fetchAmfphpUpdates) {
                 ?>
                 <div id="performanceDisplay">
                     <div class="chartDivContainer">
-                        <div id="chartDiv"></div>
+                        <div id="chartDiv">
+                            <h2 style="padding-top: 150px; text-align: center">Hit Run Test Below to try Baguette AMF</h2>
+                            <img style="margin-left: 500px; padding-top: 100px" src="img/DownArrow.png"></img>
+                            
+                        </div>
                     </div>                  
                     <div id="controls">
                         
                         Choose a number of objects to generate and serialize on the server
                         <input value="1000" id="numObjectsInput"></input>
-                        <input type="submit" id="runTest" value=">> Run Test" onclick="runTestClickHandler()"></input>
+                        <input type="submit" id="runTest" value="Run Test" onclick="runTestClickHandler()"></input>
                         <div id="statusMessage" class="warning"> </div>
                     </div>
                     <div id="amfCallerContainer">
@@ -137,7 +141,7 @@ if ($config->fetchAmfphpUpdates) {
                     if(e.success){
                         amfCaller = e.ref;
                     }else{
-                        alert("could not load AMF Caller.");
+                        displayStatusMessage("could not load AMF Caller.");
                         if(console){
                             console.log(e);
                         }
@@ -168,7 +172,8 @@ if ($config->fetchAmfphpUpdates) {
              * called by amf caller when ready
              */
             function onAmfCallerLoaded(){
-                runTest();
+                //don't run test on load, wait for user
+                //runTest();
             }
             
             function runTestClickHandler(){
