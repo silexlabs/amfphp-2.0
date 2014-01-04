@@ -245,7 +245,11 @@ if ($config->fetchAmfphpUpdates) {
                         }
                     }
                     seriesData.push(formattedUriData);
-                    ticks.push(uri);
+					if(uri == ''){
+						ticks.push("Empty Call");
+					}else{
+	                    ticks.push(uri);
+					}
                     orderedTimedNamesSet = true;
                 }
 
@@ -289,12 +293,17 @@ if ($config->fetchAmfphpUpdates) {
                 var ticks = [];
     
                 //data for each target uri
-                var rawUriData = serverData.sortedData[uri];
+                var rawUriData;
+				if(uri == "Empty Call"){
+					rawUriData = serverData.sortedData[""];
+				}else{
+					rawUriData = serverData.sortedData[uri];
+				}
+					
     
                 var i = 0;
                 //look at data for each time 
                 for(var timeName in rawUriData){
-
                     var timeData = rawUriData[timeName];
                     timeData = timeData.slice(0, 20);
                     orderedTimeNames.push(timeName);

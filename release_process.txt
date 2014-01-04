@@ -4,6 +4,7 @@ deploy to a unix server(case sensitive)
 test service browser
 test generators
 test examples
+test opening Amfphp/ with browser
 regenerate doc, and update online version
 check included readme.html
 make sure no flex builds, no generated clients, no extraConfig.php, no monitor log

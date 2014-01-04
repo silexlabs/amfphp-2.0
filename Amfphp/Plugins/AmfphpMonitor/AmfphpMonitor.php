@@ -150,7 +150,6 @@ class AmfphpMonitor {
      */
     public function filterDeserializedRequest($deserializedRequest) {
         self::addTime('Deserialization');
-        
         //AMF
         if(is_a($deserializedRequest, 'Amfphp_Core_Amf_Packet')){
             //add multiple uris split with a ', '
@@ -164,7 +163,7 @@ class AmfphpMonitor {
         }else if(isset ($deserializedRequest->serviceName)){
         //JSON
             $this->uri = $deserializedRequest->serviceName . '/' . $deserializedRequest->methodName;
-        }else if(isset ($deserializedRequest['serviceName'])){
+        }else if(is_array($deserializedRequest) && isset ($deserializedRequest['serviceName'])){
             //GET, included request
             $this->uri = $deserializedRequest['serviceName'] . '/' . $deserializedRequest['methodName'];
         }
