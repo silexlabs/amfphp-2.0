@@ -152,13 +152,32 @@ class AmfphpMonitor {
         self::addTime('Deserialization');
         //AMF
         if(is_a($deserializedRequest, 'Amfphp_Core_Amf_Packet')){
-            //add multiple uris split with a ', '
+            //detect Flex by looking at first message. assumes that request doesn't mix simple AMF remoting with Flex Messaging
+            $isFlex = ($deserializedRequest->messages[0]->targetUri == 'null'); //target Uri is described in Flex message
+            
             for($i = 0; $i < count($deserializedRequest->messages); $i++){
                 if($i > 0){
+                    //add multiple uris split with a ', '
                     $this->uri .= ', ';
                 }
                 $message = $deserializedRequest->messages[$i];
-                $this->uri .= $message->targetUri;
+
+                if ($isFlex){
+                    $flexMessage = $message->data[0];
+                    $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
+                    $messageType = $flexMessage->$explicitTypeField;
+                    //assumes AmfphpFlexMessaging plugin is installed, which is reasonable given that we're using Flex messaging
+                    if ($messageType == AmfphpFlexMessaging::FLEX_TYPE_COMMAND_MESSAGE) {
+                        $this->uri .= "Flex Command Message";
+                    }else if ($messageType == AmfphpFlexMessaging::FLEX_TYPE_REMOTING_MESSAGE) {                    
+                        $this->uri .= $flexMessage->source . '.' . $flexMessage->operation;
+                    }else{
+                        $this->uri .= "Unrecognized Flex Message";
+                    }
+                }else{
+                    $this->uri .= $message->targetUri;
+                }
+                
             }
         }else if(isset ($deserializedRequest->serviceName)){
         //JSON
