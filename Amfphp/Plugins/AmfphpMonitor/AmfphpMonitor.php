@@ -172,7 +172,7 @@ class AmfphpMonitor {
                     }else if ($messageType == AmfphpFlexMessaging::FLEX_TYPE_REMOTING_MESSAGE) {                    
                         $this->uri .= $flexMessage->source . '.' . $flexMessage->operation;
                     }else{
-                        $this->uri .= "Unrecognized Flex Message";
+                        $this->uri .= 'Flex ' . $messageType;
                     }
                 }else{
                     $this->uri .= $message->targetUri;
