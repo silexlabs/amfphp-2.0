@@ -86,7 +86,7 @@ if ($config->fetchAmfphpUpdates) {
                             </a>    
                         </div>
                     </div>
-                    <div class="chartDivContainer">
+                    <div id="chartDivContainer">
                         <div id="chartDiv"></div>
                     </div>                  
                 </div>
@@ -162,6 +162,7 @@ if ($config->fetchAmfphpUpdates) {
     
                 displayStatusMessage('');
                 $("#profilerImg").hide();
+                console.log($("#chartDivContainer"));
                 $("#chartDivContainer").show();
     
                 if(focusedUri && data.sortedData && data.sortedData[focusedUri]){

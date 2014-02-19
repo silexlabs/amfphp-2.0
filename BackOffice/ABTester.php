@@ -76,7 +76,7 @@ if ($config->fetchAmfphpUpdates) {
                 }
                 ?>
                 <div id="performanceDisplay">
-                    <div class="chartDivContainer">
+                    <div id="chartDivContainer">
                         <div id="chartDiv">
                             <h2 style="padding-top: 150px; text-align: center">Hit Run Test Below to try Baguette AMF</h2>
                             <img style="margin-left: 500px; padding-top: 100px" src="img/DownArrow.png"></img>

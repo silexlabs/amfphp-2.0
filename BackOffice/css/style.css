@@ -252,7 +252,7 @@ table#clientGen td{
     padding-right: 50px;
 }
 /* profiler */
-.chartDivContainer{
+#chartDivContainer{
     background-color: white;
     padding: 10px;
 }
