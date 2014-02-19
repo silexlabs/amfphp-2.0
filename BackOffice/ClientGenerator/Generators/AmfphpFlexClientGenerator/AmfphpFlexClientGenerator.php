@@ -53,18 +53,23 @@ class AmfphpFlexClientGenerator extends Amfphp_BackOffice_ClientGenerator_LocalC
             $blockForParameter = str_replace(self::_PARAMETER_, $parameter->name, $code);
             $as3Type = null;
             switch(strtolower($parameter->type)){
-                case 'string':
+               case 'string':
                     $as3Type = 'String';
+                break;
                 case 'bool':
                 case 'boolean':
                     $as3Type = 'Boolean';
+                break;
                 case 'int':
                     $as3Type = 'int';
+                break;
                 case 'uint':
                     $as3Type = 'uint';
+                break;
                 case 'float':
                 case 'number':
                     $as3Type = 'Number';
+                break;
             }
             if($as3Type){
                 $blockForParameter = str_replace('Object', $as3Type, $blockForParameter);

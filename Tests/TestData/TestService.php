@@ -209,6 +209,19 @@ class TestService {
     public function thisFunctionNameIsReallyReallyReallyReallyLong(){
         
     }
+    
+    /**
+     * @param string pString
+     * @param bool pBool
+     * @param boolean pBoolean
+     * @param int pInt
+     * @param uint pUInt
+     * @param float pFloat
+     * @param number pNumber
+     * */
+    public function testCodeGenParamTyping($pString, $pBool, $pBoolean, $pInt, $pUInt, $pFloat, $pNumber){
+        return null;
+    }
 }
 
 class DummyVo2 {}

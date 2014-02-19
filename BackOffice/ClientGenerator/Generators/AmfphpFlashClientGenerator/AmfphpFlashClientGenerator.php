@@ -54,16 +54,21 @@ class AmfphpFlashClientGenerator extends Amfphp_BackOffice_ClientGenerator_Local
             switch(strtolower($parameter->type)){
                 case 'string':
                     $as3Type = 'String';
+                break;
                 case 'bool':
                 case 'boolean':
                     $as3Type = 'Boolean';
+                break;
                 case 'int':
                     $as3Type = 'int';
+                break;
                 case 'uint':
                     $as3Type = 'uint';
+                break;
                 case 'float':
                 case 'number':
                     $as3Type = 'Number';
+                break;
             }
             if($as3Type){
                 $blockForParameter = str_replace('Object', $as3Type, $blockForParameter);
