@@ -82,24 +82,13 @@ class AmfphpFlexMessaging {
      * @return array
      */
     public function filterAmfRequestMessageHandler($handler, Amfphp_Core_Amf_Message $requestMessage) {
-        if ($requestMessage->data == null) {
-            //all flex messages have data
-            return;
-        }
-
-        $explicitTypeField = Amfphp_Core_Amf_Constants::FIELD_EXPLICIT_TYPE;
-
-        if (!isset($requestMessage->data[0]) || !isset($requestMessage->data[0]->$explicitTypeField)) {
-            //and all flex messages have data containing one object with an explicit type
-            return;
-        }
-
-        $messageType = $requestMessage->data[0]->$explicitTypeField;
-        if ($messageType == self::FLEX_TYPE_COMMAND_MESSAGE || $messageType == self::FLEX_TYPE_REMOTING_MESSAGE) {
-            //recognized message type! This plugin will handle it
+        if ($requestMessage->targetUri == 'null') {
+            //target uri is null for Flex messaging, so it's an easy way to detect it.  This plugin will handle it 
             $this->clientUsesFlexMessaging = true;
             return $this;
         }
+        
+
     }
 
     /**

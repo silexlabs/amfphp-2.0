@@ -57,7 +57,7 @@ class AmfphpFlexMessagingTest extends PHPUnit_Framework_TestCase {
      * test get amf request message handler filter
      */
     public function testGetAmfRequestMessageHandlerFilter() {
-        $requestMessage = new Amfphp_Core_Amf_Message(null, '/1', null);
+        $requestMessage = new Amfphp_Core_Amf_Message('null', '/1', null);
         $requestMessage->data = array();
         $command = new stdClass();
         $command->_explicitType = AmfphpFlexMessaging::FLEX_TYPE_COMMAND_MESSAGE;
