@@ -233,6 +233,10 @@ class TestService {
         $ret .= 'this should not be truncated';
         return $ret;
     }
+    
+    public function testCharsetEncoding(){
+        return "ça marche èè";
+    }
 }
 
 class DummyVo2 {}
