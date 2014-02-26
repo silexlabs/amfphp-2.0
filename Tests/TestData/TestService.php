@@ -222,6 +222,17 @@ class TestService {
     public function testCodeGenParamTyping($pString, $pBool, $pBoolean, $pInt, $pUInt, $pFloat, $pNumber){
         return null;
     }
+    
+    public function getReallyLongString(){
+        $ret = "z";
+        for($i = 0; $i < 66000 ; $i++){
+            $ret .= 'a';
+            
+        }
+        
+        $ret .= 'this should not be truncated';
+        return $ret;
+    }
 }
 
 class DummyVo2 {}
