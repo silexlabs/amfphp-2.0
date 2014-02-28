@@ -35,8 +35,8 @@ amfphp.services.AmfphpMonitorService = {};
 *   */
 amfphp.services.AmfphpMonitorService.getData = function(onSuccess, onError, flush){
 	var callData = JSON.stringify({"serviceName":"AmfphpMonitorService", "methodName":"getData","parameters":[flush]});
-	    $.post(amfphp.entryPointUrl, callData, onSuccess)
-	    	.error(onError);
+	    $.post(amfphp.entryPointUrl, callData, onSuccess, "json")
+	    	.fail(onError);
 	
 }
 /** 
@@ -44,8 +44,8 @@ amfphp.services.AmfphpMonitorService.getData = function(onSuccess, onError, flus
 *   */
 amfphp.services.AmfphpMonitorService.flush = function(onSuccess, onError){
 	var callData = JSON.stringify({"serviceName":"AmfphpMonitorService", "methodName":"flush","parameters":[]});
-	    $.post(amfphp.entryPointUrl, callData, onSuccess)
-	    	.error(onError);
+	    $.post(amfphp.entryPointUrl, callData, onSuccess, "json")
+	    	.fail(onError);
 	
 }
 /** 
@@ -64,7 +64,7 @@ amfphp.services.AmfphpDiscoveryService = {};
 *   */
 amfphp.services.AmfphpDiscoveryService.discover = function(onSuccess, onError){
 	var callData = JSON.stringify({"serviceName":"AmfphpDiscoveryService", "methodName":"discover","parameters":[]});
-	    $.post(amfphp.entryPointUrl, callData, onSuccess)
-	    	.error(onError);
+	    $.post(amfphp.entryPointUrl, callData, onSuccess, "json")
+	    	.fail(onError);
 	
 }
