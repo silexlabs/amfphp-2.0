@@ -1,4 +1,9 @@
 Version history
+--------- 2.2.1 ---------
+fix basic typing of parameters in client generator
+fix error message handling in back office
+fix flex message monitoring
+fix API doc
 --------- 2.2 -----------
 Custom class converter renamed to VoConverter:
 enforceConversion flag to throw exception when vo class not found
