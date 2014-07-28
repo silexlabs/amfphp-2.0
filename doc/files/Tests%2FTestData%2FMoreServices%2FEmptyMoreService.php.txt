@@ -1,0 +1,29 @@
+<?php
+
+/**
+ *  This file is part of amfPHP
+ *
+ * LICENSE
+ *
+ * This source file is subject to the license that is bundled
+ * with this package in the file license.txt.
+ * @package Tests_TestData_CustomClasses
+ */
+
+/**
+ * empty service, just to test support for multiple service folders
+ *
+ * @package Tests_TestData_Services
+ * @author Ariel Sommeria-klein
+ */
+class EmptyMoreService {
+    
+    /**
+     * dummy function bla
+     */
+    public function bla(){
+    }
+}
+
+?>
+

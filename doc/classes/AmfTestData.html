@@ -1,0 +1,2662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>API Documentation</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="https://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">API Documentation</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown">
+                        <a href="../index.html" class="dropdown-toggle" data-toggle="dropdown">
+                            API Documentation <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                                                        <li><a href="../namespaces/NService.html">\NService</a></li>
+                                                        <li><a href="../namespaces/NVo.html">\NVo</a></li>
+                                                    </ul>
+                    </li>
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">146</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">15</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-2014487181"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-2014487181" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-872414691"></a>
+                                <a href="../namespaces/NService.html" style="margin-left: 30px; padding-left: 0">NService</a>
+            </div>
+            <div id="namespace-872414691" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1766698562"></a>
+                                <a href="../namespaces/NService.Sub1.html" style="margin-left: 30px; padding-left: 0">Sub1</a>
+            </div>
+            <div id="namespace-1766698562" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/NService.Sub1.NamespaceTestService.html">NamespaceTestService</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/NService.NamespaceTestService.html">NamespaceTestService</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1162355324"></a>
+                                <a href="../namespaces/NVo.html" style="margin-left: 30px; padding-left: 0">NVo</a>
+            </div>
+            <div id="namespace-1162355324" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-463534216"></a>
+                                <a href="../namespaces/NVo.Sub1.html" style="margin-left: 30px; padding-left: 0">Sub1</a>
+            </div>
+            <div id="namespace-463534216" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/NVo.Sub1.NamespaceTestVo.html">NamespaceTestVo</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/NVo.NamespaceTestVo.html">NamespaceTestVo</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/Amfphp_Core_Common_IDeserializedRequestHandler.html">Amfphp_Core_Common_IDeserializedRequestHandler</a></li>
+                                                    <li class="interface"><a href="../classes/Amfphp_Core_Common_IDeserializer.html">Amfphp_Core_Common_IDeserializer</a></li>
+                                                    <li class="interface"><a href="../classes/Amfphp_Core_Common_IExceptionHandler.html">Amfphp_Core_Common_IExceptionHandler</a></li>
+                                                    <li class="interface"><a href="../classes/Amfphp_Core_Common_ISerializer.html">Amfphp_Core_Common_ISerializer</a></li>
+                                                    <li class="interface"><a href="../classes/Amfphp_Core_Common_IVoConverter.html">Amfphp_Core_Common_IVoConverter</a></li>
+                                                                                                    <li class="class"><a href="../classes/Amf3DeserializationTest.html">Amf3DeserializationTest</a></li>
+                                                    <li class="class"><a href="../classes/Amf3SerializationTest.html">Amf3SerializationTest</a></li>
+                                                    <li class="class"><a href="../classes/Amf3TestData.html">Amf3TestData</a></li>
+                                                    <li class="class"><a href="../classes/AmfDeserializerWrapper.html">AmfDeserializerWrapper</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_BackOffice_AccessManager.html">Amfphp_BackOffice_AccessManager</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_BackOffice_ClientGenerator_GeneratorManager.html">Amfphp_BackOffice_ClientGenerator_GeneratorManager</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_BackOffice_ClientGenerator_Util.html">Amfphp_BackOffice_ClientGenerator_Util</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_BackOffice_Config.html">Amfphp_BackOffice_Config</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Amf_Constants.html">Amfphp_Core_Amf_Constants</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Amf_Deserializer.html">Amfphp_Core_Amf_Deserializer</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Amf_Handler.html">Amfphp_Core_Amf_Handler</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Amf_Header.html">Amfphp_Core_Amf_Header</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Amf_Message.html">Amfphp_Core_Amf_Message</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Amf_Packet.html">Amfphp_Core_Amf_Packet</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Amf_Serializer.html">Amfphp_Core_Amf_Serializer</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Amf_Types_ByteArray.html">Amfphp_Core_Amf_Types_ByteArray</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Amf_Types_Date.html">Amfphp_Core_Amf_Types_Date</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Amf_Types_Undefined.html">Amfphp_Core_Amf_Types_Undefined</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Amf_Types_Vector.html">Amfphp_Core_Amf_Types_Vector</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Amf_Types_Xml.html">Amfphp_Core_Amf_Types_Xml</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Amf_Types_XmlDocument.html">Amfphp_Core_Amf_Types_XmlDocument</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Amf_Util.html">Amfphp_Core_Amf_Util</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Amf_UtilTest.html">Amfphp_Core_Amf_UtilTest</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Common_ClassFindInfo.html">Amfphp_Core_Common_ClassFindInfo</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Common_ServiceCallParameters.html">Amfphp_Core_Common_ServiceCallParameters</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Common_ServiceRouter.html">Amfphp_Core_Common_ServiceRouter</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Common_ServiceRouterTest.html">Amfphp_Core_Common_ServiceRouterTest</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Config.html">Amfphp_Core_Config</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Exception.html">Amfphp_Core_Exception</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_FilterManager.html">Amfphp_Core_FilterManager</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_FilterManagerTest.html">Amfphp_Core_FilterManagerTest</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Gateway.html">Amfphp_Core_Gateway</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_GatewayTest.html">Amfphp_Core_GatewayTest</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_HttpRequestGatewayFactory.html">Amfphp_Core_HttpRequestGatewayFactory</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_PluginManager.html">Amfphp_Core_PluginManager</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_PluginManagerTest.html">Amfphp_Core_PluginManagerTest</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpAuthentication.html">AmfphpAuthentication</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpAuthenticationTest.html">AmfphpAuthenticationTest</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpCharsetConverter.html">AmfphpCharsetConverter</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpCharsetConverterTest.html">AmfphpCharsetConverterTest</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpDiscovery.html">AmfphpDiscovery</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpDiscovery_MethodDescriptor.html">AmfphpDiscovery_MethodDescriptor</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpDiscovery_ParameterDescriptor.html">AmfphpDiscovery_ParameterDescriptor</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpDiscovery_ServiceDescriptor.html">AmfphpDiscovery_ServiceDescriptor</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpDiscoveryService.html">AmfphpDiscoveryService</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpDummy.html">AmfphpDummy</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpErrorHandler.html">AmfphpErrorHandler</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpErrorHandlerTest.html">AmfphpErrorHandlerTest</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpFlashClientGenerator.html">AmfphpFlashClientGenerator</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpFlexClientGenerator.html">AmfphpFlexClientGenerator</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpFlexMessaging.html">AmfphpFlexMessaging</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpFlexMessaging_AcknowledgeMessage.html">AmfphpFlexMessaging_AcknowledgeMessage</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpFlexMessaging_ErrorMessage.html">AmfphpFlexMessaging_ErrorMessage</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpFlexMessagingTest.html">AmfphpFlexMessagingTest</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpGet.html">AmfphpGet</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpHtmlClientGenerator.html">AmfphpHtmlClientGenerator</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpJson.html">AmfphpJson</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpLogger.html">AmfphpLogger</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpLoggerTest.html">AmfphpLoggerTest</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpMonitor.html">AmfphpMonitor</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpMonitorService.html">AmfphpMonitorService</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpMonitorTest.html">AmfphpMonitorTest</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpVoConverter.html">AmfphpVoConverter</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpVoConverterTest.html">AmfphpVoConverterTest</a></li>
+                                                    <li class="class"><a href="../classes/AmfSerializerWrapper.html">AmfSerializerWrapper</a></li>
+                                                    <li class="class"><a href="../classes/AmfTestData.html">AmfTestData</a></li>
+                                                    <li class="class"><a href="../classes/AuthenticationService.html">AuthenticationService</a></li>
+                                                    <li class="class"><a href="../classes/BadSyntaxService.html">BadSyntaxService</a></li>
+                                                    <li class="class"><a href="../classes/ByteArrayTestService.html">ByteArrayTestService</a></li>
+                                                    <li class="class"><a href="../classes/DBUtils.html">DBUtils</a></li>
+                                                    <li class="class"><a href="../classes/DeserializationTest.html">DeserializationTest</a></li>
+                                                    <li class="class"><a href="../classes/DisabledPlugin.html">DisabledPlugin</a></li>
+                                                    <li class="class"><a href="../classes/DummyClass.html">DummyClass</a></li>
+                                                    <li class="class"><a href="../classes/DummyPlugin.html">DummyPlugin</a></li>
+                                                    <li class="class"><a href="../classes/DummyService.html">DummyService</a></li>
+                                                    <li class="class"><a href="../classes/DummyVo.html">DummyVo</a></li>
+                                                    <li class="class"><a href="../classes/DummyVo2.html">DummyVo2</a></li>
+                                                    <li class="class"><a href="../classes/EmptyMoreService.html">EmptyMoreService</a></li>
+                                                    <li class="class"><a href="../classes/ExampleSerializationDebugService.html">ExampleSerializationDebugService</a></li>
+                                                    <li class="class"><a href="../classes/ExampleService.html">ExampleService</a></li>
+                                                    <li class="class"><a href="../classes/MySQLUtil.html">MySQLUtil</a></li>
+                                                    <li class="class"><a href="../classes/MyVO.html">MyVO</a></li>
+                                                    <li class="class"><a href="../classes/PizzaService.html">PizzaService</a></li>
+                                                    <li class="class"><a href="../classes/SerializationTest.html">SerializationTest</a></li>
+                                                    <li class="class"><a href="../classes/TestAuthenticationService.html">TestAuthenticationService</a></li>
+                                                    <li class="class"><a href="../classes/TestPlugin.html">TestPlugin</a></li>
+                                                    <li class="class"><a href="../classes/TestService.html">TestService</a></li>
+                                                    <li class="class"><a href="../classes/TestServicesConfig.html">TestServicesConfig</a></li>
+                                                    <li class="class"><a href="../classes/TestVo1.html">TestVo1</a></li>
+                                                    <li class="class"><a href="../classes/TestVo2.html">TestVo2</a></li>
+                                                    <li class="class"><a href="../classes/TestVo3.html">TestVo3</a></li>
+                                                    <li class="class"><a href="../classes/UserService.html">UserService</a></li>
+                                                    <li class="class"><a href="../classes/UserVo1.html">UserVo1</a></li>
+                                                    <li class="class"><a href="../classes/VoService.html">VoService</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/default.html">\</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\</small>AmfTestData</h1>
+                    <p><em>test data for the Amfphp unit tests
+data types have the s prefix for &#039;serialized&#039; and &#039;d&#039; prefix for &#039;deserialized&#039;
+for Packets there is a flaw in the Amfphp design which means that serializng and deserializing is not symmetrical.</em></p>
+                    <p>so use s for serialized, d for deserialized for the serialization tests and dd for the deserialation tests, the idea being that dd will disappear for v2</p>
+
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/AmfTestData.html#method___construct" class="">__construct()</a><br />
+                                                                    <a href="../classes/AmfTestData.html#method_buildByte" class="">buildByte()</a><br />
+                                                                    <a href="../classes/AmfTestData.html#method_buildInt" class="">buildInt()</a><br />
+                                                                    <a href="../classes/AmfTestData.html#method_buildLong" class="">buildLong()</a><br />
+                                                                    <a href="../classes/AmfTestData.html#method_buildDouble" class="">buildDouble()</a><br />
+                                                                    <a href="../classes/AmfTestData.html#method_buildUtf" class="">buildUtf()</a><br />
+                                                                    <a href="../classes/AmfTestData.html#method_buildLongUtf" class="">buildLongUtf()</a><br />
+                                                                    <a href="../classes/AmfTestData.html#method_buildNumber" class="">buildNumber()</a><br />
+                                                                    <a href="../classes/AmfTestData.html#method_buildBoolean" class="">buildBoolean()</a><br />
+                                                                    <a href="../classes/AmfTestData.html#method_buildString" class="">buildString()</a><br />
+                                                                    <a href="../classes/AmfTestData.html#method_buildObject" class="">buildObject()</a><br />
+                                                                    <a href="../classes/AmfTestData.html#method_buildNull" class="">buildNull()</a><br />
+                                                                    <a href="../classes/AmfTestData.html#method_buildUndefined" class="">buildUndefined()</a><br />
+                                                                    <a href="../classes/AmfTestData.html#method_buildReference" class="">buildReference()</a><br />
+                                                                    <a href="../classes/AmfTestData.html#method_buildEcmaArray" class="">buildEcmaArray()</a><br />
+                                                                    <a href="../classes/AmfTestData.html#method_buildObjectEnd" class="">buildObjectEnd()</a><br />
+                                                                    <a href="../classes/AmfTestData.html#method_buildStrictArray" class="">buildStrictArray()</a><br />
+                                                                    <a href="../classes/AmfTestData.html#method_buildDate" class="">buildDate()</a><br />
+                                                                    <a href="../classes/AmfTestData.html#method_buildLongString" class="">buildLongString()</a><br />
+                                                                    <a href="../classes/AmfTestData.html#method_buildUnsupported" class="">buildUnsupported()</a><br />
+                                                                    <a href="../classes/AmfTestData.html#method_buildXml" class="">buildXml()</a><br />
+                                                                    <a href="../classes/AmfTestData.html#method_buildTypedObject" class="">buildTypedObject()</a><br />
+                                                                    <a href="../classes/AmfTestData.html#method_buildEmptyPacket" class="">buildEmptyPacket()</a><br />
+                                                                    <a href="../classes/AmfTestData.html#method_buildNullHeaderPacket" class="">buildNullHeaderPacket()</a><br />
+                                                                    <a href="../classes/AmfTestData.html#method_buildStringHeaderPacket" class="">buildStringHeaderPacket()</a><br />
+                                                                    <a href="../classes/AmfTestData.html#method_buildNullMessagePacket" class="">buildNullMessagePacket()</a><br />
+                                                                    <a href="../classes/AmfTestData.html#method_buildStringMessagePacket" class="">buildStringMessagePacket()</a><br />
+                                                                    <a href="../classes/AmfTestData.html#method_build2HeadersAndTwoMessagesPacket" class="">build2HeadersAndTwoMessagesPacket()</a><br />
+                                                                    <a href="../classes/AmfTestData.html#method_buildSimpleTestServiceRequestAndResponse" class="">buildSimpleTestServiceRequestAndResponse()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/AmfTestData.html#property_sByte" class="">$sByte</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_dByte" class="">$dByte</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_sInt" class="">$sInt</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_dInt" class="">$dInt</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_sLong" class="">$sLong</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_dLong" class="">$dLong</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_sDouble" class="">$sDouble</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_dDouble" class="">$dDouble</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_sUtf" class="">$sUtf</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_dUtf" class="">$dUtf</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_sLongUtf" class="">$sLongUtf</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_dLongUtf" class="">$dLongUtf</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_sNumber" class="">$sNumber</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_dNumber" class="">$dNumber</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_sBoolean" class="">$sBoolean</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_dBoolean" class="">$dBoolean</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_sString" class="">$sString</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_dString" class="">$dString</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_sObject" class="">$sObject</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_dObject" class="">$dObject</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_sNull" class="">$sNull</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_dNull" class="">$dNull</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_sUndefined" class="">$sUndefined</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_dUndefined" class="">$dUndefined</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_sReference" class="">$sReference</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_dReference" class="">$dReference</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_sEcmaArray" class="">$sEcmaArray</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_dEcmaArray" class="">$dEcmaArray</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_sObjectEnd" class="">$sObjectEnd</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_dObjectEnd" class="">$dObjectEnd</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_sStrictArray" class="">$sStrictArray</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_dStrictArray" class="">$dStrictArray</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_sDate" class="">$sDate</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_dDate" class="">$dDate</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_sLongString" class="">$sLongString</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_dLongString" class="">$dLongString</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_sUnsupported" class="">$sUnsupported</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_dUnsupported" class="">$dUnsupported</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_sXml" class="">$sXml</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_dXml" class="">$dXml</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_sTypedObject" class="">$sTypedObject</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_dTypedObject" class="">$dTypedObject</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_sEmptyPacket" class="">$sEmptyPacket</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_dEmptyPacket" class="">$dEmptyPacket</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_sNullHeaderPacket" class="">$sNullHeaderPacket</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_dNullHeaderPacket" class="">$dNullHeaderPacket</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_sStringHeaderPacket" class="">$sStringHeaderPacket</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_dStringHeaderPacket" class="">$dStringHeaderPacket</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_sNullMessagePacket" class="">$sNullMessagePacket</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_dNullMessagePacket" class="">$dNullMessagePacket</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_sStringMessagePacket" class="">$sStringMessagePacket</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_dStringMessagePacket" class="">$dStringMessagePacket</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_s2Headers2MessagesPacket" class="">$s2Headers2MessagesPacket</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_d2Headers2MessagesPacket" class="">$d2Headers2MessagesPacket</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_testServiceRequestPacket" class="">$testServiceRequestPacket</a><br />
+                                                                    <a href="../classes/AmfTestData.html#property_testServiceResponsePacket" class="">$testServiceResponsePacket</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No constants found</em>
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <em>No protected methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No protected properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <em>No private methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No private properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/Tests.TestData.AmfTestData.html"><div class="path-wrapper">Tests/TestData/AmfTestData.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">\Tests_TestData</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                    <div class="namespace-wrapper">\AmfTestData</div>
+                            </dd>
+
+                        
+                        
+                        
+                        
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr>
+                            <th>
+                                author
+                            </th>
+                            <td>
+                                                                    <p>Ariel Sommeria-klein</p>
+                                                            </td>
+                        </tr>
+                                        </table>
+                </aside>
+            </div>
+
+                        
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sByte" name="property_sByte" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$sByte</h3>
+                <pre class="signature">$sByte : string</pre>
+                <p><em>byte</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_dByte" name="property_dByte" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$dByte</h3>
+                <pre class="signature">$dByte : integer</pre>
+                <p><em>byte</em></p>
+                
+
+                                <h4>Type</h4>
+                integer
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sInt" name="property_sInt" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$sInt</h3>
+                <pre class="signature">$sInt : string</pre>
+                <p><em>int</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_dInt" name="property_dInt" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$dInt</h3>
+                <pre class="signature">$dInt : integer</pre>
+                <p><em>int</em></p>
+                
+
+                                <h4>Type</h4>
+                integer
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sLong" name="property_sLong" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$sLong</h3>
+                <pre class="signature">$sLong : string</pre>
+                <p><em>long</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_dLong" name="property_dLong" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$dLong</h3>
+                <pre class="signature">$dLong : integer</pre>
+                <p><em>long</em></p>
+                
+
+                                <h4>Type</h4>
+                integer
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sDouble" name="property_sDouble" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$sDouble</h3>
+                <pre class="signature">$sDouble : string</pre>
+                <p><em>double</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_dDouble" name="property_dDouble" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$dDouble</h3>
+                <pre class="signature">$dDouble : float</pre>
+                <p><em>double</em></p>
+                
+
+                                <h4>Type</h4>
+                float
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sUtf" name="property_sUtf" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$sUtf</h3>
+                <pre class="signature">$sUtf : string</pre>
+                <p><em>utf string</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_dUtf" name="property_dUtf" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$dUtf</h3>
+                <pre class="signature">$dUtf : </pre>
+                <p><em>string</em></p>
+                
+
+                                <h4>Type</h4>
+                
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sLongUtf" name="property_sLongUtf" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$sLongUtf</h3>
+                <pre class="signature">$sLongUtf : string</pre>
+                <p><em>long utf</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_dLongUtf" name="property_dLongUtf" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$dLongUtf</h3>
+                <pre class="signature">$dLongUtf : string</pre>
+                <p><em>long utf</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sNumber" name="property_sNumber" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$sNumber</h3>
+                <pre class="signature">$sNumber : string</pre>
+                <p><em>number</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_dNumber" name="property_dNumber" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$dNumber</h3>
+                <pre class="signature">$dNumber : float</pre>
+                <p><em>number</em></p>
+                
+
+                                <h4>Type</h4>
+                float
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sBoolean" name="property_sBoolean" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$sBoolean</h3>
+                <pre class="signature">$sBoolean : string</pre>
+                <p><em>boolean</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_dBoolean" name="property_dBoolean" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$dBoolean</h3>
+                <pre class="signature">$dBoolean : boolean</pre>
+                <p><em>boolean</em></p>
+                
+
+                                <h4>Type</h4>
+                boolean
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sString" name="property_sString" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$sString</h3>
+                <pre class="signature">$sString : string</pre>
+                <p><em>string</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_dString" name="property_dString" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$dString</h3>
+                <pre class="signature">$dString : string</pre>
+                <p><em>string</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sObject" name="property_sObject" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$sObject</h3>
+                <pre class="signature">$sObject : string</pre>
+                <p><em>object</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_dObject" name="property_dObject" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$dObject</h3>
+                <pre class="signature">$dObject : \stdClass</pre>
+                <p><em>object</em></p>
+                
+
+                                <h4>Type</h4>
+                \stdClass
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sNull" name="property_sNull" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$sNull</h3>
+                <pre class="signature">$sNull : string</pre>
+                <p><em>null</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_dNull" name="property_dNull" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$dNull</h3>
+                <pre class="signature">$dNull : null</pre>
+                <p><em>null</em></p>
+                
+
+                                <h4>Type</h4>
+                null
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sUndefined" name="property_sUndefined" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$sUndefined</h3>
+                <pre class="signature">$sUndefined : string</pre>
+                <p><em>undefined</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_dUndefined" name="property_dUndefined" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$dUndefined</h3>
+                <pre class="signature">$dUndefined : \Amfphp_Core_Amf_Types_Undefined</pre>
+                <p><em>undefined</em></p>
+                
+
+                                <h4>Type</h4>
+                <a href="../classes/Amfphp_Core_Amf_Types_Undefined.html">\Amfphp_Core_Amf_Types_Undefined</a>
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sReference" name="property_sReference" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$sReference</h3>
+                <pre class="signature">$sReference : string</pre>
+                <p><em>string</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_dReference" name="property_dReference" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$dReference</h3>
+                <pre class="signature">$dReference : \stdClass</pre>
+                <p><em>reference</em></p>
+                
+
+                                <h4>Type</h4>
+                \stdClass
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sEcmaArray" name="property_sEcmaArray" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$sEcmaArray</h3>
+                <pre class="signature">$sEcmaArray : string</pre>
+                <p><em>ecma array</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_dEcmaArray" name="property_dEcmaArray" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$dEcmaArray</h3>
+                <pre class="signature">$dEcmaArray : array</pre>
+                <p><em>ecma array</em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sObjectEnd" name="property_sObjectEnd" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$sObjectEnd</h3>
+                <pre class="signature">$sObjectEnd : string</pre>
+                <p><em>object end</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_dObjectEnd" name="property_dObjectEnd" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$dObjectEnd</h3>
+                <pre class="signature">$dObjectEnd : null</pre>
+                <p><em>object end</em></p>
+                
+
+                                <h4>Type</h4>
+                null
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sStrictArray" name="property_sStrictArray" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$sStrictArray</h3>
+                <pre class="signature">$sStrictArray : string</pre>
+                <p><em>strict array</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_dStrictArray" name="property_dStrictArray" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$dStrictArray</h3>
+                <pre class="signature">$dStrictArray : array</pre>
+                <p><em>strict array</em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sDate" name="property_sDate" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$sDate</h3>
+                <pre class="signature">$sDate : string</pre>
+                <p><em>date</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_dDate" name="property_dDate" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$dDate</h3>
+                <pre class="signature">$dDate : \Amfphp_Core_Amf_Types_Date</pre>
+                <p><em>date</em></p>
+                
+
+                                <h4>Type</h4>
+                <a href="../classes/Amfphp_Core_Amf_Types_Date.html">\Amfphp_Core_Amf_Types_Date</a>
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sLongString" name="property_sLongString" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$sLongString</h3>
+                <pre class="signature">$sLongString : string</pre>
+                <p><em>long string</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_dLongString" name="property_dLongString" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$dLongString</h3>
+                <pre class="signature">$dLongString : string</pre>
+                <p><em>long string</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sUnsupported" name="property_sUnsupported" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$sUnsupported</h3>
+                <pre class="signature">$sUnsupported : string</pre>
+                <p><em>unsupported</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_dUnsupported" name="property_dUnsupported" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$dUnsupported</h3>
+                <pre class="signature">$dUnsupported : string</pre>
+                <p><em>unsupported</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sXml" name="property_sXml" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$sXml</h3>
+                <pre class="signature">$sXml : string</pre>
+                <p><em>xml</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_dXml" name="property_dXml" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$dXml</h3>
+                <pre class="signature">$dXml : \Amfphp_Core_Amf_Types_Xml</pre>
+                <p><em>xml</em></p>
+                
+
+                                <h4>Type</h4>
+                <a href="../classes/Amfphp_Core_Amf_Types_Xml.html">\Amfphp_Core_Amf_Types_Xml</a>
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sTypedObject" name="property_sTypedObject" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$sTypedObject</h3>
+                <pre class="signature">$sTypedObject : string</pre>
+                <p><em>typed object</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_dTypedObject" name="property_dTypedObject" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$dTypedObject</h3>
+                <pre class="signature">$dTypedObject : \DummyClass</pre>
+                <p><em>typed object</em></p>
+                
+
+                                <h4>Type</h4>
+                <a href="../classes/DummyClass.html">\DummyClass</a>
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sEmptyPacket" name="property_sEmptyPacket" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$sEmptyPacket</h3>
+                <pre class="signature">$sEmptyPacket : string</pre>
+                <p><em>empty packet</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_dEmptyPacket" name="property_dEmptyPacket" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$dEmptyPacket</h3>
+                <pre class="signature">$dEmptyPacket : \Amfphp_Core_Amf_Packet</pre>
+                <p><em>empty packet</em></p>
+                
+
+                                <h4>Type</h4>
+                <a href="../classes/Amfphp_Core_Amf_Packet.html">\Amfphp_Core_Amf_Packet</a>
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sNullHeaderPacket" name="property_sNullHeaderPacket" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$sNullHeaderPacket</h3>
+                <pre class="signature">$sNullHeaderPacket : string</pre>
+                <p><em>null header packet</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_dNullHeaderPacket" name="property_dNullHeaderPacket" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$dNullHeaderPacket</h3>
+                <pre class="signature">$dNullHeaderPacket : \Amfphp_Core_Amf_Packet</pre>
+                <p><em>null header packet</em></p>
+                
+
+                                <h4>Type</h4>
+                <a href="../classes/Amfphp_Core_Amf_Packet.html">\Amfphp_Core_Amf_Packet</a>
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sStringHeaderPacket" name="property_sStringHeaderPacket" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$sStringHeaderPacket</h3>
+                <pre class="signature">$sStringHeaderPacket : string</pre>
+                <p><em>string header packet</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_dStringHeaderPacket" name="property_dStringHeaderPacket" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$dStringHeaderPacket</h3>
+                <pre class="signature">$dStringHeaderPacket : \Amfphp_Core_Amf_Packet</pre>
+                <p><em>string header packet</em></p>
+                
+
+                                <h4>Type</h4>
+                <a href="../classes/Amfphp_Core_Amf_Packet.html">\Amfphp_Core_Amf_Packet</a>
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sNullMessagePacket" name="property_sNullMessagePacket" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$sNullMessagePacket</h3>
+                <pre class="signature">$sNullMessagePacket : string</pre>
+                <p><em>null message packet</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                &mdash; Amfphp_Core_Amf_Packet                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_dNullMessagePacket" name="property_dNullMessagePacket" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$dNullMessagePacket</h3>
+                <pre class="signature">$dNullMessagePacket : \Amfphp_Core_Amf_Packet</pre>
+                <p><em>null message packet</em></p>
+                
+
+                                <h4>Type</h4>
+                <a href="../classes/Amfphp_Core_Amf_Packet.html">\Amfphp_Core_Amf_Packet</a>
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sStringMessagePacket" name="property_sStringMessagePacket" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$sStringMessagePacket</h3>
+                <pre class="signature">$sStringMessagePacket : string</pre>
+                <p><em>string message packet</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_dStringMessagePacket" name="property_dStringMessagePacket" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$dStringMessagePacket</h3>
+                <pre class="signature">$dStringMessagePacket : \Amfphp_Core_Amf_Packet</pre>
+                <p><em>string message packet</em></p>
+                
+
+                                <h4>Type</h4>
+                <a href="../classes/Amfphp_Core_Amf_Packet.html">\Amfphp_Core_Amf_Packet</a>
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_s2Headers2MessagesPacket" name="property_s2Headers2MessagesPacket" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$s2Headers2MessagesPacket</h3>
+                <pre class="signature">$s2Headers2MessagesPacket : string</pre>
+                <p><em>2 headers, 2 messages packet</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_d2Headers2MessagesPacket" name="property_d2Headers2MessagesPacket" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$d2Headers2MessagesPacket</h3>
+                <pre class="signature">$d2Headers2MessagesPacket : \Amfphp_Core_Amf_Packet</pre>
+                <p><em>2 headers, 2 messages packet</em></p>
+                
+
+                                <h4>Type</h4>
+                <a href="../classes/Amfphp_Core_Amf_Packet.html">\Amfphp_Core_Amf_Packet</a>
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_testServiceRequestPacket" name="property_testServiceRequestPacket" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$testServiceRequestPacket</h3>
+                <pre class="signature">$testServiceRequestPacket : \Amfphp_Core_Amf_Packet</pre>
+                <p><em>test service request packet</em></p>
+                
+
+                                <h4>Type</h4>
+                <a href="../classes/Amfphp_Core_Amf_Packet.html">\Amfphp_Core_Amf_Packet</a>
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_testServiceResponsePacket" name="property_testServiceResponsePacket" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$testServiceResponsePacket</h3>
+                <pre class="signature">$testServiceResponsePacket : \Amfphp_Core_Amf_Packet</pre>
+                <p><em>test service request packet</em></p>
+                
+
+                                <h4>Type</h4>
+                <a href="../classes/Amfphp_Core_Amf_Packet.html">\Amfphp_Core_Amf_Packet</a>
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___construct" name="method___construct" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">__construct()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__construct()</pre>
+                <p><em>constructor</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_buildByte" name="method_buildByte" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">buildByte()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">buildByte()</pre>
+                <p><em>byte</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_buildInt" name="method_buildInt" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">buildInt()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">buildInt()</pre>
+                <p><em>int: 2 bytes</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_buildLong" name="method_buildLong" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">buildLong()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">buildLong()</pre>
+                <p><em>long: 4 bytes</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_buildDouble" name="method_buildDouble" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">buildDouble()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">buildDouble()</pre>
+                <p><em>double: 8 bytes. Careful of little/big endian so that test runs with both systems</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_buildUtf" name="method_buildUtf" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">buildUtf()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">buildUtf()</pre>
+                <p><em>utf: the length of the data on 2 bytes and then the char data</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_buildLongUtf" name="method_buildLongUtf" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">buildLongUtf()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">buildLongUtf()</pre>
+                <p><em>long utf: the length of the data on 4 bytes and then the char data. The char data is more than 65xxx long</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_buildNumber" name="method_buildNumber" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">buildNumber()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">buildNumber()</pre>
+                <p><em>number: type is0, then value in (double)8 bytes. See buildDouble for little/big endian</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_buildBoolean" name="method_buildBoolean" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">buildBoolean()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">buildBoolean()</pre>
+                <p><em>build boolean</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_buildString" name="method_buildString" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">buildString()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">buildString()</pre>
+                <p><em>build string</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_buildObject" name="method_buildObject" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">buildObject()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">buildObject()</pre>
+                <p><em>build object</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_buildNull" name="method_buildNull" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">buildNull()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">buildNull()</pre>
+                <p><em>build null</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_buildUndefined" name="method_buildUndefined" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">buildUndefined()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">buildUndefined()</pre>
+                <p><em>build undefined</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_buildReference" name="method_buildReference" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">buildReference()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">buildReference()</pre>
+                <p><em>TODO test with a real reference?</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_buildEcmaArray" name="method_buildEcmaArray" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">buildEcmaArray()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">buildEcmaArray()</pre>
+                <p><em>the writeArray method looks at the keys. If there are both numeric and string keys, the data is treated as an Ecma Array
+it also sorts the data and writes the data with numerical keys first, then the data with string keys</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_buildObjectEnd" name="method_buildObjectEnd" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">buildObjectEnd()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">buildObjectEnd()</pre>
+                <p><em>build object end</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_buildStrictArray" name="method_buildStrictArray" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">buildStrictArray()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">buildStrictArray()</pre>
+                <p><em>build strict array</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_buildDate" name="method_buildDate" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">buildDate()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">buildDate()</pre>
+                <p><em>build date</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_buildLongString" name="method_buildLongString" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">buildLongString()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">buildLongString()</pre>
+                <p><em>build long string</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_buildUnsupported" name="method_buildUnsupported" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">buildUnsupported()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">buildUnsupported()</pre>
+                <p><em>TODO: no writeUnsupported method, and no PHP for unsupported. Write it A.S.</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_buildXml" name="method_buildXml" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">buildXml()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">buildXml()</pre>
+                <p><em>note: the writeXml method gets rids of CRs and LFs</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_buildTypedObject" name="method_buildTypedObject" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">buildTypedObject()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">buildTypedObject()</pre>
+                <p><em>note: the writeXml method gets rids of CRs and LFs</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_buildEmptyPacket" name="method_buildEmptyPacket" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">buildEmptyPacket()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">buildEmptyPacket()</pre>
+                <p><em>test serializing an empty Amfphp_Core_Amf_Packet.</em></p>
+                <p>expected output: 0x000000
+1st int : version
+2nd int : number of headers
+3rd int : number of Messages</p>
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_buildNullHeaderPacket" name="method_buildNullHeaderPacket" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">buildNullHeaderPacket()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">buildNullHeaderPacket()</pre>
+                <p><em>one header containing a null, and with required set to true</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_buildStringHeaderPacket" name="method_buildStringHeaderPacket" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">buildStringHeaderPacket()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">buildStringHeaderPacket()</pre>
+                <p><em>with one header containing a string</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_buildNullMessagePacket" name="method_buildNullMessagePacket" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">buildNullMessagePacket()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">buildNullMessagePacket()</pre>
+                <p><em>no headers and a Message containing a null</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_buildStringMessagePacket" name="method_buildStringMessagePacket" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">buildStringMessagePacket()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">buildStringMessagePacket()</pre>
+                <p><em>no headers and a Message containing a string</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_build2HeadersAndTwoMessagesPacket" name="method_build2HeadersAndTwoMessagesPacket" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">build2HeadersAndTwoMessagesPacket()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">build2HeadersAndTwoMessagesPacket()</pre>
+                <p><em>an Amfphp_Core_Amf_Packet with two headers one with a string and one with a null , and two Messages, one with a string and one with a null</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_buildSimpleTestServiceRequestAndResponse" name="method_buildSimpleTestServiceRequestAndResponse" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">buildSimpleTestServiceRequestAndResponse()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">buildSimpleTestServiceRequestAndResponse()</pre>
+                <p><em>build simple test service reauest and response</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">AmfTestData.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/Tests/TestData/AmfTestData.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                            <li><a href="../namespaces/NService.html">\NService</a></li>
+                                                                            <li><a href="../namespaces/NVo.html">\NVo</a></li>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on July 28th, 2014 at 13:37.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>

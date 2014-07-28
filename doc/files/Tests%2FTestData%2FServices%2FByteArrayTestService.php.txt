@@ -1,0 +1,40 @@
+<?php
+/**
+ *  This file is part of amfPHP
+ *
+ * LICENSE
+ *
+ * This source file is subject to the license that is bundled
+ * with this package in the file license.txt.
+ * @package Tests_TestData_Services
+ */
+
+/**
+ * a service for tests on byte arrays
+ *
+ * @package Tests_TestData_Services
+ * @author Ariel Sommeria-klein
+ */
+
+class ByteArrayTestService {
+
+    /**
+     * uncompresses a bytearray, writes the uncompressed data to a file, received.jpg
+     * @param data, an array containing 2 byte arrays, one compressed one not
+     * @return true 
+     */
+    public function uploadCompressedByteArray($data){
+		
+		//uncomment to test with gzuncompress
+        $uncompressed = gzuncompress($data[0]->data);
+        //uncomment to save file to jpeg
+        //file_put_contents('received.jpg', $uncompressed);
+		if(get_class($data[1]) != 'Amfphp_Core_Amf_Types_ByteArray'){
+			throw new Exception("second element on data not a byte array");
+		}
+        return true;
+
+    }
+}
+?>
+

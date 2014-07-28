@@ -62,3 +62,5 @@ BackOffice/ClientGenerator/Generators/AmfphpFlashClientGenerator/Template/bin-de
 Tests/TestData/request.amf
 
 BackOffice/extraConfig.php
+
+phpDocumentor.phar

@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>API Documentation</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="https://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">API Documentation</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown">
+                        <a href="../index.html" class="dropdown-toggle" data-toggle="dropdown">
+                            API Documentation <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                                                        <li><a href="../namespaces/NService.html">\NService</a></li>
+                                                        <li><a href="../namespaces/NVo.html">\NVo</a></li>
+                                                    </ul>
+                    </li>
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">146</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">15</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1238606991"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-1238606991" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1507127594"></a>
+                                <a href="../namespaces/NService.html" style="margin-left: 30px; padding-left: 0">NService</a>
+            </div>
+            <div id="namespace-1507127594" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1744450523"></a>
+                                <a href="../namespaces/NService.Sub1.html" style="margin-left: 30px; padding-left: 0">Sub1</a>
+            </div>
+            <div id="namespace-1744450523" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/NService.Sub1.NamespaceTestService.html">NamespaceTestService</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/NService.NamespaceTestService.html">NamespaceTestService</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-658774259"></a>
+                                <a href="../namespaces/NVo.html" style="margin-left: 30px; padding-left: 0">NVo</a>
+            </div>
+            <div id="namespace-658774259" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1463327568"></a>
+                                <a href="../namespaces/NVo.Sub1.html" style="margin-left: 30px; padding-left: 0">Sub1</a>
+            </div>
+            <div id="namespace-1463327568" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/NVo.Sub1.NamespaceTestVo.html">NamespaceTestVo</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/NVo.NamespaceTestVo.html">NamespaceTestVo</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/Amfphp_Core_Common_IDeserializedRequestHandler.html">Amfphp_Core_Common_IDeserializedRequestHandler</a></li>
+                                                    <li class="interface"><a href="../classes/Amfphp_Core_Common_IDeserializer.html">Amfphp_Core_Common_IDeserializer</a></li>
+                                                    <li class="interface"><a href="../classes/Amfphp_Core_Common_IExceptionHandler.html">Amfphp_Core_Common_IExceptionHandler</a></li>
+                                                    <li class="interface"><a href="../classes/Amfphp_Core_Common_ISerializer.html">Amfphp_Core_Common_ISerializer</a></li>
+                                                    <li class="interface"><a href="../classes/Amfphp_Core_Common_IVoConverter.html">Amfphp_Core_Common_IVoConverter</a></li>
+                                                                                                    <li class="class"><a href="../classes/Amf3DeserializationTest.html">Amf3DeserializationTest</a></li>
+                                                    <li class="class"><a href="../classes/Amf3SerializationTest.html">Amf3SerializationTest</a></li>
+                                                    <li class="class"><a href="../classes/Amf3TestData.html">Amf3TestData</a></li>
+                                                    <li class="class"><a href="../classes/AmfDeserializerWrapper.html">AmfDeserializerWrapper</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_BackOffice_AccessManager.html">Amfphp_BackOffice_AccessManager</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_BackOffice_ClientGenerator_GeneratorManager.html">Amfphp_BackOffice_ClientGenerator_GeneratorManager</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html">Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_BackOffice_ClientGenerator_Util.html">Amfphp_BackOffice_ClientGenerator_Util</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_BackOffice_Config.html">Amfphp_BackOffice_Config</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Amf_Constants.html">Amfphp_Core_Amf_Constants</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Amf_Deserializer.html">Amfphp_Core_Amf_Deserializer</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Amf_Handler.html">Amfphp_Core_Amf_Handler</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Amf_Header.html">Amfphp_Core_Amf_Header</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Amf_Message.html">Amfphp_Core_Amf_Message</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Amf_Packet.html">Amfphp_Core_Amf_Packet</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Amf_Serializer.html">Amfphp_Core_Amf_Serializer</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Amf_Types_ByteArray.html">Amfphp_Core_Amf_Types_ByteArray</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Amf_Types_Date.html">Amfphp_Core_Amf_Types_Date</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Amf_Types_Undefined.html">Amfphp_Core_Amf_Types_Undefined</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Amf_Types_Vector.html">Amfphp_Core_Amf_Types_Vector</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Amf_Types_Xml.html">Amfphp_Core_Amf_Types_Xml</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Amf_Types_XmlDocument.html">Amfphp_Core_Amf_Types_XmlDocument</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Amf_Util.html">Amfphp_Core_Amf_Util</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Amf_UtilTest.html">Amfphp_Core_Amf_UtilTest</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Common_ClassFindInfo.html">Amfphp_Core_Common_ClassFindInfo</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Common_ServiceCallParameters.html">Amfphp_Core_Common_ServiceCallParameters</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Common_ServiceRouter.html">Amfphp_Core_Common_ServiceRouter</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Common_ServiceRouterTest.html">Amfphp_Core_Common_ServiceRouterTest</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Config.html">Amfphp_Core_Config</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Exception.html">Amfphp_Core_Exception</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_FilterManager.html">Amfphp_Core_FilterManager</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_FilterManagerTest.html">Amfphp_Core_FilterManagerTest</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_Gateway.html">Amfphp_Core_Gateway</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_GatewayTest.html">Amfphp_Core_GatewayTest</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_HttpRequestGatewayFactory.html">Amfphp_Core_HttpRequestGatewayFactory</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_PluginManager.html">Amfphp_Core_PluginManager</a></li>
+                                                    <li class="class"><a href="../classes/Amfphp_Core_PluginManagerTest.html">Amfphp_Core_PluginManagerTest</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpAuthentication.html">AmfphpAuthentication</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpAuthenticationTest.html">AmfphpAuthenticationTest</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpCharsetConverter.html">AmfphpCharsetConverter</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpCharsetConverterTest.html">AmfphpCharsetConverterTest</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpDiscovery.html">AmfphpDiscovery</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpDiscovery_MethodDescriptor.html">AmfphpDiscovery_MethodDescriptor</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpDiscovery_ParameterDescriptor.html">AmfphpDiscovery_ParameterDescriptor</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpDiscovery_ServiceDescriptor.html">AmfphpDiscovery_ServiceDescriptor</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpDiscoveryService.html">AmfphpDiscoveryService</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpDummy.html">AmfphpDummy</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpErrorHandler.html">AmfphpErrorHandler</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpErrorHandlerTest.html">AmfphpErrorHandlerTest</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpFlashClientGenerator.html">AmfphpFlashClientGenerator</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpFlexClientGenerator.html">AmfphpFlexClientGenerator</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpFlexMessaging.html">AmfphpFlexMessaging</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpFlexMessaging_AcknowledgeMessage.html">AmfphpFlexMessaging_AcknowledgeMessage</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpFlexMessaging_ErrorMessage.html">AmfphpFlexMessaging_ErrorMessage</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpFlexMessagingTest.html">AmfphpFlexMessagingTest</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpGet.html">AmfphpGet</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpHtmlClientGenerator.html">AmfphpHtmlClientGenerator</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpJson.html">AmfphpJson</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpLogger.html">AmfphpLogger</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpLoggerTest.html">AmfphpLoggerTest</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpMonitor.html">AmfphpMonitor</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpMonitorService.html">AmfphpMonitorService</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpMonitorTest.html">AmfphpMonitorTest</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpVoConverter.html">AmfphpVoConverter</a></li>
+                                                    <li class="class"><a href="../classes/AmfphpVoConverterTest.html">AmfphpVoConverterTest</a></li>
+                                                    <li class="class"><a href="../classes/AmfSerializerWrapper.html">AmfSerializerWrapper</a></li>
+                                                    <li class="class"><a href="../classes/AmfTestData.html">AmfTestData</a></li>
+                                                    <li class="class"><a href="../classes/AuthenticationService.html">AuthenticationService</a></li>
+                                                    <li class="class"><a href="../classes/BadSyntaxService.html">BadSyntaxService</a></li>
+                                                    <li class="class"><a href="../classes/ByteArrayTestService.html">ByteArrayTestService</a></li>
+                                                    <li class="class"><a href="../classes/DBUtils.html">DBUtils</a></li>
+                                                    <li class="class"><a href="../classes/DeserializationTest.html">DeserializationTest</a></li>
+                                                    <li class="class"><a href="../classes/DisabledPlugin.html">DisabledPlugin</a></li>
+                                                    <li class="class"><a href="../classes/DummyClass.html">DummyClass</a></li>
+                                                    <li class="class"><a href="../classes/DummyPlugin.html">DummyPlugin</a></li>
+                                                    <li class="class"><a href="../classes/DummyService.html">DummyService</a></li>
+                                                    <li class="class"><a href="../classes/DummyVo.html">DummyVo</a></li>
+                                                    <li class="class"><a href="../classes/DummyVo2.html">DummyVo2</a></li>
+                                                    <li class="class"><a href="../classes/EmptyMoreService.html">EmptyMoreService</a></li>
+                                                    <li class="class"><a href="../classes/ExampleSerializationDebugService.html">ExampleSerializationDebugService</a></li>
+                                                    <li class="class"><a href="../classes/ExampleService.html">ExampleService</a></li>
+                                                    <li class="class"><a href="../classes/MySQLUtil.html">MySQLUtil</a></li>
+                                                    <li class="class"><a href="../classes/MyVO.html">MyVO</a></li>
+                                                    <li class="class"><a href="../classes/PizzaService.html">PizzaService</a></li>
+                                                    <li class="class"><a href="../classes/SerializationTest.html">SerializationTest</a></li>
+                                                    <li class="class"><a href="../classes/TestAuthenticationService.html">TestAuthenticationService</a></li>
+                                                    <li class="class"><a href="../classes/TestPlugin.html">TestPlugin</a></li>
+                                                    <li class="class"><a href="../classes/TestService.html">TestService</a></li>
+                                                    <li class="class"><a href="../classes/TestServicesConfig.html">TestServicesConfig</a></li>
+                                                    <li class="class"><a href="../classes/TestVo1.html">TestVo1</a></li>
+                                                    <li class="class"><a href="../classes/TestVo2.html">TestVo2</a></li>
+                                                    <li class="class"><a href="../classes/TestVo3.html">TestVo3</a></li>
+                                                    <li class="class"><a href="../classes/UserService.html">UserService</a></li>
+                                                    <li class="class"><a href="../classes/UserVo1.html">UserVo1</a></li>
+                                                    <li class="class"><a href="../classes/VoService.html">VoService</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/default.html">\</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\</small>AmfphpFlexClientGenerator</h1>
+                    <p><em>generates a Flash project for consumption of amfPHP services</em></p>
+                    <ol>
+<li>looks for template directives in the code. Usually these directives indicate a block of code that must be replicated.
+Each directive starts with '/*<em>ACG' and must end with </em> /
+note that services in subfolders should get a special treatment, and ideally code would be generated in them
+with additionnal sub-packages. This is technically too messy, so the '/' is simply replaced
+by '__'.  This will be replaced by a '/' in Amfphp.</li>
+</ol>
+
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/AmfphpFlexClientGenerator.html#method___construct" class="">__construct()</a><br />
+                                                                    <a href="../classes/AmfphpFlexClientGenerator.html#method_getUiCallText" class="">getUiCallText()</a><br />
+                                                                    <a href="../classes/AmfphpFlexClientGenerator.html#method_getInfoUrl" class="">getInfoUrl()</a><br />
+                                                                    <a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#method_getTestUrlSuffix" class="">getTestUrlSuffix()</a><br />
+                                                                    <a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#method_generate" class="">generate()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#property_targetFolder" class="">$targetFolder</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#constant__SERVICE_" class="">_SERVICE_</a><br />
+                                                                    <a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#constant__METHOD_" class="">_METHOD_</a><br />
+                                                                    <a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#constant__PARAMETER_" class="">_PARAMETER_</a><br />
+                                                                    <a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#constant_SERVICE" class="">SERVICE</a><br />
+                                                                    <a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#constant_METHOD" class="">METHOD</a><br />
+                                                                    <a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#constant_PARAMETER" class="">PARAMETER</a><br />
+                                                                    <a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#constant_PARAMETER_COMMA" class="">PARAMETER_COMMA</a><br />
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#method_searchForBlocksAndApplyProcessing" class="">searchForBlocksAndApplyProcessing()</a><br />
+                                                                    <a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#method_processSourceFile" class="">processSourceFile()</a><br />
+                                                                    <a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#method_generateServiceFiles" class="">generateServiceFiles()</a><br />
+                                                                    <a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#method_generateOneServiceFileCode" class="">generateOneServiceFileCode()</a><br />
+                                                                    <a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#method_processServiceListBlock" class="">processServiceListBlock()</a><br />
+                                                                    <a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#method_processMethodListBlock" class="">processMethodListBlock()</a><br />
+                                                                    <a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#method_processParameterListBlock" class="">processParameterListBlock()</a><br />
+                                                                    <a href="../classes/AmfphpFlexClientGenerator.html#method_processParameterCommaListBlock" class="">processParameterCommaListBlock()</a><br />
+                                                                    <a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#method_wrapComment" class="">wrapComment()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#property_codeFileExtensions" class="">$codeFileExtensions</a><br />
+                                                                    <a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#property_templateFolderUrl" class="">$templateFolderUrl</a><br />
+                                                                    <a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#property_services" class="">$services</a><br />
+                                                                    <a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#property_serviceBeingProcessed" class="">$serviceBeingProcessed</a><br />
+                                                                    <a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#property_methodBeingProcessed" class="">$methodBeingProcessed</a><br />
+                                                                    <a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#property_fileBeingProcessed" class="">$fileBeingProcessed</a><br />
+                                                                    <a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html#property_amfphpEntryPointUrl" class="">$amfphpEntryPointUrl</a><br />
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <em>No private methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No private properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/BackOffice.ClientGenerator.Generators.AmfphpFlexClientGenerator.AmfphpFlexClientGenerator.html"><div class="path-wrapper">BackOffice/ClientGenerator/Generators/AmfphpFlexClientGenerator/AmfphpFlexClientGenerator.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">\Amfphp_Backoffice_Generators</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                                                                                                                                                
+                                        <div class="namespace-wrapper"><a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html">\Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</a></div>
+                                                                                                    <div class="namespace-wrapper">\AmfphpFlexClientGenerator</div>
+                            </dd>
+
+                        
+                        
+                        
+                        
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr>
+                            <th>
+                                author
+                            </th>
+                            <td>
+                                                                    <p>Ariel Sommeria-klein</p>
+                                                            </td>
+                        </tr>
+                                        </table>
+                </aside>
+            </div>
+
+                                    <a id="constants" name="constants"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Constants</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant__SERVICE_" name="constant__SERVICE_" class="anchor"></a>
+            <article id="constant__SERVICE_" class="constant">
+                <h3 class="">_SERVICE_</h3>
+                <pre class="signature">_SERVICE_</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html"><div class="path-wrapper">\Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant__METHOD_" name="constant__METHOD_" class="anchor"></a>
+            <article id="constant__METHOD_" class="constant">
+                <h3 class="">_METHOD_</h3>
+                <pre class="signature">_METHOD_</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html"><div class="path-wrapper">\Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant__PARAMETER_" name="constant__PARAMETER_" class="anchor"></a>
+            <article id="constant__PARAMETER_" class="constant">
+                <h3 class="">_PARAMETER_</h3>
+                <pre class="signature">_PARAMETER_</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html"><div class="path-wrapper">\Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_SERVICE" name="constant_SERVICE" class="anchor"></a>
+            <article id="constant_SERVICE" class="constant">
+                <h3 class="">SERVICE</h3>
+                <pre class="signature">SERVICE</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html"><div class="path-wrapper">\Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_METHOD" name="constant_METHOD" class="anchor"></a>
+            <article id="constant_METHOD" class="constant">
+                <h3 class="">METHOD</h3>
+                <pre class="signature">METHOD</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html"><div class="path-wrapper">\Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_PARAMETER" name="constant_PARAMETER" class="anchor"></a>
+            <article id="constant_PARAMETER" class="constant">
+                <h3 class="">PARAMETER</h3>
+                <pre class="signature">PARAMETER</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html"><div class="path-wrapper">\Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_PARAMETER_COMMA" name="constant_PARAMETER_COMMA" class="anchor"></a>
+            <article id="constant_PARAMETER_COMMA" class="constant">
+                <h3 class="">PARAMETER_COMMA</h3>
+                <pre class="signature">PARAMETER_COMMA</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html"><div class="path-wrapper">\Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                            
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_targetFolder" name="property_targetFolder" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$targetFolder</h3>
+                <pre class="signature">$targetFolder : string</pre>
+                <p><em>absolute!</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html"><div class="path-wrapper">\Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_codeFileExtensions" name="property_codeFileExtensions" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$codeFileExtensions</h3>
+                <pre class="signature">$codeFileExtensions : array</pre>
+                <p><em>code file extensions to parse.</em></p>
+                <p>for example array('as')</p>
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html"><div class="path-wrapper">\Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_templateFolderUrl" name="property_templateFolderUrl" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$templateFolderUrl</h3>
+                <pre class="signature">$templateFolderUrl : string</pre>
+                <p><em>absolute path to folder where template is</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html"><div class="path-wrapper">\Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_services" name="property_services" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$services</h3>
+                <pre class="signature">$services : array</pre>
+                <p><em>services</em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html"><div class="path-wrapper">\Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_serviceBeingProcessed" name="property_serviceBeingProcessed" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$serviceBeingProcessed</h3>
+                <pre class="signature">$serviceBeingProcessed : \stdClass</pre>
+                <p><em>service being processed.</em></p>
+                <p>untyped</p>
+
+                                <h4>Type</h4>
+                \stdClass
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html"><div class="path-wrapper">\Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</div></a></dd>
+                                                                            <dt>See also</dt>
+                                                                <dd><a href="../classes/AmfphpDiscovery_ServiceDescriptor.html"><span class="namespace-wrapper"></span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_methodBeingProcessed" name="property_methodBeingProcessed" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$methodBeingProcessed</h3>
+                <pre class="signature">$methodBeingProcessed : \stdClass</pre>
+                <p><em>method being processed.</em></p>
+                <p>untyped</p>
+
+                                <h4>Type</h4>
+                \stdClass
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html"><div class="path-wrapper">\Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</div></a></dd>
+                                                                            <dt>See also</dt>
+                                                                <dd><a href="../classes/AmfphpDiscovery_MethodDescriptor.html"><span class="namespace-wrapper"></span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_fileBeingProcessed" name="property_fileBeingProcessed" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$fileBeingProcessed</h3>
+                <pre class="signature">$fileBeingProcessed : \SplFileInfo</pre>
+                <p><em>file being processed, useful for error messages</em></p>
+                
+
+                                <h4>Type</h4>
+                \SplFileInfo
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html"><div class="path-wrapper">\Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_amfphpEntryPointUrl" name="property_amfphpEntryPointUrl" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$amfphpEntryPointUrl</h3>
+                <pre class="signature">$amfphpEntryPointUrl : string</pre>
+                <p><em>url</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html"><div class="path-wrapper">\Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___construct" name="method___construct" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">__construct()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__construct()</pre>
+                <p><em>constructor</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getUiCallText" name="method_getUiCallText" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getUiCallText()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getUiCallText() : string</pre>
+                <p><em>get ui call text</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getInfoUrl" name="method_getInfoUrl" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getInfoUrl()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getInfoUrl() : string</pre>
+                <p><em>info url</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getTestUrlSuffix" name="method_getTestUrlSuffix" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getTestUrlSuffix()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getTestUrlSuffix()</pre>
+                <p><em>added to the url of the generated code to go to its test page directly fro, the client generator ui
+for example: &#039;testhtml&#039;/index.html&#039;
+return false if none, for example if the generated client must be compiled first</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html"><div class="path-wrapper">\Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_generate" name="method_generate" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">generate()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">generate(array <span class="argument">$services</span>, string <span class="argument">$amfphpEntryPointUrl</span>,  <span class="argument">$targetFolder</span>) : null</pre>
+                <p><em>generate project based on template</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$services </td>
+                                <td><p>. note: here '/' in each service name is replaced by '__', to avoid dealing with packages</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$amfphpEntryPointUrl </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$targetFolder </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    null
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html"><div class="path-wrapper">\Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_searchForBlocksAndApplyProcessing" name="method_searchForBlocksAndApplyProcessing" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">searchForBlocksAndApplyProcessing()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">searchForBlocksAndApplyProcessing(String <span class="argument">$code</span>, String <span class="argument">$directive</span>,  <span class="argument">$functionName</span>) : \mixed.</pre>
+                <p><em>looks for blocks delimited by the start and stop markers matching the directive, and applies a processing function to each
+found block.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>String</td>
+                                <td>$code </td>
+                                <td><p>the template code. Is modified continually</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>String</td>
+                                <td>$directive </td>
+                                <td><p>for example 'SERVICE'</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$functionName </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \mixed.
+                                            &mdash; <p>if there was a change, returns the modified code, else returns false</p>
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html"><div class="path-wrapper">\Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_processSourceFile" name="method_processSourceFile" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">processSourceFile()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">processSourceFile(\SplFileInfo <span class="argument">$file</span>)</pre>
+                <p><em>load the code, and look if either file is a service block, or if it contains service blocks.</em></p>
+                <p>If the file is a service block(detected by having '<em>SERVICE</em>' in the file name), call generateServiceFiles
+If not, look for block delimited by the 'SERVICE' directive and call processServiceListBlock on them
+Also sets the amfphp entry point url</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\SplFileInfo</td>
+                                <td>$file </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html"><div class="path-wrapper">\Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_generateServiceFiles" name="method_generateServiceFiles" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">generateServiceFiles()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">generateServiceFiles(String <span class="argument">$code</span>, \SplFileInfo <span class="argument">$file</span>)</pre>
+                <p><em>generate as many copies as there are services and
+treat it as a service block.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>String</td>
+                                <td>$code </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>\SplFileInfo</td>
+                                <td>$file </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html"><div class="path-wrapper">\Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_generateOneServiceFileCode" name="method_generateOneServiceFileCode" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">generateOneServiceFileCode()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">generateOneServiceFileCode(String <span class="argument">$code</span>) : String</pre>
+                <p><em>generates code for one Service File.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>String</td>
+                                <td>$code </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    String
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html"><div class="path-wrapper">\Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_processServiceListBlock" name="method_processServiceListBlock" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">processServiceListBlock()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">processServiceListBlock(\type <span class="argument">$code</span>)</pre>
+                <p><em>finds method blocks.</em></p>
+                <p>applies processMethodListBlock to each of them
+then multiplies and adapts the resulting code for each service</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\type</td>
+                                <td>$code </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html"><div class="path-wrapper">\Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_processMethodListBlock" name="method_processMethodListBlock" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">processMethodListBlock()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">processMethodListBlock(\type <span class="argument">$code</span>)</pre>
+                <p><em>finds parameter blocks.</em></p>
+                <p>applies processParameterListBlock to each of them
+then multiplies and adapts the resulting code for each method</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\type</td>
+                                <td>$code </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html"><div class="path-wrapper">\Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_processParameterListBlock" name="method_processParameterListBlock" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">processParameterListBlock()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">processParameterListBlock(\type <span class="argument">$code</span>)</pre>
+                <p><em>multiplies and adapts the code for each parameter</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\type</td>
+                                <td>$code </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html"><div class="path-wrapper">\Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_processParameterCommaListBlock" name="method_processParameterCommaListBlock" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">processParameterCommaListBlock()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">processParameterCommaListBlock(\type <span class="argument">$code</span>)</pre>
+                <p><em>multiplies and adapts the code for each parameter, but adds a comma between each.</em></p>
+                <p>duplicated and enhanced to add typing. Right now vo typing is not supported, only primitive types, like int, boolean, string etc.
+note: this is copied from the flash generator. @todo maybe find a way to maintain the code only in one place</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\type</td>
+                                <td>$code </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_wrapComment" name="method_wrapComment" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">wrapComment()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">wrapComment(\type <span class="argument">$comment</span>)</pre>
+                <p><em>$comment is stripped in discovery service, and needs to be wrapped with comment markers before
+ being reinserted in code. Here this is done with slashes and stars</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\type</td>
+                                <td>$comment </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Amfphp_BackOffice_ClientGenerator_LocalClientGenerator.html"><div class="path-wrapper">\Amfphp_BackOffice_ClientGenerator_LocalClientGenerator</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">AmfphpFlexClientGenerator.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/BackOffice/ClientGenerator/Generators/AmfphpFlexClientGenerator/AmfphpFlexClientGenerator.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                            <li><a href="../namespaces/NService.html">\NService</a></li>
+                                                                            <li><a href="../namespaces/NVo.html">\NVo</a></li>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on July 28th, 2014 at 13:37.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>
