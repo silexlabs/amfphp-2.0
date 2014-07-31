@@ -7,7 +7,6 @@
  *
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
- * @package Amfphp_Core_Amf
  */
 
 /**
@@ -81,7 +80,7 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer {
     protected $amf0storedObjects;
 
     /**
-     *
+     * converts VOs directly if set, rather than instanciating anonymous classes that are converted later
      * @var Amfphp_Core_Common_IVoConverter
      */
     public $voConverter;

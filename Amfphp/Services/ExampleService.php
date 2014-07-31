@@ -6,7 +6,6 @@
  *
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
- * @package Amfphp_Services
  */
 
 
@@ -192,13 +191,16 @@ class ExampleService {
     }
 	
     /**
+     * useful for testing a messy, nested typed obj
     * @param mixed $param example:  {"_explicitType":"UserVo1", "name":"ariel", "status":"bla", "sub1":  {"_explicitType":"Sub1", "name":"ariel", "status":"bla", "sub2":  {"_explicitType":"Sub2", "name":"ariel", "status":"bla"}, "sub2again": {"_explicitType":"Sub2", "name":"ariel2", "status":"bla2"}}}
     */
-
     public function testComplicatedTypedObj($param){
         return $param;
     }
     
+    /**
+     * adds custom markers for monitoring
+     */
     public function testCustomMonitorTime(){
         usleep(200000);
         AmfphpMonitor::addTime('operation 1');
@@ -210,5 +212,8 @@ class ExampleService {
     }
 }
 
+/**
+ * dummy class
+ */
 class DummyVo {}
 ?>

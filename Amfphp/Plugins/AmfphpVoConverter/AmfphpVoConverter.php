@@ -7,7 +7,6 @@
  *
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
- * @package Amfphp_Plugins_VoConverter
  */
 
 /**
@@ -67,6 +66,7 @@ class AmfphpVoConverter implements Amfphp_Core_Common_IVoConverter {
     public $enforceConversion;
     
     /**
+     * should objects be scanned or converted. 
      * @see setScanEnabled
      * default true
      * @var boolean
@@ -93,6 +93,10 @@ class AmfphpVoConverter implements Amfphp_Core_Common_IVoConverter {
         $filterManager->addFilter(Amfphp_Core_Gateway::FILTER_DESERIALIZED_RESPONSE, $this, 'filterDeserializedResponse');
     }
     
+    /**
+     *  provides this as a default vo converter
+     * @return \AmfphpVoConverter
+     */
     public function filterVoConverter(){
         return $this;
     }

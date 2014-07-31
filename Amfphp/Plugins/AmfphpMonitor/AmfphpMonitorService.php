@@ -1,5 +1,4 @@
 <?php
-
 /**
  *  This file is part of amfPHP
  *
@@ -7,16 +6,21 @@
  *
  * This source file is subject to the license that is bundled
  * with this package in the file license.txt.
- * @package Amfphp_Plugins_Monitor
+ */
 
 /**
- * monitoring service. controls logging, qnd provides method to fetch data.
+ * monitoring service. controls logging, and provides method to fetch data.
  *
  * @amfphpHide
  * @package Amfphp_Plugins_Monitor
  * @author Ariel Sommeria-klein
  */
 class AmfphpMonitorService {
+    /**
+     * path to log. 
+     * @see AmfphpMonitor maxLogFileSize
+     * @var type string
+     */
     public static $logPath;
 
 
@@ -28,6 +32,7 @@ class AmfphpMonitorService {
     
        
     /**
+     * max log file size
      * @see AmfphpMonitor maxLogFileSize
      * @var int 
      */
