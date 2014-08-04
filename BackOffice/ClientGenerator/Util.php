@@ -71,6 +71,12 @@ class Amfphp_BackOffice_ClientGenerator_Util {
 
 // add each file in the file list to the archive
         foreach ($filelist as $value) {
+            if($value == '.'){
+                continue;
+            }
+            if($value == '..'){
+                continue;
+            }
             $localName = str_replace($removeFromLocalName, '', $value);
             if(!$zip->addFile(realpath($value), $localName)){
                 throw new Exception("ERROR: Could not add file: $key");
