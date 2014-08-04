@@ -108,7 +108,8 @@ $config = new Amfphp_BackOffice_Config();
         require_once(dirname(__FILE__) . '/Footer.inc.php');
         ?>
             <script>
-$(function () {	      
+$(function () {	   
+    amfphp.entryPointUrl = amfphpEntryPointUrl + "?contentType=application/json";   
     $("#tabName").html("Client Generator  &nbsp;&nbsp;<a href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/client-generator/' target='_blank'>?</a>");
     
     $("#clientGeneratorLink").addClass("chosen");

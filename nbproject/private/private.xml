@@ -5,14 +5,33 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/README.html</file>
+            <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/Amfphp/Plugins/AmfphpDiscovery/ParameterDescriptor.php</file>
             <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/Amfphp/Plugins/AmfphpDiscovery/AmfphpDiscoveryService.php</file>
-            <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/Amfphp/Plugins/AmfphpMonitor/AmfphpMonitor.php</file>
+            <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/BackOffice/Config.php</file>
+            <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/Amfphp/Plugins/AmfphpDiscovery/MethodDescriptor.php</file>
+            <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/Amfphp/Plugins/AmfphpMonitor/AmfphpMonitorService.php</file>
             <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/BackOffice/extraConfig.php</file>
-            <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/changelog.txt</file>
-            <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/Tests/TestData/TestServicesConfig.php</file>
-            <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/Tests/TestData/index.php</file>
+            <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/Amfphp/Plugins/AmfphpGet/AmfphpGet.php</file>
+            <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/Amfphp/Plugins/AmfphpDummy/AmfphpDummy.php</file>
+            <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/Amfphp/Plugins/AmfphpCharsetConverter/AmfphpCharsetConverter.php</file>
+            <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/Amfphp/Plugins/AmfphpAuthentication/AmfphpAuthentication.php</file>
+            <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/Amfphp/Plugins/AmfphpDiscovery/AmfphpDiscovery.php</file>
+            <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/Amfphp/Plugins/AmfphpLogger/AmfphpLogger.php</file>
+            <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/Amfphp/Plugins/AmfphpMonitor/AmfphpMonitor.php</file>
+            <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/Amfphp/Plugins/AmfphpJson/AmfphpJson.php</file>
+            <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/Amfphp/Plugins/AmfphpDiscovery/ServiceDescriptor.php</file>
             <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/release_process.txt</file>
+            <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/Amfphp/Plugins/AmfphpErrorHandler/AmfphpErrorHandler.php</file>
+            <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/Amfphp/Core/Amf/Serializer.php</file>
+            <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/Amfphp/Plugins/AmfphpVoConverter/AmfphpVoConverter.php</file>
+            <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/Amfphp/ClassLoader.php</file>
+            <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/Amfphp/Core/Amf/Deserializer.php</file>
+            <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/Amfphp/Services/ExampleService.php</file>
+            <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/Amfphp/Plugins/AmfphpDummy/index.html</file>
+            <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/Amfphp/index.php</file>
+            <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/Amfphp/Plugins/AmfphpFlexMessaging/AcknowledgeMessage.php</file>
+            <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/Amfphp/Plugins/AmfphpFlexMessaging/ErrorMessage.php</file>
+            <file>file:/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/Amfphp/Plugins/AmfphpFlexMessaging/AmfphpFlexMessaging.php</file>
         </group>
     </open-files>
 </project-private>

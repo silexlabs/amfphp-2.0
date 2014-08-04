@@ -125,6 +125,7 @@ if ($config->fetchAmfphpUpdates) {
 
 
             $(function () {	
+                amfphp.entryPointUrl = amfphpEntryPointUrl + "?contentType=application/json";
                 $("#tabName").html("Profiler &nbsp;&nbsp;<a href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/' target='_blank'>?</a>");
                 $("#profilerLink").addClass("chosen");
 
@@ -395,6 +396,7 @@ if ($config->fetchAmfphpUpdates) {
             
             function onServerError(jqXHR, textStatus ){
                 var responseText = jqXHR.responseText;
+                responseText = "Error communicating with the server at " + amfphp.entryPointUrl + ": <br/>" + responseText;
                 if(responseText.indexOf("AmfphpMonitorService service not found") != -1){
                     showErrorMessage("The AmfphpMonitorService could not be called. This is most likely because AmfphpMonitor plugin is not enabled. See the <a href='http://www.silexlabs.org/amfphp/documentation/using-the-back-office/profiler/'>documentation</a>.");
                     return;
@@ -410,7 +412,7 @@ if ($config->fetchAmfphpUpdates) {
                 }
 
 
-                showErrorMessage(textStatus + "<br/><br/>" + jqXHR.responseText);
+                showErrorMessage(textStatus + "<br/><br/>" + responseText);
                 
             }
         </script>

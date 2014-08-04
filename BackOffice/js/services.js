@@ -8,7 +8,7 @@ amfphp.services = {};
 /**
  * set by default to server url with which the code was generated. The contentType parameter is to make sure the server interprets the request as JSON
  * */
-amfphp.entryPointUrl = "http://localhost/workspaceNetbeans/amfphp-2.0/BackOffice/../Tests/TestData/index.php?contentType=application/json";
+amfphp.entryPointUrl = "../Amfphp/index.php?contentType=application/json";
 
 /** 
 *   monitoring service. controls logging, qnd provides method to fetch data.
