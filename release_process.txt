@@ -7,9 +7,9 @@ test examples
 test opening Amfphp/ with browser
 regenerate doc, and update online version
 check included readme.html
-make sure no flex builds, no generated clients, no extraConfig.php, no monitor log
+empty monitor log
 update version flag in 3 places: in the front/classloader.php, in backoffice/classloader.php ,and at downloads.silexlabs.org/amfphp/amfphp_updates.php
-create release zip
+create release zip with release.sh (includes making sure no flex builds, no generated clients, no extraConfig.php)
 upload to distribution platform(sourceforge)
 download it again for a quick test
 
