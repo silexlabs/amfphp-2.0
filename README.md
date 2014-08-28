@@ -33,12 +33,19 @@ Amfphp, Simple Remoting for Web Applications
 
 ## Package Contents
 The Amfphp library itself [Amfphp](./Amfphp)
+
 [The Back Office](./BackOffice)
+
 The Examples [Examples](./Examples)
+
 [The class reference](./doc/) 
+
 [Some free Amfphp images](./goodies/)
+
 [The license](./license.txt)
+
 [The change log ](./changelog.txt)
+
 The composer file(see [getcomposer.org](getcomposer.org)) [Composer](./composer.json)
 
 
