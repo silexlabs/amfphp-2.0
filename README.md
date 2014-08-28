@@ -46,6 +46,6 @@ The Examples [Examples](./Examples)
 
 [The change log ](./changelog.txt)
 
-The composer file(see [getcomposer.org](getcomposer.org)) [Composer](./composer.json)
+The composer file(see [getcomposer.org](http://getcomposer.org)) [Composer](./composer.json)
 
 
