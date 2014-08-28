@@ -18,11 +18,17 @@ Amfphp is maintained by Silex Labs.
 Amfphp, Simple Remoting for Web Applications
 
 [Feedback](http://www.silexlabs.org/amfphp/feedback/)
+
 [main Amfphp website](http://silexlabs.org/amfphp/)
+
 [Documentation](http://silexlabs.org/amfphp/documentation/)
+
 [Forums](http://www.silexlabs.org/groups/amfphp/amfphp-users/)
+
 [Source Code](https://github.com/silexlabs/amfphp-2.0)
+
 [Class Reference](http://community.silexlabs.org/amfphp/reference/)
+
 [Silex Labs](http://www.silexlabs.org/)
 
 ## Package Contents
