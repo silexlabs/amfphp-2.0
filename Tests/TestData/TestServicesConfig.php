@@ -37,8 +37,15 @@ class TestServicesConfig extends Amfphp_Core_Config {
         //$this->pluginsConfig['AmfphpVoConverter']['enforceConversion'] = true;
         
         //My tests, shouldn't be in release code!!
-        //
-        $this->pluginsFolders[] = '/Users/arielsommeria-klein/Documents/workspaces/baguetteamf/BaguetteAMF/amfphp_plugin/';
+        switch(php_uname('s')){
+            case 'Darwin':
+                $this->pluginsFolders[] = '/Users/arielsommeria-klein/Documents/workspaces/baguetteamf/BaguetteAMF/amfphp_plugin/';
+                break;
+            case 'Linux':
+                $this->pluginsFolders[] = '/var/www/baguetteamf/BaguetteAMF/amfphp_plugin/';
+                break;
+            
+        }
         //$this->serviceFolders [] = '/Users/arielsommeria-klein/Documents/workspaces/baguetteamf/test/Services/';
     }
 
