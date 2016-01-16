@@ -26,11 +26,7 @@ class Amfphp_Core_HttpRequestGatewayFactory {
      * @return <String> it's a binary stream, but there seems to be no better type than String for this.
      */
     static protected function getRawPostData(){
-        if (isset($GLOBALS['HTTP_RAW_POST_DATA'])) {
-            return $GLOBALS['HTTP_RAW_POST_DATA'];
-        }else{
-            return file_get_contents('php://input');
-        }
+    	return file_get_contents('php://input');
 
     }
 
