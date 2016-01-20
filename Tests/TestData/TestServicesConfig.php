@@ -39,7 +39,7 @@ class TestServicesConfig extends Amfphp_Core_Config {
         //My tests, shouldn't be in release code!!
         switch(php_uname('s')){
             case 'Darwin':
-                $this->pluginsFolders[] = '/Users/arielsommeria-klein/Documents/workspaces/baguetteamf/BaguetteAMF/amfphp_plugin/';
+                $this->pluginsFolders[] = '/Users/ariel/Documents/workspaces/baguetteamf/BaguetteAMF/amfphp_plugin/';
                 break;
             case 'Linux':
                 $this->pluginsFolders[] = '/var/www/baguetteamf/BaguetteAMF/amfphp_plugin/';
