@@ -35,11 +35,12 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer {
 
     /**
      * The current seek cursor of the stream
+     * note: must be initialised here to avoid error 'String offset cast occured' 
      *
      * @access protected
      * @var int
      */
-    protected $currentByte;
+    protected $currentByte = 0;
 
     /**
      * The number of headers in the packet left to process

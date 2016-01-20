@@ -103,7 +103,7 @@ class AmfSerializerWrapper extends Amfphp_Core_Amf_Serializer {
      * write xml
      * @param Amfphp_Core_Amf_Types_Xml $d
      */
-    public function writeXML($d) {
+    public function writeXML(Amfphp_Core_Amf_Types_Xml $d) {
         parent::writeXML($d);
     }
 
@@ -111,7 +111,7 @@ class AmfSerializerWrapper extends Amfphp_Core_Amf_Serializer {
      * write date
      * @param Amfphp_Core_Amf_Types_Date $d
      */
-    public function writeDate($d) {
+    public function writeDate(Amfphp_Core_Amf_Types_Date $d) {
         parent::writeDate($d);
     }
 
@@ -148,8 +148,8 @@ class AmfSerializerWrapper extends Amfphp_Core_Amf_Serializer {
      * write reference
      * @param int $d
      */
-    public function writeReference($d) {
-        parent::writeReference($d);
+    public function writeReference($num) {
+        parent::writeReference($num);
     }
 
     /**
@@ -164,7 +164,7 @@ class AmfSerializerWrapper extends Amfphp_Core_Amf_Serializer {
      * write amf3 datas
      * @param mixed $d
      */
-    public function writeAmf3Data(&$d) {
+    public function writeAmf3Data($d) {
         parent::writeAmf3Data($d);
     }
 
@@ -210,7 +210,7 @@ class AmfSerializerWrapper extends Amfphp_Core_Amf_Serializer {
      * write amf3 xml
      * @param Amfphp_Core_Amf_Types_Xml $d
      */
-    public function writeAmf3Xml($d) {
+    public function writeAmf3Xml(Amfphp_Core_Amf_Types_Xml $d) {
         parent::writeAmf3Xml($d);
     }
 
@@ -218,7 +218,7 @@ class AmfSerializerWrapper extends Amfphp_Core_Amf_Serializer {
      * write amf3 xml doc
      * @param Amfphp_Core_Amf_Types_XmlDocument $d
      */
-    public function writeAmf3XmlDocument($d) {
+    public function writeAmf3XmlDocument(Amfphp_Core_Amf_Types_XmlDocument $d) {
         parent::writeAmf3XmlDocument($d);
     }
 
@@ -226,7 +226,7 @@ class AmfSerializerWrapper extends Amfphp_Core_Amf_Serializer {
      * write amf3 date
      * @param Amfphp_Core_Amf_Types_Date $d
      */
-    public function writeAmf3Date($d) {
+    public function writeAmf3Date(Amfphp_Core_Amf_Types_Date $d) {
         parent::writeAmf3Date($d);
     }
 
@@ -250,7 +250,7 @@ class AmfSerializerWrapper extends Amfphp_Core_Amf_Serializer {
      * write Amfphp_Core_Amf_Types_ByteArray in amf3
      * @param Amfphp_Core_Amf_Types_ByteArray $d
      */
-    public function writeAmf3ByteArray(/* ByteArray */ $d) {
+    public function writeAmf3ByteArray(Amfphp_Core_Amf_Types_ByteArray $d) {
         parent::writeAmf3ByteArray($d);
     }
     
@@ -258,19 +258,10 @@ class AmfSerializerWrapper extends Amfphp_Core_Amf_Serializer {
      * write Amfphp_Core_Amf_Types_Vector in amf3
      * @param Amfphp_Core_Amf_Types_Vector $d
      */
-    public function writeAmf3Vector(/* Vector */ $d) {
+    public function writeAmf3Vector(Amfphp_Core_Amf_Types_Vector $d) {
         parent::writeAmf3Vector($d);
     }    
     
-    /**
-     * write Amfphp_Core_Amf_Types_Dictionary in amf3
-     * @param Amfphp_Core_Amf_Types_Dictionary $d
-     */
-    public function writeAmf3Dictionary(/* Dictionary */ $d) {
-        parent::writeAmf3Dictionary($d);
-    }    
-    
-
 }
 
 ?>
