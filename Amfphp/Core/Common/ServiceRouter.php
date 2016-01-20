@@ -151,7 +151,7 @@ class Amfphp_Core_Common_ServiceRouter {
         }
         
         if(substr($methodName, 0, 1) == '_'){
-            throw new Exception("The method $methodName starts with a '_', and is therefore not accessible");
+            throw new Amfphp_Core_Exception("The method $methodName starts with a '_', and is therefore not accessible");
         }
         
         if($this->checkArgumentCount){
