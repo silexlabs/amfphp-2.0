@@ -1,4 +1,7 @@
 Version history
+--------- 2.2.2 ---------
+support for php 5.6 and preliminary support for php 7
+better detection of service classes in Amfphp discorvery(for service browser)
 --------- 2.2.1 ---------
 fix basic typing of parameters in client generator
 fix error message handling in back office
