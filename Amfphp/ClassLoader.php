@@ -19,7 +19,7 @@
  */
 
 define( 'AMFPHP_ROOTPATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
-define( 'AMFPHP_VERSION', '2.2.1');
+define( 'AMFPHP_VERSION', '2.2.2');
 
 //core/common
 require_once AMFPHP_ROOTPATH . 'Core/Common/ClassFindInfo.php';

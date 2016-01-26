@@ -8,7 +8,7 @@ test opening Amfphp/ with browser
 regenerate doc, and update online version
 check included readme.html
 empty monitor log
-update version flag in 3 places: in the front/classloader.php, in backoffice/classloader.php ,and at downloads.silexlabs.org/amfphp/amfphp_updates.php
+update version flag in 2 places: in the front/classloader.php, in backoffice/classloader.php 
 create release zip with release.sh (includes making sure no flex builds, no generated clients, no extraConfig.php)
 upload to distribution platform(sourceforge)
 download it again for a quick test
@@ -22,6 +22,7 @@ blog post on silexlabs. publish to twitter, facebook, google plus, linkedin.
 update download link on silex labs page
 update version info on wikipedia page
 send link to amfphp-general@lists.sourceforge.net (from proper email address!)
+update version flag in downloads.silexlabs.org/amfphp/amfphp_updates.php
 
 
 note on how to delete a tag:
