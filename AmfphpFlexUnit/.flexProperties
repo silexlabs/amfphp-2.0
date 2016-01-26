@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<flexProperties enableServiceManager="false" flexServerFeatures="0" flexServerType="16" serverContextRoot="" serverRoot="/Users/arielsommeria-klein/Documents/workspaces" serverRootURL="http://localhost/" toolCompile="true" useServerFlexSDK="false" version="2"/>
+<flexProperties enableServiceManager="false" flexServerFeatures="0" flexServerType="16" serverContextRoot="" serverRoot="/Users/ariel/Documents/workspaces" serverRootURL="http://localhost:8080/" toolCompile="true" useServerFlexSDK="false" version="2"/>

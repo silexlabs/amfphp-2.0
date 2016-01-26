@@ -38,8 +38,8 @@ package org.amfphp.test
 		}
 		
 		public override function connect(command:String, ...parameters):void{
-			var connectRet:Boolean = super.connect(command);
-			trace("connect " + connectRet +  ", command : " + command);
+			super.connect(command);
+			trace("connect, command : " + command);
 		}
 
 		

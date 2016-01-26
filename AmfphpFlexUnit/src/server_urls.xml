@@ -2,6 +2,7 @@
 	<url description="trunk with baguette" active="n">http://localhost/workspaceNetbeans/amfphp-2.0/Tests/TestData/</url>
 	<url description="trunk without baguette" active="n">http://localhost:8888/workspaceNetbeans/amfphp-2.0/Tests/TestData/</url>
 	<url description="trunk without baguette, mampstack php 5.5" active="n">http://localhost:8080/workspaceNetbeans/amfphp-2.0/Tests/TestData/</url>
+	<url description="trunk without baguette, mampstack php 7.0" active="y">http://localhost:8070/workspaceNetbeans/amfphp-2.0/Tests/TestData/</url>
 	<url description="online" active="n">http://arielsommeria.com/amfphp-2.1/Tests/TestData/</url>
 	<url description="Baguette AMF Server" active="n">http://localhost/baguetteamf/BaguetteAMF_server/gateway.php</url>
 	<url description="Baguette AMF Server debian 32 php 5.2" active="n">http://linux32:5213/baguetteamf/test/amfphp/Tests/TestData/</url>
@@ -15,7 +16,7 @@
 	<url description="debian 32 php 5.2" active="n">http://linux32:5213/amfphp_master/Tests/TestData/</url>
 	<url description="debian 32 php 5.3" active="n">http://linux32:5302/amfphp_master/Tests/TestData/</url>
 	<url description="debian 32 php 5.4" active="n">http://linux32:5521/amfphp_master/Tests/TestData/</url>
-	<url description="debian 32 php 5.5" active="y">http://linux32:5605/amfphp_master/Tests/TestData/</url>
+	<url description="debian 32 php 5.5" active="n">http://linux32:5605/amfphp_master/Tests/TestData/</url>
 	<url description="debian 32 php 5.6" active="n">http://linux32:5411/amfphp_master/Tests/TestData/</url>
 	<url description="debian 64 php 5.2" active="n">http://linux64:5213/amfphp_master/Tests/TestData/</url>
 	<url description="debian 64 php 5.3" active="n">http://linux64:5302/amfphp_master/Tests/TestData/</url>
