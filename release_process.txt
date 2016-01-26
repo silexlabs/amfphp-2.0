@@ -8,6 +8,7 @@ test opening Amfphp/ with browser
 regenerate doc, and update online version
 check included readme.html
 empty monitor log
+review change log
 update version flag in 2 places: in the front/classloader.php, in backoffice/classloader.php 
 create release zip with release.sh (includes making sure no flex builds, no generated clients, no extraConfig.php)
 upload to distribution platform(sourceforge)
