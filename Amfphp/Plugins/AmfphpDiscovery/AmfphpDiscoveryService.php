@@ -67,7 +67,7 @@ class AmfphpDiscoveryService {
         if ($folderContent) {
             foreach ($folderContent as $fileName) {
                 //add all .php file names, but removing the .php suffix
-                if (strpos($fileName, '.php')) {
+                if (preg_match('/.php$/', $fileName)) {
                     $fullServiceName = $subFolder . substr($fileName, 0, strlen($fileName) - 4);
                     $ret[] = $fullServiceName;
                 } else if ((substr($fileName, 0, 1) != '.') && is_dir($rootPath . $subFolder . $fileName)) {
