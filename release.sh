@@ -4,8 +4,8 @@
 #for ex call  ./release.sh 2.2.1 to create amfphp-2.2.1 zip
 
 version=$1
-sourceFolder=/Users/arielsommeria-klein/Documents/workspaces/workspaceNetbeans/amfphp-2.0/
-targetFolder=/Users/arielsommeria-klein/Documents/workspaces/amfphp_dist/amfphp-$version
+sourceFolder=/Users/ariel/Documents/workspaces/workspaceNetbeans/amfphp-2.0/
+targetFolder=/Users/ariel/Documents/workspaces/amfphp_dist/amfphp-$version
 
 rm -rf $targetFolder
 rm -rf $targetFolder.zip
