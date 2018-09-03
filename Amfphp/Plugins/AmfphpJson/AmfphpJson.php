@@ -11,20 +11,20 @@
 
 /**
  * Enables amfPHP to receive and reply with JSON
- * This plugin can be deactivated if the project doesn't need to support JSON 
- * strings and returned as JSON strings using POST parameters. 
- * 
+ * This plugin can be deactivated if the project doesn't need to support JSON
+ * strings and returned as JSON strings using POST parameters.
+ *
  * You must add the 'application/json' content type, or set it in the headers so that it is recognized as a call to be handled by this plugin.
  * for example:
  * http://yourserver.com/Amfphp/?contentType=application/json
- * 
+ *
  * Here is some sample code using Javascript with JQuery:
  * <code>
  * var callDataObj = {"serviceName":"PizzaService", "methodName":"getPizza","parameters":[]};
  * var callData = JSON.stringify(callDataObj);
  * $.post("http://yourserver.com/Amfphp/?contentType=application/json", callData, onSuccess);
  * </code>
- * 
+ *
  * Requires at least PHP 5.2.
  *
  * @package Amfphp_Plugins_Json
@@ -68,7 +68,7 @@ class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common
         }
     }
 
-    
+
     /**
      * deserialize
      * @see Amfphp_Core_Common_IDeserializer
@@ -87,7 +87,7 @@ class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common
             throw new Exception('json call data not found. It must be sent in the post data');
         }
 
-        $deserializedRequest = json_decode($rawPostData);
+        $deserializedRequest = json_decode($rawPostData, true);
         if ($deserializedRequest === null) {
             $error = '';
             switch (json_last_error()) {
@@ -115,10 +115,10 @@ class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common
             }
             throw new Exception("<pre>Error decoding JSON. $error \njsonString:\n $jsonString </pre>");
         }
-        if (!isset($deserializedRequest->serviceName)) {
+        if (!isset($deserializedRequest['serviceName'])) {
             throw new Exception("<pre>Service name field missing in JSON. \njsonString:\n $jsonString \ndecoded: \n" . print_r($deserializedRequest, true) . '</pre>');
         }
-        if (!isset($deserializedRequest->methodName)) {
+        if (!isset($deserializedRequest['methodName'])) {
             throw new Exception("<pre>MethodName field missing in JSON. \njsonString:\n $jsonString \ndecoded: \n" . print_r($deserializedRequest, true) . '</pre>');
         }
         return $deserializedRequest;
@@ -134,13 +134,13 @@ class AmfphpJson implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common
      * @return the service call response
      */
     public function handleDeserializedRequest($deserializedRequest, Amfphp_Core_Common_ServiceRouter $serviceRouter) {
-        $serviceName = $deserializedRequest->serviceName;
-        $methodName = $deserializedRequest->methodName;
+		$serviceName = $deserializedRequest['serviceName'];
+		$methodName = $deserializedRequest['methodName'];
 
         $parameters = array();
-        if (isset($deserializedRequest->parameters)) {
-            $parameters = $deserializedRequest->parameters;
-        }
+		if (isset($deserializedRequest['parameters'])) {
+			$parameters = $deserializedRequest['parameters'];
+		}
         return $serviceRouter->executeServiceCall($serviceName, $methodName, $parameters);
     }
 
