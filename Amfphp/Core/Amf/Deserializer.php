@@ -744,7 +744,7 @@ class Amfphp_Core_Amf_Deserializer implements Amfphp_Core_Common_IDeserializer {
         $data = '';
         for ($i = 0; $i < $len; $i++) {
             $data .= $this->rawData
-                    {$i + $this->currentByte};
+                    [$i + $this->currentByte];
         }
         $this->currentByte += $len;
         return $data;

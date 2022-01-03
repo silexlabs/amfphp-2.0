@@ -119,7 +119,7 @@ class Amfphp_Core_Amf_Handler implements Amfphp_Core_Common_IDeserializer, Amfph
         $split = explode('/', $targetUri);
         $ret = new Amfphp_Core_Common_ServiceCallParameters();
         $ret->methodName = array_pop($split);
-        $ret->serviceName = join($split, '/');
+        $ret->serviceName = join('/', $split);
         $ret->methodParameters = $Amfphp_Core_Amf_Message->data;
         return $ret;
     }
