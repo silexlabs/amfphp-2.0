@@ -192,7 +192,7 @@ class Amfphp_Core_Amf_Serializer implements Amfphp_Core_Common_ISerializer {
      * @param string $s The string less than 65535 characters to add to the stream
      */
     protected function writeUtf($s) {
-        $this->writeInt(strlen($s)); // write the string length - max 65535
+        $this->writeInt(strlen(is_null($s) ? '' : $s)); // write the string length - max 65535
         $this->outBuffer .= $s; // write the string chars
     }
 
