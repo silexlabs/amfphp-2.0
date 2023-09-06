@@ -70,7 +70,7 @@ class AmfphpGet implements Amfphp_Core_Common_IDeserializer, Amfphp_Core_Common_
      * @return this or null
      */
     public function filterHandler($handler, $contentType){
-        if(strpos($contentType, self::CONTENT_TYPE) !== false){
+        if(!is_null($contentType) && strpos($contentType, self::CONTENT_TYPE) !== false){
             return $this;
         }
     }
