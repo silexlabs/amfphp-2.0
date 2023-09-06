@@ -48,6 +48,8 @@ class AmfphpFlexMessaging_ErrorMessage {
      */
     public $rootCause;
 
+    public $_explicitType;
+
     /**
      * constructor
      * @param type $correlationId
