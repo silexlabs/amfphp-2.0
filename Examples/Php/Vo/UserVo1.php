@@ -15,6 +15,7 @@
  * @package Amfphp_Examples_ExampleService
  * @author Ariel Sommeria-klein
  */
+#[AllowDynamicProperties]
 class UserVo1 {
     /**
      *name
