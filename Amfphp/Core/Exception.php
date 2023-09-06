@@ -14,6 +14,7 @@
  * @package Amfphp_Core
  * @author Ariel Sommeria-klein
  */
+#[AllowDynamicProperties]
 class Amfphp_Core_Exception extends Exception {
 	
 }
