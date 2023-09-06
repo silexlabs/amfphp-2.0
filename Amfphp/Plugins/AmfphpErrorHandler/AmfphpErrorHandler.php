@@ -36,7 +36,7 @@ class AmfphpErrorHandler {
  * @param mixed $errcontext
  * @throws Exception
  */
-function custom_warning_handler($errno, $errstr, $errfile, $errline, $errcontext) {
+function custom_warning_handler($errno, $errstr, $errfile = null, $errline = null, $errcontext = null) {
     if ($errno & error_reporting()) {
         throw new Amfphp_Core_Exception("$errstr . \n<br>file:  $errfile \n<br>line: $errline \n<br>context: " . print_r($errcontext, true), $errno);
     }

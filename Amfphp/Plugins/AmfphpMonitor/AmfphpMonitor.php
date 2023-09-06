@@ -206,7 +206,7 @@ class AmfphpMonitor {
      * @param mixed $rawData
      */
     public function filterSerializedResponse($rawData) {
-        if(substr($this->uri, 0, 6) == 'Amfphp'){
+        if(!is_null($this->uri) && substr($this->uri, 0, 6) == 'Amfphp'){
             return;
         }
         

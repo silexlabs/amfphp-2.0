@@ -68,6 +68,8 @@ class AmfphpFlexMessaging_AcknowledgeMessage {
      */
     public $headers;
 
+    public $_explicitType;
+
     /**
      * constructor
      * @param string $correlationId
